@@ -28,8 +28,8 @@
 - [ ] BentoService (service definition, dependency management, API input/output adapters)
 - [ ] Model Artifact (model serialization, multi-framework support)
 - [ ] Model Server (mico-batching, dockerisation, logging, OpenAPI, instruments)
-- [ ] YataiService gRPC server (model registry, cloud deployment automation)
-- [ ] YataiService web server (nodejs HTTP server and web UI)
+- [ ] GammaService gRPC server (model registry, cloud deployment automation)
+- [ ] GammaService web server (nodejs HTTP server and web UI)
 - [ ] Internal (BentoML's own configuration, logging, utility, exception handling)
 - [ ] BentoML CLI
 

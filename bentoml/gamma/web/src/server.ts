@@ -3,14 +3,14 @@ import morgan from "morgan";
 import { Request, Response } from "express";
 import express from "express";
 import { bentoml } from "./generated/bentoml_grpc";
-import { createYataiClient } from "./yatai_client";
+import { createGammaClient } from "./gamma_client";
 import { getLogger } from "./logger";
 import axios from "axios";
 
 const logger = getLogger();
 const ALL_NAMESPACE_TAG = '__BENTOML_ALL_NAMESPACE';
 
-const createAPIRoutes = (app, yataiClient) => {
+const createAPIRoutes = (app, gammaClient) => {
   let router = express.Router();
   router.get("/api/ListBento", async (req: Request, res: Response) => {
     const requestQuery: any = Object.assign({}, req.query);
@@ -27,7 +27,7 @@ const createAPIRoutes = (app, yataiClient) => {
     }
     let requestMessage = bentoml.ListBentoRequest.create(requestQuery);
     try {
-      const result = await yataiClient.listBento(requestMessage);
+      const result = await gammaClient.listBento(requestMessage);
       logger.info({
         request: "ListBento",
         data: requestMessage,
@@ -51,7 +51,7 @@ const createAPIRoutes = (app, yataiClient) => {
     }
     let requestMessage = bentoml.GetBentoRequest.create(req.query);
     try {
-      const result = await yataiClient.getBento(requestMessage);
+      const result = await gammaClient.getBento(requestMessage);
       logger.info({
         request: "GetBento",
         data: requestMessage,
@@ -75,7 +75,7 @@ const createAPIRoutes = (app, yataiClient) => {
     }
     let requestMessage = bentoml.GetDeploymentRequest.create(req.query);
     try {
-      const result = await yataiClient.getDeployment(requestMessage);
+      const result = await gammaClient.getDeployment(requestMessage);
       logger.info({
         request: "GetDeployment",
         data: requestMessage,
@@ -106,7 +106,7 @@ const createAPIRoutes = (app, yataiClient) => {
     }
     let requestMessage = bentoml.ListDeploymentsRequest.create(requestQuery);
     try {
-      const result = await yataiClient.listDeployments(requestMessage);
+      const result = await gammaClient.listDeployments(requestMessage);
       logger.info({
         request: "ListDeployments",
         data: requestMessage,
@@ -130,7 +130,7 @@ const createAPIRoutes = (app, yataiClient) => {
     }
     let requestMessage = bentoml.DeleteDeploymentRequest.create(req.body);
     try {
-      const result = await yataiClient.deleteDeployment(requestMessage);
+      const result = await gammaClient.deleteDeployment(requestMessage);
       logger.info({
         request: "DeleteDeployment",
         data: requestMessage,
@@ -157,7 +157,7 @@ const createAPIRoutes = (app, yataiClient) => {
     }
     let requestMessage = bentoml.DangerouslyDeleteBentoRequest.create(req.body);
     try {
-      const result = await yataiClient.dangerouslyDeleteBento(requestMessage);
+      const result = await gammaClient.dangerouslyDeleteBento(requestMessage);
       logger.info({
         request: "DeleteBento",
         data: requestMessage,
@@ -181,7 +181,7 @@ const createAPIRoutes = (app, yataiClient) => {
     }
     let requestMessage = bentoml.ApplyDeploymentRequest.create(req.body);
     try {
-      const result = await yataiClient.applyDeployment(requestMessage);
+      const result = await gammaClient.applyDeployment(requestMessage);
       logger.info({
         request: "ApplyDeployment",
         data: requestMessage,
@@ -228,8 +228,8 @@ export const getExpressApp = (
       stream: { write: (message) => logger.info(message.trim()) },
     })
   );
-  const yataiClient = createYataiClient(grpcAddress);
-  const router = createAPIRoutes(app, yataiClient);
+  const gammaClient = createGammaClient(grpcAddress);
+  const router = createAPIRoutes(app, gammaClient);
   const apiUrlPrefix = baseURL == "." ? "/" : "/" + baseURL;
   app.use(apiUrlPrefix, router);
 

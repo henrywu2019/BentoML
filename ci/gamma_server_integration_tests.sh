@@ -10,11 +10,11 @@ cd "$GIT_ROOT" || exit
 
 python -m pip install -e .
 
-# Install Yatai dependencies
+# Install Gamma dependencies
 pip install psycopg2 psycopg2-binary
 
-# Run Yatai server tests
-python -m pytest -s "$GIT_ROOT"/tests/integration/yatai_server/test_local_fs.py
-python -m pytest -s "$GIT_ROOT"/tests/integration/yatai_server/test_containerize.py
+# Run Gamma server tests
+python -m pytest -s "$GIT_ROOT"/tests/integration/gamma_server/test_local_fs.py
+python -m pytest -s "$GIT_ROOT"/tests/integration/gamma_server/test_containerize.py
 
 test $error = 0 # Return non-zero if pytest failed

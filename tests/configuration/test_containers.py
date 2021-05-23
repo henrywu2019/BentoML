@@ -203,12 +203,12 @@ bento_bundle:
     os.remove(override_config.name)
 
 
-def test_yatai_database_url():
+def test_gamma_database_url():
     container = BentoMLContainer()
     config = BentoMLConfiguration().as_dict()
     container.config.from_dict(config)
 
-    assert container.yatai_database_url() == "{}:///{}".format(
+    assert container.gamma_database_url() == "{}:///{}".format(
         "sqlite", os.path.join(mock_bentoml_home(), "storage.db")
     )
 
@@ -225,17 +225,17 @@ gamma:
     config = BentoMLConfiguration(override_config_file=override_config.name).as_dict()
     container.config.from_dict(config)
 
-    assert container.yatai_database_url() == "customized_url"
+    assert container.gamma_database_url() == "customized_url"
 
     os.remove(override_config.name)
 
 
-def test_yatai_tls_root_ca_cert():
+def test_gamma_tls_root_ca_cert():
     container = BentoMLContainer()
     config = BentoMLConfiguration().as_dict()
     container.config.from_dict(config)
 
-    assert container.yatai_tls_root_ca_cert() is None
+    assert container.gamma_tls_root_ca_cert() is None
 
     override_config = tempfile.NamedTemporaryFile(delete=False)
     override_config.write(
@@ -251,7 +251,7 @@ gamma:
     config = BentoMLConfiguration(override_config_file=override_config.name).as_dict()
     container.config.from_dict(config)
 
-    assert container.yatai_tls_root_ca_cert() == "value1"
+    assert container.gamma_tls_root_ca_cert() == "value1"
 
     os.remove(override_config.name)
 
@@ -270,18 +270,18 @@ gamma:
     config = BentoMLConfiguration(override_config_file=override_config.name).as_dict()
     container.config.from_dict(config)
 
-    assert container.yatai_tls_root_ca_cert() == "value1"
+    assert container.gamma_tls_root_ca_cert() == "value1"
 
     os.remove(override_config.name)
 
 
-def test_yatai_logging_path():
+def test_gamma_logging_path():
     container = BentoMLContainer()
     config = BentoMLConfiguration().as_dict()
     container.config.from_dict(config)
 
-    assert container.yatai_logging_path() == os.path.join(
-        mock_bentoml_home(), "logs", "yatai_web_server.log"
+    assert container.gamma_logging_path() == os.path.join(
+        mock_bentoml_home(), "logs", "gamma_web_server.log"
     )
 
     override_config = tempfile.NamedTemporaryFile(delete=False)
@@ -297,7 +297,7 @@ gamma:
     config = BentoMLConfiguration(override_config_file=override_config.name).as_dict()
     container.config.from_dict(config)
 
-    assert container.yatai_logging_path() == "/tmp/customized.log"
+    assert container.gamma_logging_path() == "/tmp/customized.log"
 
     os.remove(override_config.name)
 

@@ -136,7 +136,7 @@ __bentoml_tmp_sdist_build
 __bentoml_tmp_sdist_build
 
 # Helm Dependencies
-helm/YataiService/charts
+helm/GammaService/charts
 
 # Integration test data
 tests/integration/data

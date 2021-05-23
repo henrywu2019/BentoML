@@ -17,7 +17,7 @@ from urllib.parse import urlparse
 from dependency_injector.wiring import Provide, inject
 
 from bentoml.configuration.containers import BentoMLContainer
-from bentoml.exceptions import YataiRepositoryException
+from bentoml.exceptions import GammaRepositoryException
 from bentoml.gamma.proto.repository_pb2 import BentoUri
 from bentoml.gamma.repository.base_repository import BaseRepository
 
@@ -36,7 +36,7 @@ class GCSRepository(BaseRepository):
         try:
             from google.cloud import storage
         except ImportError:
-            raise YataiRepositoryException(
+            raise GammaRepositoryException(
                 '"google-cloud-storage" package is required for Google Cloud '
                 'Storage Repository. You can install it with pip: '
                 '"pip install google-cloud-storage"'
@@ -65,7 +65,7 @@ class GCSRepository(BaseRepository):
                 version="v4", expiration=self.expiration, method="PUT",
             )
         except Exception as e:
-            raise YataiRepositoryException(
+            raise GammaRepositoryException(
                 "Not able to get pre-signed URL on GCS. Error: {}".format(e)
             )
 
@@ -106,6 +106,6 @@ class GCSRepository(BaseRepository):
             blob = bucket.blob(object_name)
             blob.delete()
         except Exception as e:
-            raise YataiRepositoryException(
+            raise GammaRepositoryException(
                 "Not able to delete object on GCS. Error: {}".format(e)
             )

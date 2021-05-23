@@ -45,12 +45,12 @@ spellcheck-doc: ## Spell check documentation
 	sphinx-build -b spelling ./docs/source ./docs/build || (echo "Error running spellchecker.. You may need to run 'make install-spellchecker-deps'"; exit 1)
 
 
-# YataiService gRPC
-start-gamma-debug: ## Start YataiService in debug mode
+# GammaService gRPC
+start-gamma-debug: ## Start GammaService in debug mode
 	bentoml gamma-service-start --debug || (echo "Error starting... You may need to run 'make install-gamma-deps'"; exit 1)
 start-grpcui: ## Start gPRC Web UI
 	grpcui -plaintext localhost:50051 || (echo "Error starting... You may need to run 'make install-gamma-deps'"; exit 1)
-install-gamma-deps: ## Install dependencies to debug YataiService
+install-gamma-deps: ## Install dependencies to debug GammaService
 	pip install -e ".[dev]"
 	go get github.com/fullstorydev/grpcui
 	go install github.com/fullstorydev/grpcui/cmd/grpcui@latest
@@ -70,12 +70,12 @@ install-web-deps: ## Install dependencies to run web server and frontend
 
 # Helm
 helm-lint: ## Helm Lint
-	helm lint ./helm/YataiService
+	helm lint ./helm/GammaService
 helm-deps: ## Helm installed dependencies
-	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx && helm dependencies build helm/YataiService
+	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx && helm dependencies build helm/GammaService
 helm-dry: ## Helm Dry Install
-	cd helm && helm install -f YataiService/values/postgres.yaml --dry-run --debug gamma-service YataiService
+	cd helm && helm install -f GammaService/values/postgres.yaml --dry-run --debug gamma-service GammaService
 helm-install: ## Helm Install
-	@cd helm && helm install -f YataiService/values/postgres.yaml gamma-service YataiService
+	@cd helm && helm install -f GammaService/values/postgres.yaml gamma-service GammaService
 helm-uninstall: ## Helm Uninstall
 	helm uninstall gamma-service

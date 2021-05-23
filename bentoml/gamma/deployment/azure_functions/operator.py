@@ -40,7 +40,7 @@ from bentoml.exceptions import (
     BentoMLException,
     MissingDependencyException,
     AzureServiceError,
-    YataiDeploymentException,
+    GammaDeploymentException,
 )
 from bentoml.gamma.proto.deployment_pb2 import (
     ApplyDeploymentResponse,
@@ -60,7 +60,7 @@ def _assert_az_cli_logged_in():
         command=['az', 'account', 'show'], message='show Azure account'
     )
     if not account_info['user'] or not account_info['homeTenantId']:
-        raise YataiDeploymentException(
+        raise GammaDeploymentException(
             'A signed in Azure CLI is required for Azure Function deployment'
         )
 
@@ -213,7 +213,7 @@ def _build_and_push_docker_image_to_azure_container_registry(
     try:
         docker_client.ping()
     except docker.errors.APIError as err:
-        raise YataiDeploymentException(
+        raise GammaDeploymentException(
             f'Failed to get response from docker server: {str(err)}'
         )
     tag = f'{container_registry_name}.azurecr.io/{bento_name}:{bento_version}'.lower()
@@ -230,11 +230,11 @@ def _build_and_push_docker_image_to_azure_container_registry(
         )
         logger.debug('Finished building docker image')
     except docker.errors.BuildError as e:
-        raise YataiDeploymentException(
+        raise GammaDeploymentException(
             f'Failed to build docker image. BuildError: {str(e)}'
         )
     except docker.errors.APIError as e:
-        raise YataiDeploymentException(
+        raise GammaDeploymentException(
             f'Failed to build docker image. APIError: {str(e)}'
         )
     logger.debug(f'Pushing docker image {tag}')
@@ -242,7 +242,7 @@ def _build_and_push_docker_image_to_azure_container_registry(
         docker_client.images.push(tag)
         logger.debug('Finished pushing docker image')
     except docker.errors.APIError as e:
-        raise YataiDeploymentException(
+        raise GammaDeploymentException(
             f'Failed to push docker image. APIError: {str(e)}'
         )
 
@@ -491,8 +491,8 @@ def _update_azure_functions(
 
 
 class AzureFunctionsDeploymentOperator(DeploymentOperatorBase):
-    def __init__(self, yatai_service):
-        super(AzureFunctionsDeploymentOperator, self).__init__(yatai_service)
+    def __init__(self, gamma_service):
+        super(AzureFunctionsDeploymentOperator, self).__init__(gamma_service)
         ensure_docker_available_or_raise()
         _assert_azure_cli_available()
         _assert_az_cli_logged_in()
@@ -501,10 +501,10 @@ class AzureFunctionsDeploymentOperator(DeploymentOperatorBase):
         try:
             deployment_spec = deployment_pb.spec
             if not deployment_spec.azure_functions_operator_config.location:
-                raise YataiDeploymentException(
+                raise GammaDeploymentException(
                     'Azure Functions parameter "location" is missing'
                 )
-            bento_repo_pb = self.yatai_service.GetBento(
+            bento_repo_pb = self.gamma_service.GetBento(
                 GetBentoRequest(
                     bento_name=deployment_spec.bento_name,
                     bento_version=deployment_spec.bento_version,
@@ -558,7 +558,7 @@ class AzureFunctionsDeploymentOperator(DeploymentOperatorBase):
 
     def update(self, deployment_pb, previous_deployment):
         try:
-            bento_repo_pb = self.yatai_service.GetBento(
+            bento_repo_pb = self.gamma_service.GetBento(
                 GetBentoRequest(
                     bento_name=deployment_pb.spec.bento_name,
                     bento_version=deployment_pb.spec.bento_version,

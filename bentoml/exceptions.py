@@ -14,18 +14,18 @@
 
 from bentoml.utils.lazy_loader import LazyLoader
 
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
+gamma_proto = LazyLoader('gamma_proto', globals(), 'bentoml.gamma.proto')
 
 
 def _proto_status_code_to_http_status_code(proto_status_code, fallback):
     _PROTO_STATUS_CODE_TO_HTTP_STATUS_CODE = {
-        yatai_proto.status_pb2.Status.INTERNAL: 500,  # Internal Server Error
-        yatai_proto.status_pb2.Status.INVALID_ARGUMENT: 400,  # "Bad Request"
-        yatai_proto.status_pb2.Status.NOT_FOUND: 404,  # Not Found
-        yatai_proto.status_pb2.Status.DEADLINE_EXCEEDED: 408,  # Request Time out
-        yatai_proto.status_pb2.Status.PERMISSION_DENIED: 401,  # Unauthorized
-        yatai_proto.status_pb2.Status.UNAUTHENTICATED: 401,  # Unauthorized
-        yatai_proto.status_pb2.Status.FAILED_PRECONDITION: 500,  # Internal Server Error
+        gamma_proto.status_pb2.Status.INTERNAL: 500,  # Internal Server Error
+        gamma_proto.status_pb2.Status.INVALID_ARGUMENT: 400,  # "Bad Request"
+        gamma_proto.status_pb2.Status.NOT_FOUND: 404,  # Not Found
+        gamma_proto.status_pb2.Status.DEADLINE_EXCEEDED: 408,  # Request Time out
+        gamma_proto.status_pb2.Status.PERMISSION_DENIED: 401,  # Unauthorized
+        gamma_proto.status_pb2.Status.UNAUTHENTICATED: 401,  # Unauthorized
+        gamma_proto.status_pb2.Status.FAILED_PRECONDITION: 500,  # Internal Server Error
     }
     return _PROTO_STATUS_CODE_TO_HTTP_STATUS_CODE.get(proto_status_code, fallback)
 
@@ -38,11 +38,11 @@ class BentoMLException(Exception):
 
     @property
     def proto_status_code(self):
-        return yatai_proto.status_pb2.Status.INTERNAL
+        return gamma_proto.status_pb2.Status.INTERNAL
 
     @property
     def status_proto(self):
-        return yatai_proto.status_pb2.Status(
+        return gamma_proto.status_pb2.Status(
             status_code=self.proto_status_code, error_message=str(self)
         )
 
@@ -70,7 +70,7 @@ class Unauthenticated(BentoMLException):
 
     @property
     def proto_status_code(self):
-        return yatai_proto.status_pb2.Status.UNAUTHENTICATED
+        return gamma_proto.status_pb2.Status.UNAUTHENTICATED
 
 
 class InvalidArgument(BentoMLException):
@@ -81,7 +81,7 @@ class InvalidArgument(BentoMLException):
 
     @property
     def proto_status_code(self):
-        return yatai_proto.status_pb2.Status.INVALID_ARGUMENT
+        return gamma_proto.status_pb2.Status.INVALID_ARGUMENT
 
 
 class BadInput(InvalidArgument):
@@ -95,7 +95,7 @@ class NotFound(BentoMLException):
 
     @property
     def proto_status_code(self):
-        return yatai_proto.status_pb2.Status.NOT_FOUND
+        return gamma_proto.status_pb2.Status.NOT_FOUND
 
 
 class FailedPrecondition(BentoMLException):
@@ -105,7 +105,7 @@ class FailedPrecondition(BentoMLException):
 
     @property
     def proto_status_code(self):
-        return yatai_proto.status_pb2.Status.FAILED_PRECONDITION
+        return gamma_proto.status_pb2.Status.FAILED_PRECONDITION
 
 
 class LockUnavailable(BentoMLException):
@@ -115,7 +115,7 @@ class LockUnavailable(BentoMLException):
 
     @property
     def proto_status_code(self):
-        return yatai_proto.status_pb2.Status.FAILED_PRECONDITION
+        return gamma_proto.status_pb2.Status.FAILED_PRECONDITION
 
 
 class ArtifactLoadingException(BentoMLException):
@@ -135,37 +135,37 @@ class MissingDependencyException(BentoMLException):
     """
 
 
-class YataiServiceException(BentoMLException):
-    """Raise when YataiService encounters an error"""
+class GammaServiceException(BentoMLException):
+    """Raise when GammaService encounters an error"""
 
 
-class YataiServiceRpcAborted(YataiServiceException):
-    """Raise when YataiService RPC operation aborted"""
+class GammaServiceRpcAborted(GammaServiceException):
+    """Raise when GammaService RPC operation aborted"""
 
     @property
     def proto_status_code(self):
-        return yatai_proto.status_pb2.Status.ABORTED
+        return gamma_proto.status_pb2.Status.ABORTED
 
 
-class YataiDeploymentException(YataiServiceException):
-    """Raise when YataiService encounters an issue creating/managing deployments"""
+class GammaDeploymentException(GammaServiceException):
+    """Raise when GammaService encounters an issue creating/managing deployments"""
 
 
-class YataiRepositoryException(YataiServiceException):
-    """Raise when YataiService encounters an issue managing BentoService repository"""
+class GammaRepositoryException(GammaServiceException):
+    """Raise when GammaService encounters an issue managing BentoService repository"""
 
 
-class AWSServiceError(YataiDeploymentException):
-    """Raise when YataiService encounters an issue with AWS service"""
+class AWSServiceError(GammaDeploymentException):
+    """Raise when GammaService encounters an issue with AWS service"""
 
 
-class AzureServiceError(YataiDeploymentException):
-    """Raise when YataiService encounters an issue with Azure service"""
+class AzureServiceError(GammaDeploymentException):
+    """Raise when GammaService encounters an issue with Azure service"""
 
 
 class CLIException(BentoMLException):
     """Raise when CLI encounters an issue"""
 
 
-class YataiLabelException(YataiServiceException):
-    """Raise when YataiService encounters an issue managing BentoService label"""
+class GammaLabelException(GammaServiceException):
+    """Raise when GammaService encounters an issue managing BentoService label"""

@@ -16,7 +16,7 @@ import click
 
 from bentoml.utils import status_pb_to_error_code_and_message
 from bentoml.utils.lazy_loader import LazyLoader
-from bentoml.utils import get_default_yatai_client
+from bentoml.utils import get_default_gamma_client
 from bentoml.cli.utils import Spinner
 from bentoml.cli.click_utils import (
     BentoMLCommandGroup,
@@ -32,7 +32,7 @@ from bentoml.cli.deployment import (
 from bentoml.gamma.deployment import ALL_NAMESPACE_TAG
 from bentoml.exceptions import CLIException
 
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
+gamma_proto = LazyLoader('gamma_proto', globals(), 'bentoml.gamma.proto')
 
 
 def get_aws_lambda_sub_command():
@@ -63,7 +63,7 @@ def get_aws_lambda_sub_command():
         '--namespace',
         type=click.STRING,
         help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration yatai_service/default_namespace',
+        'can be changed in BentoML configuration gamma_service/default_namespace',
     )
     @click.option(
         '-l',
@@ -113,10 +113,10 @@ def get_aws_lambda_sub_command():
         output,
         wait,
     ):
-        yatai_client = get_default_yatai_client()
+        gamma_client = get_default_gamma_client()
         bento_name, bento_version = bento.split(':')
         with Spinner(f'Deploying "{bento}" to AWS Lambda '):
-            result = yatai_client.deployment.create_lambda_deployment(
+            result = gamma_client.deployment.create_lambda_deployment(
                 name=name,
                 namespace=namespace,
                 bento_name=bento_name,
@@ -128,7 +128,7 @@ def get_aws_lambda_sub_command():
                 labels=labels,
                 wait=wait,
             )
-        if result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        if result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
@@ -152,7 +152,7 @@ def get_aws_lambda_sub_command():
         '--namespace',
         type=click.STRING,
         help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration yatai_service/default_namespace',
+        'can be changed in BentoML configuration gamma_service/default_namespace',
     )
     @click.option(
         '--memory-size',
@@ -176,14 +176,14 @@ def get_aws_lambda_sub_command():
         'If set to no-wait, CLI will return immediately. The default value is wait',
     )
     def update(name, namespace, bento, memory_size, timeout, output, wait):
-        yatai_client = get_default_yatai_client()
+        gamma_client = get_default_gamma_client()
         if bento:
             bento_name, bento_version = bento.split(':')
         else:
             bento_name = None
             bento_version = None
         with Spinner('Updating Lambda deployment '):
-            result = yatai_client.deployment.update_lambda_deployment(
+            result = gamma_client.deployment.update_lambda_deployment(
                 bento_name=bento_name,
                 bento_version=bento_version,
                 deployment_name=name,
@@ -192,7 +192,7 @@ def get_aws_lambda_sub_command():
                 timeout=timeout,
                 wait=wait,
             )
-        if result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        if result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
@@ -209,7 +209,7 @@ def get_aws_lambda_sub_command():
         '--namespace',
         type=click.STRING,
         help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration yatai_service/default_namespace',
+        'can be changed in BentoML configuration gamma_service/default_namespace',
     )
     @click.option(
         '--force',
@@ -218,19 +218,19 @@ def get_aws_lambda_sub_command():
         'ignore errors when deleting cloud resources',
     )
     def delete(name, namespace, force):
-        yatai_client = get_default_yatai_client()
-        get_deployment_result = yatai_client.deployment.get(
+        gamma_client = get_default_gamma_client()
+        get_deployment_result = gamma_client.deployment.get(
             namespace=namespace, name=name
         )
-        if get_deployment_result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        if get_deployment_result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 get_deployment_result.status
             )
             raise CLIException(f'{error_code}:{error_message}')
-        result = yatai_client.deployment.delete(
+        result = gamma_client.deployment.delete(
             namespace=namespace, deployment_name=name, force_delete=force
         )
-        if result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        if result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
@@ -246,22 +246,22 @@ def get_aws_lambda_sub_command():
         '--namespace',
         type=click.STRING,
         help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration yatai_service/default_namespace',
+        'can be changed in BentoML configuration gamma_service/default_namespace',
     )
     @click.option(
         '-o', '--output', type=click.Choice(['json', 'yaml', 'table']), default='json'
     )
     def get(name, namespace, output):
-        yatai_client = get_default_yatai_client()
-        describe_result = yatai_client.deployment.describe(namespace, name)
-        if describe_result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        gamma_client = get_default_gamma_client()
+        describe_result = gamma_client.deployment.describe(namespace, name)
+        if describe_result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 describe_result.status
             )
             raise CLIException(f'{error_code}:{error_message}')
 
-        get_result = yatai_client.deployment.get(namespace, name)
-        if get_result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        get_result = gamma_client.deployment.get(namespace, name)
+        if get_result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 get_result.status
             )
@@ -274,7 +274,7 @@ def get_aws_lambda_sub_command():
         '--namespace',
         type=click.STRING,
         help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration yatai_service/default_namespace',
+        'can be changed in BentoML configuration gamma_service/default_namespace',
         default=ALL_NAMESPACE_TAG,
     )
     @click.option(
@@ -305,15 +305,15 @@ def get_aws_lambda_sub_command():
         default='table',
     )
     def list_deployments(namespace, limit, labels, order_by, asc, output):
-        yatai_client = get_default_yatai_client()
-        list_result = yatai_client.deployment.list_lambda_deployments(
+        gamma_client = get_default_gamma_client()
+        list_result = gamma_client.deployment.list_lambda_deployments(
             limit=limit,
             labels=labels,
             namespace=namespace,
             order_by=order_by,
             ascending_order=asc,
         )
-        if list_result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        if list_result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 list_result.status
             )

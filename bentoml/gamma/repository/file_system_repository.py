@@ -17,7 +17,7 @@ import shutil
 import logging
 from pathlib import Path
 
-from bentoml.exceptions import YataiRepositoryException
+from bentoml.exceptions import GammaRepositoryException
 from bentoml.gamma.proto.repository_pb2 import BentoUri
 from bentoml.gamma.repository.base_repository import BaseRepository
 
@@ -52,7 +52,7 @@ class FileSystemRepository(BaseRepository):
 
         # Raise if target bento version already exist in storage
         if os.path.exists(target_dir):
-            raise YataiRepositoryException(
+            raise GammaRepositoryException(
                 "Existing BentoService bundle {name}:{version} found in repository: "
                 "{target_dir}".format(
                     name=bento_name, version=bento_version, target_dir=target_dir

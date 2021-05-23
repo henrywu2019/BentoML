@@ -8,7 +8,7 @@ fi
 
 PROTO_PATH=$BENTOML_REPO/protos
 PY_OUT_PATH=$BENTOML_REPO/bentoml/gamma/proto
-# test YataiService Interceptor calls
+# test GammaService Interceptor calls
 PROTO_TEST_PATH=$PROTO_PATH/tests
 PY_TEST_OUT_PATH=$BENTOML_REPO/tests/gamma/proto
 
@@ -37,7 +37,7 @@ python -m grpc_tools.protoc \
   -I"$PROTO_PATH" \
   --python_out="$PY_OUT_PATH" \
   --grpc_python_out="$PY_OUT_PATH" \
-  "$PROTO_PATH"/yatai_service.proto
+  "$PROTO_PATH"/gamma_service.proto
 
 fix_grpc_service_code(){
   PKGNAME=$1

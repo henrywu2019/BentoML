@@ -5,7 +5,7 @@ import pytest
 from minio import Minio
 
 from bentoml.utils.tempdir import TempDirectory
-from bentoml.gamma.client import get_yatai_client
+from bentoml.gamma.client import get_gamma_client
 from tests.bento_service_examples.example_bento_service import ExampleBentoService
 
 bucket_name = 'test-repo'
@@ -25,7 +25,7 @@ def minio_address():
 
 @pytest.mark.skip('Unable to connect minio on Github')
 def test_s3(minio_address):
-    yatai_server_command = [
+    gamma_server_command = [
         'bentoml',
         'gamma-service-start',
         '--no-ui',
@@ -37,14 +37,14 @@ def test_s3(minio_address):
         'localhost:9000',
     ]
     proc = subprocess.Popen(
-        yatai_server_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        gamma_server_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
-    yatai_server_url = "localhost:50051"
+    gamma_server_url = "localhost:50051"
     svc = ExampleBentoService()
     svc.pack('model', {'model': 'abc'})
     bento_tag = f'{svc.name}:{svc.version}'
-    saved_path = svc.save(yatai_url=yatai_server_url)
-    yc = get_yatai_client(yatai_server_url)
+    saved_path = svc.save(gamma_url=gamma_server_url)
+    yc = get_gamma_client(gamma_server_url)
 
     assert saved_path.startswith('s3://')
 

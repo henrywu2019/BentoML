@@ -34,7 +34,7 @@ def ensure_node_available_or_raise():
         )
     except FileNotFoundError:
         raise MissingDependencyException(
-            'Node is required for Yatai web UI. Please visit '
+            'Node is required for Gamma web UI. Please visit '
             'www.nodejs.org for instructions'
         )
 

@@ -37,7 +37,7 @@ mock_port_number = 123
 mock_user_id = 1234567891
 
 
-def create_yatai_service_mock(repo_storage_type=BentoUri.LOCAL):
+def create_gamma_service_mock(repo_storage_type=BentoUri.LOCAL):
     bento_pb = Bento(name='bento_test_name', version='version1.1.1')
     if repo_storage_type == BentoUri.LOCAL:
         bento_pb.uri.uri = '/tmp/path/to/bundle'
@@ -47,9 +47,9 @@ def create_yatai_service_mock(repo_storage_type=BentoUri.LOCAL):
     bento_pb.bento_service_metadata.env.python_version = '3.7.0'
     get_bento_response = GetBentoResponse(bento=bento_pb)
 
-    yatai_service_mock = MagicMock()
-    yatai_service_mock.GetBento.return_value = get_bento_response
-    return yatai_service_mock
+    gamma_service_mock = MagicMock()
+    gamma_service_mock.GetBento.return_value = get_bento_response
+    return gamma_service_mock
 
 
 def generate_ec2_deployment_pb():
@@ -105,9 +105,9 @@ def test_ec2_add_success():
         if op_name == "GetCallerIdentity":
             return {"Account": mock_user_id}
 
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_ec2_deployment_pb()
-    operator = AwsEc2DeploymentOperator(yatai_service_mock)
+    operator = AwsEc2DeploymentOperator(gamma_service_mock)
 
     with patch("botocore.client.BaseClient._make_api_call", new=mock_boto_client):
         result_pb = operator.add(test_deployment_pb)
@@ -123,9 +123,9 @@ def test_ec2_delete_success():
         elif op_name == "DeleteRepository":
             return {}
 
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_ec2_deployment_pb()
-    operator = AwsEc2DeploymentOperator(yatai_service_mock)
+    operator = AwsEc2DeploymentOperator(gamma_service_mock)
 
     with patch("botocore.client.BaseClient._make_api_call", new=mock_boto_client):
         result_pb = operator.delete(test_deployment_pb)
@@ -171,9 +171,9 @@ def test_ec2_describe_no_scaling_success():
                 ]
             }
 
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_ec2_deployment_pb()
-    operator = AwsEc2DeploymentOperator(yatai_service_mock)
+    operator = AwsEc2DeploymentOperator(gamma_service_mock)
 
     with patch("botocore.client.BaseClient._make_api_call", new=mock_boto_client):
         result_pb = operator.describe(test_deployment_pb)
@@ -220,9 +220,9 @@ def test_ec2_describe_pending():
                 ]
             }
 
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_ec2_deployment_pb()
-    operator = AwsEc2DeploymentOperator(yatai_service_mock)
+    operator = AwsEc2DeploymentOperator(gamma_service_mock)
 
     with patch("botocore.client.BaseClient._make_api_call", new=mock_boto_client):
         result_pb = operator.describe(test_deployment_pb)
@@ -269,9 +269,9 @@ def test_ec2_describe_stack_failure():
                 ]
             }
 
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_ec2_deployment_pb()
-    operator = AwsEc2DeploymentOperator(yatai_service_mock)
+    operator = AwsEc2DeploymentOperator(gamma_service_mock)
 
     with patch("botocore.client.BaseClient._make_api_call", new=mock_boto_client):
         result_pb = operator.describe(test_deployment_pb)
@@ -284,9 +284,9 @@ def test_ec2_describe_no_bucket_failure():
         if op_name == "DescribeStacks":
             return {"Stacks": [{"StackStatus": "CREATE_COMPLETE"}]}
 
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_ec2_deployment_pb()
-    operator = AwsEc2DeploymentOperator(yatai_service_mock)
+    operator = AwsEc2DeploymentOperator(gamma_service_mock)
 
     with patch("botocore.client.BaseClient._make_api_call", new=mock_boto_client):
         result_pb = operator.describe(test_deployment_pb)
@@ -344,9 +344,9 @@ def test_ec2_update_success():
                 ]
             }
 
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_ec2_deployment_pb()
-    operator = AwsEc2DeploymentOperator(yatai_service_mock)
+    operator = AwsEc2DeploymentOperator(gamma_service_mock)
 
     with patch("botocore.client.BaseClient._make_api_call", new=mock_boto_client):
         result_pb = operator.update(test_deployment_pb, test_deployment_pb)
@@ -377,9 +377,9 @@ def test_ec2_update_success():
     ),
 )
 def test_ec2_update_describe_failure():
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_ec2_deployment_pb()
-    operator = AwsEc2DeploymentOperator(yatai_service_mock)
+    operator = AwsEc2DeploymentOperator(gamma_service_mock)
 
     result_pb = operator.update(test_deployment_pb, test_deployment_pb)
     assert result_pb.status.status_code == status_pb2.Status.INTERNAL
@@ -402,9 +402,9 @@ def test_ec2_update_no_bucket_failure():
         if op_name == "DescribeStacks":
             return {"Stacks": [{"StackStatus": "CREATE_COMPLETE"}]}
 
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_ec2_deployment_pb()
-    operator = AwsEc2DeploymentOperator(yatai_service_mock)
+    operator = AwsEc2DeploymentOperator(gamma_service_mock)
 
     with patch("botocore.client.BaseClient._make_api_call", new=mock_boto_client):
         result_pb = operator.update(test_deployment_pb, test_deployment_pb)

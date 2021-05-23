@@ -28,13 +28,13 @@ from bentoml.utils.ruamel_yaml import YAML
 
 LOGGER = logging.getLogger(__name__)
 
-YATAI_REPOSITORY_S3 = "s3"
-YATAI_REPOSITORY_GCS = "gcs"
-YATAI_REPOSITORY_FILE_SYSTEM = "file_system"
-YATAI_REPOSITORY_TYPES = [
-    YATAI_REPOSITORY_FILE_SYSTEM,
-    YATAI_REPOSITORY_S3,
-    YATAI_REPOSITORY_GCS,
+GAMMA_REPOSITORY_S3 = "s3"
+GAMMA_REPOSITORY_GCS = "gcs"
+GAMMA_REPOSITORY_FILE_SYSTEM = "file_system"
+GAMMA_REPOSITORY_TYPES = [
+    GAMMA_REPOSITORY_FILE_SYSTEM,
+    GAMMA_REPOSITORY_S3,
+    GAMMA_REPOSITORY_GCS,
 ]
 
 SCHEMA = Schema(
@@ -93,9 +93,9 @@ SCHEMA = Schema(
             "repository": {
                 "type": And(
                     str,
-                    lambda type: type in YATAI_REPOSITORY_TYPES,
+                    lambda type: type in GAMMA_REPOSITORY_TYPES,
                     error="gamma.repository.type must be one of %s"
-                    % YATAI_REPOSITORY_TYPES,
+                    % GAMMA_REPOSITORY_TYPES,
                 ),
                 "file_system": {"directory": Or(str, None)},
                 "s3": {
@@ -217,7 +217,7 @@ class BentoMLContainer(containers.DeclarativeContainer):
         ),
     )
 
-    yatai_database_url = providers.Callable(
+    gamma_database_url = providers.Callable(
         lambda default, customized: customized or default,
         providers.Callable(
             "sqlite:///{}".format,
@@ -226,13 +226,13 @@ class BentoMLContainer(containers.DeclarativeContainer):
         config.gamma.database.url,
     )
 
-    yatai_file_system_directory = providers.Callable(
+    gamma_file_system_directory = providers.Callable(
         lambda default, customized: customized or default,
         providers.Callable(os.path.join, bentoml_home, "repository"),
         config.gamma.repository.file_system.directory,
     )
 
-    yatai_tls_root_ca_cert = providers.Callable(
+    gamma_tls_root_ca_cert = providers.Callable(
         lambda current, deprecated: current or deprecated,
         config.gamma.remote.tls.root_ca_cert,
         config.gamma.remote.tls.client_certificate_file,
@@ -244,10 +244,10 @@ class BentoMLContainer(containers.DeclarativeContainer):
         config.logging.file.directory,
     )
 
-    yatai_logging_path = providers.Callable(
+    gamma_logging_path = providers.Callable(
         lambda default, customized: customized or default,
         providers.Callable(
-            os.path.join, logging_file_directory, "yatai_web_server.log"
+            os.path.join, logging_file_directory, "gamma_web_server.log"
         ),
         config.gamma.logging.path,
     )

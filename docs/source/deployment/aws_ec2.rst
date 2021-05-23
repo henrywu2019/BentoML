@@ -238,18 +238,18 @@ Removing a EC2 deployment is also very easy.  Calling `bentoml ec2 delete` comma
 
 
 =================================================================
-Deploy and manage AWS EC2 deployments with remote YataiService
+Deploy and manage AWS EC2 deployments with remote GammaService
 =================================================================
 
-BentoML recommends to use remote YataiService for managing and deploying BentoService
+BentoML recommends to use remote GammaService for managing and deploying BentoService
 when you are working in a team. To deploy AWS EC2 deployments with remote
-YataiService, you need to provide the AWS credentials.
+GammaService, you need to provide the AWS credentials.
 
 After signed in and configured your AWS CLI in your local machine, you can find the
 credentials in your aws directory, `~/.aws/credentials` as key value pairs, with key
 name as `aws_access_key_id` and `aws_secret_access_key`
 
-Starts a BentoML YataiService docker image and set the credentials found in
+Starts a BentoML GammaService docker image and set the credentials found in
 `~/.aws/credentials` as environment variables to the running container.
 
 .. code-block:: bash
@@ -260,12 +260,12 @@ Starts a BentoML YataiService docker image and set the credentials found in
         -p 50051:50051 -p 3000:3000 bentoml/gamma-service:latest
 
 
-After the YataiService docker container is running, in another terminal window, set
+After the GammaService docker container is running, in another terminal window, set
 gamma service address with `bentoml config set`
 
 .. code-block:: bash
 
-    $ bentoml config set yatai_service.url=0.0.0.0:50051
+    $ bentoml config set gamma_service.url=0.0.0.0:50051
 
 
 ========================================================
@@ -375,7 +375,7 @@ Copy and paste the code below into a file named `gamma-service.yaml`
                   key: default_region
 
 
-Run `kubectl apply` command to deploy Yatai service to the Kubernetes cluster
+Run `kubectl apply` command to deploy Gamma service to the Kubernetes cluster
 
 .. code-block:: bash
 

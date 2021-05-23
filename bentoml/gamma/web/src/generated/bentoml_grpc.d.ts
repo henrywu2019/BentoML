@@ -4457,11 +4457,11 @@ export namespace bentoml {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Represents a Yatai */
-    class Yatai extends $protobuf.rpc.Service {
+    /** Represents a Gamma */
+    class Gamma extends $protobuf.rpc.Service {
 
         /**
-         * Constructs a new Yatai service.
+         * Constructs a new Gamma service.
          * @param rpcImpl RPC implementation
          * @param [requestDelimited=false] Whether requests are length-delimited
          * @param [responseDelimited=false] Whether responses are length-delimited
@@ -4469,20 +4469,20 @@ export namespace bentoml {
         constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
 
         /**
-         * Creates new Yatai service using the specified rpc implementation.
+         * Creates new Gamma service using the specified rpc implementation.
          * @param rpcImpl RPC implementation
          * @param [requestDelimited=false] Whether requests are length-delimited
          * @param [responseDelimited=false] Whether responses are length-delimited
          * @returns RPC service. Useful where requests and/or responses are streamed.
          */
-        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Yatai;
+        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Gamma;
 
         /**
          * Calls HealthCheck.
          * @param request Empty message or plain object
          * @param callback Node-style callback called with the error, if any, and HealthCheckResponse
          */
-        public healthCheck(request: google.protobuf.IEmpty, callback: bentoml.Yatai.HealthCheckCallback): void;
+        public healthCheck(request: google.protobuf.IEmpty, callback: bentoml.Gamma.HealthCheckCallback): void;
 
         /**
          * Calls HealthCheck.
@@ -4492,25 +4492,25 @@ export namespace bentoml {
         public healthCheck(request: google.protobuf.IEmpty): Promise<bentoml.HealthCheckResponse>;
 
         /**
-         * Calls GetYataiServiceVersion.
+         * Calls GetGammaServiceVersion.
          * @param request Empty message or plain object
-         * @param callback Node-style callback called with the error, if any, and GetYataiServiceVersionResponse
+         * @param callback Node-style callback called with the error, if any, and GetGammaServiceVersionResponse
          */
-        public getYataiServiceVersion(request: google.protobuf.IEmpty, callback: bentoml.Yatai.GetYataiServiceVersionCallback): void;
+        public getGammaServiceVersion(request: google.protobuf.IEmpty, callback: bentoml.Gamma.GetGammaServiceVersionCallback): void;
 
         /**
-         * Calls GetYataiServiceVersion.
+         * Calls GetGammaServiceVersion.
          * @param request Empty message or plain object
          * @returns Promise
          */
-        public getYataiServiceVersion(request: google.protobuf.IEmpty): Promise<bentoml.GetYataiServiceVersionResponse>;
+        public getGammaServiceVersion(request: google.protobuf.IEmpty): Promise<bentoml.GetGammaServiceVersionResponse>;
 
         /**
          * Calls ApplyDeployment.
          * @param request ApplyDeploymentRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and ApplyDeploymentResponse
          */
-        public applyDeployment(request: bentoml.IApplyDeploymentRequest, callback: bentoml.Yatai.ApplyDeploymentCallback): void;
+        public applyDeployment(request: bentoml.IApplyDeploymentRequest, callback: bentoml.Gamma.ApplyDeploymentCallback): void;
 
         /**
          * Calls ApplyDeployment.
@@ -4524,7 +4524,7 @@ export namespace bentoml {
          * @param request DeleteDeploymentRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and DeleteDeploymentResponse
          */
-        public deleteDeployment(request: bentoml.IDeleteDeploymentRequest, callback: bentoml.Yatai.DeleteDeploymentCallback): void;
+        public deleteDeployment(request: bentoml.IDeleteDeploymentRequest, callback: bentoml.Gamma.DeleteDeploymentCallback): void;
 
         /**
          * Calls DeleteDeployment.
@@ -4538,7 +4538,7 @@ export namespace bentoml {
          * @param request GetDeploymentRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and GetDeploymentResponse
          */
-        public getDeployment(request: bentoml.IGetDeploymentRequest, callback: bentoml.Yatai.GetDeploymentCallback): void;
+        public getDeployment(request: bentoml.IGetDeploymentRequest, callback: bentoml.Gamma.GetDeploymentCallback): void;
 
         /**
          * Calls GetDeployment.
@@ -4552,7 +4552,7 @@ export namespace bentoml {
          * @param request DescribeDeploymentRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and DescribeDeploymentResponse
          */
-        public describeDeployment(request: bentoml.IDescribeDeploymentRequest, callback: bentoml.Yatai.DescribeDeploymentCallback): void;
+        public describeDeployment(request: bentoml.IDescribeDeploymentRequest, callback: bentoml.Gamma.DescribeDeploymentCallback): void;
 
         /**
          * Calls DescribeDeployment.
@@ -4566,7 +4566,7 @@ export namespace bentoml {
          * @param request ListDeploymentsRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and ListDeploymentsResponse
          */
-        public listDeployments(request: bentoml.IListDeploymentsRequest, callback: bentoml.Yatai.ListDeploymentsCallback): void;
+        public listDeployments(request: bentoml.IListDeploymentsRequest, callback: bentoml.Gamma.ListDeploymentsCallback): void;
 
         /**
          * Calls ListDeployments.
@@ -4580,7 +4580,7 @@ export namespace bentoml {
          * @param request AddBentoRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and AddBentoResponse
          */
-        public addBento(request: bentoml.IAddBentoRequest, callback: bentoml.Yatai.AddBentoCallback): void;
+        public addBento(request: bentoml.IAddBentoRequest, callback: bentoml.Gamma.AddBentoCallback): void;
 
         /**
          * Calls AddBento.
@@ -4594,7 +4594,7 @@ export namespace bentoml {
          * @param request UpdateBentoRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and UpdateBentoResponse
          */
-        public updateBento(request: bentoml.IUpdateBentoRequest, callback: bentoml.Yatai.UpdateBentoCallback): void;
+        public updateBento(request: bentoml.IUpdateBentoRequest, callback: bentoml.Gamma.UpdateBentoCallback): void;
 
         /**
          * Calls UpdateBento.
@@ -4608,7 +4608,7 @@ export namespace bentoml {
          * @param request GetBentoRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and GetBentoResponse
          */
-        public getBento(request: bentoml.IGetBentoRequest, callback: bentoml.Yatai.GetBentoCallback): void;
+        public getBento(request: bentoml.IGetBentoRequest, callback: bentoml.Gamma.GetBentoCallback): void;
 
         /**
          * Calls GetBento.
@@ -4622,7 +4622,7 @@ export namespace bentoml {
          * @param request DangerouslyDeleteBentoRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and DangerouslyDeleteBentoResponse
          */
-        public dangerouslyDeleteBento(request: bentoml.IDangerouslyDeleteBentoRequest, callback: bentoml.Yatai.DangerouslyDeleteBentoCallback): void;
+        public dangerouslyDeleteBento(request: bentoml.IDangerouslyDeleteBentoRequest, callback: bentoml.Gamma.DangerouslyDeleteBentoCallback): void;
 
         /**
          * Calls DangerouslyDeleteBento.
@@ -4636,7 +4636,7 @@ export namespace bentoml {
          * @param request ListBentoRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and ListBentoResponse
          */
-        public listBento(request: bentoml.IListBentoRequest, callback: bentoml.Yatai.ListBentoCallback): void;
+        public listBento(request: bentoml.IListBentoRequest, callback: bentoml.Gamma.ListBentoCallback): void;
 
         /**
          * Calls ListBento.
@@ -4650,7 +4650,7 @@ export namespace bentoml {
          * @param request ContainerizeBentoRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and ContainerizeBentoResponse
          */
-        public containerizeBento(request: bentoml.IContainerizeBentoRequest, callback: bentoml.Yatai.ContainerizeBentoCallback): void;
+        public containerizeBento(request: bentoml.IContainerizeBentoRequest, callback: bentoml.Gamma.ContainerizeBentoCallback): void;
 
         /**
          * Calls ContainerizeBento.
@@ -4660,94 +4660,94 @@ export namespace bentoml {
         public containerizeBento(request: bentoml.IContainerizeBentoRequest): Promise<bentoml.ContainerizeBentoResponse>;
     }
 
-    namespace Yatai {
+    namespace Gamma {
 
         /**
-         * Callback as used by {@link bentoml.Yatai#healthCheck}.
+         * Callback as used by {@link bentoml.Gamma#healthCheck}.
          * @param error Error, if any
          * @param [response] HealthCheckResponse
          */
         type HealthCheckCallback = (error: (Error|null), response?: bentoml.HealthCheckResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#getYataiServiceVersion}.
+         * Callback as used by {@link bentoml.Gamma#getGammaServiceVersion}.
          * @param error Error, if any
-         * @param [response] GetYataiServiceVersionResponse
+         * @param [response] GetGammaServiceVersionResponse
          */
-        type GetYataiServiceVersionCallback = (error: (Error|null), response?: bentoml.GetYataiServiceVersionResponse) => void;
+        type GetGammaServiceVersionCallback = (error: (Error|null), response?: bentoml.GetGammaServiceVersionResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#applyDeployment}.
+         * Callback as used by {@link bentoml.Gamma#applyDeployment}.
          * @param error Error, if any
          * @param [response] ApplyDeploymentResponse
          */
         type ApplyDeploymentCallback = (error: (Error|null), response?: bentoml.ApplyDeploymentResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#deleteDeployment}.
+         * Callback as used by {@link bentoml.Gamma#deleteDeployment}.
          * @param error Error, if any
          * @param [response] DeleteDeploymentResponse
          */
         type DeleteDeploymentCallback = (error: (Error|null), response?: bentoml.DeleteDeploymentResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#getDeployment}.
+         * Callback as used by {@link bentoml.Gamma#getDeployment}.
          * @param error Error, if any
          * @param [response] GetDeploymentResponse
          */
         type GetDeploymentCallback = (error: (Error|null), response?: bentoml.GetDeploymentResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#describeDeployment}.
+         * Callback as used by {@link bentoml.Gamma#describeDeployment}.
          * @param error Error, if any
          * @param [response] DescribeDeploymentResponse
          */
         type DescribeDeploymentCallback = (error: (Error|null), response?: bentoml.DescribeDeploymentResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#listDeployments}.
+         * Callback as used by {@link bentoml.Gamma#listDeployments}.
          * @param error Error, if any
          * @param [response] ListDeploymentsResponse
          */
         type ListDeploymentsCallback = (error: (Error|null), response?: bentoml.ListDeploymentsResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#addBento}.
+         * Callback as used by {@link bentoml.Gamma#addBento}.
          * @param error Error, if any
          * @param [response] AddBentoResponse
          */
         type AddBentoCallback = (error: (Error|null), response?: bentoml.AddBentoResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#updateBento}.
+         * Callback as used by {@link bentoml.Gamma#updateBento}.
          * @param error Error, if any
          * @param [response] UpdateBentoResponse
          */
         type UpdateBentoCallback = (error: (Error|null), response?: bentoml.UpdateBentoResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#getBento}.
+         * Callback as used by {@link bentoml.Gamma#getBento}.
          * @param error Error, if any
          * @param [response] GetBentoResponse
          */
         type GetBentoCallback = (error: (Error|null), response?: bentoml.GetBentoResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#dangerouslyDeleteBento}.
+         * Callback as used by {@link bentoml.Gamma#dangerouslyDeleteBento}.
          * @param error Error, if any
          * @param [response] DangerouslyDeleteBentoResponse
          */
         type DangerouslyDeleteBentoCallback = (error: (Error|null), response?: bentoml.DangerouslyDeleteBentoResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#listBento}.
+         * Callback as used by {@link bentoml.Gamma#listBento}.
          * @param error Error, if any
          * @param [response] ListBentoResponse
          */
         type ListBentoCallback = (error: (Error|null), response?: bentoml.ListBentoResponse) => void;
 
         /**
-         * Callback as used by {@link bentoml.Yatai#containerizeBento}.
+         * Callback as used by {@link bentoml.Gamma#containerizeBento}.
          * @param error Error, if any
          * @param [response] ContainerizeBentoResponse
          */
@@ -4844,97 +4844,97 @@ export namespace bentoml {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a GetYataiServiceVersionResponse. */
-    interface IGetYataiServiceVersionResponse {
+    /** Properties of a GetGammaServiceVersionResponse. */
+    interface IGetGammaServiceVersionResponse {
 
-        /** GetYataiServiceVersionResponse status */
+        /** GetGammaServiceVersionResponse status */
         status?: (bentoml.IStatus|null);
 
-        /** GetYataiServiceVersionResponse version */
+        /** GetGammaServiceVersionResponse version */
         version?: (string|null);
     }
 
-    /** Represents a GetYataiServiceVersionResponse. */
-    class GetYataiServiceVersionResponse implements IGetYataiServiceVersionResponse {
+    /** Represents a GetGammaServiceVersionResponse. */
+    class GetGammaServiceVersionResponse implements IGetGammaServiceVersionResponse {
 
         /**
-         * Constructs a new GetYataiServiceVersionResponse.
+         * Constructs a new GetGammaServiceVersionResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: bentoml.IGetYataiServiceVersionResponse);
+        constructor(properties?: bentoml.IGetGammaServiceVersionResponse);
 
-        /** GetYataiServiceVersionResponse status. */
+        /** GetGammaServiceVersionResponse status. */
         public status?: (bentoml.IStatus|null);
 
-        /** GetYataiServiceVersionResponse version. */
+        /** GetGammaServiceVersionResponse version. */
         public version: string;
 
         /**
-         * Creates a new GetYataiServiceVersionResponse instance using the specified properties.
+         * Creates a new GetGammaServiceVersionResponse instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns GetYataiServiceVersionResponse instance
+         * @returns GetGammaServiceVersionResponse instance
          */
-        public static create(properties?: bentoml.IGetYataiServiceVersionResponse): bentoml.GetYataiServiceVersionResponse;
+        public static create(properties?: bentoml.IGetGammaServiceVersionResponse): bentoml.GetGammaServiceVersionResponse;
 
         /**
-         * Encodes the specified GetYataiServiceVersionResponse message. Does not implicitly {@link bentoml.GetYataiServiceVersionResponse.verify|verify} messages.
-         * @param message GetYataiServiceVersionResponse message or plain object to encode
+         * Encodes the specified GetGammaServiceVersionResponse message. Does not implicitly {@link bentoml.GetGammaServiceVersionResponse.verify|verify} messages.
+         * @param message GetGammaServiceVersionResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: bentoml.IGetYataiServiceVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: bentoml.IGetGammaServiceVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GetYataiServiceVersionResponse message, length delimited. Does not implicitly {@link bentoml.GetYataiServiceVersionResponse.verify|verify} messages.
-         * @param message GetYataiServiceVersionResponse message or plain object to encode
+         * Encodes the specified GetGammaServiceVersionResponse message, length delimited. Does not implicitly {@link bentoml.GetGammaServiceVersionResponse.verify|verify} messages.
+         * @param message GetGammaServiceVersionResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: bentoml.IGetYataiServiceVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: bentoml.IGetGammaServiceVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a GetYataiServiceVersionResponse message from the specified reader or buffer.
+         * Decodes a GetGammaServiceVersionResponse message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns GetYataiServiceVersionResponse
+         * @returns GetGammaServiceVersionResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): bentoml.GetYataiServiceVersionResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): bentoml.GetGammaServiceVersionResponse;
 
         /**
-         * Decodes a GetYataiServiceVersionResponse message from the specified reader or buffer, length delimited.
+         * Decodes a GetGammaServiceVersionResponse message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns GetYataiServiceVersionResponse
+         * @returns GetGammaServiceVersionResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): bentoml.GetYataiServiceVersionResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): bentoml.GetGammaServiceVersionResponse;
 
         /**
-         * Verifies a GetYataiServiceVersionResponse message.
+         * Verifies a GetGammaServiceVersionResponse message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a GetYataiServiceVersionResponse message from a plain object. Also converts values to their respective internal types.
+         * Creates a GetGammaServiceVersionResponse message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns GetYataiServiceVersionResponse
+         * @returns GetGammaServiceVersionResponse
          */
-        public static fromObject(object: { [k: string]: any }): bentoml.GetYataiServiceVersionResponse;
+        public static fromObject(object: { [k: string]: any }): bentoml.GetGammaServiceVersionResponse;
 
         /**
-         * Creates a plain object from a GetYataiServiceVersionResponse message. Also converts values to other types if specified.
-         * @param message GetYataiServiceVersionResponse
+         * Creates a plain object from a GetGammaServiceVersionResponse message. Also converts values to other types if specified.
+         * @param message GetGammaServiceVersionResponse
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: bentoml.GetYataiServiceVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: bentoml.GetGammaServiceVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this GetYataiServiceVersionResponse to JSON.
+         * Converts this GetGammaServiceVersionResponse to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

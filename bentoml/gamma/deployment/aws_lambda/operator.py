@@ -25,7 +25,7 @@ from bentoml.utils.ruamel_yaml import YAML
 from bentoml.exceptions import (
     BentoMLException,
     InvalidArgument,
-    YataiDeploymentException,
+    GammaDeploymentException,
 )
 from bentoml.saved_bundle import loader
 from bentoml.utils import status_pb_to_error_code_and_message
@@ -280,8 +280,8 @@ def _deploy_lambda_function(
 
 
 class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
-    def __init__(self, yatai_service):
-        super(AwsLambdaDeploymentOperator, self).__init__(yatai_service)
+    def __init__(self, gamma_service):
+        super(AwsLambdaDeploymentOperator, self).__init__(gamma_service)
         ensure_docker_available_or_raise()
         ensure_sam_available_or_raise()
 
@@ -295,7 +295,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
             if not deployment_spec.aws_lambda_operator_config.region:
                 raise InvalidArgument('AWS region is missing')
 
-            bento_pb = self.yatai_service.GetBento(
+            bento_pb = self.gamma_service.GetBento(
                 GetBentoRequest(
                     bento_name=deployment_spec.bento_name,
                     bento_version=deployment_spec.bento_version,
@@ -354,7 +354,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
     def update(self, deployment_pb, previous_deployment):
         try:
             deployment_spec = deployment_pb.spec
-            bento_pb = self.yatai_service.GetBento(
+            bento_pb = self.gamma_service.GetBento(
                 GetBentoRequest(
                     bento_name=deployment_spec.bento_name,
                     bento_version=deployment_spec.bento_version,
@@ -393,7 +393,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
             error_code, error_message = status_pb_to_error_code_and_message(
                 describe_result.status
             )
-            raise YataiDeploymentException(
+            raise GammaDeploymentException(
                 f'Failed fetching Lambda deployment current status - '
                 f'{error_code}:{error_message}'
             )
@@ -462,7 +462,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
             if not lambda_deployment_config.region:
                 raise InvalidArgument('AWS region is missing')
 
-            bento_pb = self.yatai_service.GetBento(
+            bento_pb = self.gamma_service.GetBento(
                 GetBentoRequest(
                     bento_name=deployment_spec.bento_name,
                     bento_version=deployment_spec.bento_version,

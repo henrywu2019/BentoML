@@ -40,15 +40,15 @@ tag_name="v$VERSION_STR"
 echo "Installing dev dependencies..."
 pip install .[dev]
 
-echo "Installing YataiServer node server dependencies.."
+echo "Installing GammaServer node server dependencies.."
 cd "$GIT_ROOT"/bentoml/gamma/web
 yarn
 
-echo "Installing YataiServer Web UI dependencies.."
+echo "Installing GammaServer Web UI dependencies.."
 cd "$GIT_ROOT"/bentoml/gamma/web/client
 yarn
 
-echo "Build YataiServer node server and web UI..."
+echo "Build GammaServer node server and web UI..."
 cd "$GIT_ROOT"/bentoml/gamma/web
 yarn build
 

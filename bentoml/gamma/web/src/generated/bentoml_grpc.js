@@ -11103,41 +11103,41 @@ export const bentoml = $root.bentoml = (() => {
         return ContainerizeBentoResponse;
     })();
 
-    bentoml.Yatai = (function() {
+    bentoml.Gamma = (function() {
 
         /**
-         * Constructs a new Yatai service.
+         * Constructs a new Gamma service.
          * @memberof bentoml
-         * @classdesc Represents a Yatai
+         * @classdesc Represents a Gamma
          * @extends $protobuf.rpc.Service
          * @constructor
          * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
          * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
          * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
          */
-        function Yatai(rpcImpl, requestDelimited, responseDelimited) {
+        function Gamma(rpcImpl, requestDelimited, responseDelimited) {
             $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
         }
 
-        (Yatai.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Yatai;
+        (Gamma.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Gamma;
 
         /**
-         * Creates new Yatai service using the specified rpc implementation.
+         * Creates new Gamma service using the specified rpc implementation.
          * @function create
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @static
          * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
          * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
          * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-         * @returns {Yatai} RPC service. Useful where requests and/or responses are streamed.
+         * @returns {Gamma} RPC service. Useful where requests and/or responses are streamed.
          */
-        Yatai.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+        Gamma.create = function create(rpcImpl, requestDelimited, responseDelimited) {
             return new this(rpcImpl, requestDelimited, responseDelimited);
         };
 
         /**
-         * Callback as used by {@link bentoml.Yatai#healthCheck}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#healthCheck}.
+         * @memberof bentoml.Gamma
          * @typedef HealthCheckCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11147,21 +11147,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls HealthCheck.
          * @function healthCheck
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {google.protobuf.IEmpty} request Empty message or plain object
-         * @param {bentoml.Yatai.HealthCheckCallback} callback Node-style callback called with the error, if any, and HealthCheckResponse
+         * @param {bentoml.Gamma.HealthCheckCallback} callback Node-style callback called with the error, if any, and HealthCheckResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.healthCheck = function healthCheck(request, callback) {
+        Object.defineProperty(Gamma.prototype.healthCheck = function healthCheck(request, callback) {
             return this.rpcCall(healthCheck, $root.google.protobuf.Empty, $root.bentoml.HealthCheckResponse, request, callback);
         }, "name", { value: "HealthCheck" });
 
         /**
          * Calls HealthCheck.
          * @function healthCheck
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {google.protobuf.IEmpty} request Empty message or plain object
          * @returns {Promise<bentoml.HealthCheckResponse>} Promise
@@ -11169,41 +11169,41 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#getYataiServiceVersion}.
-         * @memberof bentoml.Yatai
-         * @typedef GetYataiServiceVersionCallback
+         * Callback as used by {@link bentoml.Gamma#getGammaServiceVersion}.
+         * @memberof bentoml.Gamma
+         * @typedef GetGammaServiceVersionCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {bentoml.GetYataiServiceVersionResponse} [response] GetYataiServiceVersionResponse
+         * @param {bentoml.GetGammaServiceVersionResponse} [response] GetGammaServiceVersionResponse
          */
 
         /**
-         * Calls GetYataiServiceVersion.
-         * @function getYataiServiceVersion
-         * @memberof bentoml.Yatai
+         * Calls GetGammaServiceVersion.
+         * @function getGammaServiceVersion
+         * @memberof bentoml.Gamma
          * @instance
          * @param {google.protobuf.IEmpty} request Empty message or plain object
-         * @param {bentoml.Yatai.GetYataiServiceVersionCallback} callback Node-style callback called with the error, if any, and GetYataiServiceVersionResponse
+         * @param {bentoml.Gamma.GetGammaServiceVersionCallback} callback Node-style callback called with the error, if any, and GetGammaServiceVersionResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.getYataiServiceVersion = function getYataiServiceVersion(request, callback) {
-            return this.rpcCall(getYataiServiceVersion, $root.google.protobuf.Empty, $root.bentoml.GetYataiServiceVersionResponse, request, callback);
-        }, "name", { value: "GetYataiServiceVersion" });
+        Object.defineProperty(Gamma.prototype.getGammaServiceVersion = function getGammaServiceVersion(request, callback) {
+            return this.rpcCall(getGammaServiceVersion, $root.google.protobuf.Empty, $root.bentoml.GetGammaServiceVersionResponse, request, callback);
+        }, "name", { value: "GetGammaServiceVersion" });
 
         /**
-         * Calls GetYataiServiceVersion.
-         * @function getYataiServiceVersion
-         * @memberof bentoml.Yatai
+         * Calls GetGammaServiceVersion.
+         * @function getGammaServiceVersion
+         * @memberof bentoml.Gamma
          * @instance
          * @param {google.protobuf.IEmpty} request Empty message or plain object
-         * @returns {Promise<bentoml.GetYataiServiceVersionResponse>} Promise
+         * @returns {Promise<bentoml.GetGammaServiceVersionResponse>} Promise
          * @variation 2
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#applyDeployment}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#applyDeployment}.
+         * @memberof bentoml.Gamma
          * @typedef ApplyDeploymentCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11213,21 +11213,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls ApplyDeployment.
          * @function applyDeployment
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IApplyDeploymentRequest} request ApplyDeploymentRequest message or plain object
-         * @param {bentoml.Yatai.ApplyDeploymentCallback} callback Node-style callback called with the error, if any, and ApplyDeploymentResponse
+         * @param {bentoml.Gamma.ApplyDeploymentCallback} callback Node-style callback called with the error, if any, and ApplyDeploymentResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.applyDeployment = function applyDeployment(request, callback) {
+        Object.defineProperty(Gamma.prototype.applyDeployment = function applyDeployment(request, callback) {
             return this.rpcCall(applyDeployment, $root.bentoml.ApplyDeploymentRequest, $root.bentoml.ApplyDeploymentResponse, request, callback);
         }, "name", { value: "ApplyDeployment" });
 
         /**
          * Calls ApplyDeployment.
          * @function applyDeployment
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IApplyDeploymentRequest} request ApplyDeploymentRequest message or plain object
          * @returns {Promise<bentoml.ApplyDeploymentResponse>} Promise
@@ -11235,8 +11235,8 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#deleteDeployment}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#deleteDeployment}.
+         * @memberof bentoml.Gamma
          * @typedef DeleteDeploymentCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11246,21 +11246,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls DeleteDeployment.
          * @function deleteDeployment
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IDeleteDeploymentRequest} request DeleteDeploymentRequest message or plain object
-         * @param {bentoml.Yatai.DeleteDeploymentCallback} callback Node-style callback called with the error, if any, and DeleteDeploymentResponse
+         * @param {bentoml.Gamma.DeleteDeploymentCallback} callback Node-style callback called with the error, if any, and DeleteDeploymentResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.deleteDeployment = function deleteDeployment(request, callback) {
+        Object.defineProperty(Gamma.prototype.deleteDeployment = function deleteDeployment(request, callback) {
             return this.rpcCall(deleteDeployment, $root.bentoml.DeleteDeploymentRequest, $root.bentoml.DeleteDeploymentResponse, request, callback);
         }, "name", { value: "DeleteDeployment" });
 
         /**
          * Calls DeleteDeployment.
          * @function deleteDeployment
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IDeleteDeploymentRequest} request DeleteDeploymentRequest message or plain object
          * @returns {Promise<bentoml.DeleteDeploymentResponse>} Promise
@@ -11268,8 +11268,8 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#getDeployment}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#getDeployment}.
+         * @memberof bentoml.Gamma
          * @typedef GetDeploymentCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11279,21 +11279,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls GetDeployment.
          * @function getDeployment
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IGetDeploymentRequest} request GetDeploymentRequest message or plain object
-         * @param {bentoml.Yatai.GetDeploymentCallback} callback Node-style callback called with the error, if any, and GetDeploymentResponse
+         * @param {bentoml.Gamma.GetDeploymentCallback} callback Node-style callback called with the error, if any, and GetDeploymentResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.getDeployment = function getDeployment(request, callback) {
+        Object.defineProperty(Gamma.prototype.getDeployment = function getDeployment(request, callback) {
             return this.rpcCall(getDeployment, $root.bentoml.GetDeploymentRequest, $root.bentoml.GetDeploymentResponse, request, callback);
         }, "name", { value: "GetDeployment" });
 
         /**
          * Calls GetDeployment.
          * @function getDeployment
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IGetDeploymentRequest} request GetDeploymentRequest message or plain object
          * @returns {Promise<bentoml.GetDeploymentResponse>} Promise
@@ -11301,8 +11301,8 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#describeDeployment}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#describeDeployment}.
+         * @memberof bentoml.Gamma
          * @typedef DescribeDeploymentCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11312,21 +11312,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls DescribeDeployment.
          * @function describeDeployment
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IDescribeDeploymentRequest} request DescribeDeploymentRequest message or plain object
-         * @param {bentoml.Yatai.DescribeDeploymentCallback} callback Node-style callback called with the error, if any, and DescribeDeploymentResponse
+         * @param {bentoml.Gamma.DescribeDeploymentCallback} callback Node-style callback called with the error, if any, and DescribeDeploymentResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.describeDeployment = function describeDeployment(request, callback) {
+        Object.defineProperty(Gamma.prototype.describeDeployment = function describeDeployment(request, callback) {
             return this.rpcCall(describeDeployment, $root.bentoml.DescribeDeploymentRequest, $root.bentoml.DescribeDeploymentResponse, request, callback);
         }, "name", { value: "DescribeDeployment" });
 
         /**
          * Calls DescribeDeployment.
          * @function describeDeployment
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IDescribeDeploymentRequest} request DescribeDeploymentRequest message or plain object
          * @returns {Promise<bentoml.DescribeDeploymentResponse>} Promise
@@ -11334,8 +11334,8 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#listDeployments}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#listDeployments}.
+         * @memberof bentoml.Gamma
          * @typedef ListDeploymentsCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11345,21 +11345,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls ListDeployments.
          * @function listDeployments
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IListDeploymentsRequest} request ListDeploymentsRequest message or plain object
-         * @param {bentoml.Yatai.ListDeploymentsCallback} callback Node-style callback called with the error, if any, and ListDeploymentsResponse
+         * @param {bentoml.Gamma.ListDeploymentsCallback} callback Node-style callback called with the error, if any, and ListDeploymentsResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.listDeployments = function listDeployments(request, callback) {
+        Object.defineProperty(Gamma.prototype.listDeployments = function listDeployments(request, callback) {
             return this.rpcCall(listDeployments, $root.bentoml.ListDeploymentsRequest, $root.bentoml.ListDeploymentsResponse, request, callback);
         }, "name", { value: "ListDeployments" });
 
         /**
          * Calls ListDeployments.
          * @function listDeployments
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IListDeploymentsRequest} request ListDeploymentsRequest message or plain object
          * @returns {Promise<bentoml.ListDeploymentsResponse>} Promise
@@ -11367,8 +11367,8 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#addBento}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#addBento}.
+         * @memberof bentoml.Gamma
          * @typedef AddBentoCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11378,21 +11378,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls AddBento.
          * @function addBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IAddBentoRequest} request AddBentoRequest message or plain object
-         * @param {bentoml.Yatai.AddBentoCallback} callback Node-style callback called with the error, if any, and AddBentoResponse
+         * @param {bentoml.Gamma.AddBentoCallback} callback Node-style callback called with the error, if any, and AddBentoResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.addBento = function addBento(request, callback) {
+        Object.defineProperty(Gamma.prototype.addBento = function addBento(request, callback) {
             return this.rpcCall(addBento, $root.bentoml.AddBentoRequest, $root.bentoml.AddBentoResponse, request, callback);
         }, "name", { value: "AddBento" });
 
         /**
          * Calls AddBento.
          * @function addBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IAddBentoRequest} request AddBentoRequest message or plain object
          * @returns {Promise<bentoml.AddBentoResponse>} Promise
@@ -11400,8 +11400,8 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#updateBento}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#updateBento}.
+         * @memberof bentoml.Gamma
          * @typedef UpdateBentoCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11411,21 +11411,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls UpdateBento.
          * @function updateBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IUpdateBentoRequest} request UpdateBentoRequest message or plain object
-         * @param {bentoml.Yatai.UpdateBentoCallback} callback Node-style callback called with the error, if any, and UpdateBentoResponse
+         * @param {bentoml.Gamma.UpdateBentoCallback} callback Node-style callback called with the error, if any, and UpdateBentoResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.updateBento = function updateBento(request, callback) {
+        Object.defineProperty(Gamma.prototype.updateBento = function updateBento(request, callback) {
             return this.rpcCall(updateBento, $root.bentoml.UpdateBentoRequest, $root.bentoml.UpdateBentoResponse, request, callback);
         }, "name", { value: "UpdateBento" });
 
         /**
          * Calls UpdateBento.
          * @function updateBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IUpdateBentoRequest} request UpdateBentoRequest message or plain object
          * @returns {Promise<bentoml.UpdateBentoResponse>} Promise
@@ -11433,8 +11433,8 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#getBento}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#getBento}.
+         * @memberof bentoml.Gamma
          * @typedef GetBentoCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11444,21 +11444,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls GetBento.
          * @function getBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IGetBentoRequest} request GetBentoRequest message or plain object
-         * @param {bentoml.Yatai.GetBentoCallback} callback Node-style callback called with the error, if any, and GetBentoResponse
+         * @param {bentoml.Gamma.GetBentoCallback} callback Node-style callback called with the error, if any, and GetBentoResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.getBento = function getBento(request, callback) {
+        Object.defineProperty(Gamma.prototype.getBento = function getBento(request, callback) {
             return this.rpcCall(getBento, $root.bentoml.GetBentoRequest, $root.bentoml.GetBentoResponse, request, callback);
         }, "name", { value: "GetBento" });
 
         /**
          * Calls GetBento.
          * @function getBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IGetBentoRequest} request GetBentoRequest message or plain object
          * @returns {Promise<bentoml.GetBentoResponse>} Promise
@@ -11466,8 +11466,8 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#dangerouslyDeleteBento}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#dangerouslyDeleteBento}.
+         * @memberof bentoml.Gamma
          * @typedef DangerouslyDeleteBentoCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11477,21 +11477,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls DangerouslyDeleteBento.
          * @function dangerouslyDeleteBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IDangerouslyDeleteBentoRequest} request DangerouslyDeleteBentoRequest message or plain object
-         * @param {bentoml.Yatai.DangerouslyDeleteBentoCallback} callback Node-style callback called with the error, if any, and DangerouslyDeleteBentoResponse
+         * @param {bentoml.Gamma.DangerouslyDeleteBentoCallback} callback Node-style callback called with the error, if any, and DangerouslyDeleteBentoResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.dangerouslyDeleteBento = function dangerouslyDeleteBento(request, callback) {
+        Object.defineProperty(Gamma.prototype.dangerouslyDeleteBento = function dangerouslyDeleteBento(request, callback) {
             return this.rpcCall(dangerouslyDeleteBento, $root.bentoml.DangerouslyDeleteBentoRequest, $root.bentoml.DangerouslyDeleteBentoResponse, request, callback);
         }, "name", { value: "DangerouslyDeleteBento" });
 
         /**
          * Calls DangerouslyDeleteBento.
          * @function dangerouslyDeleteBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IDangerouslyDeleteBentoRequest} request DangerouslyDeleteBentoRequest message or plain object
          * @returns {Promise<bentoml.DangerouslyDeleteBentoResponse>} Promise
@@ -11499,8 +11499,8 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#listBento}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#listBento}.
+         * @memberof bentoml.Gamma
          * @typedef ListBentoCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11510,21 +11510,21 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls ListBento.
          * @function listBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IListBentoRequest} request ListBentoRequest message or plain object
-         * @param {bentoml.Yatai.ListBentoCallback} callback Node-style callback called with the error, if any, and ListBentoResponse
+         * @param {bentoml.Gamma.ListBentoCallback} callback Node-style callback called with the error, if any, and ListBentoResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.listBento = function listBento(request, callback) {
+        Object.defineProperty(Gamma.prototype.listBento = function listBento(request, callback) {
             return this.rpcCall(listBento, $root.bentoml.ListBentoRequest, $root.bentoml.ListBentoResponse, request, callback);
         }, "name", { value: "ListBento" });
 
         /**
          * Calls ListBento.
          * @function listBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IListBentoRequest} request ListBentoRequest message or plain object
          * @returns {Promise<bentoml.ListBentoResponse>} Promise
@@ -11532,8 +11532,8 @@ export const bentoml = $root.bentoml = (() => {
          */
 
         /**
-         * Callback as used by {@link bentoml.Yatai#containerizeBento}.
-         * @memberof bentoml.Yatai
+         * Callback as used by {@link bentoml.Gamma#containerizeBento}.
+         * @memberof bentoml.Gamma
          * @typedef ContainerizeBentoCallback
          * @type {function}
          * @param {Error|null} error Error, if any
@@ -11543,28 +11543,28 @@ export const bentoml = $root.bentoml = (() => {
         /**
          * Calls ContainerizeBento.
          * @function containerizeBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IContainerizeBentoRequest} request ContainerizeBentoRequest message or plain object
-         * @param {bentoml.Yatai.ContainerizeBentoCallback} callback Node-style callback called with the error, if any, and ContainerizeBentoResponse
+         * @param {bentoml.Gamma.ContainerizeBentoCallback} callback Node-style callback called with the error, if any, and ContainerizeBentoResponse
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(Yatai.prototype.containerizeBento = function containerizeBento(request, callback) {
+        Object.defineProperty(Gamma.prototype.containerizeBento = function containerizeBento(request, callback) {
             return this.rpcCall(containerizeBento, $root.bentoml.ContainerizeBentoRequest, $root.bentoml.ContainerizeBentoResponse, request, callback);
         }, "name", { value: "ContainerizeBento" });
 
         /**
          * Calls ContainerizeBento.
          * @function containerizeBento
-         * @memberof bentoml.Yatai
+         * @memberof bentoml.Gamma
          * @instance
          * @param {bentoml.IContainerizeBentoRequest} request ContainerizeBentoRequest message or plain object
          * @returns {Promise<bentoml.ContainerizeBentoResponse>} Promise
          * @variation 2
          */
 
-        return Yatai;
+        return Gamma;
     })();
 
     bentoml.HealthCheckResponse = (function() {
@@ -11759,25 +11759,25 @@ export const bentoml = $root.bentoml = (() => {
         return HealthCheckResponse;
     })();
 
-    bentoml.GetYataiServiceVersionResponse = (function() {
+    bentoml.GetGammaServiceVersionResponse = (function() {
 
         /**
-         * Properties of a GetYataiServiceVersionResponse.
+         * Properties of a GetGammaServiceVersionResponse.
          * @memberof bentoml
-         * @interface IGetYataiServiceVersionResponse
-         * @property {bentoml.IStatus|null} [status] GetYataiServiceVersionResponse status
-         * @property {string|null} [version] GetYataiServiceVersionResponse version
+         * @interface IGetGammaServiceVersionResponse
+         * @property {bentoml.IStatus|null} [status] GetGammaServiceVersionResponse status
+         * @property {string|null} [version] GetGammaServiceVersionResponse version
          */
 
         /**
-         * Constructs a new GetYataiServiceVersionResponse.
+         * Constructs a new GetGammaServiceVersionResponse.
          * @memberof bentoml
-         * @classdesc Represents a GetYataiServiceVersionResponse.
-         * @implements IGetYataiServiceVersionResponse
+         * @classdesc Represents a GetGammaServiceVersionResponse.
+         * @implements IGetGammaServiceVersionResponse
          * @constructor
-         * @param {bentoml.IGetYataiServiceVersionResponse=} [properties] Properties to set
+         * @param {bentoml.IGetGammaServiceVersionResponse=} [properties] Properties to set
          */
-        function GetYataiServiceVersionResponse(properties) {
+        function GetGammaServiceVersionResponse(properties) {
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -11785,43 +11785,43 @@ export const bentoml = $root.bentoml = (() => {
         }
 
         /**
-         * GetYataiServiceVersionResponse status.
+         * GetGammaServiceVersionResponse status.
          * @member {bentoml.IStatus|null|undefined} status
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @instance
          */
-        GetYataiServiceVersionResponse.prototype.status = null;
+        GetGammaServiceVersionResponse.prototype.status = null;
 
         /**
-         * GetYataiServiceVersionResponse version.
+         * GetGammaServiceVersionResponse version.
          * @member {string} version
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @instance
          */
-        GetYataiServiceVersionResponse.prototype.version = "";
+        GetGammaServiceVersionResponse.prototype.version = "";
 
         /**
-         * Creates a new GetYataiServiceVersionResponse instance using the specified properties.
+         * Creates a new GetGammaServiceVersionResponse instance using the specified properties.
          * @function create
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @static
-         * @param {bentoml.IGetYataiServiceVersionResponse=} [properties] Properties to set
-         * @returns {bentoml.GetYataiServiceVersionResponse} GetYataiServiceVersionResponse instance
+         * @param {bentoml.IGetGammaServiceVersionResponse=} [properties] Properties to set
+         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse instance
          */
-        GetYataiServiceVersionResponse.create = function create(properties) {
-            return new GetYataiServiceVersionResponse(properties);
+        GetGammaServiceVersionResponse.create = function create(properties) {
+            return new GetGammaServiceVersionResponse(properties);
         };
 
         /**
-         * Encodes the specified GetYataiServiceVersionResponse message. Does not implicitly {@link bentoml.GetYataiServiceVersionResponse.verify|verify} messages.
+         * Encodes the specified GetGammaServiceVersionResponse message. Does not implicitly {@link bentoml.GetGammaServiceVersionResponse.verify|verify} messages.
          * @function encode
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @static
-         * @param {bentoml.IGetYataiServiceVersionResponse} message GetYataiServiceVersionResponse message or plain object to encode
+         * @param {bentoml.IGetGammaServiceVersionResponse} message GetGammaServiceVersionResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        GetYataiServiceVersionResponse.encode = function encode(message, writer) {
+        GetGammaServiceVersionResponse.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.status != null && Object.hasOwnProperty.call(message, "status"))
@@ -11832,33 +11832,33 @@ export const bentoml = $root.bentoml = (() => {
         };
 
         /**
-         * Encodes the specified GetYataiServiceVersionResponse message, length delimited. Does not implicitly {@link bentoml.GetYataiServiceVersionResponse.verify|verify} messages.
+         * Encodes the specified GetGammaServiceVersionResponse message, length delimited. Does not implicitly {@link bentoml.GetGammaServiceVersionResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @static
-         * @param {bentoml.IGetYataiServiceVersionResponse} message GetYataiServiceVersionResponse message or plain object to encode
+         * @param {bentoml.IGetGammaServiceVersionResponse} message GetGammaServiceVersionResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        GetYataiServiceVersionResponse.encodeDelimited = function encodeDelimited(message, writer) {
+        GetGammaServiceVersionResponse.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a GetYataiServiceVersionResponse message from the specified reader or buffer.
+         * Decodes a GetGammaServiceVersionResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {bentoml.GetYataiServiceVersionResponse} GetYataiServiceVersionResponse
+         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        GetYataiServiceVersionResponse.decode = function decode(reader, length) {
+        GetGammaServiceVersionResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.GetYataiServiceVersionResponse();
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.GetGammaServiceVersionResponse();
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -11877,30 +11877,30 @@ export const bentoml = $root.bentoml = (() => {
         };
 
         /**
-         * Decodes a GetYataiServiceVersionResponse message from the specified reader or buffer, length delimited.
+         * Decodes a GetGammaServiceVersionResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {bentoml.GetYataiServiceVersionResponse} GetYataiServiceVersionResponse
+         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        GetYataiServiceVersionResponse.decodeDelimited = function decodeDelimited(reader) {
+        GetGammaServiceVersionResponse.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a GetYataiServiceVersionResponse message.
+         * Verifies a GetGammaServiceVersionResponse message.
          * @function verify
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        GetYataiServiceVersionResponse.verify = function verify(message) {
+        GetGammaServiceVersionResponse.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.status != null && message.hasOwnProperty("status")) {
@@ -11915,20 +11915,20 @@ export const bentoml = $root.bentoml = (() => {
         };
 
         /**
-         * Creates a GetYataiServiceVersionResponse message from a plain object. Also converts values to their respective internal types.
+         * Creates a GetGammaServiceVersionResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {bentoml.GetYataiServiceVersionResponse} GetYataiServiceVersionResponse
+         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse
          */
-        GetYataiServiceVersionResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.bentoml.GetYataiServiceVersionResponse)
+        GetGammaServiceVersionResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.GetGammaServiceVersionResponse)
                 return object;
-            let message = new $root.bentoml.GetYataiServiceVersionResponse();
+            let message = new $root.bentoml.GetGammaServiceVersionResponse();
             if (object.status != null) {
                 if (typeof object.status !== "object")
-                    throw TypeError(".bentoml.GetYataiServiceVersionResponse.status: object expected");
+                    throw TypeError(".bentoml.GetGammaServiceVersionResponse.status: object expected");
                 message.status = $root.bentoml.Status.fromObject(object.status);
             }
             if (object.version != null)
@@ -11937,15 +11937,15 @@ export const bentoml = $root.bentoml = (() => {
         };
 
         /**
-         * Creates a plain object from a GetYataiServiceVersionResponse message. Also converts values to other types if specified.
+         * Creates a plain object from a GetGammaServiceVersionResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @static
-         * @param {bentoml.GetYataiServiceVersionResponse} message GetYataiServiceVersionResponse
+         * @param {bentoml.GetGammaServiceVersionResponse} message GetGammaServiceVersionResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        GetYataiServiceVersionResponse.toObject = function toObject(message, options) {
+        GetGammaServiceVersionResponse.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             let object = {};
@@ -11961,17 +11961,17 @@ export const bentoml = $root.bentoml = (() => {
         };
 
         /**
-         * Converts this GetYataiServiceVersionResponse to JSON.
+         * Converts this GetGammaServiceVersionResponse to JSON.
          * @function toJSON
-         * @memberof bentoml.GetYataiServiceVersionResponse
+         * @memberof bentoml.GetGammaServiceVersionResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        GetYataiServiceVersionResponse.prototype.toJSON = function toJSON() {
+        GetGammaServiceVersionResponse.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GetYataiServiceVersionResponse;
+        return GetGammaServiceVersionResponse;
     })();
 
     bentoml.Chunk = (function() {

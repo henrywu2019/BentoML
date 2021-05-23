@@ -8,7 +8,7 @@ import "deployment.proto";
 import "repository.proto";
 
 
-// Yatai RPC Server
+// Gamma RPC Server
 //
 // A stateful service that provides a complete BentoML model management
 // and model serving/deployment workflow
@@ -19,14 +19,14 @@ import "repository.proto";
 //  Serving Deployment: Deploys saved Bento to a varity of different cloud
 //                      platforms, track deploym//ent status, set up logging
 //                      monitoring for your model serving workloads, and
-service Yatai {
+service Gamma {
   // Health check ping endpoint
   rpc HealthCheck (google.protobuf.Empty)
     returns (HealthCheckResponse);
 
   // Return current service version information
-  rpc GetYataiServiceVersion (google.protobuf.Empty)
-    returns (GetYataiServiceVersionResponse);
+  rpc GetGammaServiceVersion (google.protobuf.Empty)
+    returns (GetGammaServiceVersionResponse);
 
   // Create new or update existing deployment
   rpc ApplyDeployment(ApplyDeploymentRequest)
@@ -55,7 +55,7 @@ service Yatai {
 
   // RPC for updating a previously added Bento's information, including
   // the BentoService's Metadata(apis, env, artifacts etc) and the upload status.
-  // Yatai server expects the client to use this RPC for notifying that, for a
+  // Gamma server expects the client to use this RPC for notifying that, for a
   // previously requested AddBento call, what's the uploading progress and when the
   // upload is completed
   rpc UpdateBento(UpdateBentoRequest)
@@ -66,7 +66,7 @@ service Yatai {
   rpc GetBento(GetBentoRequest)
     returns (GetBentoResponse);
 
-  // Deleting the Bento files that was added to this Yatai server earlier, this may
+  // Deleting the Bento files that was added to this Gamma server earlier, this may
   // break existing deployments or create issues when doing deployment rollback
   rpc DangerouslyDeleteBento(DangerouslyDeleteBentoRequest)
     returns (DangerouslyDeleteBentoResponse);
@@ -84,7 +84,7 @@ message HealthCheckResponse {
   Status status = 1;
 }
 
-message GetYataiServiceVersionResponse {
+message GetGammaServiceVersionResponse {
   Status status = 1;
   string version = 2;
 }

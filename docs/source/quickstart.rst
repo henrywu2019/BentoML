@@ -170,18 +170,18 @@ BentoML packaged model format contains all the code, files, and configs required
 run and deploy the model.
 
 BentoML also comes with a model management component called
-`YataiService <https://docs.bentoml.org/en/latest/concepts.html#customizing-model-repository>`_,
+`GammaService <https://docs.bentoml.org/en/latest/concepts.html#customizing-model-repository>`_,
 which provides a central hub for teams to manage and access packaged models via Web UI
 and API:
 
 .. image:: _static/img/gamma-service-web-ui-repository.png
-    :alt: BentoML YataiService Bento Repository Page
+    :alt: BentoML GammaService Bento Repository Page
 
 .. image:: _static/img/gamma-service-web-ui-repository-detail.png
-    :alt: BentoML YataiService Bento Details Page
+    :alt: BentoML GammaService Bento Details Page
 
 
-Launch Yatai server locally with docker and view your local repository of BentoML
+Launch Gamma server locally with docker and view your local repository of BentoML
 packaged models:
 
 

@@ -5,7 +5,7 @@ import coremltools as ct
 from coremltools.models import MLModel
 
 import bentoml
-from bentoml.gamma.client import YataiClient
+from bentoml.gamma.client import GammaClient
 from tests.bento_service_examples.coreml_classifier import CoreMLClassifier
 from tests.integration.test_pytorch_model_artifact import PytorchModel
 from tests.integration.test_pytorch_model_artifact import test_df
@@ -46,5 +46,5 @@ def test_pytorch_artifact_pack(coreml_classifier_class):
     assert loaded_svc.predict(test_df) == 5.0, 'Run inference from saved artifact'
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{svc.name}:{svc.version}')

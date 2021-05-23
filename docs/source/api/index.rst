@@ -9,4 +9,4 @@ API Reference
   ../frameworks
   artifacts
   types
-  yatai_client
+  gamma_client

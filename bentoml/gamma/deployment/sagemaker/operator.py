@@ -7,7 +7,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 from bentoml.exceptions import (
-    YataiDeploymentException,
+    GammaDeploymentException,
     AWSServiceError,
     InvalidArgument,
     BentoMLException,
@@ -87,7 +87,7 @@ def get_arn_role_from_current_aws_user():
             ):
                 arn = role["Arn"]
         if arn is None:
-            raise YataiDeploymentException(
+            raise GammaDeploymentException(
                 "Can't find proper Arn role for Sagemaker, please create one and try "
                 "again"
             )
@@ -96,7 +96,7 @@ def get_arn_role_from_current_aws_user():
         role_response = iam_client.get_role(RoleName=type_role[1])
         return role_response["Role"]["Arn"]
 
-    raise YataiDeploymentException(
+    raise GammaDeploymentException(
         "Not supported role type {}; sts arn is {}".format(type_role[0], sts_arn)
     )
 
@@ -427,8 +427,8 @@ def _update_sagemaker_endpoint(sagemaker_client, endpoint_name, endpoint_config_
 
 
 class SageMakerDeploymentOperator(DeploymentOperatorBase):
-    def __init__(self, yatai_service):
-        super(SageMakerDeploymentOperator, self).__init__(yatai_service)
+    def __init__(self, gamma_service):
+        super(SageMakerDeploymentOperator, self).__init__(gamma_service)
         ensure_docker_available_or_raise()
 
     def add(self, deployment_pb):
@@ -440,9 +440,9 @@ class SageMakerDeploymentOperator(DeploymentOperatorBase):
             )
 
             if sagemaker_config is None:
-                raise YataiDeploymentException("Sagemaker configuration is missing.")
+                raise GammaDeploymentException("Sagemaker configuration is missing.")
 
-            bento_pb = self.yatai_service.GetBento(
+            bento_pb = self.gamma_service.GetBento(
                 GetBentoRequest(
                     bento_name=deployment_spec.bento_name,
                     bento_version=deployment_spec.bento_version,
@@ -523,7 +523,7 @@ class SageMakerDeploymentOperator(DeploymentOperatorBase):
     def update(self, deployment_pb, previous_deployment):
         try:
             deployment_spec = deployment_pb.spec
-            bento_pb = self.yatai_service.GetBento(
+            bento_pb = self.gamma_service.GetBento(
                 GetBentoRequest(
                     bento_name=deployment_spec.bento_name,
                     bento_version=deployment_spec.bento_version,

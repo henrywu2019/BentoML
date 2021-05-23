@@ -4,7 +4,7 @@ import pytest
 import evalml
 
 import bentoml
-from bentoml.gamma.client import YataiClient
+from bentoml.gamma.client import GammaClient
 from tests.bento_service_examples.evalml_classifier import EvalMLClassifier
 
 
@@ -44,5 +44,5 @@ def test_evalml_artifact_pack(evalml_classifier_class, evalml_pipeline):
     assert loaded_svc.predict(test_df) == 1.0, 'Run inference from saved artifact'
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{svc.name}:{svc.version}')

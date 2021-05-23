@@ -5,11 +5,11 @@ import grpc
 import bentoml.gamma.proto.deployment_pb2 as deployment__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 import bentoml.gamma.proto.repository_pb2 as repository__pb2
-import bentoml.gamma.proto.yatai_service_pb2 as yatai__service__pb2
+import bentoml.gamma.proto.gamma_service_pb2 as gamma__service__pb2
 
 
-class YataiStub(object):
-    """Yatai RPC Server
+class GammaStub(object):
+    """Gamma RPC Server
 
     A stateful service that provides a complete BentoML model management
     and model serving/deployment workflow
@@ -29,74 +29,74 @@ class YataiStub(object):
             channel: A grpc.Channel.
         """
         self.HealthCheck = channel.unary_unary(
-                '/bentoml.Yatai/HealthCheck',
+                '/bentoml.Gamma/HealthCheck',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=yatai__service__pb2.HealthCheckResponse.FromString,
+                response_deserializer=gamma__service__pb2.HealthCheckResponse.FromString,
                 )
-        self.GetYataiServiceVersion = channel.unary_unary(
-                '/bentoml.Yatai/GetYataiServiceVersion',
+        self.GetGammaServiceVersion = channel.unary_unary(
+                '/bentoml.Gamma/GetGammaServiceVersion',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=yatai__service__pb2.GetYataiServiceVersionResponse.FromString,
+                response_deserializer=gamma__service__pb2.GetGammaServiceVersionResponse.FromString,
                 )
         self.ApplyDeployment = channel.unary_unary(
-                '/bentoml.Yatai/ApplyDeployment',
+                '/bentoml.Gamma/ApplyDeployment',
                 request_serializer=deployment__pb2.ApplyDeploymentRequest.SerializeToString,
                 response_deserializer=deployment__pb2.ApplyDeploymentResponse.FromString,
                 )
         self.DeleteDeployment = channel.unary_unary(
-                '/bentoml.Yatai/DeleteDeployment',
+                '/bentoml.Gamma/DeleteDeployment',
                 request_serializer=deployment__pb2.DeleteDeploymentRequest.SerializeToString,
                 response_deserializer=deployment__pb2.DeleteDeploymentResponse.FromString,
                 )
         self.GetDeployment = channel.unary_unary(
-                '/bentoml.Yatai/GetDeployment',
+                '/bentoml.Gamma/GetDeployment',
                 request_serializer=deployment__pb2.GetDeploymentRequest.SerializeToString,
                 response_deserializer=deployment__pb2.GetDeploymentResponse.FromString,
                 )
         self.DescribeDeployment = channel.unary_unary(
-                '/bentoml.Yatai/DescribeDeployment',
+                '/bentoml.Gamma/DescribeDeployment',
                 request_serializer=deployment__pb2.DescribeDeploymentRequest.SerializeToString,
                 response_deserializer=deployment__pb2.DescribeDeploymentResponse.FromString,
                 )
         self.ListDeployments = channel.unary_unary(
-                '/bentoml.Yatai/ListDeployments',
+                '/bentoml.Gamma/ListDeployments',
                 request_serializer=deployment__pb2.ListDeploymentsRequest.SerializeToString,
                 response_deserializer=deployment__pb2.ListDeploymentsResponse.FromString,
                 )
         self.AddBento = channel.unary_unary(
-                '/bentoml.Yatai/AddBento',
+                '/bentoml.Gamma/AddBento',
                 request_serializer=repository__pb2.AddBentoRequest.SerializeToString,
                 response_deserializer=repository__pb2.AddBentoResponse.FromString,
                 )
         self.UpdateBento = channel.unary_unary(
-                '/bentoml.Yatai/UpdateBento',
+                '/bentoml.Gamma/UpdateBento',
                 request_serializer=repository__pb2.UpdateBentoRequest.SerializeToString,
                 response_deserializer=repository__pb2.UpdateBentoResponse.FromString,
                 )
         self.GetBento = channel.unary_unary(
-                '/bentoml.Yatai/GetBento',
+                '/bentoml.Gamma/GetBento',
                 request_serializer=repository__pb2.GetBentoRequest.SerializeToString,
                 response_deserializer=repository__pb2.GetBentoResponse.FromString,
                 )
         self.DangerouslyDeleteBento = channel.unary_unary(
-                '/bentoml.Yatai/DangerouslyDeleteBento',
+                '/bentoml.Gamma/DangerouslyDeleteBento',
                 request_serializer=repository__pb2.DangerouslyDeleteBentoRequest.SerializeToString,
                 response_deserializer=repository__pb2.DangerouslyDeleteBentoResponse.FromString,
                 )
         self.ListBento = channel.unary_unary(
-                '/bentoml.Yatai/ListBento',
+                '/bentoml.Gamma/ListBento',
                 request_serializer=repository__pb2.ListBentoRequest.SerializeToString,
                 response_deserializer=repository__pb2.ListBentoResponse.FromString,
                 )
         self.ContainerizeBento = channel.unary_unary(
-                '/bentoml.Yatai/ContainerizeBento',
+                '/bentoml.Gamma/ContainerizeBento',
                 request_serializer=repository__pb2.ContainerizeBentoRequest.SerializeToString,
                 response_deserializer=repository__pb2.ContainerizeBentoResponse.FromString,
                 )
 
 
-class YataiServicer(object):
-    """Yatai RPC Server
+class GammaServicer(object):
+    """Gamma RPC Server
 
     A stateful service that provides a complete BentoML model management
     and model serving/deployment workflow
@@ -116,7 +116,7 @@ class YataiServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetYataiServiceVersion(self, request, context):
+    def GetGammaServiceVersion(self, request, context):
         """Return current service version information
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -169,7 +169,7 @@ class YataiServicer(object):
     def UpdateBento(self, request, context):
         """RPC for updating a previously added Bento's information, including
         the BentoService's Metadata(apis, env, artifacts etc) and the upload status.
-        Yatai server expects the client to use this RPC for notifying that, for a
+        Gamma server expects the client to use this RPC for notifying that, for a
         previously requested AddBento call, what's the uploading progress and when the
         upload is completed
         """
@@ -186,7 +186,7 @@ class YataiServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DangerouslyDeleteBento(self, request, context):
-        """Deleting the Bento files that was added to this Yatai server earlier, this may
+        """Deleting the Bento files that was added to this Gamma server earlier, this may
         break existing deployments or create issues when doing deployment rollback
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -208,17 +208,17 @@ class YataiServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_YataiServicer_to_server(servicer, server):
+def add_GammaServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'HealthCheck': grpc.unary_unary_rpc_method_handler(
                     servicer.HealthCheck,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=yatai__service__pb2.HealthCheckResponse.SerializeToString,
+                    response_serializer=gamma__service__pb2.HealthCheckResponse.SerializeToString,
             ),
-            'GetYataiServiceVersion': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetYataiServiceVersion,
+            'GetGammaServiceVersion': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetGammaServiceVersion,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=yatai__service__pb2.GetYataiServiceVersionResponse.SerializeToString,
+                    response_serializer=gamma__service__pb2.GetGammaServiceVersionResponse.SerializeToString,
             ),
             'ApplyDeployment': grpc.unary_unary_rpc_method_handler(
                     servicer.ApplyDeployment,
@@ -277,13 +277,13 @@ def add_YataiServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'bentoml.Yatai', rpc_method_handlers)
+            'bentoml.Gamma', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class Yatai(object):
-    """Yatai RPC Server
+class Gamma(object):
+    """Gamma RPC Server
 
     A stateful service that provides a complete BentoML model management
     and model serving/deployment workflow
@@ -307,14 +307,14 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/HealthCheck',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/HealthCheck',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            yatai__service__pb2.HealthCheckResponse.FromString,
+            gamma__service__pb2.HealthCheckResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetYataiServiceVersion(request,
+    def GetGammaServiceVersion(request,
             target,
             options=(),
             channel_credentials=None,
@@ -324,9 +324,9 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/GetYataiServiceVersion',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/GetGammaServiceVersion',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            yatai__service__pb2.GetYataiServiceVersionResponse.FromString,
+            gamma__service__pb2.GetGammaServiceVersionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -341,7 +341,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/ApplyDeployment',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/ApplyDeployment',
             deployment__pb2.ApplyDeploymentRequest.SerializeToString,
             deployment__pb2.ApplyDeploymentResponse.FromString,
             options, channel_credentials,
@@ -358,7 +358,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/DeleteDeployment',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/DeleteDeployment',
             deployment__pb2.DeleteDeploymentRequest.SerializeToString,
             deployment__pb2.DeleteDeploymentResponse.FromString,
             options, channel_credentials,
@@ -375,7 +375,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/GetDeployment',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/GetDeployment',
             deployment__pb2.GetDeploymentRequest.SerializeToString,
             deployment__pb2.GetDeploymentResponse.FromString,
             options, channel_credentials,
@@ -392,7 +392,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/DescribeDeployment',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/DescribeDeployment',
             deployment__pb2.DescribeDeploymentRequest.SerializeToString,
             deployment__pb2.DescribeDeploymentResponse.FromString,
             options, channel_credentials,
@@ -409,7 +409,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/ListDeployments',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/ListDeployments',
             deployment__pb2.ListDeploymentsRequest.SerializeToString,
             deployment__pb2.ListDeploymentsResponse.FromString,
             options, channel_credentials,
@@ -426,7 +426,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/AddBento',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/AddBento',
             repository__pb2.AddBentoRequest.SerializeToString,
             repository__pb2.AddBentoResponse.FromString,
             options, channel_credentials,
@@ -443,7 +443,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/UpdateBento',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/UpdateBento',
             repository__pb2.UpdateBentoRequest.SerializeToString,
             repository__pb2.UpdateBentoResponse.FromString,
             options, channel_credentials,
@@ -460,7 +460,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/GetBento',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/GetBento',
             repository__pb2.GetBentoRequest.SerializeToString,
             repository__pb2.GetBentoResponse.FromString,
             options, channel_credentials,
@@ -477,7 +477,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/DangerouslyDeleteBento',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/DangerouslyDeleteBento',
             repository__pb2.DangerouslyDeleteBentoRequest.SerializeToString,
             repository__pb2.DangerouslyDeleteBentoResponse.FromString,
             options, channel_credentials,
@@ -494,7 +494,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/ListBento',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/ListBento',
             repository__pb2.ListBentoRequest.SerializeToString,
             repository__pb2.ListBentoResponse.FromString,
             options, channel_credentials,
@@ -511,7 +511,7 @@ class Yatai(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.Yatai/ContainerizeBento',
+        return grpc.experimental.unary_unary(request, target, '/bentoml.Gamma/ContainerizeBento',
             repository__pb2.ContainerizeBentoRequest.SerializeToString,
             repository__pb2.ContainerizeBentoResponse.FromString,
             options, channel_credentials,

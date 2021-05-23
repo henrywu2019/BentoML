@@ -1,9 +1,9 @@
 FROM python:3.7-buster
 
-# YataiService GRPC port
+# GammaService GRPC port
 EXPOSE 50051
 
-# YataiService Web UI port
+# GammaService Web UI port
 EXPOSE 3000
 
 COPY entrypoint.sh /usr/local/bin/
@@ -54,7 +54,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
 # Build time argument - the BentoML version to be used in this image
 ARG BENTOML_VERSION
 ENV BENTOML_VERSION=$BENTOML_VERSION
-RUN pip install "bentoml[yatai_service]==$BENTOML_VERSION" --no-cache-dir
+RUN pip install "bentoml[gamma_service]==$BENTOML_VERSION" --no-cache-dir
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["bentoml", "gamma-service-start"]

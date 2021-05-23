@@ -1,13 +1,13 @@
 import pytest
 
-from bentoml.exceptions import YataiDeploymentException, BentoMLException
+from bentoml.exceptions import GammaDeploymentException, BentoMLException
 from bentoml.gamma.proto.deployment_pb2 import Deployment
 from bentoml.gamma.deployment_utils import deployment_dict_to_pb
 
 
 def test_deployment_dict_to_pb():
     failed_dict_no_operator = {'name': 'fake name'}
-    with pytest.raises(YataiDeploymentException) as error:
+    with pytest.raises(GammaDeploymentException) as error:
         deployment_dict_to_pb(failed_dict_no_operator)
     assert str(error.value).startswith('"spec" is required field for deployment')
 

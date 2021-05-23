@@ -18,5 +18,5 @@ jobs:
             Hello @${{ github.event.client_payload.github.actor }}!
             | Command | Description |
             | ------- | ----------- |
-            | /test-e2e-gamma sha="first 7 char of commit sha' | Run Yatai e2e tests |
+            | /test-e2e-gamma sha="first 7 char of commit sha' | Run Gamma e2e tests |
             | /test-e2e-deployment sha="first 7 char of commit sha" | Run deployment e2e tests |

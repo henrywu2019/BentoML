@@ -20,7 +20,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 from bentoml.configuration.containers import BentoMLContainer
-from bentoml.exceptions import YataiRepositoryException
+from bentoml.exceptions import GammaRepositoryException
 from bentoml.gamma.proto.repository_pb2 import BentoUri
 from bentoml.gamma.repository.base_repository import BaseRepository
 
@@ -74,7 +74,7 @@ class S3Repository(BaseRepository):
                 ExpiresIn=self.expiration,
             )
         except Exception as e:
-            raise YataiRepositoryException(
+            raise GammaRepositoryException(
                 "Not able to get pre-signed URL on S3. Error: {}".format(e)
             )
 
@@ -143,7 +143,7 @@ class S3Repository(BaseRepository):
                 else:
                     logger.warning(
                         f"BentoML has deleted service '{bento_name}:{bento_version}' "
-                        f"from YataiService records, but it failed to delete the saved "
+                        f"from GammaService records, but it failed to delete the saved "
                         f"bundle files stored in s3://{self.bucket}/{object_name}, "
                         f"the files may have already been deleted by the user."
                     )
@@ -156,7 +156,7 @@ class S3Repository(BaseRepository):
                     self.s3_client.head_object(Bucket=self.bucket, Key=object_name)
                     logger.warning(
                         f"BentoML has deleted service '{bento_name}:{bento_version}' "
-                        f"from YataiService records, but it failed to delete the saved "
+                        f"from GammaService records, but it failed to delete the saved "
                         f"bundle files stored in s3://{self.bucket}/{object_name}, "
                         f"the files may have already been deleted by the user."
                     )
@@ -173,10 +173,10 @@ class S3Repository(BaseRepository):
                         # unexpected boto3 ClientError
                         raise e
             else:
-                raise YataiRepositoryException(
+                raise GammaRepositoryException(
                     'Unrecognized response format from s3 delete_object'
                 )
         except Exception as e:
-            raise YataiRepositoryException(
+            raise GammaRepositoryException(
                 "Not able to delete object on S3. Error: {}".format(e)
             )

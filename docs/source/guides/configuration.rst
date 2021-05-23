@@ -91,29 +91,29 @@ YAML based configuration.
 +---------------+--------------------------------------------+-----------------------------------------+
 | logging       | feedback_log_filename                      | DEPRECATED                              |
 +---------------+--------------------------------------------+-----------------------------------------+
-| logging       | yatai_web_server_log_filename              | gamma.logging.path                      |
+| logging       | gamma_web_server_log_filename              | gamma.logging.path                      |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | url                                        | gamma.remote.url                        |
+| gamma_service | url                                        | gamma.remote.url                        |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | s3_signature_version                       | gamma.repository.s3.signature_version   |
+| gamma_service | s3_signature_version                       | gamma.repository.s3.signature_version   |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | repository_base_url                        | See Repository Base URL section         |
+| gamma_service | repository_base_url                        | See Repository Base URL section         |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | db_url                                     | gamma.database.url                      |
+| gamma_service | db_url                                     | gamma.database.url                      |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | s3_endpoint_url                            | gamma.repository.s3.endpoint_url        |
+| gamma_service | s3_endpoint_url                            | gamma.repository.s3.endpoint_url        |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | default_namespace                          | gamma.namespace                         |
+| gamma_service | default_namespace                          | gamma.namespace                         |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | tls_root_ca_cert                           | gamma.remote.tls.root_ca_cert           |
+| gamma_service | tls_root_ca_cert                           | gamma.remote.tls.root_ca_cert           |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | tls_client_key                             | gamma.remote.tls.client_key             |
+| gamma_service | tls_client_key                             | gamma.remote.tls.client_key             |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | tls_client_cert                            | gamma.remote.tls.client_cert            |
+| gamma_service | tls_client_cert                            | gamma.remote.tls.client_cert            |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | access_token                               | gamma.remote.access_token               |
+| gamma_service | access_token                               | gamma.remote.access_token               |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | access_token_header                        | gamma.remote.access_token_header        |
+| gamma_service | access_token_header                        | gamma.remote.access_token_header        |
 +---------------+--------------------------------------------+-----------------------------------------+
 | apiserver     | default_port                               | bento_server.port                       |
 +---------------+--------------------------------------------+-----------------------------------------+

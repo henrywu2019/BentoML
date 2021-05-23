@@ -186,7 +186,7 @@ Run the `watch.sh` script to start watching docs changes:
 $ ./docs/watch.sh
 ```
 
-## How to debug YataiService GRPC server
+## How to debug GammaService GRPC server
 
 Install all dev dependencies:
 ```bash
@@ -199,7 +199,7 @@ $ go get github.com/fullstorydev/grpcui
 $ go install github.com/fullstorydev/grpcui/cmd/grpcui
 ```
 
-Start Yatai server in debug mode:
+Start Gamma server in debug mode:
 ```bash
 $ bentoml gamma-service-start --debug
 ```

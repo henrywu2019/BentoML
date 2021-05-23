@@ -1,24 +1,24 @@
 ==============================
-Install Yatai on K8s with Helm
+Install Gamma on K8s with Helm
 ==============================
 
-*Helm* is a tool that streamlines installing and managing K8s applications. It lets developers easily configure a set of K8s resources that make up an application -- YataiService in this case. Helm enables developers to
+*Helm* is a tool that streamlines installing and managing K8s applications. It lets developers easily configure a set of K8s resources that make up an application -- GammaService in this case. Helm enables developers to
 
-- easily deploy recommended configuration and setup for YataiService
+- easily deploy recommended configuration and setup for GammaService
 - easily change settings
 - drop and replace parts with your own (e.g. replace local Postgres with a remote RDS)
 
 1. Configuration
 ================
-Helm charts rely on a values file to configure how to template and create Kubernetes resources. The default values for these resources can be found in `BentoML/helm/YataiService/values.yaml`. These basic values describe a basic local `YataiService` instance with ephemeral storage.
+Helm charts rely on a values file to configure how to template and create Kubernetes resources. The default values for these resources can be found in `BentoML/helm/GammaService/values.yaml`. These basic values describe a basic local `GammaService` instance with ephemeral storage.
 
 1.1 Persistent Storage
 ---------------------------
-The recommended way to deploy `YataiService` is with a PostgreSQL DB instance within the cluster, backed with a Persistent Volume. The Helm chart makes it really easy to go this route. All the configuration for this can be found under the Postgres block,
+The recommended way to deploy `GammaService` is with a PostgreSQL DB instance within the cluster, backed with a Persistent Volume. The Helm chart makes it really easy to go this route. All the configuration for this can be found under the Postgres block,
 
 .. code-block:: yaml
 
-    # in BentoML/helm/YataiService/values.yaml
+    # in BentoML/helm/GammaService/values.yaml
 
     # Local Postgres Service
     postgres:
@@ -40,7 +40,7 @@ An Ingress helps to manage incoming external traffic into the cluster. The confi
 
 .. code-block:: yaml
 
-    # in BentoML/helm/YataiService/values.yaml
+    # in BentoML/helm/GammaService/values.yaml
 
     ingress:
         enabled: false
@@ -91,7 +91,7 @@ Developers can do a dry run of the helm chart installation to see if the configu
 
 .. code-block:: bash
 
-    $ helm install --dry-run gamma-service helm/YataiService
+    $ helm install --dry-run gamma-service helm/GammaService
 
     NAME: gamma-service
     LAST DEPLOYED: Tue Aug 11 22:12:18 2020
@@ -108,7 +108,7 @@ Then, to install it into the cluster,
 
 .. code-block:: bash
 
-    $ helm install gamma-service helm/YataiService
+    $ helm install gamma-service helm/GammaService
 
     NAME: gamma-service
     LAST DEPLOYED: Tue Aug 11 22:18:02 2020
@@ -143,20 +143,20 @@ After this step, the service should be healthy. Visit the web UI by telling `min
     🎉  Opening service default/gamma-service in default browser...
     ❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
 
-Woo! You now have a `YataiService` instance running on a local K8s cluster :) To cleanup, run `helm uninstall gamma-service` then `minikube stop`.
+Woo! You now have a `GammaService` instance running on a local K8s cluster :) To cleanup, run `helm uninstall gamma-service` then `minikube stop`.
 
-Keep reading for more info on configuring `YataiService` using Helm.
+Keep reading for more info on configuring `GammaService` using Helm.
 
 Custom Values
 ~~~~~~~~~~~~~
 
-To deploy a `YataiService` instance with a PostgreSQL DB instance within the cluster, developers can use the custom values found in `helm/YataiService/values.yaml`. If this doesn't match the your needs, feel free to create your own custom values files to configure `YataiService` in a way that works for you/your company.
+To deploy a `GammaService` instance with a PostgreSQL DB instance within the cluster, developers can use the custom values found in `helm/GammaService/values.yaml`. If this doesn't match the your needs, feel free to create your own custom values files to configure `GammaService` in a way that works for you/your company.
 
 To tell Helm to use these custom values,
 
 .. code-block:: bash
 
-    $ cd helm && helm install -f YataiService/values/postgres.yaml --dry-run --debug gamma-service YataiService
+    $ cd helm && helm install -f GammaService/values/postgres.yaml --dry-run --debug gamma-service GammaService
 
     NAME: gamma-service
     LAST DEPLOYED: Tue Aug 11 22:39:12 2020

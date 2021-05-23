@@ -24,7 +24,7 @@ from bentoml.cli.click_utils import (
 )
 from bentoml.cli.deployment import _print_deployment_info, _print_deployments_info
 from bentoml.cli.utils import Spinner
-from bentoml.utils import get_default_yatai_client
+from bentoml.utils import get_default_gamma_client
 from bentoml.gamma.deployment.azure_functions.constants import (
     AZURE_FUNCTIONS_PREMIUM_PLAN_SKUS,
     AZURE_FUNCTIONS_AUTH_LEVELS,
@@ -37,7 +37,7 @@ from bentoml.gamma.deployment import ALL_NAMESPACE_TAG
 from bentoml.exceptions import CLIException
 from bentoml.utils import status_pb_to_error_code_and_message
 
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
+gamma_proto = LazyLoader('gamma_proto', globals(), 'bentoml.gamma.proto')
 
 
 def get_azure_functions_sub_command():
@@ -57,7 +57,7 @@ def get_azure_functions_sub_command():
         '--namespace',
         type=click.STRING,
         help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration yatai_service/default_namespace',
+        'can be changed in BentoML configuration gamma_service/default_namespace',
     )
     @click.argument('name', type=click.STRING)
     @click.option(
@@ -135,9 +135,9 @@ def get_azure_functions_sub_command():
         wait,
     ):
         bento_name, bento_version = bento.split(':')
-        yatai_client = get_default_yatai_client()
+        gamma_client = get_default_gamma_client()
         with Spinner(f'Deploying {bento} to Azure Functions'):
-            result = yatai_client.deployment.create_azure_functions_deployment(
+            result = gamma_client.deployment.create_azure_functions_deployment(
                 name=name,
                 namespace=namespace,
                 labels=labels,
@@ -150,7 +150,7 @@ def get_azure_functions_sub_command():
                 function_auth_level=function_auth_level,
                 wait=wait,
             )
-            if result.status.status_code != yatai_proto.status_pb2.Status.OK:
+            if result.status.status_code != gamma_proto.status_pb2.Status.OK:
                 error_code, error_message = status_pb_to_error_code_and_message(
                     result.status
                 )
@@ -205,14 +205,14 @@ def get_azure_functions_sub_command():
     def update(
         name, namespace, bento, min_instances, max_burst, premium_plan_sku, output, wait
     ):
-        yatai_client = get_default_yatai_client()
+        gamma_client = get_default_gamma_client()
         if bento:
             bento_name, bento_version = bento.split(':')
         else:
             bento_name = None
             bento_version = None
         with Spinner(f'Updating Azure Functions deployment {name}'):
-            result = yatai_client.deployment.update_azure_functions_deployment(
+            result = gamma_client.deployment.update_azure_functions_deployment(
                 namespace=namespace,
                 deployment_name=name,
                 bento_name=bento_name,
@@ -222,7 +222,7 @@ def get_azure_functions_sub_command():
                 premium_plan_sku=premium_plan_sku,
                 wait=wait,
             )
-            if result.status.status_code != yatai_proto.status_pb2.Status.OK:
+            if result.status.status_code != gamma_proto.status_pb2.Status.OK:
                 error_code, error_message = status_pb_to_error_code_and_message(
                     result.status
                 )
@@ -240,7 +240,7 @@ def get_azure_functions_sub_command():
         '--namespace',
         type=click.STRING,
         help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration yatai_service/default_namespace',
+        'can be changed in BentoML configuration gamma_service/default_namespace',
     )
     @click.option(
         '--force',
@@ -249,15 +249,15 @@ def get_azure_functions_sub_command():
         'ignore errors when deleting cloud resources',
     )
     def delete(name, namespace, force):
-        yatai_client = get_default_yatai_client()
-        get_deployment_result = yatai_client.deployment.get(namespace, name)
-        if get_deployment_result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        gamma_client = get_default_gamma_client()
+        get_deployment_result = gamma_client.deployment.get(namespace, name)
+        if get_deployment_result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 get_deployment_result.status
             )
             raise CLIException(f'{error_code}:{error_message}')
-        result = yatai_client.deployment.delete(name, namespace, force)
-        if result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        result = gamma_client.deployment.delete(name, namespace, force)
+        if result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
@@ -274,21 +274,21 @@ def get_azure_functions_sub_command():
         '--namespace',
         type=click.STRING,
         help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration yatai_service/default_namespace',
+        'can be changed in BentoML configuration gamma_service/default_namespace',
     )
     @click.option(
         '-o', '--output', type=click.Choice(['json', 'yaml', 'table']), default='json'
     )
     def get(name, namespace, output):
-        yatai_client = get_default_yatai_client()
-        get_result = yatai_client.deployment.get(namespace, name)
-        if get_result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        gamma_client = get_default_gamma_client()
+        get_result = gamma_client.deployment.get(namespace, name)
+        if get_result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 get_result.status
             )
             raise CLIException(f'{error_code}:{error_message}')
-        describe_result = yatai_client.deployment.describe(namespace, name)
-        if describe_result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        describe_result = gamma_client.deployment.describe(namespace, name)
+        if describe_result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 describe_result.status
             )
@@ -302,7 +302,7 @@ def get_azure_functions_sub_command():
         '--namespace',
         type=click.STRING,
         help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration yatai_service/default_namespace',
+        'can be changed in BentoML configuration gamma_service/default_namespace',
         default=ALL_NAMESPACE_TAG,
     )
     @click.option(
@@ -330,15 +330,15 @@ def get_azure_functions_sub_command():
         '-o', '--output', type=click.Choice(['json', 'yaml', 'table']), default='table'
     )
     def list_deployment(namespace, limit, labels, order_by, asc, output):
-        yatai_client = get_default_yatai_client()
-        list_result = yatai_client.deployment.list_azure_functions_deployments(
+        gamma_client = get_default_gamma_client()
+        list_result = gamma_client.deployment.list_azure_functions_deployments(
             limit=limit,
             labels=labels,
             namespace=namespace,
             order_by=order_by,
             ascending_order=asc,
         )
-        if list_result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        if list_result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 list_result.status
             )

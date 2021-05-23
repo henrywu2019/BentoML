@@ -1,7 +1,7 @@
-Yatai Client
+Gamma Client
 ============
 
-.. autofunction:: bentoml.gamma.client.get_yatai_client
+.. autofunction:: bentoml.gamma.client.get_gamma_client
 
 .. autoclass:: bentoml.gamma.client.bento_repository_api.BentoRepositoryAPIClient
 

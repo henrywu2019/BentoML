@@ -43,7 +43,7 @@ __all__ = [
     "cached_contextmanager",
 ]
 
-yatai_proto = LazyLoader("yatai_proto", globals(), "bentoml.gamma.proto")
+gamma_proto = LazyLoader("gamma_proto", globals(), "bentoml.gamma.proto")
 
 
 class _CachedContextmanager:
@@ -166,9 +166,9 @@ class catch_exceptions(object):
         return _
 
 
-def resolve_bundle_path(bento, pip_installed_bundle_path, yatai_url=None):
+def resolve_bundle_path(bento, pip_installed_bundle_path, gamma_url=None):
     from bentoml.exceptions import BentoMLException
-    from bentoml.gamma.client import get_yatai_client
+    from bentoml.gamma.client import get_gamma_client
 
     if pip_installed_bundle_path:
         assert (
@@ -182,8 +182,8 @@ def resolve_bundle_path(bento, pip_installed_bundle_path, yatai_url=None):
 
     elif ":" in bento:
         # assuming passing in BentoService in the form of Name:Version tag
-        yatai_client = get_yatai_client(yatai_url)
-        bento_pb = yatai_client.repository.get(bento)
+        gamma_client = get_gamma_client(gamma_url)
+        bento_pb = gamma_client.repository.get(bento)
         return resolve_bento_bundle_uri(bento_pb)
     else:
         raise BentoMLException(
@@ -193,10 +193,10 @@ def resolve_bundle_path(bento, pip_installed_bundle_path, yatai_url=None):
         )
 
 
-def get_default_yatai_client():
-    from bentoml.gamma.client import YataiClient
+def get_default_gamma_client():
+    from bentoml.gamma.client import GammaClient
 
-    return YataiClient()
+    return GammaClient()
 
 
 def resolve_bento_bundle_uri(bento_pb):

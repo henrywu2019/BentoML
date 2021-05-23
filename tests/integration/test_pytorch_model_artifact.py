@@ -5,7 +5,7 @@ import torch
 from torch import nn
 
 import bentoml
-from bentoml.gamma.client import YataiClient
+from bentoml.gamma.client import GammaClient
 from tests.bento_service_examples.pytorch_classifier import PytorchClassifier
 
 
@@ -46,7 +46,7 @@ def test_pytorch_artifact_pack(pytorch_classifier_class):
     assert loaded_svc.predict(test_df) == 5.0, 'Run inference from saved artifact'
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{svc.name}:{svc.version}')
 
 
@@ -64,7 +64,7 @@ def test_pytorch_artifact_pack_with_traced_model(pytorch_classifier_class):
     assert loaded_svc.predict(test_df) == 5.0, 'Run inference from saved artifact'
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{svc.name}:{svc.version}')
 
 
@@ -81,5 +81,5 @@ def test_pytorch_artifact_pack_with_scripted_model(pytorch_classifier_class):
     assert loaded_svc.predict(test_df) == 5.0, 'Run inference from saved artifact'
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{svc.name}:{svc.version}')

@@ -4,7 +4,7 @@ import pytest
 import pandas
 
 import bentoml
-from bentoml.gamma.client import YataiClient
+from bentoml.gamma.client import GammaClient
 from tests.bento_service_examples.onnx_onnxruntime_iris_classifier import (
     OnnxIrisClassifier,
 )
@@ -54,7 +54,7 @@ def test_onnx_model_artifact_pack_modelproto_with_onnxruntime_backend(
     assert loaded_svc.predict(test_df)[0] == [1], 'Run inference after save onnx model'
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{svc.name}:{svc.version}')
 
 
@@ -74,5 +74,5 @@ def test_onnx_model_artifact_pack_model_file_path_with_onnxruntime_backend(
     assert loaded_svc.predict(test_df)[0] == [1], 'Run inference after save onnx model'
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{svc.name}:{svc.version}')

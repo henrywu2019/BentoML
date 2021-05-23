@@ -8,7 +8,7 @@ base on usage.
 
 In this guide, it will deploy an IrisClassifier BentoService to Azure Functions, make a
 prediction request to the deployment endpoint, and then delete the deployment. It will
-also show how to start an remote YataiService with Azure credential for deploying to
+also show how to start an remote GammaService with Azure credential for deploying to
 the Azure Functions.
 
 Prerequisites:
@@ -276,15 +276,15 @@ Remove Azure Functions deployment
 
 
 =====================================================================
-Deploy and manage Azure Functions deployment with remote YataiService
+Deploy and manage Azure Functions deployment with remote GammaService
 =====================================================================
 
-BentoML recommends to use remote YataiService for managing and deploying BentoService
-when you are working in a team. To deploy Azure Functions in remote YataiService, you
+BentoML recommends to use remote GammaService for managing and deploying BentoService
+when you are working in a team. To deploy Azure Functions in remote GammaService, you
 need to provide the Azure credential for it.
 
 After Sign in with Azure CLI in your local machine, you should be able to find the
-`accessTokens.json` in your Azure directory. Now start the BentoML YataiService docker
+`accessTokens.json` in your Azure directory. Now start the BentoML GammaService docker
 image and mount that `accessTokens.json` file to the running container.
 
 .. code-block:: bash
@@ -292,12 +292,12 @@ image and mount that `accessTokens.json` file to the running container.
     $ docker run -v ~/.azure/accessTokens.json:/home/.azure/accessTokens.json -p 50051:50051 -p 3000:3000 bentoml/gamma-service:latest
 
 
-After the YataiService docker container is running, in another terminal window, set
+After the GammaService docker container is running, in another terminal window, set
 gamma service address with `bentoml config set`
 
 .. code-block:: bash
 
-    $ bentoml config set yatai_service.url=0.0.0.0:50051
+    $ bentoml config set gamma_service.url=0.0.0.0:50051
 
 
 ============================================================
@@ -373,7 +373,7 @@ Copy and paste the code below into a file named `gamma-service.yaml`
                 secretName: azure-access-tokens
 
 
-Run `kubectl apply` command to deploy Yatai service to the Kubernetes cluster
+Run `kubectl apply` command to deploy Gamma service to the Kubernetes cluster
 
 .. code-block:: bash
 

@@ -3,7 +3,7 @@ import re
 
 from sqlalchemy import UniqueConstraint, Column, Integer, String, and_, Enum
 
-from bentoml.exceptions import YataiLabelException, InvalidArgument
+from bentoml.exceptions import GammaLabelException, InvalidArgument
 from bentoml.gamma.db import Base
 from bentoml.gamma.proto.label_selectors_pb2 import LabelSelectors
 
@@ -183,7 +183,7 @@ class LabelStore(object):
                     sess.query(Label.resource_id).filter(Label.key != expression.key)
                 )
             else:
-                raise YataiLabelException(
+                raise GammaLabelException(
                     f'Unrecognized operator: "{expression.operator}"'
                 )
         query = query.intersect(*filters)

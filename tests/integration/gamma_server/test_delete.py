@@ -5,13 +5,13 @@ from click.testing import CliRunner
 
 from bentoml.cli import create_bentoml_cli
 from tests.bento_service_examples.iris_classifier import IrisClassifier
-from bentoml.gamma.client import get_yatai_client
+from bentoml.gamma.client import get_gamma_client
 
 logger = logging.getLogger('bentoml.test')
 
 
 def test_delete_single_bento(bento_service):
-    yc = get_yatai_client()
+    yc = get_gamma_client()
     # Remove all other bentos. Clean state
     deleted_version = uuid.uuid4().hex[0:8]
     yc.repository.delete(prune=True)
@@ -34,7 +34,7 @@ def test_delete_single_bento(bento_service):
 
 
 def test_delete_bentos_base_on_labels(bento_service):
-    yc = get_yatai_client()
+    yc = get_gamma_client()
     yc.repository.delete(prune=True)
     bento_service.save(version=uuid.uuid4().hex[0:8], labels={'cohort': '100'})
     bento_service.save(version=uuid.uuid4().hex[0:8], labels={'cohort': '110'})
@@ -48,7 +48,7 @@ def test_delete_bentos_base_on_labels(bento_service):
 
 
 def test_delete_bentos_base_on_name(bento_service):
-    yc = get_yatai_client()
+    yc = get_gamma_client()
     yc.repository.delete(prune=True)
     bento_service.save(version=uuid.uuid4().hex[0:8])
     bento_service.save(version=uuid.uuid4().hex[0:8])
@@ -63,7 +63,7 @@ def test_delete_bentos_base_on_name(bento_service):
 
 
 def test_delete_bentos_on_name_and_labels(bento_service):
-    yc = get_yatai_client()
+    yc = get_gamma_client()
     yc.repository.delete(prune=True)
     bento_service.save(version=uuid.uuid4().hex[0:8], labels={'dataset': '20201212'})
     bento_service.save(version=uuid.uuid4().hex[0:8], labels={'dataset': '20201212'})
@@ -79,7 +79,7 @@ def test_delete_bentos_on_name_and_labels(bento_service):
 
 
 def test_delete_bentos_with_tags(bento_service):
-    yc = get_yatai_client()
+    yc = get_gamma_client()
     yc.repository.delete(prune=True)
     version_one = uuid.uuid4().hex[0:8]
     version_two = uuid.uuid4().hex[0:8]
@@ -112,7 +112,7 @@ def test_delete_all_bentos(bento_service):
     bento_service.save(version=uuid.uuid4().hex[0:8])
     bento_service.save(version=uuid.uuid4().hex[0:8])
 
-    yc = get_yatai_client()
+    yc = get_gamma_client()
     yc.repository.delete(prune=True)
     bentos = yc.repository.list()
     assert len(bentos) == 0

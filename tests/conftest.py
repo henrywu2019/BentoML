@@ -7,7 +7,7 @@ import imageio
 import numpy as np
 import pytest
 
-from bentoml.gamma.client import YataiClient
+from bentoml.gamma.client import GammaClient
 from tests.bento_service_examples.example_bento_service import ExampleBentoService
 
 
@@ -220,5 +220,5 @@ def bento_bundle_path(bento_service):  # pylint:disable=redefined-outer-name
 
 
 def delete_saved_bento_service(name, version):
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{name}:{version}')

@@ -26,8 +26,8 @@ livenessProbe
 readyinessProbe
 healthz
 gamma
-Yatai
-YataiService
+Gamma
+GammaService
 SLO
 hostname
 Postgres

@@ -17,7 +17,7 @@ import logging
 
 from bentoml.utils.ruamel_yaml import YAML
 from bentoml.gamma.proto.deployment_pb2 import Deployment, DeploymentSpec
-from bentoml.exceptions import InvalidArgument, YataiDeploymentException
+from bentoml.exceptions import InvalidArgument, GammaDeploymentException
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +36,7 @@ def deployment_dict_to_pb(deployment_dict):
     if deployment_dict.get('spec'):
         spec_dict = deployment_dict.get('spec')
     else:
-        raise YataiDeploymentException('"spec" is required field for deployment')
+        raise GammaDeploymentException('"spec" is required field for deployment')
     platform = spec_dict.get('operator')
     if platform is not None:
         # converting platform parameter to DeploymentOperator name in proto

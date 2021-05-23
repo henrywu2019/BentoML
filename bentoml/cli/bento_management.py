@@ -26,9 +26,9 @@ from bentoml.cli.utils import (
     _format_labels_for_print,
 )
 from bentoml.utils import pb_to_yaml
-from bentoml.gamma.client import get_yatai_client
+from bentoml.gamma.client import get_gamma_client
 
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
+gamma_proto = LazyLoader('gamma_proto', globals(), 'bentoml.gamma.proto')
 
 
 def _print_bento_info(bento, output_type):
@@ -128,14 +128,14 @@ def add_bento_sub_command(cli):
     @click.option(
         '--gamma-url',
         type=click.STRING,
-        help='Remote YataiService URL. Optional. '
+        help='Remote GammaService URL. Optional. '
         'Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
         '-o', '--output', type=click.Choice(['json', 'yaml', 'table', 'wide'])
     )
-    def get(bento, limit, ascending_order, print_location, labels, yatai_url, output):
-        yc = get_yatai_client(yatai_url)
+    def get(bento, limit, ascending_order, print_location, labels, gamma_url, output):
+        yc = get_gamma_client(gamma_url)
         if ':' in bento:
             result = yc.repository.get(bento)
             if print_location:
@@ -173,7 +173,7 @@ def add_bento_sub_command(cli):
     @click.option(
         '--gamma-url',
         type=click.STRING,
-        help='Remote YataiService URL. Optional. '
+        help='Remote GammaService URL. Optional. '
         'Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
@@ -183,9 +183,9 @@ def add_bento_sub_command(cli):
         default='table',
     )
     def list_bentos(
-        limit, offset, labels, order_by, ascending_order, yatai_url, output
+        limit, offset, labels, order_by, ascending_order, gamma_url, output
     ):
-        yc = get_yatai_client(yatai_url)
+        yc = get_gamma_client(gamma_url)
         result = yc.repository.list(
             limit=limit,
             offset=offset,
@@ -213,7 +213,7 @@ def add_bento_sub_command(cli):
     @click.option(
         '--gamma-url',
         type=click.STRING,
-        help='Remote YataiService URL. Optional. Example: '
+        help='Remote GammaService URL. Optional. Example: '
         '"--gamma-url http://localhost:50050"',
     )
     @click.option(
@@ -227,10 +227,10 @@ def add_bento_sub_command(cli):
         all,  # pylint: disable=redefined-builtin
         delete_targets,
         labels,
-        yatai_url,
+        gamma_url,
         yes,  # pylint: disable=redefined-builtin
     ):
-        """Delete bento bundles in target YataiService. When the --gamma-url option is not specified, it will use local Yatai by default.
+        """Delete bento bundles in target GammaService. When the --gamma-url option is not specified, it will use local Gamma by default.
 
 Specify target service bundles to remove:
 
@@ -244,7 +244,7 @@ Specify target service bundles to remove:
 
 * Bulk delete all, e.g.: `bentoml delete --all`
         """  # noqa
-        yc = get_yatai_client(yatai_url)
+        yc = get_gamma_client(gamma_url)
         # Backward compatible with the previous CLI, allows deletion with tag/s
         if delete_targets is not None and len(delete_targets) > 0:
             for item in delete_targets:
@@ -279,22 +279,22 @@ Specify target service bundles to remove:
     @click.option(
         '--gamma-url',
         required=True,
-        help='Remote YataiService URL. Example: "--gamma-url http://localhost:50050"',
+        help='Remote GammaService URL. Example: "--gamma-url http://localhost:50050"',
     )
-    def pull(bento, yatai_url):
+    def pull(bento, gamma_url):
         if ':' not in bento:
             _echo(f'BentoService {bento} invalid - specify name:version')
             return
-        yc = get_yatai_client(yatai_url)
+        yc = get_gamma_client(gamma_url)
         yc.repository.pull(bento=bento)
-        _echo(f'Pulled {bento} from {yatai_url}')
+        _echo(f'Pulled {bento} from {gamma_url}')
 
     @cli.command(help='Push BentoService to remote gamma server')
     @click.argument("bento", type=click.STRING)
     @click.option(
         '--gamma-url',
         required=True,
-        help='Remote YataiService URL. Example: "--gamma-url http://localhost:50050"',
+        help='Remote GammaService URL. Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
         '--with-labels/--without-labels',
@@ -303,27 +303,27 @@ Specify target service bundles to remove:
         "gamma. When running with --without-labels, labels are not retained in the "
         "remote gamma server",
     )
-    def push(bento, yatai_url, with_labels):
+    def push(bento, gamma_url, with_labels):
         if ':' not in bento:
             _echo(f'BentoService {bento} invalid - specify name:version')
             return
-        yc = get_yatai_client(yatai_url)
+        yc = get_gamma_client(gamma_url)
         yc.repository.push(bento, with_labels)
-        _echo(f'Pushed {bento} to {yatai_url}')
+        _echo(f'Pushed {bento} to {gamma_url}')
 
     @cli.command(help='Retrieve')
     @click.argument("bento", type=click.STRING)
     @click.option(
         '--gamma-url',
-        help='Remote YataiService URL. Example: "--gamma-url http://localhost:50050"',
+        help='Remote GammaService URL. Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
         '--target_dir',
         help="Target directory to save BentoService. Defaults to the current directory",
         default=os.getcwd(),
     )
-    def retrieve(bento, yatai_url, target_dir):
-        yc = get_yatai_client(yatai_url)
+    def retrieve(bento, gamma_url, target_dir):
+        yc = get_gamma_client(gamma_url)
         bento_pb = yc.repository.get(bento)
         yc.repository.download_to_directory(bento_pb, target_dir)
 

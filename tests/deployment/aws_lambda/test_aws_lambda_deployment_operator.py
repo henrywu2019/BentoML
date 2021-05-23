@@ -29,7 +29,7 @@ mock_s3_prefix = 'prefix'
 mock_s3_path = 's3://{}/{}'.format(mock_s3_bucket_name, mock_s3_prefix)
 
 
-def create_yatai_service_mock(repo_storage_type=BentoUri.LOCAL):
+def create_gamma_service_mock(repo_storage_type=BentoUri.LOCAL):
     bento_pb = Bento(name='bento_test_name', version='version1.1.1')
     if repo_storage_type == BentoUri.LOCAL:
         bento_pb.uri.uri = '/tmp/path/to/bundle'
@@ -39,9 +39,9 @@ def create_yatai_service_mock(repo_storage_type=BentoUri.LOCAL):
     bento_pb.bento_service_metadata.env.python_version = '3.7.0'
     get_bento_response = GetBentoResponse(bento=bento_pb)
 
-    yatai_service_mock = MagicMock()
-    yatai_service_mock.GetBento.return_value = get_bento_response
-    return yatai_service_mock
+    gamma_service_mock = MagicMock()
+    gamma_service_mock.GetBento.return_value = get_bento_response
+    return gamma_service_mock
 
 
 def generate_lambda_deployment_pb():
@@ -218,9 +218,9 @@ def mock_lambda_related_operations(func):
     MagicMock(),
 )
 def test_aws_lambda_apply_under_bundle_size_limit_success():
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_lambda_deployment_pb()
-    deployment_operator = AwsLambdaDeploymentOperator(yatai_service_mock)
+    deployment_operator = AwsLambdaDeploymentOperator(gamma_service_mock)
 
     result_pb = deployment_operator.add(test_deployment_pb)
 
@@ -265,9 +265,9 @@ def test_aws_lambda_apply_under_bundle_size_limit_success():
     MagicMock(),
 )
 def test_aws_lambda_apply_over_bundle_size_limit_success():
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_lambda_deployment_pb()
-    deployment_operator = AwsLambdaDeploymentOperator(yatai_service_mock)
+    deployment_operator = AwsLambdaDeploymentOperator(gamma_service_mock)
 
     result_pb = deployment_operator.add(test_deployment_pb)
 
@@ -308,9 +308,9 @@ def test_aws_lambda_apply_over_bundle_size_limit_success():
     MagicMock(),
 )
 def test_aws_lambda_apply_over_max_bundle_size_limit_fail():
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_lambda_deployment_pb()
-    deployment_operator = AwsLambdaDeploymentOperator(yatai_service_mock)
+    deployment_operator = AwsLambdaDeploymentOperator(gamma_service_mock)
     result_pb = deployment_operator.add(test_deployment_pb)
     assert result_pb.status.status_code == status_pb2.Status.INTERNAL
     assert result_pb.deployment.state.state == DeploymentState.ERROR
@@ -331,14 +331,14 @@ def test_aws_lambda_describe_still_in_progress():
         else:
             raise Exception('This test does not handle operation {}'.format(op_name))
 
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_lambda_deployment_pb()
     with patch(
         'bentoml.gamma.deployment.aws_lambda.operator.get_default_aws_region',
         MagicMock(return_value='mock_region'),
     ):
         with patch('botocore.client.BaseClient._make_api_call', new=mock_cf_response):
-            deployment_operator = AwsLambdaDeploymentOperator(yatai_service_mock)
+            deployment_operator = AwsLambdaDeploymentOperator(gamma_service_mock)
             result_pb = deployment_operator.describe(test_deployment_pb)
             assert result_pb.status.status_code == status_pb2.Status.OK
             assert result_pb.state.state == DeploymentState.PENDING
@@ -372,14 +372,14 @@ def test_aws_lambda_describe_success():
         else:
             raise Exception('This test does not handle operation {}'.format(op_name))
 
-    yatai_service_mock = create_yatai_service_mock()
+    gamma_service_mock = create_gamma_service_mock()
     test_deployment_pb = generate_lambda_deployment_pb()
     with patch(
         'bentoml.gamma.deployment.aws_lambda.operator.get_default_aws_region',
         MagicMock(return_value='mock_region'),
     ):
         with patch('botocore.client.BaseClient._make_api_call', new=mock_cf_response):
-            deployment_operator = AwsLambdaDeploymentOperator(yatai_service_mock)
+            deployment_operator = AwsLambdaDeploymentOperator(gamma_service_mock)
             result_pb = deployment_operator.describe(test_deployment_pb)
             assert result_pb.status.status_code == status_pb2.Status.OK
             assert result_pb.state.state == DeploymentState.RUNNING

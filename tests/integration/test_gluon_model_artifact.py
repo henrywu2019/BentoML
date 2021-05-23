@@ -1,7 +1,7 @@
 import pytest
 import bentoml
 from tests.bento_service_examples.gluon_classifier import GluonClassifier
-from bentoml.gamma.client import YataiClient
+from bentoml.gamma.client import GammaClient
 
 import mxnet
 
@@ -32,5 +32,5 @@ def test_gluon_artifact_pack(gluon_classifier, trained_gluon_model):
     assert loaded_svc.predict([0]) == [0]
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{gluon_classifier.name}:{gluon_classifier.version}')

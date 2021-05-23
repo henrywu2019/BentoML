@@ -15,7 +15,7 @@ import docker
 from bentoml.configuration import LAST_PYPI_RELEASE_VERSION
 from bentoml.exceptions import InvalidArgument
 from bentoml.saved_bundle.loader import load_from_dir
-from bentoml.gamma.client import get_yatai_client
+from bentoml.gamma.client import get_gamma_client
 from bentoml.gamma.deployment.docker_utils import ensure_docker_available_or_raise
 from bentoml.gamma.db.stores.label import _validate_labels
 
@@ -69,10 +69,10 @@ def wait_until_container_ready(container_name, check_message, timeout_seconds=12
 
 
 @pytest.fixture(scope='module')
-def yatai_server_container():
+def gamma_server_container():
     ensure_docker_available_or_raise()
 
-    yatai_docker_image_tag = f'bentoml/gamma-service:{LAST_PYPI_RELEASE_VERSION}'
+    gamma_docker_image_tag = f'bentoml/gamma-service:{LAST_PYPI_RELEASE_VERSION}'
     container_name = f'e2e-test-gamma-service-container-{uuid.uuid4().hex[:6]}'
     port = '50055'
     command = [
@@ -87,7 +87,7 @@ def yatai_server_container():
         f'{port}:{port}',
         '-p',
         '3000:3000',
-        yatai_docker_image_tag,
+        gamma_docker_image_tag,
         '--grpc-port',
         port,
     ]
@@ -97,7 +97,7 @@ def yatai_server_container():
         command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
     wait_until_container_ready(
-        container_name, b'* Starting BentoML YataiService gRPC Server', 120
+        container_name, b'* Starting BentoML GammaService gRPC Server', 120
     )
 
     yield f'localhost:{port}'
@@ -116,17 +116,17 @@ class TestModel(object):
     reason="Requires docker, skipping test for Mac OS on Github Action",
 )
 @pytest.mark.skipif('not psutil.POSIX')
-def test_save_load(yatai_server_container, example_bento_service_class):
+def test_save_load(gamma_server_container, example_bento_service_class):
     example_bento_service_class = bentoml.ver(major=2, minor=1)(
         example_bento_service_class
     )
 
-    yc = get_yatai_client(yatai_server_container)
+    yc = get_gamma_client(gamma_server_container)
     test_model = TestModel()
     svc = example_bento_service_class()
     svc.pack('model', test_model)
 
-    saved_path = svc.save(yatai_url=yatai_server_container)
+    saved_path = svc.save(gamma_url=gamma_server_container)
     assert saved_path
 
     bento_pb = yc.repository.get(f'{svc.name}:{svc.version}')
@@ -139,12 +139,12 @@ def test_save_load(yatai_server_container, example_bento_service_class):
     reason="Requires docker, skipping test for Mac OS on Github Action",
 )
 @pytest.mark.skipif('not psutil.POSIX')
-def test_push(yatai_server_container, example_bento_service_class):
+def test_push(gamma_server_container, example_bento_service_class):
     example_bento_service_class = bentoml.ver(major=2, minor=2)(
         example_bento_service_class
     )
 
-    yc = get_yatai_client(yatai_server_container)
+    yc = get_gamma_client(gamma_server_container)
     test_model = TestModel()
     svc = example_bento_service_class()
     svc.pack('model', test_model)
@@ -159,16 +159,16 @@ def test_push(yatai_server_container, example_bento_service_class):
     reason="Requires docker, skipping test for Mac OS on Github Action",
 )
 @pytest.mark.skipif('not psutil.POSIX')
-def test_pull(yatai_server_container, example_bento_service_class):
+def test_pull(gamma_server_container, example_bento_service_class):
     example_bento_service_class = bentoml.ver(major=2, minor=3)(
         example_bento_service_class
     )
 
-    yc = get_yatai_client(yatai_server_container)
+    yc = get_gamma_client(gamma_server_container)
     test_model = TestModel()
     svc = example_bento_service_class()
     svc.pack('model', test_model)
-    saved_path = svc.save(yatai_url=yatai_server_container)
+    saved_path = svc.save(gamma_url=gamma_server_container)
 
     pulled_local_path = yc.repository.pull(f'{svc.name}:{svc.version}')
     assert pulled_local_path != saved_path
@@ -179,12 +179,12 @@ def test_pull(yatai_server_container, example_bento_service_class):
     reason="Requires docker, skipping test for Mac OS on Github Action",
 )
 @pytest.mark.skipif('not psutil.POSIX')
-def test_push_with_labels(yatai_server_container, example_bento_service_class):
+def test_push_with_labels(gamma_server_container, example_bento_service_class):
     example_bento_service_class = bentoml.ver(major=2, minor=2)(
         example_bento_service_class
     )
 
-    yc = get_yatai_client(yatai_server_container)
+    yc = get_gamma_client(gamma_server_container)
     test_model = TestModel()
     svc = example_bento_service_class()
     svc.pack('model', test_model)
@@ -204,22 +204,22 @@ def test_push_with_labels(yatai_server_container, example_bento_service_class):
     reason="Requires docker, skipping test for Mac OS on Github Action",
 )
 @pytest.mark.skipif('not psutil.POSIX')
-def test_pull_with_labels(yatai_server_container, example_bento_service_class):
+def test_pull_with_labels(gamma_server_container, example_bento_service_class):
     example_bento_service_class = bentoml.ver(major=2, minor=3)(
         example_bento_service_class
     )
 
-    yc = get_yatai_client(yatai_server_container)
+    yc = get_gamma_client(gamma_server_container)
     test_model = TestModel()
     svc = example_bento_service_class()
     svc.pack('model', test_model)
     saved_path = svc.save(
-        yatai_url=yatai_server_container, labels={'foo': 'bar', 'abc': '123'}
+        gamma_url=gamma_server_container, labels={'foo': 'bar', 'abc': '123'}
     )
 
     pulled_local_path = yc.repository.pull(f'{svc.name}:{svc.version}')
     assert pulled_local_path != saved_path
-    local_yc = get_yatai_client()
+    local_yc = get_gamma_client()
     local_bento_pb = local_yc.repository.get(f'{svc.name}:{svc.version}')
     assert local_bento_pb.bento_service_metadata.labels
     labels = dict(local_bento_pb.bento_service_metadata.labels)
@@ -232,16 +232,16 @@ def test_pull_with_labels(yatai_server_container, example_bento_service_class):
     reason="Requires docker, skipping test for Mac OS for Github Action",
 )
 @pytest.mark.skipif('not psutil.POSIX')
-def test_get(yatai_server_container, example_bento_service_class):
+def test_get(gamma_server_container, example_bento_service_class):
     example_bento_service_class = bentoml.ver(major=2, minor=4)(
         example_bento_service_class
     )
 
-    yc = get_yatai_client(yatai_server_container)
+    yc = get_gamma_client(gamma_server_container)
     test_model = TestModel()
     svc = example_bento_service_class()
     svc.pack('model', test_model)
-    svc.save(yatai_url=yatai_server_container)
+    svc.save(gamma_url=gamma_server_container)
     svc_pb = yc.repository.get(f'{svc.name}:{svc.version}')
     assert svc_pb.bento_service_metadata.name == svc.name
     assert svc_pb.bento_service_metadata.version == svc.version
@@ -252,15 +252,15 @@ def test_get(yatai_server_container, example_bento_service_class):
     reason="Requires docker, skipping test for Mac OS for Github Action",
 )
 @pytest.mark.skipif('not psutil.POSIX')
-def test_list(yatai_server_container, example_bento_service_class):
+def test_list(gamma_server_container, example_bento_service_class):
     example_bento_service_class = bentoml.ver(major=2, minor=5)(
         example_bento_service_class
     )
-    yc = get_yatai_client(yatai_server_container)
+    yc = get_gamma_client(gamma_server_container)
     test_model = TestModel()
     svc = example_bento_service_class()
     svc.pack('model', test_model)
-    svc.save(yatai_url=yatai_server_container)
+    svc.save(gamma_url=gamma_server_container)
 
     bentos = yc.repository.list(bento_name=svc.name)
     assert len(bentos) == 7
@@ -271,15 +271,15 @@ def test_list(yatai_server_container, example_bento_service_class):
     reason="Requires docker, skipping test for Mac OS for Github Action",
 )
 @pytest.mark.skipif('not psutil.POSIX')
-def test_load(yatai_server_container, example_bento_service_class):
+def test_load(gamma_server_container, example_bento_service_class):
     example_bento_service_class = bentoml.ver(major=2, minor=5)(
         example_bento_service_class
     )
-    yc = get_yatai_client(yatai_server_container)
+    yc = get_gamma_client(gamma_server_container)
     test_model = TestModel()
     svc = example_bento_service_class()
     svc.pack('model', test_model)
-    svc.save(yatai_url=yatai_server_container)
+    svc.save(gamma_url=gamma_server_container)
 
     loaded_svc = yc.repository.load(f'{svc.name}:{svc.version}')
     assert loaded_svc.name == svc.name
@@ -290,7 +290,7 @@ def test_load_from_dir(example_bento_service_class):
     example_bento_service_class = bentoml.ver(major=2, minor=6)(
         example_bento_service_class
     )
-    yc = get_yatai_client()
+    yc = get_gamma_client()
     test_model = TestModel()
     svc = example_bento_service_class()
     svc.pack('model', test_model)

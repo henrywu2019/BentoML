@@ -21,32 +21,32 @@ from prometheus_client import start_http_server
 
 
 @inject
-def get_yatai_service(
+def get_gamma_service(
     channel_address: str = Provide[BentoMLContainer.config.gamma.remote.url],
     access_token: str = Provide[BentoMLContainer.config.gamma.remote.access_token],
     access_token_header: str = Provide[
         BentoMLContainer.config.gamma.remote.access_token_header
     ],
-    tls_root_ca_cert: str = Provide[BentoMLContainer.yatai_tls_root_ca_cert],
+    tls_root_ca_cert: str = Provide[BentoMLContainer.gamma_tls_root_ca_cert],
     tls_client_key: str = Provide[BentoMLContainer.config.gamma.remote.tls.client_key],
     tls_client_cert: str = Provide[
         BentoMLContainer.config.gamma.remote.tls.client_cert
     ],
-    db_url: str = Provide[BentoMLContainer.yatai_database_url],
+    db_url: str = Provide[BentoMLContainer.gamma_database_url],
     default_namespace: str = Provide[BentoMLContainer.config.gamma.namespace],
     repository_type: str = Provide[BentoMLContainer.config.gamma.repository.type],
-    file_system_directory: str = Provide[BentoMLContainer.yatai_file_system_directory],
+    file_system_directory: str = Provide[BentoMLContainer.gamma_file_system_directory],
     s3_url: str = Provide[BentoMLContainer.config.gamma.repository.s3.url],
     gcs_url: str = Provide[BentoMLContainer.config.gamma.repository.gcs.url],
 ):
     if channel_address:
-        # Lazily import grpcio for YataiSerivce gRPC related actions
+        # Lazily import grpcio for GammaSerivce gRPC related actions
         import grpc
         from bentoml.gamma.client.interceptor import header_client_interceptor
-        from bentoml.gamma.proto.yatai_service_pb2_grpc import YataiStub
+        from bentoml.gamma.proto.gamma_service_pb2_grpc import GammaStub
 
         channel_address = channel_address.strip()
-        logger.debug("Connecting YataiService gRPC server at: %s", channel_address)
+        logger.debug("Connecting GammaService gRPC server at: %s", channel_address)
         scheme, addr = parse_grpc_url(channel_address)
         header_adder_interceptor = header_client_interceptor.header_adder_interceptor(
             access_token_header, access_token
@@ -73,16 +73,16 @@ def get_yatai_service(
             channel = grpc.intercept_channel(
                 grpc.insecure_channel(addr), header_adder_interceptor
             )
-        return YataiStub(channel)
+        return GammaStub(channel)
     else:
         from bentoml.gamma.db import DB
         from bentoml.gamma.repository import create_repository
-        from bentoml.gamma.yatai_service_impl import get_yatai_service_impl
+        from bentoml.gamma.gamma_service_impl import get_gamma_service_impl
 
-        LocalYataiService = get_yatai_service_impl()
+        LocalGammaService = get_gamma_service_impl()
 
-        logger.debug("Creating local YataiService instance")
-        return LocalYataiService(
+        logger.debug("Creating local GammaService instance")
+        return LocalGammaService(
             repository=create_repository(
                 repository_type, file_system_directory, s3_url, gcs_url
             ),
@@ -92,7 +92,7 @@ def get_yatai_service(
 
 
 @inject
-def start_yatai_service_grpc_server(
+def start_gamma_service_grpc_server(
     db_url,
     grpc_port,
     ui_port,
@@ -103,18 +103,18 @@ def start_yatai_service_grpc_server(
     s3_url,
     s3_endpoint_url,
     gcs_url,
-    web_ui_log_path: str = Provide[BentoMLContainer.yatai_logging_path],
+    web_ui_log_path: str = Provide[BentoMLContainer.gamma_logging_path],
 ):
-    # Lazily import grpcio for YataiSerivce gRPC related actions
+    # Lazily import grpcio for GammaSerivce gRPC related actions
     import grpc
     from bentoml.gamma.db import DB
     from bentoml.gamma.repository import create_repository
-    from bentoml.gamma.yatai_service_impl import get_yatai_service_impl
-    from bentoml.gamma.proto.yatai_service_pb2_grpc import add_YataiServicer_to_server
-    from bentoml.gamma.proto.yatai_service_pb2_grpc import YataiServicer
+    from bentoml.gamma.gamma_service_impl import get_gamma_service_impl
+    from bentoml.gamma.proto.gamma_service_pb2_grpc import add_GammaServicer_to_server
+    from bentoml.gamma.proto.gamma_service_pb2_grpc import GammaServicer
 
-    YataiServicerImpl = get_yatai_service_impl(YataiServicer)
-    yatai_service = YataiServicerImpl(
+    GammaServicerImpl = get_gamma_service_impl(GammaServicer)
+    gamma_service = GammaServicerImpl(
         repository=create_repository(
             repository_type, file_system_directory, s3_url, s3_endpoint_url, gcs_url
         ),
@@ -126,16 +126,16 @@ def start_yatai_service_grpc_server(
     server = grpc.server(
         futures.ThreadPoolExecutor(max_workers=10), interceptors=grpc_interceptors,
     )
-    add_YataiServicer_to_server(yatai_service, server)
+    add_GammaServicer_to_server(gamma_service, server)
     debug_mode = get_debug_mode()
     if debug_mode:
         try:
             logger.debug("Enabling gRPC server reflection for debugging")
-            from bentoml.gamma.proto import yatai_service_pb2
+            from bentoml.gamma.proto import gamma_service_pb2
             from grpc_reflection.v1alpha import reflection
 
             SERVICE_NAMES = (
-                yatai_service_pb2.DESCRIPTOR.services_by_name["Yatai"].full_name,
+                gamma_service_pb2.DESCRIPTOR.services_by_name["Gamma"].full_name,
                 reflection.SERVICE_NAME,
             )
             reflection.enable_server_reflection(SERVICE_NAMES, server)
@@ -159,10 +159,10 @@ def start_yatai_service_grpc_server(
     server.start()
     if with_ui:
         ensure_node_available_or_raise()
-        yatai_grpc_server_address = f"localhost:{grpc_port}"
+        gamma_grpc_server_address = f"localhost:{grpc_port}"
         prometheus_address = f"http://localhost:{prometheus_port}"
-        async_start_yatai_service_web_ui(
-            yatai_grpc_server_address,
+        async_start_gamma_service_web_ui(
+            gamma_grpc_server_address,
             prometheus_address,
             ui_port,
             web_ui_log_path,
@@ -186,19 +186,19 @@ def start_yatai_service_grpc_server(
         prom_ui_message = f"running on http://0.0.0.0:{ui_port}/metrics\n"
 
     click.echo(
-        f"* Starting BentoML YataiService gRPC Server\n"
+        f"* Starting BentoML GammaService gRPC Server\n"
         f'* Debug mode: { "on" if debug_mode else "off"}\n'
         f"* Web UI: {web_ui_message}\n"
         f"* Running on 0.0.0.0:{grpc_port} (Press CTRL+C to quit)\n"
         f"* Prometheus: {prom_ui_message}\n"
         f"* Help and instructions: "
-        f"https://docs.bentoml.org/en/latest/guides/yatai_service.html\n"
+        f"https://docs.bentoml.org/en/latest/guides/gamma_service.html\n"
         f'{f"* Web server log can be found here: {web_ui_log_path}" if with_ui else ""}'
         f"\n-----\n"
         f"* Usage in Python:\n"
-        f'*  bento_svc.save(yatai_url="0.0.0.0:{grpc_port}")\n'
-        f"*  from bentoml.gamma.client import get_yatai_client\n"
-        f'*  get_yatai_client("0.0.0.0:{grpc_port}").repository.list()\n'
+        f'*  bento_svc.save(gamma_url="0.0.0.0:{grpc_port}")\n'
+        f"*  from bentoml.gamma.client import get_gamma_client\n"
+        f'*  get_gamma_client("0.0.0.0:{grpc_port}").repository.list()\n'
         f"* Usage in CLI:\n"
         f"*  bentoml list --gamma-url=0.0.0.0:{grpc_port}\n"
         f"*  bentoml containerize IrisClassifier:latest --gamma-url=0.0.0.0:"
@@ -218,7 +218,7 @@ def start_yatai_service_grpc_server(
         while True:
             time.sleep(_ONE_DAY_IN_SECONDS)
     except KeyboardInterrupt:
-        logger.info("Terminating YataiService gRPC server..")
+        logger.info("Terminating GammaService gRPC server..")
         server.stop(grace=None)
 
 
@@ -230,8 +230,8 @@ def _is_web_server_debug_tools_available(root_dir):
     )
 
 
-def async_start_yatai_service_web_ui(
-    yatai_server_address,
+def async_start_gamma_service_web_ui(
+    gamma_server_address,
     prometheus_address,
     ui_port,
     base_log_path,
@@ -252,7 +252,7 @@ def async_start_yatai_service_web_ui(
                 "run",
                 "dev",
                 "--",
-                yatai_server_address,
+                gamma_server_address,
                 ui_port,
                 base_log_path,
                 web_prefix_path,
@@ -262,7 +262,7 @@ def async_start_yatai_service_web_ui(
             web_ui_command = [
                 "node",
                 "dist/bundle.js",
-                yatai_server_address,
+                gamma_server_address,
                 ui_port,
                 base_log_path,
                 web_prefix_path,
@@ -271,14 +271,14 @@ def async_start_yatai_service_web_ui(
     else:
         if not os.path.exists(os.path.join(web_ui_dir, "dist", "bundle.js")):
             raise BentoMLException(
-                "Yatai web client built is missing. "
+                "Gamma web client built is missing. "
                 "Please run `npm run build` in the bentoml/gamma/web directory "
                 "and then try again"
             )
         web_ui_command = [
             "node",
             "dist/bundle.js",
-            yatai_server_address,
+            gamma_server_address,
             ui_port,
             base_log_path,
             web_prefix_path,
@@ -293,7 +293,7 @@ def async_start_yatai_service_web_ui(
     if not is_web_proc_running:
         web_proc_output = web_proc.stdout.read().decode("utf-8")
         logger.error(f"return code: {web_proc.returncode} {web_proc_output}")
-        raise BentoMLException("Yatai web ui did not start properly")
+        raise BentoMLException("Gamma web ui did not start properly")
 
     atexit.register(web_proc.terminate)
 

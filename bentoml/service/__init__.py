@@ -403,16 +403,16 @@ def save(bento_service, base_path=None, version=None, labels=None):
         "and BentoService#save_to_dir instead."
     )
 
-    from bentoml.gamma.client import YataiClient
-    from bentoml.gamma.yatai_service import get_yatai_service
+    from bentoml.gamma.client import GammaClient
+    from bentoml.gamma.gamma_service import get_gamma_service
 
     if base_path:
-        yatai_service = get_yatai_service(file_system_directory=base_path)
-        yatai_client = YataiClient(yatai_service)
+        gamma_service = get_gamma_service(file_system_directory=base_path)
+        gamma_client = GammaClient(gamma_service)
     else:
-        yatai_client = YataiClient()
+        gamma_client = GammaClient()
 
-    return yatai_client.repository.upload(bento_service, version, labels)
+    return gamma_client.repository.upload(bento_service, version, labels)
 
 
 class BentoService:
@@ -719,7 +719,7 @@ class BentoService:
 
         return self._bento_service_version
 
-    def save(self, yatai_url=None, version=None, labels=None):
+    def save(self, gamma_url=None, version=None, labels=None):
         """
         Save and register this BentoService via BentoML's built-in model management
         system. BentoML by default keeps track of all the SavedBundle's files and
@@ -727,14 +727,14 @@ class BentoService:
         Users can also configure BentoML to save their BentoService to a shared Database
         and cloud object storage such as AWS S3.
 
-        :param yatai_url: optional - URL path to Yatai server
+        :param gamma_url: optional - URL path to Gamma server
         :param version: optional - save with version override
         :param labels: optional - labels dictionary
         :return: saved_path: file path to where the BentoService is saved
         """
-        from bentoml.gamma.client import get_yatai_client
+        from bentoml.gamma.client import get_gamma_client
 
-        yc = get_yatai_client(yatai_url)
+        yc = get_gamma_client(gamma_url)
 
         return yc.repository.upload(self, version, labels)
 

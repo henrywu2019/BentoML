@@ -25,7 +25,7 @@ from bentoml.gamma.proto.deployment_pb2 import DeploymentSpec, DeploymentState
 
 deployment_schema = {
     'name': {'type': 'string', 'required': True, 'minlength': 4},
-    # namespace is optional - YataiService will fill-in the default namespace configured
+    # namespace is optional - GammaService will fill-in the default namespace configured
     # when it is missing in the apply deployment request
     'namespace': {'type': 'string', 'required': False, 'minlength': 3},
     'labels': {'type': 'dict', 'deployment_labels': True},
@@ -150,7 +150,7 @@ deployment_schema = {
 }
 
 
-class YataiDeploymentValidator(Validator):
+class GammaDeploymentValidator(Validator):
     def _validate_aws_lambda_memory(self, aws_lambda_memory, field, value):
         """ Test the memory size restriction for AWS Lambda.
 
@@ -242,7 +242,7 @@ class YataiDeploymentValidator(Validator):
 
 def validate_deployment_pb(pb):
     pb_dict = ProtoMessageToDict(pb)
-    v = YataiDeploymentValidator(deployment_schema)
+    v = GammaDeploymentValidator(deployment_schema)
     if v.validate(pb_dict):
         return None
     else:

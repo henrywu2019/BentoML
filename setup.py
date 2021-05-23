@@ -55,7 +55,7 @@ install_requires = [
     "chardet",
 ]
 
-yatai_service_requires = [
+gamma_service_requires = [
     "grpcio~=1.34.0",  # match the grpcio-tools version used in gamma docker image
     "google-cloud-storage",
     "azure-cli",
@@ -118,7 +118,7 @@ dev_all = install_requires + dev_requires + docs_requires
 extras_require = {
     "dev": dev_all,
     "test": test_requires,
-    "yatai_service": yatai_service_requires,
+    "gamma_service": gamma_service_requires,
     "model_server": model_server_requires,
     "doc_builder": docs_requires,  # 'doc_builder' is required by readthedocs.io
 }

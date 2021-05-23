@@ -31,7 +31,7 @@ from bentoml.gamma.proto.deployment_pb2 import (
     Deployment,
     DeploymentState,
 )
-from bentoml.exceptions import BentoMLException, YataiDeploymentException
+from bentoml.exceptions import BentoMLException, GammaDeploymentException
 from bentoml.gamma.proto import status_pb2
 from bentoml.gamma.validator import validate_deployment_pb
 from bentoml.gamma.deployment_utils import (
@@ -46,8 +46,8 @@ WAIT_TIME = 5
 
 
 class DeploymentAPIClient:
-    def __init__(self, yatai_service):
-        self.yatai_service = yatai_service
+    def __init__(self, gamma_service):
+        self.gamma_service = gamma_service
 
     def list(
         self,
@@ -91,20 +91,20 @@ class DeploymentAPIClient:
             generate_gprc_labels_selector(
                 list_deployment_request.label_selectors, labels
             )
-        return self.yatai_service.ListDeployments(list_deployment_request)
+        return self.gamma_service.ListDeployments(list_deployment_request)
 
     def get(self, namespace, name):
-        return self.yatai_service.GetDeployment(
+        return self.gamma_service.GetDeployment(
             GetDeploymentRequest(deployment_name=name, namespace=namespace)
         )
 
     def describe(self, namespace, name):
-        return self.yatai_service.DescribeDeployment(
+        return self.gamma_service.DescribeDeployment(
             DescribeDeploymentRequest(deployment_name=name, namespace=namespace)
         )
 
     def delete(self, deployment_name, namespace, force_delete=False):
-        return self.yatai_service.DeleteDeployment(
+        return self.gamma_service.DeleteDeployment(
             DeleteDeploymentRequest(
                 deployment_name=deployment_name,
                 namespace=namespace,
@@ -120,7 +120,7 @@ class DeploymentAPIClient:
         elif isinstance(deployment_info, Deployment):
             deployment_pb = deployment_info
         else:
-            raise YataiDeploymentException(
+            raise GammaDeploymentException(
                 'Unexpected argument type, expect deployment info to be str in yaml '
                 'format or a dict or a deployment protobuf obj, instead got: {}'.format(
                     str(type(deployment_info))
@@ -129,12 +129,12 @@ class DeploymentAPIClient:
 
         validation_errors = validate_deployment_pb(deployment_pb)
         if validation_errors:
-            raise YataiDeploymentException(
+            raise GammaDeploymentException(
                 f'Failed to validate deployment {deployment_pb.name}: '
                 f'{validation_errors}'
             )
         # Make sure there is no active deployment with the same deployment name
-        get_deployment_pb = self.yatai_service.GetDeployment(
+        get_deployment_pb = self.gamma_service.GetDeployment(
             GetDeploymentRequest(
                 deployment_name=deployment_pb.name, namespace=deployment_pb.namespace
             )
@@ -145,14 +145,14 @@ class DeploymentAPIClient:
                 f'Apply for updating existing deployment, delete the deployment, '
                 f'or use a different deployment name'
             )
-        apply_result = self.yatai_service.ApplyDeployment(
+        apply_result = self.gamma_service.ApplyDeployment(
             ApplyDeploymentRequest(deployment=deployment_pb)
         )
         if apply_result.status.status_code != status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 apply_result.status
             )
-            raise YataiDeploymentException(f'{error_code}:{error_message}')
+            raise GammaDeploymentException(f'{error_code}:{error_message}')
         if wait:
             self._wait_deployment_action_complete(
                 deployment_pb.name, deployment_pb.namespace
@@ -167,7 +167,7 @@ class DeploymentAPIClient:
         elif isinstance(deployment_info, Deployment):
             deployment_pb = deployment_info
         else:
-            raise YataiDeploymentException(
+            raise GammaDeploymentException(
                 'Unexpected argument type, expect deployment info to be str in yaml '
                 'format or a dict or a deployment protobuf obj, instead got: {}'.format(
                     str(type(deployment_info))
@@ -176,19 +176,19 @@ class DeploymentAPIClient:
 
         validation_errors = validate_deployment_pb(deployment_pb)
         if validation_errors:
-            raise YataiDeploymentException(
+            raise GammaDeploymentException(
                 f'Failed to validate deployment {deployment_pb.name}: '
                 f'{validation_errors}'
             )
 
-        apply_result = self.yatai_service.ApplyDeployment(
+        apply_result = self.gamma_service.ApplyDeployment(
             ApplyDeploymentRequest(deployment=deployment_pb)
         )
         if apply_result.status.status_code != status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 apply_result.status
             )
-            raise YataiDeploymentException(f'{error_code}:{error_message}')
+            raise GammaDeploymentException(f'{error_code}:{error_message}')
         if wait:
             self._wait_deployment_action_complete(
                 deployment_pb.name, deployment_pb.namespace

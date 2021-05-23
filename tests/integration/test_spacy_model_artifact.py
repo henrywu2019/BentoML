@@ -3,7 +3,7 @@ import random
 import spacy
 import bentoml
 from tests.bento_service_examples.spacy_classifier import SpacyModelService
-from bentoml.gamma.client import YataiClient
+from bentoml.gamma.client import GammaClient
 
 
 @pytest.fixture()
@@ -64,5 +64,5 @@ def test_spacy_artifact_pack(spacy_model_service_class):
     ], 'Run inference before saving the artifact'
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{svc.name}:{svc.version}')

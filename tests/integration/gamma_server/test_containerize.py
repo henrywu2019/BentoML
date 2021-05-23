@@ -1,25 +1,25 @@
 import logging
 import subprocess
 
-from bentoml.gamma.client import get_yatai_client
+from bentoml.gamma.client import get_gamma_client
 from tests.bento_service_examples.example_bento_service import ExampleBentoService
 
 logger = logging.getLogger('bentoml.test')
 
 
-def test_yatai_server_containerize_without_push():
+def test_gamma_server_containerize_without_push():
     svc = ExampleBentoService()
     svc.pack('model', [1, 2, 3])
     logger.info('Saving bento service to local gamma server')
     svc.save()
 
-    yc = get_yatai_client()
+    yc = get_gamma_client()
     tag = 'mytag'
     built_tag = yc.repository.containerize(bento=f'{svc.name}:{svc.version}', tag=tag)
     assert built_tag == f'{tag}:{svc.version}'
 
 
-def test_yatai_server_containerize_from_cli():
+def test_gamma_server_containerize_from_cli():
     svc = ExampleBentoService()
     svc.pack('model', [1, 2, 3])
     logger.info('Saving bento service to local gamma server')

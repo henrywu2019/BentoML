@@ -25,7 +25,7 @@ from bentoml.server.open_api import get_open_api_spec_json
 from bentoml.utils import ProtoMessageToDict, resolve_bundle_path
 from bentoml.utils.docker_utils import validate_tag
 from bentoml.utils.lazy_loader import LazyLoader
-from bentoml.gamma.client import get_yatai_client
+from bentoml.gamma.client import get_gamma_client
 
 try:
     import click_completion
@@ -38,7 +38,7 @@ except ImportError:
     shell_types = click.Choice(['bash', 'zsh', 'fish', 'powershell'])
 
 
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
+gamma_proto = LazyLoader('gamma_proto', globals(), 'bentoml.gamma.proto')
 
 
 def add_options(options):
@@ -59,7 +59,7 @@ def escape_shell_params(param):
 @inject
 def create_bento_service_cli(
     pip_installed_bundle_path: str = None,
-    default_yatai_url: str = None,
+    default_gamma_url: str = None,
     default_port: int = Provide[BentoMLContainer.config.bento_server.port],
     default_enable_microbatch: bool = Provide[
         BentoMLContainer.config.bento_server.microbatch.enabled
@@ -125,11 +125,11 @@ def create_bento_service_cli(
     @click.argument('run_args', nargs=-1, type=click.UNPROCESSED)
     def run(api_name, run_args, bento=None):
         parser = argparse.ArgumentParser()
-        parser.add_argument('--gamma-url', type=str, default=default_yatai_url)
+        parser.add_argument('--gamma-url', type=str, default=default_gamma_url)
         parsed_args, _ = parser.parse_known_args(run_args)
-        yatai_url = parsed_args.yatai_url
+        gamma_url = parsed_args.gamma_url
         saved_bundle_path = resolve_bundle_path(
-            bento, pip_installed_bundle_path, yatai_url
+            bento, pip_installed_bundle_path, gamma_url
         )
 
         api = load_bento_service_api(saved_bundle_path, api_name)
@@ -145,16 +145,16 @@ def create_bento_service_cli(
     @click.option(
         '--gamma-url',
         type=click.STRING,
-        default=default_yatai_url,
-        help='Remote YataiService URL. Optional. '
+        default=default_gamma_url,
+        help='Remote GammaService URL. Optional. '
         'Example: "--gamma-url http://localhost:50050"',
     )
-    def info(bento=None, yatai_url=None):
+    def info(bento=None, gamma_url=None):
         """
         List all APIs defined in the BentoService loaded from saved bundle
         """
         saved_bundle_path = resolve_bundle_path(
-            bento, pip_installed_bundle_path, yatai_url
+            bento, pip_installed_bundle_path, gamma_url
         )
 
         bento_service_metadata_pb = load_bento_service_metadata(saved_bundle_path)
@@ -171,13 +171,13 @@ def create_bento_service_cli(
     @click.option(
         '--gamma-url',
         type=click.STRING,
-        default=default_yatai_url,
-        help='Remote YataiService URL. Optional. '
+        default=default_gamma_url,
+        help='Remote GammaService URL. Optional. '
         'Example: "--gamma-url http://localhost:50050"',
     )
-    def open_api_spec(bento=None, yatai_url=None):
+    def open_api_spec(bento=None, gamma_url=None):
         saved_bundle_path = resolve_bundle_path(
-            bento, pip_installed_bundle_path, yatai_url
+            bento, pip_installed_bundle_path, gamma_url
         )
 
         bento_service = load_from_dir(saved_bundle_path)
@@ -209,8 +209,8 @@ def create_bento_service_cli(
     @click.option(
         '--gamma-url',
         type=click.STRING,
-        default=default_yatai_url,
-        help='Remote YataiService URL. Optional. '
+        default=default_gamma_url,
+        help='Remote GammaService URL. Optional. '
         'Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
@@ -227,11 +227,11 @@ def create_bento_service_cli(
         mb_max_batch_size,
         mb_max_latency,
         run_with_ngrok,
-        yatai_url,
+        gamma_url,
         enable_swagger,
     ):
         saved_bundle_path = resolve_bundle_path(
-            bento, pip_installed_bundle_path, yatai_url
+            bento, pip_installed_bundle_path, gamma_url
         )
 
         start_dev_server(
@@ -284,8 +284,8 @@ def create_bento_service_cli(
     @click.option(
         '--gamma-url',
         type=click.STRING,
-        default=default_yatai_url,
-        help='Remote YataiService URL. Optional. '
+        default=default_gamma_url,
+        help='Remote GammaService URL. Optional. '
         'Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
@@ -304,7 +304,7 @@ def create_bento_service_cli(
         mb_max_batch_size,
         mb_max_latency,
         microbatch_workers,
-        yatai_url,
+        gamma_url,
         enable_swagger,
     ):
         if not psutil.POSIX:
@@ -317,7 +317,7 @@ def create_bento_service_cli(
             return
 
         saved_bundle_path = resolve_bundle_path(
-            bento, pip_installed_bundle_path, yatai_url
+            bento, pip_installed_bundle_path, gamma_url
         )
 
         start_prod_server(
@@ -376,12 +376,12 @@ def create_bento_service_cli(
     @click.option(
         '--gamma-url',
         type=click.STRING,
-        default=default_yatai_url,
-        help='Specify the YataiService for running the containerization, default to '
-        'the Local YataiService with local docker daemon. Example: '
+        default=default_gamma_url,
+        help='Specify the GammaService for running the containerization, default to '
+        'the Local GammaService with local docker daemon. Example: '
         '"--gamma-url http://localhost:50050"',
     )
-    def containerize(bento, push, tag, build_arg, yatai_url):
+    def containerize(bento, push, tag, build_arg, gamma_url):
         """Containerize specified BentoService.
 
         BENTO is the target BentoService to be containerized, referenced by its name
@@ -405,28 +405,28 @@ def create_bento_service_cli(
         provided by Docker daemon.
         """
         saved_bundle_path = resolve_bundle_path(
-            bento, pip_installed_bundle_path, yatai_url
+            bento, pip_installed_bundle_path, gamma_url
         )
 
         _echo(f"Found Bento: {saved_bundle_path}")
 
         bento_metadata = load_bento_service_metadata(saved_bundle_path)
         bento_tag = f'{bento_metadata.name}:{bento_metadata.version}'
-        yatai_client = get_yatai_client(yatai_url)
+        gamma_client = get_gamma_client(gamma_url)
         docker_build_args = {}
         if build_arg:
             for arg in build_arg:
                 key, value = arg.split("=", 1)
                 docker_build_args[key] = value
-        if yatai_url is not None:
-            spinner_message = f'Sending containerize RPC to YataiService at {yatai_url}'
+        if gamma_url is not None:
+            spinner_message = f'Sending containerize RPC to GammaService at {gamma_url}'
         else:
             spinner_message = (
-                f'Containerizing {bento_tag} with local YataiService and docker '
+                f'Containerizing {bento_tag} with local GammaService and docker '
                 f'daemon from local environment'
             )
         with Spinner(spinner_message):
-            tag = yatai_client.repository.containerize(
+            tag = gamma_client.repository.containerize(
                 bento=bento_tag, tag=tag, build_args=docker_build_args, push=push,
             )
             _echo(f'Build container image: {tag}', CLI_COLOR_SUCCESS)

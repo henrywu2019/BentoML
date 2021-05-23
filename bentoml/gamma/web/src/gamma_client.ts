@@ -1,14 +1,14 @@
 import { Client, credentials } from "@grpc/grpc-js";
 import { bentoml } from "./generated/bentoml_grpc";
 
-export const createYataiClient = (grpcAddress: string) => {
+export const createGammaClient = (grpcAddress: string) => {
   const client = new Client(grpcAddress, credentials.createInsecure());
 
   const rpcImpl = function (method, requestData, callback) {
     /* Conventionally in gRPC, the request path looks like
      "/package.names.ServiceName/MethodName/",
      so getPath would generate that from the method */
-    const methodPath = `/bentoml.Yatai/${method.name}`;
+    const methodPath = `/bentoml.Gamma/${method.name}`;
 
     client.makeUnaryRequest(
       methodPath,
@@ -19,5 +19,5 @@ export const createYataiClient = (grpcAddress: string) => {
     );
   };
 
-  return bentoml.Yatai.create(rpcImpl, false, false);
+  return bentoml.Gamma.create(rpcImpl, false, false);
 };

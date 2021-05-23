@@ -14,7 +14,7 @@ from bentoml.utils.docker_utils import (
     to_valid_docker_image_version,
 )
 from bentoml.cli.utils import echo_docker_api_result
-from bentoml.exceptions import BentoMLException, YataiDeploymentException
+from bentoml.exceptions import BentoMLException, GammaDeploymentException
 
 
 def generate_test_input_file():
@@ -73,7 +73,7 @@ def test_validate_tag(tag):
     "tag", ["AAA--", ".asdf", "asdf:...", "asdf:" + "A" * 129, "asdf:å"]
 )
 def test_validate_tag_raises(tag):
-    with pytest.raises(YataiDeploymentException):
+    with pytest.raises(GammaDeploymentException):
         validate_tag(None, None, tag)
 
 

@@ -45,7 +45,7 @@ from bentoml.gamma.deployment.aws_utils import (
 from bentoml.exceptions import (
     BentoMLException,
     InvalidArgument,
-    YataiDeploymentException,
+    GammaDeploymentException,
 )
 from bentoml.gamma.proto.repository_pb2 import GetBentoRequest, BentoUri
 from bentoml.gamma.proto import status_pb2
@@ -67,7 +67,7 @@ from bentoml.gamma.deployment.aws_ec2.constants import (
 
 logger = logging.getLogger(__name__)
 
-yatai_proto = LazyLoader("yatai_proto", globals(), "bentoml.gamma.proto")
+gamma_proto = LazyLoader("gamma_proto", globals(), "bentoml.gamma.proto")
 SAM_TEMPLATE_NAME = "template.yml"
 
 
@@ -231,7 +231,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
             ensure_sam_available_or_raise()
             ensure_docker_available_or_raise()
 
-            bento_pb = self.yatai_service.GetBento(
+            bento_pb = self.gamma_service.GetBento(
                 GetBentoRequest(
                     bento_name=deployment_spec.bento_name,
                     bento_version=deployment_spec.bento_version,
@@ -334,7 +334,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
             if not ec2_deployment_config.region:
                 raise InvalidArgument("AWS region is missing")
 
-            bento_pb = self.yatai_service.GetBento(
+            bento_pb = self.gamma_service.GetBento(
                 GetBentoRequest(
                     bento_name=deployment_spec.bento_name,
                     bento_version=deployment_spec.bento_version,
@@ -376,7 +376,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
             error_code, error_message = status_pb_to_error_code_and_message(
                 describe_result.status
             )
-            raise YataiDeploymentException(
+            raise GammaDeploymentException(
                 f"Failed fetching ec2 deployment current status - "
                 f"{error_code}:{error_message}"
             )
@@ -411,7 +411,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
             if not ec2_deployment_config.region:
                 raise InvalidArgument("AWS region is missing")
 
-            bento_pb = self.yatai_service.GetBento(
+            bento_pb = self.gamma_service.GetBento(
                 GetBentoRequest(
                     bento_name=deployment_spec.bento_name,
                     bento_version=deployment_spec.bento_version,

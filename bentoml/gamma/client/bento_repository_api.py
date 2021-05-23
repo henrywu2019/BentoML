@@ -56,13 +56,13 @@ from bentoml.gamma.status import Status
 
 
 logger = logging.getLogger(__name__)
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
+gamma_proto = LazyLoader('gamma_proto', globals(), 'bentoml.gamma.proto')
 
 
 class BentoRepositoryAPIClient:
-    def __init__(self, yatai_service):
-        # YataiService stub for accessing remote YataiService RPCs
-        self.yatai_service = yatai_service
+    def __init__(self, gamma_service):
+        # GammaService stub for accessing remote GammaService RPCs
+        self.gamma_service = gamma_service
 
     def push(self, bento, with_labels=True):
         """
@@ -79,15 +79,15 @@ class BentoRepositoryAPIClient:
         >>> svc = MyBentoService()
         >>> svc.save()
         >>>
-        >>> remote_yatai_client = get_yatai_client('http://remote.gamma.service:50050')
+        >>> remote_gamma_client = get_gamma_client('http://remote.gamma.service:50050')
         >>> bento = f'{svc.name}:{svc.version}'
-        >>> remote_saved_path= remote_yatai_client.repository.push(bento)
+        >>> remote_saved_path= remote_gamma_client.repository.push(bento)
         """
         track('py-api-push')
 
-        from bentoml.gamma.client import get_yatai_client
+        from bentoml.gamma.client import get_gamma_client
 
-        local_yc = get_yatai_client()
+        local_yc = get_gamma_client()
 
         local_bento_pb = local_yc.repository.get(bento)
         if local_bento_pb.uri.s3_presigned_url:
@@ -117,7 +117,7 @@ class BentoRepositoryAPIClient:
 
         Example:
 
-        >>> client = get_yatai_client('0.0.0.0:50051')
+        >>> client = get_gamma_client('0.0.0.0:50051')
         >>> saved_path = client.repository.pull('MyService:')
         """
         track('py-api-pull')
@@ -128,7 +128,7 @@ class BentoRepositoryAPIClient:
             target_bundle_path = os.path.join(tmpdir, 'bundle')
             self.download_to_directory(bento_pb, target_bundle_path)
 
-            from bentoml.gamma.client import get_yatai_client
+            from bentoml.gamma.client import get_gamma_client
 
             labels = (
                 dict(bento_pb.bento_service_metadata.labels)
@@ -136,13 +136,13 @@ class BentoRepositoryAPIClient:
                 else None
             )
 
-            local_yc = get_yatai_client()
+            local_yc = get_gamma_client()
             return local_yc.repository.upload_from_dir(
                 target_bundle_path, labels=labels
             )
 
     def upload(self, bento_service, version=None, labels=None):
-        """Save and upload given bento_service to yatai_service, which manages all your
+        """Save and upload given bento_service to gamma_service, which manages all your
         saved BentoService bundles and model serving deployments.
 
         Args:
@@ -162,7 +162,7 @@ class BentoRepositoryAPIClient:
             _validate_labels(labels)
             bento_service_metadata.labels.update(labels)
 
-        get_bento_response = self.yatai_service.GetBento(
+        get_bento_response = self.gamma_service.GetBento(
             GetBentoRequest(
                 bento_name=bento_service_metadata.name,
                 bento_version=bento_service_metadata.version,
@@ -178,7 +178,7 @@ class BentoRepositoryAPIClient:
             )
         elif get_bento_response.status.status_code != status_pb2.Status.NOT_FOUND:
             raise BentoMLException(
-                'Failed accessing YataiService. {error_code}:'
+                'Failed accessing GammaService. {error_code}:'
                 '{error_message}'.format(
                     error_code=Status.Name(get_bento_response.status.status_code),
                     error_message=get_bento_response.status.error_message,
@@ -188,7 +188,7 @@ class BentoRepositoryAPIClient:
             bento_name=bento_service_metadata.name,
             bento_version=bento_service_metadata.version,
         )
-        response = self.yatai_service.AddBento(request)
+        response = self.gamma_service.AddBento(request)
 
         if response.status.status_code != status_pb2.Status.OK:
             raise BentoMLException(
@@ -270,7 +270,7 @@ class BentoRepositoryAPIClient:
             upload_status=upload_status,
             service_metadata=bento_service_metadata,
         )
-        self.yatai_service.UpdateBento(update_bento_req)
+        self.gamma_service.UpdateBento(update_bento_req)
 
     def download_to_directory(self, bento_pb, target_dir):
         if bento_pb.uri.s3_presigned_url:
@@ -294,8 +294,8 @@ class BentoRepositoryAPIClient:
 
         Example:
 
-        >>> yatai_client = get_yatai_client()
-        >>> bento_info = yatai_client.repository.get('my_service:version')
+        >>> gamma_client = get_gamma_client()
+        >>> bento_info = gamma_client.repository.get('my_service:version')
         """
         track('py-api-get')
         if ':' not in bento:
@@ -304,10 +304,10 @@ class BentoRepositoryAPIClient:
                 'format of name:version'
             )
         name, version = bento.split(':')
-        result = self.yatai_service.GetBento(
+        result = self.gamma_service.GetBento(
             GetBentoRequest(bento_name=name, bento_version=version)
         )
-        if result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        if result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
@@ -342,8 +342,8 @@ class BentoRepositoryAPIClient:
 
         Example:
 
-        >>> yatai_client = get_yatai_client()
-        >>> bentos_info_list = yatai_client.repository.list(
+        >>> gamma_client = get_gamma_client()
+        >>> bentos_info_list = gamma_client.repository.list(
         >>>     labels='key=value,key2=value'
         >>> )
         """
@@ -358,8 +358,8 @@ class BentoRepositoryAPIClient:
         if labels is not None:
             generate_gprc_labels_selector(list_bento_request.label_selectors, labels)
 
-        result = self.yatai_service.ListBento(list_bento_request)
-        if result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        result = self.gamma_service.ListBento(list_bento_request)
+        if result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
@@ -370,13 +370,13 @@ class BentoRepositoryAPIClient:
         bento_pb = self.get(bento_tag)
         if require_confirm and not click.confirm(f'Permanently delete {bento_tag}?'):
             return
-        result = self.yatai_service.DangerouslyDeleteBento(
+        result = self.gamma_service.DangerouslyDeleteBento(
             DangerouslyDeleteBentoRequest(
                 bento_name=bento_pb.name, bento_version=bento_pb.version
             )
         )
 
-        if result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        if result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
@@ -409,19 +409,19 @@ class BentoRepositoryAPIClient:
             require_confirm: boolean
         Example:
         >>>
-        >>> yatai_client = get_yatai_client()
+        >>> gamma_client = get_gamma_client()
         >>> # Delete all bento services
-        >>> yatai_client.repository.delete(prune=True)
+        >>> gamma_client.repository.delete(prune=True)
         >>> # Delete bento service with name is `IrisClassifier` and version `0.1.0`
-        >>> yatai_client.repository.delete(
+        >>> gamma_client.repository.delete(
         >>>     bento_name='IrisClassifier', bento_version='0.1.0'
         >>> )
         >>> # or use bento tag
-        >>> yatai_client.repository.delete('IrisClassifier:v0.1.0')
+        >>> gamma_client.repository.delete('IrisClassifier:v0.1.0')
         >>> # Delete all bento services with name 'MyService`
-        >>> yatai_client.repository.delete(bento_name='MyService')
+        >>> gamma_client.repository.delete(bento_name='MyService')
         >>> # Delete all bento services with labels match `ci=failed` and `cohort=20`
-        >>> yatai_client.repository.delete(labels='ci=failed, cohort=20')
+        >>> gamma_client.repository.delete(labels='ci=failed, cohort=20')
         """
         track('py-api-delete')
 
@@ -501,9 +501,9 @@ class BentoRepositoryAPIClient:
             build_args=build_args,
             push=push,
         )
-        result = self.yatai_service.ContainerizeBento(containerize_request)
+        result = self.gamma_service.ContainerizeBento(containerize_request)
 
-        if result.status.status_code != yatai_proto.status_pb2.Status.OK:
+        if result.status.status_code != gamma_proto.status_pb2.Status.OK:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
@@ -521,13 +521,13 @@ class BentoRepositoryAPIClient:
             BentoService instance
 
         Example:
-        >>> yatai_client = get_yatai_client()
+        >>> gamma_client = get_gamma_client()
         >>> # Load BentoService bases on bento tag.
-        >>> bento = yatai_client.repository.load('Service_name:version')
+        >>> bento = gamma_client.repository.load('Service_name:version')
         >>> # Load BentoService from bento bundle path
-        >>> bento = yatai_client.repository.load('/path/to/bento/bundle')
+        >>> bento = gamma_client.repository.load('/path/to/bento/bundle')
         >>> # Load BentoService from s3 storage
-        >>> bento = yatai_client.repository.load('s3://bucket/path/bundle.tar.gz')
+        >>> bento = gamma_client.repository.load('s3://bucket/path/bundle.tar.gz')
         """
         track('py-api-load')
         if os.path.isdir(bento) or is_s3_url(bento) or is_gcs_url(bento):

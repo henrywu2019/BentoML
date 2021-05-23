@@ -50,8 +50,8 @@ jobs:
       - name: Install test dependencies
         run: ./ci/install_e2e_test_deps.sh
         shell: bash
-      - name: Run Yatai Service E2E tests
-        run: ./ci/e2e_yatai_tests.sh
+      - name: Run Gamma Service E2E tests
+        run: ./ci/e2e_gamma_tests.sh
         shell: bash
 
       # Update check run called "integration-fork"

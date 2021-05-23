@@ -15,10 +15,10 @@
 from abc import abstractmethod, ABCMeta
 
 from bentoml.gamma.proto.deployment_pb2 import DeploymentSpec
-from bentoml.exceptions import YataiDeploymentException
+from bentoml.exceptions import GammaDeploymentException
 
 
-def get_deployment_operator(yatai_service, deployment_pb):
+def get_deployment_operator(gamma_service, deployment_pb):
     operator = deployment_pb.spec.operator
 
     if operator == DeploymentSpec.AWS_SAGEMAKER:
@@ -26,34 +26,34 @@ def get_deployment_operator(yatai_service, deployment_pb):
             SageMakerDeploymentOperator,
         )
 
-        return SageMakerDeploymentOperator(yatai_service)
+        return SageMakerDeploymentOperator(gamma_service)
     elif operator == DeploymentSpec.AWS_LAMBDA:
         from bentoml.gamma.deployment.aws_lambda.operator import (
             AwsLambdaDeploymentOperator,
         )
 
-        return AwsLambdaDeploymentOperator(yatai_service)
+        return AwsLambdaDeploymentOperator(gamma_service)
     elif operator == DeploymentSpec.AZURE_FUNCTIONS:
         from bentoml.gamma.deployment.azure_functions.operator import (
             AzureFunctionsDeploymentOperator,
         )
 
-        return AzureFunctionsDeploymentOperator(yatai_service)
+        return AzureFunctionsDeploymentOperator(gamma_service)
     elif operator == DeploymentSpec.AWS_EC2:
         from bentoml.gamma.deployment.aws_ec2.operator import AwsEc2DeploymentOperator
 
-        return AwsEc2DeploymentOperator(yatai_service)
+        return AwsEc2DeploymentOperator(gamma_service)
     elif operator == DeploymentSpec.CUSTOM:
         raise NotImplementedError(
             "Custom deployment operator is not supported in current version of BentoML"
         )
     else:
-        raise YataiDeploymentException("DeployOperator must be set")
+        raise GammaDeploymentException("DeployOperator must be set")
 
 
 class DeploymentOperatorBase(object):
-    def __init__(self, yatai_service):
-        self.yatai_service = yatai_service
+    def __init__(self, gamma_service):
+        self.gamma_service = gamma_service
 
     __metaclass__ = ABCMeta
 

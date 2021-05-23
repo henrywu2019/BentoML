@@ -12,10 +12,10 @@ GRPC_PORT = '50051'
 GRPC_CHANNEL_ADDRESS = f'0.0.0.0:{GRPC_PORT}'
 
 
-def execute_bentoml_run_command(bento_tag, data, api="predict", yatai_url=None):
+def execute_bentoml_run_command(bento_tag, data, api="predict", gamma_url=None):
     command = ['bentoml', 'run', bento_tag, api, '--input', data, "-q"]
-    if yatai_url is not None:
-        command.extend(['--gamma-url', yatai_url])
+    if gamma_url is not None:
+        command.extend(['--gamma-url', gamma_url])
     proc = subprocess.Popen(
         command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=os.environ,
     )
@@ -62,19 +62,19 @@ def kill_process(proc_pid):
 
 
 @contextlib.contextmanager
-def local_yatai_server(db_url=None, repo_base_url=None, port=50051):
-    yatai_server_command = ['bentoml', 'gamma-service-start']
+def local_gamma_server(db_url=None, repo_base_url=None, port=50051):
+    gamma_server_command = ['bentoml', 'gamma-service-start']
     if db_url:
-        yatai_server_command.extend(['--db-url', db_url])
+        gamma_server_command.extend(['--db-url', db_url])
     if repo_base_url:
-        yatai_server_command.extend(['--repo-base-url', repo_base_url])
+        gamma_server_command.extend(['--repo-base-url', repo_base_url])
     try:
         proc = subprocess.Popen(
-            yatai_server_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+            gamma_server_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
-        yatai_service_url = f"localhost:{port}"
-        logger.info(f'Setting config yatai_service.url to: {yatai_service_url}')
-        yield yatai_service_url
+        gamma_service_url = f"localhost:{port}"
+        logger.info(f'Setting config gamma_service.url to: {gamma_service_url}')
+        yield gamma_service_url
     finally:
-        logger.info('Shutting down YataiServer gRPC server and node web server')
+        logger.info('Shutting down GammaServer gRPC server and node web server')
         kill_process(proc.pid)

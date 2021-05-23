@@ -1,4 +1,4 @@
-# Default values for YataiService.
+# Default values for GammaService.
 
 # Database URL following RFC-1738, and usually can
 # include username, password, hostname, database name as
@@ -12,7 +12,7 @@ db_url: {}
 # URL, usually starts with "s3://"
 repo_base_url: {}
 
-# Yatai Service
+# Gamma Service
 gamma:
   replicaCount: 1 # only supports 1 at the moment
   image:

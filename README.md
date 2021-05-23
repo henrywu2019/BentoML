@@ -208,14 +208,14 @@ Prometheus metrics, health check endpoint, prediction logging, and tracing suppo
 out-of-the-box. This makes it super easy for your DevOps team to incorporate your models
 into production systems.
 
-BentoML's model management component is called Yatai, it means food cart in Japanese, 
-and you can think of it as where you'd store your bentos 🍱. Yatai provides CLI, Web UI,
-and Python API for accessing BentoML bundles you have created, and you can start a Yatai
+BentoML's model management component is called Gamma, it means food cart in Japanese, 
+and you can think of it as where you'd store your bentos 🍱. Gamma provides CLI, Web UI,
+and Python API for accessing BentoML bundles you have created, and you can start a Gamma
 server for your team to manage all models on cloud storage(S3, GCS, MinIO etc) and build
 CI/CD workflow around it. 
 [Learn more about it here](https://docs.bentoml.org/en/latest/concepts.html#model-management).
 
-![Yatai UI](https://github.com/bentoml/BentoML/blob/master/docs/source/_static/img/gamma-service-web-ui-repository.png)
+![Gamma UI](https://github.com/bentoml/BentoML/blob/master/docs/source/_static/img/gamma-service-web-ui-repository.png)
 
 Read the [Quickstart Guide](https://docs.bentoml.org/en/latest/quickstart.html) 
 to learn more about the basic functionalities of BentoML. You can also try it out 

@@ -17,7 +17,7 @@
 
 import logging
 
-from bentoml.gamma.yatai_service import get_yatai_service
+from bentoml.gamma.gamma_service import get_gamma_service
 from bentoml.gamma.client.bento_repository_api import BentoRepositoryAPIClient
 from bentoml.gamma.client.deployment_api import DeploymentAPIClient
 
@@ -26,40 +26,40 @@ from bentoml.utils import cached_property
 logger = logging.getLogger(__name__)
 
 
-class YataiClient:
-    """Python Client for interacting with YataiService
+class GammaClient:
+    """Python Client for interacting with GammaService
     """
 
-    def __init__(self, yatai_service=None):
-        self.yatai_service = yatai_service if yatai_service else get_yatai_service()
+    def __init__(self, gamma_service=None):
+        self.gamma_service = gamma_service if gamma_service else get_gamma_service()
         self.bento_repository_api_client = None
         self.deployment_api_client = None
 
     @cached_property
     def repository(self):
-        return BentoRepositoryAPIClient(self.yatai_service)
+        return BentoRepositoryAPIClient(self.gamma_service)
 
     @cached_property
     def deployment(self):
-        return DeploymentAPIClient(self.yatai_service)
+        return DeploymentAPIClient(self.gamma_service)
 
 
-def get_yatai_client(yatai_url=None):
+def get_gamma_client(gamma_url=None):
     """
     Args:
-        yatai_service_channel_address: String. Yatai Service URL address.
+        gamma_service_channel_address: String. Gamma Service URL address.
 
     Returns:
-        YataiClient instance
+        GammaClient instance
 
     Example:
 
-    >>>  from bentoml.gamma.client import get_yatai_client
+    >>>  from bentoml.gamma.client import get_gamma_client
     >>>
-    >>>  yatai_url = 'https://remote.gamma:50050'
-    >>>  yatai_client = get_yatai_client(yatai_url)
+    >>>  gamma_url = 'https://remote.gamma:50050'
+    >>>  gamma_client = get_gamma_client(gamma_url)
     >>>
-    >>>  local_yatai_client = get_yatai_client()
+    >>>  local_gamma_client = get_gamma_client()
     """
-    yatai_service = get_yatai_service(channel_address=yatai_url)
-    return YataiClient(yatai_service=yatai_service)
+    gamma_service = get_gamma_service(channel_address=gamma_url)
+    return GammaClient(gamma_service=gamma_service)

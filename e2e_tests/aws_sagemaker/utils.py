@@ -3,7 +3,7 @@ import subprocess
 
 import boto3
 
-from e2e_tests.yatai_server.utils import modified_environ
+from e2e_tests.gamma_server.utils import modified_environ
 
 logger = logging.getLogger('bentoml.test')
 

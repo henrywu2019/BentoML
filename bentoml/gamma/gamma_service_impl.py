@@ -42,15 +42,15 @@ from bentoml.gamma.proto.repository_pb2 import (
     BentoUri,
     ContainerizeBentoResponse,
 )
-from bentoml.gamma.proto.yatai_service_pb2 import (
+from bentoml.gamma.proto.gamma_service_pb2 import (
     HealthCheckResponse,
-    GetYataiServiceVersionResponse,
+    GetGammaServiceVersionResponse,
 )
 from bentoml.gamma.deployment.operator import get_deployment_operator
 from bentoml.exceptions import (
     BentoMLException,
     InvalidArgument,
-    YataiRepositoryException,
+    GammaRepositoryException,
 )
 from bentoml.gamma.repository.base_repository import BaseRepository
 from bentoml.gamma.db import DB
@@ -72,11 +72,11 @@ def track_deployment_delete(deployment_operator, created_at, force_delete=False)
     )
 
 
-def get_yatai_service_impl(base=object):
-    # This helps avoid loading YataiServicer grpc file when using local YataiService
-    # implementation. This speeds up regular save/load operations when Yatai is not used
+def get_gamma_service_impl(base=object):
+    # This helps avoid loading GammaServicer grpc file when using local GammaService
+    # implementation. This speeds up regular save/load operations when Gamma is not used
 
-    class YataiServiceImpl(base):
+    class GammaServiceImpl(base):
 
         # pylint: disable=unused-argument
         # pylint: disable=broad-except
@@ -94,8 +94,8 @@ def get_yatai_service_impl(base=object):
         def HealthCheck(self, request, context=None):
             return HealthCheckResponse(status=Status.OK())
 
-        def GetYataiServiceVersion(self, request, context=None):
-            return GetYataiServiceVersionResponse(
+        def GetGammaServiceVersion(self, request, context=None):
+            return GetGammaServiceVersionResponse(
                 status=Status.OK, version=BENTOML_VERSION
             )
 
@@ -533,7 +533,7 @@ def get_yatai_service_impl(base=object):
                         sess, request.bento_name, request.bento_version
                     )
                     if not bento_pb:
-                        raise YataiRepositoryException(
+                        raise GammaRepositoryException(
                             f'BentoService '
                             f'{request.bento_name}:{request.bento_version} '
                             f'does not exist'
@@ -562,14 +562,14 @@ def get_yatai_service_impl(base=object):
                             docker.errors.BuildError,
                         ) as error:
                             logger.error(f'Encounter container building issue: {error}')
-                            raise YataiRepositoryException(error)
+                            raise GammaRepositoryException(error)
                         if request.push is True:
                             try:
                                 docker_client.images.push(
                                     repository=request.repository, tag=tag
                                 )
                             except docker.errors.APIError as error:
-                                raise YataiRepositoryException(error)
+                                raise GammaRepositoryException(error)
                         return ContainerizeBentoResponse(status=Status.OK(), tag=tag)
                 except BentoMLException as e:
                     logger.error(f"RPC ERROR ContainerizeBento: {e}")
@@ -580,4 +580,4 @@ def get_yatai_service_impl(base=object):
 
             # pylint: enable=unused-argument
 
-    return YataiServiceImpl
+    return GammaServiceImpl

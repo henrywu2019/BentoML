@@ -30,7 +30,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from google.protobuf.json_format import ParseDict
 
 from bentoml.utils import ProtoMessageToDict
-from bentoml.exceptions import YataiRepositoryException
+from bentoml.exceptions import GammaRepositoryException
 from bentoml.gamma.db import Base
 from bentoml.gamma.db.stores.label import (
     LabelStore,
@@ -180,7 +180,7 @@ class MetadataStore(object):
                     sess, RESOURCE_TYPE.bento, bento.id, service_metadata['labels']
                 )
         except NoResultFound:
-            raise YataiRepositoryException(
+            raise GammaRepositoryException(
                 "Bento %s:%s is not found in repository" % bento_name, bento_version
             )
 
@@ -197,7 +197,7 @@ class MetadataStore(object):
             # upload_status_pb.updated_at, update should be ignored
             bento_obj.upload_status = ProtoMessageToDict(upload_status_pb)
         except NoResultFound:
-            raise YataiRepositoryException(
+            raise GammaRepositoryException(
                 "Bento %s:%s is not found in repository" % bento_name, bento_version
             )
 
@@ -210,14 +210,14 @@ class MetadataStore(object):
                 .one()
             )
             if bento_obj.deleted:
-                raise YataiRepositoryException(
+                raise GammaRepositoryException(
                     "Bento {}:{} has already been deleted".format(
                         bento_name, bento_version
                     )
                 )
             bento_obj.deleted = True
         except NoResultFound:
-            raise YataiRepositoryException(
+            raise GammaRepositoryException(
                 "Bento %s:%s is not found in repository" % bento_name, bento_version
             )
 

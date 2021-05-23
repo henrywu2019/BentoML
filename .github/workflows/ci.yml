@@ -404,7 +404,7 @@ jobs:
       - name: Upload test coverage to Codecov
         uses: codecov/codecov-action@v1.0.12
 
-  yatai_server_integration_tests:
+  gamma_server_integration_tests:
     runs-on: ubuntu-latest
     services:
       # Label used to access the service container
@@ -438,7 +438,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Run tests
-        run: ./ci/yatai_server_integration_tests.sh
+        run: ./ci/gamma_server_integration_tests.sh
       - name: Upload test coverage to Codecov
         uses: codecov/codecov-action@v1.0.12
 

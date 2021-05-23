@@ -4,7 +4,7 @@ import lightgbm as lgb
 from pandas import DataFrame
 import pytest
 import bentoml
-from bentoml.gamma.client import YataiClient
+from bentoml.gamma.client import GammaClient
 
 
 @pytest.fixture()
@@ -34,5 +34,5 @@ def test_lgbm_artifact_pack():
     assert loaded_svc.predict(DataFrame([[0]])) == [0]
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.dangerously_delete_bento(svc.name, svc.version)

@@ -17,7 +17,7 @@ and ask in the bentoml-users channel.
   micro_batching
   custom_artifact
   custom_input_adapter
-  yatai_service
+  gamma_service
   tracing
   helm
 

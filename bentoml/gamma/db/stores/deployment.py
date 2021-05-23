@@ -28,7 +28,7 @@ from sqlalchemy import (
 from sqlalchemy.orm.exc import NoResultFound
 from google.protobuf.json_format import ParseDict
 
-from bentoml.exceptions import YataiDeploymentException
+from bentoml.exceptions import GammaDeploymentException
 from bentoml.gamma.db import Base
 from bentoml.gamma.deployment import ALL_NAMESPACE_TAG
 from bentoml.gamma.db.stores.label import (
@@ -159,7 +159,7 @@ class DeploymentStore(object):
             )
             return sess.delete(deployment)
         except NoResultFound:
-            raise YataiDeploymentException(
+            raise GammaDeploymentException(
                 "Deployment '%s' in namespace: '%s' is not found" % name, namespace
             )
 

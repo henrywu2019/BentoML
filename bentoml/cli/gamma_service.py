@@ -19,26 +19,26 @@ from dependency_injector.wiring import Provide, inject
 
 from bentoml.configuration.containers import (
     BentoMLContainer,
-    YATAI_REPOSITORY_TYPES,
-    YATAI_REPOSITORY_FILE_SYSTEM,
-    YATAI_REPOSITORY_S3,
-    YATAI_REPOSITORY_GCS,
+    GAMMA_REPOSITORY_TYPES,
+    GAMMA_REPOSITORY_FILE_SYSTEM,
+    GAMMA_REPOSITORY_S3,
+    GAMMA_REPOSITORY_GCS,
 )
-from bentoml.gamma.yatai_service import start_yatai_service_grpc_server
+from bentoml.gamma.gamma_service import start_gamma_service_grpc_server
 
 
 logger = logging.getLogger(__name__)
 
 
 @inject
-def add_yatai_service_sub_command(
+def add_gamma_service_sub_command(
     cli,
-    default_db_url: str = Provide[BentoMLContainer.yatai_database_url],
+    default_db_url: str = Provide[BentoMLContainer.gamma_database_url],
     default_repository_type: str = Provide[
         BentoMLContainer.config.gamma.repository.type
     ],
     default_file_system_directory: str = Provide[
-        BentoMLContainer.yatai_file_system_directory
+        BentoMLContainer.gamma_file_system_directory
     ],
     default_s3_url: str = Provide[BentoMLContainer.config.gamma.repository.s3.url],
     default_s3_endpoint_url: str = Provide[
@@ -48,7 +48,7 @@ def add_yatai_service_sub_command(
 ):
     # pylint: disable=unused-variable
 
-    @cli.command(help='Start BentoML YataiService for model management and deployment')
+    @cli.command(help='Start BentoML GammaService for model management and deployment')
     @click.option(
         '--db-url',
         type=click.STRING,
@@ -70,20 +70,20 @@ def add_yatai_service_sub_command(
         '--grpc-port',
         type=click.INT,
         default=50051,
-        help='Port to run YataiService gRPC server',
+        help='Port to run GammaService gRPC server',
         envvar='BENTOML_GRPC_PORT',
     )
     @click.option(
         '--ui-port',
         type=click.INT,
         default=3000,
-        help='Port to run YataiService Web UI server',
+        help='Port to run GammaService Web UI server',
         envvar='BENTOML_WEB_UI_PORT',
     )
     @click.option(
         '--ui/--no-ui',
         default=True,
-        help='Run YataiService with or without Web UI, when running with --no-ui, it '
+        help='Run GammaService with or without Web UI, when running with --no-ui, it '
         'will only run the gRPC server',
         envvar='BENTOML_ENABLE_WEB_UI',
     )
@@ -91,30 +91,30 @@ def add_yatai_service_sub_command(
         '--web-prefix-path',
         type=click.STRING,
         default='.',
-        help='Add a location prefix to the URL when running YataiService'
+        help='Add a location prefix to the URL when running GammaService'
         'behind a reverse proxy server',
-        envvar='BENTOML_YATAI_WEB_PREFIX_PATH',
+        envvar='BENTOML_GAMMA_WEB_PREFIX_PATH',
     )
     @click.option(
         '--repository-type',
-        type=click.Choice(YATAI_REPOSITORY_TYPES, case_sensitive=False),
+        type=click.Choice(GAMMA_REPOSITORY_TYPES, case_sensitive=False),
         default=default_repository_type,
         help='Type of the repository implementation',
-        envvar='BENTOML_YATAI_REPOSITORY_TYPE',
+        envvar='BENTOML_GAMMA_REPOSITORY_TYPE',
     )
     @click.option(
         '--file-system-directory',
         type=click.STRING,
         default=default_file_system_directory,
         help='Specifies the directory path for the file system repository type',
-        envvar='BENTOML_YATAI_FILE_SYSTEM_DIRECTORY',
+        envvar='BENTOML_GAMMA_FILE_SYSTEM_DIRECTORY',
     )
     @click.option(
         '--s3-url',
         type=click.STRING,
         default=default_s3_url,
         help='Specifies the S3 URL for the S3 repository type',
-        envvar='BENTOML_YATAI_S3_URL',
+        envvar='BENTOML_GAMMA_S3_URL',
     )
     @click.option(
         '--s3-endpoint-url',
@@ -129,9 +129,9 @@ def add_yatai_service_sub_command(
         type=click.STRING,
         default=default_gcs_url,
         help='Specifies the GCS URL for the GCS repository type',
-        envvar='BENTOML_YATAI_GCS_URL',
+        envvar='BENTOML_GAMMA_GCS_URL',
     )
-    def yatai_service_start(
+    def gamma_service_start(
         db_url,
         repo_base_url,
         grpc_port,
@@ -154,23 +154,23 @@ def add_yatai_service_sub_command(
                 "corresponding options in the upcoming releases. "
             )
             if is_s3_url(repo_base_url):
-                repository_type = YATAI_REPOSITORY_S3
+                repository_type = GAMMA_REPOSITORY_S3
                 s3_url = repo_base_url
             elif is_gcs_url(repo_base_url):
-                repository_type = YATAI_REPOSITORY_GCS
+                repository_type = GAMMA_REPOSITORY_GCS
                 gcs_url = repo_base_url
             else:
-                repository_type = YATAI_REPOSITORY_FILE_SYSTEM
+                repository_type = GAMMA_REPOSITORY_FILE_SYSTEM
                 file_system_directory = repo_base_url
 
-        if repository_type == YATAI_REPOSITORY_S3 and s3_url is None:
+        if repository_type == GAMMA_REPOSITORY_S3 and s3_url is None:
             logger.error("'--s3-url' must be specified for S3 repository type")
             return
-        elif repository_type == YATAI_REPOSITORY_GCS and gcs_url is None:
+        elif repository_type == GAMMA_REPOSITORY_GCS and gcs_url is None:
             logger.error("'--gcs-url' must be specified for GCS repository type")
             return
         elif (
-            repository_type == YATAI_REPOSITORY_FILE_SYSTEM
+            repository_type == GAMMA_REPOSITORY_FILE_SYSTEM
             and file_system_directory is None
         ):
             logger.error(
@@ -179,7 +179,7 @@ def add_yatai_service_sub_command(
             )
             return
         else:
-            start_yatai_service_grpc_server(
+            start_gamma_service_grpc_server(
                 db_url=db_url,
                 grpc_port=grpc_port,
                 ui_port=ui_port,

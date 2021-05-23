@@ -98,11 +98,11 @@ machine learning model serving. The BentoML bundle can be generated at each of y
 training job, and then easily stored and distributed for CI testing and deployment in
 production.
 
-BentoML's model management component is called Yatai, it means food cart in Japanese,
-and you can think of it as where you'd store your bentos 🍱. Yatai provides CLI, Web UI,
-and Python API for accessing BentoML bundles you have created, and you can start a Yatai
+BentoML's model management component is called Gamma, it means food cart in Japanese,
+and you can think of it as where you'd store your bentos 🍱. Gamma provides CLI, Web UI,
+and Python API for accessing BentoML bundles you have created, and you can start a Gamma
 server for your team to manage all models on cloud storage(S3, GCS, MinIO etc) and build
-CI/CD workflow around it. :doc:`Learn more about it here <guides/yatai_service>`.
+CI/CD workflow around it. :doc:`Learn more about it here <guides/gamma_service>`.
 
 Listing recent BentoML bundles created:
 
@@ -118,10 +118,10 @@ Listing recent BentoML bundles created:
 BentoML model registry web UI:
 
 .. image:: _static/img/gamma-service-web-ui-repository.png
-    :alt: BentoML YataiService Bento Repository Page
+    :alt: BentoML GammaService Bento Repository Page
 
 .. image:: _static/img/gamma-service-web-ui-repository-detail.png
-    :alt: BentoML YataiService Bento Details Page
+    :alt: BentoML GammaService Bento Details Page
 
 Creating BentoService
 ---------------------
@@ -1094,22 +1094,22 @@ BentoService directly. For example:
 Customizing Model Repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-BentoML has a standalone component :code:`YataiService` that handles model storage and
-deployment. BentoML uses a local :code:`YataiService` instance by default, which saves
+BentoML has a standalone component :code:`GammaService` that handles model storage and
+deployment. BentoML uses a local :code:`GammaService` instance by default, which saves
 BentoService files to :code:`~/bentoml/repository/` directory and other metadata to
 :code:`~/bentoml/storage.db`.
 
 Users can also customize this to make it work for team settings, making it possible
 for a team of data scientists to easily share, use and deploy models and prediction
 services created by each other. To do so, the user will need to setup a host server
-that runs :code:`YataiService`, from BentoML cli command `gamma-service-start`:
+that runs :code:`GammaService`, from BentoML cli command `gamma-service-start`:
 
 .. code-block:: bash
 
     > bentoml gamma-service-start --help
     Usage: bentoml gamma-service-start [OPTIONS]
 
-      Start BentoML YataiService for model management and deployment
+      Start BentoML GammaService for model management and deployment
 
     Options:
       --db-url TEXT         Database URL following RFC-1738, and usually can
@@ -1119,18 +1119,18 @@ that runs :code:`YataiService`, from BentoML cli command `gamma-service-start`:
       --repo-base-url TEXT  Base URL for storing saved BentoService bundle files,
                             this can be a filesystem path(POSIX/Windows), or an S3
                             URL, usually starts with "s3://"
-      --grpc-port INTEGER   Port for Yatai server
-      --ui-port INTEGER     Port for Yatai web UI
-      --ui / --no-ui        Start BentoML YataiService without Web UI
+      --grpc-port INTEGER   Port for Gamma server
+      --ui-port INTEGER     Port for Gamma web UI
+      --ui / --no-ui        Start BentoML GammaService without Web UI
       -q, --quiet           Hide all warnings and info logs
       --verbose, --debug    Show debug logs when running the command
       --help                Show this message and exit.
 
 
-BentoML provides a pre-built docker image for running YataiService. For each BentoML 
+BentoML provides a pre-built docker image for running GammaService. For each BentoML
 release, a new image will be pushed to [docker hub](https://hub.docker.com/r/bentoml/gamma-service/tags) under :code:`bentoml/gamma-service`
 with the same image tag as the PyPI package version. For example, use the following 
-command to start a YataiService of BentoML version 0.8.6, loading data from your local
+command to start a GammaService of BentoML version 0.8.6, loading data from your local
 BentoML repository under the local ``~/bentoml`` directory:
 
 .. code-block:: bash
@@ -1143,9 +1143,9 @@ BentoML repository under the local ``~/bentoml`` directory:
         --repo-base-url=/bentoml/repository
 
 
-The recommended way to deploy :code:`YataiService` for teams, is to back it by a
+The recommended way to deploy :code:`GammaService` for teams, is to back it by a
 remote PostgreSQL database and an S3 bucket. For example, deploy the following docker
-container to run a YataiService configured with remote database and S3 storage, as well
+container to run a GammaService configured with remote database and S3 storage, as well
 as AWS credentials for managing deployments created on AWS: 
 
 .. code-block:: bash
@@ -1156,23 +1156,23 @@ as AWS credentials for managing deployments created on AWS:
         --db-url postgresql://scott:tiger@localhost:5432/bentomldb \
         --repo-base-url s3://my-bentoml-repo/
 
-    * Starting BentoML YataiService gRPC Server
+    * Starting BentoML GammaService gRPC Server
     * Debug mode: off
     * Web UI: running on http://0.0.0.0:3000
     * Running on 0.0.0.0:50051 (Press CTRL+C to quit)
-    * Usage: `bentoml config set yatai_service.url=0.0.0.0:50051`
-    * Help and instructions: https://docs.bentoml.org/en/latest/guides/yatai_service.html
-    * Web server log can be found here: /Users/chaoyu/bentoml/logs/yatai_web_server.log
+    * Usage: `bentoml config set gamma_service.url=0.0.0.0:50051`
+    * Help and instructions: https://docs.bentoml.org/en/latest/guides/gamma_service.html
+    * Web server log can be found here: /Users/chaoyu/bentoml/logs/gamma_web_server.log
 
 
-After deploying the YataiService server, get the server IP address and run the following 
-command to configure BentoML client to use this remote YataiService for model management
+After deploying the GammaService server, get the server IP address and run the following
+command to configure BentoML client to use this remote GammaService for model management
 and deployments. You will need to replace ``0.0.0.0`` with an IP address or URL
 that is accessible for your team:
 
 .. code-block:: bash
 
-    bentoml config set yatai_service.url=0.0.0.0:50051
+    bentoml config set gamma_service.url=0.0.0.0:50051
 
 Once you've run the command above, all the BentoML model management operations will be
 sent to the remote server, including saving BentoService, query saved BentoServices or
@@ -1181,11 +1181,11 @@ creating model serving deployments.
 
 .. note::
 
-    BentoML's :code:`YataiService` does not provide any kind of authentication. To
+    BentoML's :code:`GammaService` does not provide any kind of authentication. To
     secure your deployment, we recommend only make the server accessible within your
     VPC for you data science team to have access.
 
-    BentoML team also provides hosted YataiService for enterprise teams, that has all
+    BentoML team also provides hosted GammaService for enterprise teams, that has all
     the security best practices built-in, to bootstrap the end-to-end model management 
     and model serving deployment workflow. `Contact us <mailto:contact@bentoml.ai>`_ to
     learn more about our offerings.
@@ -1196,7 +1196,7 @@ Labels
 
 Labels are key/value pairs for BentoService and deployment to be used to identify
 attributes that are relevant to the users. Labels do not have any direct implications
-to YataiService.  Each key must be unique for the given resource.
+to GammaService.  Each key must be unique for the given resource.
 
 Valid label name and value must be 63 characters or less, beginning and ending with an
 alphanumeric character([a-zA-Z0-9]) with dashes (`-`), underscores (`_`), dots(`.`),
@@ -1296,7 +1296,7 @@ Supported CLI commands:
 Retrieving BentoServices
 ------------------------
 
-After saving your Model services to BentoML, you can retrieve the artifact bundle using the CLI from any environment configured to use the YataiService. The :code:`--target_dir` flag specifies where the artifact bundle will be populated. If the directory exists, it will not be overwritten to avoid inconsistent bundles.
+After saving your Model services to BentoML, you can retrieve the artifact bundle using the CLI from any environment configured to use the GammaService. The :code:`--target_dir` flag specifies where the artifact bundle will be populated. If the directory exists, it will not be overwritten to avoid inconsistent bundles.
 
 .. code-block:: bash
 

@@ -3,7 +3,7 @@ import tempfile
 import contextlib
 import bentoml
 from tests.bento_service_examples.fasttext_classifier import FasttextClassifier
-from bentoml.gamma.client import YataiClient
+from bentoml.gamma.client import GammaClient
 
 import fasttext
 
@@ -45,5 +45,5 @@ def test_fasttext_artifact_pack(fasttext_classifier_class):
     ), 'Run inference after saving the artifact'
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{svc.name}:{svc.version}')

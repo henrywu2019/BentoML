@@ -1,6 +1,6 @@
 import bentoml
 from tests.bento_service_examples.easyocr_service import EasyOCRService
-from bentoml.gamma.client import YataiClient
+from bentoml.gamma.client import GammaClient
 
 import imageio
 import easyocr
@@ -35,5 +35,5 @@ def test_easyocr_artifact_packs():
     ), 'Run inference after saving the artifact'
 
     # clean up saved bundle
-    yc = YataiClient()
+    yc = GammaClient()
     yc.repository.delete(f'{svc.name}:{svc.version}')

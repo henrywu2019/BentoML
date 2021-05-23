@@ -19,7 +19,7 @@ from bentoml.gamma.proto.repository_pb2 import (
     BentoUri,
 )
 from bentoml.gamma.proto.status_pb2 import Status
-from bentoml.exceptions import YataiDeploymentException
+from bentoml.exceptions import GammaDeploymentException
 from tests.deployment.sagemaker.sagemaker_moto import moto_mock_sagemaker
 
 
@@ -119,7 +119,7 @@ def test_get_arn_from_aws_user():
         new=mock_role_path_call_no_service_principal,
     ):
         assert pytest.raises(
-            YataiDeploymentException, get_arn_role_from_current_aws_user
+            GammaDeploymentException, get_arn_role_from_current_aws_user
         )
 
 
@@ -193,7 +193,7 @@ def mock_sagemaker_deployment_wrapper(func):
     return mock_wrapper
 
 
-def create_yatai_service_mock(repo_storage_type=BentoUri.LOCAL):
+def create_gamma_service_mock(repo_storage_type=BentoUri.LOCAL):
     bento_pb = Bento(
         name=TEST_DEPLOYMENT_BENTO_NAME, version=TEST_DEPLOYMENT_BENTO_VERSION
     )
@@ -204,10 +204,10 @@ def create_yatai_service_mock(repo_storage_type=BentoUri.LOCAL):
     bento_pb.bento_service_metadata.apis.extend([api])
     get_bento_response = GetBentoResponse(bento=bento_pb)
 
-    yatai_service_mock = MagicMock()
-    yatai_service_mock.GetBento.return_value = get_bento_response
+    gamma_service_mock = MagicMock()
+    gamma_service_mock.GetBento.return_value = get_bento_response
 
-    return yatai_service_mock
+    return gamma_service_mock
 
 
 def generate_sagemaker_deployment_pb():
@@ -235,9 +235,9 @@ def raise_(ex):
 
 @mock_sagemaker_deployment_wrapper
 def test_sagemaker_apply_fail_not_local_repo():
-    yatai_service = create_yatai_service_mock(repo_storage_type=BentoUri.UNSET)
+    gamma_service = create_gamma_service_mock(repo_storage_type=BentoUri.UNSET)
     sagemaker_deployment_pb = generate_sagemaker_deployment_pb()
-    deployment_operator = SageMakerDeploymentOperator(yatai_service)
+    deployment_operator = SageMakerDeploymentOperator(gamma_service)
     result_pb = deployment_operator.add(sagemaker_deployment_pb)
     assert result_pb.status.status_code == Status.INTERNAL
     assert result_pb.status.error_message.startswith('BentoML currently not support')
@@ -245,9 +245,9 @@ def test_sagemaker_apply_fail_not_local_repo():
 
 @mock_sagemaker_deployment_wrapper
 def test_sagemaker_apply_success():
-    yatai_service = create_yatai_service_mock()
+    gamma_service = create_gamma_service_mock()
     sagemaker_deployment_pb = generate_sagemaker_deployment_pb()
-    deployment_operator = SageMakerDeploymentOperator(yatai_service)
+    deployment_operator = SageMakerDeploymentOperator(gamma_service)
     result_pb = deployment_operator.add(sagemaker_deployment_pb)
     assert result_pb.status.status_code == Status.OK
     assert result_pb.deployment.name == TEST_DEPLOYMENT_NAME
@@ -257,20 +257,20 @@ def test_sagemaker_apply_success():
 # def test_sagemaker_apply_model_already_exists(
 #     mock_chmod, mock_copytree, mock_docker_push, mock_docker_build, mock_check_output
 # ):
-#     yatai_service = create_yatai_service_mock()
+#     gamma_service = create_gamma_service_mock()
 #     sagemaker_deployment_pb = generate_sagemaker_deployment_pb()
 #     deployment_operator = SageMakerDeploymentOperator()
 #     with pytest.raises(ValueError) as error:
-#         result_pb = deployment_operator.apply(sagemaker_deployment_pb, yatai_service)
+#         result_pb = deployment_operator.apply(sagemaker_deployment_pb, gamma_service)
 #     print(error.value)
 #     assert False
 
 
 @mock_sagemaker_deployment_wrapper
 def test_sagemaker_apply_create_model_fail():
-    yatai_service = create_yatai_service_mock()
+    gamma_service = create_gamma_service_mock()
     sagemaker_deployment_pb = generate_sagemaker_deployment_pb()
-    deployment_operator = SageMakerDeploymentOperator(yatai_service)
+    deployment_operator = SageMakerDeploymentOperator(gamma_service)
 
     orig = botocore.client.BaseClient._make_api_call
 
@@ -309,9 +309,9 @@ def test_sagemaker_apply_create_model_fail():
 @mock_sagemaker_deployment_wrapper
 def test_sagemaker_apply_delete_model_fail():
     orig = botocore.client.BaseClient._make_api_call
-    yatai_service = create_yatai_service_mock()
+    gamma_service = create_gamma_service_mock()
     sagemaker_deployment_pb = generate_sagemaker_deployment_pb()
-    deployment_operator = SageMakerDeploymentOperator(yatai_service)
+    deployment_operator = SageMakerDeploymentOperator(gamma_service)
 
     def fail_delete_model(self, operation_name, kwarg):
         if operation_name == 'DeleteModel':
@@ -333,9 +333,9 @@ def test_sagemaker_apply_delete_model_fail():
 @mock_sagemaker_deployment_wrapper
 def test_sagemaker_apply_duplicate_endpoint():
     orig = botocore.client.BaseClient._make_api_call
-    yatai_service = create_yatai_service_mock()
+    gamma_service = create_gamma_service_mock()
     sagemaker_deployment_pb = generate_sagemaker_deployment_pb()
-    deployment_operator = SageMakerDeploymentOperator(yatai_service)
+    deployment_operator = SageMakerDeploymentOperator(gamma_service)
     deployment_operator.add(sagemaker_deployment_pb)
 
     endpoint_name = '{ns}-{name}'.format(
@@ -357,9 +357,9 @@ def test_sagemaker_apply_duplicate_endpoint():
 
 @mock_sagemaker_deployment_wrapper
 def test_sagemaker_update_deployment_with_new_bento_service_tag():
-    mocked_yatai_service = create_yatai_service_mock()
+    mocked_gamma_service = create_gamma_service_mock()
     mocked_sagemaker_deployment_pb = generate_sagemaker_deployment_pb()
-    deployment_operator = SageMakerDeploymentOperator(mocked_yatai_service)
+    deployment_operator = SageMakerDeploymentOperator(mocked_gamma_service)
     deployment_operator.add(mocked_sagemaker_deployment_pb)
     mocked_sagemaker_deployment_pb_with_new_bento_service_tag = (
         generate_sagemaker_deployment_pb()
