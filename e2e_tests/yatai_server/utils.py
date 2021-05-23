@@ -9,7 +9,7 @@ import psutil
 logger = logging.getLogger('bentoml.test')
 
 GRPC_PORT = '50051'
-GRPC_CHANNEL_ADDRESS = f'127.0.0.1:{GRPC_PORT}'
+GRPC_CHANNEL_ADDRESS = f'0.0.0.0:{GRPC_PORT}'
 
 
 def execute_bentoml_run_command(bento_tag, data, api="predict", yatai_url=None):

@@ -108,7 +108,7 @@ def run_api_server_docker_container(image, enable_microbatch=False, timeout=60):
             detach=True,
             remove=True,
         )
-        host_url = f"127.0.0.1:{port}"
+        host_url = f"0.0.0.0:{port}"
         _wait_until_api_server_ready(host_url, timeout, container)
         yield host_url
     finally:
@@ -149,7 +149,7 @@ def run_api_server(bundle_path, enable_microbatch=False, dev_server=False, timeo
     )
     try:
         threading.Thread(target=print_log, args=(p,), daemon=True).start()
-        host_url = f"127.0.0.1:{port}"
+        host_url = f"0.0.0.0:{port}"
         _wait_until_api_server_ready(host_url, timeout=timeout)
         yield host_url
     finally:

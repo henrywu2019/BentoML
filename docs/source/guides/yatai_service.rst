@@ -42,7 +42,7 @@ NGINX ≥ 1.13.9
             server_name yatai.yourdomain.com;
 
             location / {
-                proxy_pass http://127.0.0.1:3000;
+                proxy_pass http://0.0.0.0:3000;
             }
 
             listen [::]:443 ssl ipv6only=on;

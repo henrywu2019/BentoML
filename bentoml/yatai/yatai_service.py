@@ -174,7 +174,7 @@ def start_yatai_service_grpc_server(
     if with_ui:
         if debug_mode is True:
             ui_port = 8080
-        web_ui_link = f"http://127.0.0.1:{ui_port}"
+        web_ui_link = f"http://0.0.0.0:{ui_port}"
         if base_url != ".":
             web_ui_link += f"/{base_url}"
         web_ui_message = f"running on {web_ui_link}"
@@ -183,34 +183,34 @@ def start_yatai_service_grpc_server(
     if debug_mode:
         prom_ui_message = "off"
     else:
-        prom_ui_message = f"running on http://127.0.0.1:{ui_port}/metrics\n"
+        prom_ui_message = f"running on http://0.0.0.0:{ui_port}/metrics\n"
 
     click.echo(
         f"* Starting BentoML YataiService gRPC Server\n"
         f'* Debug mode: { "on" if debug_mode else "off"}\n'
         f"* Web UI: {web_ui_message}\n"
-        f"* Running on 127.0.0.1:{grpc_port} (Press CTRL+C to quit)\n"
+        f"* Running on 0.0.0.0:{grpc_port} (Press CTRL+C to quit)\n"
         f"* Prometheus: {prom_ui_message}\n"
         f"* Help and instructions: "
         f"https://docs.bentoml.org/en/latest/guides/yatai_service.html\n"
         f'{f"* Web server log can be found here: {web_ui_log_path}" if with_ui else ""}'
         f"\n-----\n"
         f"* Usage in Python:\n"
-        f'*  bento_svc.save(yatai_url="127.0.0.1:{grpc_port}")\n'
+        f'*  bento_svc.save(yatai_url="0.0.0.0:{grpc_port}")\n'
         f"*  from bentoml.yatai.client import get_yatai_client\n"
-        f'*  get_yatai_client("127.0.0.1:{grpc_port}").repository.list()\n'
+        f'*  get_yatai_client("0.0.0.0:{grpc_port}").repository.list()\n'
         f"* Usage in CLI:\n"
-        f"*  bentoml list --yatai-url=127.0.0.1:{grpc_port}\n"
-        f"*  bentoml containerize IrisClassifier:latest --yatai-url=127.0.0.1:"
+        f"*  bentoml list --yatai-url=0.0.0.0:{grpc_port}\n"
+        f"*  bentoml containerize IrisClassifier:latest --yatai-url=0.0.0.0:"
         f"{grpc_port}\n"
-        f"*  bentoml push IrisClassifier:20200918001645_CD2886 --yatai-url=127.0.0.1:"
+        f"*  bentoml push IrisClassifier:20200918001645_CD2886 --yatai-url=0.0.0.0:"
         f"{grpc_port}\n"
-        f"*  bentoml pull IrisClassifier:20200918001645_CD2886 --yatai-url=127.0.0.1:"
+        f"*  bentoml pull IrisClassifier:20200918001645_CD2886 --yatai-url=0.0.0.0:"
         f"{grpc_port}\n"
         f"*  bentoml retrieve IrisClassifier:20200918001645_CD2886 "
-        f'--yatai-url=127.0.0.1:{grpc_port} --target_dir="/tmp/foo/bar"\n'
+        f'--yatai-url=0.0.0.0:{grpc_port} --target_dir="/tmp/foo/bar"\n'
         f"*  bentoml delete IrisClassifier:20200918001645_CD2886 "
-        f"--yatai-url=127.0.0.1:{grpc_port}\n"
+        f"--yatai-url=0.0.0.0:{grpc_port}\n"
         # TODO: simplify the example usage here once related documentation is ready
     )
 

@@ -117,7 +117,7 @@ class BentoRepositoryAPIClient:
 
         Example:
 
-        >>> client = get_yatai_client('127.0.0.1:50051')
+        >>> client = get_yatai_client('0.0.0.0:50051')
         >>> saved_path = client.repository.pull('MyService:')
         """
         track('py-api-pull')

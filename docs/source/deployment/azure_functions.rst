@@ -297,7 +297,7 @@ yatai service address with `bentoml config set`
 
 .. code-block:: bash
 
-    $ bentoml config set yatai_service.url=127.0.0.1:50051
+    $ bentoml config set yatai_service.url=0.0.0.0:50051
 
 
 ============================================================

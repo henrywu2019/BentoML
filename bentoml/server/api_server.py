@@ -179,7 +179,7 @@ class BentoAPIServer:
 
         self.setup_routes()
 
-    def start(self, port: int, host: str = "127.0.0.1"):
+    def start(self, port: int, host: str = "0.0.0.0"):
         """
         Start an REST server at the specific port on the instance or parameter.
         """

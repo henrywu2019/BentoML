@@ -208,7 +208,7 @@ In another terminal session run grpcui:
 ```bash
 $ grpcui -plain text localhost:50051
 
-gRPC Web UI available at http://127.0.0.1:60551/...
+gRPC Web UI available at http://0.0.0.0:60551/...
 ```
 Navigate to the URL from above
 

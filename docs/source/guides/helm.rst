@@ -136,8 +136,8 @@ After this step, the service should be healthy. Visit the web UI by telling `min
     |-----------|---------------|-------------|------------------------|
     | NAMESPACE |     NAME      | TARGET PORT |          URL           |
     |-----------|---------------|-------------|------------------------|
-    | default   | yatai-service |             | http://127.0.0.1:56121 |
-    |           |               |             | http://127.0.0.1:56122 |
+    | default   | yatai-service |             | http://0.0.0.0:56121 |
+    |           |               |             | http://0.0.0.0:56122 |
     |-----------|---------------|-------------|------------------------|
     🎉  Opening service default/yatai-service in default browser...
     🎉  Opening service default/yatai-service in default browser...

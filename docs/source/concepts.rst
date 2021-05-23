@@ -1085,7 +1085,7 @@ BentoService directly. For example:
       WARNING: This is a development server. Do not use it in a production deployment.
       Use a production WSGI server instead.
     * Debug mode: off
-    * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+    * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
     > bentoml run IrisClassifier:latest predict --input '[[5.1, 3.5, 1.4, 0.2]]'
     [0]
@@ -1158,21 +1158,21 @@ as AWS credentials for managing deployments created on AWS:
 
     * Starting BentoML YataiService gRPC Server
     * Debug mode: off
-    * Web UI: running on http://127.0.0.1:3000
-    * Running on 127.0.0.1:50051 (Press CTRL+C to quit)
-    * Usage: `bentoml config set yatai_service.url=127.0.0.1:50051`
+    * Web UI: running on http://0.0.0.0:3000
+    * Running on 0.0.0.0:50051 (Press CTRL+C to quit)
+    * Usage: `bentoml config set yatai_service.url=0.0.0.0:50051`
     * Help and instructions: https://docs.bentoml.org/en/latest/guides/yatai_service.html
     * Web server log can be found here: /Users/chaoyu/bentoml/logs/yatai_web_server.log
 
 
 After deploying the YataiService server, get the server IP address and run the following 
 command to configure BentoML client to use this remote YataiService for model management
-and deployments. You will need to replace ``127.0.0.1`` with an IP address or URL
+and deployments. You will need to replace ``0.0.0.0`` with an IP address or URL
 that is accessible for your team:
 
 .. code-block:: bash
 
-    bentoml config set yatai_service.url=127.0.0.1:50051
+    bentoml config set yatai_service.url=0.0.0.0:50051
 
 Once you've run the command above, all the BentoML model management operations will be
 sent to the remote server, including saving BentoService, query saved BentoServices or

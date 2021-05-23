@@ -249,7 +249,7 @@ Or with :code:`python` and
 .. code-block:: python
 
     import requests
-    response = requests.post("http://127.0.0.1:5000/predict", json=[[5.1, 3.5, 1.4, 0.2]])
+    response = requests.post("http://0.0.0.0:5000/predict", json=[[5.1, 3.5, 1.4, 0.2]])
     print(response.text)
 
 

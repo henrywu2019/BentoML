@@ -89,4 +89,4 @@ def start_ngrok(port):
     """
     ngrok_address = _run_ngrok(port)
     logger.info(f" * Running on {ngrok_address}")
-    logger.info(" * Traffic stats available on http://127.0.0.1:4040")
+    logger.info(" * Traffic stats available on http://0.0.0.0:4040")
