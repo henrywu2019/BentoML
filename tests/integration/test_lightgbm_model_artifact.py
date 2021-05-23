@@ -4,7 +4,7 @@ import lightgbm as lgb
 from pandas import DataFrame
 import pytest
 import bentoml
-from bentoml.yatai.client import YataiClient
+from bentoml.gamma.client import YataiClient
 
 
 @pytest.fixture()

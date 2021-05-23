@@ -3,7 +3,7 @@ import random
 import spacy
 import bentoml
 from tests.bento_service_examples.spacy_classifier import SpacyModelService
-from bentoml.yatai.client import YataiClient
+from bentoml.gamma.client import YataiClient
 
 
 @pytest.fixture()

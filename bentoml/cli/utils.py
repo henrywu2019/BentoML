@@ -147,7 +147,7 @@ def human_friendly_age_from_datetime(dt, detailed=False, max_unit=2):
 
 
 def _print_deployments_table(deployments, wide=False):
-    from bentoml.yatai.proto.deployment_pb2 import DeploymentState, DeploymentSpec
+    from bentoml.gamma.proto.deployment_pb2 import DeploymentState, DeploymentSpec
 
     table = []
     if wide:

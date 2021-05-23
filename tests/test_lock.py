@@ -3,8 +3,8 @@ import time
 import pytest
 
 from bentoml.exceptions import LockUnavailable
-from bentoml.yatai.db import DB
-from bentoml.yatai.locking.lock import lock, LockType
+from bentoml.gamma.db import DB
+from bentoml.gamma.locking.lock import lock, LockType
 from tests.threading_util import ThreadWithResult, run_delayed_thread
 
 

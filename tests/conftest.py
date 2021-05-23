@@ -7,7 +7,7 @@ import imageio
 import numpy as np
 import pytest
 
-from bentoml.yatai.client import YataiClient
+from bentoml.gamma.client import YataiClient
 from tests.bento_service_examples.example_bento_service import ExampleBentoService
 
 

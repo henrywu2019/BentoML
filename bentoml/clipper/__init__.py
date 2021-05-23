@@ -20,7 +20,7 @@ import logging
 
 from bentoml.utils.tempdir import TempDirectory
 from bentoml.saved_bundle import load_bento_service_metadata
-from bentoml.yatai.deployment.docker_utils import (
+from bentoml.gamma.deployment.docker_utils import (
     ensure_docker_available_or_raise,
     build_docker_image,
 )

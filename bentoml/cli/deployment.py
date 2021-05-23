@@ -22,13 +22,13 @@ from bentoml.cli.click_utils import (
     CLI_COLOR_SUCCESS,
     parse_yaml_file_callback,
 )
-from bentoml.yatai.deployment import ALL_NAMESPACE_TAG
+from bentoml.gamma.deployment import ALL_NAMESPACE_TAG
 from bentoml.utils import status_pb_to_error_code_and_message
 from bentoml.exceptions import CLIException
 from bentoml.cli.utils import Spinner, _print_deployment_info, _print_deployments_info
 from bentoml.utils import get_default_yatai_client
 
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.yatai.proto')
+yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
 
 # pylint: disable=unused-variable
 

@@ -215,7 +215,7 @@ def test_yatai_database_url():
     override_config = tempfile.NamedTemporaryFile(delete=False)
     override_config.write(
         b"""
-yatai:
+gamma:
   database:
     url: customized_url
 """
@@ -240,7 +240,7 @@ def test_yatai_tls_root_ca_cert():
     override_config = tempfile.NamedTemporaryFile(delete=False)
     override_config.write(
         b"""
-yatai:
+gamma:
   remote:
     tls:
       client_certificate_file: value1
@@ -258,7 +258,7 @@ yatai:
     override_config = tempfile.NamedTemporaryFile(delete=False)
     override_config.write(
         b"""
-yatai:
+gamma:
   remote:
     tls:
       root_ca_cert: value1
@@ -287,7 +287,7 @@ def test_yatai_logging_path():
     override_config = tempfile.NamedTemporaryFile(delete=False)
     override_config.write(
         b"""
-yatai:
+gamma:
   logging:
     path: /tmp/customized.log
 """

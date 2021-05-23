@@ -4,7 +4,7 @@ import json
 
 from sklearn import datasets
 
-from bentoml.yatai.deployment.aws_utils import get_default_aws_region
+from bentoml.gamma.deployment.aws_utils import get_default_aws_region
 from e2e_tests.cli_operations import delete_deployment
 from e2e_tests.aws_ec2.utils import (
     run_aws_ec2_create_command,

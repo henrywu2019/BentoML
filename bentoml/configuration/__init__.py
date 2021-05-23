@@ -145,9 +145,9 @@ def inject_dependencies():
         saved_bundle,
         service,
     )
-    from bentoml.yatai import yatai_service
-    from bentoml.yatai import yatai_service_impl
-    from bentoml.yatai.repository import s3_repository, gcs_repository
+    from bentoml.gamma import yatai_service
+    from bentoml.gamma import yatai_service_impl
+    from bentoml.gamma.repository import s3_repository, gcs_repository
 
     container.wire(
         modules=[yatai_service, s3_repository, gcs_repository, yatai_service_impl],

@@ -5,9 +5,9 @@ from mock import MagicMock, patch
 import bentoml
 from bentoml.cli import create_bentoml_cli
 from bentoml.utils.usage_stats import _get_bento_service_event_properties, _do_not_track
-from bentoml.yatai.proto.deployment_pb2 import DeleteDeploymentResponse, Deployment
-from bentoml.yatai.status import Status
-from bentoml.yatai.yatai_service import get_yatai_service
+from bentoml.gamma.proto.deployment_pb2 import DeleteDeploymentResponse, Deployment
+from bentoml.gamma.status import Status
+from bentoml.gamma.yatai_service import get_yatai_service
 
 MOCK_DEPLOYMENT_NAME = 'mock_name'
 MOCK_FAILED_DEPLOYMENT_NAME = 'mock-failed'
@@ -125,14 +125,14 @@ def test_track_cli_with_keyboard_interrupt(bento_bundle_path):
             assert properties['command'] == 'serve'
 
 
-@patch('bentoml.yatai.yatai_service_impl.validate_deployment_pb', MagicMock())
-@patch('bentoml.yatai.db.DeploymentStore')
+@patch('bentoml.gamma.yatai_service_impl.validate_deployment_pb', MagicMock())
+@patch('bentoml.gamma.db.DeploymentStore')
 def test_track_server_successful_delete(mock_deployment_store):
     mock_deployment_store.return_value.get.return_value = mock_deployment_pb()
-    with patch('bentoml.yatai.yatai_service_impl.track') as mock:
+    with patch('bentoml.gamma.yatai_service_impl.track') as mock:
         mock.side_effect = mock_track_func
         with patch(
-            'bentoml.yatai.yatai_service_impl.get_deployment_operator'
+            'bentoml.gamma.yatai_service_impl.get_deployment_operator'
         ) as mock_get_deployment_operator:
             mock_get_deployment_operator.side_effect = mock_get_operator_func()
             yatai_service = get_yatai_service()
@@ -146,18 +146,18 @@ def test_track_server_successful_delete(mock_deployment_store):
 
 
 @patch(
-    'bentoml.yatai.yatai_service_impl.validate_deployment_pb',
+    'bentoml.gamma.yatai_service_impl.validate_deployment_pb',
     MagicMock(return_value=None),
 )
-@patch('bentoml.yatai.db.DeploymentStore')
+@patch('bentoml.gamma.db.DeploymentStore')
 def test_track_server_force_delete(mock_deployment_store):
     mock_deployment_store.return_value.get.return_value = mock_deployment_pb(
         MOCK_FAILED_DEPLOYMENT_NAME
     )
-    with patch('bentoml.yatai.yatai_service_impl.track') as mock:
+    with patch('bentoml.gamma.yatai_service_impl.track') as mock:
         mock.side_effect = mock_track_func
         with patch(
-            'bentoml.yatai.yatai_service_impl.get_deployment_operator'
+            'bentoml.gamma.yatai_service_impl.get_deployment_operator'
         ) as mock_get_deployment_operator:
             mock_get_deployment_operator.side_effect = mock_get_operator_func()
             yatai_service = get_yatai_service()

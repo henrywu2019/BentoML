@@ -53,7 +53,7 @@ adapters:
       - .webp
       - .bmp
 
-yatai:
+gamma:
   remote:
     url: Null
     access_token: Null

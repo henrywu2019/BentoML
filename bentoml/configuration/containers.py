@@ -78,7 +78,7 @@ SCHEMA = Schema(
             Optional("jaeger"): {"address": Or(str, None), "port": Or(int, None)},
         },
         "adapters": {"image_input": {"default_extensions": [str]}},
-        "yatai": {
+        "gamma": {
             "remote": {
                 "url": Or(str, None),
                 "access_token": Or(str, None),
@@ -94,7 +94,7 @@ SCHEMA = Schema(
                 "type": And(
                     str,
                     lambda type: type in YATAI_REPOSITORY_TYPES,
-                    error="yatai.repository.type must be one of %s"
+                    error="gamma.repository.type must be one of %s"
                     % YATAI_REPOSITORY_TYPES,
                 ),
                 "file_system": {"directory": Or(str, None)},
@@ -223,19 +223,19 @@ class BentoMLContainer(containers.DeclarativeContainer):
             "sqlite:///{}".format,
             providers.Callable(os.path.join, bentoml_home, "storage.db"),
         ),
-        config.yatai.database.url,
+        config.gamma.database.url,
     )
 
     yatai_file_system_directory = providers.Callable(
         lambda default, customized: customized or default,
         providers.Callable(os.path.join, bentoml_home, "repository"),
-        config.yatai.repository.file_system.directory,
+        config.gamma.repository.file_system.directory,
     )
 
     yatai_tls_root_ca_cert = providers.Callable(
         lambda current, deprecated: current or deprecated,
-        config.yatai.remote.tls.root_ca_cert,
-        config.yatai.remote.tls.client_certificate_file,
+        config.gamma.remote.tls.root_ca_cert,
+        config.gamma.remote.tls.client_certificate_file,
     )
 
     logging_file_directory = providers.Callable(
@@ -249,5 +249,5 @@ class BentoMLContainer(containers.DeclarativeContainer):
         providers.Callable(
             os.path.join, logging_file_directory, "yatai_web_server.log"
         ),
-        config.yatai.logging.path,
+        config.gamma.logging.path,
     )

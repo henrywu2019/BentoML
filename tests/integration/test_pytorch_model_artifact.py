@@ -5,7 +5,7 @@ import torch
 from torch import nn
 
 import bentoml
-from bentoml.yatai.client import YataiClient
+from bentoml.gamma.client import YataiClient
 from tests.bento_service_examples.pytorch_classifier import PytorchClassifier
 
 

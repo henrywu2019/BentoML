@@ -25,7 +25,7 @@ from bentoml.server.open_api import get_open_api_spec_json
 from bentoml.utils import ProtoMessageToDict, resolve_bundle_path
 from bentoml.utils.docker_utils import validate_tag
 from bentoml.utils.lazy_loader import LazyLoader
-from bentoml.yatai.client import get_yatai_client
+from bentoml.gamma.client import get_yatai_client
 
 try:
     import click_completion
@@ -38,7 +38,7 @@ except ImportError:
     shell_types = click.Choice(['bash', 'zsh', 'fish', 'powershell'])
 
 
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.yatai.proto')
+yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
 
 
 def add_options(options):
@@ -125,7 +125,7 @@ def create_bento_service_cli(
     @click.argument('run_args', nargs=-1, type=click.UNPROCESSED)
     def run(api_name, run_args, bento=None):
         parser = argparse.ArgumentParser()
-        parser.add_argument('--yatai-url', type=str, default=default_yatai_url)
+        parser.add_argument('--gamma-url', type=str, default=default_yatai_url)
         parsed_args, _ = parser.parse_known_args(run_args)
         yatai_url = parsed_args.yatai_url
         saved_bundle_path = resolve_bundle_path(
@@ -143,11 +143,11 @@ def create_bento_service_cli(
     )
     @conditional_argument(pip_installed_bundle_path is None, "bento", type=click.STRING)
     @click.option(
-        '--yatai-url',
+        '--gamma-url',
         type=click.STRING,
         default=default_yatai_url,
         help='Remote YataiService URL. Optional. '
-        'Example: "--yatai-url http://localhost:50050"',
+        'Example: "--gamma-url http://localhost:50050"',
     )
     def info(bento=None, yatai_url=None):
         """
@@ -169,11 +169,11 @@ def create_bento_service_cli(
     )
     @conditional_argument(pip_installed_bundle_path is None, "bento", type=click.STRING)
     @click.option(
-        '--yatai-url',
+        '--gamma-url',
         type=click.STRING,
         default=default_yatai_url,
         help='Remote YataiService URL. Optional. '
-        'Example: "--yatai-url http://localhost:50050"',
+        'Example: "--gamma-url http://localhost:50050"',
     )
     def open_api_spec(bento=None, yatai_url=None):
         saved_bundle_path = resolve_bundle_path(
@@ -207,11 +207,11 @@ def create_bento_service_cli(
         envvar='BENTOML_ENABLE_NGROK',
     )
     @click.option(
-        '--yatai-url',
+        '--gamma-url',
         type=click.STRING,
         default=default_yatai_url,
         help='Remote YataiService URL. Optional. '
-        'Example: "--yatai-url http://localhost:50050"',
+        'Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
         '--enable-swagger/--disable-swagger',
@@ -282,11 +282,11 @@ def create_bento_service_cli(
         envvar='BENTOML_MICROBATCH_WORKERS',
     )
     @click.option(
-        '--yatai-url',
+        '--gamma-url',
         type=click.STRING,
         default=default_yatai_url,
         help='Remote YataiService URL. Optional. '
-        'Example: "--yatai-url http://localhost:50050"',
+        'Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
         '--enable-swagger/--disable-swagger',
@@ -374,12 +374,12 @@ def create_bento_service_cli(
         '--build-arg', multiple=True, help="pass through docker image build arguments"
     )
     @click.option(
-        '--yatai-url',
+        '--gamma-url',
         type=click.STRING,
         default=default_yatai_url,
         help='Specify the YataiService for running the containerization, default to '
         'the Local YataiService with local docker daemon. Example: '
-        '"--yatai-url http://localhost:50050"',
+        '"--gamma-url http://localhost:50050"',
     )
     def containerize(bento, push, tag, build_arg, yatai_url):
         """Containerize specified BentoService.

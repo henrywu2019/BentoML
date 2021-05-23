@@ -145,7 +145,7 @@ class SavedBundleConfig(object):
         return conf
 
     def get_bento_service_metadata_pb(self):
-        from bentoml.yatai.proto.repository_pb2 import BentoServiceMetadata
+        from bentoml.gamma.proto.repository_pb2 import BentoServiceMetadata
 
         bento_service_metadata = BentoServiceMetadata()
         bento_service_metadata.name = self.config["metadata"]["service_name"]

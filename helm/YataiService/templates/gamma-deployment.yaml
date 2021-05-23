@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gamma-service
+  labels:
+    app: gamma-service
+spec:
+  replicas: {{ .Values.gamma.replicaCount }}
+  selector:
+    matchLabels:
+      app: gamma-service
+  template:
+    metadata:
+      labels:
+        app: gamma-service
+    spec:
+      imagePullSecrets:
+        {{- toYaml .Values.imagePullSecrets | nindent 8 }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: gamma-service
+          securityContext:
+            {{- toYaml .Values.gamma.securityContext | nindent 12 }}
+          image: "{{ .Values.gamma.image.repo }}:{{ .Values.gamma.image.version }}"
+          imagePullPolicy: {{ .Values.gamma.image.pullPolicy }}
+          ports:
+          - containerPort: {{ .Values.service.ports.grpc }}
+          - containerPort: {{ .Values.service.ports.web }}
+          livenessProbe:
+            {{- toYaml .Values.service.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.service.readinessProbe | nindent 12 }}
+          args:
+            {{ if .Values.db_url -}}
+            - "--db-url={{ .Values.db_url }}"
+            {{- end }}
+            {{ if .Values.repo_base_url -}}
+            - "--repo-base-url={{ .Values.repo_base_url}}"
+            {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      affinity:
+        {{- toYaml .Values.affinity | nindent 8 }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}

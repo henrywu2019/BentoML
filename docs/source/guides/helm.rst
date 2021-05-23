@@ -91,9 +91,9 @@ Developers can do a dry run of the helm chart installation to see if the configu
 
 .. code-block:: bash
 
-    $ helm install --dry-run yatai-service helm/YataiService
+    $ helm install --dry-run gamma-service helm/YataiService
 
-    NAME: yatai-service
+    NAME: gamma-service
     LAST DEPLOYED: Tue Aug 11 22:12:18 2020
     NAMESPACE: default
     STATUS: pending-install
@@ -108,9 +108,9 @@ Then, to install it into the cluster,
 
 .. code-block:: bash
 
-    $ helm install yatai-service helm/YataiService
+    $ helm install gamma-service helm/YataiService
 
-    NAME: yatai-service
+    NAME: gamma-service
     LAST DEPLOYED: Tue Aug 11 22:18:02 2020
     NAMESPACE: default
     STATUS: deployed
@@ -119,31 +119,31 @@ Then, to install it into the cluster,
 
     $ kubectl get pods
     NAME                             READY   STATUS    RESTARTS   AGE
-    yatai-service-85898d6c9c-ndlfg   1/1     Running   0          91s
+    gamma-service-85898d6c9c-ndlfg   1/1     Running   0          91s
 
 After this step, the service should be healthy. Visit the web UI by telling `minikube` to tunnel all of the ports that were defined earlier to your local machine. This should open 2 browser tabs.
 
 .. code-block:: bash
 
-    $ minikube service yatai-service
+    $ minikube service gamma-service
     |-----------|---------------|-------------|-------------------------|
     | NAMESPACE |     NAME      | TARGET PORT |           URL           |
     |-----------|---------------|-------------|-------------------------|
-    | default   | yatai-service | web/3000    | http://172.17.0.3:31891 |
+    | default   | gamma-service | web/3000    | http://172.17.0.3:31891 |
     |           |               | grpc/50051  | http://172.17.0.3:31368 |
     |-----------|---------------|-------------|-------------------------|
-    🏃  Starting tunnel for service yatai-service.
+    🏃  Starting tunnel for service gamma-service.
     |-----------|---------------|-------------|------------------------|
     | NAMESPACE |     NAME      | TARGET PORT |          URL           |
     |-----------|---------------|-------------|------------------------|
-    | default   | yatai-service |             | http://0.0.0.0:56121 |
+    | default   | gamma-service |             | http://0.0.0.0:56121 |
     |           |               |             | http://0.0.0.0:56122 |
     |-----------|---------------|-------------|------------------------|
-    🎉  Opening service default/yatai-service in default browser...
-    🎉  Opening service default/yatai-service in default browser...
+    🎉  Opening service default/gamma-service in default browser...
+    🎉  Opening service default/gamma-service in default browser...
     ❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
 
-Woo! You now have a `YataiService` instance running on a local K8s cluster :) To cleanup, run `helm uninstall yatai-service` then `minikube stop`.
+Woo! You now have a `YataiService` instance running on a local K8s cluster :) To cleanup, run `helm uninstall gamma-service` then `minikube stop`.
 
 Keep reading for more info on configuring `YataiService` using Helm.
 
@@ -156,16 +156,16 @@ To tell Helm to use these custom values,
 
 .. code-block:: bash
 
-    $ cd helm && helm install -f YataiService/values/postgres.yaml --dry-run --debug yatai-service YataiService
+    $ cd helm && helm install -f YataiService/values/postgres.yaml --dry-run --debug gamma-service YataiService
 
-    NAME: yatai-service
+    NAME: gamma-service
     LAST DEPLOYED: Tue Aug 11 22:39:12 2020
     NAMESPACE: default
     STATUS: pending-install
     REVISION: 1
     TEST SUITE: None
     USER-SUPPLIED VALUES:
-    db_url: postgresql://postgres:password123@yatai-postgres:5432/postgres
+    db_url: postgresql://postgres:password123@gamma-postgres:5432/postgres
     postgres:
     enabled: true
     ...
@@ -178,21 +178,21 @@ If the configuration looks correct, apply it by removing the `--dry-run` and `--
 
     kubectl get all
     NAME                                 READY   STATUS    RESTARTS   AGE
-    pod/yatai-postgres-5649dd765c-9c4sp  1/1     Running   0          3s
-    pod/yatai-service-556487fb55-wbjc4   1/1     Running   0          3s
+    pod/gamma-postgres-5649dd765c-9c4sp  1/1     Running   0          3s
+    pod/gamma-service-556487fb55-wbjc4   1/1     Running   0          3s
 
     NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                          AGE
     service/kubernetes      ClusterIP      10.96.0.1        <none>        443/TCP                          22h
-    service/yatai-postgres  NodePort       10.99.249.0      <none>        5432:30007/TCP                   3s
-    service/yatai-service   LoadBalancer   10.107.204.236   <pending>     3000:32422/TCP,50051:30014/TCP   3s
+    service/gamma-postgres  NodePort       10.99.249.0      <none>        5432:30007/TCP                   3s
+    service/gamma-service   LoadBalancer   10.107.204.236   <pending>     3000:32422/TCP,50051:30014/TCP   3s
 
     NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
-    deployment.apps/yatai-postgres  1/1     1            1           3s
-    deployment.apps/yatai-service   1/1     1            1           3s
+    deployment.apps/gamma-postgres  1/1     1            1           3s
+    deployment.apps/gamma-service   1/1     1            1           3s
 
     NAME                                       DESIRED   CURRENT   READY   AGE
-    replicaset.apps/yatai-postgres-5649dd765c  1         1         1       3s
-    replicaset.apps/yatai-service-556487fb55   1         1         1       3s
+    replicaset.apps/gamma-postgres-5649dd765c  1         1         1       3s
+    replicaset.apps/gamma-service-556487fb55   1         1         1       3s
 
 Everything looks good!
 

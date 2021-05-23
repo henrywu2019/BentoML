@@ -215,7 +215,7 @@ server for your team to manage all models on cloud storage(S3, GCS, MinIO etc) a
 CI/CD workflow around it. 
 [Learn more about it here](https://docs.bentoml.org/en/latest/concepts.html#model-management).
 
-![Yatai UI](https://github.com/bentoml/BentoML/blob/master/docs/source/_static/img/yatai-service-web-ui-repository.png)
+![Yatai UI](https://github.com/bentoml/BentoML/blob/master/docs/source/_static/img/gamma-service-web-ui-repository.png)
 
 Read the [Quickstart Guide](https://docs.bentoml.org/en/latest/quickstart.html) 
 to learn more about the basic functionalities of BentoML. You can also try it out 

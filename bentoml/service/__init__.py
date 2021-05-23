@@ -403,8 +403,8 @@ def save(bento_service, base_path=None, version=None, labels=None):
         "and BentoService#save_to_dir instead."
     )
 
-    from bentoml.yatai.client import YataiClient
-    from bentoml.yatai.yatai_service import get_yatai_service
+    from bentoml.gamma.client import YataiClient
+    from bentoml.gamma.yatai_service import get_yatai_service
 
     if base_path:
         yatai_service = get_yatai_service(file_system_directory=base_path)
@@ -732,7 +732,7 @@ class BentoService:
         :param labels: optional - labels dictionary
         :return: saved_path: file path to where the BentoService is saved
         """
-        from bentoml.yatai.client import get_yatai_client
+        from bentoml.gamma.client import get_yatai_client
 
         yc = get_yatai_client(yatai_url)
 

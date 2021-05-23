@@ -7,10 +7,10 @@ if [[ -z "$BENTOML_REPO" ]]; then
 fi
 
 PROTO_PATH=$BENTOML_REPO/protos
-PY_OUT_PATH=$BENTOML_REPO/bentoml/yatai/proto
+PY_OUT_PATH=$BENTOML_REPO/bentoml/gamma/proto
 # test YataiService Interceptor calls
 PROTO_TEST_PATH=$PROTO_PATH/tests
-PY_TEST_OUT_PATH=$BENTOML_REPO/tests/yatai/proto
+PY_TEST_OUT_PATH=$BENTOML_REPO/tests/gamma/proto
 
 echo "Cleaning up existing proto generated py code.."
 rm -rf "$PY_OUT_PATH" "$PY_TEST_OUT_PATH"
@@ -45,11 +45,11 @@ fix_grpc_service_code(){
 
   echo "Fix imports in generated GRPC service code.."
   find "$OUT_DIR" -name '*_pb2*.py' | while read -r pyfile; do
-  sed -i'.old' "s/^import \([^ ]*\)_pb2 \(.*\)$/import $PKGNAME.yatai.proto.\1_pb2 \2/" "$pyfile"
-  sed -i'.old' "s/^from \([^ ]*\) import \([^ ]*\)_pb2\(.*\)$/from $PKGNAME.yatai.proto.\1 import \2_pb2\3/" "$pyfile"
+  sed -i'.old' "s/^import \([^ ]*\)_pb2 \(.*\)$/import $PKGNAME.gamma.proto.\1_pb2 \2/" "$pyfile"
+  sed -i'.old' "s/^from \([^ ]*\) import \([^ ]*\)_pb2\(.*\)$/from $PKGNAME.gamma.proto.\1 import \2_pb2\3/" "$pyfile"
   # Fix google.protobuf package imports
-  sed -i'.old' "s/^import $PKGNAME.yatai.proto.google.\([^ ]*\)_pb2 as \([^ ]*\)$/import google.\1_pb2 as \2/" "$pyfile"
-  sed -i'.old' "s/^from $PKGNAME.yatai.proto.google.\([^ ]*\) import \([^ ]*\)_pb2 as \([^ ]*\)$/from google.\1 import \2_pb2 as \3/" "$pyfile"
+  sed -i'.old' "s/^import $PKGNAME.gamma.proto.google.\([^ ]*\)_pb2 as \([^ ]*\)$/import google.\1_pb2 as \2/" "$pyfile"
+  sed -i'.old' "s/^from $PKGNAME.gamma.proto.google.\([^ ]*\) import \([^ ]*\)_pb2 as \([^ ]*\)$/from google.\1 import \2_pb2 as \3/" "$pyfile"
   rm "$pyfile".old
   done
 }
@@ -97,7 +97,7 @@ echo "Generate grpc code for javascript/typescript"
 echo "Please make sure protobufjs is installed on your system"
 echo "You can install with npm i -g protobufjs"
 
-JS_OUT_PATH=$BENTOML_REPO/bentoml/yatai/web/src/generated
+JS_OUT_PATH=$BENTOML_REPO/bentoml/gamma/web/src/generated
 echo "Cleaning up existing proto generated js code.."
 rm -rf "$JS_OUT_PATH"
 mkdir -p "$JS_OUT_PATH"

@@ -28,8 +28,8 @@ from bentoml.cli.deployment import (
     _print_deployment_info,
     _print_deployments_info,
 )
-from bentoml.yatai.deployment import ALL_NAMESPACE_TAG
-from bentoml.yatai.deployment.aws_ec2.constants import (
+from bentoml.gamma.deployment import ALL_NAMESPACE_TAG
+from bentoml.gamma.deployment.aws_ec2.constants import (
     DEFAULT_MIN_SIZE,
     DEFAULT_DESIRED_CAPACITY,
     DEFAULT_MAX_SIZE,
@@ -38,7 +38,7 @@ from bentoml.yatai.deployment.aws_ec2.constants import (
 )
 from bentoml.exceptions import CLIException
 
-yatai_proto = LazyLoader("yatai_proto", globals(), "bentoml.yatai.proto")
+yatai_proto = LazyLoader("yatai_proto", globals(), "bentoml.gamma.proto")
 
 
 def get_aws_ec2_sub_command():

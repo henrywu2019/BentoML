@@ -43,7 +43,7 @@ __all__ = [
     "cached_contextmanager",
 ]
 
-yatai_proto = LazyLoader("yatai_proto", globals(), "bentoml.yatai.proto")
+yatai_proto = LazyLoader("yatai_proto", globals(), "bentoml.gamma.proto")
 
 
 class _CachedContextmanager:
@@ -142,7 +142,7 @@ def ProtoMessageToDict(protobuf_msg: Message, **kwargs) -> object:
 
 # This function assume the status is not status.OK
 def status_pb_to_error_code_and_message(pb_status) -> (int, str):
-    from bentoml.yatai.proto import status_pb2
+    from bentoml.gamma.proto import status_pb2
 
     assert pb_status.status_code != status_pb2.Status.OK
     error_code = status_pb2.Status.Code.Name(pb_status.status_code)
@@ -168,7 +168,7 @@ class catch_exceptions(object):
 
 def resolve_bundle_path(bento, pip_installed_bundle_path, yatai_url=None):
     from bentoml.exceptions import BentoMLException
-    from bentoml.yatai.client import get_yatai_client
+    from bentoml.gamma.client import get_yatai_client
 
     if pip_installed_bundle_path:
         assert (
@@ -194,7 +194,7 @@ def resolve_bundle_path(bento, pip_installed_bundle_path, yatai_url=None):
 
 
 def get_default_yatai_client():
-    from bentoml.yatai.client import YataiClient
+    from bentoml.gamma.client import YataiClient
 
     return YataiClient()
 

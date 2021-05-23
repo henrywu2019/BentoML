@@ -1,6 +1,6 @@
 import bentoml
 from tests.bento_service_examples.easyocr_service import EasyOCRService
-from bentoml.yatai.client import YataiClient
+from bentoml.gamma.client import YataiClient
 
 import imageio
 import easyocr

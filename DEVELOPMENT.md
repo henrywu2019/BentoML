@@ -201,7 +201,7 @@ $ go install github.com/fullstorydev/grpcui/cmd/grpcui
 
 Start Yatai server in debug mode:
 ```bash
-$ bentoml yatai-service-start --debug
+$ bentoml gamma-service-start --debug
 ```
 
 In another terminal session run grpcui:
@@ -221,17 +221,17 @@ Install all npm packages required by BentoML Web UI:
 
 ```bash
 # install npm packages required by BentoML's Node.js Web Server
-cd {PROJECT_ROOT}/bentoml/yatai/web/
+cd {PROJECT_ROOT}/bentoml/gamma/web/
 yarn
 
 # install npm packages required by BentoML web frontend
-cd {PROJECT_ROOT}/bentoml/yatai/web/client/
+cd {PROJECT_ROOT}/bentoml/gamma/web/client/
 yarn
 ```
 
 Build the Web Server and frontend UI code:
 ```bash
-cd {PROJECT_ROOT}/bentoml/yatai/web/
+cd {PROJECT_ROOT}/bentoml/gamma/web/
 npm run build
 ```
 

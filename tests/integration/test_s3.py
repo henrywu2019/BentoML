@@ -5,7 +5,7 @@ import pytest
 from minio import Minio
 
 from bentoml.utils.tempdir import TempDirectory
-from bentoml.yatai.client import get_yatai_client
+from bentoml.gamma.client import get_yatai_client
 from tests.bento_service_examples.example_bento_service import ExampleBentoService
 
 bucket_name = 'test-repo'
@@ -27,7 +27,7 @@ def minio_address():
 def test_s3(minio_address):
     yatai_server_command = [
         'bentoml',
-        'yatai-service-start',
+        'gamma-service-start',
         '--no-ui',
         '--grpc-port',
         '50051',

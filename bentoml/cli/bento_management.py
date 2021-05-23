@@ -26,9 +26,9 @@ from bentoml.cli.utils import (
     _format_labels_for_print,
 )
 from bentoml.utils import pb_to_yaml
-from bentoml.yatai.client import get_yatai_client
+from bentoml.gamma.client import get_yatai_client
 
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.yatai.proto')
+yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
 
 
 def _print_bento_info(bento, output_type):
@@ -126,10 +126,10 @@ def add_bento_sub_command(cli):
         "In (value3, value3a), key4 DoesNotExist)",
     )
     @click.option(
-        '--yatai-url',
+        '--gamma-url',
         type=click.STRING,
         help='Remote YataiService URL. Optional. '
-        'Example: "--yatai-url http://localhost:50050"',
+        'Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
         '-o', '--output', type=click.Choice(['json', 'yaml', 'table', 'wide'])
@@ -171,10 +171,10 @@ def add_bento_sub_command(cli):
     )
     @click.option('--ascending-order', is_flag=True)
     @click.option(
-        '--yatai-url',
+        '--gamma-url',
         type=click.STRING,
         help='Remote YataiService URL. Optional. '
-        'Example: "--yatai-url http://localhost:50050"',
+        'Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
         '-o',
@@ -211,10 +211,10 @@ def add_bento_sub_command(cli):
         "In (value3, value3a), key4 DoesNotExist)",
     )
     @click.option(
-        '--yatai-url',
+        '--gamma-url',
         type=click.STRING,
         help='Remote YataiService URL. Optional. Example: '
-        '"--yatai-url http://localhost:50050"',
+        '"--gamma-url http://localhost:50050"',
     )
     @click.option(
         '-y',
@@ -230,7 +230,7 @@ def add_bento_sub_command(cli):
         yatai_url,
         yes,  # pylint: disable=redefined-builtin
     ):
-        """Delete bento bundles in target YataiService. When the --yatai-url option is not specified, it will use local Yatai by default.
+        """Delete bento bundles in target YataiService. When the --gamma-url option is not specified, it will use local Yatai by default.
 
 Specify target service bundles to remove:
 
@@ -274,12 +274,12 @@ Specify target service bundles to remove:
                 prune=all, labels=labels, require_confirm=False if yes else True,
             )
 
-    @cli.command(help='Pull BentoService from remote yatai server',)
+    @cli.command(help='Pull BentoService from remote gamma server',)
     @click.argument("bento", type=click.STRING)
     @click.option(
-        '--yatai-url',
+        '--gamma-url',
         required=True,
-        help='Remote YataiService URL. Example: "--yatai-url http://localhost:50050"',
+        help='Remote YataiService URL. Example: "--gamma-url http://localhost:50050"',
     )
     def pull(bento, yatai_url):
         if ':' not in bento:
@@ -289,19 +289,19 @@ Specify target service bundles to remove:
         yc.repository.pull(bento=bento)
         _echo(f'Pulled {bento} from {yatai_url}')
 
-    @cli.command(help='Push BentoService to remote yatai server')
+    @cli.command(help='Push BentoService to remote gamma server')
     @click.argument("bento", type=click.STRING)
     @click.option(
-        '--yatai-url',
+        '--gamma-url',
         required=True,
-        help='Remote YataiService URL. Example: "--yatai-url http://localhost:50050"',
+        help='Remote YataiService URL. Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
         '--with-labels/--without-labels',
         default=True,
         help="Retain bento bundle's labels or not for push Bento bundle to remote "
-        "yatai. When running with --without-labels, labels are not retained in the "
-        "remote yatai server",
+        "gamma. When running with --without-labels, labels are not retained in the "
+        "remote gamma server",
     )
     def push(bento, yatai_url, with_labels):
         if ':' not in bento:
@@ -314,8 +314,8 @@ Specify target service bundles to remove:
     @cli.command(help='Retrieve')
     @click.argument("bento", type=click.STRING)
     @click.option(
-        '--yatai-url',
-        help='Remote YataiService URL. Example: "--yatai-url http://localhost:50050"',
+        '--gamma-url',
+        help='Remote YataiService URL. Example: "--gamma-url http://localhost:50050"',
     )
     @click.option(
         '--target_dir',

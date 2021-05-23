@@ -6,7 +6,7 @@
      types: [created]
 
  jobs:
-   test-e2e-yatai:
+   test-e2e-gamma:
      runs-on: ubuntu-latest
      # Only run for PRs, not issue comments
      if: ${{ github.event.issue.pull_request }}
@@ -31,7 +31,7 @@
            # token: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # PAT or OAuth token will also work
            reaction-token: ${{ secrets.PAT_FOR_TEST}}
            issue-type: pull-request
-           commands: test-e2e-yatai
+           commands: test-e2e-gamma
            permission: write
 
    help-command:

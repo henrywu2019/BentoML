@@ -46,27 +46,27 @@ spellcheck-doc: ## Spell check documentation
 
 
 # YataiService gRPC
-start-yatai-debug: ## Start YataiService in debug mode
-	bentoml yatai-service-start --debug || (echo "Error starting... You may need to run 'make install-yatai-deps'"; exit 1)
+start-gamma-debug: ## Start YataiService in debug mode
+	bentoml gamma-service-start --debug || (echo "Error starting... You may need to run 'make install-gamma-deps'"; exit 1)
 start-grpcui: ## Start gPRC Web UI
-	grpcui -plaintext localhost:50051 || (echo "Error starting... You may need to run 'make install-yatai-deps'"; exit 1)
-install-yatai-deps: ## Install dependencies to debug YataiService
+	grpcui -plaintext localhost:50051 || (echo "Error starting... You may need to run 'make install-gamma-deps'"; exit 1)
+install-gamma-deps: ## Install dependencies to debug YataiService
 	pip install -e ".[dev]"
 	go get github.com/fullstorydev/grpcui
 	go install github.com/fullstorydev/grpcui/cmd/grpcui@latest
 
 # BentoML Web UI
-watch-yatai-web-ui: ## Start BentoML Web UI server in dev mode
-	bentoml yatai-service-start --no-ui & \
-	cd bentoml/yatai/web && yarn dev 0.0.0.0:50051 3000 . 0.0.0.0:50052
-build-yatai-web-ui: ## Build BentoML Web UI server and frontend
-	cd bentoml/yatai/web && yarn build
-run-yatai-web-ui: ## Run production BentoML Web UI server and frontend
-	bentoml yatai-service-start --no-ui & \
-	cd bentoml/yatai/web && yarn start 0.0.0.0:50051 3000 . 0.0.0.0:50052
+watch-gamma-web-ui: ## Start BentoML Web UI server in dev mode
+	bentoml gamma-service-start --no-ui & \
+	cd bentoml/gamma/web && yarn dev 0.0.0.0:50051 3000 . 0.0.0.0:50052
+build-gamma-web-ui: ## Build BentoML Web UI server and frontend
+	cd bentoml/gamma/web && yarn build
+run-gamma-web-ui: ## Run production BentoML Web UI server and frontend
+	bentoml gamma-service-start --no-ui & \
+	cd bentoml/gamma/web && yarn start 0.0.0.0:50051 3000 . 0.0.0.0:50052
 install-web-deps: ## Install dependencies to run web server and frontend
-	cd bentoml/yatai/web && yarn install
-	cd bentoml/yatai/web/client && yarn install
+	cd bentoml/gamma/web && yarn install
+	cd bentoml/gamma/web/client && yarn install
 
 # Helm
 helm-lint: ## Helm Lint
@@ -74,8 +74,8 @@ helm-lint: ## Helm Lint
 helm-deps: ## Helm installed dependencies
 	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx && helm dependencies build helm/YataiService
 helm-dry: ## Helm Dry Install
-	cd helm && helm install -f YataiService/values/postgres.yaml --dry-run --debug yatai-service YataiService
+	cd helm && helm install -f YataiService/values/postgres.yaml --dry-run --debug gamma-service YataiService
 helm-install: ## Helm Install
-	@cd helm && helm install -f YataiService/values/postgres.yaml yatai-service YataiService
+	@cd helm && helm install -f YataiService/values/postgres.yaml gamma-service YataiService
 helm-uninstall: ## Helm Uninstall
-	helm uninstall yatai-service
+	helm uninstall gamma-service

@@ -4,12 +4,12 @@ import mock
 from click.testing import CliRunner
 
 from bentoml.cli import create_bentoml_cli
-from bentoml.yatai.proto.deployment_pb2 import (
+from bentoml.gamma.proto.deployment_pb2 import (
     ApplyDeploymentResponse,
     Deployment,
     DeploymentSpec,
 )
-from bentoml.yatai.status import Status
+from bentoml.gamma.status import Status
 
 
 def test_label_selectors_on_cli_list(bento_service):
@@ -53,11 +53,11 @@ def test_label_selectors_on_cli_get(bento_service):
 
 
 @mock.patch(
-    'bentoml.yatai.deployment.aws_lambda.operator.ensure_docker_available_or_raise',
+    'bentoml.gamma.deployment.aws_lambda.operator.ensure_docker_available_or_raise',
     mock.MagicMock(),
 )
 @mock.patch(
-    'bentoml.yatai.deployment.aws_lambda.operator.ensure_sam_available_or_raise',
+    'bentoml.gamma.deployment.aws_lambda.operator.ensure_sam_available_or_raise',
     mock.MagicMock(),
 )
 def test_deployment_labels():
@@ -78,7 +78,7 @@ def test_deployment_labels():
     assert failed_result.exit_code == 2
 
     with mock.patch(
-        'bentoml.yatai.deployment.aws_lambda.operator.AwsLambdaDeploymentOperator.add'
+        'bentoml.gamma.deployment.aws_lambda.operator.AwsLambdaDeploymentOperator.add'
     ) as mock_operator_add:
         bento_name = 'MockService'
         bento_version = 'MockVersion'

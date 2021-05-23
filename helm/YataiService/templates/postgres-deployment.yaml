@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: yatai-postgres
+  name: gamma-postgres
   labels:
-    app: yatai-postgres
+    app: gamma-postgres
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: yatai-postgres
+      app: gamma-postgres
   template:
     metadata:
       labels:
-        app: yatai-postgres
+        app: gamma-postgres
     spec:
       imagePullSecrets:
         {{- toYaml .Values.imagePullSecrets | nindent 8 }}
@@ -21,19 +21,19 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: yatai-postgres
+        - name: gamma-postgres
           image: "{{ .Values.postgres.image.repo }}:{{ .Values.postgres.image.version }}"
-          imagePullPolicy: {{ .Values.yatai.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.gamma.image.pullPolicy }}
           ports:
             - containerPort: 5432 # default postgres port
           envFrom:
             - configMapRef:
-                name: yatai-postgres-config
+                name: gamma-postgres-config
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: yatai-postgredb
+              name: gamma-postgredb
       volumes:
-        - name: yatai-postgredb
+        - name: gamma-postgredb
           persistentVolumeClaim:
-            claimName: yatai-postgres-pv-claim
+            claimName: gamma-postgres-pv-claim
 {{- end -}}

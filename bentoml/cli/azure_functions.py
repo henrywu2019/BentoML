@@ -25,7 +25,7 @@ from bentoml.cli.click_utils import (
 from bentoml.cli.deployment import _print_deployment_info, _print_deployments_info
 from bentoml.cli.utils import Spinner
 from bentoml.utils import get_default_yatai_client
-from bentoml.yatai.deployment.azure_functions.constants import (
+from bentoml.gamma.deployment.azure_functions.constants import (
     AZURE_FUNCTIONS_PREMIUM_PLAN_SKUS,
     AZURE_FUNCTIONS_AUTH_LEVELS,
     DEFAULT_MIN_INSTANCE_COUNT,
@@ -33,11 +33,11 @@ from bentoml.yatai.deployment.azure_functions.constants import (
     DEFAULT_PREMIUM_PLAN_SKU,
     DEFAULT_FUNCTION_AUTH_LEVEL,
 )
-from bentoml.yatai.deployment import ALL_NAMESPACE_TAG
+from bentoml.gamma.deployment import ALL_NAMESPACE_TAG
 from bentoml.exceptions import CLIException
 from bentoml.utils import status_pb_to_error_code_and_message
 
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.yatai.proto')
+yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
 
 
 def get_azure_functions_sub_command():

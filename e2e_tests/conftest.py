@@ -14,7 +14,7 @@ import docker
 # Append local bentoml repository path which contains the 'e2e_tests/' directory
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from bentoml.yatai.deployment.docker_utils import (  # noqa
+from bentoml.gamma.deployment.docker_utils import (  # noqa
     ensure_docker_available_or_raise,
 )
 from e2e_tests.cli_operations import delete_bento
@@ -90,7 +90,7 @@ def wait_until_container_ready(container_name, check_message, timeout_seconds=12
 @pytest.fixture(scope='session')
 def postgres_db_container_url():
     ensure_docker_available_or_raise()
-    container_name = f'e2e-test-yatai-service-postgres-db-{uuid.uuid4().hex[:6]}'
+    container_name = f'e2e-test-gamma-service-postgres-db-{uuid.uuid4().hex[:6]}'
     db_url = 'postgresql://postgres:postgres@localhost:5432/bentoml'
 
     command = [

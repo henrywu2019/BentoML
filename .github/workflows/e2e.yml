@@ -2,14 +2,14 @@ name: BentoML-E2E
 
 on:
   repository_dispatch:
-    types: [ test-e2e-yatai-command ]
+    types: [ test-e2e-gamma-command ]
 
 jobs:
-  e2e-yatai-service:
+  e2e-gamma-service:
     runs-on: ubuntu-latest
     if:
       github.event_name == 'repository_dispatch' &&
-      github.event.client_payload.slash_command.command == 'test-e2e-yatai' &&
+      github.event.client_payload.slash_command.command == 'test-e2e-gamma' &&
       github.event.client_payload.slash_command.args.named.sha != '' &&
       contains(github.event.client_payload.pull_request.head.sha, github.event.client_payload.slash_command.args.named.sha)
     services:
@@ -31,7 +31,7 @@ jobs:
           - 5432:5432
     steps:
       # Check out merge commit
-      - name: Fork based /e2e-test-yatai checkout
+      - name: Fork based /e2e-test-gamma checkout
         uses: actions/checkout@v2
         with:
           ref: 'refs/pull/${{ github.event.client_payload.pull_request.number }}/merge'

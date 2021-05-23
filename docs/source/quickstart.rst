@@ -174,10 +174,10 @@ BentoML also comes with a model management component called
 which provides a central hub for teams to manage and access packaged models via Web UI
 and API:
 
-.. image:: _static/img/yatai-service-web-ui-repository.png
+.. image:: _static/img/gamma-service-web-ui-repository.png
     :alt: BentoML YataiService Bento Repository Page
 
-.. image:: _static/img/yatai-service-web-ui-repository-detail.png
+.. image:: _static/img/gamma-service-web-ui-repository-detail.png
     :alt: BentoML YataiService Bento Details Page
 
 
@@ -192,7 +192,7 @@ packaged models:
       -v ~/bentoml:/bentoml \
       -p 3000:3000 \
       -p 50051:50051 \
-      bentoml/yatai-service:latest
+      bentoml/gamma-service:latest
 
 .. note::
 

@@ -91,29 +91,29 @@ YAML based configuration.
 +---------------+--------------------------------------------+-----------------------------------------+
 | logging       | feedback_log_filename                      | DEPRECATED                              |
 +---------------+--------------------------------------------+-----------------------------------------+
-| logging       | yatai_web_server_log_filename              | yatai.logging.path                      |
+| logging       | yatai_web_server_log_filename              | gamma.logging.path                      |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | url                                        | yatai.remote.url                        |
+| yatai_service | url                                        | gamma.remote.url                        |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | s3_signature_version                       | yatai.repository.s3.signature_version   |
+| yatai_service | s3_signature_version                       | gamma.repository.s3.signature_version   |
 +---------------+--------------------------------------------+-----------------------------------------+
 | yatai_service | repository_base_url                        | See Repository Base URL section         |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | db_url                                     | yatai.database.url                      |
+| yatai_service | db_url                                     | gamma.database.url                      |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | s3_endpoint_url                            | yatai.repository.s3.endpoint_url        |
+| yatai_service | s3_endpoint_url                            | gamma.repository.s3.endpoint_url        |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | default_namespace                          | yatai.namespace                         |
+| yatai_service | default_namespace                          | gamma.namespace                         |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | tls_root_ca_cert                           | yatai.remote.tls.root_ca_cert           |
+| yatai_service | tls_root_ca_cert                           | gamma.remote.tls.root_ca_cert           |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | tls_client_key                             | yatai.remote.tls.client_key             |
+| yatai_service | tls_client_key                             | gamma.remote.tls.client_key             |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | tls_client_cert                            | yatai.remote.tls.client_cert            |
+| yatai_service | tls_client_cert                            | gamma.remote.tls.client_cert            |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | access_token                               | yatai.remote.access_token               |
+| yatai_service | access_token                               | gamma.remote.access_token               |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai_service | access_token_header                        | yatai.remote.access_token_header        |
+| yatai_service | access_token_header                        | gamma.remote.access_token_header        |
 +---------------+--------------------------------------------+-----------------------------------------+
 | apiserver     | default_port                               | bento_server.port                       |
 +---------------+--------------------------------------------+-----------------------------------------+
@@ -129,8 +129,8 @@ YAML based configuration.
 +---------------+--------------------------------------------+-----------------------------------------+
 | apiserver     | default_gunicorn_workers_count             | bento_server.workers                    |
 +---------------+--------------------------------------------+-----------------------------------------+
-| yatai         | bento_uri_default_expiration               | yatai.repository.s3.expiration OR       |
-|               |                                            | yatai.repository.gcs.expiration         |
+| gamma         | bento_uri_default_expiration               | gamma.repository.s3.expiration OR       |
+|               |                                            | gamma.repository.gcs.expiration         |
 +---------------+--------------------------------------------+-----------------------------------------+
 
 Repository Base URL
@@ -145,7 +145,7 @@ the following in YAML.
 .. code-block:: yaml
     :caption: BentoML Configuration
 
-    yatai:
+    gamma:
         repository:
             type: file_system
             file_system:
@@ -157,7 +157,7 @@ YAML.
 .. code-block:: yaml
     :caption: BentoML Configuration
 
-    yatai:
+    gamma:
         repository:
             type: s3
             s3:

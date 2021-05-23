@@ -6,7 +6,7 @@ import subprocess
 import sys
 import bentoml
 from tests.bento_service_examples.onnxmlir_classifier import OnnxMlirClassifier
-from bentoml.yatai.client import YataiClient
+from bentoml.gamma.client import YataiClient
 
 test_data = np.array([[1, 2, 3, 4, 5]], dtype=np.float64)
 test_df = pandas.DataFrame(test_data, columns=['A', 'B', 'C', 'D', 'E'])

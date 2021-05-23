@@ -289,11 +289,11 @@ image and mount that `accessTokens.json` file to the running container.
 
 .. code-block:: bash
 
-    $ docker run -v ~/.azure/accessTokens.json:/home/.azure/accessTokens.json -p 50051:50051 -p 3000:3000 bentoml/yatai-service:latest
+    $ docker run -v ~/.azure/accessTokens.json:/home/.azure/accessTokens.json -p 50051:50051 -p 3000:3000 bentoml/gamma-service:latest
 
 
 After the YataiService docker container is running, in another terminal window, set
-yatai service address with `bentoml config set`
+gamma service address with `bentoml config set`
 
 .. code-block:: bash
 
@@ -319,7 +319,7 @@ Confirm the secrete is created successfully by using `kubectl describe` command
 
 
 
-Copy and paste the code below into a file named `yatai-service.yaml`
+Copy and paste the code below into a file named `gamma-service.yaml`
 
 .. code-block:: yaml
 
@@ -327,8 +327,8 @@ Copy and paste the code below into a file named `yatai-service.yaml`
     kind: Service
     metadata:
       labels:
-        app: yatai-service
-      name: yatai-service
+        app: gamma-service
+      name: gamma-service
     spec:
       ports:
       - name: grpc
@@ -338,28 +338,28 @@ Copy and paste the code below into a file named `yatai-service.yaml`
         port: 3000
         targetPort: 3000
       selector:
-        app: yatai-service
+        app: gamma-service
       type: LoadBalancer
     ---
     apiVersion: apps/v1
     kind: Deployment
     metadata:
       labels:
-        app: yatai-service
-      name: yatai-service
+        app: gamma-service
+      name: gamma-service
     spec:
       selector:
         matchLabels:
-          app: yatai-service
+          app: gamma-service
       template:
         metadata:
           labels:
-            app: yatai-service
+            app: gamma-service
         spec:
           containers:
-          - image: bentoml/yatai-service
+          - image: bentoml/gamma-service
             imagePullPolicy: IfNotPresent
-            name: yatai-service
+            name: gamma-service
             ports:
             - containerPort: 50051
             - containerPort: 3000
@@ -377,7 +377,7 @@ Run `kubectl apply` command to deploy Yatai service to the Kubernetes cluster
 
 .. code-block:: bash
 
-    $ kubectl apply -f yatai-service.yaml
+    $ kubectl apply -f gamma-service.yaml
 
 
 .. spelling::

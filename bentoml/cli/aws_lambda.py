@@ -29,10 +29,10 @@ from bentoml.cli.deployment import (
     _print_deployment_info,
     _print_deployments_info,
 )
-from bentoml.yatai.deployment import ALL_NAMESPACE_TAG
+from bentoml.gamma.deployment import ALL_NAMESPACE_TAG
 from bentoml.exceptions import CLIException
 
-yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.yatai.proto')
+yatai_proto = LazyLoader('yatai_proto', globals(), 'bentoml.gamma.proto')
 
 
 def get_aws_lambda_sub_command():

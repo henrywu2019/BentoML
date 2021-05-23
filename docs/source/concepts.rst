@@ -117,10 +117,10 @@ Listing recent BentoML bundles created:
 
 BentoML model registry web UI:
 
-.. image:: _static/img/yatai-service-web-ui-repository.png
+.. image:: _static/img/gamma-service-web-ui-repository.png
     :alt: BentoML YataiService Bento Repository Page
 
-.. image:: _static/img/yatai-service-web-ui-repository-detail.png
+.. image:: _static/img/gamma-service-web-ui-repository-detail.png
     :alt: BentoML YataiService Bento Details Page
 
 Creating BentoService
@@ -1102,12 +1102,12 @@ BentoService files to :code:`~/bentoml/repository/` directory and other metadata
 Users can also customize this to make it work for team settings, making it possible
 for a team of data scientists to easily share, use and deploy models and prediction
 services created by each other. To do so, the user will need to setup a host server
-that runs :code:`YataiService`, from BentoML cli command `yatai-service-start`:
+that runs :code:`YataiService`, from BentoML cli command `gamma-service-start`:
 
 .. code-block:: bash
 
-    > bentoml yatai-service-start --help
-    Usage: bentoml yatai-service-start [OPTIONS]
+    > bentoml gamma-service-start --help
+    Usage: bentoml gamma-service-start [OPTIONS]
 
       Start BentoML YataiService for model management and deployment
 
@@ -1128,7 +1128,7 @@ that runs :code:`YataiService`, from BentoML cli command `yatai-service-start`:
 
 
 BentoML provides a pre-built docker image for running YataiService. For each BentoML 
-release, a new image will be pushed to [docker hub](https://hub.docker.com/r/bentoml/yatai-service/tags) under :code:`bentoml/yatai-service` 
+release, a new image will be pushed to [docker hub](https://hub.docker.com/r/bentoml/gamma-service/tags) under :code:`bentoml/gamma-service`
 with the same image tag as the PyPI package version. For example, use the following 
 command to start a YataiService of BentoML version 0.8.6, loading data from your local
 BentoML repository under the local ``~/bentoml`` directory:
@@ -1138,7 +1138,7 @@ BentoML repository under the local ``~/bentoml`` directory:
     > docker run -v ~/bentoml:/bentoml \
         -p 3000:3000 \
         -p 50051:50051 \
-        bentoml/yatai-service:0.8.6 \
+        bentoml/gamma-service:0.8.6 \
         --db-url=sqlite:///bentoml/storage.db \
         --repo-base-url=/bentoml/repository
 
@@ -1152,7 +1152,7 @@ as AWS credentials for managing deployments created on AWS:
 
     > docker run -p 3000:3000 -p 50051:50051 \
         -e AWS_SECRET_ACCESS_KEY=... -e AWS_ACCESS_KEY_ID=...  \
-        bentoml/yatai-service \
+        bentoml/gamma-service \
         --db-url postgresql://scott:tiger@localhost:5432/bentomldb \
         --repo-base-url s3://my-bentoml-repo/
 

@@ -32,20 +32,20 @@ graft bentoml/server/static_content
 graft bentoml/configuration
 
 # include migration files
-graft bentoml/yatai/migrations
-include bentoml/yatai/alembic.ini
+graft bentoml/gamma/migrations
+include bentoml/gamma/alembic.ini
 
-# include yatai server UI distribution files
-graft bentoml/yatai/web/dist
+# include gamma server UI distribution files
+graft bentoml/gamma/web/dist
 
 # include Sagemaker deployment file
-include bentoml/yatai/deployment/sagemaker/nginx.conf
-include bentoml/yatai/deployment/sagemaker/serve
+include bentoml/gamma/deployment/sagemaker/nginx.conf
+include bentoml/gamma/deployment/sagemaker/serve
 
 # include files for Azure function deployment
-include bentoml/yatai/deployment/azure_functions/host.json
-include bentoml/yatai/deployment/azure_functions/local.settings.json
-include bentoml/yatai/deployment/azure_functions/Dockerfile
+include bentoml/gamma/deployment/azure_functions/host.json
+include bentoml/gamma/deployment/azure_functions/local.settings.json
+include bentoml/gamma/deployment/azure_functions/Dockerfile
 
 prune e2e_tests
 prune tests
