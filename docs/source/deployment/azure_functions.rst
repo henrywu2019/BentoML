@@ -249,7 +249,7 @@ Use `bentoml azure-functions list` to display all active deployments to Azure Fu
     $ bentoml azure-functions list
 
     # Sample output
-    NAME                  NAMESPACE    PLATFORM         BENTO_SERVICE                         STATUS    AGE
+    NAME                  NAMESPACE    PLATFORM         MODEL_VERSION                         STATUS    AGE
     iris-classifier-demo  dev          azure-functions  IrisClassifier:20200622131825_5788D9  running   26 minutes and 24.49 seconds
 
 

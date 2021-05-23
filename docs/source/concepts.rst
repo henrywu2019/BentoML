@@ -109,7 +109,7 @@ Listing recent BentoML bundles created:
 .. code-block:: bash
 
     > bentoml list
-    BENTO_SERVICE                         CREATED_AT        APIS                       ARTIFACTS
+    MODEL_VERSION                         CREATED_AT        APIS                       ARTIFACTS
     IrisClassifier:20200121114004_360ECB  2020-01-21 19:40  predict<DataframeInput>  model<SklearnModelArtifact>
     IrisClassifier:20200120082658_4169CF  2020-01-20 16:27  predict<DataframeInput>  clf<PickleArtifact>
     ...
@@ -1025,14 +1025,14 @@ list all the BentoService created:
 .. code-block:: bash
 
     > bentoml list
-    BENTO_SERVICE                                   AGE                  APIS                        ARTIFACTS
+    MODEL_VERSION                                   AGE                  APIS                        ARTIFACTS
     IrisClassifier:20200323212422_A1D30D            1 day and 22 hours   predict<DataframeInput>   model<SklearnModelArtifact>
     IrisClassifier:20200304143410_CD5F13            3 weeks and 4 hours  predict<DataframeInput>   model<SklearnModelArtifact>
     SentimentAnalysisService:20191219090607_189CFE  13 weeks and 6 days  predict<DataframeInput>   model<SklearnModelArtifact>
     TfModelService:20191216125343_06BCA3            14 weeks and 2 days  predict<JsonInput>        model<TensorflowSavedModelArtifact>
 
     > bentoml get IrisClassifier
-    BENTO_SERVICE                         CREATED_AT        APIS                       ARTIFACTS
+    MODEL_VERSION                         CREATED_AT        APIS                       ARTIFACTS
     IrisClassifier:20200121114004_360ECB  2020-01-21 19:45  predict<DataframeInput>  model<SklearnModelArtifact>
     IrisClassifier:20200121114004_360ECB  2020-01-21 19:40  predict<DataframeInput>  model<SklearnModelArtifact>
 

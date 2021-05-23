@@ -63,9 +63,9 @@ def parse_delete_targets_argument_callback(
 def _print_bento_table(bentos, wide=False):
     table = []
     if wide:
-        headers = ['BENTO_SERVICE', 'CREATED_AT', 'APIS', 'ARTIFACTS', 'LABELS', 'URI']
+        headers = ['MODEL_VERSION', 'CREATED_AT', 'APIS', 'ARTIFACTS', 'LABELS', 'URI']
     else:
-        headers = ['BENTO_SERVICE', 'AGE', 'APIS', 'ARTIFACTS', 'LABELS']
+        headers = ['MODEL_VERSION', 'AGE', 'APIS', 'ARTIFACTS', 'LABELS']
 
     for bento in bentos:
         artifacts = [

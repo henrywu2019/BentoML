@@ -155,7 +155,7 @@ def _print_deployments_table(deployments, wide=False):
             'NAME',
             'NAMESPACE',
             'PLATFORM',
-            'BENTO_SERVICE',
+            'MODEL_VERSION',
             'STATUS',
             'AGE',
             'LABELS',
@@ -165,7 +165,7 @@ def _print_deployments_table(deployments, wide=False):
             'NAME',
             'NAMESPACE',
             'PLATFORM',
-            'BENTO_SERVICE',
+            'MODEL_VERSION',
             'STATUS',
             'AGE',
         ]
