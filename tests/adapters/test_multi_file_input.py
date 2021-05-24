@@ -4,8 +4,8 @@ import io
 import pytest
 from urllib3.filepost import encode_multipart_formdata
 
-from bentoml.adapters import MultiFileInput
-from bentoml.types import HTTPRequest, InferenceTask
+from kappa.adapters import MultiFileInput
+from kappa.types import HTTPRequest, InferenceTask
 
 
 @pytest.fixture()

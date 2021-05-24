@@ -22,11 +22,11 @@ Prerequisites
 
   * Install instruction: https://docs.docker.com/install
 
-* Python 3.6 or above and required packages: `bentoml` and `scikit-learn`:
+* Python 3.6 or above and required packages: `kappa` and `scikit-learn`:
 
   * .. code-block:: bash
 
-        pip install bentoml scikit-learn
+        pip install kappa scikit-learn
 
 
 Deploying BentoService to Azure Container Instance
@@ -38,15 +38,15 @@ Kappa saved bundle for deployment:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
 Verify the saved bundle created:
 
 .. code-block:: bash
 
-    $ bentoml get IrisClassifier:latest
+    $ kappa get IrisClassifier:latest
 
     # sample output
     {
@@ -54,15 +54,15 @@ Verify the saved bundle created:
       "version": "20200121141808_FE78B5",
       "uri": {
         "type": "LOCAL",
-        "uri": "/Users/bozhaoyu/bentoml/repository/IrisClassifier/20200121141808_FE78B5"
+        "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
       "bentoServiceMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
         "env": {
-          "condaEnv": "name: bentoml-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
-          "pipDependencies": "bentoml==0.5.8\nscikit-learn",
+          "condaEnv": "name: kappa-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
+          "pipDependencies": "kappa==0.5.8\nscikit-learn",
           "pythonVersion": "3.7.3"
         },
         "artifacts": [
@@ -88,7 +88,7 @@ BentoService and available for sending test request:
 .. code-block:: bash
 
     # Start Kappa API server:
-    bentoml serve IrisClassifier:latest
+    kappa serve IrisClassifier:latest
 
 
 .. code-block:: bash
@@ -223,7 +223,7 @@ Build and push docker image to ACR
 .. code-block:: bash
 
     # Find the local path of the latest version IrisClassifier saved bundle
-    $ saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+    $ saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
 
     $ docker build -t bentomlirisclassifier.azurecr.io/iris-classifier $saved_path
 
@@ -247,7 +247,7 @@ Build and push docker image to ACR
     ---> Running in f2f0e8b74e01
     Removing intermediate container f2f0e8b74e01
     ---> 4a75521e1a9d
-    Step 15/15 : CMD ["bentoml serve-gunicorn /bento $FLAGS"]
+    Step 15/15 : CMD ["kappa serve-gunicorn /bento $FLAGS"]
     ---> Running in 5ebd6bb79077
     Removing intermediate container 5ebd6bb79077
     ---> 0cb0ac545be1

@@ -4,15 +4,15 @@ import stat
 import psutil  # noqa # pylint: disable=unused-import
 import pytest
 
-import bentoml
-from bentoml.adapters import DataframeInput
-from bentoml.frameworks.sklearn import SklearnModelArtifact
+import kappa
+from kappa.adapters import DataframeInput
+from kappa.frameworks.sklearn import SklearnModelArtifact
 
 
 def test_pip_packages_env_with_legacy_api():
-    @bentoml.env(pip_packages=['numpy', 'pandas', 'torch'])
-    class ServiceWithList(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    @kappa.env(pip_packages=['numpy', 'pandas', 'torch'])
+    class ServiceWithList(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -23,9 +23,9 @@ def test_pip_packages_env_with_legacy_api():
 
 
 def test_pip_packages_env():
-    @bentoml.env(pip_packages=['numpy', 'pandas', 'torch'])
-    class ServiceWithList(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    @kappa.env(pip_packages=['numpy', 'pandas', 'torch'])
+    class ServiceWithList(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -36,9 +36,9 @@ def test_pip_packages_env():
 
 
 def test_service_env_pip_packages(tmpdir):
-    @bentoml.env(pip_packages=['numpy', 'pandas', 'torch'])
-    class ServiceWithList(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    @kappa.env(pip_packages=['numpy', 'pandas', 'torch'])
+    class ServiceWithList(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -59,14 +59,14 @@ def test_service_env_pip_install_options(tmpdir):
     sample_trusted_host = "https://pip.my_pypi_index.com"
     sample_extra_index_url = "https://pip.my_pypi_index_ii.com"
 
-    @bentoml.env(
+    @kappa.env(
         pip_packages=['numpy', 'pandas', 'torch'],
         pip_index_url=sample_index_url,
         pip_trusted_host=sample_trusted_host,
         pip_extra_index_url=sample_extra_index_url,
     )
-    class ServiceWithList(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    class ServiceWithList(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -87,10 +87,10 @@ def test_service_env_pip_install_options(tmpdir):
 
 
 def test_artifact_pip_packages(tmpdir):
-    @bentoml.artifacts([SklearnModelArtifact('model')])
-    @bentoml.env(pip_packages=['scikit-learn==0.23.0'])
-    class ServiceWithList(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    @kappa.artifacts([SklearnModelArtifact('model')])
+    @kappa.env(pip_packages=['scikit-learn==0.23.0'])
+    class ServiceWithList(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -110,9 +110,9 @@ def test_can_instantiate_setup_sh_from_file(tmpdir):
     with open(script_path, 'w') as f:
         f.write('ls')
 
-    @bentoml.env(setup_sh=script_path)
-    class ServiceWithSetup(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    @kappa.env(setup_sh=script_path)
+    class ServiceWithSetup(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -131,9 +131,9 @@ def test_can_instantiate_setup_sh_from_file(tmpdir):
 
 @pytest.mark.skipif('not psutil.POSIX')
 def test_can_instantiate_setup_sh_from_txt(tmpdir):
-    @bentoml.env(setup_sh='ls')
-    class ServiceWithSetup(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    @kappa.env(setup_sh='ls')
+    class ServiceWithSetup(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -151,9 +151,9 @@ def test_can_instantiate_setup_sh_from_txt(tmpdir):
 
 
 def test_docker_base_image_env():
-    @bentoml.env(docker_base_image='continuumio/miniconda3:4.8.0')
-    class ServiceWithSetup(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    @kappa.env(docker_base_image='continuumio/miniconda3:4.8.0')
+    class ServiceWithSetup(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -162,11 +162,11 @@ def test_docker_base_image_env():
 
 
 def test_conda_channels_n_dependencies(tmpdir):
-    @bentoml.env(
-        conda_channels=["bentoml-test-channel"], conda_dependencies=["bentoml-test-lib"]
+    @kappa.env(
+        conda_channels=["kappa-test-channel"], conda_dependencies=["kappa-test-lib"]
     )
-    class ServiceWithCondaDeps(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    class ServiceWithCondaDeps(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -175,23 +175,23 @@ def test_conda_channels_n_dependencies(tmpdir):
 
     from pathlib import Path
 
-    from bentoml.utils.ruamel_yaml import YAML
+    from kappa.utils.ruamel_yaml import YAML
 
     yaml = YAML()
     env_yml = yaml.load(Path(os.path.join(tmpdir, 'environment.yml')))
-    assert 'bentoml-test-channel' in env_yml['channels']
+    assert 'kappa-test-channel' in env_yml['channels']
 
-    assert 'bentoml-test-lib' in env_yml['dependencies']
+    assert 'kappa-test-lib' in env_yml['dependencies']
 
 
 def test_conda_overwrite_channels(tmpdir):
-    @bentoml.env(
-        conda_channels=["bentoml-test-channel"],
-        conda_dependencies=["bentoml-test-lib"],
+    @kappa.env(
+        conda_channels=["kappa-test-channel"],
+        conda_dependencies=["kappa-test-lib"],
         conda_override_channels=True,
     )
-    class ServiceWithCondaDeps(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    class ServiceWithCondaDeps(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -200,11 +200,11 @@ def test_conda_overwrite_channels(tmpdir):
 
     from pathlib import Path
 
-    from bentoml.utils.ruamel_yaml import YAML
+    from kappa.utils.ruamel_yaml import YAML
 
     yaml = YAML()
     env_yml = yaml.load(Path(os.path.join(tmpdir, 'environment.yml')))
-    assert 'bentoml-test-channel' in env_yml['channels']
+    assert 'kappa-test-channel' in env_yml['channels']
     assert 'nodefaults' in env_yml['channels']
     assert len(env_yml['channels']) == 2
 
@@ -214,7 +214,7 @@ def test_conda_env_yml_file_option(tmpdir):
     with open(conda_env_yml_file, 'wb') as f:
         f.write(
             """
-name: bentoml-test-conda-env
+name: kappa-test-conda-env
 channels:
   - test-ch-1
   - test-ch-2
@@ -223,9 +223,9 @@ dependencies:
 """.encode()
         )
 
-    @bentoml.env(conda_env_yml_file=conda_env_yml_file)
-    class ServiceWithCondaDeps(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    @kappa.env(conda_env_yml_file=conda_env_yml_file)
+    class ServiceWithCondaDeps(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -234,7 +234,7 @@ dependencies:
 
     from pathlib import Path
 
-    from bentoml.utils.ruamel_yaml import YAML
+    from kappa.utils.ruamel_yaml import YAML
 
     yaml = YAML()
     env_yml = yaml.load(Path(os.path.join(tmpdir, 'environment.yml')))
@@ -249,7 +249,7 @@ def test_both_conda_env_yml_file_and_other_options(tmpdir):
     with open(conda_env_yml_file, 'wb') as f:
         f.write(
             """
-name: bentoml-test-conda-env
+name: kappa-test-conda-env
 channels:
   - test-ch-1
   - test-ch-2
@@ -258,13 +258,13 @@ dependencies:
 """.encode()
         )
 
-    @bentoml.env(
+    @kappa.env(
         conda_env_yml_file=conda_env_yml_file,
-        conda_channels=["bentoml-test-channel"],
-        conda_dependencies=["bentoml-test-lib"],
+        conda_channels=["kappa-test-channel"],
+        conda_dependencies=["kappa-test-lib"],
     )
-    class ServiceWithCondaDeps(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(), batch=True)
+    class ServiceWithCondaDeps(kappa.BentoService):
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             return df
 
@@ -273,13 +273,13 @@ dependencies:
 
     from pathlib import Path
 
-    from bentoml.utils.ruamel_yaml import YAML
+    from kappa.utils.ruamel_yaml import YAML
 
     yaml = YAML()
     env_yml = yaml.load(Path(os.path.join(tmpdir, 'environment.yml')))
     assert 'test-ch-1' not in env_yml['channels']
     assert 'test-ch-2' not in env_yml['channels']
-    assert 'bentoml-test-channel' in env_yml['channels']
+    assert 'kappa-test-channel' in env_yml['channels']
 
     assert 'test-dep-1' in env_yml['dependencies']
-    assert 'bentoml-test-lib' in env_yml['dependencies']
+    assert 'kappa-test-lib' in env_yml['dependencies']

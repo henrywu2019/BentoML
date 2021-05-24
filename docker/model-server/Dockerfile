@@ -16,9 +16,9 @@ ENV PYTHON_VERSION=$PYTHON_VERSION
 RUN conda install pip python=$PYTHON_VERSION -y
 
 # pre-install Kappa base dependencies
-RUN pip install bentoml[model_server]==$BENTOML_VERSION --no-cache-dir
+RUN pip install kappa[model_server]==$BENTOML_VERSION --no-cache-dir
 
 COPY entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT [ "entrypoint.sh" ]
-CMD ["bentoml", "serve-gunicorn", "/bento"]
+CMD ["kappa", "serve-gunicorn", "/bento"]

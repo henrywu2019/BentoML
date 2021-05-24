@@ -3,15 +3,15 @@ import sys
 
 import numpy as np
 
-import bentoml
-from bentoml.adapters import DataframeInput
-from bentoml.frameworks.paddle import PaddlePaddleModelArtifact
+import kappa
+from kappa.adapters import DataframeInput
+from kappa.frameworks.paddle import PaddlePaddleModelArtifact
 
 
-@bentoml.env(infer_pip_packages=True)
-@bentoml.artifacts([PaddlePaddleModelArtifact('model')])
-class PaddleService(bentoml.BentoService):
-    @bentoml.api(input=DataframeInput(), batch=True)
+@kappa.env(infer_pip_packages=True)
+@kappa.artifacts([PaddlePaddleModelArtifact('model')])
+class PaddleService(kappa.BentoService):
+    @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         input_data = df.to_numpy().astype(np.float32)
 

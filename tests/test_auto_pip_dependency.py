@@ -4,7 +4,7 @@ from sklearn import svm
 from sklearn import datasets
 from pkg_resources import parse_requirements
 
-from bentoml.saved_bundle import load_bento_service_metadata
+from kappa.saved_bundle import load_bento_service_metadata
 from tests.bento_service_examples.iris_classifier import (
     IrisClassifier,
     IrisClassifierPipEnv,
@@ -19,7 +19,7 @@ def test_auto_adapter_dependencies(bento_bundle_path):
     dependencies = requirements_txt_content.split('\n')
     dependencies = [dep.split('==')[0] for dep in dependencies]
     assert 'imageio' in dependencies
-    assert 'bentoml' in dependencies
+    assert 'kappa' in dependencies
 
     # Test that dependencies also wrote to BentoServiceMetadata config file
 
@@ -63,13 +63,13 @@ def test_auto_artifact_dependencies():
 
     # parse generated requirements.txt
     dependencies = _dependencies_to_requirements(_parse_dependencies(saved_path))
-    _assert_in_dependencies(['scikit-learn', 'bentoml'], dependencies)
+    _assert_in_dependencies(['scikit-learn', 'kappa'], dependencies)
 
     # Test that dependencies also wrote to BentoServiceMetadata config file
     bs_metadata = load_bento_service_metadata(saved_path)
     dependencies = bs_metadata.env.pip_packages
     dependencies = _dependencies_to_requirements(dependencies)
-    _assert_in_dependencies(['scikit-learn', 'bentoml'], dependencies)
+    _assert_in_dependencies(['scikit-learn', 'kappa'], dependencies)
 
     # Clean up
     delete_saved_bento_service(
@@ -86,7 +86,7 @@ def test_requirements_txt_file():
 
     dependencies = _dependencies_to_requirements(_parse_dependencies(saved_path))
     _assert_in_dependencies(
-        ['scikit-learn', 'azure-cli', 'psycopg2-binary', 'bentoml'], dependencies
+        ['scikit-learn', 'azure-cli', 'psycopg2-binary', 'kappa'], dependencies
     )
 
     bs_metadata = load_bento_service_metadata(saved_path)

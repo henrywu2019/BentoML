@@ -3,8 +3,8 @@ import os
 import pytest
 import pandas
 
-import bentoml
-from bentoml.gamma.client import GammaClient
+import kappa
+from kappa.gamma.client import GammaClient
 from tests.bento_service_examples.onnx_onnxruntime_iris_classifier import (
     OnnxIrisClassifier,
 )
@@ -50,7 +50,7 @@ def test_onnx_model_artifact_pack_modelproto_with_onnxruntime_backend(
     assert svc.predict(test_df)[0] == [1], "Run inference before saving onnx artifact"
 
     saved_path = svc.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
     assert loaded_svc.predict(test_df)[0] == [1], 'Run inference after save onnx model'
 
     # clean up saved bundle
@@ -70,7 +70,7 @@ def test_onnx_model_artifact_pack_model_file_path_with_onnxruntime_backend(
     assert svc.predict(test_df)[0] == [1], "Run inference before saving onnx artifact"
 
     saved_path = svc.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
     assert loaded_svc.predict(test_df)[0] == [1], 'Run inference after save onnx model'
 
     # clean up saved bundle

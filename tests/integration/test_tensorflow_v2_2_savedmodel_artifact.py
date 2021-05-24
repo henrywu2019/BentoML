@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 import tensorflow as tf
 
-import bentoml
+import kappa
 from tests.bento_service_examples.tensorflow_classifier import Tensorflow2Classifier
 from tests.integration.utils import (
     build_api_server_docker_image,
@@ -121,7 +121,7 @@ def test_tensorflow_2_artifact(svc):
 
 def test_tensorflow_2_artifact_loaded(svc):
     with export_service_bundle(svc) as saved_path:
-        svc_loaded = bentoml.load(saved_path)
+        svc_loaded = kappa.load(saved_path)
         assert (
             svc_loaded.predict1(test_tensor) == 15.0
         ), 'Inference on saved and loaded TF2 artifact does not match expected'

@@ -4,7 +4,7 @@ API Reference
 .. toctree::
   :glob:
 
-  bentoml
+  kappa
   adapters
   ../frameworks
   artifacts

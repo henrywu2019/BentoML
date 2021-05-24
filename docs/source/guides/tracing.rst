@@ -44,14 +44,14 @@ CLI argument `--config`:
 
 .. code-block:: bash
 
-    bentoml serve $BENTO_BUNDLE_PATH --config my_config_file.yml
+    kappa serve $BENTO_BUNDLE_PATH --config my_config_file.yml
 
 After Kappa v0.13.0, user will need to provide the config file path via environment
 variable :code:`BENTOML_CONFIG`:
 
 .. code-block:: bash
 
-    BENTOML_CONFIG=my_config_file.yml bentoml serve $BENTO_BUNDLE_PATH
+    BENTOML_CONFIG=my_config_file.yml kappa serve $BENTO_BUNDLE_PATH
 
 
 Similarly when serving with Kappa API server docker image, assuming you have a

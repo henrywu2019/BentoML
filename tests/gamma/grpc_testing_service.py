@@ -7,7 +7,7 @@ from prometheus_client import start_http_server
 
 from tests.gamma.proto.mock_service_pb2 import MockRequest, MockResponse
 from tests.gamma.proto.mock_service_pb2_grpc import MockServiceServicer
-from bentoml.utils import reserve_free_port
+from kappa.utils import reserve_free_port
 
 SpecialCaseFunction = Callable[[str, grpc.ServicerContext], str]
 

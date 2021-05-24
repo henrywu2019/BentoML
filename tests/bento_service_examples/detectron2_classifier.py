@@ -3,12 +3,12 @@
 
 import torch  # pylint: disable=import-error
 import numpy as np
-import bentoml
+import kappa
 import sys
 import traceback
 from typing import Dict
-from bentoml.frameworks.detectron import DetectronModelArtifact
-from bentoml.adapters import ImageInput
+from kappa.frameworks.detectron import DetectronModelArtifact
+from kappa.adapters import ImageInput
 from detectron2.data import transforms as T  # pylint: disable=import-error
 
 
@@ -17,10 +17,10 @@ def get_traceback_list():
     return traceback.format_exception(exc_type, exc_value, exc_traceback)
 
 
-@bentoml.env(infer_pip_packages=True)
-@bentoml.artifacts([DetectronModelArtifact('model')])
-class DetectronClassifier(bentoml.BentoService):
-    @bentoml.api(input=ImageInput(), batch=False)
+@kappa.env(infer_pip_packages=True)
+@kappa.artifacts([DetectronModelArtifact('model')])
+class DetectronClassifier(kappa.BentoService):
+    @kappa.api(input=ImageInput(), batch=False)
     def predict(self, original_image: np.ndarray) -> Dict:
         _aug = T.ResizeShortestEdge([800, 800], 1333)
 

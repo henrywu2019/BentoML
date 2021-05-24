@@ -4,7 +4,7 @@ import json
 
 from sklearn import datasets
 
-from bentoml.gamma.deployment.aws_utils import get_default_aws_region
+from kappa.gamma.deployment.aws_utils import get_default_aws_region
 from e2e_tests.cli_operations import delete_deployment
 from e2e_tests.aws_ec2.utils import (
     run_aws_ec2_create_command,
@@ -12,7 +12,7 @@ from e2e_tests.aws_ec2.utils import (
     send_test_data_to_multiple_endpoint,
 )
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_aws_ec2_deployment(iris_clf_service):
@@ -22,7 +22,7 @@ def test_aws_ec2_deployment(iris_clf_service):
     deployment_region = get_default_aws_region()
 
     create_deployment_command = [
-        'bentoml',
+        'kappa',
         'ec2',
         'deploy',
         deployment_name,

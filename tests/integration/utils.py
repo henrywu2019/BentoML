@@ -8,10 +8,10 @@ import time
 import urllib
 from contextlib import contextmanager
 
-import bentoml
-from bentoml.utils import cached_contextmanager
+import kappa
+from kappa.utils import cached_contextmanager
 
-logger = logging.getLogger("bentoml.tests")
+logger = logging.getLogger("kappa.tests")
 
 
 def _wait_until_api_server_ready(host_url, timeout, container=None, check_interval=1):
@@ -50,7 +50,7 @@ def _wait_until_api_server_ready(host_url, timeout, container=None, check_interv
 @contextmanager
 def export_service_bundle(bento_service):
     """
-    Export a bentoml service to a temporary directory, yield the path.
+    Export a kappa service to a temporary directory, yield the path.
     Delete the temporary directory on close.
     """
     import tempfile
@@ -61,9 +61,9 @@ def export_service_bundle(bento_service):
 
 
 @cached_contextmanager("{saved_bundle_path}, {image_tag}")
-def build_api_server_docker_image(saved_bundle_path, image_tag="test_bentoml_server"):
+def build_api_server_docker_image(saved_bundle_path, image_tag="test_kappa_server"):
     """
-    Build the docker image for a saved bentoml bundle, yield the docker image object.
+    Build the docker image for a saved kappa bundle, yield the docker image object.
     """
 
     import docker
@@ -86,13 +86,13 @@ def build_api_server_docker_image(saved_bundle_path, image_tag="test_bentoml_ser
 @cached_contextmanager("{image.id}, {enable_microbatch}")
 def run_api_server_docker_container(image, enable_microbatch=False, timeout=60):
     """
-    Launch a bentoml service container from a docker image, yields the host URL.
+    Launch a kappa service container from a docker image, yields the host URL.
     """
     import docker
 
     client = docker.from_env()
 
-    with bentoml.utils.reserve_free_port() as port:
+    with kappa.utils.reserve_free_port() as port:
         pass
     if enable_microbatch:
         command_args = "--enable-microbatch --workers 1 --mb-max-batch-size 2048"
@@ -120,7 +120,7 @@ def run_api_server_docker_container(image, enable_microbatch=False, timeout=60):
 @contextmanager
 def run_api_server(bundle_path, enable_microbatch=False, dev_server=False, timeout=20):
     """
-    Launch a bentoml service directly by the bentoml CLI, yields the host URL.
+    Launch a kappa service directly by the kappa CLI, yields the host URL.
     """
 
     if dev_server:
@@ -128,9 +128,9 @@ def run_api_server(bundle_path, enable_microbatch=False, dev_server=False, timeo
     else:
         serve_cmd = "serve-gunicorn"
 
-    with bentoml.utils.reserve_free_port() as port:
+    with kappa.utils.reserve_free_port() as port:
         my_env = os.environ.copy()
-        cmd = [sys.executable, "-m", "bentoml", serve_cmd]
+        cmd = [sys.executable, "-m", "kappa", serve_cmd]
         if port:
             cmd += ['--port', f'{port}']
         if enable_microbatch:

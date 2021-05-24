@@ -23,11 +23,11 @@ Before starting this guide, make sure you have the following:
 
   * Docker install instruction: https://docs.docker.com/get-docker/
 
-* Python 3.6 or above and required PyPi packages: `bentoml` and `scikit-learn`
+* Python 3.6 or above and required PyPi packages: `kappa` and `scikit-learn`
 
   * .. code-block:: bash
 
-          pip install bentoml scikit-learn
+          pip install kappa scikit-learn
 
 
 Kubeflow deployment with Kappa
@@ -38,16 +38,16 @@ Kappa saved bundle for deployment:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
 
 Use Kappa CLI tool to get the information of IrisClassifier created above
 
 .. code-block:: bash
 
-    $ bentoml get IrisClassifier:latest
+    $ kappa get IrisClassifier:latest
 
 
     # Sample output
@@ -56,15 +56,15 @@ Use Kappa CLI tool to get the information of IrisClassifier created above
       "version": "20200121141808_FE78B5",
       "uri": {
         "type": "LOCAL",
-        "uri": "/Users/bozhaoyu/bentoml/repository/IrisClassifier/20200121141808_FE78B5"
+        "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
       "bentoServiceMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
         "env": {
-          "condaEnv": "name: bentoml-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
-          "pipDependencies": "bentoml==0.5.8\nscikit-learn",
+          "condaEnv": "name: kappa-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
+          "pipDependencies": "kappa==0.5.8\nscikit-learn",
           "pythonVersion": "3.7.3"
         },
         "artifacts": [
@@ -90,7 +90,7 @@ Deploy BentoService to Kubeflow
 
 Kappa provides a convenient way to containerize the model API server with Docker:
 
-    1. Find the SavedBundle directory with `bentoml get` command
+    1. Find the SavedBundle directory with `kappa get` command
 
     2. Run docker build with the SavedBundle directory which contains a generated Dockerfile
 
@@ -99,7 +99,7 @@ Kappa provides a convenient way to containerize the model API server with Docker
 .. code-block:: bash
 
     # Find the local path of the latest version IrisClassifier saved bundle
-    saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+    saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
 
 
     # Replace {docker_username} with your Docker Hub username

@@ -4,8 +4,8 @@ import torch
 import coremltools as ct
 from coremltools.models import MLModel
 
-import bentoml
-from bentoml.gamma.client import GammaClient
+import kappa
+from kappa.gamma.client import GammaClient
 from tests.bento_service_examples.coreml_classifier import CoreMLClassifier
 from tests.integration.test_pytorch_model_artifact import PytorchModel
 from tests.integration.test_pytorch_model_artifact import test_df
@@ -42,7 +42,7 @@ def test_pytorch_artifact_pack(coreml_classifier_class):
     assert svc.predict(test_df) == 5.0, 'Run inference before save the artifact'
 
     saved_path = svc.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
     assert loaded_svc.predict(test_df) == 5.0, 'Run inference from saved artifact'
 
     # clean up saved bundle

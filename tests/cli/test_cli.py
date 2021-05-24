@@ -7,14 +7,14 @@ import pytest
 from click.testing import CliRunner
 from humanfriendly import format_size
 
-from bentoml.cli.bento_service import create_bento_service_cli
-from bentoml.utils.docker_utils import (
+from kappa.cli.bento_service import create_bento_service_cli
+from kappa.utils.docker_utils import (
     validate_tag,
     to_valid_docker_image_name,
     to_valid_docker_image_version,
 )
-from bentoml.cli.utils import echo_docker_api_result
-from bentoml.exceptions import BentoMLException, GammaDeploymentException
+from kappa.cli.utils import echo_docker_api_result
+from kappa.exceptions import BentoMLException, GammaDeploymentException
 
 
 def generate_test_input_file():
@@ -118,7 +118,7 @@ def test_run_command_with_input_file(bento_bundle_path):
 
 def test_echo_docker_api_result_build():
     build_stream = [
-        {'stream': 'Step 1/2 : FROM bentoml/model-server:0.8.1'},
+        {'stream': 'Step 1/2 : FROM kappa/model-server:0.8.1'},
         {'stream': '\n'},
         {'stream': ' ---> f034fa23264c\n'},
         {'stream': 'Step 2/2 : COPY . /bento'},
@@ -130,7 +130,7 @@ def test_echo_docker_api_result_build():
     ]
 
     expected = [
-        "Step 1/2 : FROM bentoml/model-server:0.8.1",
+        "Step 1/2 : FROM kappa/model-server:0.8.1",
         " ---> f034fa23264c",
         "Step 2/2 : COPY . /bento",
         " ---> Using cache",
@@ -214,7 +214,7 @@ def test_gunicorn_serve_command():
     gunicorn_cmd = cli.commands["serve-gunicorn"]
 
     with mock.patch(
-        "bentoml.cli.bento_service.start_prod_server"
+        "kappa.cli.bento_service.start_prod_server"
     ) as mocked_start_prod_server:
         runner.invoke(
             gunicorn_cmd, ["/"],
@@ -267,7 +267,7 @@ def test_serve_command():
     serve_cmd = cli.commands["serve"]
 
     with mock.patch(
-        "bentoml.cli.bento_service.start_dev_server",
+        "kappa.cli.bento_service.start_dev_server",
     ) as mocked_start_dev_server:
         runner.invoke(
             serve_cmd, ["/"],

@@ -10,16 +10,16 @@ import uuid
 import psutil  # noqa # pylint: disable=unused-import
 import pytest
 
-import bentoml
+import kappa
 import docker
-from bentoml.configuration import LAST_PYPI_RELEASE_VERSION
-from bentoml.exceptions import InvalidArgument
-from bentoml.saved_bundle.loader import load_from_dir
-from bentoml.gamma.client import get_gamma_client
-from bentoml.gamma.deployment.docker_utils import ensure_docker_available_or_raise
-from bentoml.gamma.db.stores.label import _validate_labels
+from kappa.configuration import LAST_PYPI_RELEASE_VERSION
+from kappa.exceptions import InvalidArgument
+from kappa.saved_bundle.loader import load_from_dir
+from kappa.gamma.client import get_gamma_client
+from kappa.gamma.deployment.docker_utils import ensure_docker_available_or_raise
+from kappa.gamma.db.stores.label import _validate_labels
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_validate_labels_fails():
@@ -72,7 +72,7 @@ def wait_until_container_ready(container_name, check_message, timeout_seconds=12
 def gamma_server_container():
     ensure_docker_available_or_raise()
 
-    gamma_docker_image_tag = f'bentoml/gamma-service:{LAST_PYPI_RELEASE_VERSION}'
+    gamma_docker_image_tag = f'kappa/gamma-service:{LAST_PYPI_RELEASE_VERSION}'
     container_name = f'e2e-test-gamma-service-container-{uuid.uuid4().hex[:6]}'
     port = '50055'
     command = [
@@ -117,7 +117,7 @@ class TestModel(object):
 )
 @pytest.mark.skipif('not psutil.POSIX')
 def test_save_load(gamma_server_container, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=1)(
+    example_bento_service_class = kappa.ver(major=2, minor=1)(
         example_bento_service_class
     )
 
@@ -140,7 +140,7 @@ def test_save_load(gamma_server_container, example_bento_service_class):
 )
 @pytest.mark.skipif('not psutil.POSIX')
 def test_push(gamma_server_container, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=2)(
+    example_bento_service_class = kappa.ver(major=2, minor=2)(
         example_bento_service_class
     )
 
@@ -160,7 +160,7 @@ def test_push(gamma_server_container, example_bento_service_class):
 )
 @pytest.mark.skipif('not psutil.POSIX')
 def test_pull(gamma_server_container, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=3)(
+    example_bento_service_class = kappa.ver(major=2, minor=3)(
         example_bento_service_class
     )
 
@@ -180,7 +180,7 @@ def test_pull(gamma_server_container, example_bento_service_class):
 )
 @pytest.mark.skipif('not psutil.POSIX')
 def test_push_with_labels(gamma_server_container, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=2)(
+    example_bento_service_class = kappa.ver(major=2, minor=2)(
         example_bento_service_class
     )
 
@@ -205,7 +205,7 @@ def test_push_with_labels(gamma_server_container, example_bento_service_class):
 )
 @pytest.mark.skipif('not psutil.POSIX')
 def test_pull_with_labels(gamma_server_container, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=3)(
+    example_bento_service_class = kappa.ver(major=2, minor=3)(
         example_bento_service_class
     )
 
@@ -233,7 +233,7 @@ def test_pull_with_labels(gamma_server_container, example_bento_service_class):
 )
 @pytest.mark.skipif('not psutil.POSIX')
 def test_get(gamma_server_container, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=4)(
+    example_bento_service_class = kappa.ver(major=2, minor=4)(
         example_bento_service_class
     )
 
@@ -253,7 +253,7 @@ def test_get(gamma_server_container, example_bento_service_class):
 )
 @pytest.mark.skipif('not psutil.POSIX')
 def test_list(gamma_server_container, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=5)(
+    example_bento_service_class = kappa.ver(major=2, minor=5)(
         example_bento_service_class
     )
     yc = get_gamma_client(gamma_server_container)
@@ -272,7 +272,7 @@ def test_list(gamma_server_container, example_bento_service_class):
 )
 @pytest.mark.skipif('not psutil.POSIX')
 def test_load(gamma_server_container, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=5)(
+    example_bento_service_class = kappa.ver(major=2, minor=5)(
         example_bento_service_class
     )
     yc = get_gamma_client(gamma_server_container)
@@ -287,7 +287,7 @@ def test_load(gamma_server_container, example_bento_service_class):
 
 @pytest.mark.skipif('not psutil.POSIX')
 def test_load_from_dir(example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=6)(
+    example_bento_service_class = kappa.ver(major=2, minor=6)(
         example_bento_service_class
     )
     yc = get_gamma_client()

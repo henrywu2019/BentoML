@@ -7,14 +7,14 @@ import requests
 
 from e2e_tests.cli_operations import delete_deployment
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_azure_function_deployment(iris_clf_service):
     random_hash = uuid.uuid4().hex[:6]
     deployment_name = f'test-azures-{random_hash}'
     command = f"""\
-bentoml azure-functions deploy {deployment_name} -b {iris_clf_service} \
+kappa azure-functions deploy {deployment_name} -b {iris_clf_service} \
 --location westus --max-burst 2 --function-auth-level anonymous --debug\
 """.split(
         ' '

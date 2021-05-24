@@ -4,7 +4,7 @@ import requests
 from time import sleep
 import subprocess
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def get_instance_ip_from_id(instance_id, api, region):
@@ -87,7 +87,7 @@ def run_aws_ec2_create_command(deploy_command):
     """
     :return: deployment_success, deployment_endpoint
     """
-    logger.info(f"Running bentoml deploy command: {' '.join(deploy_command)}")
+    logger.info(f"Running kappa deploy command: {' '.join(deploy_command)}")
     with subprocess.Popen(
         deploy_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     ) as proc:

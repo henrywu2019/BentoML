@@ -5,10 +5,10 @@ import mock
 import pytest
 from mock import patch
 
-import bentoml
-from bentoml.adapters import DataframeInput
-from bentoml.exceptions import BentoMLException
-from bentoml.saved_bundle import load_bento_service_metadata
+import kappa
+from kappa.adapters import DataframeInput
+from kappa.exceptions import BentoMLException
+from kappa.saved_bundle import load_bento_service_metadata
 from tests.conftest import delete_saved_bento_service
 
 
@@ -18,7 +18,7 @@ class TestModel(object):
 
 
 def test_save_and_load_model(tmpdir, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=10)(
+    example_bento_service_class = kappa.ver(major=2, minor=10)(
         example_bento_service_class
     )
 
@@ -30,7 +30,7 @@ def test_save_and_load_model(tmpdir, example_bento_service_class):
     version = "test_" + uuid.uuid4().hex
 
     svc.save_to_dir(str(tmpdir), version=version)
-    model_service = bentoml.load(str(tmpdir))
+    model_service = kappa.load(str(tmpdir))
 
     expected_version = "2.10.{}".format(version)
     assert model_service.version == expected_version
@@ -52,7 +52,7 @@ def test_warning_when_save_without_declared_artifact(
 ):
     svc = example_bento_service_class()
 
-    with mock.patch('bentoml.saved_bundle.bundler.logger') as log_mock:
+    with mock.patch('kappa.saved_bundle.bundler.logger') as log_mock:
         svc.save_to_dir(str(tmpdir))
         log_mock.warning.assert_called_once_with(
             "Missing declared artifact '%s' for BentoService '%s'",
@@ -62,7 +62,7 @@ def test_warning_when_save_without_declared_artifact(
 
 
 def test_pack_on_bento_service_instance(tmpdir, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=10)(
+    example_bento_service_class = kappa.ver(major=2, minor=10)(
         example_bento_service_class
     )
     test_model = TestModel()
@@ -75,7 +75,7 @@ def test_pack_on_bento_service_instance(tmpdir, example_bento_service_class):
     svc.set_version(version)
 
     svc.save_to_dir(str(tmpdir))
-    model_service = bentoml.load(str(tmpdir))
+    model_service = kappa.load(str(tmpdir))
 
     expected_version = "2.10.{}".format(version)
     assert model_service.version == expected_version
@@ -89,7 +89,7 @@ def test_pack_on_bento_service_instance(tmpdir, example_bento_service_class):
 
 
 def test_pack_metadata_invalid(example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=10)(
+    example_bento_service_class = kappa.ver(major=2, minor=10)(
         example_bento_service_class
     )
     test_model = TestModel()
@@ -106,7 +106,7 @@ def test_pack_metadata_invalid(example_bento_service_class):
 
 
 def test_pack_metadata(tmpdir, example_bento_service_class):
-    example_bento_service_class = bentoml.ver(major=2, minor=10)(
+    example_bento_service_class = kappa.ver(major=2, minor=10)(
         example_bento_service_class
     )
     test_model = TestModel()
@@ -124,23 +124,23 @@ def test_pack_metadata(tmpdir, example_bento_service_class):
     assert svc.artifacts.get('model').metadata == model_metadata
 
     svc.save_to_dir(str(tmpdir))
-    model_service = bentoml.load(str(tmpdir))
+    model_service = kappa.load(str(tmpdir))
 
     # check loaded metadata is correct
     assert model_service.artifacts.get('model').metadata == model_metadata
 
 
-class TestBentoWithOutArtifact(bentoml.BentoService):
+class TestBentoWithOutArtifact(kappa.BentoService):
     __test__ = False
 
-    @bentoml.api(input=DataframeInput(), batch=True)
+    @kappa.api(input=DataframeInput(), batch=True)
     def test(self, df):
         return df
 
 
 def test_bento_without_artifact(tmpdir):
     TestBentoWithOutArtifact().save_to_dir(str(tmpdir))
-    model_service = bentoml.load(str(tmpdir))
+    model_service = kappa.load(str(tmpdir))
     assert model_service.test(1) == 1
     assert len(model_service.inference_apis) == 1
 
@@ -155,7 +155,7 @@ def test_save_duplicated_bento_exception_raised(example_bento_service_class):
     assert svc.version == svc_metadata.version
 
     with pytest.raises(BentoMLException):
-        with patch.object(bentoml.BentoService, 'save_to_dir') as save_to_dir_method:
+        with patch.object(kappa.BentoService, 'save_to_dir') as save_to_dir_method:
             # attempt to save again
             svc.save()
             save_to_dir_method.assert_not_called()
@@ -174,7 +174,7 @@ def test_pyversion_warning_on_load(
     tmp_path_factory, capsys, example_bento_service_class
 ):
     # Set logging level so version mismatch warnings are outputted
-    bentoml.configure_logging(logging_level=logging.WARNING)
+    kappa.configure_logging(logging_level=logging.WARNING)
     # (Note that logger.warning() is captured by pytest in stdout, NOT stdlog.
     #  So the warning is in capsys.readouterr().out, NOT caplog.text.)
 
@@ -185,15 +185,15 @@ def test_pyversion_warning_on_load(
     # Should not warn for default `_python_version` value
     match_dir = tmp_path_factory.mktemp("match")
     svc.save_to_dir(match_dir)
-    _ = bentoml.load(str(match_dir))
+    _ = kappa.load(str(match_dir))
     assert "Python version mismatch" not in capsys.readouterr().out
 
     # Should warn for any version mismatch (major, minor, or micro)
     svc.env._python_version = "X.Y.Z"
     mismatch_dir = tmp_path_factory.mktemp("mismatch")
     svc.save_to_dir(mismatch_dir)
-    _ = bentoml.load(str(mismatch_dir))
+    _ = kappa.load(str(mismatch_dir))
     assert "Python version mismatch" in capsys.readouterr().out
 
     # Reset logging level to default
-    bentoml.configure_logging()
+    kappa.configure_logging()

@@ -9,26 +9,26 @@ Run on Google Colab
 -------------------
 
 Try out this quickstart guide interactively on Google Colab:
-`Open in Colab <https://colab.research.google.com/github/bentoml/Kappa/blob/master/guides/quick-start/bentoml-quick-start-guide.ipynb>`_.
+`Open in Colab <https://colab.research.google.com/github/kappa/Kappa/blob/master/guides/quick-start/kappa-quick-start-guide.ipynb>`_.
 
 Note that Docker containerization does not work in the Colab environment.
 
 Run notebook locally
 --------------------
 
-Install `Kappa <https://github.com/bentoml/Kappa>`_. This requires python 3.6 or
+Install `Kappa <https://github.com/kappa/Kappa>`_. This requires python 3.6 or
 above, install with :code:`pip` command:
 
 .. code-block:: bash
 
-    pip install bentoml
+    pip install kappa
 
 When referring the latest documentation instead of the stable release doc, it is
 required to install the preview release of Kappa:
 
 .. code-block:: bash
 
-    pip install --pre -U bentoml
+    pip install --pre -U kappa
 
 
 Download and run the notebook in this quickstart guide:
@@ -36,18 +36,18 @@ Download and run the notebook in this quickstart guide:
 .. code-block:: bash
 
     # Download Kappa git repo
-    git clone http://github.com/bentoml/bentoml
-    cd bentoml
+    git clone http://github.com/kappa/kappa
+    cd kappa
 
     # Install jupyter and other dependencies
     pip install jupyter
     pip install -r ./guides/quick-start/requirements.txt
 
     # Run the notebook
-    jupyter notebook ./guides/quick-start/bentoml-quick-start-guide.ipynb
+    jupyter notebook ./guides/quick-start/kappa-quick-start-guide.ipynb
 
 
-Alternatively, :download:`Download the notebook <https://raw.githubusercontent.com/bentoml/Kappa/master/guides/quick-start/bentoml-quick-start-guide.ipynb>`
+Alternatively, :download:`Download the notebook <https://raw.githubusercontent.com/kappa/Kappa/master/guides/quick-start/kappa-quick-start-guide.ipynb>`
 (Right-Click and then "Save Link As") to your notebook workspace.
 
 To build a model server docker image, you will also need to install
@@ -86,9 +86,9 @@ serving the iris classifier model trained above:
     # iris_classifier.py
     import pandas as pd
 
-    from bentoml import env, artifacts, api, BentoService
-    from bentoml.adapters import DataframeInput
-    from bentoml.frameworks.sklearn import SklearnModelArtifact
+    from kappa import env, artifacts, api, BentoService
+    from kappa.adapters import DataframeInput
+    from kappa.frameworks.sklearn import SklearnModelArtifact
 
     @env(infer_pip_packages=True)
     @artifacts([SklearnModelArtifact('model')])
@@ -137,7 +137,7 @@ increases the overall throughput of the API server.
 
 Besides `DataframeInput`, Kappa also supports API input types such as `JsonInput`,
 `ImageInput`, `FileInput` and
-`more <https://docs.bentoml.org/en/latest/api/adapters.html>`_. `DataframeInput` and
+`more <https://docs.kappa.org/en/latest/api/adapters.html>`_. `DataframeInput` and
 `TfTensorInput` only support inference API with `batch=True`, while other input adapters
 support either batch or single-item API.
 
@@ -165,12 +165,12 @@ in the Kappa format for distribution and deployment:
 
 
 Kappa stores all packaged model files under the
-`~/bentoml/repository/{service_name}/{service_version}` directory by default. The
+`~/kappa/repository/{service_name}/{service_version}` directory by default. The
 Kappa packaged model format contains all the code, files, and configs required to
 run and deploy the model.
 
 Kappa also comes with a model management component called
-`GammaService <https://docs.bentoml.org/en/latest/concepts.html#customizing-model-repository>`_,
+`GammaService <https://docs.kappa.org/en/latest/concepts.html#customizing-model-repository>`_,
 which provides a central hub for teams to manage and access packaged models via Web UI
 and API:
 
@@ -189,10 +189,10 @@ packaged models:
 
     docker run \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      -v ~/bentoml:/bentoml \
+      -v ~/kappa:/kappa \
       -p 3000:3000 \
       -p 50051:50051 \
-      bentoml/gamma-service:latest
+      kappa/gamma-service:latest
 
 .. note::
 
@@ -201,15 +201,15 @@ packaged models:
     It is the file path where the BentoService saved bundle is stored.
     Kappa locally keeps track of all the BentoService SavedBundle you've created,
     you can also find the saved_path of your BentoService from the output of
-    :code:`bentoml list -o wide`, :code:`bentoml get IrisClassifier -o wide` and
-    :code:`bentoml get IrisClassifier:latest` command.
+    :code:`kappa list -o wide`, :code:`kappa get IrisClassifier -o wide` and
+    :code:`kappa get IrisClassifier:latest` command.
 
     A quick way of getting the :code:`saved_path` from the command line is via the
     `--print-location` option:
 
     .. code-block:: bash
 
-        saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+        saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
 
 
 
@@ -217,20 +217,20 @@ Model Serving via REST API
 --------------------------
 
 To start a REST API model server locally with the IrisClassifier saved above, use the
-`bentoml serve` command followed by service name and version tag:
+`kappa serve` command followed by service name and version tag:
 
 .. code-block:: bash
 
-    bentoml serve IrisClassifier:latest
+    kappa serve IrisClassifier:latest
 
 Alternatively, use the saved path to load and serve the Kappa packaged model directly:
 
 .. code-block:: bash
 
     # Find the local path of the latest version IrisClassifier saved bundle
-    saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+    saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
 
-    bentoml serve $saved_path
+    kappa serve $saved_path
 
 The `IrisClassifier` model is now served at `localhost:5000`. Use `curl` command to send
 a prediction request:
@@ -260,7 +260,7 @@ The Kappa API server also provides a simple web UI dashboard.
 Go to http://localhost:5000 in the browser and use the Web UI to send
 prediction request:
 
-.. image:: https://raw.githubusercontent.com/bentoml/Kappa/master/guides/quick-start/bento-api-server-web-ui.png
+.. image:: https://raw.githubusercontent.com/kappa/Kappa/master/guides/quick-start/bento-api-server-web-ui.png
   :width: 600
   :alt: Kappa API Server Web UI Screenshot
 
@@ -272,11 +272,11 @@ The Kappa CLI supports loading and running a packaged model from CLI. With the `
 
 .. code-block:: bash
 
-  bentoml run IrisClassifier:latest predict --input '[[5.1, 3.5, 1.4, 0.2]]'
+  kappa run IrisClassifier:latest predict --input '[[5.1, 3.5, 1.4, 0.2]]'
 
-  bentoml run IrisClassifier:latest predict --input-file './iris_data.csv'
+  kappa run IrisClassifier:latest predict --input-file './iris_data.csv'
 
-More details on running packaged models that use other input adapters here: `Offline Batch Serving <https://docs.bentoml.org/en/latest/guides/batch_serving.html>`_
+More details on running packaged models that use other input adapters here: `Offline Batch Serving <https://docs.kappa.org/en/latest/guides/batch_serving.html>`_
 
 Containerize Model API Server
 -----------------------------
@@ -290,7 +290,7 @@ container image for serving the `IrisClassifier` prediction service created abov
 
 .. code-block:: bash
 
-    bentoml containerize IrisClassifier:latest -t iris-classifier
+    kappa containerize IrisClassifier:latest -t iris-classifier
 
 
 Start a container with the docker image built from the previous step:
@@ -305,8 +305,8 @@ convenient way to containerize the model API server manually:
 
 .. code-block:: bash
 
-    # 1. Find the SavedBundle directory with `bentoml get` command
-    saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+    # 1. Find the SavedBundle directory with `kappa get` command
+    saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
 
     # 2. Run `docker build` with the SavedBundle directory which contains a generated Dockerfile
     docker build -t iris-classifier $saved_path
@@ -316,9 +316,9 @@ convenient way to containerize the model API server manually:
 
 
 This made it possible to deploy Kappa bundled ML models with platforms such as
-`Kubeflow <https://www.kubeflow.org/docs/components/serving/bentoml/>`_,
-`Knative <https://knative.dev/community/samples/serving/machinelearning-python-bentoml/>`_,
-`Kubernetes <https://docs.bentoml.org/en/latest/deployment/kubernetes.html>`_, which
+`Kubeflow <https://www.kubeflow.org/docs/components/serving/kappa/>`_,
+`Knative <https://knative.dev/community/samples/serving/machinelearning-python-kappa/>`_,
+`Kubernetes <https://docs.kappa.org/en/latest/deployment/kubernetes.html>`_, which
 provides advanced model deployment features such as auto-scaling, A/B testing,
 scale-to-zero, canary rollout and multi-armed bandit.
 

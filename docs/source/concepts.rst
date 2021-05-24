@@ -9,27 +9,27 @@ And to do so, Data Scientists need tools that help them build and ship predictio
 services, instead of uploading pickled model files or Protobuf files to a server and
 hoping things work out.
 
-:ref:`bentoml.BentoService <bentoml-bentoservice-label>` is the base class for building
+:ref:`kappa.BentoService <kappa-bentoservice-label>` is the base class for building
 such prediction services using Kappa. And here's the minimal BentoService example from
 the :doc:`Getting Started Guide <quickstart>`:
 
 .. code-block:: python
 
-  import bentoml
-  from bentoml.adapters import DataframeInput
-  from bentoml.frameworks.sklearn import SklearnModelArtifact
+  import kappa
+  from kappa.adapters import DataframeInput
+  from kappa.frameworks.sklearn import SklearnModelArtifact
 
-  @bentoml.env(infer_pip_packages=True)
-  @bentoml.artifacts([SklearnModelArtifact('model')])
-  class IrisClassifier(bentoml.BentoService):
+  @kappa.env(infer_pip_packages=True)
+  @kappa.artifacts([SklearnModelArtifact('model')])
+  class IrisClassifier(kappa.BentoService):
 
-      @bentoml.api(input=DataframeInput(), batch=True)
+      @kappa.api(input=DataframeInput(), batch=True)
       def predict(self, df):
           return self.artifacts.model.predict(df)
 
 
 Each BentoService class can contain multiple ML models through the
-:code:`@bentoml.artifact` decorator. And multiple inference APIs can be defined for
+:code:`@kappa.artifact` decorator. And multiple inference APIs can be defined for
 client to access this service. Each inference API requires a input type specified via an
 :code:`InputAdapter` instance, which defines the expected input data type and data
 format of this API. Kappa provides API input adapters that covers most model serving
@@ -40,7 +40,7 @@ type, e.g. :code:`@api(input=DataframeInput(), output=JsonOutput())`.
 
 
 Once an ML model is trained, a BentoService instance can bundle with the trained model
-with the :ref:`BentoService#pack <bentoml-bentoservice-pack-label>` method. This trained
+with the :ref:`BentoService#pack <kappa-bentoservice-pack-label>` method. This trained
 model is then accessible within the API function code via 
 :code:`self.artifacts.ARTIFACT_NAME`. In the example above, the artifact is initialized
 with the name ``"model"``, so the user code can get access to the model via 
@@ -52,7 +52,7 @@ BentoService to disk, distribute the saved file, and reproduce the exact same pr
 service in testing and production environment.
 
 To save the BentoService instance, simply call the
-:ref:`BentoService#save <bentoml-bentoservice-save-label>` method. In this process, 
+:ref:`BentoService#save <kappa-bentoservice-save-label>` method. In this process,
 Kappa will:
 
 #. Saves the model based on the ML training framework and artifact type used
@@ -89,7 +89,7 @@ Kappa will:
 
 
 The Kappa bundle is a file directory that contains all the code, files and configs
-that are required to run this prediction service. A :code:`bentoml.yml` file can be
+that are required to run this prediction service. A :code:`kappa.yml` file can be
 found under the directory that contains all the metadata about this bundle and how it
 can be used for inference workload.
 
@@ -108,7 +108,7 @@ Listing recent Kappa bundles created:
 
 .. code-block:: bash
 
-    > bentoml list
+    > kappa list
     MODEL_VERSION                         CREATED_AT        APIS                       ARTIFACTS
     IrisClassifier:20200121114004_360ECB  2020-01-21 19:40  predict<DataframeInput>  model<SklearnModelArtifact>
     IrisClassifier:20200120082658_4169CF  2020-01-20 16:27  predict<DataframeInput>  clf<PickleArtifact>
@@ -127,7 +127,7 @@ Creating BentoService
 ---------------------
 
 Users create a prediction service by subclassing
-:ref:`bentoml.BentoService <bentoml-bentoservice-label>`. It is recommended to always
+:ref:`kappa.BentoService <kappa-bentoservice-label>`. It is recommended to always
 put the source code of your BentoService class into an individual Python file and check
 it into source control(e.g. git) along with your model training code. Kappa is
 designed to be easily inserted to the end of your model training workflow, where you can
@@ -139,7 +139,7 @@ import your BentoService class and create a Kappa bundle.
     the class itself should not be defined in a Jupyter notebook cell or a python
     interactive shell. You can however use the :code:`%writefile` magic command in
     Jupyter notebook to write the BentoService class definition to a separate file, see
-    example in `Kappa quickstart notebook <https://github.com/bentoml/Kappa/blob/master/guides/quick-start/bentoml-quick-start-guide.ipynb>`_.
+    example in `Kappa quickstart notebook <https://github.com/kappa/Kappa/blob/master/guides/quick-start/kappa-quick-start-guide.ipynb>`_.
 
 
 BentoService can only be created using Python as the programming language. But it is
@@ -152,7 +152,7 @@ Support for R and Spark MLlib models are on our roadmap.
 Defining Service Environment
 ----------------------------
 
-The :ref:`bentoml.env <bentoml-env-label>` decorator is the API for defining the
+The :ref:`kappa.env <kappa-env-label>` decorator is the API for defining the
 environment settings and dependencies of your prediction service. And here are the types
 of dependencies supported by Kappa:
 
@@ -165,10 +165,10 @@ python class, simply use the :code:`infer_pip_packages=True` option.
 
 .. code-block:: python
 
-  @bentoml.env(infer_pip_packages=True)
-  class ExamplePredictionService(bentoml.BentoService):
+  @kappa.env(infer_pip_packages=True)
+  class ExamplePredictionService(kappa.BentoService):
 
-      @bentoml.api(input=DataframeInput(), batch=True)
+      @kappa.api(input=DataframeInput(), batch=True)
       def predict(self, df):
           return self.artifacts.model.predict(df)
 
@@ -186,15 +186,15 @@ Specifying PyPI packages through the :code:`pip_packages` option:
 
 .. code-block:: python
 
-  @bentoml.env(
+  @kappa.env(
     pip_packages=[
       'scikit-learn==0.24.1',
       'pandas @https://github.com/pypa/pip/archive/1.3.1.zip',
     ]
   )
-  class ExamplePredictionService(bentoml.BentoService):
+  class ExamplePredictionService(kappa.BentoService):
 
-      @bentoml.api(input=DataframeInput(), batch=True)
+      @kappa.api(input=DataframeInput(), batch=True)
       def predict(self, df):
           return self.artifacts.model.predict(df)
 
@@ -206,12 +206,12 @@ packages through the `requirements_txt_file` option:
 
 .. code-block:: python
 
-  @bentoml.env(
+  @kappa.env(
     requirements_txt_file="./requirements.txt"
   )
-  class ExamplePredictionService(bentoml.BentoService):
+  class ExamplePredictionService(kappa.BentoService):
 
-      @bentoml.api(input=DataframeInput(), batch=True)
+      @kappa.api(input=DataframeInput(), batch=True)
       def predict(self, df):
           return self.artifacts.model.predict(df)
 
@@ -227,15 +227,15 @@ hosting a H2O model that requires the h2o conda packages:
 
 .. code-block:: python
 
-    @bentoml.artifacts([H2oModelArtifact('model')])
-    @bentoml.env(
+    @kappa.artifacts([H2oModelArtifact('model')])
+    @kappa.env(
       pip_packages=['pandas', 'h2o==3.24.0.2'],
       conda_channels=['h2oai'],
       conda_dependencies=['h2o==3.24.0.2']
     )
-    class ExamplePredictionService(bentoml.BentoService):
+    class ExamplePredictionService(kappa.BentoService):
 
-      @bentoml.api(input=DataframeInput(), batch=True)
+      @kappa.api(input=DataframeInput(), batch=True)
       def predict(self, df):
           return self.artifacts.model.predict(df)
 
@@ -247,8 +247,8 @@ all your conda dependencies to be installed from the channels specified in the
 
 .. code-block:: python
 
-    @bentoml.artifacts([H2oModelArtifact('model')])
-    @bentoml.env(
+    @kappa.artifacts([H2oModelArtifact('model')])
+    @kappa.env(
       conda_channels=['h2oai'],
       conda_dependencies=['h2o==3.24.0.2'],
       conda_override_channels=True,
@@ -264,11 +264,11 @@ Custom Docker base image
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Kappa's default Docker base image is released on
-`dockerhub r/bentoml <https://hub.docker.com/r/bentoml/model-server/tags>`_, its build
+`dockerhub r/kappa <https://hub.docker.com/r/kappa/model-server/tags>`_, its build
 process can be found under the
-`./docker directory in Kappa source code <https://github.com/bentoml/Kappa/tree/master/docker/model-server>`_.
+`./docker directory in Kappa source code <https://github.com/kappa/Kappa/tree/master/docker/model-server>`_.
 
-The `bentoml containerize` is equivalent to running `docker build .` in the Kappa
+The `kappa containerize` is equivalent to running `docker build .` in the Kappa
 bundle directory with a few additional options. The docker image build process copies
 all the bundle files to the docker image, makes sure it has the right python version,
 and installs all its PyPI and conda dependencies.
@@ -293,7 +293,7 @@ Kappa makes it really easy to switch between base images by specifying a
     right version of :code:`Python` pre-installed.
     If the conda packages are being used, an installation of conda on the base image
     will also be required.
-    This `bentoml-init.sh <https://github.com/bentoml/Kappa/blob/master/bentoml/saved_bundle/bentoml-init.sh>`_
+    This `kappa-init.sh <https://github.com/kappa/Kappa/blob/master/kappa/saved_bundle/kappa-init.sh>`_
     script is how Kappa initializes a docker image with files under a Kappa bundle
 
 
@@ -304,7 +304,7 @@ in at `~90MB`.
 .. code-block:: python
 
   # e.g. using Kappa slim image
-  @env(docker_base_image="bentoml/model-server:0.12.0-slim-py37")
+  @env(docker_base_image="kappa/model-server:0.12.0-slim-py37")
   @artifacts([SklearnModelArtifact('model')])
   class ExamplePredictionService(BentoService):
     ...
@@ -312,7 +312,7 @@ in at `~90MB`.
 However, as with using any alternative Docker base image, there are a few things to keep
 in mind. Firstly, you should manually select the right slim image for your bundle. For
 example, if you used Kappa version 0.11.0 and Python 3.7 to create your Kappa
-bundle, you would use `bentoml/model-server:0.11.0-slim-py37`. Currently, Kappa support
+bundle, you would use `kappa/model-server:0.11.0-slim-py37`. Currently, Kappa support
 Python 3.6, 3.7, and 3.8.
 
 Additionally, unlike the default docker base image, the slim image does not come with
@@ -329,14 +329,14 @@ install extra system dependencies or do other setups required by the prediction 
 
 .. code-block:: python
 
-  @bentoml.env(
+  @kappa.env(
       infer_pip_packages=True,
       setup_sh="./my_init_script.sh"
   )
-  class ExamplePredictionService(bentoml.BentoService):
+  class ExamplePredictionService(kappa.BentoService):
       ...
 
-  @bentoml.env(
+  @kappa.env(
       infer_pip_packages=True,
       setup_sh="""\
   #!/bin/bash
@@ -346,12 +346,12 @@ install extra system dependencies or do other setups required by the prediction 
   ...
     """
   )
-  class ExamplePredictionService(bentoml.BentoService):
+  class ExamplePredictionService(kappa.BentoService):
       ...
 
 If you have a specific docker base image that you would like to use for your API server,
 we are working on custom docker base image support. 
-`contact us <mailto:contact@bentoml.ai>`_ if you are interested in helping with beta
+`contact us <mailto:contact@kappa.ai>`_ if you are interested in helping with beta
 testing this feature.
 
 
@@ -366,28 +366,28 @@ Thus Kappa asks the user to choose the right Artifact class for the machine lear
 framework they are using. Kappa has built-in artifact class for most popular ML
 frameworks and you can find the list of supported frameworks
 :doc:`here <api/artifacts>`. If the ML framework you're using is not in the list,
-`let us know <mailto:contact@bentoml.ai>`_  and we will consider adding its support.
+`let us know <mailto:contact@kappa.ai>`_  and we will consider adding its support.
 
 To specify the model artifacts required by your BentoService, use the
-:code:`bentoml.artifacts` decorator and gives it a list of artifact types. And give
+:code:`kappa.artifacts` decorator and gives it a list of artifact types. And give
 each model artifact a unique name within the prediction service. Here's an example
 prediction service that packs two trained models:
 
 .. code-block:: python
 
-    import bentoml
-    from bentoml.adapters import DataframeInput
-    from bentoml.frameworks.sklearn import SklearnModelArtifact
-    from bentoml.frameworks.xgboost import XgboostModelArtifact
+    import kappa
+    from kappa.adapters import DataframeInput
+    from kappa.frameworks.sklearn import SklearnModelArtifact
+    from kappa.frameworks.xgboost import XgboostModelArtifact
 
-    @bentoml.env(infer_pip_packages=True)
-    @bentoml.artifacts([
+    @kappa.env(infer_pip_packages=True)
+    @kappa.artifacts([
         SklearnModelArtifact("model_a"),
         XgboostModelArtifact("model_b")
     ])
-    class MyPredictionService(bentoml.BentoService):
+    class MyPredictionService(kappa.BentoService):
 
-        @bentoml.api(input=DataframeInput(), batch=True)
+        @kappa.api(input=DataframeInput(), batch=True)
         def predict(self, df):
             # assume the output of model_a will be the input of model_b in this example:
             df = self.artifacts.model_a.predict(df)
@@ -450,17 +450,17 @@ There are three ways to access the metadata information:
 
     .. code-block:: bash
 
-        $ bentoml get MyPredictionService:latest
+        $ kappa get MyPredictionService:latest
 
 * REST API access
 
-    1. Start the API server with `bentoml serve` or `bentoml serve-gunicorn`
+    1. Start the API server with `kappa serve` or `kappa serve-gunicorn`
 
         .. code-block:: bash
 
-            $ bentoml serve MyPredictionService:latest
+            $ kappa serve MyPredictionService:latest
             # or
-            $ bentoml serve-gunicorn MyPredictionService:latest
+            $ kappa serve-gunicorn MyPredictionService:latest
 
     2. Access the metadata information at the URL path `/metadata`
 
@@ -468,7 +468,7 @@ There are three ways to access the metadata information:
 
     .. code-block:: python
 
-        from bentoml import load
+        from kappa import load
 
         svc = load('path_to_bento_service')
         print(svc.artifacts['model'].metadata)
@@ -480,7 +480,7 @@ API Function and Adapters
 BentoService API is the entry point for clients to access a prediction service. It is
 defined by writing the API handling function(a class method within the BentoService
 class) which gets called when client sent an inference request. User will need to
-annotate this method with :code:`@bentoml.api` decorator and pass in an InputAdapter
+annotate this method with :code:`@kappa.api` decorator and pass in an InputAdapter
 instance, which defines the desired input format for the API function. For example,
 if your model is expecting tabular data as input, you can use :code:`DataframeInput`
 for your API,
@@ -490,9 +490,9 @@ e.g.:
 .. code-block:: python
 
 
-  class ExamplePredictionService(bentoml.BentoService):
+  class ExamplePredictionService(kappa.BentoService):
 
-      @bentoml.api(input=DataframeInput(), batch=True)
+      @kappa.api(input=DataframeInput(), batch=True)
       def predict(self, df):
           assert type(df) == pandas.core.frame.DataFrame
           return postprocessing(model_output)
@@ -511,9 +511,9 @@ API function. For example:
 
   from my_lib import preprocessing, postprocessing, fetch_user_profile_from_database
 
-  class ExamplePredictionService(bentoml.BentoService):
+  class ExamplePredictionService(kappa.BentoService):
 
-      @bentoml.api(input=DataframeInput(), batch=True)
+      @kappa.api(input=DataframeInput(), batch=True)
       def predict(self, df):
           user_profile_column = fetch_user_profile_from_database(df['user_id'])
           df['user_profile'] = user_profile_column
@@ -552,10 +552,10 @@ The output of an API function can be any of the follow types:
     List[JSON]
 
     # For fine-grained control
-    bentoml.types.InferenceResult
+    kappa.types.InferenceResult
     # For batch enabled API
     List[InferenceResult]
-    bentoml.types.InferenceError
+    kappa.types.InferenceError
     # For batch enabled API
     List[InferenceError]
 
@@ -596,9 +596,9 @@ or malformatted. Users can do this via the InferenceTask#discard API, here's an 
 .. code-block:: python
 
     from typings import List
-    from bentoml import env, artifacts, api, BentoService
-    from bentoml.adapters import JsonInput
-    from bentoml.types import JsonSerializable, InferenceTask  # type annotations are optional
+    from kappa import env, artifacts, api, BentoService
+    from kappa.adapters import JsonInput
+    from kappa.types import JsonSerializable, InferenceTask  # type annotations are optional
 
     @env(infer_pip_packages=True)
     @artifacts([SklearnModelArtifact('classifier')])
@@ -625,12 +625,12 @@ back to tasks that have not yet been discarded.
 
 .. code-block:: python
 
-    import bentoml
-    from bentoml.types import JsonSerializable, InferenceTask, InferenceError  # type annotations are optional
+    import kappa
+    from kappa.types import JsonSerializable, InferenceTask, InferenceError  # type annotations are optional
 
-    class MyService(bentoml.BentoService):
+    class MyService(kappa.BentoService):
 
-        @bentoml.api(input=JsonInput(), batch=False)
+        @kappa.api(input=JsonInput(), batch=False)
         def predict(self, parsed_json: JsonSerializable, task: InferenceTask) -> InferenceResult:
             if task.http_headers['Accept'] == "application/json":
                 predictions = self.artifact.model.predict([parsed_json])
@@ -646,12 +646,12 @@ Or when ``batch=True``:
 
 .. code-block:: python
 
-    import bentoml
-    from bentoml.types import JsonSerializable, InferenceTask, InferenceError  # type annotations are optional
+    import kappa
+    from kappa.types import JsonSerializable, InferenceTask, InferenceError  # type annotations are optional
 
-    class MyService(bentoml.BentoService):
+    class MyService(kappa.BentoService):
 
-        @bentoml.api(input=JsonInput(), batch=True)
+        @kappa.api(input=JsonInput(), batch=True)
         def predict(self, parsed_json_list: List[JsonSerializable], tasks: List[InferenceTask]) -> List[InferenceResult]:
             rv = []
             predictions = self.artifact.model.predict(parsed_json_list)
@@ -679,13 +679,13 @@ service that supports different access patterns for different clients, e.g.:
 
   from my_lib import process_custom_json_format
 
-  class ExamplePredictionService(bentoml.BentoService):
+  class ExamplePredictionService(kappa.BentoService):
 
-      @bentoml.api(input=DataframeInput(), batch=True)
+      @kappa.api(input=DataframeInput(), batch=True)
       def predict(self, df: pandas.Dataframe):
           return self.artifacts.model.predict(df)
 
-      @bentoml.api(input=JsonInput(), batch=True)
+      @kappa.api(input=JsonInput(), batch=True)
       def predict_json(self, json_arr):
           df = process_custom_json_format(json-arr)
           return self.artifacts.model.predict(df)
@@ -699,7 +699,7 @@ Operational API
 
 User can also create APIs that, instead of handling an inference request, handles
 request for updating prediction service configs or retraining models with new arrived
-data. Operational API is still a beta feature, `contact us <mailto:contact@bentoml.ai>`_
+data. Operational API is still a beta feature, `contact us <mailto:contact@kappa.ai>`_
 if you're interested in learning more.
 
 
@@ -721,9 +721,9 @@ and host them when starting the API server.
         def predict(self, df):
             return self.artifacts.model.predict(df)
 
-Here is an example project `bentoml/gallery@master/scikit-learn/iris-classifier <https://github.com/bentoml/gallery/blob/master/scikit-learn/iris-classifier/iris-classifier.ipynb>`_
+Here is an example project `kappa/gallery@master/scikit-learn/iris-classifier <https://github.com/kappa/gallery/blob/master/scikit-learn/iris-classifier/iris-classifier.ipynb>`_
 
-.. image:: https://raw.githubusercontent.com/bentoml/gallery/master/scikit-learn/iris-classifier/webui.png
+.. image:: https://raw.githubusercontent.com/kappa/gallery/master/scikit-learn/iris-classifier/webui.png
 
 
 Saving BentoService
@@ -734,8 +734,8 @@ the steps required to create a BentoService instance and save it for serving:
 
 #. Model Training
 #. Create BentoService instance
-#. Pack trained model artifacts with :ref:`BentoService#pack <bentoml-bentoservice-pack-label>`
-#. Save to a Bento with :ref:`BentoService#save <bentoml-bentoservice-save-label>`
+#. Pack trained model artifacts with :ref:`BentoService#pack <kappa-bentoservice-pack-label>`
+#. Save to a Bento with :ref:`BentoService#save <kappa-bentoservice-save-label>`
 
 As illustrated in the previous example:
 
@@ -763,18 +763,18 @@ As illustrated in the previous example:
 How Save Works
 ^^^^^^^^^^^^^^
 
-:ref:`BentoService#save_to_dir(path) <bentoml-bentoservice-save-label>` is the primitive
+:ref:`BentoService#save_to_dir(path) <kappa-bentoservice-save-label>` is the primitive
 operation for saving the BentoService to a target directory. :code:`save_to_dir`
 serializes the model artifacts and saves all the related code, dependencies and configs
 into a the given path.
 
-Users can then use :ref:`bentoml.load(path) <bentoml-load-label>` to load the exact same
+Users can then use :ref:`kappa.load(path) <kappa-load-label>` to load the exact same
 BentoService instance back from the saved file path. This made it possible to easily
 distribute your prediction service to test and production environment in a consistent
 manner.
 
-:ref:`BentoService#save <bentoml-bentoservice-save-label>` essentially calls
-:ref:`BentoService#save_to_dir(path) <bentoml-bentoservice-save-label>` under the hood,
+:ref:`BentoService#save <kappa-bentoservice-save-label>` essentially calls
+:ref:`BentoService#save_to_dir(path) <kappa-bentoservice-save-label>` under the hood,
 while keeping track of all the prediction services you've created and maintaining the
 file structures and metadata information of those saved bundle.
 
@@ -810,27 +810,27 @@ server right away with:
 
 .. code-block:: bash
 
-    bentoml serve IrisClassifier:latest
+    kappa serve IrisClassifier:latest
 
 
-If you are using :ref:`save_to_dir <bentoml-bentoservice-save-label>` , or you have 
+If you are using :ref:`save_to_dir <kappa-bentoservice-save-label>` , or you have
 directly copied the saved Bento file directory from other machine, the BentoService
 ``IrisClassifier`` is not registered with your local Kappa repository. In that case,
 you can still start the server by providing the path to the saved BentoService:
 
 .. code-block:: bash
 
-    bentoml serve $saved_path
+    kappa serve $saved_path
 
 The REST API request format is determined by each API's input type and input config.
-More details can be found in the :ref:`Kappa API InputAdapters References <bentoml-api-adapters-label>`.
+More details can be found in the :ref:`Kappa API InputAdapters References <kappa-api-adapters-label>`.
 
-For running production API server, make sure to run ``bentoml serve-gunicorn`` 
+For running production API server, make sure to run ``kappa serve-gunicorn``
 command instead, or use Docker container for deployment.
 
 .. code-block:: bash
 
-    bentoml serve-gunicorn $saved_path --workers=2 --port=3000
+    kappa serve-gunicorn $saved_path --workers=2 --port=3000
 
 
 API Server Dockerization
@@ -846,7 +846,7 @@ text document that contains all the commands required for creating a docker imag
 .. code-block:: bash
 
     # Find the local path of the latest version IrisClassifier saved bundle
-    saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+    saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
 
 
     # Build docker image using saved_path directory as the build context, replace the
@@ -913,13 +913,13 @@ A saved BentoService can also be loaded from saved Bento and access directly fro
 Python. There are two main ways this can be done:
 
 
-1. Load from a saved Bento directory with :ref:`bentoml.load(path) <bentoml-load-label>` API
+1. Load from a saved Bento directory with :ref:`kappa.load(path) <kappa-load-label>` API
 
   .. code-block:: python
 
-      import bentoml
+      import kappa
 
-      bento_service = bentoml.load(saved_path)
+      bento_service = kappa.load(saved_path)
       result = bento_service.predict(input_data)
 
   The benefit of this approach is its flexibility. Users can easily invoke saved
@@ -934,14 +934,14 @@ Python. There are two main ways this can be done:
 
   .. code-block:: bash
 
-    saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+    saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
 
     pip install $saved_path
 
 
   .. code-block:: python
 
-    # Your bentoML model class name will become the package name
+    # Your kappa model class name will become the package name
     import IrisClassifier
 
     installed_svc = IrisClassifier.load()
@@ -968,19 +968,19 @@ Python. There are two main ways this can be done:
 3. Command-Line Access
 
   Similarly, a Bento can be loaded for inference using the Kappa CLI tool. The CLI
-  command `bentoml` is available once you've installed Kappa via ``pip``. And to load
-  a saved Bento file, simply use the :code:`bentoml run` command and give it either the
+  command `kappa` is available once you've installed Kappa via ``pip``. And to load
+  a saved Bento file, simply use the :code:`kappa run` command and give it either the
   name and version pair, or the Bento's path:
 
   .. code-block:: bash
       
       # With BentoService name and version pair
-      bentoml run IrisClassifier:latest predict --input '[[5.1, 3.5, 1.4, 0.2]]'
-      bentoml run IrisClassifier:latest predict --input-file './iris_test_data.csv'
+      kappa run IrisClassifier:latest predict --input '[[5.1, 3.5, 1.4, 0.2]]'
+      kappa run IrisClassifier:latest predict --input-file './iris_test_data.csv'
 
       # With BentoService's saved path
-      bentoml run $saved_path predict --input '[[5.1, 3.5, 1.4, 0.2]]'
-      bentoml run $saved_path predict --input-file './iris_test_data.csv'
+      kappa run $saved_path predict --input '[[5.1, 3.5, 1.4, 0.2]]'
+      kappa run $saved_path predict --input-file './iris_test_data.csv'
 
   Or if you have already pip-installed the BentoService, it provides a CLI command
   specifically for this BentoService. The CLI command is the same as the BentoService
@@ -1006,51 +1006,51 @@ CLI command. This made it very easy to integrate with Job scheduling tools such 
 
 For batch serving on large dataset running on a cluster, Kappa team is building a
 Apache Spark UDF loader for BentoService. This feature is still in Beta testing phase. 
-`Contact us <mailto:contact@bentoml.ai>`_ if you are interested in helping to test or
+`Contact us <mailto:contact@kappa.ai>`_ if you are interested in helping to test or
 improve it.
 
 
 Model Management
 ----------------
 
-By default, :ref:`BentoService#save <bentoml-bentoservice-save-label>` will save all the
-BentoService saved bundle files under :code:`~/bentoml/repository/` directory, following
+By default, :ref:`BentoService#save <kappa-bentoservice-save-label>` will save all the
+BentoService saved bundle files under :code:`~/kappa/repository/` directory, following
 by the service name and service version as sub-directory name. And all the metadata of
 saved BentoService are stored in a local SQLite database file at
-:code:`~/bentoml/storage.db`.
+:code:`~/kappa/storage.db`.
 
 Users can easily query and use all the BentoService they have created, for example, to
 list all the BentoService created:
 
 .. code-block:: bash
 
-    > bentoml list
+    > kappa list
     MODEL_VERSION                                   AGE                  APIS                        ARTIFACTS
     IrisClassifier:20200323212422_A1D30D            1 day and 22 hours   predict<DataframeInput>   model<SklearnModelArtifact>
     IrisClassifier:20200304143410_CD5F13            3 weeks and 4 hours  predict<DataframeInput>   model<SklearnModelArtifact>
     SentimentAnalysisService:20191219090607_189CFE  13 weeks and 6 days  predict<DataframeInput>   model<SklearnModelArtifact>
     TfModelService:20191216125343_06BCA3            14 weeks and 2 days  predict<JsonInput>        model<TensorflowSavedModelArtifact>
 
-    > bentoml get IrisClassifier
+    > kappa get IrisClassifier
     MODEL_VERSION                         CREATED_AT        APIS                       ARTIFACTS
     IrisClassifier:20200121114004_360ECB  2020-01-21 19:45  predict<DataframeInput>  model<SklearnModelArtifact>
     IrisClassifier:20200121114004_360ECB  2020-01-21 19:40  predict<DataframeInput>  model<SklearnModelArtifact>
 
-    > bentoml get IrisClassifier:20200323212422_A1D30D
+    > kappa get IrisClassifier:20200323212422_A1D30D
     {
       "name": "IrisClassifier",
       "version": "20200323212422_A1D30D",
       "uri": {
         "type": "LOCAL",
-        "uri": "/Users/chaoyu/bentoml/repository/IrisClassifier/20200323212422_A1D30D"
+        "uri": "/Users/chaoyu/kappa/repository/IrisClassifier/20200323212422_A1D30D"
       },
       "bentoServiceMetadata": {
         "name": "IrisClassifier",
         "version": "20200323212422_A1D30D",
         "createdAt": "2020-03-24T04:24:39.517239Z",
         "env": {
-          "condaEnv": "name: bentoml-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.5\n- pip\n",
-          "pipDependencies": "bentoml==0.6.3\nscikit-learn",
+          "condaEnv": "name: kappa-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.5\n- pip\n",
+          "pipDependencies": "kappa==0.6.3\nscikit-learn",
           "pythonVersion": "3.7.5"
         },
         "artifacts": [
@@ -1079,7 +1079,7 @@ BentoService directly. For example:
 
 .. code-block:: bash
 
-    > bentoml serve IrisClassifier:latest
+    > kappa serve IrisClassifier:latest
     * Serving Flask app "IrisClassifier" (lazy loading)
     * Environment: production
       WARNING: This is a development server. Do not use it in a production deployment.
@@ -1087,7 +1087,7 @@ BentoService directly. For example:
     * Debug mode: off
     * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
-    > bentoml run IrisClassifier:latest predict --input '[[5.1, 3.5, 1.4, 0.2]]'
+    > kappa run IrisClassifier:latest predict --input '[[5.1, 3.5, 1.4, 0.2]]'
     [0]
 
 
@@ -1096,8 +1096,8 @@ Customizing Model Repository
 
 Kappa has a standalone component :code:`GammaService` that handles model storage and
 deployment. Kappa uses a local :code:`GammaService` instance by default, which saves
-BentoService files to :code:`~/bentoml/repository/` directory and other metadata to
-:code:`~/bentoml/storage.db`.
+BentoService files to :code:`~/kappa/repository/` directory and other metadata to
+:code:`~/kappa/storage.db`.
 
 Users can also customize this to make it work for team settings, making it possible
 for a team of data scientists to easily share, use and deploy models and prediction
@@ -1106,8 +1106,8 @@ that runs :code:`GammaService`, from Kappa cli command `gamma-service-start`:
 
 .. code-block:: bash
 
-    > bentoml gamma-service-start --help
-    Usage: bentoml gamma-service-start [OPTIONS]
+    > kappa gamma-service-start --help
+    Usage: kappa gamma-service-start [OPTIONS]
 
       Start Kappa GammaService for model management and deployment
 
@@ -1128,19 +1128,19 @@ that runs :code:`GammaService`, from Kappa cli command `gamma-service-start`:
 
 
 Kappa provides a pre-built docker image for running GammaService. For each Kappa
-release, a new image will be pushed to [docker hub](https://hub.docker.com/r/bentoml/gamma-service/tags) under :code:`bentoml/gamma-service`
+release, a new image will be pushed to [docker hub](https://hub.docker.com/r/kappa/gamma-service/tags) under :code:`kappa/gamma-service`
 with the same image tag as the PyPI package version. For example, use the following 
 command to start a GammaService of Kappa version 0.8.6, loading data from your local
-Kappa repository under the local ``~/bentoml`` directory:
+Kappa repository under the local ``~/kappa`` directory:
 
 .. code-block:: bash
 
-    > docker run -v ~/bentoml:/bentoml \
+    > docker run -v ~/kappa:/kappa \
         -p 3000:3000 \
         -p 50051:50051 \
-        bentoml/gamma-service:0.8.6 \
-        --db-url=sqlite:///bentoml/storage.db \
-        --repo-base-url=/bentoml/repository
+        kappa/gamma-service:0.8.6 \
+        --db-url=sqlite:///kappa/storage.db \
+        --repo-base-url=/kappa/repository
 
 
 The recommended way to deploy :code:`GammaService` for teams, is to back it by a
@@ -1152,17 +1152,17 @@ as AWS credentials for managing deployments created on AWS:
 
     > docker run -p 3000:3000 -p 50051:50051 \
         -e AWS_SECRET_ACCESS_KEY=... -e AWS_ACCESS_KEY_ID=...  \
-        bentoml/gamma-service \
+        kappa/gamma-service \
         --db-url postgresql://scott:tiger@localhost:5432/bentomldb \
-        --repo-base-url s3://my-bentoml-repo/
+        --repo-base-url s3://my-kappa-repo/
 
     * Starting Kappa GammaService gRPC Server
     * Debug mode: off
     * Web UI: running on http://0.0.0.0:3000
     * Running on 0.0.0.0:50051 (Press CTRL+C to quit)
-    * Usage: `bentoml config set gamma_service.url=0.0.0.0:50051`
-    * Help and instructions: https://docs.bentoml.org/en/latest/guides/gamma_service.html
-    * Web server log can be found here: /Users/chaoyu/bentoml/logs/gamma_web_server.log
+    * Usage: `kappa config set gamma_service.url=0.0.0.0:50051`
+    * Help and instructions: https://docs.kappa.org/en/latest/guides/gamma_service.html
+    * Web server log can be found here: /Users/chaoyu/kappa/logs/gamma_web_server.log
 
 
 After deploying the GammaService server, get the server IP address and run the following
@@ -1172,7 +1172,7 @@ that is accessible for your team:
 
 .. code-block:: bash
 
-    bentoml config set gamma_service.url=0.0.0.0:50051
+    kappa config set gamma_service.url=0.0.0.0:50051
 
 Once you've run the command above, all the Kappa model management operations will be
 sent to the remote server, including saving BentoService, query saved BentoServices or
@@ -1187,7 +1187,7 @@ creating model serving deployments.
 
     Kappa team also provides hosted GammaService for enterprise teams, that has all
     the security best practices built-in, to bootstrap the end-to-end model management 
-    and model serving deployment workflow. `Contact us <mailto:contact@bentoml.ai>`_ to
+    and model serving deployment workflow. `Contact us <mailto:contact@kappa.ai>`_ to
     learn more about our offerings.
 
 
@@ -1228,7 +1228,7 @@ provides alternative ways to set and update labels.
 .. code-block:: bash
 
     $ # In any of the deploy command, you can add labels via --label option
-    $ bentoml azure-functions deploy my_deployment --bento service:name \
+    $ kappa azure-functions deploy my_deployment --bento service:name \
         --labels key1:value1,key2:value2
 
 
@@ -1282,15 +1282,15 @@ selector will be available in the future versions.
 
 Supported CLI commands:
 
-* ``bentoml list``
-* ``bentoml get``
+* ``kappa list``
+* ``kappa get``
 
     ``--labels`` option will be ignored if the version is provided.
-    ``$ bentoml get bento_name --labels "key1=value1, key2 In (value2, value3)"``
-* ``bentoml deployment list``
-* ``bentoml lambda list``
-* ``bentoml sagemaker list``
-* ``bentoml azure-functions list``
+    ``$ kappa get bento_name --labels "key1=value1, key2 In (value2, value3)"``
+* ``kappa deployment list``
+* ``kappa lambda list``
+* ``kappa sagemaker list``
+* ``kappa azure-functions list``
 
 
 Retrieving BentoServices
@@ -1300,8 +1300,8 @@ After saving your Model services to Kappa, you can retrieve the artifact bundle 
 
 .. code-block:: bash
 
-    > bentoml retrieve --help
-    Usage: bentoml retrieve [OPTIONS] BENTO
+    > kappa retrieve --help
+    Usage: kappa retrieve [OPTIONS] BENTO
 
       Retrieves BentoService artifacts into a target directory
 
@@ -1315,7 +1315,7 @@ This command extends Kappa to be useful in a CI workflow or to provide a rapid w
 
 .. code-block:: bash
 
-    bentoml retrieve ModelServe --target_dir=~/bentoml_bundle/
+    kappa retrieve ModelServe --target_dir=~/bentoml_bundle/
 
 
 .. spelling::

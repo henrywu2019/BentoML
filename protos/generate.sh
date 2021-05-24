@@ -7,7 +7,7 @@ if [[ -z "$BENTOML_REPO" ]]; then
 fi
 
 PROTO_PATH=$BENTOML_REPO/protos
-PY_OUT_PATH=$BENTOML_REPO/bentoml/gamma/proto
+PY_OUT_PATH=$BENTOML_REPO/kappa/gamma/proto
 # test GammaService Interceptor calls
 PROTO_TEST_PATH=$PROTO_PATH/tests
 PY_TEST_OUT_PATH=$BENTOML_REPO/tests/gamma/proto
@@ -55,7 +55,7 @@ fix_grpc_service_code(){
 }
 
 
-fix_grpc_service_code "bentoml" "$PY_OUT_PATH"
+fix_grpc_service_code "kappa" "$PY_OUT_PATH"
 fix_grpc_service_code "tests" "$PY_TEST_OUT_PATH"
 
 
@@ -97,16 +97,16 @@ echo "Generate grpc code for javascript/typescript"
 echo "Please make sure protobufjs is installed on your system"
 echo "You can install with npm i -g protobufjs"
 
-JS_OUT_PATH=$BENTOML_REPO/bentoml/gamma/web/src/generated
+JS_OUT_PATH=$BENTOML_REPO/kappa/gamma/web/src/generated
 echo "Cleaning up existing proto generated js code.."
 rm -rf "$JS_OUT_PATH"
 mkdir -p "$JS_OUT_PATH"
 
 echo "Generating gRPC JavaScript code..."
-pbjs -t static-module -w es6 --keep-case --force-number -o bentoml_grpc.js "$PROTO_PATH"/*.proto
+pbjs -t static-module -w es6 --keep-case --force-number -o kappa_grpc.js "$PROTO_PATH"/*.proto
 echo "Generating gRPC TypeScript code..."
-pbts -o bentoml_grpc.d.ts bentoml_grpc.js
+pbts -o kappa_grpc.d.ts kappa_grpc.js
 
-mv bentoml_grpc.js "$JS_OUT_PATH"
-mv bentoml_grpc.d.ts "$JS_OUT_PATH"
+mv kappa_grpc.js "$JS_OUT_PATH"
+mv kappa_grpc.d.ts "$JS_OUT_PATH"
 echo "Done"

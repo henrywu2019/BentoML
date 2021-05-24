@@ -1,14 +1,14 @@
 import logging
 
-from bentoml.gamma.proto.repository_pb2 import BentoUri
-from bentoml.gamma.client import get_gamma_client
+from kappa.gamma.proto.repository_pb2 import BentoUri
+from kappa.gamma.client import get_gamma_client
 from e2e_tests.sample_bento_service import SampleBentoService
 from e2e_tests.gamma_server.utils import (
     local_gamma_server,
-    execute_bentoml_run_command,
+    execute_kappa_run_command,
 )
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_gamma_server_with_sqlite_and_s3():
@@ -16,7 +16,7 @@ def test_gamma_server_with_sqlite_and_s3():
     # bucket's global DNS needs time to get set up.
     # https://github.com/boto/boto3/issues/1982#issuecomment-511947643
 
-    s3_bucket_name = 's3://bentoml-e2e-test-repo/'
+    s3_bucket_name = 's3://kappa-e2e-test-repo/'
 
     with local_gamma_server(repo_base_url=s3_bucket_name) as gamma_service_url:
         yc = get_gamma_client(gamma_service_url)
@@ -34,7 +34,7 @@ def test_gamma_server_with_sqlite_and_s3():
         ), 'BentoService storage type mismatched, expect S3'
 
         logger.info('Validate BentoService prediction result')
-        run_result = execute_bentoml_run_command(
+        run_result = execute_kappa_run_command(
             bento_tag=bento_tag, data='[]', gamma_url=gamma_service_url
         )
         logger.info(run_result)

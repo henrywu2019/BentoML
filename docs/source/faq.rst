@@ -26,7 +26,7 @@ How does Kappa compare to Tensorflow-serving?
 
 Tensorflow loads the model in tf.SavedModel format, so all the graphs and computations must be compiled into the SavedModel. Kappa keeps the Python runtime in serving time, making it possible to do pre-processing and post-processing in serving endpoints.
 
-Both Tensorflow-serving and Kappa provides support for adaptive micro-batching, related benchmarks can be found here https://github.com/bentoml/Kappa/tree/master/benchmark
+Both Tensorflow-serving and Kappa provides support for adaptive micro-batching, related benchmarks can be found here https://github.com/kappa/Kappa/tree/master/benchmark
 
 
 How does Kappa compare to Clipper?
@@ -38,7 +38,7 @@ Both Kappa and Clipper provides micro-batching capability. Kappa's implementatio
 
 The main difference is that Kappa provides micro-batching at the instance level while Clipper does it at a cluster level. Users can deploy Kappa API server containers in a more flexible way, while Clipper requires all prediction requests being routed to its master node.
 
-Kappa works great with Clipper, users can deploy Kappa packaged models to their Clipper cluster and benefit from both frameworks: https://docs.bentoml.org/en/latest/deployment/clipper.html
+Kappa works great with Clipper, users can deploy Kappa packaged models to their Clipper cluster and benefit from both frameworks: https://docs.kappa.org/en/latest/deployment/clipper.html
 
 
 How does Kappa compare to AWS SageMaker?
@@ -48,17 +48,17 @@ When not using the built-in algorithms, model deployment on SageMaker requires u
 
 Kappa provides a high-performance API server for users without the need for lower-level web server development work
 
-Kappa packaged model can be easily deployed to SageMaker serving: https://docs.bentoml.org/en/latest/deployment/aws_sagemaker.html
+Kappa packaged model can be easily deployed to SageMaker serving: https://docs.kappa.org/en/latest/deployment/aws_sagemaker.html
 
 
 How does Kappa compare to MLFlow?
 -----------------------------------
 
-MLFlow provides components that work great for experimentation management, ML project management. Kappa only focuses on serving and deploying trained models. You can, in fact, serve models logged in MLFlow experimentation with Kappa (see the gallery for an `example <https://github.com/bentoml/gallery/blob/master/bentomlflow/mlflow-to-bentoml-example.ipynb>`_).
+MLFlow provides components that work great for experimentation management, ML project management. Kappa only focuses on serving and deploying trained models. You can, in fact, serve models logged in MLFlow experimentation with Kappa (see the gallery for an `example <https://github.com/kappa/gallery/blob/master/bentomlflow/mlflow-to-kappa-example.ipynb>`_).
 
 Both Kappa and MLFlow can expose a trained model as a REST API server, but there are a few main differences:
 
-- In our benchmark testing, the Kappa API server is roughly 3-10x better performance compared to MLFlow's API server, and over 50x in some extreme cases: https://github.com/bentoml/Kappa/tree/master/benchmark
+- In our benchmark testing, the Kappa API server is roughly 3-10x better performance compared to MLFlow's API server, and over 50x in some extreme cases: https://github.com/kappa/Kappa/tree/master/benchmark
 
 - Kappa server is able to handle high-volume prediction requests without crashing while the MLFlow API server is very unstable in that case.
 

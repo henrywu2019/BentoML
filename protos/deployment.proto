@@ -1,5 +1,5 @@
 syntax = "proto3";
-package bentoml;
+package kappa;
 
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
@@ -76,7 +76,7 @@ message DeploymentSpec {
   }
 
   // Bento name and version are used as an reference to the saved Bento
-  // in user's bentoml repository
+  // in user's kappa repository
   string bento_name = 1;
   string bento_version = 2;
 

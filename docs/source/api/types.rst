@@ -1,8 +1,8 @@
 Types
 =====
 
-.. autoclass:: bentoml.types.InferenceTask
+.. autoclass:: kappa.types.InferenceTask
 
-.. autoclass:: bentoml.types.InferenceResult
+.. autoclass:: kappa.types.InferenceResult
 
-.. autoclass:: bentoml.types.InferenceError
+.. autoclass:: kappa.types.InferenceError

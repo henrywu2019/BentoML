@@ -20,18 +20,18 @@ Before starting this guide, make sure you have the following:
 
 * SSMS installed and connected to server: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
 
-* Python 3.6 or above and required PyPi packages: `bentoml` and `scikit-learn`
+* Python 3.6 or above and required PyPi packages: `kappa` and `scikit-learn`
 
   * .. code-block: bash
 
-          pip install bentoml scikit-learn
+          pip install kappa scikit-learn
 
-* `bentoml` installed in SQL server. In terminal change directory to 
+* `kappa` installed in SQL server. In terminal change directory to
   * .. code-block: bash
   
           $ SQL Server/PYTHON_SERVICES/SCRIPTS
 
-          $ pip.exe install bentoml
+          $ pip.exe install kappa
 
 As long as the server is not connected to remote compute, no server costs will be accumulated.
 
@@ -46,15 +46,15 @@ Kappa saved bundle for deployment:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
 Verify the saved bundle created and get the latest path:
 
 .. code-block:: bash
 
-    $ bentoml get --print-location IrisClassifier:latest 
+    $ kappa get --print-location IrisClassifier:latest
 
 
 Start a new query and write the following command. This will enable running external scripts.
@@ -151,9 +151,9 @@ The last step is to create a procedure for model deployment and prediction. Crea
 
 .. code-block:: bash
 
-    import bentoml as usual and set the saved_path to the location where the bento bundle is saved.
+    import kappa as usual and set the saved_path to the location where the bento bundle is saved.
 
-    Load the bundle using bentoml.load(). Now use this model loaded from the saved bundle to make predictions and deploy the model. List all the input and output features.
+    Load the bundle using kappa.load(). Now use this model loaded from the saved bundle to make predictions and deploy the model. List all the input and output features.
 
     Here is the complete script
 
@@ -168,11 +168,11 @@ The last step is to create a procedure for model deployment and prediction. Crea
     `EXECUTE sp_execute_external_script @language = N'Python'`
 
         `, @script = N'`
-    import bentoml
+    import kappa
 
     saved_path=r"C:\Program Files\Microsoft SQL Server\MSSQL15.NEWSERVER\bento_bundle"
 
-    irismodel = bentoml.load(saved_path)
+    irismodel = kappa.load(saved_path)
 
     species_pred = irismodel.predict(iris_data[["Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"]])
 

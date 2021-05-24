@@ -3,11 +3,11 @@ import pytest
 from botocore.exceptions import ClientError
 from mock import patch
 
-from bentoml.exceptions import AWSServiceError, BentoMLException
-from bentoml.gamma.deployment.aws_utils import (
+from kappa.exceptions import AWSServiceError, BentoMLException
+from kappa.gamma.deployment.aws_utils import (
     create_ecr_repository_if_not_exists,
     get_ecr_login_info,
-    generate_bentoml_exception_from_aws_client_error,
+    generate_kappa_exception_from_aws_client_error,
     describe_cloudformation_stack,
 )
 
@@ -87,14 +87,14 @@ def test_get_ecr_login_info():
         assert password == mock_repository_password
 
 
-def test_generate_bentoml_exception_from_aws_client_error():
+def test_generate_kappa_exception_from_aws_client_error():
     error = ClientError(
         error_response={
             'Error': {'Code': 'ValidationException', 'Message': 'error message'}
         },
         operation_name='failed_operation',
     )
-    exception = generate_bentoml_exception_from_aws_client_error(error)
+    exception = generate_kappa_exception_from_aws_client_error(error)
     assert isinstance(exception, AWSServiceError)
 
 

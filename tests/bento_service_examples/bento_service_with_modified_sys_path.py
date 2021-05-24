@@ -1,9 +1,9 @@
 import sys
 from os import path
 
-import bentoml
-from bentoml.adapters import DataframeInput
-from bentoml.frameworks.sklearn import SklearnModelArtifact
+import kappa
+from kappa.adapters import DataframeInput
+from kappa.frameworks.sklearn import SklearnModelArtifact
 
 # noqa # pylint: disable=import-error
 sys.path.append(path.dirname(path.abspath(__file__)))  # isort:skip
@@ -14,10 +14,10 @@ from local_dependencies.my_test_dependency import dummy_util_func  # isort:skip
 from local_dependencies.nested_dependency import nested_dependency_func  # isort:skip
 
 
-@bentoml.env(pip_packages=["scikit-learn"])
-@bentoml.artifacts([SklearnModelArtifact('model')])
-class IrisClassifier(bentoml.BentoService):
-    @bentoml.api(input=DataframeInput(), batch=True)
+@kappa.env(pip_packages=["scikit-learn"])
+@kappa.artifacts([SklearnModelArtifact('model')])
+class IrisClassifier(kappa.BentoService):
+    @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         df = dummy_util_func(df)
         df = dependency_in_local_module_directory(df)

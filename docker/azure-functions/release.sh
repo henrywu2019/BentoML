@@ -21,9 +21,9 @@ do
     docker build --pull \
         --build-arg BENTOML_VERSION="$BENTOML_VERSION" \
         --build-arg PYTHON_VERSION=$version \
-        -t bentoml/azure-functions:$BENTOML_VERSION-py${version//.} \
+        -t kappa/azure-functions:$BENTOML_VERSION-py${version//.} \
         .
-    docker push bentoml/azure-functions:$BENTOML_VERSION-py${version//.}
+    docker push kappa/azure-functions:$BENTOML_VERSION-py${version//.}
 done
 
 echo "Done"

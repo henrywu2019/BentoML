@@ -27,29 +27,29 @@ This guide uses the IrisClassifier BentoService from the :doc:`Quick start guide
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
 
 Use `bento list` to get the BentoService name:version tag.
 
 .. code-block:: bash
 
-    > bentoml list
+    > kappa list
 
     BentoService                          CREATED_AT                  APIS                        ARTIFACTS
     IrisClassifier:20200121141808_FE78B5  2020-01-21 22:18:25.079723  predict(DataframeInput)  model(SklearnModelArtifact)
 
 
 Deploy to Sagemaker requires a deployment name, BentoService name:version tag, and api name from the
-BentoService bundle. We apply those values to  `bentoml sagemaker deploy`.
+BentoService bundle. We apply those values to  `kappa sagemaker deploy`.
 
 
 .. code-block:: bash
 
 
-    > bentoml sagemaker deploy my-first-sagemaker-deployment -b IrisClassifier:20200121141808_FE78B5 --api-name predict
+    > kappa sagemaker deploy my-first-sagemaker-deployment -b IrisClassifier:20200121141808_FE78B5 --api-name predict
 
     Deploying Sagemaker deployment \[2020-01-21 15:26:43,548] INFO - Step 1/11 : FROM continuumio/miniconda3:4.7.12
     ...
@@ -116,12 +116,12 @@ BentoService bundle. We apply those values to  `bentoml sagemaker deploy`.
     }
 
 
-After deploy to Sagemaker, use `bentoml sagemaker get` to return and display the latest status
+After deploy to Sagemaker, use `kappa sagemaker get` to return and display the latest status
 and other information about the deployment
 
 .. code-block:: bash
 
-    > bentoml sagemaker get my-first-sagemaker-deployment
+    > kappa sagemaker get my-first-sagemaker-deployment
 
     {
       "namespace": "dev",
@@ -229,11 +229,11 @@ Use the sample data to verify the predict result from the Sagemaker deployment
     }
 
 
-Use `bentoml sagemaker list` to display all sagemaker deployments managed by Kappa
+Use `kappa sagemaker list` to display all sagemaker deployments managed by Kappa
 
 .. code-block:: bash
 
-    > bentoml sagemaker list
+    > kappa sagemaker list
 
     NAME                           NAMESPACE    LABELS    PLATFORM       STATUS    AGE
     my-first-sagemaker-deployment  dev                    aws-sagemaker  running   15 minutes and 21.14 seconds
@@ -243,7 +243,7 @@ Removing Sagemaker deployment is as easy as deploying one.  Kappa will remove an
 
 .. code-block:: bash
 
-    > bentoml sagemaker delete my-first-sagemaker-deployment
+    > kappa sagemaker delete my-first-sagemaker-deployment
 
     Successfully deleted AWS Sagemaker deployment "my-first-sagemaker-deployment"
 
@@ -268,15 +268,15 @@ Starts a Kappa GammaService docker image and set the credentials found in
     $ docker run -e AWS_ACCESS_KEY_ID=MY-ACCESS-KEY-ID \
         -e AWS_SECRET_ACCESS_KEY=MY_SECRET-ACCESS-KEY \
         -e AWS_DEFAULT_REGION=MY-DEFAULT-REGION \
-        -p 50051:50051 -p 3000:3000 bentoml/gamma-service:latest
+        -p 50051:50051 -p 3000:3000 kappa/gamma-service:latest
 
 
 After the GammaService docker container is running, in another terminal window, set
-gamma service address with `bentoml config set`
+gamma service address with `kappa config set`
 
 .. code-block:: bash
 
-    $ bentoml config set gamma_service.url=0.0.0.0:50051
+    $ kappa config set gamma_service.url=0.0.0.0:50051
 
 
 
@@ -364,7 +364,7 @@ Copy and paste the code below into a file named `gamma-service.yaml`
             app: gamma-service
         spec:
           containers:
-          - image: bentoml/gamma-service
+          - image: kappa/gamma-service
             imagePullPolicy: IfNotPresent
             name: gamma-service
             ports:

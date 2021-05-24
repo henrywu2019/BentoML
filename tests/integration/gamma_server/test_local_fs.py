@@ -2,15 +2,15 @@ import logging
 import time
 import pytest
 
-from bentoml.gamma.client import get_gamma_client
-from bentoml.gamma.proto.repository_pb2 import BentoUri
+from kappa.gamma.client import get_gamma_client
+from kappa.gamma.proto.repository_pb2 import BentoUri
 from tests.bento_service_examples.example_bento_service import ExampleBentoService
 from tests.gamma.local_gamma_service import (
     local_gamma_service_container,
     local_gamma_service_from_cli,
 )
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_sqlite_and_local_fs():
@@ -34,7 +34,7 @@ def test_sqlite_and_local_fs():
 
 @pytest.mark.skip('Skipping Postgres test on Github Action as it continues been flaky')
 def test_gamma_server_with_postgres_and_local_storage():
-    postgres_db_url = 'postgresql://postgres:postgres@localhost/bentoml:5432'
+    postgres_db_url = 'postgresql://postgres:postgres@localhost/kappa:5432'
 
     from sqlalchemy_utils import create_database
 

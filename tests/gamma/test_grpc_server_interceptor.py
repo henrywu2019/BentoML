@@ -2,13 +2,13 @@ from unittest import TestCase
 from unittest.mock import Mock
 from parameterized import parameterized
 
-from bentoml.gamma.grpc_interceptor.prom_server_interceptor import (
+from kappa.gamma.grpc_interceptor.prom_server_interceptor import (
     PromServerInterceptor,
     ServiceLatencyInterceptor,
     _wrap_rpc_behaviour,
 )
 
-from bentoml.gamma.utils import parse_method_name, MethodName
+from kappa.gamma.utils import parse_method_name, MethodName
 
 import requests
 
@@ -124,19 +124,19 @@ class TestMetrics(TestCase):
     @parameterized.expand(
         [
             (
-                'grpc_server_started_total{grpc_method="Execute",grpc_service="bentoml.MockService",grpc_type="UNARY"}',  # noqa: E501
+                'grpc_server_started_total{grpc_method="Execute",grpc_service="kappa.MockService",grpc_type="UNARY"}',  # noqa: E501
                 1.0,
             ),
             (
-                'grpc_server_started_total{grpc_method="Execute",grpc_service="bentoml.MockService",grpc_type="UNARY"}',  # noqa: E501
+                'grpc_server_started_total{grpc_method="Execute",grpc_service="kappa.MockService",grpc_type="UNARY"}',  # noqa: E501
                 2.0,
             ),
             (
-                'grpc_server_started_total{grpc_method="Execute",grpc_service="bentoml.MockService",grpc_type="UNARY"}',  # noqa: E501
+                'grpc_server_started_total{grpc_method="Execute",grpc_service="kappa.MockService",grpc_type="UNARY"}',  # noqa: E501
                 3.0,
             ),
             (
-                'grpc_server_handled_total{grpc_code="OK",grpc_method="Execute",grpc_service="bentoml.MockService",grpc_type="UNARY"}',  # noqa: E501
+                'grpc_server_handled_total{grpc_code="OK",grpc_method="Execute",grpc_service="kappa.MockService",grpc_type="UNARY"}',  # noqa: E501
                 4.0,
             ),
         ]

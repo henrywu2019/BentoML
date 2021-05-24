@@ -2,8 +2,8 @@ import pytest
 import tempfile
 import os
 
-from bentoml.configuration.containers import BentoMLConfiguration, BentoMLContainer
-from bentoml.exceptions import BentoMLConfigException
+from kappa.configuration.containers import BentoMLConfiguration, BentoMLContainer
+from kappa.exceptions import BentoMLConfigException
 
 
 def test_override():
@@ -153,16 +153,16 @@ key1:
     assert config["key1"]["key2"]["key5"] == "override5"
 
 
-def mock_bentoml_home():
-    return os.path.expanduser(os.path.join("~", "bentoml"))
+def mock_kappa_home():
+    return os.path.expanduser(os.path.join("~", "kappa"))
 
 
-def test_bentoml_home():
+def test_kappa_home():
     container = BentoMLContainer()
-    assert container.bentoml_home() == mock_bentoml_home()
+    assert container.kappa_home() == mock_kappa_home()
 
-    os.environ["BENTOML_HOME"] = "/tmp/bentoml"
-    assert container.bentoml_home() == "/tmp/bentoml"
+    os.environ["BENTOML_HOME"] = "/tmp/kappa"
+    assert container.kappa_home() == "/tmp/kappa"
 
     del os.environ["BENTOML_HOME"]
 
@@ -173,7 +173,7 @@ def test_prometheus_multiproc_dir():
     container.config.from_dict(config)
 
     assert container.prometheus_multiproc_dir() == os.path.join(
-        mock_bentoml_home(), "prometheus_multiproc_dir"
+        mock_kappa_home(), "prometheus_multiproc_dir"
     )
 
 
@@ -209,7 +209,7 @@ def test_gamma_database_url():
     container.config.from_dict(config)
 
     assert container.gamma_database_url() == "{}:///{}".format(
-        "sqlite", os.path.join(mock_bentoml_home(), "storage.db")
+        "sqlite", os.path.join(mock_kappa_home(), "storage.db")
     )
 
     override_config = tempfile.NamedTemporaryFile(delete=False)
@@ -281,7 +281,7 @@ def test_gamma_logging_path():
     container.config.from_dict(config)
 
     assert container.gamma_logging_path() == os.path.join(
-        mock_bentoml_home(), "logs", "gamma_web_server.log"
+        mock_kappa_home(), "logs", "gamma_web_server.log"
     )
 
     override_config = tempfile.NamedTemporaryFile(delete=False)
@@ -308,7 +308,7 @@ def test_logging_file_directory():
     container.config.from_dict(config)
 
     assert container.logging_file_directory() == os.path.join(
-        mock_bentoml_home(), "logs"
+        mock_kappa_home(), "logs"
     )
 
     override_config = tempfile.NamedTemporaryFile(delete=False)

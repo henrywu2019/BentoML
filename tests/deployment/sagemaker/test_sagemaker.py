@@ -7,19 +7,19 @@ from botocore.exceptions import ClientError
 from mock import patch, MagicMock
 from moto import mock_ecr, mock_iam, mock_sts
 
-from bentoml.gamma.deployment.sagemaker.operator import (
+from kappa.gamma.deployment.sagemaker.operator import (
     get_arn_role_from_current_aws_user,
 )
-from bentoml.gamma.deployment.sagemaker.operator import SageMakerDeploymentOperator
-from bentoml.gamma.proto.deployment_pb2 import Deployment, DeploymentSpec
-from bentoml.gamma.proto.repository_pb2 import (
+from kappa.gamma.deployment.sagemaker.operator import SageMakerDeploymentOperator
+from kappa.gamma.proto.deployment_pb2 import Deployment, DeploymentSpec
+from kappa.gamma.proto.repository_pb2 import (
     Bento,
     BentoServiceMetadata,
     GetBentoResponse,
     BentoUri,
 )
-from bentoml.gamma.proto.status_pb2 import Status
-from bentoml.exceptions import GammaDeploymentException
+from kappa.gamma.proto.status_pb2 import Status
+from kappa.exceptions import GammaDeploymentException
 from tests.deployment.sagemaker.sagemaker_moto import moto_mock_sagemaker
 
 
@@ -173,18 +173,18 @@ def mock_aws_services_for_sagemaker(func):
 def mock_sagemaker_deployment_wrapper(func):
     @mock_aws_services_for_sagemaker
     @patch(
-        'bentoml.gamma.deployment.sagemaker.operator.build_docker_image', MagicMock()
+        'kappa.gamma.deployment.sagemaker.operator.build_docker_image', MagicMock()
     )
     @patch(
-        'bentoml.gamma.deployment.sagemaker.operator.push_docker_image_to_repository',
+        'kappa.gamma.deployment.sagemaker.operator.push_docker_image_to_repository',
         MagicMock(),
     )
     @patch(
-        'bentoml.gamma.deployment.sagemaker.operator._init_sagemaker_project',
+        'kappa.gamma.deployment.sagemaker.operator._init_sagemaker_project',
         MagicMock(),
     )
     @patch(
-        'bentoml.gamma.deployment.sagemaker.operator.get_default_aws_region',
+        'kappa.gamma.deployment.sagemaker.operator.get_default_aws_region',
         MagicMock(return_value='mock_region'),
     )
     def mock_wrapper(*args, **kwargs):

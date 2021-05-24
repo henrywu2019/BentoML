@@ -1,13 +1,13 @@
-import bentoml
+import kappa
 import h2o  # pylint: disable=import-error
-from bentoml.adapters import DataframeInput
-from bentoml.frameworks.h2o import H2oModelArtifact
+from kappa.adapters import DataframeInput
+from kappa.frameworks.h2o import H2oModelArtifact
 
 
-@bentoml.env(infer_pip_packages=True)
-@bentoml.artifacts([H2oModelArtifact('model')])
-class H2oExampleBentoService(bentoml.BentoService):
-    @bentoml.api(input=DataframeInput(), batch=True)
+@kappa.env(infer_pip_packages=True)
+@kappa.artifacts([H2oModelArtifact('model')])
+class H2oExampleBentoService(kappa.BentoService):
+    @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         hf = h2o.H2OFrame(df)
         predictions = self.artifacts.model.predict(hf)

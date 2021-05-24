@@ -93,8 +93,8 @@ latency. It will respond to the fluctuations of server loading.
 
 .. code:: python
 
-    class MovieReviewService(bentoml.BentoService):
-        @bentoml.api(input=DataframeInput(),
+    class MovieReviewService(kappa.BentoService):
+        @kappa.api(input=DataframeInput(),
                      mb_max_latency=10000, mb_max_batch_size=1000, batch=True)
         def predict(self, inputs):
                     pass

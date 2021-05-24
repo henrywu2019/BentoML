@@ -1,6 +1,6 @@
-import bentoml
+import kappa
 from tests.bento_service_examples.easyocr_service import EasyOCRService
-from bentoml.gamma.client import GammaClient
+from kappa.gamma.client import GammaClient
 
 import imageio
 import easyocr
@@ -28,7 +28,7 @@ def test_easyocr_artifact_packs():
     ), 'Run inference before saving the artifact'
 
     saved_path = svc.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
 
     assert loaded_svc.predict(imageio.imread(IMAGE_PATH))['text'] == (
         TEST_RESULT

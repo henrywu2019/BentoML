@@ -1,9 +1,9 @@
 import pytest
 import tempfile
 import contextlib
-import bentoml
+import kappa
 from tests.bento_service_examples.fasttext_classifier import FasttextClassifier
-from bentoml.gamma.client import GammaClient
+from kappa.gamma.client import GammaClient
 
 import fasttext
 
@@ -39,7 +39,7 @@ def test_fasttext_artifact_pack(fasttext_classifier_class):
     ), 'Run inference before saving the artifact'
 
     saved_path = svc.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
     assert loaded_svc.predict(test_json)[0] == (
         '__label__bar',
     ), 'Run inference after saving the artifact'

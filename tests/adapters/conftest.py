@@ -4,8 +4,8 @@ import pytest
 
 from unittest.mock import Mock
 
-from bentoml.adapters import DefaultOutput
-from bentoml.service import InferenceAPI
+from kappa.adapters import DefaultOutput
+from kappa.service import InferenceAPI
 
 
 @pytest.fixture(params=(True, False))

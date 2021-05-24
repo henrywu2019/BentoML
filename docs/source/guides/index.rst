@@ -3,8 +3,8 @@ Advanced Guides
 
 This part of the Kappa documentation is a work in progress. If you have any questions
 related to this, please join
-`the Kappa Slack community <https://join.slack.com/t/bentoml/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg>`_
-and ask in the bentoml-users channel.
+`the Kappa Slack community <https://join.slack.com/t/kappa/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg>`_
+and ask in the kappa-users channel.
 
 
 .. toctree::

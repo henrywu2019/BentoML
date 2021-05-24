@@ -4,8 +4,8 @@ import pandas
 import torch
 from torch import nn
 
-import bentoml
-from bentoml.gamma.client import GammaClient
+import kappa
+from kappa.gamma.client import GammaClient
 from tests.bento_service_examples.pytorch_classifier import PytorchClassifier
 
 
@@ -42,7 +42,7 @@ def test_pytorch_artifact_pack(pytorch_classifier_class):
     assert svc.predict(test_df) == 5.0, 'Run inference before save the artifact'
 
     saved_path = svc.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
     assert loaded_svc.predict(test_df) == 5.0, 'Run inference from saved artifact'
 
     # clean up saved bundle
@@ -60,7 +60,7 @@ def test_pytorch_artifact_pack_with_traced_model(pytorch_classifier_class):
     assert svc.predict(test_df) == 5.0, 'Run inference before save the artifact'
 
     saved_path = svc.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
     assert loaded_svc.predict(test_df) == 5.0, 'Run inference from saved artifact'
 
     # clean up saved bundle
@@ -77,7 +77,7 @@ def test_pytorch_artifact_pack_with_scripted_model(pytorch_classifier_class):
     assert svc.predict(test_df) == 5.0, 'Run inference before save the artifact'
 
     saved_path = svc.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
     assert loaded_svc.predict(test_df) == 5.0, 'Run inference from saved artifact'
 
     # clean up saved bundle

@@ -24,11 +24,11 @@ Prerequisites
 
     * Install istio for knative: https://knative.dev/docs/install/installing-istio/
 
-* Python 3.6 or above and install required packages: `bentoml` and `scikit-learn`
+* Python 3.6 or above and install required packages: `kappa` and `scikit-learn`
 
     * .. code-block:: bash
 
-            pip install bentoml scikit-learn
+            pip install kappa scikit-learn
 
 
 Knative deployment with Kappa
@@ -40,15 +40,15 @@ Kappa saved bundle for deployment:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
 Verify the saved bundle created:
 
 .. code-block:: bash
 
-    $ bentoml get IrisClassifier:20200121141808_FE78B5
+    $ kappa get IrisClassifier:20200121141808_FE78B5
 
     # Sample output
 
@@ -57,15 +57,15 @@ Verify the saved bundle created:
       "version": "20200121141808_FE78B5",
       "uri": {
         "type": "LOCAL",
-        "uri": "/Users/bozhaoyu/bentoml/repository/IrisClassifier/20200121141808_FE78B5"
+        "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
       "bentoServiceMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
         "env": {
-          "condaEnv": "name: bentoml-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
-          "pipDependencies": "bentoml==0.5.8\nscikit-learn",
+          "condaEnv": "name: kappa-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
+          "pipDependencies": "kappa==0.5.8\nscikit-learn",
           "pythonVersion": "3.7.3"
         },
         "artifacts": [
@@ -91,7 +91,7 @@ BentoService and available for sending test request:
 .. code-block:: bash
 
     # Start Kappa API server:
-    bentoml serve IrisClassifier:latest
+    kappa serve IrisClassifier:latest
 
 
 .. code-block:: bash
@@ -110,7 +110,7 @@ Deploy Kappa model server to KNative
 
 Kappa provides a convenient way to containerize the model API server with Docker:
 
-    1. Find the SavedBundle directory with `bentoml get` command
+    1. Find the SavedBundle directory with `kappa get` command
 
     2. Run docker build with the SavedBundle directory which contains a generated Dockerfile
 
@@ -119,7 +119,7 @@ Kappa provides a convenient way to containerize the model API server with Docker
 .. code-block:: bash
 
     # Find the local path of the latest version IrisClassifier saved bundle
-    saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+    saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
 
     # Replace {docker_username} with your Docker Hub username
     docker build -t {docker_username}/iris-classifier $saved_path
@@ -153,7 +153,7 @@ readyinessProbe to the /healthz endpoint on BentoService.
     kind: Service
     metadata:
       name: iris-classifier
-      namespace: bentoml
+      namespace: kappa
     spec:
       template:
         spec:
@@ -176,11 +176,11 @@ readyinessProbe to the /healthz endpoint on BentoService.
 
 
 
-Create bentoml namespace and then deploy BentoService to Knative with kubectl apply command.
+Create kappa namespace and then deploy BentoService to Knative with kubectl apply command.
 
 .. code-block:: bash
 
-    $ kubectl create namespace bentoml
+    $ kubectl create namespace kappa
     $ kubectl apply -f service.yaml
 
     # Sample output
@@ -198,7 +198,7 @@ View the status of the deployment with `kubectl get ksvc` command:
     # Sample output
 
     NAMESPACE   NAME              URL                                          LATESTCREATED           LATESTREADY             READY   REASON
-    bentoml     iris-classifier   http://iris-classifier.bentoml.example.com   iris-classifier-7k2dv   iris-classifier-7k2dv   True
+    kappa     iris-classifier   http://iris-classifier.kappa.example.com   iris-classifier-7k2dv   iris-classifier-7k2dv   True
 
 
 ===========================================
@@ -229,7 +229,7 @@ With the IP address and port, Use `curl` to make an HTTP request to the deployme
 
     $ curl -v -i \
         --header "Content-Type: application/json" \
-        --header "Host: iris-classifier.bentoml.example.com" \
+        --header "Host: iris-classifier.kappa.example.com" \
         --request POST \
         --data '[[5.1, 3.5, 1.4, 0.2]]' \
         http://192.168.64.4:31871/predict
@@ -241,7 +241,7 @@ With the IP address and port, Use `curl` to make an HTTP request to the deployme
     * TCP_NODELAY set
     * Connected to 192.168.64.4 (192.168.64.4) port 31871 (#0)
     > POST /predict HTTP/1.1
-    > Host: iris-classifier.bentoml.example.com
+    > Host: iris-classifier.kappa.example.com
     > User-Agent: curl/7.58.0
     > Accept: */*
     > Content-Type: application/json
@@ -274,7 +274,7 @@ Clean up deployment
 
 .. code-block:: bash
 
-    kubectl delete namespace bentoml
+    kubectl delete namespace kappa
 
 
 .. spelling::

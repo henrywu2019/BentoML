@@ -2,15 +2,15 @@ import time
 
 import pytest
 
-from bentoml.exceptions import LockUnavailable
-from bentoml.gamma.db import DB
-from bentoml.gamma.locking.lock import lock, LockType
+from kappa.exceptions import LockUnavailable
+from kappa.gamma.db import DB
+from kappa.gamma.locking.lock import lock, LockType
 from tests.threading_util import ThreadWithResult, run_delayed_thread
 
 
 @pytest.fixture(name="db")
 def fixture_db():
-    db_url = 'sqlite:///bentoml/storage.db'
+    db_url = 'sqlite:///kappa/storage.db'
     return DB(db_url)
 
 

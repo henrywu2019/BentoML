@@ -2,13 +2,13 @@ import logging
 import os
 import subprocess
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def delete_deployment(deployment_type, deployment_name, deployment_namespace=None):
     logger.info(f'Delete deployment {deployment_name} with Kappa CLI')
     delete_deployment_command = [
-        'bentoml',
+        'kappa',
         deployment_type,
         'delete',
         deployment_name,
@@ -30,7 +30,7 @@ def delete_deployment(deployment_type, deployment_name, deployment_namespace=Non
 
 def delete_bento(bento_name):
     logger.info(f'Deleting bento service {bento_name}')
-    delete_bento_command = ['bentoml', 'delete', bento_name, '-y']
+    delete_bento_command = ['kappa', 'delete', bento_name, '-y']
     with subprocess.Popen(
         delete_bento_command,
         stdout=subprocess.PIPE,

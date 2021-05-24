@@ -13,7 +13,7 @@ $ pip --version
 
 Download the source code from Kappa's Github repository:
 ```bash
-$ git clone https://github.com/bentoml/Kappa.git
+$ git clone https://github.com/kappa/Kappa.git
 $ cd Kappa
 ```
 
@@ -22,16 +22,16 @@ Install Kappa with pip in `editable` mode:
 pip install --editable .
 ```
 
-This will make `bentoml` available on your system which links to the sources of
+This will make `kappa` available on your system which links to the sources of
 your local clone and pick up changes you made locally.
 
 Test the Kappa installation:
 ```bash
-$ bentoml --version
+$ kappa --version
 ```
 ```python
-import bentoml
-print(bentoml.__version__)
+import kappa
+print(kappa.__version__)
 ```
 
 #### Install Kappa from other forks or branches
@@ -41,7 +41,7 @@ easy to try out new Kappa feature that has not been released, test changes in a 
 request. For example, to install Kappa from its master branch:
 
 ```
-pip install git+https://github.com/bentoml/Kappa.git
+pip install git+https://github.com/kappa/Kappa.git
 ```
 
 Or to install from your own fork of Kappa:
@@ -75,7 +75,7 @@ Make sure you [have conda installed](https://docs.conda.io/projects/conda/en/lat
 $ conda --version
 ```
 
-Bentoml tox file is configured to run in muiltple python versions:
+kappa tox file is configured to run in muiltple python versions:
 ```bash
 $ tox
 ```
@@ -92,7 +92,7 @@ $ tox -e py36
 Add the following lines to the Python code that invokes Kappa:
 
 ```python
-from bentoml.configuration import set_debug_mode
+from kappa.configuration import set_debug_mode
 set_debug_mode(True)
 ```
 
@@ -101,9 +101,9 @@ And/or set the `BENTOML_DEBUG` environment variable to `TRUE`:
 export BENTOML_DEBUG=TRUE
 ```
 
-And/or use the `--verbose` option when running `bentoml` CLI command, e.g.:
+And/or use the `--verbose` option when running `kappa` CLI command, e.g.:
 ```bash
-bentoml get IrisClassifier --verbose
+kappa get IrisClassifier --verbose
 ```
 
 ## Style check and auto-formatting your code
@@ -201,7 +201,7 @@ $ go install github.com/fullstorydev/grpcui/cmd/grpcui
 
 Start Gamma server in debug mode:
 ```bash
-$ bentoml gamma-service-start --debug
+$ kappa gamma-service-start --debug
 ```
 
 In another terminal session run grpcui:
@@ -221,17 +221,17 @@ Install all npm packages required by Kappa Web UI:
 
 ```bash
 # install npm packages required by Kappa's Node.js Web Server
-cd {PROJECT_ROOT}/bentoml/gamma/web/
+cd {PROJECT_ROOT}/kappa/gamma/web/
 yarn
 
 # install npm packages required by Kappa web frontend
-cd {PROJECT_ROOT}/bentoml/gamma/web/client/
+cd {PROJECT_ROOT}/kappa/gamma/web/client/
 yarn
 ```
 
 Build the Web Server and frontend UI code:
 ```bash
-cd {PROJECT_ROOT}/bentoml/gamma/web/
+cd {PROJECT_ROOT}/kappa/gamma/web/
 npm run build
 ```
 
@@ -239,7 +239,7 @@ npm run build
 ## Creating Pull Request on Github
 
 
-1. [Fork Kappa project](https://github.com/bentoml/Kappa/fork) on github and
+1. [Fork Kappa project](https://github.com/kappa/Kappa/fork) on github and
 add upstream to local Kappa clone:
 
 ```bash

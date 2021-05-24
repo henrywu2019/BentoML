@@ -1,12 +1,12 @@
 import pytest
 
-from bentoml.exceptions import BentoMLException
-from bentoml.gamma.client.label_utils import (
+from kappa.exceptions import BentoMLException
+from kappa.gamma.client.label_utils import (
     _extract_expressions,
     _extract_expression_elements,
     generate_gprc_labels_selector,
 )
-from bentoml.gamma.proto.label_selectors_pb2 import LabelSelectors
+from kappa.gamma.proto.label_selectors_pb2 import LabelSelectors
 
 
 def test_expressions_extractor_func():

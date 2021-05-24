@@ -37,9 +37,9 @@
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
 <!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
 <!--- If you plan to update documentation or tests in follow-up, please note -->
-- [ ] My code follows the bentoml code style, both `./dev/format.sh` and
+- [ ] My code follows the kappa code style, both `./dev/format.sh` and
   `./dev/lint.sh` script have passed
-  ([instructions](https://github.com/bentoml/Kappa/blob/master/DEVELOPMENT.md#style-check-and-auto-formatting-your-code)).
+  ([instructions](https://github.com/kappa/Kappa/blob/master/DEVELOPMENT.md#style-check-and-auto-formatting-your-code)).
 - [ ] My change reduces project test coverage and requires unit tests to be added
 - [ ] I have added unit tests covering my code change
 - [ ] My change requires a change to the documentation

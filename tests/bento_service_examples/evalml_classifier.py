@@ -1,11 +1,11 @@
-import bentoml
-from bentoml.adapters import DataframeInput
-from bentoml.frameworks.evalml import EvalMLModelArtifact
+import kappa
+from kappa.adapters import DataframeInput
+from kappa.frameworks.evalml import EvalMLModelArtifact
 
 
-@bentoml.env(infer_pip_packages=True)
-@bentoml.artifacts([EvalMLModelArtifact('model')])
-class EvalMLClassifier(bentoml.BentoService):
-    @bentoml.api(input=DataframeInput(), batch=True)
+@kappa.env(infer_pip_packages=True)
+@kappa.artifacts([EvalMLModelArtifact('model')])
+class EvalMLClassifier(kappa.BentoService):
+    @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         return self.artifacts.model.predict(df).to_series().to_numpy()

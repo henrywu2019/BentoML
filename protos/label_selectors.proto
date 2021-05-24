@@ -1,5 +1,5 @@
 syntax = "proto3";
-package bentoml;
+package kappa;
 
 message LabelSelectors {
     message LabelSelectorExpression {

@@ -1,9 +1,0 @@
-from bentoml.gamma.grpc_interceptor.prom_server_interceptor import (
-    PromServerInterceptor,
-    ServiceLatencyInterceptor,
-)
-
-__all__ = [
-    "ServiceLatencyInterceptor",
-    "PromServerInterceptor",
-]

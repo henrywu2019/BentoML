@@ -1,19 +1,19 @@
 import logging
 
-from bentoml.gamma.proto.repository_pb2 import BentoUri
-from bentoml.gamma.client import get_gamma_client
+from kappa.gamma.proto.repository_pb2 import BentoUri
+from kappa.gamma.client import get_gamma_client
 from e2e_tests.sample_bento_service import SampleBentoService
 from e2e_tests.gamma_server.utils import (
-    execute_bentoml_run_command,
+    execute_kappa_run_command,
     local_gamma_server,
 )
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_gamma_server_with_postgres_and_gcs(postgres_db_container_url):
 
-    gcs_bucket_name = 'gs://bentoml-e2e-tests/'
+    gcs_bucket_name = 'gs://kappa-e2e-tests/'
 
     with local_gamma_server(
         db_url=postgres_db_container_url, repo_base_url=gcs_bucket_name
@@ -33,7 +33,7 @@ def test_gamma_server_with_postgres_and_gcs(postgres_db_container_url):
         ), 'BentoService storage type mismatched, expect GCS'
 
         logger.info('Validate BentoService prediction result')
-        run_result = execute_bentoml_run_command(bento_tag, '[]')
+        run_result = execute_kappa_run_command(bento_tag, '[]')
         assert 'cat' in run_result, 'Unexpected BentoService prediction result'
 
         logger.info(f'Deleting saved bundle {bento_tag}')

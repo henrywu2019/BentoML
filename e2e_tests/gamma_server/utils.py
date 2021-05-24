@@ -6,14 +6,14 @@ import os
 import psutil
 
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 GRPC_PORT = '50051'
 GRPC_CHANNEL_ADDRESS = f'0.0.0.0:{GRPC_PORT}'
 
 
-def execute_bentoml_run_command(bento_tag, data, api="predict", gamma_url=None):
-    command = ['bentoml', 'run', bento_tag, api, '--input', data, "-q"]
+def execute_kappa_run_command(bento_tag, data, api="predict", gamma_url=None):
+    command = ['kappa', 'run', bento_tag, api, '--input', data, "-q"]
     if gamma_url is not None:
         command.extend(['--gamma-url', gamma_url])
     proc = subprocess.Popen(
@@ -63,7 +63,7 @@ def kill_process(proc_pid):
 
 @contextlib.contextmanager
 def local_gamma_server(db_url=None, repo_base_url=None, port=50051):
-    gamma_server_command = ['bentoml', 'gamma-service-start']
+    gamma_server_command = ['kappa', 'gamma-service-start']
     if db_url:
         gamma_server_command.extend(['--db-url', db_url])
     if repo_base_url:

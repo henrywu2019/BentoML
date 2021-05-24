@@ -10,7 +10,7 @@ from e2e_tests.aws_sagemaker.utils import (
 )
 from e2e_tests.cli_operations import delete_deployment
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_sagemaker_deployment(iris_clf_service):
@@ -19,7 +19,7 @@ def test_sagemaker_deployment(iris_clf_service):
     deployment_name = f'tests-sagemaker-e2e-{random_hash}'
     region = 'us-west-2'
     create_deployment_command = [
-        'bentoml',
+        'kappa',
         'sagemaker',
         'deploy',
         deployment_name,

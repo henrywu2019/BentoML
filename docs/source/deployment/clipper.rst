@@ -49,9 +49,9 @@ Other than using Clipper specific input, the rest are the same as defining a reg
 .. code-block:: python
 
     >>> # save this to a separate iris_classifier.py file
-    >>> from bentoml import BentoService, api, env, artifacts
-    >>> from bentoml.service.artifacts.common import PickleArtifact
-    >>> from bentoml.adapters import DataframeInput, ClipperFloatsInput
+    >>> from kappa import BentoService, api, env, artifacts
+    >>> from kappa.service.artifacts.common import PickleArtifact
+    >>> from kappa.adapters import DataframeInput, ClipperFloatsInput
 
     >>> @artifacts([PickleArtifact('model')])
     >>> @env(infer_pip_packages=True)
@@ -91,7 +91,7 @@ Save the BentoService
     ...
     ...
     ...
-    [2019-11-13 15:41:24,395] INFO - BentoService bundle 'IrisClassifier:20191113154121_E7D3CE' created at: /Users/chaoyuyang/bentoml/repository/IrisClassifier/20191113154121_E7D3CE
+    [2019-11-13 15:41:24,395] INFO - BentoService bundle 'IrisClassifier:20191113154121_E7D3CE' created at: /Users/chaoyuyang/kappa/repository/IrisClassifier/20191113154121_E7D3CE
 
 
 Test the clipper input directly with a list of floats as input
@@ -126,23 +126,23 @@ Register an application on the clipper cluster
 
 .. code-block:: python
 
-    >>> cl.register_application('bentoml-test', 'floats', 'default_pred', 100000)
+    >>> cl.register_application('kappa-test', 'floats', 'default_pred', 100000)
 
-    19-11-13:15:43:58 INFO     [clipper_admin.py:236] [default-cluster] Application bentoml-test was successfully registered
+    19-11-13:15:43:58 INFO     [clipper_admin.py:236] [default-cluster] Application kappa-test was successfully registered
 
 
-Now you can deploy the saved BentoService using this Clipper connection and Kappa's `bentoml.clipper.deploy_bentoml` API,
+Now you can deploy the saved BentoService using this Clipper connection and Kappa's `kappa.clipper.deploy_bentoml` API,
 which will first build a clipper model docker image that containing your BentoService and then deploy it to the cluster.
 
 .. code-block:: python
 
-    >>> from bentoml.clipper import deploy_bentoml
+    >>> from kappa.clipper import deploy_bentoml
 
-    >>> saved_path = "/Users/chaoyuyang/bentoml/repository/IrisClassifier/20191113154121_E7D3CE"
+    >>> saved_path = "/Users/chaoyuyang/kappa/repository/IrisClassifier/20191113154121_E7D3CE"
 
     >>> clipper_model_name, clipper_model_version = deploy_bentoml(cl, saved_path, 'predict_clipper')
 
-    [2019-11-13 15:45:49,422] WARNING - Kappa local changes detected - Local Kappa repository including all code changes will be bundled together with the BentoService archive. When used with docker, the base docker image will be default to same version as last PyPI release at version: 0.4.9. You can also force bentoml to use a specific version for deploying your BentoService archive, by setting the config 'core/bentoml_deploy_version' to a pinned version or your custom Kappa on github, e.g.:'bentoml_deploy_version = git+https://github.com/{username}/bentoml.git@{branch}'
+    [2019-11-13 15:45:49,422] WARNING - Kappa local changes detected - Local Kappa repository including all code changes will be bundled together with the BentoService archive. When used with docker, the base docker image will be default to same version as last PyPI release at version: 0.4.9. You can also force kappa to use a specific version for deploying your BentoService archive, by setting the config 'core/bentoml_deploy_version' to a pinned version or your custom Kappa on github, e.g.:'bentoml_deploy_version = git+https://github.com/{username}/kappa.git@{branch}'
     [2019-11-13 15:45:49,444] WARNING - BentoArchive version mismatch: loading archive bundled in version 0.4.9,  but loading from version 0.4.9+7.g429b9ec.dirty
     [2019-11-13 15:45:49,772] INFO - Step 1/10 : FROM clipper/python-closure-container:0.4.1
     [2019-11-13 15:45:49,775] INFO -
@@ -175,14 +175,14 @@ Use `get_all_models` api to check is the model properly linked and deployed.
 
     [u'irisclassifier-predict-clipper:20191113154121-e7d3ce']
 
-Link the deployed model with the `bentoml-test` application created above
+Link the deployed model with the `kappa-test` application created above
 
 .. code-block:: python
 
-    >>> cl.link_model_to_app('bentoml-test', clipper_model_name)
+    >>> cl.link_model_to_app('kappa-test', clipper_model_name)
 
 
-    19-11-13:15:47:05 INFO     [clipper_admin.py:303] [default-cluster] Model irisclassifier-predict-clipper is now linked to application bentoml-test
+    19-11-13:15:47:05 INFO     [clipper_admin.py:303] [default-cluster] Model irisclassifier-predict-clipper is now linked to application kappa-test
 
 
 Let's test the application by sending prediction request with sample data.
@@ -194,7 +194,7 @@ Let's test the application by sending prediction request with sample data.
     >>> addr = cl.get_query_addr()
     >>> # Post Query
     >>> response = requests.post(
-    >>>     "http://%s/%s/predict" % (addr, 'bentoml-test'),
+    >>>     "http://%s/%s/predict" % (addr, 'kappa-test'),
     >>>     headers={"Content-type": "application/json"},
     >>>     data=json.dumps({
     >>>         'input': [6.5, 3.0 , 5.8, 2.2]

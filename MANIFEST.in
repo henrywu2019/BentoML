@@ -25,27 +25,27 @@ global-exclude __pycache__
 
 # special files to include with PyPI distribution
 include versioneer.py
-include bentoml/_version.py
-include bentoml/saved_bundle/bentoml-init.sh
-include bentoml/saved_bundle/docker-entrypoint.sh
-graft bentoml/server/static_content
-graft bentoml/configuration
+include kappa/_version.py
+include kappa/saved_bundle/kappa-init.sh
+include kappa/saved_bundle/docker-entrypoint.sh
+graft kappa/server/static_content
+graft kappa/configuration
 
 # include migration files
-graft bentoml/gamma/migrations
-include bentoml/gamma/alembic.ini
+graft kappa/gamma/migrations
+include kappa/gamma/alembic.ini
 
 # include gamma server UI distribution files
-graft bentoml/gamma/web/dist
+graft kappa/gamma/web/dist
 
 # include Sagemaker deployment file
-include bentoml/gamma/deployment/sagemaker/nginx.conf
-include bentoml/gamma/deployment/sagemaker/serve
+include kappa/gamma/deployment/sagemaker/nginx.conf
+include kappa/gamma/deployment/sagemaker/serve
 
 # include files for Azure function deployment
-include bentoml/gamma/deployment/azure_functions/host.json
-include bentoml/gamma/deployment/azure_functions/local.settings.json
-include bentoml/gamma/deployment/azure_functions/Dockerfile
+include kappa/gamma/deployment/azure_functions/host.json
+include kappa/gamma/deployment/azure_functions/local.settings.json
+include kappa/gamma/deployment/azure_functions/Dockerfile
 
 prune e2e_tests
 prune tests

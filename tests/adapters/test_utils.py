@@ -1,4 +1,4 @@
-from bentoml.adapters.utils import concat_list, get_default_accept_image_formats
+from kappa.adapters.utils import concat_list, get_default_accept_image_formats
 
 
 def test_get_default_accept_image_formats():

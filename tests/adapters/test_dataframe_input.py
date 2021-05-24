@@ -11,10 +11,10 @@ import pandas as pd
 import psutil  # noqa # pylint: disable=unused-import
 import pytest
 
-from bentoml.adapters import DataframeInput
-from bentoml.adapters.dataframe_input import read_dataframes_from_json_n_csv
-from bentoml.utils.csv import csv_splitlines
-from bentoml.utils.dataframe_util import guess_orient
+from kappa.adapters import DataframeInput
+from kappa.adapters.dataframe_input import read_dataframes_from_json_n_csv
+from kappa.utils.csv import csv_splitlines
+from kappa.utils.dataframe_util import guess_orient
 
 try:
     from unittest.mock import MagicMock

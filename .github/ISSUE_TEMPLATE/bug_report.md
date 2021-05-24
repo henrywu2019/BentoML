@@ -31,19 +31,19 @@ To give us more information for diagnosing the issue, make sure to enable debug 
 
 Enable via environment variable, e.g.:
 ```
-$ git clone git@github.com:bentoml/Kappa.git && cd bentoml
+$ git clone git@github.com:kappa/Kappa.git && cd kappa
 $ BENTOML_DEBUG=TRUE python guides/quick-start/main.py
 ```
 
 Or set debug logging in your Python code:
 ```python
-from bentoml.configuration import set_debug_mode
+from kappa.configuration import set_debug_mode
 set_debug_mode(True)
 ```
 
 For Kappa CLI commands, simply add the `--verbose` flag, e.g.:
 ```bash
-bentoml get IrisClassifier --verbose
+kappa get IrisClassifier --verbose
 ```
 
 -->

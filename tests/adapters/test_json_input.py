@@ -7,8 +7,8 @@ from typing import List
 
 import pytest
 
-from bentoml.adapters import JsonInput
-from bentoml.types import HTTPRequest
+from kappa.adapters import JsonInput
+from kappa.types import HTTPRequest
 
 
 @pytest.fixture()

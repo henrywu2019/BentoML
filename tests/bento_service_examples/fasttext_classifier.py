@@ -1,12 +1,12 @@
-import bentoml
+import kappa
 
-from bentoml.adapters import JsonInput
-from bentoml.frameworks.fasttext import FasttextModelArtifact
+from kappa.adapters import JsonInput
+from kappa.frameworks.fasttext import FasttextModelArtifact
 
 
-@bentoml.env(infer_pip_packages=True)
-@bentoml.artifacts([FasttextModelArtifact('model')])
-class FasttextClassifier(bentoml.BentoService):
-    @bentoml.api(input=JsonInput(), batch=False)
+@kappa.env(infer_pip_packages=True)
+@kappa.artifacts([FasttextModelArtifact('model')])
+class FasttextClassifier(kappa.BentoService):
+    @kappa.api(input=JsonInput(), batch=False)
     def predict(self, parsed_json):
         return self.artifacts.model.predict(parsed_json['text'])

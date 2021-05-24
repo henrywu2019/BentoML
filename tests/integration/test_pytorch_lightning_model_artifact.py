@@ -6,8 +6,8 @@ import torch
 import pandas as pd
 
 
-import bentoml
-from bentoml.utils.tempdir import TempDirectory
+import kappa
+from kappa.utils.tempdir import TempDirectory
 from tests.bento_service_examples.pytorch_lightning_classifier import (
     PytorchLightningService,
 )
@@ -38,7 +38,7 @@ def test_pytorch_lightning_model_artifact_with_saved_lightning_model():
         svc.pack('model', script_path)
 
         saved_path = svc.save(version=uuid.uuid4().hex[0:8])
-        svc = bentoml.load(saved_path)
+        svc = kappa.load(saved_path)
         result = svc.predict(pd.DataFrame([[5, 4, 3, 2]]))
         assert result.tolist() == [[6, 5, 4, 3]]
 
@@ -49,7 +49,7 @@ def test_pytorch_lightning_model_artifact():
     svc.pack('model', model)
 
     saved_path = svc.save(version=uuid.uuid4().hex[0:8])
-    svc = bentoml.load(saved_path)
+    svc = kappa.load(saved_path)
     result = svc.predict(pd.DataFrame([[5, 4, 3, 2]]))
     assert result.tolist() == [[6, 5, 4, 3]]
 

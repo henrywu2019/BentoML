@@ -21,11 +21,11 @@ Prerequisites
 
   * Install instruction: https://docs.docker.com/install
 
-* Python 3.6 or above and required packages `bentoml` and `scikit-learn`:
+* Python 3.6 or above and required packages `kappa` and `scikit-learn`:
 
   * .. code-block:: bash
 
-        pip install bentoml scikit-learn
+        pip install kappa scikit-learn
 
 ===========================
 Create Google cloud project
@@ -68,15 +68,15 @@ Kappa saved bundle for deployment:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
 Verify the saved bundle created:
 
 .. code-block:: bash
 
-    $ bentoml get IrisClassifier:latest
+    $ kappa get IrisClassifier:latest
 
     # Sample output
     {
@@ -84,15 +84,15 @@ Verify the saved bundle created:
       "version": "20200121141808_FE78B5",
       "uri": {
         "type": "LOCAL",
-        "uri": "/Users/bozhaoyu/bentoml/repository/IrisClassifier/20200121141808_FE78B5"
+        "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
       "bentoServiceMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
         "env": {
-          "condaEnv": "name: bentoml-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
-          "pipDependencies": "bentoml==0.5.8\nscikit-learn",
+          "condaEnv": "name: kappa-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
+          "pipDependencies": "kappa==0.5.8\nscikit-learn",
           "pythonVersion": "3.7.3"
         },
         "artifacts": [
@@ -118,7 +118,7 @@ BentoService and available for sending test request:
 .. code-block:: bash
 
     # Start Kappa API server:
-    bentoml serve IrisClassifier:latest
+    kappa serve IrisClassifier:latest
 
 
 .. code-block:: bash
@@ -136,7 +136,7 @@ Use `gcloud` CLI to build the docker image
 .. code-block:: bash
 
     # Find the local path of the latest version IrisClassifier saved bundle
-    $ saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+    $ saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
     $ cd $saved_path
     $ gcloud builds submit --tag gcr.io/irisclassifier-gcloud-run/iris-classifier
 

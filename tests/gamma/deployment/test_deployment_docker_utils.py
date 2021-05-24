@@ -3,12 +3,12 @@ import pytest
 import docker
 from mock import patch, Mock
 
-from bentoml.gamma.deployment.docker_utils import (
+from kappa.gamma.deployment.docker_utils import (
     ensure_docker_available_or_raise,
     build_docker_image,
     push_docker_image_to_repository,
 )
-from bentoml.exceptions import MissingDependencyException, BentoMLException
+from kappa.exceptions import MissingDependencyException, BentoMLException
 
 mock_image_tag = 'mytag:v1'
 mock_repository = f'repository.com/{mock_image_tag}'

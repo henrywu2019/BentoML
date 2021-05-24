@@ -2,7 +2,7 @@ import json
 import os
 from io import BytesIO
 
-from bentoml.server.api_server import BentoAPIServer
+from kappa.server.api_server import BentoAPIServer
 
 CUR_PATH = os.path.dirname(os.path.abspath(__file__))
 

@@ -3,8 +3,8 @@ import numpy as np
 import lightgbm as lgb
 from pandas import DataFrame
 import pytest
-import bentoml
-from bentoml.gamma.client import GammaClient
+import kappa
+from kappa.gamma.client import GammaClient
 
 
 @pytest.fixture()
@@ -29,7 +29,7 @@ def test_lgbm_artifact_pack():
 
     saved_path = svc.save()
 
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
 
     assert loaded_svc.predict(DataFrame([[0]])) == [0]
 

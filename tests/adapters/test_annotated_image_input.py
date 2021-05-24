@@ -5,8 +5,8 @@ import io
 import pytest
 from urllib3.filepost import encode_multipart_formdata
 
-from bentoml.types import HTTPRequest, InferenceTask
-from bentoml.adapters import AnnotatedImageInput
+from kappa.types import HTTPRequest, InferenceTask
+from kappa.adapters import AnnotatedImageInput
 
 
 @pytest.fixture()

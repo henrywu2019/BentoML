@@ -23,21 +23,21 @@ do
     docker build --pull \
         --build-arg BENTOML_VERSION="$BENTOML_VERSION" \
         --build-arg PYTHON_VERSION="$version" \
-        -t bentoml/model-server:"$BENTOML_VERSION"-py"${version//.}" \
-        -t bentoml/model-server:latest-py"${version//.}" \
+        -t kappa/model-server:"$BENTOML_VERSION"-py"${version//.}" \
+        -t kappa/model-server:latest-py"${version//.}" \
         .
 
-    docker push bentoml/model-server:"$BENTOML_VERSION"-py"${version//.}"
-    docker push bentoml/model-server:latest-py"${version//.}"
+    docker push kappa/model-server:"$BENTOML_VERSION"-py"${version//.}"
+    docker push kappa/model-server:latest-py"${version//.}"
 
 done
 
 # tag the default version as both latest and unspecified python version
-docker tag bentoml/model-server:latest-py${PYTHON_LATEST_VERSION//.} bentoml/model-server:latest
-docker push bentoml/model-server:latest
+docker tag kappa/model-server:latest-py${PYTHON_LATEST_VERSION//.} kappa/model-server:latest
+docker push kappa/model-server:latest
 
-docker tag bentoml/model-server:$BENTOML_VERSION-py${PYTHON_LATEST_VERSION//.} bentoml/model-server:$BENTOML_VERSION
-docker push bentoml/model-server:$BENTOML_VERSION
+docker tag kappa/model-server:$BENTOML_VERSION-py${PYTHON_LATEST_VERSION//.} kappa/model-server:$BENTOML_VERSION
+docker push kappa/model-server:$BENTOML_VERSION
 
 echo "Building slim docker base images for ${PYTHON_MAJOR_VERSIONS[*]}"
 for version in "${PYTHON_MAJOR_VERSIONS[@]}"
@@ -46,14 +46,14 @@ do
     docker build --pull \
     --build-arg BENTOML_VERSION=$BENTOML_VERSION \
     --build-arg PYTHON_VERSION=$version \
-    -t bentoml/model-server:$BENTOML_VERSION-slim-py${version//.} \
-    -t bentoml/model-server:latest-slim-py${version//.} \
+    -t kappa/model-server:$BENTOML_VERSION-slim-py${version//.} \
+    -t kappa/model-server:latest-slim-py${version//.} \
     -f Dockerfile-slim \
     --network=host \
     .
 
-    docker push bentoml/model-server:$BENTOML_VERSION-slim-py${version//.}
-    docker push bentoml/model-server:latest-slim-py${version//.}
+    docker push kappa/model-server:$BENTOML_VERSION-slim-py${version//.}
+    docker push kappa/model-server:latest-slim-py${version//.}
 
 done
 echo "Done"

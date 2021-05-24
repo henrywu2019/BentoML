@@ -1,10 +1,10 @@
 import logging
 import subprocess
 
-from bentoml.gamma.client import get_gamma_client
+from kappa.gamma.client import get_gamma_client
 from tests.bento_service_examples.example_bento_service import ExampleBentoService
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_gamma_server_containerize_without_push():
@@ -28,7 +28,7 @@ def test_gamma_server_containerize_from_cli():
     tag = 'mytagfoo'
 
     command = [
-        'bentoml',
+        'kappa',
         'containerize',
         bento_tag,
         '--build-arg',

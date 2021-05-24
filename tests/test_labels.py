@@ -3,18 +3,18 @@ import uuid
 import mock
 from click.testing import CliRunner
 
-from bentoml.cli import create_bentoml_cli
-from bentoml.gamma.proto.deployment_pb2 import (
+from kappa.cli import create_kappa_cli
+from kappa.gamma.proto.deployment_pb2 import (
     ApplyDeploymentResponse,
     Deployment,
     DeploymentSpec,
 )
-from bentoml.gamma.status import Status
+from kappa.gamma.status import Status
 
 
 def test_label_selectors_on_cli_list(bento_service):
     runner = CliRunner()
-    cli = create_bentoml_cli()
+    cli = create_kappa_cli()
     failed_result = runner.invoke(
         cli.commands['list'], ['--labels', '"incorrect label query"']
     )
@@ -39,7 +39,7 @@ def test_label_selectors_on_cli_list(bento_service):
 
 def test_label_selectors_on_cli_get(bento_service):
     runner = CliRunner()
-    cli = create_bentoml_cli()
+    cli = create_kappa_cli()
 
     unique_label_value = uuid.uuid4().hex
     bento_service.save(labels={'test_id': unique_label_value})
@@ -53,16 +53,16 @@ def test_label_selectors_on_cli_get(bento_service):
 
 
 @mock.patch(
-    'bentoml.gamma.deployment.aws_lambda.operator.ensure_docker_available_or_raise',
+    'kappa.gamma.deployment.aws_lambda.operator.ensure_docker_available_or_raise',
     mock.MagicMock(),
 )
 @mock.patch(
-    'bentoml.gamma.deployment.aws_lambda.operator.ensure_sam_available_or_raise',
+    'kappa.gamma.deployment.aws_lambda.operator.ensure_sam_available_or_raise',
     mock.MagicMock(),
 )
 def test_deployment_labels():
     runner = CliRunner()
-    cli = create_bentoml_cli()
+    cli = create_kappa_cli()
 
     failed_result = runner.invoke(
         cli.commands['lambda'],
@@ -78,7 +78,7 @@ def test_deployment_labels():
     assert failed_result.exit_code == 2
 
     with mock.patch(
-        'bentoml.gamma.deployment.aws_lambda.operator.AwsLambdaDeploymentOperator.add'
+        'kappa.gamma.deployment.aws_lambda.operator.AwsLambdaDeploymentOperator.add'
     ) as mock_operator_add:
         bento_name = 'MockService'
         bento_version = 'MockVersion'

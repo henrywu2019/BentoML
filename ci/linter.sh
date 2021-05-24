@@ -23,8 +23,8 @@ fi
 # The first line of the tests are  
 # always empty if there are no linting errors
 
-echo "Running flake8 on bentoml module.."
-output=$( flake8 --config=.flake8 bentoml )
+echo "Running flake8 on kappa module.."
+output=$( flake8 --config=.flake8 kappa )
 first_line=$(echo "${output}" | head -1)
 echo "$output"
 if [ -n "$first_line" ]; then
@@ -39,8 +39,8 @@ if [ -n "$first_line" ]; then
   has_errors=1
 fi
 
-echo "Running pylint on bentoml module.."
-output=$( pylint --rcfile="./pylintrc" bentoml )
+echo "Running pylint on kappa module.."
+output=$( pylint --rcfile="./pylintrc" kappa )
 first_line=$(echo "${output}" | head -1)
 echo "$output"
 if [ -n "$first_line" ]; then

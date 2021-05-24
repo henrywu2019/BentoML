@@ -6,7 +6,7 @@ which is actually a HTTP/2 Cleartext (H2C) service. Normally:
 
 .. code:: bash
 
-    bentoml config set gamma_service.url=<ip-of-your-server>:50051
+    kappa config set gamma_service.url=<ip-of-your-server>:50051
 
 But for security or ease of management, we sometimes want to deploy it
 behind an Nginx server, and use our own certificate to encrypt it.
@@ -63,14 +63,14 @@ NGINX ≥ 1.13.9
 
 .. code:: bash
 
-    bentoml config set gamma_service.url=grpcs://gamma.yourdomain.com:1443
+    kappa config set gamma_service.url=grpcs://gamma.yourdomain.com:1443
 
 3. (Optional) using self-signed certificates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
 
-    bentoml config set gamma_service.tls_root_ca_cert=<path_to_your_ca_cert.pem>
+    kappa config set gamma_service.tls_root_ca_cert=<path_to_your_ca_cert.pem>
 
 
 4. (Optional) using TLS client certificates
@@ -78,8 +78,8 @@ NGINX ≥ 1.13.9
 
 .. code:: bash
 
-    bentoml config set gamma_service.tls_client_cert=<path_to_your_tls_client_cert.pem>
-    bentoml config set gamma_service.tls_client_key=<path_to_your_tls_client_key.pem>
+    kappa config set gamma_service.tls_client_cert=<path_to_your_tls_client_cert.pem>
+    kappa config set gamma_service.tls_client_key=<path_to_your_tls_client_key.pem>
 
 More options of gRPC NGINX configuration:
 `https://www.nginx.com/blog/nginx-1-13-10-grpc/ <https://www.nginx.com/blog/nginx-1-13-10-grpc/>`__

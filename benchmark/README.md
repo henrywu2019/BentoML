@@ -1,1 +1,1 @@
-Moved to [bentoml/benchmark](https://github.com/bentoml/benchmark)
+Moved to [kappa/benchmark](https://github.com/kappa/benchmark)

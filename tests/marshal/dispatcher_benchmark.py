@@ -1,7 +1,7 @@
 import asyncio
 import time
 import random
-from bentoml.marshal.dispatcher import CorkDispatcher
+from kappa.marshal.dispatcher import CorkDispatcher
 
 
 class Session:

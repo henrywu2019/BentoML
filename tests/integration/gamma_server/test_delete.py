@@ -3,11 +3,11 @@ import uuid
 
 from click.testing import CliRunner
 
-from bentoml.cli import create_bentoml_cli
+from kappa.cli import create_kappa_cli
 from tests.bento_service_examples.iris_classifier import IrisClassifier
-from bentoml.gamma.client import get_gamma_client
+from kappa.gamma.client import get_gamma_client
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_delete_single_bento(bento_service):
@@ -92,7 +92,7 @@ def test_delete_bentos_with_tags(bento_service):
     assert len(bentos) == 2
 
     runner = CliRunner()
-    cli = create_bentoml_cli()
+    cli = create_kappa_cli()
     print(cli.commands['delete'])
     runner.invoke(
         cli.commands['delete'],
@@ -122,7 +122,7 @@ def test_delete_all_bentos(bento_service):
     bento_service.save(version=uuid.uuid4().hex[0:8])
 
     runner = CliRunner()
-    cli = create_bentoml_cli()
+    cli = create_kappa_cli()
     runner.invoke(
         cli.commands['delete'], ['--all', '-y'],
     )

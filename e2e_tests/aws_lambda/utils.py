@@ -3,7 +3,7 @@ import subprocess
 
 import requests
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def send_test_data_to_endpoint(deployment_endpoint, sample_data=None):
@@ -21,7 +21,7 @@ def run_lambda_create_or_update_command(deploy_command):
     """
     :return: deployment_success, deployment_endpoint
     """
-    logger.info(f"Running bentoml deploy command: {' '.join(deploy_command)}")
+    logger.info(f"Running kappa deploy command: {' '.join(deploy_command)}")
     with subprocess.Popen(
         deploy_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     ) as proc:

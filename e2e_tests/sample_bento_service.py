@@ -1,9 +1,9 @@
 import logging
 
-from bentoml import BentoService, api
-from bentoml.adapters import JsonInput
+from kappa import BentoService, api
+from kappa.adapters import JsonInput
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 class SampleBentoService(BentoService):

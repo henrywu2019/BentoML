@@ -1,9 +1,9 @@
-import bentoml
-from bentoml.service.artifacts.json_file import JSONArtifact
+import kappa
+from kappa.service.artifacts.json_file import JSONArtifact
 
 
-@bentoml.artifacts([JSONArtifact("hparams")])
-class ExampleServiceWithJSONArtifact(bentoml.BentoService):
+@kappa.artifacts([JSONArtifact("hparams")])
+class ExampleServiceWithJSONArtifact(kappa.BentoService):
     pass
 
 
@@ -14,5 +14,5 @@ def test_json_artifact_simple_service_round_trip(tmp_path):
     service.pack("hparams", hparams)
     service.save_to_dir(str(tmp_path))
     del service
-    new_service = bentoml.load(str(tmp_path))
+    new_service = kappa.load(str(tmp_path))
     assert new_service.artifacts.hparams == hparams

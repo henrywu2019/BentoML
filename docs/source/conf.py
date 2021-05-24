@@ -15,15 +15,15 @@ import sys
 
 # Adding Kappa source directory for accessing Kappa version
 sys.path.insert(0, os.path.abspath('../..'))
-import bentoml
+import kappa
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'Kappa'
-copyright = '2021, bentoml.org'
-author = 'bentoml.org'
-version = bentoml.__version__
+copyright = '2021, kappa.org'
+author = 'kappa.org'
+version = kappa.__version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -75,4 +75,4 @@ html_theme_options = {
 html_static_path = ['_static']
 
 # Private dictionary for spell checker
-spelling_word_list_filename = ['bentoml_wordlist.txt']
+spelling_word_list_filename = ['kappa_wordlist.txt']

@@ -2,23 +2,23 @@ import os
 
 from mock import MagicMock, patch
 
-from bentoml.gamma.proto import status_pb2
-from bentoml.gamma.proto.deployment_pb2 import (
+from kappa.gamma.proto import status_pb2
+from kappa.gamma.proto.deployment_pb2 import (
     Deployment,
     DeploymentState,
     DescribeDeploymentResponse,
 )
-from bentoml.gamma.proto.repository_pb2 import (
+from kappa.gamma.proto.repository_pb2 import (
     Bento,
     BentoServiceMetadata,
     BentoUri,
     GetBentoResponse,
 )
-from bentoml.gamma.deployment.aws_ec2.operator import (
+from kappa.gamma.deployment.aws_ec2.operator import (
     _make_cloudformation_template,
     AwsEc2DeploymentOperator,
 )
-from bentoml.gamma.deployment.aws_utils import FAILED_CLOUDFORMATION_STACK_STATUS
+from kappa.gamma.deployment.aws_utils import FAILED_CLOUDFORMATION_STACK_STATUS
 
 mock_s3_bucket_name = 'test_deployment_bucket'
 mock_s3_prefix = 'prefix'
@@ -86,19 +86,19 @@ def test_make_cloudformation_template(tmpdir):
 
 
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.ensure_sam_available_or_raise",
+    "kappa.gamma.deployment.aws_ec2.operator.ensure_sam_available_or_raise",
     MagicMock(),
 )
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.ensure_docker_available_or_raise",
+    "kappa.gamma.deployment.aws_ec2.operator.ensure_docker_available_or_raise",
     MagicMock(),
 )
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.create_s3_bucket_if_not_exists",
+    "kappa.gamma.deployment.aws_ec2.operator.create_s3_bucket_if_not_exists",
     MagicMock(),
 )
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.deploy_ec2_service", MagicMock(),
+    "kappa.gamma.deployment.aws_ec2.operator.deploy_ec2_service", MagicMock(),
 )
 def test_ec2_add_success():
     def mock_boto_client(self, op_name, args):  # pylint: disable=unused-argument
@@ -295,15 +295,15 @@ def test_ec2_describe_no_bucket_failure():
 
 
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.ensure_sam_available_or_raise",
+    "kappa.gamma.deployment.aws_ec2.operator.ensure_sam_available_or_raise",
     MagicMock(),
 )
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.ensure_docker_available_or_raise",
+    "kappa.gamma.deployment.aws_ec2.operator.ensure_docker_available_or_raise",
     MagicMock(),
 )
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.deploy_ec2_service", MagicMock(),
+    "kappa.gamma.deployment.aws_ec2.operator.deploy_ec2_service", MagicMock(),
 )
 def test_ec2_update_success():
     def mock_boto_client(self, op_name, args):  # pylint: disable=unused-argument
@@ -356,18 +356,18 @@ def test_ec2_update_success():
 
 
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.ensure_sam_available_or_raise",
+    "kappa.gamma.deployment.aws_ec2.operator.ensure_sam_available_or_raise",
     MagicMock(),
 )
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.ensure_docker_available_or_raise",
+    "kappa.gamma.deployment.aws_ec2.operator.ensure_docker_available_or_raise",
     MagicMock(),
 )
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.deploy_ec2_service", MagicMock(),
+    "kappa.gamma.deployment.aws_ec2.operator.deploy_ec2_service", MagicMock(),
 )
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.AwsEc2DeploymentOperator.describe",
+    "kappa.gamma.deployment.aws_ec2.operator.AwsEc2DeploymentOperator.describe",
     MagicMock(
         return_value=DescribeDeploymentResponse(
             status=status_pb2.Status(
@@ -387,15 +387,15 @@ def test_ec2_update_describe_failure():
 
 
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.ensure_sam_available_or_raise",
+    "kappa.gamma.deployment.aws_ec2.operator.ensure_sam_available_or_raise",
     MagicMock(),
 )
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.ensure_docker_available_or_raise",
+    "kappa.gamma.deployment.aws_ec2.operator.ensure_docker_available_or_raise",
     MagicMock(),
 )
 @patch(
-    "bentoml.gamma.deployment.aws_ec2.operator.deploy_ec2_service", MagicMock(),
+    "kappa.gamma.deployment.aws_ec2.operator.deploy_ec2_service", MagicMock(),
 )
 def test_ec2_update_no_bucket_failure():
     def mock_boto_client(self, op_name, args):  # pylint: disable=unused-argument

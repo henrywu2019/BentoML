@@ -1,7 +1,7 @@
 import pytest
-from bentoml.service.artifacts import BentoServiceArtifact
-from bentoml.frameworks.sklearn import SklearnModelArtifact
-from bentoml.exceptions import FailedPrecondition
+from kappa.service.artifacts import BentoServiceArtifact
+from kappa.frameworks.sklearn import SklearnModelArtifact
+from kappa.exceptions import FailedPrecondition
 
 
 def test_valid_artifact_name():

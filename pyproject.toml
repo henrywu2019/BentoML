@@ -13,9 +13,9 @@ exclude = '''
     | examples
     | guides
   )/
-  | bentoml/utils/cloudpickle.py
-  | bentoml/gamma/proto
-  | bentoml/_version.py
+  | kappa/utils/cloudpickle.py
+  | kappa/gamma/proto
+  | kappa/_version.py
   | versioneer.py
 )
 '''

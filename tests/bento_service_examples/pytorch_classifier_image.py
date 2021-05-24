@@ -5,9 +5,9 @@ import torch  # pylint: disable=import-error
 from torch.autograd import Variable  # pylint: disable=import-error
 from torchvision import transforms  # pylint: disable=import-error
 
-import bentoml
-from bentoml.frameworks.pytorch import PytorchModelArtifact
-from bentoml.adapters import FileInput
+import kappa
+from kappa.frameworks.pytorch import PytorchModelArtifact
+from kappa.adapters import FileInput
 
 
 classes = (
@@ -24,10 +24,10 @@ classes = (
 )
 
 
-@bentoml.env(pip_packages=['torch', 'numpy', 'torchvision', 'scikit-learn'])
-@bentoml.artifacts([PytorchModelArtifact('net')])
-class PytorchImageClassifier(bentoml.BentoService):
-    @bentoml.utils.cached_property
+@kappa.env(pip_packages=['torch', 'numpy', 'torchvision', 'scikit-learn'])
+@kappa.artifacts([PytorchModelArtifact('net')])
+class PytorchImageClassifier(kappa.BentoService):
+    @kappa.utils.cached_property
     def transform(self):
         return transforms.Compose(
             [
@@ -36,7 +36,7 @@ class PytorchImageClassifier(bentoml.BentoService):
             ]
         )
 
-    @bentoml.api(input=FileInput(), batch=True)
+    @kappa.api(input=FileInput(), batch=True)
     def predict(self, file_streams: List[BinaryIO]) -> List[str]:
         input_datas = []
         for fs in file_streams:

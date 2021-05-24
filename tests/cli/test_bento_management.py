@@ -1,7 +1,7 @@
 import click
 import pytest
 
-from bentoml.cli.bento_management import parse_delete_targets_argument_callback
+from kappa.cli.bento_management import parse_delete_targets_argument_callback
 
 
 def test_parse_delete_targets_argument_callback():

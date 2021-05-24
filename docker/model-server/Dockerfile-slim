@@ -11,7 +11,7 @@ RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 # pre-install Kappa requirements
-RUN pip install bentoml[model_server]==$BENTOML_VERSION --no-cache-dir
+RUN pip install kappa[model_server]==$BENTOML_VERSION --no-cache-dir
 COPY entrypoint.sh .
 
 # multi-stage build to shave dependency cost
@@ -23,4 +23,4 @@ COPY --from=compile-image entrypoint.sh /usr/local/bin
 ENV PATH="/opt/venv/bin:$PATH"
 
 ENTRYPOINT [ "entrypoint.sh" ]
-CMD ["bentoml", "serve-gunicorn", "/bento"]
+CMD ["kappa", "serve-gunicorn", "/bento"]

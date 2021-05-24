@@ -1,7 +1,7 @@
 import pytest
-import bentoml
+import kappa
 from tests.bento_service_examples.gluon_classifier import GluonClassifier
-from bentoml.gamma.client import GammaClient
+from kappa.gamma.client import GammaClient
 
 import mxnet
 
@@ -27,7 +27,7 @@ def test_gluon_artifact_pack(gluon_classifier, trained_gluon_model):
     assert gluon_classifier.predict([0]) == [0]
 
     saved_path = gluon_classifier.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
 
     assert loaded_svc.predict([0]) == [0]
 

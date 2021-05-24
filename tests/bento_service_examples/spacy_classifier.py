@@ -1,12 +1,12 @@
-import bentoml
-from bentoml.adapters import JsonInput
-from bentoml.frameworks.spacy import SpacyModelArtifact
+import kappa
+from kappa.adapters import JsonInput
+from kappa.frameworks.spacy import SpacyModelArtifact
 
 
-@bentoml.env(infer_pip_packages=True)
-@bentoml.artifacts([SpacyModelArtifact('nlp')])
-class SpacyModelService(bentoml.BentoService):
-    @bentoml.api(input=JsonInput(), batch=False)
+@kappa.env(infer_pip_packages=True)
+@kappa.artifacts([SpacyModelArtifact('nlp')])
+class SpacyModelService(kappa.BentoService):
+    @kappa.api(input=JsonInput(), batch=False)
     def predict(self, parsed_json):
         output = self.artifacts.nlp(parsed_json['text'])
         return output

@@ -14,9 +14,9 @@ cd "$GIT_ROOT"/docker/gamma-service
 
 docker build --pull \
     --build-arg BENTOML_VERSION="$BENTOML_VERSION" \
-    -t bentoml/gamma-service:"$BENTOML_VERSION" \
-    -t bentoml/gamma-service:latest \
+    -t kappa/gamma-service:"$BENTOML_VERSION" \
+    -t kappa/gamma-service:latest \
     .
 
-docker push bentoml/gamma-service:"$BENTOML_VERSION"
-docker push bentoml/gamma-service:latest
+docker push kappa/gamma-service:"$BENTOML_VERSION"
+docker push kappa/gamma-service:latest

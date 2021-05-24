@@ -31,16 +31,16 @@ This guide uses the IrisClassifier BentoService from the :doc:`Quick start guide
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
-Use `bentoml list` to get the BentoService name:version tag.
+Use `kappa list` to get the BentoService name:version tag.
 
 
 .. code-block:: bash
 
-    > bentoml list
+    > kappa list
 
     BentoService                          CREATED_AT                  APIS                        ARTIFACTS
     IrisClassifier:20200121141808_FE78B5  2020-01-21 22:18:25.079723  predict(DataframeInput)  model(SklearnModelArtifact)
@@ -50,12 +50,12 @@ Kappa has great support for AWS EC2. You can deploy, update and delete
 deployment with single command, and customize deployment to fit your needs with parameters
 such as `instance type`,`scaling capacities`
 
-To deploy BentoService to AWS EC2, use `bentoml lambda deploy` command.
+To deploy BentoService to AWS EC2, use `kappa lambda deploy` command.
 Deployment name and bento service name:version tag is required.
 
 .. code-block:: bash
 
-    > bentoml ec2 deploy my-first-ec2-deployment -b IrisClassifier:20200121141808_FE78B5
+    > kappa ec2 deploy my-first-ec2-deployment -b IrisClassifier:20200121141808_FE78B5
 
     Deploying EC2 deployment -[2020-01-21 14:37:16,838] INFO - Building project
     [2020-01-21 14:38:52,826] INFO - Containerzing service
@@ -172,11 +172,11 @@ Tests the deployed service with sample dataset:
     [0]%
 
 Get the latest state and deployment information such as endpoint and s3 bucket name by
-using `bentoml lambda get` command
+using `kappa lambda get` command
 
 .. code-block:: bash
 
-    > bentoml ec2 get my-first-ec2-deployment
+    > kappa ec2 get my-first-ec2-deployment
 
     {
         "namespace": "dev",
@@ -218,21 +218,21 @@ using `bentoml lambda get` command
         }
 
 
-Use `bentoml ec2 list` to have a quick glance of all of the AWS EC2 deployments
+Use `kappa ec2 list` to have a quick glance of all of the AWS EC2 deployments
 
 .. code-block:: bash
 
-    > bentoml ec2 list
+    > kappa ec2 list
 
     NAME                        NAMESPACE    LABELS    PLATFORM                               STATUS    AGE
     my-first-ec2-deployment     dev          aws-ec2   IrisClassifier:20201015064204_282D00   running   10 minutes and 3.72 seconds
 
 
-Removing a EC2 deployment is also very easy.  Calling `bentoml ec2 delete` command will delete the all resources from aws.
+Removing a EC2 deployment is also very easy.  Calling `kappa ec2 delete` command will delete the all resources from aws.
 
 .. code-block:: bash
 
-    > bentoml ec2 delete my-first-ec2-deployment
+    > kappa ec2 delete my-first-ec2-deployment
 
     Successfully deleted AWS EC2 deployment "my-first-ec2-deployment"
 
@@ -257,15 +257,15 @@ Starts a Kappa GammaService docker image and set the credentials found in
     $ docker run -e AWS_ACCESS_KEY_ID=MY-ACCESS-KEY-ID \
         -e AWS_SECRET_ACCESS_KEY=MY_SECRET-ACCESS-KEY \
         -e AWS_DEFAULT_REGION=MY-DEFAULT-REGION \
-        -p 50051:50051 -p 3000:3000 bentoml/gamma-service:latest
+        -p 50051:50051 -p 3000:3000 kappa/gamma-service:latest
 
 
 After the GammaService docker container is running, in another terminal window, set
-gamma service address with `bentoml config set`
+gamma service address with `kappa config set`
 
 .. code-block:: bash
 
-    $ bentoml config set gamma_service.url=0.0.0.0:50051
+    $ kappa config set gamma_service.url=0.0.0.0:50051
 
 
 ========================================================
@@ -351,7 +351,7 @@ Copy and paste the code below into a file named `gamma-service.yaml`
             app: gamma-service
         spec:
           containers:
-          - image: bentoml/gamma-service
+          - image: kappa/gamma-service
             imagePullPolicy: IfNotPresent
             name: gamma-service
             ports:

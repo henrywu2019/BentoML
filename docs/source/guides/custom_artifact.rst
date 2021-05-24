@@ -21,9 +21,9 @@ the model is valid.  It uses `cloudpickle` to `save` and `load`.
 
     import os
     import json
-    from bentoml.utils import cloudpickle
-    from bentoml.exceptions import InvalidArgument
-    from bentoml.service.artifacts import BentoServiceArtifact
+    from kappa.utils import cloudpickle
+    from kappa.exceptions import InvalidArgument
+    from kappa.service.artifacts import BentoServiceArtifact
 
     class MyModelArtifact(BentoServiceArtifact):
         def __init__(self, name):
@@ -63,13 +63,13 @@ Define and save BentoService with the custom Artifact
     # my_bento_service.py
 
     from my_model_artifact import MyModelArtifact
-    from bentoml import BentoService, env, api, artifacts
-    from bentoml.adapters import JsonInputAdapter
-    import bentoml
+    from kappa import BentoService, env, api, artifacts
+    from kappa.adapters import JsonInputAdapter
+    import kappa
 
     @env(infer_pip_packages=True)
     @artifacts([MyModelArtifact('test_model')])
-    class MyService(bentoml.BentoService):
+    class MyService(kappa.BentoService):
 
         @api(input=JsonInput, batch=False)
         def predict(self, input_data):
@@ -92,7 +92,7 @@ Test with example data
 
 .. code-block:: shell
 
-    $ bentoml serve MyService:latest
+    $ kappa serve MyService:latest
 
 
 In another terminal to make a `curl` request

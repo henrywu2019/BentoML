@@ -17,9 +17,9 @@ python "$PROJECT_PATH/model/model.py" "$BUILD_PATH/artifacts"
 python "$PROJECT_PATH/service.py" "$BUILD_PATH/artifacts" "$BUILD_PATH/dist"
 if [ "$(uname)" == "Darwin" ]; then
 	export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-	python -m pytest -s "$PROJECT_PATH" --bento-dist "$BUILD_PATH/dist" --cov=bentoml --cov-config=.coveragerc
+	python -m pytest -s "$PROJECT_PATH" --bento-dist "$BUILD_PATH/dist" --cov=kappa --cov-config=.coveragerc
 else
-	python -m pytest -s "$PROJECT_PATH" --bento-dist "$BUILD_PATH/dist" --docker --cov=bentoml --cov-config=.coveragerc
+	python -m pytest -s "$PROJECT_PATH" --bento-dist "$BUILD_PATH/dist" --docker --cov=kappa --cov-config=.coveragerc
 fi
 rm -r $BUILD_PATH
 
@@ -40,6 +40,6 @@ set BUILD_PATH=%PROJECT_PATH%\build
 # Run test
 python %PROJECT_PATH%\model\model.py %BUILD_PATH%\artifacts
 python %PROJECT_PATH%\service.py %BUILD_PATH%\artifacts %BUILD_PATH%\dist
-python -m pytest -s %PROJECT_PATH% --bento-dist %BUILD_PATH%\dist --dev-server --cov=bentoml --cov-config=.coveragerc
+python -m pytest -s %PROJECT_PATH% --bento-dist %BUILD_PATH%\dist --dev-server --cov=kappa --cov-config=.coveragerc
 
 rmdir /s /q %BUILD_PATH%

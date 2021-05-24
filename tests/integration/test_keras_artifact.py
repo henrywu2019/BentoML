@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 import tensorflow as tf
 
-import bentoml
+import kappa
 from tests.integration.utils import (
     build_api_server_docker_image,
     export_service_bundle,
@@ -83,7 +83,7 @@ def test_keras_artifact(svc):
 
 def test_keras_artifact_loaded(svc):
     with export_service_bundle(svc) as saved_path:
-        loaded = bentoml.load(saved_path)
+        loaded = kappa.load(saved_path)
         assert (
             loaded.predict([test_data]) == 15.0
         ), 'Inference on saved and loaded Keras artifact does not match expected'

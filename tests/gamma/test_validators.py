@@ -1,5 +1,5 @@
-from bentoml.gamma.validator import validate_deployment_pb
-from bentoml.gamma.proto.deployment_pb2 import Deployment, DeploymentSpec
+from kappa.gamma.validator import validate_deployment_pb
+from kappa.gamma.proto.deployment_pb2 import Deployment, DeploymentSpec
 
 
 def _get_test_sagemaker_deployment_pb():

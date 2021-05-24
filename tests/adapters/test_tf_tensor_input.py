@@ -13,7 +13,7 @@ try:
 except ImportError:
     from mock import MagicMock
 
-from bentoml.types import HTTPRequest, BATCH_HEADER
+from kappa.types import HTTPRequest, BATCH_HEADER
 
 
 def mock_tensorflow_module():
@@ -100,7 +100,7 @@ def test_tf_tensor_handle_request(make_api, test_cases):
     '''
     ref: https://www.tensorflow.org/tfx/serving/api_rest#request_format_2
     '''
-    from bentoml.adapters import TfTensorInput
+    from kappa.adapters import TfTensorInput
 
     api = make_api(input_adapter=TfTensorInput(), user_func=lambda i: i)
 
@@ -118,7 +118,7 @@ def test_tf_tensor_handle_batch_request(make_api, test_cases):
     '''
     ref: https://www.tensorflow.org/tfx/serving/api_rest#request_format_2
     '''
-    from bentoml.adapters import TfTensorInput
+    from kappa.adapters import TfTensorInput
 
     api = make_api(input_adapter=TfTensorInput(), user_func=lambda i: i)
 

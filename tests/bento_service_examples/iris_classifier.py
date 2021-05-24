@@ -1,20 +1,20 @@
-import bentoml
-from bentoml.adapters import DataframeInput
-from bentoml.frameworks.sklearn import SklearnModelArtifact
+import kappa
+from kappa.adapters import DataframeInput
+from kappa.frameworks.sklearn import SklearnModelArtifact
 
 
-@bentoml.env(infer_pip_packages=True)
-@bentoml.artifacts([SklearnModelArtifact('model')])
-class IrisClassifier(bentoml.BentoService):
-    @bentoml.api(input=DataframeInput(), batch=True)
+@kappa.env(infer_pip_packages=True)
+@kappa.artifacts([SklearnModelArtifact('model')])
+class IrisClassifier(kappa.BentoService):
+    @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         return self.artifacts.model.predict(df)
 
 
 # manually define requirements
-@bentoml.env(requirements_txt_file="./tests/pipenv_requirements.txt")
-@bentoml.artifacts([SklearnModelArtifact('model')])
-class IrisClassifierPipEnv(bentoml.BentoService):
-    @bentoml.api(input=DataframeInput(), batch=True)
+@kappa.env(requirements_txt_file="./tests/pipenv_requirements.txt")
+@kappa.artifacts([SklearnModelArtifact('model')])
+class IrisClassifierPipEnv(kappa.BentoService):
+    @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         return self.artifacts.model.predict(df)

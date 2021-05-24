@@ -2,14 +2,14 @@ import mock
 import os
 from click.testing import CliRunner
 
-from bentoml.cli.bento_service import create_bento_service_cli
-from bentoml.cli.gamma_service import add_gamma_service_sub_command
-from bentoml.configuration import expand_env_var
+from kappa.cli.bento_service import create_bento_service_cli
+from kappa.cli.gamma_service import add_gamma_service_sub_command
+from kappa.configuration import expand_env_var
 
 
-FILE_SYSTEM_REPOSITORY = expand_env_var(os.path.join("~", "bentoml", "repository"))
+FILE_SYSTEM_REPOSITORY = expand_env_var(os.path.join("~", "kappa", "repository"))
 SQLITE_DATABASE_URL = "sqlite:///" + expand_env_var(
-    os.path.join("~", "bentoml", "storage.db")
+    os.path.join("~", "kappa", "storage.db")
 )
 
 
@@ -22,7 +22,7 @@ def test_gamma_service_start():
     gamma_service_start_cmd = cli.commands["gamma-service-start"]
 
     with mock.patch(
-        "bentoml.cli.gamma_service.start_gamma_service_grpc_server"
+        "kappa.cli.gamma_service.start_gamma_service_grpc_server"
     ) as mocked_start_gamma_service_grpc_server:
         runner.invoke(gamma_service_start_cmd)
         mocked_start_gamma_service_grpc_server.assert_called()
@@ -79,7 +79,7 @@ def test_gamma_service_start_repository_types():
     gamma_service_start_cmd = cli.commands["gamma-service-start"]
 
     with mock.patch(
-        "bentoml.cli.gamma_service.start_gamma_service_grpc_server"
+        "kappa.cli.gamma_service.start_gamma_service_grpc_server"
     ) as mocked_start_gamma_service_grpc_server:
         runner.invoke(gamma_service_start_cmd, ["--repository-type=s3"])
         mocked_start_gamma_service_grpc_server.assert_not_called()

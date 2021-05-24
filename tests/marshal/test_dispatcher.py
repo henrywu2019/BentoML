@@ -6,7 +6,7 @@ import time
 import asyncio
 
 import psutil  # noqa # pylint: disable=unused-import
-from bentoml.marshal.dispatcher import CorkDispatcher
+from kappa.marshal.dispatcher import CorkDispatcher
 
 
 class BENCHMARK:

@@ -5,54 +5,54 @@ API InputAdapters
 
 BaseInputAdapter
 ++++++++++++++++
-.. autoclass:: bentoml.adapters.BaseInputAdapter
+.. autoclass:: kappa.adapters.BaseInputAdapter
 
 DataframeInput
 ++++++++++++++
-.. autoclass:: bentoml.adapters.DataframeInput
+.. autoclass:: kappa.adapters.DataframeInput
 
 JsonInput
 +++++++++
-.. autoclass:: bentoml.adapters.JsonInput
+.. autoclass:: kappa.adapters.JsonInput
 
 TfTensorInput
 +++++++++++++
-.. autoclass:: bentoml.adapters.TfTensorInput
+.. autoclass:: kappa.adapters.TfTensorInput
 
 ImageInput
 ++++++++++
-.. autoclass:: bentoml.adapters.ImageInput
+.. autoclass:: kappa.adapters.ImageInput
 
 StringInput
 +++++++++++
-.. autoclass:: bentoml.adapters.StringInput
+.. autoclass:: kappa.adapters.StringInput
 
 MultiImageInput
 +++++++++++++++
-.. autoclass:: bentoml.adapters.MultiImageInput
+.. autoclass:: kappa.adapters.MultiImageInput
 
 AnnotatedImageInput
 +++++++++++++++++++
-.. autoclass:: bentoml.adapters.AnnotatedImageInput
+.. autoclass:: kappa.adapters.AnnotatedImageInput
 
 FileInput
 +++++++++
-.. autoclass:: bentoml.adapters.FileInput
+.. autoclass:: kappa.adapters.FileInput
 
 MultiFileInput
 ++++++++++++++
-.. autoclass:: bentoml.adapters.MultiFileInput
+.. autoclass:: kappa.adapters.MultiFileInput
 
 ClipperInput
 ++++++++++++
 
 A special group of adapters that are designed to be used when deploying with `Clipper <http://clipper.ai/>`__.
 
-.. autoclass:: bentoml.adapters.ClipperBytesInput
-.. autoclass:: bentoml.adapters.ClipperFloatsInput
-.. autoclass:: bentoml.adapters.ClipperIntsInput
-.. autoclass:: bentoml.adapters.ClipperDoublesInput
-.. autoclass:: bentoml.adapters.ClipperStringsInput
+.. autoclass:: kappa.adapters.ClipperBytesInput
+.. autoclass:: kappa.adapters.ClipperFloatsInput
+.. autoclass:: kappa.adapters.ClipperIntsInput
+.. autoclass:: kappa.adapters.ClipperDoublesInput
+.. autoclass:: kappa.adapters.ClipperStringsInput
 
 
 API OutputAdapters
@@ -60,7 +60,7 @@ API OutputAdapters
 
 BaseOutputAdapter
 +++++++++++++++++
-.. autoclass:: bentoml.adapters.BaseOutputAdapter
+.. autoclass:: kappa.adapters.BaseOutputAdapter
 
 DefaultOutput
 +++++++++++++
@@ -68,19 +68,19 @@ The default output adapter is used when there's no `output` specified in an Infe
 API. It ensembles multiple common output adapter and dynamically choose one base on the
 return value of the user-defined inference API callback function.
 
-.. autoclass:: bentoml.adapters.DefaultOutput
+.. autoclass:: kappa.adapters.DefaultOutput
 
 DataframeOutput
 +++++++++++++++
-.. autoclass:: bentoml.adapters.DataframeOutput
+.. autoclass:: kappa.adapters.DataframeOutput
 
 TfTensorOutput
 ++++++++++++++
-.. autoclass:: bentoml.adapters.TfTensorOutput
+.. autoclass:: kappa.adapters.TfTensorOutput
 
 JsonOutput
 ++++++++++
-.. autoclass:: bentoml.adapters.JsonOutput
+.. autoclass:: kappa.adapters.JsonOutput
 
 
 Adapter Roadmap

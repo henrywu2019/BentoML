@@ -10,7 +10,7 @@ from e2e_tests.aws_lambda.utils import (
 )
 from e2e_tests.cli_operations import delete_deployment
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_aws_lambda_deployment(iris_clf_service):
@@ -18,7 +18,7 @@ def test_aws_lambda_deployment(iris_clf_service):
     deployment_name = f'tests-lambda-e2e-{random_hash}'
 
     create_deployment_command = [
-        'bentoml',
+        'kappa',
         'lambda',
         'deploy',
         deployment_name,

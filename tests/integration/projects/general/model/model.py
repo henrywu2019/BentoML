@@ -1,8 +1,8 @@
 import pathlib
 import sys
 
-from bentoml.frameworks.sklearn import SklearnModelArtifact
-from bentoml.service.artifacts.pickle import PickleArtifact
+from kappa.frameworks.sklearn import SklearnModelArtifact
+from kappa.service.artifacts.pickle import PickleArtifact
 
 
 class PickleModel:

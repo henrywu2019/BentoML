@@ -8,7 +8,7 @@ from e2e_tests.aws_sagemaker.utils import (
 from e2e_tests.cli_operations import delete_deployment
 
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_sagemaker_update_deployment(basic_bentoservice_v1, basic_bentoservice_v2):
@@ -17,7 +17,7 @@ def test_sagemaker_update_deployment(basic_bentoservice_v1, basic_bentoservice_v
     region = 'us-west-2'
 
     create_deployment_command = [
-        'bentoml',
+        'kappa',
         'sagemaker',
         'deploy',
         deployment_name,
@@ -45,7 +45,7 @@ def test_sagemaker_update_deployment(basic_bentoservice_v1, basic_bentoservice_v
         ), 'Sagemaker prediction result mismatch'
 
         update_bento_version_deployment_command = [
-            'bentoml',
+            'kappa',
             'sagemaker',
             'update',
             deployment_name,

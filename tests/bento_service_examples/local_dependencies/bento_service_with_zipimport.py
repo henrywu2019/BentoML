@@ -8,15 +8,15 @@ from nested_zipmodule.boolean_module.return_true import return_true
 from return_false import return_false
 
 
-import bentoml
-from bentoml.adapters import DataframeInput
-from bentoml.frameworks.sklearn import SklearnModelArtifact
+import kappa
+from kappa.adapters import DataframeInput
+from kappa.frameworks.sklearn import SklearnModelArtifact
 
 
-@bentoml.env(zipimport_archives=['nested_zipmodule.zip'])
-@bentoml.artifacts([SklearnModelArtifact('model')])
-class IrisClassifier(bentoml.BentoService):
-    @bentoml.api(input=DataframeInput(), batch=True)
+@kappa.env(zipimport_archives=['nested_zipmodule.zip'])
+@kappa.artifacts([SklearnModelArtifact('model')])
+class IrisClassifier(kappa.BentoService):
+    @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         df = identity(df)
         assert return_true() is True

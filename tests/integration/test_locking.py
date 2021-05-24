@@ -5,13 +5,13 @@ import subprocess
 from tests.bento_service_examples.example_bento_service import ExampleBentoService
 from tests.threading_util import ThreadWithResult, run_delayed_thread
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def cli(svc, cmd, *args):
     bento_tag = f'{svc.name}:{svc.version}'
     proc = subprocess.Popen(
-        ['bentoml', cmd, bento_tag, *args],
+        ['kappa', cmd, bento_tag, *args],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )

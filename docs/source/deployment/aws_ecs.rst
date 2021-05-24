@@ -28,11 +28,11 @@ Prerequisites
 
   * Install instruction: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html
 
-* Python 3.6 or above with `scikit-learn` and `bentoml` installed
+* Python 3.6 or above with `scikit-learn` and `kappa` installed
 
   *  .. code-block:: bash
 
-        pip install bentoml scikit-learn
+        pip install kappa scikit-learn
 
 
 
@@ -46,15 +46,15 @@ Kappa saved bundle for deployment:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
 Verify the saved bundle created:
 
 .. code-block:: bash
 
-    $ bentoml get IrisClassifier:latest
+    $ kappa get IrisClassifier:latest
 
     # sample output
     {
@@ -62,15 +62,15 @@ Verify the saved bundle created:
       "version": "20200121141808_FE78B5",
       "uri": {
         "type": "LOCAL",
-        "uri": "/Users/bozhaoyu/bentoml/repository/IrisClassifier/20200121141808_FE78B5"
+        "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
       "bentoServiceMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
         "env": {
-          "condaEnv": "name: bentoml-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
-          "pipDependencies": "bentoml==0.5.8\nscikit-learn",
+          "condaEnv": "name: kappa-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
+          "pipDependencies": "kappa==0.5.8\nscikit-learn",
           "pythonVersion": "3.7.3"
         },
         "artifacts": [
@@ -96,7 +96,7 @@ BentoService and available for sending test request:
 .. code-block:: bash
 
     # Start Kappa API server:
-    bentoml serve IrisClassifier:latest
+    kappa serve IrisClassifier:latest
 
 
 .. code-block:: bash
@@ -169,7 +169,7 @@ Create AWS ECR repository
 .. code-block:: bash
 
     # Find the local path of the latest version IrisClassifier saved bundle
-    $ saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+    $ saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
 
     $ docker build --tag=192023623294.dkr.ecr.us-west-2.amazonaws.com/irisclassifier-ecs $saved_path
 
@@ -410,31 +410,31 @@ After create `ecs-params.yaml`, we can deploy our BentoService to the ECS cluste
 
 .. code-block:: bash
 
-    $ ecs-cli compose --project-name tutorial-bentoml-ecs service up --create-log-groups \
+    $ ecs-cli compose --project-name tutorial-kappa-ecs service up --create-log-groups \
       --cluster-config tutorial --ecs-profile tutorial-profile
 
     # Sample output
 
-    INFO[0000] Using ECS task definition                     TaskDefinition="tutorial-bentoml-ecs:1"
+    INFO[0000] Using ECS task definition                     TaskDefinition="tutorial-kappa-ecs:1"
     WARN[0001] Failed to create log group sentiment-aws-ecs in us-west-2: The specified log group already exists
-    INFO[0001] Updated ECS service successfully              desiredCount=1 force-deployment=false service=tutorial-bentoml-ecs
-    INFO[0017] (service tutorial-bentoml-ecs) has started 1 tasks: (task ecd119f0-b159-42e6-b86c-e6a62242ce7a).  timestamp="2019-12-17 01:05:23 +0000 UTC"
-    INFO[0094] Service status                                desiredCount=1 runningCount=1 serviceName=tutorial-bentoml-ecs
-    INFO[0094] (service tutorial-bentoml-ecs) has reached a steady state.  timestamp="2019-12-17 01:06:40 +0000 UTC"
-    INFO[0094] ECS Service has reached a stable state        desiredCount=1 runningCount=1 serviceName=tutorial-bentoml-ecs
+    INFO[0001] Updated ECS service successfully              desiredCount=1 force-deployment=false service=tutorial-kappa-ecs
+    INFO[0017] (service tutorial-kappa-ecs) has started 1 tasks: (task ecd119f0-b159-42e6-b86c-e6a62242ce7a).  timestamp="2019-12-17 01:05:23 +0000 UTC"
+    INFO[0094] Service status                                desiredCount=1 runningCount=1 serviceName=tutorial-kappa-ecs
+    INFO[0094] (service tutorial-kappa-ecs) has reached a steady state.  timestamp="2019-12-17 01:06:40 +0000 UTC"
+    INFO[0094] ECS Service has reached a stable state        desiredCount=1 runningCount=1 serviceName=tutorial-kappa-ecs
 
 
 Now, after creating the service, we can use `ecs-cli service ps` command to check the service's status
 
 .. code-block:: bash
 
-    $ ecs-cli compose --project-name tutorial-bentoml-ecs service ps \
+    $ ecs-cli compose --project-name tutorial-kappa-ecs service ps \
       --cluster-config tutorial --ecs-profile tutorial-profile
 
     # Sample output
 
     Name                                      State    Ports                        TaskDefinition          Health
-    ecd119f0-b159-42e6-b86c-e6a62242ce7a/web  RUNNING  34.212.49.46:5000->5000/tcp  tutorial-bentoml-ecs:1  UNKNOWN
+    ecd119f0-b159-42e6-b86c-e6a62242ce7a/web  RUNNING  34.212.49.46:5000->5000/tcp  tutorial-kappa-ecs:1  UNKNOWN
 
 
 ====================================
@@ -460,18 +460,18 @@ Delete the service on AWS ECS
 
 .. code-block:: bash
 
-    $ ecs-cli compose --project-name tutorial-bentoml-ecs service down --cluster-config tutorial \
+    $ ecs-cli compose --project-name tutorial-kappa-ecs service down --cluster-config tutorial \
       --ecs-profile tutorial-profile
 
     # Sample output
 
-    INFO[0000] Updated ECS service successfully              desiredCount=0 force-deployment=false service=tutorial-bentoml-ecs
-    INFO[0000] Service status                                desiredCount=0 runningCount=1 serviceName=tutorial-bentoml-ecs
-    INFO[0016] Service status                                desiredCount=0 runningCount=0 serviceName=tutorial-bentoml-ecs
-    INFO[0016] (service tutorial-bentoml-ecs) has stopped 1 running tasks: (task ecd119f0-b159-42e6-b86c-e6a62242ce7a).  timestamp="2019-12-17 01:15:37 +0000 UTC"
-    INFO[0016] ECS Service has reached a stable state        desiredCount=0 runningCount=0 serviceName=tutorial-bentoml-ecs
-    INFO[0016] Deleted ECS service                           service=tutorial-bentoml-ecs
-    INFO[0016] ECS Service has reached a stable state        desiredCount=0 runningCount=0 serviceName=tutorial-bentoml-ecs
+    INFO[0000] Updated ECS service successfully              desiredCount=0 force-deployment=false service=tutorial-kappa-ecs
+    INFO[0000] Service status                                desiredCount=0 runningCount=1 serviceName=tutorial-kappa-ecs
+    INFO[0016] Service status                                desiredCount=0 runningCount=0 serviceName=tutorial-kappa-ecs
+    INFO[0016] (service tutorial-kappa-ecs) has stopped 1 running tasks: (task ecd119f0-b159-42e6-b86c-e6a62242ce7a).  timestamp="2019-12-17 01:15:37 +0000 UTC"
+    INFO[0016] ECS Service has reached a stable state        desiredCount=0 runningCount=0 serviceName=tutorial-kappa-ecs
+    INFO[0016] Deleted ECS service                           service=tutorial-kappa-ecs
+    INFO[0016] ECS Service has reached a stable state        desiredCount=0 runningCount=0 serviceName=tutorial-kappa-ecs
 
 
 Shutting down the AWS ECS cluster

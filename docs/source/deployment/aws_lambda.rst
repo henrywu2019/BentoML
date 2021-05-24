@@ -32,16 +32,16 @@ This guide uses the IrisClassifier BentoService from the :doc:`Quick start guide
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
-Use `bentoml list` to get the BentoService name:version tag.
+Use `kappa list` to get the BentoService name:version tag.
 
 
 .. code-block:: bash
 
-    > bentoml list
+    > kappa list
 
     BentoService                          CREATED_AT                  APIS                        ARTIFACTS
     IrisClassifier:20200121141808_FE78B5  2020-01-21 22:18:25.079723  predict(DataframeInput)  model(SklearnModelArtifact)
@@ -51,15 +51,15 @@ Kappa has great support for AWS Lambda. You can deploy, update and delete Lambda
 deployment with single command, and customize deployment to fit your needs with parameters
 such as `memory_size` and `timeout`
 
-To deploy BentoService to AWS Lambda, use `bentoml lambda deploy` command.
+To deploy BentoService to AWS Lambda, use `kappa lambda deploy` command.
 Deployment name and bento service name:version tag is required.
 
 .. code-block:: bash
 
-    > bentoml lambda deploy my-first-lambda-deployment -b IrisClassifier:20200121141808_FE78B5
+    > kappa lambda deploy my-first-lambda-deployment -b IrisClassifier:20200121141808_FE78B5
 
     Deploying Lambda deployment -[2020-01-21 14:37:16,838] INFO - Building lambda project
-    [2020-01-21 14:38:52,826] INFO - Packaging AWS Lambda project at /private/var/folders/kn/xnc9k74x03567n1mx2tfqnpr0000gn/T/bentoml-temp-qmzs123h ...
+    [2020-01-21 14:38:52,826] INFO - Packaging AWS Lambda project at /private/var/folders/kn/xnc9k74x03567n1mx2tfqnpr0000gn/T/kappa-temp-qmzs123h ...
     [2020-01-21 14:39:18,834] INFO - Deploying lambda project
     [2020-01-21 14:40:09,265] INFO - ApplyDeployment (my-first-lambda-deployment, namespace dev) succeeded
     Successfully created AWS Lambda deployment my-first-lambda-deployment
@@ -159,11 +159,11 @@ Tests the deployed service with sample dataset:
     [0]%
 
 Get the latest state and deployment information such as endpoint and s3 bucket name by
-using `bentoml lambda get` command
+using `kappa lambda get` command
 
 .. code-block:: bash
 
-    > bentoml lambda get my-first-lambda-deployment
+    > kappa lambda get my-first-lambda-deployment
 
     {
       "namespace": "dev",
@@ -193,11 +193,11 @@ using `bentoml lambda get` command
     }
 
 
-Use `bentoml lambda list` to have a quick glance of all of the AWS Lambda deployments
+Use `kappa lambda list` to have a quick glance of all of the AWS Lambda deployments
 
 .. code-block:: bash
 
-    > bentoml lambda list
+    > kappa lambda list
 
     NAME                        NAMESPACE    LABELS    PLATFORM    STATUS    AGE
     my-first-lambda-deployment  dev                    aws-lambda  running   8 minutes and 49.6 seconds
@@ -301,11 +301,11 @@ You can parse this JSON using CloudWatch Logs Insights or ElasticSearch. Within 
 
 In this example, `@timestamp` and `@message` represent the time when the log was emitted and the full log message. The third field can be any first level JSON field that were logged (either event info or prediction info).
 
-Removing a Lambda deployment is also very easy.  Calling `bentoml lambda delete` command will delete the Lambda function and related AWS resources
+Removing a Lambda deployment is also very easy.  Calling `kappa lambda delete` command will delete the Lambda function and related AWS resources
 
 .. code-block:: bash
 
-    > bentoml lambda delete my-first-lambda-deployment
+    > kappa lambda delete my-first-lambda-deployment
 
     Successfully deleted AWS Lambda deployment "my-first-lambda-deployment"
 
@@ -331,15 +331,15 @@ Starts a Kappa GammaService docker image and set the credentials found in
     $ docker run -e AWS_ACCESS_KEY_ID=MY-ACCESS-KEY-ID \
         -e AWS_SECRET_ACCESS_KEY=MY_SECRET-ACCESS-KEY \
         -e AWS_DEFAULT_REGION=MY-DEFAULT-REGION \
-        -p 50051:50051 -p 3000:3000 bentoml/gamma-service:latest
+        -p 50051:50051 -p 3000:3000 kappa/gamma-service:latest
 
 
 After the GammaService docker container is running, in another terminal window, set
-gamma service address with `bentoml config set`
+gamma service address with `kappa config set`
 
 .. code-block:: bash
 
-    $ bentoml config set gamma_service.url=0.0.0.0:50051
+    $ kappa config set gamma_service.url=0.0.0.0:50051
 
 
 ========================================================
@@ -425,7 +425,7 @@ Copy and paste the code below into a file named `gamma-service.yaml`
             app: gamma-service
         spec:
           containers:
-          - image: bentoml/gamma-service
+          - image: kappa/gamma-service
             imagePullPolicy: IfNotPresent
             name: gamma-service
             ports:

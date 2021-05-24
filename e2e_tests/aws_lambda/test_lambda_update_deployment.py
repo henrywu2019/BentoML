@@ -7,7 +7,7 @@ from e2e_tests.aws_lambda.utils import (
 )
 from e2e_tests.cli_operations import delete_deployment
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def test_aws_lambda_update_deployment(basic_bentoservice_v1, basic_bentoservice_v2):
@@ -15,7 +15,7 @@ def test_aws_lambda_update_deployment(basic_bentoservice_v1, basic_bentoservice_
     deployment_name = f'tests-lambda-update-{random_hash}'
 
     create_deployment_command = [
-        'bentoml',
+        'kappa',
         'lambda',
         'deploy',
         deployment_name,
@@ -36,7 +36,7 @@ def test_aws_lambda_update_deployment(basic_bentoservice_v1, basic_bentoservice_
         assert content == '"cat"', "prediction result mismatch"
 
         update_deployment_command = [
-            'bentoml',
+            'kappa',
             'lambda',
             'update',
             deployment_name,

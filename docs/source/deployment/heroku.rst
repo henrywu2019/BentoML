@@ -20,11 +20,11 @@ Prerequisites
 
     * Install instruction: https://docs.docker.com/install
 
-* Python 3.6 or above and required packages `bentoml` and `scikit-learn`:
+* Python 3.6 or above and required packages `kappa` and `scikit-learn`:
 
     * .. code-block:: bash
 
-            pip install bentoml scikit-learn
+            pip install kappa scikit-learn
 
 
 
@@ -37,15 +37,15 @@ Kappa saved bundle for deployment:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
 Verify the saved bundle created:
 
 .. code-block:: bash
 
-    $ bentoml get IrisClassifier:latest
+    $ kappa get IrisClassifier:latest
 
     # Sample output
 
@@ -54,15 +54,15 @@ Verify the saved bundle created:
       "version": "20200121141808_FE78B5",
       "uri": {
         "type": "LOCAL",
-        "uri": "/Users/bozhaoyu/bentoml/repository/IrisClassifier/20200121141808_FE78B5"
+        "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
       "bentoServiceMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
         "env": {
-          "condaEnv": "name: bentoml-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
-          "pipDependencies": "bentoml==0.5.8\nscikit-learn",
+          "condaEnv": "name: kappa-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
+          "pipDependencies": "kappa==0.5.8\nscikit-learn",
           "pythonVersion": "3.7.3"
         },
         "artifacts": [
@@ -88,7 +88,7 @@ BentoService and available for sending test request:
 .. code-block:: bash
 
     # Start Kappa API server:
-    bentoml serve IrisClassifier:latest
+    kappa serve IrisClassifier:latest
 
 
 .. code-block:: bash
@@ -123,7 +123,7 @@ Create a Heroku app:
 
 .. code-block:: bash
 
-    APP_NAME=bentoml-her0ku-$(date +%s | base64 | tr '[:upper:]' '[:lower:]' | tr -dc _a-z-0-9)
+    APP_NAME=kappa-her0ku-$(date +%s | base64 | tr '[:upper:]' '[:lower:]' | tr -dc _a-z-0-9)
     heroku create $APP_NAME
 
 
@@ -131,13 +131,13 @@ Find the IrisClassifier SavedBundle directory:
 
 .. code-block:: bash
 
-    cd $(bentoml get IrisClassifier:latest --print-location --quiet)
+    cd $(kappa get IrisClassifier:latest --print-location --quiet)
 
 
 
 
 Build and push API server container with the SavedBundle, and push to the Heroku app
-`bentoml-iris-classifier` created above:
+`kappa-iris-classifier` created above:
 
 .. code-block:: bash
 

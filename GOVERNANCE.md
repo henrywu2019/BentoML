@@ -8,11 +8,11 @@ Anyone with an interest in the project can join the community, contribute to the
 and participate in the decision making process. And this is a living document aiming to 
 outline how that participation takes place.
 
-* Contribution guidelines: https://github.com/bentoml/Kappa/blob/master/CONTRIBUTING.md
-* Code of Conduct: https://github.com/bentoml/Kappa/blob/master/CODE_OF_CONDUCT.md
-* Development guidelines: https://github.com/bentoml/Kappa/blob/master/DEVELOPMENT.md
-* Kappa contributor mailing list: https://groups.google.com/forum/#!forum/bentoml
-* Kappa contributor slack channel: https://bentoml.slack.com/archives/CKC2JP3TM
+* Contribution guidelines: https://github.com/kappa/Kappa/blob/master/CONTRIBUTING.md
+* Code of Conduct: https://github.com/kappa/Kappa/blob/master/CODE_OF_CONDUCT.md
+* Development guidelines: https://github.com/kappa/Kappa/blob/master/DEVELOPMENT.md
+* Kappa contributor mailing list: https://groups.google.com/forum/#!forum/kappa
+* Kappa contributor slack channel: https://kappa.slack.com/archives/CKC2JP3TM
 
 
 ## Roles And Responsibilities
@@ -21,27 +21,27 @@ outline how that participation takes place.
 
 Contributors are community members who contribute in concrete ways to the project. 
 Anyone can become a contributor, and contributions can take many forms, as detailed in 
-the [Kappa Contribution Guidelines](https://github.com/bentoml/Kappa/blob/master/CONTRIBUTING.md).
+the [Kappa Contribution Guidelines](https://github.com/kappa/Kappa/blob/master/CONTRIBUTING.md).
 There is no expectation of commitment to the project, no specific skill requirements and
 no selection process.
 
 As a contributor, you may find yourself doing one or more of the following:
 
 * Support new users by answering questions on the
-    [github issue tracker](https://github.com/bentoml/Kappa/issues) and the 
-    [#bentoml-users slack channel](https://join.slack.com/t/bentoml/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg).
+    [github issue tracker](https://github.com/kappa/Kappa/issues) and the 
+    [#kappa-users slack channel](https://join.slack.com/t/kappa/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg).
 * Report issues you're facing and "Thumbs up" on issues and feature requests that are 
-    relevant to you in Kappa's [issue tracker](https://github.com/bentoml/Kappa/issues).
+    relevant to you in Kappa's [issue tracker](https://github.com/kappa/Kappa/issues).
 * Investigate bugs and reviewing other developer's pull requests.
 * Contribute code or documentation to the project by submitting a Github pull request.
-* Create new example projects and contribute it to [bentoml/gallery](https://github.com/bentoml/gallery).
+* Create new example projects and contribute it to [kappa/gallery](https://github.com/kappa/gallery).
 
 
 Contributors engage with the project through the issue tracker and mailing list. They 
 submit code or documentation changes to the project via github pull request, which will 
 be reviewed by the Core Team members (see next section). 
 
-The [Kappa contributors mailing list](https://groups.google.com/forum/#!forum/bentoml) 
+The [Kappa contributors mailing list](https://groups.google.com/forum/#!forum/kappa) 
 is the most appropriate place to ask for help or get feedback when making contributions.
 
 As contributors gain experience and familiarity with the project, their profile within, 
@@ -133,9 +133,9 @@ they will appoint a substitute BDFL for that decision.
 Anyone can contribute to the project, regardless of their skills, as there are many ways
 to contribute. For instance, a contributor might be active on the project mailing list 
 and issue tracker, or might supply patches. The various ways of contributing are 
-described in more detail in the [Contribution Guidelines](https://github.com/bentoml/Kappa/blob/master/CONTRIBUTING.md).
+described in more detail in the [Contribution Guidelines](https://github.com/kappa/Kappa/blob/master/CONTRIBUTING.md).
 
-The [Kappa contributor mailing list](https://groups.google.com/forum/#!forum/bentoml) 
+The [Kappa contributor mailing list](https://groups.google.com/forum/#!forum/kappa) 
 is the most appropriate place to ask for help or get feedback when making contributions.
 
 
@@ -144,7 +144,7 @@ is the most appropriate place to ask for help or get feedback when making contri
 Decisions about the future of the project are made through discussion with all members 
 of the community, from the newest user to the most experienced PMC member. All 
 non-sensitive project management discussion takes place on the 
-[Kappa contributors mailing list](https://groups.google.com/forum/#!forum/bentoml). 
+[Kappa contributors mailing list](https://groups.google.com/forum/#!forum/kappa). 
 
 In order to ensure that the project is not bogged down by endless discussion and 
 continual voting, the project operates a policy of lazy consensus. This allows the 

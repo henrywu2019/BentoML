@@ -1,11 +1,11 @@
-import bentoml
-from bentoml.frameworks.lightgbm import LightGBMModelArtifact
-from bentoml.adapters import DataframeInput
+import kappa
+from kappa.frameworks.lightgbm import LightGBMModelArtifact
+from kappa.adapters import DataframeInput
 
 
-@bentoml.artifacts([LightGBMModelArtifact('model')])
-@bentoml.env(infer_pip_packages=True)
-class LgbModelService(bentoml.BentoService):
-    @bentoml.api(input=DataframeInput(), batch=True)
+@kappa.artifacts([LightGBMModelArtifact('model')])
+@kappa.env(infer_pip_packages=True)
+class LgbModelService(kappa.BentoService):
+    @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         return self.artifacts.model.predict(df)

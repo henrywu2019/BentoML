@@ -1,7 +1,7 @@
 import multiprocessing
 import os
 import sys
-from bentoml.configuration import (
+from kappa.configuration import (
     get_local_config_file,
     get_debug_mode,
     set_debug_mode,
@@ -13,10 +13,10 @@ def test_get_local_config_file():
 
     assert config_file is None
 
-    os.environ["BENTOML_CONFIG"] = "/tmp/bentoml.cfg"
+    os.environ["BENTOML_CONFIG"] = "/tmp/kappa.cfg"
     config_file = get_local_config_file()
 
-    assert config_file == "/tmp/bentoml.cfg"
+    assert config_file == "/tmp/kappa.cfg"
 
     del os.environ["BENTOML_CONFIG"]
 

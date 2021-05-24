@@ -3,15 +3,15 @@ import sys
 
 import numpy as np
 
-import bentoml
-from bentoml.adapters import DataframeInput
-from bentoml.frameworks.fastai import FastaiModelArtifact
+import kappa
+from kappa.adapters import DataframeInput
+from kappa.frameworks.fastai import FastaiModelArtifact
 
 
-@bentoml.env(infer_pip_packages=True)
-@bentoml.artifacts([FastaiModelArtifact('model')])
-class FastaiClassifier(bentoml.BentoService):
-    @bentoml.api(input=DataframeInput(), batch=True)
+@kappa.env(infer_pip_packages=True)
+@kappa.artifacts([FastaiModelArtifact('model')])
+class FastaiClassifier(kappa.BentoService):
+    @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         input_data = df.to_numpy().astype(np.float32)
         _, _, output = self.artifacts.model.predict(input_data)

@@ -14,7 +14,7 @@ from tests.bento_service_examples import (
     iris_classifier,
 )
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 @pytest.fixture()
@@ -43,7 +43,7 @@ def assert_out(stdout, stderr, expected):
 def run_predict(bento_service, input_data, is_file=False, options=[]):
     bento_name = f"{bento_service.name}:{bento_service.version}"
     run_predict_deployment_command = [
-        'bentoml',
+        'kappa',
         'run',
         bento_name,
         'predict',

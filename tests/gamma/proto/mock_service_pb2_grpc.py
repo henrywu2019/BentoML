@@ -16,22 +16,22 @@ class MockServiceStub(object):
             channel: A grpc.Channel.
         """
         self.Execute = channel.unary_unary(
-                '/bentoml.MockService/Execute',
+                '/kappa.MockService/Execute',
                 request_serializer=mock__service__pb2.MockRequest.SerializeToString,
                 response_deserializer=mock__service__pb2.MockResponse.FromString,
                 )
         self.ExecuteClientStream = channel.stream_unary(
-                '/bentoml.MockService/ExecuteClientStream',
+                '/kappa.MockService/ExecuteClientStream',
                 request_serializer=mock__service__pb2.MockRequest.SerializeToString,
                 response_deserializer=mock__service__pb2.MockResponse.FromString,
                 )
         self.ExecuteServerStream = channel.unary_stream(
-                '/bentoml.MockService/ExecuteServerStream',
+                '/kappa.MockService/ExecuteServerStream',
                 request_serializer=mock__service__pb2.MockRequest.SerializeToString,
                 response_deserializer=mock__service__pb2.MockResponse.FromString,
                 )
         self.ExecuteClientServerStream = channel.stream_stream(
-                '/bentoml.MockService/ExecuteClientServerStream',
+                '/kappa.MockService/ExecuteClientServerStream',
                 request_serializer=mock__service__pb2.MockRequest.SerializeToString,
                 response_deserializer=mock__service__pb2.MockResponse.FromString,
                 )
@@ -90,7 +90,7 @@ def add_MockServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'bentoml.MockService', rpc_method_handlers)
+            'kappa.MockService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -110,7 +110,7 @@ class MockService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/bentoml.MockService/Execute',
+        return grpc.experimental.unary_unary(request, target, '/kappa.MockService/Execute',
             mock__service__pb2.MockRequest.SerializeToString,
             mock__service__pb2.MockResponse.FromString,
             options, channel_credentials,
@@ -127,7 +127,7 @@ class MockService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(request_iterator, target, '/bentoml.MockService/ExecuteClientStream',
+        return grpc.experimental.stream_unary(request_iterator, target, '/kappa.MockService/ExecuteClientStream',
             mock__service__pb2.MockRequest.SerializeToString,
             mock__service__pb2.MockResponse.FromString,
             options, channel_credentials,
@@ -144,7 +144,7 @@ class MockService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/bentoml.MockService/ExecuteServerStream',
+        return grpc.experimental.unary_stream(request, target, '/kappa.MockService/ExecuteServerStream',
             mock__service__pb2.MockRequest.SerializeToString,
             mock__service__pb2.MockResponse.FromString,
             options, channel_credentials,
@@ -161,7 +161,7 @@ class MockService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_stream(request_iterator, target, '/bentoml.MockService/ExecuteClientServerStream',
+        return grpc.experimental.stream_stream(request_iterator, target, '/kappa.MockService/ExecuteClientServerStream',
             mock__service__pb2.MockRequest.SerializeToString,
             mock__service__pb2.MockResponse.FromString,
             options, channel_credentials,

@@ -19,7 +19,7 @@ def test_pip_install_saved_bentoservice_bundle(bento_bundle_path, tmpdir):
     from pip._internal.cli.main import main as pipmain
 
     install_path = str(tmpdir.mkdir("pip_local"))
-    bentoml_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    kappa_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
     assert (
         pipmain(
@@ -30,11 +30,11 @@ def test_pip_install_saved_bentoservice_bundle(bento_bundle_path, tmpdir):
 
     # ensure Kappa is installed as dependency
     if psutil.WINDOWS:
-        assert os.path.isfile(os.path.join(install_path, "bin", "bentoml.exe"))
+        assert os.path.isfile(os.path.join(install_path, "bin", "kappa.exe"))
     else:
-        assert os.path.isfile(os.path.join(install_path, "bin", "bentoml"))
+        assert os.path.isfile(os.path.join(install_path, "bin", "kappa"))
 
-    assert os.path.isdir(os.path.join(install_path, "bentoml"))
+    assert os.path.isdir(os.path.join(install_path, "kappa"))
 
     sys.path.insert(0, install_path)
     ExampleBentoService = __import__("ExampleBentoService")
@@ -54,10 +54,10 @@ def test_pip_install_saved_bentoservice_bundle(bento_bundle_path, tmpdir):
         cli_bin_path = os.path.join(install_path, "bin", "ExampleBentoService")
     assert os.path.isfile(cli_bin_path)
 
-    # add install_path and local bentoml module to PYTHONPATH to make them
+    # add install_path and local kappa module to PYTHONPATH to make them
     # available in subprocess call
     env = os.environ.copy()
-    env["PYTHONPATH"] = ":".join(sys.path + [install_path, bentoml_path])
+    env["PYTHONPATH"] = ":".join(sys.path + [install_path, kappa_path])
 
     output = subprocess.check_output(
         [cli_bin_path, "info", "--quiet"], env=env

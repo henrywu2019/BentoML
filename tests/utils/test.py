@@ -1,4 +1,4 @@
-from bentoml.utils import cached_contextmanager, cached_property
+from kappa.utils import cached_contextmanager, cached_property
 
 
 def test_cached_property():

@@ -448,8 +448,8 @@ jobs:
       minio:
         image: yubozhao/minio-github-action-service
         env:
-          MINIO_ACCESS_KEY: bentoml
-          MINIO_SECRET_KEY: bentoml
+          MINIO_ACCESS_KEY: kappa
+          MINIO_SECRET_KEY: kappa
         ports:
           - 9000:9000
     steps:
@@ -465,8 +465,8 @@ jobs:
       - name: Run s3 test
         run: ./ci/s3_bucket_integration_tests.sh
         env:
-          AWS_ACCESS_KEY: bentoml
-          AWS_SECRET_ACCESS_KEY: bentoml
+          AWS_ACCESS_KEY: kappa
+          AWS_SECRET_ACCESS_KEY: kappa
       - name: Upload test coverage to Codecov
         uses: codecov/codecov-action@v1.0.12
 

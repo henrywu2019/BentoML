@@ -1,8 +1,8 @@
 CLI Reference
 =============
 
-.. click:: bentoml:commandline_interface
-  :prog: bentoml
+.. click:: kappa:commandline_interface
+  :prog: kappa
   :show-nested:
 
 

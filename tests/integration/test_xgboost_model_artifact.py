@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 import xgboost as xgb
 
-import bentoml
+import kappa
 from tests.bento_service_examples.xgboost_classifier import XgboostModelClassifier
 from tests.integration.utils import (
     build_api_server_docker_image,
@@ -87,7 +87,7 @@ def xgboost_svc_saved_dir(tmp_path_factory, xgboost_svc):
 
 @pytest.fixture(scope="module")
 def xgboost_svc_loaded(xgboost_svc_saved_dir):
-    return bentoml.load(xgboost_svc_saved_dir)
+    return kappa.load(xgboost_svc_saved_dir)
 
 
 def test_xgboost_artifact(xgboost_svc_loaded):

@@ -64,19 +64,19 @@ Please see below configuration examples of different logging scenarios in YAML f
                         level: WARN
                         formatter: dev
                         class: logging.handlers.RotatingFileHandler
-                        filename: '/var/logs/bentoml/active.log'
+                        filename: '/var/logs/kappa/active.log'
                         maxBytes: 104857600
                         backupCount: 2
                 loggers:
-                    bentoml:
+                    kappa:
                         handlers: [console, local]
                         level: INFO
                         propagate: False
-                    bentoml.prediction:
+                    kappa.prediction:
                         handlers: [console]
                         level: INFO
                         propagate: False
-                    bentoml.feedback:
+                    kappa.feedback:
                         handlers: [console]
                         level: INFO
                         propagate: False
@@ -100,26 +100,26 @@ Please see below configuration examples of different logging scenarios in YAML f
                         class: logging.handlers.RotatingFileHandler
                         formatter: prediction
                         level: INFO
-                        filename: '/var/logs/bentoml/prediction.log'
+                        filename: '/var/logs/kappa/prediction.log'
                         maxBytes: 104857600
                         backupCount: 10
                     feedback:
                         class: logging.handlers.RotatingFileHandler
                         formatter: feedback
                         level: INFO
-                        filename: '/var/logs/bentoml/feedback.log'
+                        filename: '/var/logs/kappa/feedback.log'
                         maxBytes: 104857600
                         backupCount: 10
                 loggers:
-                    bentoml:
+                    kappa:
                         handlers: []
                         level: INFO
                         propagate: False
-                    bentoml.prediction:
+                    kappa.prediction:
                         handlers: [prediction]
                         level: INFO
                         propagate: False
-                    bentoml.feedback:
+                    kappa.feedback:
                         handlers: [feedback]
                         level: INFO
                         propagate: False
@@ -153,33 +153,33 @@ Please see below configuration examples of different logging scenarios in YAML f
                         level: INFO
                         formatter: dev
                         class: logging.handlers.RotatingFileHandler
-                        filename: '/var/logs/bentoml/active.log'
+                        filename: '/var/logs/kappa/active.log'
                         maxBytes: 104857600
                         backupCount: 2
                     prediction:
                         class: logging.handlers.RotatingFileHandler
                         formatter: prediction
                         level: INFO
-                        filename: '/var/logs/bentoml/prediction.log'
+                        filename: '/var/logs/kappa/prediction.log'
                         maxBytes: 104857600
                         backupCount: 10
                     feedback:
                         class: logging.handlers.RotatingFileHandler
                         formatter: feedback
                         level: INFO
-                        filename: '/var/logs/bentoml/feedback.log'
+                        filename: '/var/logs/kappa/feedback.log'
                         maxBytes: 104857600
                         backupCount: 10
                 loggers:
-                    bentoml:
+                    kappa:
                         handlers: [console, local]
                         level: INFO
                         propagate: False
-                    bentoml.prediction:
+                    kappa.prediction:
                         handlers: [console, prediction]
                         level: INFO
                         propagate: False
-                    bentoml.feedback:
+                    kappa.feedback:
                         handlers: [console, feedback]
                         level: INFO
                         propagate: False

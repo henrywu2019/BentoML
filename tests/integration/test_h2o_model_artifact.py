@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-import bentoml
+import kappa
 from tests.bento_service_examples.h2o_service import H2oExampleBentoService
 from tests.integration.utils import (
     build_api_server_docker_image,
@@ -25,7 +25,7 @@ def h2o_svc():
     h2o.init()
 
     df = h2o.import_file(
-        "https://github.com/yubozhao/bentoml-h2o-data-for-testing/raw/master/"
+        "https://github.com/yubozhao/kappa-h2o-data-for-testing/raw/master/"
         "powerplant_output.csv"
     )
     splits = df.split_frame(ratios=[0.8], seed=1)
@@ -50,7 +50,7 @@ def h2o_svc_saved_dir(tmp_path_factory, h2o_svc):
 
 @pytest.fixture()
 def h2o_svc_loaded(h2o_svc_saved_dir):
-    return bentoml.load(h2o_svc_saved_dir)
+    return kappa.load(h2o_svc_saved_dir)
 
 
 def test_h2o_artifact(h2o_svc_loaded):

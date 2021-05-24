@@ -7,7 +7,7 @@ import imageio
 import numpy as np
 import pytest
 
-from bentoml.gamma.client import GammaClient
+from kappa.gamma.client import GammaClient
 from tests.bento_service_examples.example_bento_service import ExampleBentoService
 
 
@@ -95,7 +95,7 @@ def pytest_configure():
 
         return _wrapper
 
-    pytest.since_bentoml_version = _since_version
+    pytest.since_kappa_version = _since_version
 
 
 def pytest_addoption(parser):

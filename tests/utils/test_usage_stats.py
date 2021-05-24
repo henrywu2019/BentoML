@@ -2,12 +2,12 @@ from os import environ
 from click.testing import CliRunner
 from mock import MagicMock, patch
 
-import bentoml
-from bentoml.cli import create_bentoml_cli
-from bentoml.utils.usage_stats import _get_bento_service_event_properties, _do_not_track
-from bentoml.gamma.proto.deployment_pb2 import DeleteDeploymentResponse, Deployment
-from bentoml.gamma.status import Status
-from bentoml.gamma.gamma_service import get_gamma_service
+import kappa
+from kappa.cli import create_kappa_cli
+from kappa.utils.usage_stats import _get_bento_service_event_properties, _do_not_track
+from kappa.gamma.proto.deployment_pb2 import DeleteDeploymentResponse, Deployment
+from kappa.gamma.status import Status
+from kappa.gamma.gamma_service import get_gamma_service
 
 MOCK_DEPLOYMENT_NAME = 'mock_name'
 MOCK_FAILED_DEPLOYMENT_NAME = 'mock-failed'
@@ -70,7 +70,7 @@ def test_get_bento_service_event_properties(bento_service):
 
 
 def test_get_bento_service_event_properties_with_no_artifact():
-    class ExampleBentoService(bentoml.BentoService):
+    class ExampleBentoService(kappa.BentoService):
         pass
 
     properties = _get_bento_service_event_properties(ExampleBentoService())
@@ -82,25 +82,25 @@ def test_get_bento_service_event_properties_with_no_artifact():
 
 
 def test_track_cli_usage(bento_service, bento_bundle_path):
-    with patch('bentoml.cli.click_utils.track') as mock:
+    with patch('kappa.cli.click_utils.track') as mock:
         mock.side_effect = mock_track_func
         runner = CliRunner()
-        cli = create_bentoml_cli()
+        cli = create_kappa_cli()
         runner.invoke(
             cli.commands['info'], [f'{bento_service.name}:{bento_service.version}']
         )
         event_name, properties = mock.call_args_list[0][0]
-        assert event_name == 'bentoml-cli'
+        assert event_name == 'kappa-cli'
         assert properties['command'] == 'info'
         assert properties['return_code'] == 0
         assert properties['duration']
 
 
 def test_track_cli_with_click_exception():
-    with patch('bentoml.cli.click_utils.track') as mock:
+    with patch('kappa.cli.click_utils.track') as mock:
         mock.side_effect = mock_track_func
         runner = CliRunner()
-        cli = create_bentoml_cli()
+        cli = create_kappa_cli()
         runner.invoke(
             cli.commands['azure-functions'], ['update', 'mock-deployment-name']
         )
@@ -112,12 +112,12 @@ def test_track_cli_with_click_exception():
 
 
 def test_track_cli_with_keyboard_interrupt(bento_bundle_path):
-    with patch('bentoml.cli.click_utils.track') as track:
+    with patch('kappa.cli.click_utils.track') as track:
         track.side_effect = mock_track_func
-        with patch('bentoml.cli.bento_service.start_dev_server') as start_dev_server:
+        with patch('kappa.cli.bento_service.start_dev_server') as start_dev_server:
             start_dev_server.side_effect = mock_start_dev_server
             runner = CliRunner()
-            cli = create_bentoml_cli()
+            cli = create_kappa_cli()
             runner.invoke(cli.commands['serve'], [bento_bundle_path])
             _, properties = track.call_args_list[0][0]
             assert properties['return_code'] == 2
@@ -125,14 +125,14 @@ def test_track_cli_with_keyboard_interrupt(bento_bundle_path):
             assert properties['command'] == 'serve'
 
 
-@patch('bentoml.gamma.gamma_service_impl.validate_deployment_pb', MagicMock())
-@patch('bentoml.gamma.db.DeploymentStore')
+@patch('kappa.gamma.gamma_service_impl.validate_deployment_pb', MagicMock())
+@patch('kappa.gamma.db.DeploymentStore')
 def test_track_server_successful_delete(mock_deployment_store):
     mock_deployment_store.return_value.get.return_value = mock_deployment_pb()
-    with patch('bentoml.gamma.gamma_service_impl.track') as mock:
+    with patch('kappa.gamma.gamma_service_impl.track') as mock:
         mock.side_effect = mock_track_func
         with patch(
-            'bentoml.gamma.gamma_service_impl.get_deployment_operator'
+            'kappa.gamma.gamma_service_impl.get_deployment_operator'
         ) as mock_get_deployment_operator:
             mock_get_deployment_operator.side_effect = mock_get_operator_func()
             gamma_service = get_gamma_service()
@@ -146,18 +146,18 @@ def test_track_server_successful_delete(mock_deployment_store):
 
 
 @patch(
-    'bentoml.gamma.gamma_service_impl.validate_deployment_pb',
+    'kappa.gamma.gamma_service_impl.validate_deployment_pb',
     MagicMock(return_value=None),
 )
-@patch('bentoml.gamma.db.DeploymentStore')
+@patch('kappa.gamma.db.DeploymentStore')
 def test_track_server_force_delete(mock_deployment_store):
     mock_deployment_store.return_value.get.return_value = mock_deployment_pb(
         MOCK_FAILED_DEPLOYMENT_NAME
     )
-    with patch('bentoml.gamma.gamma_service_impl.track') as mock:
+    with patch('kappa.gamma.gamma_service_impl.track') as mock:
         mock.side_effect = mock_track_func
         with patch(
-            'bentoml.gamma.gamma_service_impl.get_deployment_operator'
+            'kappa.gamma.gamma_service_impl.get_deployment_operator'
         ) as mock_get_deployment_operator:
             mock_get_deployment_operator.side_effect = mock_get_operator_func()
             gamma_service = get_gamma_service()

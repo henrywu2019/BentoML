@@ -11,11 +11,11 @@ Kappa CLI allows you to load and run packaged models straight from the CLI witho
 
 Example with :code:`DataframeInput`. Here, we give the data to the input adapter in the form of a flat JSON string using the :code:`--input` flag::
 
-    $ bentoml run IrisClassifier:latest predict --input '[{"sw": 1, "sl": 2, "pw": 1, "pl": 2}]'
+    $ kappa run IrisClassifier:latest predict --input '[{"sw": 1, "sl": 2, "pw": 1, "pl": 2}]'
 
 You can also pass file data to any subclass of :code:`StringInput` using the :code:`--input-file` flag::
 
-    $ bentoml run IrisClassifier:latest predict --format csv --input-file test.csv
+    $ kappa run IrisClassifier:latest predict --format csv --input-file test.csv
 
 
 :code:`FileInput`
@@ -26,11 +26,11 @@ You can also pass file data to any subclass of :code:`StringInput` using the :co
     
 Example with :code:`ImageInput`. We provide the image data to the input adapter by specifying the the image file we want to run inference on using the flag :code:`--input-file`::
 
-    $ bentoml run PyTorchFashionClassifier:latest predict --input-file test.jpg
+    $ kappa run PyTorchFashionClassifier:latest predict --input-file test.jpg
 
 Alternatively, we can also run inference on all images in a folder and specify the batch size using the flag :code:`--max-match-size`::
 
-    $ bentoml run PyTorchFashionClassifier:latest predict \\
+    $ kappa run PyTorchFashionClassifier:latest predict \\
           --input-file folder/*.jpg --max-batch-size 10
 
 :code:`MultiFileInput`
@@ -41,13 +41,13 @@ Alternatively, we can also run inference on all images in a folder and specify t
 
 Example with :code:`MultiImageInput`. We provide image data to the input adapter using CLI flags in the form :code:`--input-<name>` or :code:`--input-file-<name>`::
 
-    $ bentoml run PyTorchFashionClassifier:latest predict \\
+    $ kappa run PyTorchFashionClassifier:latest predict \\
           --input-file-imageX testx.jpg \\
           --input-file-imageY testy.jpg
 
 Similarly to :code:`FileInput`, we can infer all file pairs under a folder with ten pairs each batch by specifying the :code:`--max-batch-size` flag::
 
-    $ bentoml run PyTorchFashionClassifier:latest predict --max-batch-size 10 \\
+    $ kappa run PyTorchFashionClassifier:latest predict --max-batch-size 10 \\
           --input-file-imageX folderx/*.jpg \\
           --input-file-imageY foldery/*.jpg
 

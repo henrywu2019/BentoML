@@ -1,8 +1,8 @@
 import pytest
 
-from bentoml.exceptions import GammaDeploymentException, BentoMLException
-from bentoml.gamma.proto.deployment_pb2 import Deployment
-from bentoml.gamma.deployment_utils import deployment_dict_to_pb
+from kappa.exceptions import GammaDeploymentException, BentoMLException
+from kappa.gamma.proto.deployment_pb2 import Deployment
+from kappa.gamma.deployment_utils import deployment_dict_to_pb
 
 
 def test_deployment_dict_to_pb():

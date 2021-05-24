@@ -23,11 +23,11 @@ Prerequisites:
 
     * Install instruction: https://docs.docker.com/get-docker/
 
-* Python 3.6 or above and required Pypi packages: `bentoml` and `scikit-learn`
+* Python 3.6 or above and required Pypi packages: `kappa` and `scikit-learn`
 
     * .. code-block:: bash
 
-            pip install bentoml scikit-learn
+            pip install kappa scikit-learn
 
 
 Azure Functions deployment with Kappa
@@ -38,9 +38,9 @@ IrisClassifier BentoService saved bundle for the deployment:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/Kappa.git
-    pip install -r ./bentoml/guides/quick-start/requirements.txt
-    python ./bentoml/guides/quick-start/main.py
+    git clone git@github.com:kappa/Kappa.git
+    pip install -r ./kappa/guides/quick-start/requirements.txt
+    python ./kappa/guides/quick-start/main.py
 
 
 Use Kappa CLI tool to get the information of the IrisClassifier BentoService created
@@ -48,7 +48,7 @@ above
 
 .. code-block:: bash
 
-    $ bentoml get IrisClassifier:latest
+    $ kappa get IrisClassifier:latest
 
     # Sample output
     {
@@ -56,17 +56,17 @@ above
       "version": "20200618124555_310CE0",
       "uri": {
         "type": "LOCAL",
-        "uri": "/Users/bozhaoyu/bentoml/repository/IrisClassifier/20200618124555_310CE0"
+        "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200618124555_310CE0"
       },
       "bentoServiceMetadata": {
         "name": "IrisClassifier",
         "version": "20200618124555_310CE0",
         "createdAt": "2020-06-18T19:46:18.675900Z",
         "env": {
-          "condaEnv": "name: bentoml-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
-          "pipDependencies": "scikit-learn\npandas\nbentoml==0.8.1",
+          "condaEnv": "name: kappa-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
+          "pipDependencies": "scikit-learn\npandas\nkappa==0.8.1",
           "pythonVersion": "3.7.3",
-          "dockerBaseImage": "bentoml/model-server:0.8.1"
+          "dockerBaseImage": "kappa/model-server:0.8.1"
         },
         "artifacts": [
           {
@@ -109,7 +109,7 @@ BentoService as docker image to Azure Functions.
 
 .. code-block:: bash
 
-    $ bentoml azure-functions deploy iris-classifier-demo -b IrisClassifier:20200622131825_5788D9 --location westus
+    $ kappa azure-functions deploy iris-classifier-demo -b IrisClassifier:20200622131825_5788D9 --location westus
 
     # sample output
     [2020-06-22 13:59:22,881] INFO - ApplyDeployment (iris-classifier-demo, namespace dev) succeeded
@@ -160,12 +160,12 @@ BentoService as docker image to Azure Functions.
 
 
 
-Use `bentoml azure-functions get` command to retrieve the latest status information of
+Use `kappa azure-functions get` command to retrieve the latest status information of
 the deployment.
 
 .. code-block:: bash
 
-    $ bentoml azure-functions get iris-classifier-demo
+    $ kappa azure-functions get iris-classifier-demo
 
     # Sample output
     {
@@ -242,11 +242,11 @@ mentioned above or you could make a `curl` request to the endpoint.
     [0]%
 
 
-Use `bentoml azure-functions list` to display all active deployments to Azure Functions
+Use `kappa azure-functions list` to display all active deployments to Azure Functions
 
 .. code-block:: bash
 
-    $ bentoml azure-functions list
+    $ kappa azure-functions list
 
     # Sample output
     NAME                  NAMESPACE    PLATFORM         MODEL_VERSION                         STATUS    AGE
@@ -258,12 +258,12 @@ Use `bentoml azure-functions list` to display all active deployments to Azure Fu
 Update existing Azure Functions deployment
 ==========================================
 
-To update an active Azure Function deployment use `bentoml azure-functions update`
+To update an active Azure Function deployment use `kappa azure-functions update`
 command.
 
 .. code-block: bash
 
-    $ bentoml azure-functions update iris-classifier-demo -b IrisClassifier:new_version
+    $ kappa azure-functions update iris-classifier-demo -b IrisClassifier:new_version
 
 
 =================================
@@ -272,7 +272,7 @@ Remove Azure Functions deployment
 
 .. code-block:: bash
 
-    $ bentoml azure-functions delete iris-classifier-demo
+    $ kappa azure-functions delete iris-classifier-demo
 
 
 =====================================================================
@@ -289,15 +289,15 @@ image and mount that `accessTokens.json` file to the running container.
 
 .. code-block:: bash
 
-    $ docker run -v ~/.azure/accessTokens.json:/home/.azure/accessTokens.json -p 50051:50051 -p 3000:3000 bentoml/gamma-service:latest
+    $ docker run -v ~/.azure/accessTokens.json:/home/.azure/accessTokens.json -p 50051:50051 -p 3000:3000 kappa/gamma-service:latest
 
 
 After the GammaService docker container is running, in another terminal window, set
-gamma service address with `bentoml config set`
+gamma service address with `kappa config set`
 
 .. code-block:: bash
 
-    $ bentoml config set gamma_service.url=0.0.0.0:50051
+    $ kappa config set gamma_service.url=0.0.0.0:50051
 
 
 ============================================================
@@ -357,7 +357,7 @@ Copy and paste the code below into a file named `gamma-service.yaml`
             app: gamma-service
         spec:
           containers:
-          - image: bentoml/gamma-service
+          - image: kappa/gamma-service
             imagePullPolicy: IfNotPresent
             name: gamma-service
             ports:

@@ -4,9 +4,9 @@ import pandas
 import tensorflow as tf
 import subprocess
 import sys
-import bentoml
+import kappa
 from tests.bento_service_examples.onnxmlir_classifier import OnnxMlirClassifier
-from bentoml.gamma.client import GammaClient
+from kappa.gamma.client import GammaClient
 
 test_data = np.array([[1, 2, 3, 4, 5]], dtype=np.float64)
 test_df = pandas.DataFrame(test_data, columns=['A', 'B', 'C', 'D', 'E'])
@@ -103,7 +103,7 @@ def test_onnxmlir_artifact(get_onnx_mlir_svc):
     ), 'Inference on onnx-mlir artifact does not match expected'
 
     saved_path = svc.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
 
     assert (
         loaded_svc.predict(test_df)[0] == 15.0

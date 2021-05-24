@@ -10,16 +10,16 @@ and applied to the entire team.
 
 .. note::
     Kappa configuration underwent a major redesign in release 0.13.0. Previous configuration set through the
-    `bentoml config` CLI command is no longer compatible with the configuration releases in 0.13.0 and above. 
+    `kappa config` CLI command is no longer compatible with the configuration releases in 0.13.0 and above.
     Please see legacy configuration property mapping table below to upgrade configuration to the new format.
 
 Kappa configuration is defined by a YAML file placed in a directory specified by the `BENTOML_CONFIG`
-environment variable. By default, configurations defined in `$BENTOML_HOME/bentoml.yml` is applied if present. 
+environment variable. By default, configurations defined in `$BENTOML_HOME/kappa.yml` is applied if present.
 The example below starts the bento server with configuration defined in `~/bentoml_configuration.yml`
 
 .. code-block:: shell
 
-    $ BENTOML_CONFIG=~/bentoml_configuration.yml bentoml serve-gunicorn IrisClassifier:latest
+    $ BENTOML_CONFIG=~/bentoml_configuration.yml kappa serve-gunicorn IrisClassifier:latest
 
 Users only need to specify a partial configuration with only the properties they wish to customize instead 
 of a full configuration schema. In the example below, the microbatching workers count is overridden to 4. 
@@ -35,7 +35,7 @@ Remaining properties will take their defaults values.
 Throughout the Kappa documentation, features that are customizable through configuration are demonstrated
 like the example above. For a full configuration schema including all customizable properties, refer to 
 the Kappa configuration template defined in
-`default_bentoml.yml <https://github.com/bentoml/Kappa/blob/master/bentoml/configuration/default_bentoml.yml>`_.
+`default_bentoml.yml <https://github.com/kappa/Kappa/blob/master/kappa/configuration/default_bentoml.yml>`_.
 
 Docker Deployment
 -----------------
@@ -44,7 +44,7 @@ Configuration file can be mounted to Docker container using the `-v` option.
 
 .. code-block:: shell
 
-    $ docker run -v /local/path/bentoml.yml:/user/home/bentoml/bentoml.yml
+    $ docker run -v /local/path/kappa.yml:/user/home/kappa/kappa.yml
 
 Configuration Priority
 ----------------------
@@ -56,7 +56,7 @@ the values defined in the configuration.
 Legacy Property Mapping
 -----------------------
 
-Starting Kappa release `0.13.0`, the legacy `bentoml.cfg` based configuration is deprecated and no longer
+Starting Kappa release `0.13.0`, the legacy `kappa.cfg` based configuration is deprecated and no longer
 compatible with the YAML based configuration system. Please refer to the mapping below to migrate to the 
 YAML based configuration.
 
@@ -139,7 +139,7 @@ Repository Base URL
 The repository base URL property has been broken down into properties for the individual repository 
 implementations, instead of being derived automatically.
 
-For file system, what was previously specified as `/user/home/bentoml/repository` should defined as 
+For file system, what was previously specified as `/user/home/kappa/repository` should defined as
 the following in YAML.
 
 .. code-block:: yaml
@@ -149,7 +149,7 @@ the following in YAML.
         repository:
             type: file_system
             file_system:
-                directory: /user/home/bentoml/repository
+                directory: /user/home/kappa/repository
 
 For S3 or GCS, what was previously specified as `s3://s3_address` should defined as the following in 
 YAML.

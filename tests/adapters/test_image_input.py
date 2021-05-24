@@ -3,8 +3,8 @@ import base64
 
 import pytest
 
-from bentoml.adapters import ImageInput
-from bentoml.types import HTTPRequest
+from kappa.adapters import ImageInput
+from kappa.types import HTTPRequest
 
 
 @pytest.fixture()

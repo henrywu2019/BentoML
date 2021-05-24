@@ -36,4 +36,4 @@ ARG BENTOML_VERSION
 ENV BENTOML_VERSION=$BENTOML_VERSION
 
 # pre-install Kappa base dependencies
-RUN pip install bentoml==$BENTOML_VERSION --no-cache-dir
+RUN pip install kappa==$BENTOML_VERSION --no-cache-dir

@@ -1,10 +1,10 @@
 import logging
 
-from bentoml import BentoService, api, artifacts
-from bentoml.service.artifacts.common import PickleArtifact
-from bentoml.adapters import JsonInput
+from kappa import BentoService, api, artifacts
+from kappa.service.artifacts.common import PickleArtifact
+from kappa.adapters import JsonInput
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 @artifacts([PickleArtifact('model')])

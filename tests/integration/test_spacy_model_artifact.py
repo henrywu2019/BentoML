@@ -1,9 +1,9 @@
 import pytest
 import random
 import spacy
-import bentoml
+import kappa
 from tests.bento_service_examples.spacy_classifier import SpacyModelService
-from bentoml.gamma.client import GammaClient
+from kappa.gamma.client import GammaClient
 
 
 @pytest.fixture()
@@ -57,7 +57,7 @@ def test_spacy_artifact_pack(spacy_model_service_class):
 
     saved_path = svc.save()
 
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
 
     assert [(ent.text, ent.label_) for ent in loaded_svc.predict(test_json).ents] == [
         ('Google', 'ORG')

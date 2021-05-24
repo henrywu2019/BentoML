@@ -40,7 +40,7 @@ def test_bento_service_class(bento_service_class):
     bento_name = f"{bento_service.name}:{bento_service.version}"
 
     run_command = [
-        "bentoml",
+        "kappa",
         "run",
         bento_name,
         "predict",

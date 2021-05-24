@@ -10,9 +10,9 @@ _is_sourced() {
 }
 
 _main() {
-	# if first arg looks like a flag, assume we want to start bentoml GammaService
+	# if first arg looks like a flag, assume we want to start kappa GammaService
 	if [ "${1:0:1}" = '-' ]; then
-		set -- bentoml gamma-service-start "$@"
+		set -- kappa gamma-service-start "$@"
 	fi
 
 	exec "$@"

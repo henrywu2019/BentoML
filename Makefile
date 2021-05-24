@@ -12,7 +12,7 @@ lint: ## Lint code
 	./dev/lint.sh
 install-local: ## Install Kappa from current directory in editable mode
 	pip install --editable .
-	bentoml --version
+	kappa --version
 install-test-deps: ## Install all test dependencies
 	@echo Ensuring test dependencies...
 	@pip install -e ".[test]" --quiet
@@ -47,7 +47,7 @@ spellcheck-doc: ## Spell check documentation
 
 # GammaService gRPC
 start-gamma-debug: ## Start GammaService in debug mode
-	bentoml gamma-service-start --debug || (echo "Error starting... You may need to run 'make install-gamma-deps'"; exit 1)
+	kappa gamma-service-start --debug || (echo "Error starting... You may need to run 'make install-gamma-deps'"; exit 1)
 start-grpcui: ## Start gPRC Web UI
 	grpcui -plaintext localhost:50051 || (echo "Error starting... You may need to run 'make install-gamma-deps'"; exit 1)
 install-gamma-deps: ## Install dependencies to debug GammaService
@@ -57,16 +57,16 @@ install-gamma-deps: ## Install dependencies to debug GammaService
 
 # Kappa Web UI
 watch-gamma-web-ui: ## Start Kappa Web UI server in dev mode
-	bentoml gamma-service-start --no-ui & \
-	cd bentoml/gamma/web && yarn dev 0.0.0.0:50051 3000 . 0.0.0.0:50052
+	kappa gamma-service-start --no-ui & \
+	cd kappa/gamma/web && yarn dev 0.0.0.0:50051 3000 . 0.0.0.0:50052
 build-gamma-web-ui: ## Build Kappa Web UI server and frontend
-	cd bentoml/gamma/web && yarn build
+	cd kappa/gamma/web && yarn build
 run-gamma-web-ui: ## Run production Kappa Web UI server and frontend
-	bentoml gamma-service-start --no-ui & \
-	cd bentoml/gamma/web && yarn start 0.0.0.0:50051 3000 . 0.0.0.0:50052
+	kappa gamma-service-start --no-ui & \
+	cd kappa/gamma/web && yarn start 0.0.0.0:50051 3000 . 0.0.0.0:50052
 install-web-deps: ## Install dependencies to run web server and frontend
-	cd bentoml/gamma/web && yarn install
-	cd bentoml/gamma/web/client && yarn install
+	cd kappa/gamma/web && yarn install
+	cd kappa/gamma/web/client && yarn install
 
 # Helm
 helm-lint: ## Helm Lint

@@ -5,14 +5,14 @@ import boto3
 
 from e2e_tests.gamma_server.utils import modified_environ
 
-logger = logging.getLogger('bentoml.test')
+logger = logging.getLogger('kappa.test')
 
 
 def run_sagemaker_create_or_update_command(deploy_command):
     """
     :return: deployment_success, endpoint_name
     """
-    logger.info(f"Running bentoml deploy command: {' '.join(deploy_command)}")
+    logger.info(f"Running kappa deploy command: {' '.join(deploy_command)}")
     with subprocess.Popen(
         deploy_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     ) as proc:

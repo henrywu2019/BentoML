@@ -1,6 +1,6 @@
 import os
 
-from bentoml.gamma.client import get_gamma_client
+from kappa.gamma.client import get_gamma_client
 from .example_bento_service_class import ExampleBentoService
 from tests.gamma.local_gamma_service import local_gamma_service_container
 

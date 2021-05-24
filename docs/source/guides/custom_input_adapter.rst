@@ -19,11 +19,11 @@ will discard the task with appropriate status code and message.
     # my_custom_input.py
 
     import json
-    from bentoml.adapters.string_input import StringInput
+    from kappa.adapters.string_input import StringInput
 
 
     class MyCustomJsonInput(StringInput):
-        # See more information about tasks at https://docs.bentoml.org/en/latest/api/types.html#bentoml.types.InferenceTask
+        # See more information about tasks at https://docs.kappa.org/en/latest/api/types.html#kappa.types.InferenceTask
         def extract_user_func_args(self, tasks):
             json_inputs = []
             for task in tasks:
@@ -50,13 +50,13 @@ Define and save BentoService with the customized InputAdapter
 
     # my_bento_service.py
 
-    import bentoml
-    from bentoml.service.artifacts.common import PickleArtifact
+    import kappa
+    from kappa.service.artifacts.common import PickleArtifact
     from my_custom_input import MyCustomJsonInput
 
-    @bentoml.env(infer_pip=True)
-    class MyService(bentoml.BentoService):
-        @bentoml.api(input=MyCustomJsonInput(), batch=True)
+    @kappa.env(infer_pip=True)
+    class MyService(kappa.BentoService):
+        @kappa.api(input=MyCustomJsonInput(), batch=True)
         def predict(self, input_data):
             result = []
             for data in input_data:
@@ -78,7 +78,7 @@ Test with example data
 
 .. code-block:: shell
 
-    $ bentoml serve MyService:latest
+    $ kappa serve MyService:latest
 
 
 In another terminal to make a `curl` request

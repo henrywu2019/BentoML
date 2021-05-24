@@ -1,5 +1,5 @@
 syntax = "proto3";
-package bentoml;
+package kappa;
 
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";

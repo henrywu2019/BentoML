@@ -3,8 +3,8 @@ import pytest
 
 import evalml
 
-import bentoml
-from bentoml.gamma.client import GammaClient
+import kappa
+from kappa.gamma.client import GammaClient
 from tests.bento_service_examples.evalml_classifier import EvalMLClassifier
 
 
@@ -40,7 +40,7 @@ def test_evalml_artifact_pack(evalml_classifier_class, evalml_pipeline):
     assert svc.predict(test_df) == 1.0, 'Run inference before save the artifact'
 
     saved_path = svc.save()
-    loaded_svc = bentoml.load(saved_path)
+    loaded_svc = kappa.load(saved_path)
     assert loaded_svc.predict(test_df) == 1.0, 'Run inference from saved artifact'
 
     # clean up saved bundle

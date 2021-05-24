@@ -65,6 +65,6 @@ def service(pytestconfig):
         sys.argv[1], "build", "dist"
     )
 
-    import bentoml
+    import kappa
 
-    return bentoml.load_from_dir(test_svc_bundle)
+    return kappa.load_from_dir(test_svc_bundle)

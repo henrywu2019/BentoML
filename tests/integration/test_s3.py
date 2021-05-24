@@ -4,8 +4,8 @@ import subprocess
 import pytest
 from minio import Minio
 
-from bentoml.utils.tempdir import TempDirectory
-from bentoml.gamma.client import get_gamma_client
+from kappa.utils.tempdir import TempDirectory
+from kappa.gamma.client import get_gamma_client
 from tests.bento_service_examples.example_bento_service import ExampleBentoService
 
 bucket_name = 'test-repo'
@@ -26,7 +26,7 @@ def minio_address():
 @pytest.mark.skip('Unable to connect minio on Github')
 def test_s3(minio_address):
     gamma_server_command = [
-        'bentoml',
+        'kappa',
         'gamma-service-start',
         '--no-ui',
         '--grpc-port',
@@ -51,5 +51,5 @@ def test_s3(minio_address):
     bento_pb = yc.repository.get(bento_tag)
     with TempDirectory() as temp_dir:
         yc.repository.download_to_directory(bento_pb, f'{temp_dir}/bundle')
-        assert os.path.exists(f'{temp_dir}/bundle/bentoml.yml')
+        assert os.path.exists(f'{temp_dir}/bundle/kappa.yml')
     proc.kill()

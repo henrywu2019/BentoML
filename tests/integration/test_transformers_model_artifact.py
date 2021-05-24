@@ -3,7 +3,7 @@ import json
 import pytest
 from transformers import AutoModelWithLMHead, AutoTokenizer
 
-import bentoml
+import kappa
 from tests.bento_service_examples.transformer_gpt_example import (
     TransformersGPT2TextGenerator,
 )
@@ -56,7 +56,7 @@ def transformers_svc_saved_dir(tmp_path_factory, transformers_svc):
 @pytest.fixture()
 def transformers_svc_loaded(transformers_svc_saved_dir):
     """Return a Transformers BentoService that has been saved and loaded."""
-    return bentoml.load(transformers_svc_saved_dir)
+    return kappa.load(transformers_svc_saved_dir)
 
 
 @pytest.fixture()

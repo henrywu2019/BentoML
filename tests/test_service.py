@@ -1,37 +1,37 @@
 import pytest
 
-import bentoml
-from bentoml.adapters import DataframeInput, ImageInput
-from bentoml.exceptions import InvalidArgument
-from bentoml.service import validate_version_str
-from bentoml.service.artifacts.pickle import PickleArtifact
+import kappa
+from kappa.adapters import DataframeInput, ImageInput
+from kappa.exceptions import InvalidArgument
+from kappa.service import validate_version_str
+from kappa.service.artifacts.pickle import PickleArtifact
 
 
 def test_custom_api_name():
     # these names should work:
-    bentoml.api(input=DataframeInput(), api_name="a_valid_name", batch=True)(
+    kappa.api(input=DataframeInput(), api_name="a_valid_name", batch=True)(
         lambda x: x
     )
-    bentoml.api(input=DataframeInput(), api_name="AValidName", batch=True)(lambda x: x)
-    bentoml.api(input=DataframeInput(), api_name="_AValidName", batch=True)(lambda x: x)
-    bentoml.api(input=DataframeInput(), api_name="a_valid_name_123", batch=True)(
+    kappa.api(input=DataframeInput(), api_name="AValidName", batch=True)(lambda x: x)
+    kappa.api(input=DataframeInput(), api_name="_AValidName", batch=True)(lambda x: x)
+    kappa.api(input=DataframeInput(), api_name="a_valid_name_123", batch=True)(
         lambda x: x
     )
 
     with pytest.raises(InvalidArgument) as e:
-        bentoml.api(input=DataframeInput(), api_name="a invalid name", batch=True)(
+        kappa.api(input=DataframeInput(), api_name="a invalid name", batch=True)(
             lambda x: x
         )
     assert str(e.value).startswith("Invalid API name")
 
     with pytest.raises(InvalidArgument) as e:
-        bentoml.api(input=DataframeInput(), api_name="123_a_invalid_name", batch=True)(
+        kappa.api(input=DataframeInput(), api_name="123_a_invalid_name", batch=True)(
             lambda x: x
         )
     assert str(e.value).startswith("Invalid API name")
 
     with pytest.raises(InvalidArgument) as e:
-        bentoml.api(input=DataframeInput(), api_name="a-invalid-name", batch=True)(
+        kappa.api(input=DataframeInput(), api_name="a-invalid-name", batch=True)(
             lambda x: x
         )
     assert str(e.value).startswith("Invalid API name")
@@ -41,9 +41,9 @@ def test_custom_api_name():
 def test_invalid_artifact_type():
     with pytest.raises(InvalidArgument) as e:
 
-        @bentoml.artifacts(["Not A Artifact"])
+        @kappa.artifacts(["Not A Artifact"])
         class ExampleBentoService(  # pylint: disable=unused-variable
-            bentoml.BentoService
+            kappa.BentoService
         ):
             pass
 
@@ -54,9 +54,9 @@ def test_invalid_artifact_type():
 def test_duplicated_artifact_name():
     with pytest.raises(InvalidArgument) as e:
 
-        @bentoml.artifacts([PickleArtifact("model"), PickleArtifact("model")])
+        @kappa.artifacts([PickleArtifact("model"), PickleArtifact("model")])
         class ExampleBentoService(  # pylint: disable=unused-variable
-            bentoml.BentoService
+            kappa.BentoService
         ):
             pass
 
@@ -68,21 +68,21 @@ def test_invalid_api_input():
     with pytest.raises(InvalidArgument) as e:
 
         class ExampleBentoService(  # pylint: disable=unused-variable
-            bentoml.BentoService
+            kappa.BentoService
         ):
-            @bentoml.api("Not A InputAdapter")
+            @kappa.api("Not A InputAdapter")
             def test(self):
                 pass
 
     assert (
         "must be an instance of a class derived from "
-        "bentoml.adapters.BaseInputAdapter" in str(e.value)
+        "kappa.adapters.BaseInputAdapter" in str(e.value)
     )
 
 
 def test_image_input_pip_dependencies():
-    class TestImageService(bentoml.BentoService):
-        @bentoml.api(input=ImageInput(), batch=True)
+    class TestImageService(kappa.BentoService):
+        @kappa.api(input=ImageInput(), batch=True)
         def test(self, images):
             return images
 

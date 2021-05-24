@@ -15,7 +15,7 @@ python3 -m http.server --directory "$GIT_ROOT"/docs/build/html &
 echo "Open browser..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
   open -a "Google Chrome" http://0.0.0.0:8000/
-  fswatch -o "$GIT_ROOT/docs" "$GIT_ROOT/bentoml" | while read -r; do
+  fswatch -o "$GIT_ROOT/docs" "$GIT_ROOT/kappa" | while read -r; do
     echo "Change detected, rebuilding docs..."
     cd "$GIT_ROOT"/docs && make html
 
@@ -38,7 +38,7 @@ end tell
   done
 else
   xdg-open http://localhost:8000
-  while inotifywait -e modify -r "$GIT_ROOT"/docs "$GIT_ROOT"/bentoml; do
+  while inotifywait -e modify -r "$GIT_ROOT"/docs "$GIT_ROOT"/kappa; do
     echo "Change detected, rebuilding docs..."
     cd "$GIT_ROOT"/docs && make html
   done

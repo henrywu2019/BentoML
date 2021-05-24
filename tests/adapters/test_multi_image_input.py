@@ -3,8 +3,8 @@ import io
 
 import pytest
 
-from bentoml.adapters import MultiImageInput
-from bentoml.types import InferenceTask
+from kappa.adapters import MultiImageInput
+from kappa.types import InferenceTask
 
 
 @pytest.fixture()

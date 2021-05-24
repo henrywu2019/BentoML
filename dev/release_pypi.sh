@@ -11,7 +11,7 @@ fi
 SEMVER_REGEX="^[vV]?(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(\\-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
 
 if [[ "$VERSION_STR" =~ $SEMVER_REGEX ]]; then
-  echo "Releasing bentoml version v$VERSION_STR:"
+  echo "Releasing kappa version v$VERSION_STR:"
 else
   echo "Warning: version $VERSION_STR must follow semantic versioning schema, ignore this for preview releases"
 fi
@@ -41,15 +41,15 @@ echo "Installing dev dependencies..."
 pip install .[dev]
 
 echo "Installing GammaServer node server dependencies.."
-cd "$GIT_ROOT"/bentoml/gamma/web
+cd "$GIT_ROOT"/kappa/gamma/web
 yarn
 
 echo "Installing GammaServer Web UI dependencies.."
-cd "$GIT_ROOT"/bentoml/gamma/web/client
+cd "$GIT_ROOT"/kappa/gamma/web/client
 yarn
 
 echo "Build GammaServer node server and web UI..."
-cd "$GIT_ROOT"/bentoml/gamma/web
+cd "$GIT_ROOT"/kappa/gamma/web
 yarn build
 
 if git rev-parse "$tag_name" >/dev/null 2>&1; then

@@ -25,11 +25,11 @@ Prerequisites
 
   * Install instruction: https://docs.docker.com/install
 
-* Python 3.6 or above and required packages `bentoml` and `scikit-learn`:
+* Python 3.6 or above and required packages `kappa` and `scikit-learn`:
 
   * .. code-block:: bash
 
-        pip install bentoml scikit-learn
+        pip install kappa scikit-learn
 
 ===========================
 Create Google cloud project
@@ -128,9 +128,9 @@ We define with the following bash command the Kappa Service:
 .. code-block:: bash
 
     cat > main.py <<EOF
-    from bentoml import env, artifacts, api, BentoService
-    from bentoml.adapters import JsonInput
-    from bentoml.frameworks.sklearn import SklearnModelArtifact
+    from kappa import env, artifacts, api, BentoService
+    from kappa.adapters import JsonInput
+    from kappa.frameworks.sklearn import SklearnModelArtifact
 
     @env(infer_pip_packages=True)
     @artifacts([SklearnModelArtifact('model')])
@@ -167,7 +167,7 @@ Verify the saved bundle created:
 
 .. code-block:: bash
 
-    $ bentoml get IrisClassifier:latest
+    $ kappa get IrisClassifier:latest
 
     # Sample output
     {
@@ -175,18 +175,18 @@ Verify the saved bundle created:
       "version": "20210325170627_3F9592",
       "uri": {
         "type": "LOCAL",
-        "uri": "/Users/eliasecchi/bentoml/repository/IrisClassifier/20210325170627_3F9592"
+        "uri": "/Users/eliasecchi/kappa/repository/IrisClassifier/20210325170627_3F9592"
       },
       "bentoServiceMetadata": {
         "name": "IrisClassifier",
         "version": "20210325170627_3F9592",
         "createdAt": "2021-03-25T17:06:28.274128Z",
         "env": {
-          "condaEnv": "name: bentoml-default-conda-env\nchannels:\n- conda-forge\n- defaults\ndependencies:\n- pip\n",
+          "condaEnv": "name: kappa-default-conda-env\nchannels:\n- conda-forge\n- defaults\ndependencies:\n- pip\n",
           "pythonVersion": "3.7.9",
-          "dockerBaseImage": "bentoml/model-server:0.10.1-py37",
+          "dockerBaseImage": "kappa/model-server:0.10.1-py37",
           "pipPackages": [
-            "bentoml==0.10.1",
+            "kappa==0.10.1",
             "pandas==1.2.0",
             "scikit-learn==0.24.1"
           ]
@@ -228,7 +228,7 @@ BentoService and available for sending test request:
 .. code-block:: bash
 
     # Start Kappa API server:
-    bentoml serve IrisClassifier:latest
+    kappa serve IrisClassifier:latest
 
 
 .. code-block:: bash
@@ -246,7 +246,7 @@ Use `gcloud` CLI to build the docker image
 .. code-block:: bash
 
     # Find the local path of the latest version IrisClassifier saved bundle
-    $ saved_path=$(bentoml get IrisClassifier:latest --print-location --quiet)
+    $ saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
     $ cd $saved_path
     $ gcloud builds submit --tag gcr.io/$GCP_PROJECT/iris-classifier
 
