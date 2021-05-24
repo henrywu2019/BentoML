@@ -383,7 +383,7 @@ def get_gamma_service_impl(base=object):
                     logger.error("RPC ERROR AddBento: %s", e)
                     return DeleteDeploymentResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except
-                    logger.error("URPC ERROR AddBento: %s", e)
+                    logger.error("OCI ERROR AddBento: %s", e)
                     return DeleteDeploymentResponse(status=Status.INTERNAL())
 
         def UpdateBento(self, request, context=None):

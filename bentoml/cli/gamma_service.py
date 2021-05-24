@@ -23,6 +23,7 @@ from bentoml.configuration.containers import (
     GAMMA_REPOSITORY_FILE_SYSTEM,
     GAMMA_REPOSITORY_S3,
     GAMMA_REPOSITORY_GCS,
+    GAMMA_REPOSITORY_OCI,
 )
 from bentoml.gamma.gamma_service import start_gamma_service_grpc_server
 
@@ -45,6 +46,7 @@ def add_gamma_service_sub_command(
         BentoMLContainer.config.gamma.repository.s3.endpoint_url
     ],
     default_gcs_url: str = Provide[BentoMLContainer.config.gamma.repository.gcs.url],
+    default_oci_url: str = Provide[BentoMLContainer.config.gamma.repository.oci.url],
 ):
     # pylint: disable=unused-variable
 
@@ -131,6 +133,13 @@ def add_gamma_service_sub_command(
         help='Specifies the GCS URL for the GCS repository type',
         envvar='BENTOML_GAMMA_GCS_URL',
     )
+    @click.option(
+        '--oci-url',
+        type=click.STRING,
+        default=default_oci_url,
+        help='Specifies the OCI URL for the OCI repository type',
+        envvar='BENTOML_GAMMA_OCI_URL',
+    )
     def gamma_service_start(
         db_url,
         repo_base_url,
@@ -143,8 +152,10 @@ def add_gamma_service_sub_command(
         s3_url,
         s3_endpoint_url,
         gcs_url,
+        oci_url,
     ):
         from bentoml.utils.s3 import is_s3_url
+        from bentoml.utils.oci_object_storage import is_oci_url
         from bentoml.utils.gcs import is_gcs_url
 
         if repo_base_url:
@@ -159,6 +170,9 @@ def add_gamma_service_sub_command(
             elif is_gcs_url(repo_base_url):
                 repository_type = GAMMA_REPOSITORY_GCS
                 gcs_url = repo_base_url
+            elif is_oci_url(repo_base_url):
+                repository_type = GAMMA_REPOSITORY_OCI
+                oci_url = repo_base_url
             else:
                 repository_type = GAMMA_REPOSITORY_FILE_SYSTEM
                 file_system_directory = repo_base_url
@@ -168,6 +182,9 @@ def add_gamma_service_sub_command(
             return
         elif repository_type == GAMMA_REPOSITORY_GCS and gcs_url is None:
             logger.error("'--gcs-url' must be specified for GCS repository type")
+            return
+        elif repository_type == GAMMA_REPOSITORY_OCI and oci_url is None:
+            logger.error("'--oci-url' must be specified for OCI repository type")
             return
         elif (
             repository_type == GAMMA_REPOSITORY_FILE_SYSTEM
@@ -190,4 +207,5 @@ def add_gamma_service_sub_command(
                 s3_url=s3_url,
                 s3_endpoint_url=s3_endpoint_url,
                 gcs_url=gcs_url,
+                oci_url=oci_url,
             )

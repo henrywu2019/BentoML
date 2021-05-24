@@ -30,11 +30,13 @@ LOGGER = logging.getLogger(__name__)
 
 GAMMA_REPOSITORY_S3 = "s3"
 GAMMA_REPOSITORY_GCS = "gcs"
+GAMMA_REPOSITORY_OCI = "oci"
 GAMMA_REPOSITORY_FILE_SYSTEM = "file_system"
 GAMMA_REPOSITORY_TYPES = [
     GAMMA_REPOSITORY_FILE_SYSTEM,
     GAMMA_REPOSITORY_S3,
     GAMMA_REPOSITORY_GCS,
+    GAMMA_REPOSITORY_OCI,
 ]
 
 SCHEMA = Schema(
@@ -105,6 +107,7 @@ SCHEMA = Schema(
                     "expiration": Or(int, None),
                 },
                 "gcs": {"url": Or(str, None), "expiration": Or(int, None)},
+                "oci": {"url": Or(str, None), "expiration": Or(int, None)},
             },
             "database": {"url": Or(str, None)},
             "namespace": str,

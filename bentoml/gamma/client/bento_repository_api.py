@@ -214,8 +214,13 @@ class BentoRepositoryAPIClient:
             )
             # Return URI to saved bento in repository storage
             return response.uri.uri
-        elif response.uri.type == BentoUri.S3 or response.uri.type == BentoUri.GCS:
-            uri_type = 'S3' if response.uri.type == BentoUri.S3 else 'GCS'
+        elif response.uri.type in (BentoUri.S3, BentoUri.GCS, BentoUri.OCI):
+            uri_type = 'S3'
+            if response.uri.type == BentoUri.GCS:
+                uri_type = 'GCS'
+            if response.uri.type == BentoUri.OCI:
+                uri_type = "OCI"
+
             self._update_bento_upload_progress(
                 bento_service_metadata, UploadStatus.UPLOADING, 0
             )
@@ -232,6 +237,10 @@ class BentoRepositoryAPIClient:
             elif response.uri.type == BentoUri.GCS:
                 http_response = requests.put(
                     response.uri.gcs_presigned_url, data=fileobj
+                )
+            elif response.uri.type == BentoUri.OCI:
+                http_response = requests.put(
+                    response.uri.oci_presigned_url, data=fileobj
                 )
 
             if http_response.status_code != 200:

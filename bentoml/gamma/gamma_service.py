@@ -38,6 +38,7 @@ def get_gamma_service(
     file_system_directory: str = Provide[BentoMLContainer.gamma_file_system_directory],
     s3_url: str = Provide[BentoMLContainer.config.gamma.repository.s3.url],
     gcs_url: str = Provide[BentoMLContainer.config.gamma.repository.gcs.url],
+    oci_url: str = Provide[BentoMLContainer.config.gamma.repository.oci.url],
 ):
     if channel_address:
         # Lazily import grpcio for GammaSerivce gRPC related actions
@@ -84,7 +85,7 @@ def get_gamma_service(
         logger.debug("Creating local GammaService instance")
         return LocalGammaService(
             repository=create_repository(
-                repository_type, file_system_directory, s3_url, gcs_url
+                repository_type, file_system_directory, s3_url, gcs_url, oci_url
             ),
             database=DB(db_url),
             default_namespace=default_namespace,
@@ -103,6 +104,7 @@ def start_gamma_service_grpc_server(
     s3_url,
     s3_endpoint_url,
     gcs_url,
+    oci_url,
     web_ui_log_path: str = Provide[BentoMLContainer.gamma_logging_path],
 ):
     # Lazily import grpcio for GammaSerivce gRPC related actions
@@ -116,7 +118,7 @@ def start_gamma_service_grpc_server(
     GammaServicerImpl = get_gamma_service_impl(GammaServicer)
     gamma_service = GammaServicerImpl(
         repository=create_repository(
-            repository_type, file_system_directory, s3_url, s3_endpoint_url, gcs_url
+            repository_type, file_system_directory, s3_url, s3_endpoint_url, gcs_url, oci_url,
         ),
         database=DB(db_url),
     )

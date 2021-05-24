@@ -26,6 +26,7 @@ from pathlib import PureWindowsPath, PurePosixPath
 
 from bentoml.utils.s3 import is_s3_url
 from bentoml.utils.gcs import is_gcs_url
+from bentoml.utils.oci_object_storage import is_oci_url
 from bentoml.exceptions import BentoMLException
 from bentoml.saved_bundle.config import SavedBundleConfig
 from bentoml.saved_bundle.pip_pkg import ZIPIMPORT_DIR
@@ -43,7 +44,7 @@ def _is_http_url(bundle_path):
 
 def _is_remote_path(bundle_path):
     return isinstance(bundle_path, str) and (
-        is_s3_url(bundle_path) or is_gcs_url(bundle_path) or _is_http_url(bundle_path)
+        is_s3_url(bundle_path) or is_gcs_url(bundle_path) or is_oci_url(bundle_path) or _is_http_url(bundle_path)
     )
 
 

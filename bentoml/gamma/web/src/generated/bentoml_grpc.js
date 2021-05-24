@@ -6033,6 +6033,1073 @@ export const bentoml = $root.bentoml = (() => {
         return LabelSelectors;
     })();
 
+    bentoml.Gamma = (function() {
+
+        /**
+         * Constructs a new Gamma service.
+         * @memberof bentoml
+         * @classdesc Represents a Gamma
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function Gamma(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+
+        (Gamma.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Gamma;
+
+        /**
+         * Creates new Gamma service using the specified rpc implementation.
+         * @function create
+         * @memberof bentoml.Gamma
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {Gamma} RPC service. Useful where requests and/or responses are streamed.
+         */
+        Gamma.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#healthCheck}.
+         * @memberof bentoml.Gamma
+         * @typedef HealthCheckCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.HealthCheckResponse} [response] HealthCheckResponse
+         */
+
+        /**
+         * Calls HealthCheck.
+         * @function healthCheck
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {google.protobuf.IEmpty} request Empty message or plain object
+         * @param {bentoml.Gamma.HealthCheckCallback} callback Node-style callback called with the error, if any, and HealthCheckResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.healthCheck = function healthCheck(request, callback) {
+            return this.rpcCall(healthCheck, $root.google.protobuf.Empty, $root.bentoml.HealthCheckResponse, request, callback);
+        }, "name", { value: "HealthCheck" });
+
+        /**
+         * Calls HealthCheck.
+         * @function healthCheck
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {google.protobuf.IEmpty} request Empty message or plain object
+         * @returns {Promise<bentoml.HealthCheckResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#getGammaServiceVersion}.
+         * @memberof bentoml.Gamma
+         * @typedef GetGammaServiceVersionCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.GetGammaServiceVersionResponse} [response] GetGammaServiceVersionResponse
+         */
+
+        /**
+         * Calls GetGammaServiceVersion.
+         * @function getGammaServiceVersion
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {google.protobuf.IEmpty} request Empty message or plain object
+         * @param {bentoml.Gamma.GetGammaServiceVersionCallback} callback Node-style callback called with the error, if any, and GetGammaServiceVersionResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.getGammaServiceVersion = function getGammaServiceVersion(request, callback) {
+            return this.rpcCall(getGammaServiceVersion, $root.google.protobuf.Empty, $root.bentoml.GetGammaServiceVersionResponse, request, callback);
+        }, "name", { value: "GetGammaServiceVersion" });
+
+        /**
+         * Calls GetGammaServiceVersion.
+         * @function getGammaServiceVersion
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {google.protobuf.IEmpty} request Empty message or plain object
+         * @returns {Promise<bentoml.GetGammaServiceVersionResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#applyDeployment}.
+         * @memberof bentoml.Gamma
+         * @typedef ApplyDeploymentCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.ApplyDeploymentResponse} [response] ApplyDeploymentResponse
+         */
+
+        /**
+         * Calls ApplyDeployment.
+         * @function applyDeployment
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IApplyDeploymentRequest} request ApplyDeploymentRequest message or plain object
+         * @param {bentoml.Gamma.ApplyDeploymentCallback} callback Node-style callback called with the error, if any, and ApplyDeploymentResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.applyDeployment = function applyDeployment(request, callback) {
+            return this.rpcCall(applyDeployment, $root.bentoml.ApplyDeploymentRequest, $root.bentoml.ApplyDeploymentResponse, request, callback);
+        }, "name", { value: "ApplyDeployment" });
+
+        /**
+         * Calls ApplyDeployment.
+         * @function applyDeployment
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IApplyDeploymentRequest} request ApplyDeploymentRequest message or plain object
+         * @returns {Promise<bentoml.ApplyDeploymentResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#deleteDeployment}.
+         * @memberof bentoml.Gamma
+         * @typedef DeleteDeploymentCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.DeleteDeploymentResponse} [response] DeleteDeploymentResponse
+         */
+
+        /**
+         * Calls DeleteDeployment.
+         * @function deleteDeployment
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IDeleteDeploymentRequest} request DeleteDeploymentRequest message or plain object
+         * @param {bentoml.Gamma.DeleteDeploymentCallback} callback Node-style callback called with the error, if any, and DeleteDeploymentResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.deleteDeployment = function deleteDeployment(request, callback) {
+            return this.rpcCall(deleteDeployment, $root.bentoml.DeleteDeploymentRequest, $root.bentoml.DeleteDeploymentResponse, request, callback);
+        }, "name", { value: "DeleteDeployment" });
+
+        /**
+         * Calls DeleteDeployment.
+         * @function deleteDeployment
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IDeleteDeploymentRequest} request DeleteDeploymentRequest message or plain object
+         * @returns {Promise<bentoml.DeleteDeploymentResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#getDeployment}.
+         * @memberof bentoml.Gamma
+         * @typedef GetDeploymentCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.GetDeploymentResponse} [response] GetDeploymentResponse
+         */
+
+        /**
+         * Calls GetDeployment.
+         * @function getDeployment
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IGetDeploymentRequest} request GetDeploymentRequest message or plain object
+         * @param {bentoml.Gamma.GetDeploymentCallback} callback Node-style callback called with the error, if any, and GetDeploymentResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.getDeployment = function getDeployment(request, callback) {
+            return this.rpcCall(getDeployment, $root.bentoml.GetDeploymentRequest, $root.bentoml.GetDeploymentResponse, request, callback);
+        }, "name", { value: "GetDeployment" });
+
+        /**
+         * Calls GetDeployment.
+         * @function getDeployment
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IGetDeploymentRequest} request GetDeploymentRequest message or plain object
+         * @returns {Promise<bentoml.GetDeploymentResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#describeDeployment}.
+         * @memberof bentoml.Gamma
+         * @typedef DescribeDeploymentCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.DescribeDeploymentResponse} [response] DescribeDeploymentResponse
+         */
+
+        /**
+         * Calls DescribeDeployment.
+         * @function describeDeployment
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IDescribeDeploymentRequest} request DescribeDeploymentRequest message or plain object
+         * @param {bentoml.Gamma.DescribeDeploymentCallback} callback Node-style callback called with the error, if any, and DescribeDeploymentResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.describeDeployment = function describeDeployment(request, callback) {
+            return this.rpcCall(describeDeployment, $root.bentoml.DescribeDeploymentRequest, $root.bentoml.DescribeDeploymentResponse, request, callback);
+        }, "name", { value: "DescribeDeployment" });
+
+        /**
+         * Calls DescribeDeployment.
+         * @function describeDeployment
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IDescribeDeploymentRequest} request DescribeDeploymentRequest message or plain object
+         * @returns {Promise<bentoml.DescribeDeploymentResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#listDeployments}.
+         * @memberof bentoml.Gamma
+         * @typedef ListDeploymentsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.ListDeploymentsResponse} [response] ListDeploymentsResponse
+         */
+
+        /**
+         * Calls ListDeployments.
+         * @function listDeployments
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IListDeploymentsRequest} request ListDeploymentsRequest message or plain object
+         * @param {bentoml.Gamma.ListDeploymentsCallback} callback Node-style callback called with the error, if any, and ListDeploymentsResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.listDeployments = function listDeployments(request, callback) {
+            return this.rpcCall(listDeployments, $root.bentoml.ListDeploymentsRequest, $root.bentoml.ListDeploymentsResponse, request, callback);
+        }, "name", { value: "ListDeployments" });
+
+        /**
+         * Calls ListDeployments.
+         * @function listDeployments
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IListDeploymentsRequest} request ListDeploymentsRequest message or plain object
+         * @returns {Promise<bentoml.ListDeploymentsResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#addBento}.
+         * @memberof bentoml.Gamma
+         * @typedef AddBentoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.AddBentoResponse} [response] AddBentoResponse
+         */
+
+        /**
+         * Calls AddBento.
+         * @function addBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IAddBentoRequest} request AddBentoRequest message or plain object
+         * @param {bentoml.Gamma.AddBentoCallback} callback Node-style callback called with the error, if any, and AddBentoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.addBento = function addBento(request, callback) {
+            return this.rpcCall(addBento, $root.bentoml.AddBentoRequest, $root.bentoml.AddBentoResponse, request, callback);
+        }, "name", { value: "AddBento" });
+
+        /**
+         * Calls AddBento.
+         * @function addBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IAddBentoRequest} request AddBentoRequest message or plain object
+         * @returns {Promise<bentoml.AddBentoResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#updateBento}.
+         * @memberof bentoml.Gamma
+         * @typedef UpdateBentoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.UpdateBentoResponse} [response] UpdateBentoResponse
+         */
+
+        /**
+         * Calls UpdateBento.
+         * @function updateBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IUpdateBentoRequest} request UpdateBentoRequest message or plain object
+         * @param {bentoml.Gamma.UpdateBentoCallback} callback Node-style callback called with the error, if any, and UpdateBentoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.updateBento = function updateBento(request, callback) {
+            return this.rpcCall(updateBento, $root.bentoml.UpdateBentoRequest, $root.bentoml.UpdateBentoResponse, request, callback);
+        }, "name", { value: "UpdateBento" });
+
+        /**
+         * Calls UpdateBento.
+         * @function updateBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IUpdateBentoRequest} request UpdateBentoRequest message or plain object
+         * @returns {Promise<bentoml.UpdateBentoResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#getBento}.
+         * @memberof bentoml.Gamma
+         * @typedef GetBentoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.GetBentoResponse} [response] GetBentoResponse
+         */
+
+        /**
+         * Calls GetBento.
+         * @function getBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IGetBentoRequest} request GetBentoRequest message or plain object
+         * @param {bentoml.Gamma.GetBentoCallback} callback Node-style callback called with the error, if any, and GetBentoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.getBento = function getBento(request, callback) {
+            return this.rpcCall(getBento, $root.bentoml.GetBentoRequest, $root.bentoml.GetBentoResponse, request, callback);
+        }, "name", { value: "GetBento" });
+
+        /**
+         * Calls GetBento.
+         * @function getBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IGetBentoRequest} request GetBentoRequest message or plain object
+         * @returns {Promise<bentoml.GetBentoResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#dangerouslyDeleteBento}.
+         * @memberof bentoml.Gamma
+         * @typedef DangerouslyDeleteBentoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.DangerouslyDeleteBentoResponse} [response] DangerouslyDeleteBentoResponse
+         */
+
+        /**
+         * Calls DangerouslyDeleteBento.
+         * @function dangerouslyDeleteBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IDangerouslyDeleteBentoRequest} request DangerouslyDeleteBentoRequest message or plain object
+         * @param {bentoml.Gamma.DangerouslyDeleteBentoCallback} callback Node-style callback called with the error, if any, and DangerouslyDeleteBentoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.dangerouslyDeleteBento = function dangerouslyDeleteBento(request, callback) {
+            return this.rpcCall(dangerouslyDeleteBento, $root.bentoml.DangerouslyDeleteBentoRequest, $root.bentoml.DangerouslyDeleteBentoResponse, request, callback);
+        }, "name", { value: "DangerouslyDeleteBento" });
+
+        /**
+         * Calls DangerouslyDeleteBento.
+         * @function dangerouslyDeleteBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IDangerouslyDeleteBentoRequest} request DangerouslyDeleteBentoRequest message or plain object
+         * @returns {Promise<bentoml.DangerouslyDeleteBentoResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#listBento}.
+         * @memberof bentoml.Gamma
+         * @typedef ListBentoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.ListBentoResponse} [response] ListBentoResponse
+         */
+
+        /**
+         * Calls ListBento.
+         * @function listBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IListBentoRequest} request ListBentoRequest message or plain object
+         * @param {bentoml.Gamma.ListBentoCallback} callback Node-style callback called with the error, if any, and ListBentoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.listBento = function listBento(request, callback) {
+            return this.rpcCall(listBento, $root.bentoml.ListBentoRequest, $root.bentoml.ListBentoResponse, request, callback);
+        }, "name", { value: "ListBento" });
+
+        /**
+         * Calls ListBento.
+         * @function listBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IListBentoRequest} request ListBentoRequest message or plain object
+         * @returns {Promise<bentoml.ListBentoResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link bentoml.Gamma#containerizeBento}.
+         * @memberof bentoml.Gamma
+         * @typedef ContainerizeBentoCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {bentoml.ContainerizeBentoResponse} [response] ContainerizeBentoResponse
+         */
+
+        /**
+         * Calls ContainerizeBento.
+         * @function containerizeBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IContainerizeBentoRequest} request ContainerizeBentoRequest message or plain object
+         * @param {bentoml.Gamma.ContainerizeBentoCallback} callback Node-style callback called with the error, if any, and ContainerizeBentoResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.containerizeBento = function containerizeBento(request, callback) {
+            return this.rpcCall(containerizeBento, $root.bentoml.ContainerizeBentoRequest, $root.bentoml.ContainerizeBentoResponse, request, callback);
+        }, "name", { value: "ContainerizeBento" });
+
+        /**
+         * Calls ContainerizeBento.
+         * @function containerizeBento
+         * @memberof bentoml.Gamma
+         * @instance
+         * @param {bentoml.IContainerizeBentoRequest} request ContainerizeBentoRequest message or plain object
+         * @returns {Promise<bentoml.ContainerizeBentoResponse>} Promise
+         * @variation 2
+         */
+
+        return Gamma;
+    })();
+
+    bentoml.HealthCheckResponse = (function() {
+
+        /**
+         * Properties of a HealthCheckResponse.
+         * @memberof bentoml
+         * @interface IHealthCheckResponse
+         * @property {bentoml.IStatus|null} [status] HealthCheckResponse status
+         */
+
+        /**
+         * Constructs a new HealthCheckResponse.
+         * @memberof bentoml
+         * @classdesc Represents a HealthCheckResponse.
+         * @implements IHealthCheckResponse
+         * @constructor
+         * @param {bentoml.IHealthCheckResponse=} [properties] Properties to set
+         */
+        function HealthCheckResponse(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * HealthCheckResponse status.
+         * @member {bentoml.IStatus|null|undefined} status
+         * @memberof bentoml.HealthCheckResponse
+         * @instance
+         */
+        HealthCheckResponse.prototype.status = null;
+
+        /**
+         * Creates a new HealthCheckResponse instance using the specified properties.
+         * @function create
+         * @memberof bentoml.HealthCheckResponse
+         * @static
+         * @param {bentoml.IHealthCheckResponse=} [properties] Properties to set
+         * @returns {bentoml.HealthCheckResponse} HealthCheckResponse instance
+         */
+        HealthCheckResponse.create = function create(properties) {
+            return new HealthCheckResponse(properties);
+        };
+
+        /**
+         * Encodes the specified HealthCheckResponse message. Does not implicitly {@link bentoml.HealthCheckResponse.verify|verify} messages.
+         * @function encode
+         * @memberof bentoml.HealthCheckResponse
+         * @static
+         * @param {bentoml.IHealthCheckResponse} message HealthCheckResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        HealthCheckResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                $root.bentoml.Status.encode(message.status, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified HealthCheckResponse message, length delimited. Does not implicitly {@link bentoml.HealthCheckResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof bentoml.HealthCheckResponse
+         * @static
+         * @param {bentoml.IHealthCheckResponse} message HealthCheckResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        HealthCheckResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a HealthCheckResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof bentoml.HealthCheckResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {bentoml.HealthCheckResponse} HealthCheckResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        HealthCheckResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.HealthCheckResponse();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = $root.bentoml.Status.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a HealthCheckResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof bentoml.HealthCheckResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {bentoml.HealthCheckResponse} HealthCheckResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        HealthCheckResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a HealthCheckResponse message.
+         * @function verify
+         * @memberof bentoml.HealthCheckResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        HealthCheckResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.status != null && message.hasOwnProperty("status")) {
+                let error = $root.bentoml.Status.verify(message.status);
+                if (error)
+                    return "status." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a HealthCheckResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof bentoml.HealthCheckResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {bentoml.HealthCheckResponse} HealthCheckResponse
+         */
+        HealthCheckResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.HealthCheckResponse)
+                return object;
+            let message = new $root.bentoml.HealthCheckResponse();
+            if (object.status != null) {
+                if (typeof object.status !== "object")
+                    throw TypeError(".bentoml.HealthCheckResponse.status: object expected");
+                message.status = $root.bentoml.Status.fromObject(object.status);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a HealthCheckResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof bentoml.HealthCheckResponse
+         * @static
+         * @param {bentoml.HealthCheckResponse} message HealthCheckResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        HealthCheckResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults)
+                object.status = null;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = $root.bentoml.Status.toObject(message.status, options);
+            return object;
+        };
+
+        /**
+         * Converts this HealthCheckResponse to JSON.
+         * @function toJSON
+         * @memberof bentoml.HealthCheckResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        HealthCheckResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return HealthCheckResponse;
+    })();
+
+    bentoml.GetGammaServiceVersionResponse = (function() {
+
+        /**
+         * Properties of a GetGammaServiceVersionResponse.
+         * @memberof bentoml
+         * @interface IGetGammaServiceVersionResponse
+         * @property {bentoml.IStatus|null} [status] GetGammaServiceVersionResponse status
+         * @property {string|null} [version] GetGammaServiceVersionResponse version
+         */
+
+        /**
+         * Constructs a new GetGammaServiceVersionResponse.
+         * @memberof bentoml
+         * @classdesc Represents a GetGammaServiceVersionResponse.
+         * @implements IGetGammaServiceVersionResponse
+         * @constructor
+         * @param {bentoml.IGetGammaServiceVersionResponse=} [properties] Properties to set
+         */
+        function GetGammaServiceVersionResponse(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GetGammaServiceVersionResponse status.
+         * @member {bentoml.IStatus|null|undefined} status
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @instance
+         */
+        GetGammaServiceVersionResponse.prototype.status = null;
+
+        /**
+         * GetGammaServiceVersionResponse version.
+         * @member {string} version
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @instance
+         */
+        GetGammaServiceVersionResponse.prototype.version = "";
+
+        /**
+         * Creates a new GetGammaServiceVersionResponse instance using the specified properties.
+         * @function create
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @static
+         * @param {bentoml.IGetGammaServiceVersionResponse=} [properties] Properties to set
+         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse instance
+         */
+        GetGammaServiceVersionResponse.create = function create(properties) {
+            return new GetGammaServiceVersionResponse(properties);
+        };
+
+        /**
+         * Encodes the specified GetGammaServiceVersionResponse message. Does not implicitly {@link bentoml.GetGammaServiceVersionResponse.verify|verify} messages.
+         * @function encode
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @static
+         * @param {bentoml.IGetGammaServiceVersionResponse} message GetGammaServiceVersionResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetGammaServiceVersionResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                $root.bentoml.Status.encode(message.status, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GetGammaServiceVersionResponse message, length delimited. Does not implicitly {@link bentoml.GetGammaServiceVersionResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @static
+         * @param {bentoml.IGetGammaServiceVersionResponse} message GetGammaServiceVersionResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetGammaServiceVersionResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GetGammaServiceVersionResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetGammaServiceVersionResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.GetGammaServiceVersionResponse();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = $root.bentoml.Status.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.version = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GetGammaServiceVersionResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetGammaServiceVersionResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GetGammaServiceVersionResponse message.
+         * @function verify
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GetGammaServiceVersionResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.status != null && message.hasOwnProperty("status")) {
+                let error = $root.bentoml.Status.verify(message.status);
+                if (error)
+                    return "status." + error;
+            }
+            if (message.version != null && message.hasOwnProperty("version"))
+                if (!$util.isString(message.version))
+                    return "version: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a GetGammaServiceVersionResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse
+         */
+        GetGammaServiceVersionResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.GetGammaServiceVersionResponse)
+                return object;
+            let message = new $root.bentoml.GetGammaServiceVersionResponse();
+            if (object.status != null) {
+                if (typeof object.status !== "object")
+                    throw TypeError(".bentoml.GetGammaServiceVersionResponse.status: object expected");
+                message.status = $root.bentoml.Status.fromObject(object.status);
+            }
+            if (object.version != null)
+                message.version = String(object.version);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GetGammaServiceVersionResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @static
+         * @param {bentoml.GetGammaServiceVersionResponse} message GetGammaServiceVersionResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GetGammaServiceVersionResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults) {
+                object.status = null;
+                object.version = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = $root.bentoml.Status.toObject(message.status, options);
+            if (message.version != null && message.hasOwnProperty("version"))
+                object.version = message.version;
+            return object;
+        };
+
+        /**
+         * Converts this GetGammaServiceVersionResponse to JSON.
+         * @function toJSON
+         * @memberof bentoml.GetGammaServiceVersionResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GetGammaServiceVersionResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetGammaServiceVersionResponse;
+    })();
+
+    bentoml.Chunk = (function() {
+
+        /**
+         * Properties of a Chunk.
+         * @memberof bentoml
+         * @interface IChunk
+         * @property {Uint8Array|null} [content] Chunk content
+         */
+
+        /**
+         * Constructs a new Chunk.
+         * @memberof bentoml
+         * @classdesc Represents a Chunk.
+         * @implements IChunk
+         * @constructor
+         * @param {bentoml.IChunk=} [properties] Properties to set
+         */
+        function Chunk(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Chunk content.
+         * @member {Uint8Array} content
+         * @memberof bentoml.Chunk
+         * @instance
+         */
+        Chunk.prototype.content = $util.newBuffer([]);
+
+        /**
+         * Creates a new Chunk instance using the specified properties.
+         * @function create
+         * @memberof bentoml.Chunk
+         * @static
+         * @param {bentoml.IChunk=} [properties] Properties to set
+         * @returns {bentoml.Chunk} Chunk instance
+         */
+        Chunk.create = function create(properties) {
+            return new Chunk(properties);
+        };
+
+        /**
+         * Encodes the specified Chunk message. Does not implicitly {@link bentoml.Chunk.verify|verify} messages.
+         * @function encode
+         * @memberof bentoml.Chunk
+         * @static
+         * @param {bentoml.IChunk} message Chunk message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Chunk.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.content);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Chunk message, length delimited. Does not implicitly {@link bentoml.Chunk.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof bentoml.Chunk
+         * @static
+         * @param {bentoml.IChunk} message Chunk message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Chunk.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Chunk message from the specified reader or buffer.
+         * @function decode
+         * @memberof bentoml.Chunk
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {bentoml.Chunk} Chunk
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Chunk.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.Chunk();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.content = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Chunk message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof bentoml.Chunk
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {bentoml.Chunk} Chunk
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Chunk.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Chunk message.
+         * @function verify
+         * @memberof bentoml.Chunk
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Chunk.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.content != null && message.hasOwnProperty("content"))
+                if (!(message.content && typeof message.content.length === "number" || $util.isString(message.content)))
+                    return "content: buffer expected";
+            return null;
+        };
+
+        /**
+         * Creates a Chunk message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof bentoml.Chunk
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {bentoml.Chunk} Chunk
+         */
+        Chunk.fromObject = function fromObject(object) {
+            if (object instanceof $root.bentoml.Chunk)
+                return object;
+            let message = new $root.bentoml.Chunk();
+            if (object.content != null)
+                if (typeof object.content === "string")
+                    $util.base64.decode(object.content, message.content = $util.newBuffer($util.base64.length(object.content)), 0);
+                else if (object.content.length)
+                    message.content = object.content;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Chunk message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof bentoml.Chunk
+         * @static
+         * @param {bentoml.Chunk} message Chunk
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Chunk.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults)
+                if (options.bytes === String)
+                    object.content = "";
+                else {
+                    object.content = [];
+                    if (options.bytes !== Array)
+                        object.content = $util.newBuffer(object.content);
+                }
+            if (message.content != null && message.hasOwnProperty("content"))
+                object.content = options.bytes === String ? $util.base64.encode(message.content, 0, message.content.length) : options.bytes === Array ? Array.prototype.slice.call(message.content) : message.content;
+            return object;
+        };
+
+        /**
+         * Converts this Chunk to JSON.
+         * @function toJSON
+         * @memberof bentoml.Chunk
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Chunk.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Chunk;
+    })();
+
     bentoml.BentoUri = (function() {
 
         /**
@@ -6043,6 +7110,7 @@ export const bentoml = $root.bentoml = (() => {
          * @property {string|null} [uri] BentoUri uri
          * @property {string|null} [s3_presigned_url] BentoUri s3_presigned_url
          * @property {string|null} [gcs_presigned_url] BentoUri gcs_presigned_url
+         * @property {string|null} [oci_presigned_url] BentoUri oci_presigned_url
          */
 
         /**
@@ -6093,6 +7161,14 @@ export const bentoml = $root.bentoml = (() => {
         BentoUri.prototype.gcs_presigned_url = "";
 
         /**
+         * BentoUri oci_presigned_url.
+         * @member {string} oci_presigned_url
+         * @memberof bentoml.BentoUri
+         * @instance
+         */
+        BentoUri.prototype.oci_presigned_url = "";
+
+        /**
          * Creates a new BentoUri instance using the specified properties.
          * @function create
          * @memberof bentoml.BentoUri
@@ -6124,6 +7200,8 @@ export const bentoml = $root.bentoml = (() => {
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.s3_presigned_url);
             if (message.gcs_presigned_url != null && Object.hasOwnProperty.call(message, "gcs_presigned_url"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.gcs_presigned_url);
+            if (message.oci_presigned_url != null && Object.hasOwnProperty.call(message, "oci_presigned_url"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.oci_presigned_url);
             return writer;
         };
 
@@ -6170,6 +7248,9 @@ export const bentoml = $root.bentoml = (() => {
                 case 4:
                     message.gcs_presigned_url = reader.string();
                     break;
+                case 5:
+                    message.oci_presigned_url = reader.string();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -6215,6 +7296,7 @@ export const bentoml = $root.bentoml = (() => {
                 case 3:
                 case 4:
                 case 5:
+                case 6:
                     break;
                 }
             if (message.uri != null && message.hasOwnProperty("uri"))
@@ -6226,6 +7308,9 @@ export const bentoml = $root.bentoml = (() => {
             if (message.gcs_presigned_url != null && message.hasOwnProperty("gcs_presigned_url"))
                 if (!$util.isString(message.gcs_presigned_url))
                     return "gcs_presigned_url: string expected";
+            if (message.oci_presigned_url != null && message.hasOwnProperty("oci_presigned_url"))
+                if (!$util.isString(message.oci_presigned_url))
+                    return "oci_presigned_url: string expected";
             return null;
         };
 
@@ -6266,6 +7351,10 @@ export const bentoml = $root.bentoml = (() => {
             case 5:
                 message.type = 5;
                 break;
+            case "OCI":
+            case 6:
+                message.type = 6;
+                break;
             }
             if (object.uri != null)
                 message.uri = String(object.uri);
@@ -6273,6 +7362,8 @@ export const bentoml = $root.bentoml = (() => {
                 message.s3_presigned_url = String(object.s3_presigned_url);
             if (object.gcs_presigned_url != null)
                 message.gcs_presigned_url = String(object.gcs_presigned_url);
+            if (object.oci_presigned_url != null)
+                message.oci_presigned_url = String(object.oci_presigned_url);
             return message;
         };
 
@@ -6294,6 +7385,7 @@ export const bentoml = $root.bentoml = (() => {
                 object.uri = "";
                 object.s3_presigned_url = "";
                 object.gcs_presigned_url = "";
+                object.oci_presigned_url = "";
             }
             if (message.type != null && message.hasOwnProperty("type"))
                 object.type = options.enums === String ? $root.bentoml.BentoUri.StorageType[message.type] : message.type;
@@ -6303,6 +7395,8 @@ export const bentoml = $root.bentoml = (() => {
                 object.s3_presigned_url = message.s3_presigned_url;
             if (message.gcs_presigned_url != null && message.hasOwnProperty("gcs_presigned_url"))
                 object.gcs_presigned_url = message.gcs_presigned_url;
+            if (message.oci_presigned_url != null && message.hasOwnProperty("oci_presigned_url"))
+                object.oci_presigned_url = message.oci_presigned_url;
             return object;
         };
 
@@ -6327,6 +7421,7 @@ export const bentoml = $root.bentoml = (() => {
          * @property {number} GCS=3 GCS value
          * @property {number} AZURE_BLOB_STORAGE=4 AZURE_BLOB_STORAGE value
          * @property {number} HDFS=5 HDFS value
+         * @property {number} OCI=6 OCI value
          */
         BentoUri.StorageType = (function() {
             const valuesById = {}, values = Object.create(valuesById);
@@ -6336,6 +7431,7 @@ export const bentoml = $root.bentoml = (() => {
             values[valuesById[3] = "GCS"] = 3;
             values[valuesById[4] = "AZURE_BLOB_STORAGE"] = 4;
             values[valuesById[5] = "HDFS"] = 5;
+            values[valuesById[6] = "OCI"] = 6;
             return values;
         })();
 
@@ -11101,1073 +12197,6 @@ export const bentoml = $root.bentoml = (() => {
         };
 
         return ContainerizeBentoResponse;
-    })();
-
-    bentoml.Gamma = (function() {
-
-        /**
-         * Constructs a new Gamma service.
-         * @memberof bentoml
-         * @classdesc Represents a Gamma
-         * @extends $protobuf.rpc.Service
-         * @constructor
-         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-         */
-        function Gamma(rpcImpl, requestDelimited, responseDelimited) {
-            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-        }
-
-        (Gamma.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Gamma;
-
-        /**
-         * Creates new Gamma service using the specified rpc implementation.
-         * @function create
-         * @memberof bentoml.Gamma
-         * @static
-         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-         * @returns {Gamma} RPC service. Useful where requests and/or responses are streamed.
-         */
-        Gamma.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-            return new this(rpcImpl, requestDelimited, responseDelimited);
-        };
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#healthCheck}.
-         * @memberof bentoml.Gamma
-         * @typedef HealthCheckCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.HealthCheckResponse} [response] HealthCheckResponse
-         */
-
-        /**
-         * Calls HealthCheck.
-         * @function healthCheck
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {google.protobuf.IEmpty} request Empty message or plain object
-         * @param {bentoml.Gamma.HealthCheckCallback} callback Node-style callback called with the error, if any, and HealthCheckResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.healthCheck = function healthCheck(request, callback) {
-            return this.rpcCall(healthCheck, $root.google.protobuf.Empty, $root.bentoml.HealthCheckResponse, request, callback);
-        }, "name", { value: "HealthCheck" });
-
-        /**
-         * Calls HealthCheck.
-         * @function healthCheck
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {google.protobuf.IEmpty} request Empty message or plain object
-         * @returns {Promise<bentoml.HealthCheckResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#getGammaServiceVersion}.
-         * @memberof bentoml.Gamma
-         * @typedef GetGammaServiceVersionCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.GetGammaServiceVersionResponse} [response] GetGammaServiceVersionResponse
-         */
-
-        /**
-         * Calls GetGammaServiceVersion.
-         * @function getGammaServiceVersion
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {google.protobuf.IEmpty} request Empty message or plain object
-         * @param {bentoml.Gamma.GetGammaServiceVersionCallback} callback Node-style callback called with the error, if any, and GetGammaServiceVersionResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.getGammaServiceVersion = function getGammaServiceVersion(request, callback) {
-            return this.rpcCall(getGammaServiceVersion, $root.google.protobuf.Empty, $root.bentoml.GetGammaServiceVersionResponse, request, callback);
-        }, "name", { value: "GetGammaServiceVersion" });
-
-        /**
-         * Calls GetGammaServiceVersion.
-         * @function getGammaServiceVersion
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {google.protobuf.IEmpty} request Empty message or plain object
-         * @returns {Promise<bentoml.GetGammaServiceVersionResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#applyDeployment}.
-         * @memberof bentoml.Gamma
-         * @typedef ApplyDeploymentCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.ApplyDeploymentResponse} [response] ApplyDeploymentResponse
-         */
-
-        /**
-         * Calls ApplyDeployment.
-         * @function applyDeployment
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IApplyDeploymentRequest} request ApplyDeploymentRequest message or plain object
-         * @param {bentoml.Gamma.ApplyDeploymentCallback} callback Node-style callback called with the error, if any, and ApplyDeploymentResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.applyDeployment = function applyDeployment(request, callback) {
-            return this.rpcCall(applyDeployment, $root.bentoml.ApplyDeploymentRequest, $root.bentoml.ApplyDeploymentResponse, request, callback);
-        }, "name", { value: "ApplyDeployment" });
-
-        /**
-         * Calls ApplyDeployment.
-         * @function applyDeployment
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IApplyDeploymentRequest} request ApplyDeploymentRequest message or plain object
-         * @returns {Promise<bentoml.ApplyDeploymentResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#deleteDeployment}.
-         * @memberof bentoml.Gamma
-         * @typedef DeleteDeploymentCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.DeleteDeploymentResponse} [response] DeleteDeploymentResponse
-         */
-
-        /**
-         * Calls DeleteDeployment.
-         * @function deleteDeployment
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IDeleteDeploymentRequest} request DeleteDeploymentRequest message or plain object
-         * @param {bentoml.Gamma.DeleteDeploymentCallback} callback Node-style callback called with the error, if any, and DeleteDeploymentResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.deleteDeployment = function deleteDeployment(request, callback) {
-            return this.rpcCall(deleteDeployment, $root.bentoml.DeleteDeploymentRequest, $root.bentoml.DeleteDeploymentResponse, request, callback);
-        }, "name", { value: "DeleteDeployment" });
-
-        /**
-         * Calls DeleteDeployment.
-         * @function deleteDeployment
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IDeleteDeploymentRequest} request DeleteDeploymentRequest message or plain object
-         * @returns {Promise<bentoml.DeleteDeploymentResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#getDeployment}.
-         * @memberof bentoml.Gamma
-         * @typedef GetDeploymentCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.GetDeploymentResponse} [response] GetDeploymentResponse
-         */
-
-        /**
-         * Calls GetDeployment.
-         * @function getDeployment
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IGetDeploymentRequest} request GetDeploymentRequest message or plain object
-         * @param {bentoml.Gamma.GetDeploymentCallback} callback Node-style callback called with the error, if any, and GetDeploymentResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.getDeployment = function getDeployment(request, callback) {
-            return this.rpcCall(getDeployment, $root.bentoml.GetDeploymentRequest, $root.bentoml.GetDeploymentResponse, request, callback);
-        }, "name", { value: "GetDeployment" });
-
-        /**
-         * Calls GetDeployment.
-         * @function getDeployment
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IGetDeploymentRequest} request GetDeploymentRequest message or plain object
-         * @returns {Promise<bentoml.GetDeploymentResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#describeDeployment}.
-         * @memberof bentoml.Gamma
-         * @typedef DescribeDeploymentCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.DescribeDeploymentResponse} [response] DescribeDeploymentResponse
-         */
-
-        /**
-         * Calls DescribeDeployment.
-         * @function describeDeployment
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IDescribeDeploymentRequest} request DescribeDeploymentRequest message or plain object
-         * @param {bentoml.Gamma.DescribeDeploymentCallback} callback Node-style callback called with the error, if any, and DescribeDeploymentResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.describeDeployment = function describeDeployment(request, callback) {
-            return this.rpcCall(describeDeployment, $root.bentoml.DescribeDeploymentRequest, $root.bentoml.DescribeDeploymentResponse, request, callback);
-        }, "name", { value: "DescribeDeployment" });
-
-        /**
-         * Calls DescribeDeployment.
-         * @function describeDeployment
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IDescribeDeploymentRequest} request DescribeDeploymentRequest message or plain object
-         * @returns {Promise<bentoml.DescribeDeploymentResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#listDeployments}.
-         * @memberof bentoml.Gamma
-         * @typedef ListDeploymentsCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.ListDeploymentsResponse} [response] ListDeploymentsResponse
-         */
-
-        /**
-         * Calls ListDeployments.
-         * @function listDeployments
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IListDeploymentsRequest} request ListDeploymentsRequest message or plain object
-         * @param {bentoml.Gamma.ListDeploymentsCallback} callback Node-style callback called with the error, if any, and ListDeploymentsResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.listDeployments = function listDeployments(request, callback) {
-            return this.rpcCall(listDeployments, $root.bentoml.ListDeploymentsRequest, $root.bentoml.ListDeploymentsResponse, request, callback);
-        }, "name", { value: "ListDeployments" });
-
-        /**
-         * Calls ListDeployments.
-         * @function listDeployments
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IListDeploymentsRequest} request ListDeploymentsRequest message or plain object
-         * @returns {Promise<bentoml.ListDeploymentsResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#addBento}.
-         * @memberof bentoml.Gamma
-         * @typedef AddBentoCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.AddBentoResponse} [response] AddBentoResponse
-         */
-
-        /**
-         * Calls AddBento.
-         * @function addBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IAddBentoRequest} request AddBentoRequest message or plain object
-         * @param {bentoml.Gamma.AddBentoCallback} callback Node-style callback called with the error, if any, and AddBentoResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.addBento = function addBento(request, callback) {
-            return this.rpcCall(addBento, $root.bentoml.AddBentoRequest, $root.bentoml.AddBentoResponse, request, callback);
-        }, "name", { value: "AddBento" });
-
-        /**
-         * Calls AddBento.
-         * @function addBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IAddBentoRequest} request AddBentoRequest message or plain object
-         * @returns {Promise<bentoml.AddBentoResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#updateBento}.
-         * @memberof bentoml.Gamma
-         * @typedef UpdateBentoCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.UpdateBentoResponse} [response] UpdateBentoResponse
-         */
-
-        /**
-         * Calls UpdateBento.
-         * @function updateBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IUpdateBentoRequest} request UpdateBentoRequest message or plain object
-         * @param {bentoml.Gamma.UpdateBentoCallback} callback Node-style callback called with the error, if any, and UpdateBentoResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.updateBento = function updateBento(request, callback) {
-            return this.rpcCall(updateBento, $root.bentoml.UpdateBentoRequest, $root.bentoml.UpdateBentoResponse, request, callback);
-        }, "name", { value: "UpdateBento" });
-
-        /**
-         * Calls UpdateBento.
-         * @function updateBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IUpdateBentoRequest} request UpdateBentoRequest message or plain object
-         * @returns {Promise<bentoml.UpdateBentoResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#getBento}.
-         * @memberof bentoml.Gamma
-         * @typedef GetBentoCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.GetBentoResponse} [response] GetBentoResponse
-         */
-
-        /**
-         * Calls GetBento.
-         * @function getBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IGetBentoRequest} request GetBentoRequest message or plain object
-         * @param {bentoml.Gamma.GetBentoCallback} callback Node-style callback called with the error, if any, and GetBentoResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.getBento = function getBento(request, callback) {
-            return this.rpcCall(getBento, $root.bentoml.GetBentoRequest, $root.bentoml.GetBentoResponse, request, callback);
-        }, "name", { value: "GetBento" });
-
-        /**
-         * Calls GetBento.
-         * @function getBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IGetBentoRequest} request GetBentoRequest message or plain object
-         * @returns {Promise<bentoml.GetBentoResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#dangerouslyDeleteBento}.
-         * @memberof bentoml.Gamma
-         * @typedef DangerouslyDeleteBentoCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.DangerouslyDeleteBentoResponse} [response] DangerouslyDeleteBentoResponse
-         */
-
-        /**
-         * Calls DangerouslyDeleteBento.
-         * @function dangerouslyDeleteBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IDangerouslyDeleteBentoRequest} request DangerouslyDeleteBentoRequest message or plain object
-         * @param {bentoml.Gamma.DangerouslyDeleteBentoCallback} callback Node-style callback called with the error, if any, and DangerouslyDeleteBentoResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.dangerouslyDeleteBento = function dangerouslyDeleteBento(request, callback) {
-            return this.rpcCall(dangerouslyDeleteBento, $root.bentoml.DangerouslyDeleteBentoRequest, $root.bentoml.DangerouslyDeleteBentoResponse, request, callback);
-        }, "name", { value: "DangerouslyDeleteBento" });
-
-        /**
-         * Calls DangerouslyDeleteBento.
-         * @function dangerouslyDeleteBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IDangerouslyDeleteBentoRequest} request DangerouslyDeleteBentoRequest message or plain object
-         * @returns {Promise<bentoml.DangerouslyDeleteBentoResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#listBento}.
-         * @memberof bentoml.Gamma
-         * @typedef ListBentoCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.ListBentoResponse} [response] ListBentoResponse
-         */
-
-        /**
-         * Calls ListBento.
-         * @function listBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IListBentoRequest} request ListBentoRequest message or plain object
-         * @param {bentoml.Gamma.ListBentoCallback} callback Node-style callback called with the error, if any, and ListBentoResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.listBento = function listBento(request, callback) {
-            return this.rpcCall(listBento, $root.bentoml.ListBentoRequest, $root.bentoml.ListBentoResponse, request, callback);
-        }, "name", { value: "ListBento" });
-
-        /**
-         * Calls ListBento.
-         * @function listBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IListBentoRequest} request ListBentoRequest message or plain object
-         * @returns {Promise<bentoml.ListBentoResponse>} Promise
-         * @variation 2
-         */
-
-        /**
-         * Callback as used by {@link bentoml.Gamma#containerizeBento}.
-         * @memberof bentoml.Gamma
-         * @typedef ContainerizeBentoCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {bentoml.ContainerizeBentoResponse} [response] ContainerizeBentoResponse
-         */
-
-        /**
-         * Calls ContainerizeBento.
-         * @function containerizeBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IContainerizeBentoRequest} request ContainerizeBentoRequest message or plain object
-         * @param {bentoml.Gamma.ContainerizeBentoCallback} callback Node-style callback called with the error, if any, and ContainerizeBentoResponse
-         * @returns {undefined}
-         * @variation 1
-         */
-        Object.defineProperty(Gamma.prototype.containerizeBento = function containerizeBento(request, callback) {
-            return this.rpcCall(containerizeBento, $root.bentoml.ContainerizeBentoRequest, $root.bentoml.ContainerizeBentoResponse, request, callback);
-        }, "name", { value: "ContainerizeBento" });
-
-        /**
-         * Calls ContainerizeBento.
-         * @function containerizeBento
-         * @memberof bentoml.Gamma
-         * @instance
-         * @param {bentoml.IContainerizeBentoRequest} request ContainerizeBentoRequest message or plain object
-         * @returns {Promise<bentoml.ContainerizeBentoResponse>} Promise
-         * @variation 2
-         */
-
-        return Gamma;
-    })();
-
-    bentoml.HealthCheckResponse = (function() {
-
-        /**
-         * Properties of a HealthCheckResponse.
-         * @memberof bentoml
-         * @interface IHealthCheckResponse
-         * @property {bentoml.IStatus|null} [status] HealthCheckResponse status
-         */
-
-        /**
-         * Constructs a new HealthCheckResponse.
-         * @memberof bentoml
-         * @classdesc Represents a HealthCheckResponse.
-         * @implements IHealthCheckResponse
-         * @constructor
-         * @param {bentoml.IHealthCheckResponse=} [properties] Properties to set
-         */
-        function HealthCheckResponse(properties) {
-            if (properties)
-                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * HealthCheckResponse status.
-         * @member {bentoml.IStatus|null|undefined} status
-         * @memberof bentoml.HealthCheckResponse
-         * @instance
-         */
-        HealthCheckResponse.prototype.status = null;
-
-        /**
-         * Creates a new HealthCheckResponse instance using the specified properties.
-         * @function create
-         * @memberof bentoml.HealthCheckResponse
-         * @static
-         * @param {bentoml.IHealthCheckResponse=} [properties] Properties to set
-         * @returns {bentoml.HealthCheckResponse} HealthCheckResponse instance
-         */
-        HealthCheckResponse.create = function create(properties) {
-            return new HealthCheckResponse(properties);
-        };
-
-        /**
-         * Encodes the specified HealthCheckResponse message. Does not implicitly {@link bentoml.HealthCheckResponse.verify|verify} messages.
-         * @function encode
-         * @memberof bentoml.HealthCheckResponse
-         * @static
-         * @param {bentoml.IHealthCheckResponse} message HealthCheckResponse message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        HealthCheckResponse.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
-                $root.bentoml.Status.encode(message.status, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified HealthCheckResponse message, length delimited. Does not implicitly {@link bentoml.HealthCheckResponse.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof bentoml.HealthCheckResponse
-         * @static
-         * @param {bentoml.IHealthCheckResponse} message HealthCheckResponse message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        HealthCheckResponse.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a HealthCheckResponse message from the specified reader or buffer.
-         * @function decode
-         * @memberof bentoml.HealthCheckResponse
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {bentoml.HealthCheckResponse} HealthCheckResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        HealthCheckResponse.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.HealthCheckResponse();
-            while (reader.pos < end) {
-                let tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.status = $root.bentoml.Status.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a HealthCheckResponse message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof bentoml.HealthCheckResponse
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {bentoml.HealthCheckResponse} HealthCheckResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        HealthCheckResponse.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a HealthCheckResponse message.
-         * @function verify
-         * @memberof bentoml.HealthCheckResponse
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        HealthCheckResponse.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.status != null && message.hasOwnProperty("status")) {
-                let error = $root.bentoml.Status.verify(message.status);
-                if (error)
-                    return "status." + error;
-            }
-            return null;
-        };
-
-        /**
-         * Creates a HealthCheckResponse message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof bentoml.HealthCheckResponse
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {bentoml.HealthCheckResponse} HealthCheckResponse
-         */
-        HealthCheckResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.bentoml.HealthCheckResponse)
-                return object;
-            let message = new $root.bentoml.HealthCheckResponse();
-            if (object.status != null) {
-                if (typeof object.status !== "object")
-                    throw TypeError(".bentoml.HealthCheckResponse.status: object expected");
-                message.status = $root.bentoml.Status.fromObject(object.status);
-            }
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a HealthCheckResponse message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof bentoml.HealthCheckResponse
-         * @static
-         * @param {bentoml.HealthCheckResponse} message HealthCheckResponse
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        HealthCheckResponse.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            let object = {};
-            if (options.defaults)
-                object.status = null;
-            if (message.status != null && message.hasOwnProperty("status"))
-                object.status = $root.bentoml.Status.toObject(message.status, options);
-            return object;
-        };
-
-        /**
-         * Converts this HealthCheckResponse to JSON.
-         * @function toJSON
-         * @memberof bentoml.HealthCheckResponse
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        HealthCheckResponse.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return HealthCheckResponse;
-    })();
-
-    bentoml.GetGammaServiceVersionResponse = (function() {
-
-        /**
-         * Properties of a GetGammaServiceVersionResponse.
-         * @memberof bentoml
-         * @interface IGetGammaServiceVersionResponse
-         * @property {bentoml.IStatus|null} [status] GetGammaServiceVersionResponse status
-         * @property {string|null} [version] GetGammaServiceVersionResponse version
-         */
-
-        /**
-         * Constructs a new GetGammaServiceVersionResponse.
-         * @memberof bentoml
-         * @classdesc Represents a GetGammaServiceVersionResponse.
-         * @implements IGetGammaServiceVersionResponse
-         * @constructor
-         * @param {bentoml.IGetGammaServiceVersionResponse=} [properties] Properties to set
-         */
-        function GetGammaServiceVersionResponse(properties) {
-            if (properties)
-                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * GetGammaServiceVersionResponse status.
-         * @member {bentoml.IStatus|null|undefined} status
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @instance
-         */
-        GetGammaServiceVersionResponse.prototype.status = null;
-
-        /**
-         * GetGammaServiceVersionResponse version.
-         * @member {string} version
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @instance
-         */
-        GetGammaServiceVersionResponse.prototype.version = "";
-
-        /**
-         * Creates a new GetGammaServiceVersionResponse instance using the specified properties.
-         * @function create
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @static
-         * @param {bentoml.IGetGammaServiceVersionResponse=} [properties] Properties to set
-         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse instance
-         */
-        GetGammaServiceVersionResponse.create = function create(properties) {
-            return new GetGammaServiceVersionResponse(properties);
-        };
-
-        /**
-         * Encodes the specified GetGammaServiceVersionResponse message. Does not implicitly {@link bentoml.GetGammaServiceVersionResponse.verify|verify} messages.
-         * @function encode
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @static
-         * @param {bentoml.IGetGammaServiceVersionResponse} message GetGammaServiceVersionResponse message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        GetGammaServiceVersionResponse.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
-                $root.bentoml.Status.encode(message.status, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified GetGammaServiceVersionResponse message, length delimited. Does not implicitly {@link bentoml.GetGammaServiceVersionResponse.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @static
-         * @param {bentoml.IGetGammaServiceVersionResponse} message GetGammaServiceVersionResponse message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        GetGammaServiceVersionResponse.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a GetGammaServiceVersionResponse message from the specified reader or buffer.
-         * @function decode
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        GetGammaServiceVersionResponse.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.GetGammaServiceVersionResponse();
-            while (reader.pos < end) {
-                let tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.status = $root.bentoml.Status.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.version = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a GetGammaServiceVersionResponse message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        GetGammaServiceVersionResponse.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a GetGammaServiceVersionResponse message.
-         * @function verify
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        GetGammaServiceVersionResponse.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.status != null && message.hasOwnProperty("status")) {
-                let error = $root.bentoml.Status.verify(message.status);
-                if (error)
-                    return "status." + error;
-            }
-            if (message.version != null && message.hasOwnProperty("version"))
-                if (!$util.isString(message.version))
-                    return "version: string expected";
-            return null;
-        };
-
-        /**
-         * Creates a GetGammaServiceVersionResponse message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {bentoml.GetGammaServiceVersionResponse} GetGammaServiceVersionResponse
-         */
-        GetGammaServiceVersionResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.bentoml.GetGammaServiceVersionResponse)
-                return object;
-            let message = new $root.bentoml.GetGammaServiceVersionResponse();
-            if (object.status != null) {
-                if (typeof object.status !== "object")
-                    throw TypeError(".bentoml.GetGammaServiceVersionResponse.status: object expected");
-                message.status = $root.bentoml.Status.fromObject(object.status);
-            }
-            if (object.version != null)
-                message.version = String(object.version);
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a GetGammaServiceVersionResponse message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @static
-         * @param {bentoml.GetGammaServiceVersionResponse} message GetGammaServiceVersionResponse
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        GetGammaServiceVersionResponse.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            let object = {};
-            if (options.defaults) {
-                object.status = null;
-                object.version = "";
-            }
-            if (message.status != null && message.hasOwnProperty("status"))
-                object.status = $root.bentoml.Status.toObject(message.status, options);
-            if (message.version != null && message.hasOwnProperty("version"))
-                object.version = message.version;
-            return object;
-        };
-
-        /**
-         * Converts this GetGammaServiceVersionResponse to JSON.
-         * @function toJSON
-         * @memberof bentoml.GetGammaServiceVersionResponse
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        GetGammaServiceVersionResponse.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return GetGammaServiceVersionResponse;
-    })();
-
-    bentoml.Chunk = (function() {
-
-        /**
-         * Properties of a Chunk.
-         * @memberof bentoml
-         * @interface IChunk
-         * @property {Uint8Array|null} [content] Chunk content
-         */
-
-        /**
-         * Constructs a new Chunk.
-         * @memberof bentoml
-         * @classdesc Represents a Chunk.
-         * @implements IChunk
-         * @constructor
-         * @param {bentoml.IChunk=} [properties] Properties to set
-         */
-        function Chunk(properties) {
-            if (properties)
-                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Chunk content.
-         * @member {Uint8Array} content
-         * @memberof bentoml.Chunk
-         * @instance
-         */
-        Chunk.prototype.content = $util.newBuffer([]);
-
-        /**
-         * Creates a new Chunk instance using the specified properties.
-         * @function create
-         * @memberof bentoml.Chunk
-         * @static
-         * @param {bentoml.IChunk=} [properties] Properties to set
-         * @returns {bentoml.Chunk} Chunk instance
-         */
-        Chunk.create = function create(properties) {
-            return new Chunk(properties);
-        };
-
-        /**
-         * Encodes the specified Chunk message. Does not implicitly {@link bentoml.Chunk.verify|verify} messages.
-         * @function encode
-         * @memberof bentoml.Chunk
-         * @static
-         * @param {bentoml.IChunk} message Chunk message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        Chunk.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.content != null && Object.hasOwnProperty.call(message, "content"))
-                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.content);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified Chunk message, length delimited. Does not implicitly {@link bentoml.Chunk.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof bentoml.Chunk
-         * @static
-         * @param {bentoml.IChunk} message Chunk message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        Chunk.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a Chunk message from the specified reader or buffer.
-         * @function decode
-         * @memberof bentoml.Chunk
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {bentoml.Chunk} Chunk
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        Chunk.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.bentoml.Chunk();
-            while (reader.pos < end) {
-                let tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.content = reader.bytes();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a Chunk message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof bentoml.Chunk
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {bentoml.Chunk} Chunk
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        Chunk.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a Chunk message.
-         * @function verify
-         * @memberof bentoml.Chunk
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        Chunk.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.content != null && message.hasOwnProperty("content"))
-                if (!(message.content && typeof message.content.length === "number" || $util.isString(message.content)))
-                    return "content: buffer expected";
-            return null;
-        };
-
-        /**
-         * Creates a Chunk message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof bentoml.Chunk
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {bentoml.Chunk} Chunk
-         */
-        Chunk.fromObject = function fromObject(object) {
-            if (object instanceof $root.bentoml.Chunk)
-                return object;
-            let message = new $root.bentoml.Chunk();
-            if (object.content != null)
-                if (typeof object.content === "string")
-                    $util.base64.decode(object.content, message.content = $util.newBuffer($util.base64.length(object.content)), 0);
-                else if (object.content.length)
-                    message.content = object.content;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a Chunk message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof bentoml.Chunk
-         * @static
-         * @param {bentoml.Chunk} message Chunk
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        Chunk.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            let object = {};
-            if (options.defaults)
-                if (options.bytes === String)
-                    object.content = "";
-                else {
-                    object.content = [];
-                    if (options.bytes !== Array)
-                        object.content = $util.newBuffer(object.content);
-                }
-            if (message.content != null && message.hasOwnProperty("content"))
-                object.content = options.bytes === String ? $util.base64.encode(message.content, 0, message.content.length) : options.bytes === Array ? Array.prototype.slice.call(message.content) : message.content;
-            return object;
-        };
-
-        /**
-         * Converts this Chunk to JSON.
-         * @function toJSON
-         * @memberof bentoml.Chunk
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        Chunk.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return Chunk;
     })();
 
     return bentoml;

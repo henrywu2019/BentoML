@@ -16,12 +16,14 @@ message BentoUri {
     GCS = 3;
     AZURE_BLOB_STORAGE = 4;
     HDFS = 5;
+    OCI = 6;
   }
 
   StorageType type = 1;
   string uri = 2;
   string s3_presigned_url = 3;
   string gcs_presigned_url = 4;
+  string oci_presigned_url = 5;
 }
 
 message BentoServiceMetadata {

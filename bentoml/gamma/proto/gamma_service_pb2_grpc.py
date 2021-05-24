@@ -3,9 +3,9 @@
 import grpc
 
 import bentoml.gamma.proto.deployment_pb2 as deployment__pb2
+import bentoml.gamma.proto.gamma_service_pb2 as gamma__service__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 import bentoml.gamma.proto.repository_pb2 as repository__pb2
-import bentoml.gamma.proto.gamma_service_pb2 as gamma__service__pb2
 
 
 class GammaStub(object):

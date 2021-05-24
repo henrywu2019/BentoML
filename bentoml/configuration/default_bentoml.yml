@@ -75,6 +75,9 @@ gamma:
     gcs:
       url: Null
       expiration: 3000
+    oci:
+      url: Null
+      expiration: 3000
   database:
     url: Null
   namespace: dev
