@@ -24,14 +24,14 @@ Prerequisites
   * Install instruction: https://docs.docker.com/install
 
 
-AWS EC2 deployment and management with BentoML
+AWS EC2 deployment and management with Kappa
 -------------------------------------------------
 
 This guide uses the IrisClassifier BentoService from the :doc:`Quick start guide <../quickstart>`:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/BentoML.git
+    git clone git@github.com:bentoml/Kappa.git
     pip install -r ./bentoml/guides/quick-start/requirements.txt
     python ./bentoml/guides/quick-start/main.py
 
@@ -46,7 +46,7 @@ Use `bentoml list` to get the BentoService name:version tag.
     IrisClassifier:20200121141808_FE78B5  2020-01-21 22:18:25.079723  predict(DataframeInput)  model(SklearnModelArtifact)
 
 
-BentoML has great support for AWS EC2. You can deploy, update and delete
+Kappa has great support for AWS EC2. You can deploy, update and delete
 deployment with single command, and customize deployment to fit your needs with parameters
 such as `instance type`,`scaling capacities`
 
@@ -85,7 +85,7 @@ Deployment name and bento service name:version tag is required.
 
 
 
-BentoML helps you manage the entire process of deploying your BentoService bundle to EC2.
+Kappa helps you manage the entire process of deploying your BentoService bundle to EC2.
 Verify the deployed resources with AWS CLI tool:
 
 .. code-block:: bash
@@ -98,7 +98,7 @@ Verify the deployed resources with AWS CLI tool:
               "StackId": "arn:aws:cloudformation:ap-south-1:752014255238:stack/btml-stack-dev-my-first-ec2-deployment/a9d08770-1d10-11eb-bc31-028b9ab9a492",
               "StackName": "btml-stack-dev-my-first-ec2-deployment",
               "ChangeSetId": "arn:aws:cloudformation:ap-south-1:752014255238:changeSet/samcli-deploy1604324294/ac735ad1-6080-43d2-9e9f-2484563d31c8",
-              "Description": "BentoML load balanced template",
+              "Description": "Kappa load balanced template",
               "Parameters": [
                   {
                       "ParameterKey": "AmazonLinux2LatestAmiId",
@@ -241,7 +241,7 @@ Removing a EC2 deployment is also very easy.  Calling `bentoml ec2 delete` comma
 Deploy and manage AWS EC2 deployments with remote GammaService
 =================================================================
 
-BentoML recommends to use remote GammaService for managing and deploying BentoService
+Kappa recommends to use remote GammaService for managing and deploying BentoService
 when you are working in a team. To deploy AWS EC2 deployments with remote
 GammaService, you need to provide the AWS credentials.
 
@@ -249,7 +249,7 @@ After signed in and configured your AWS CLI in your local machine, you can find 
 credentials in your aws directory, `~/.aws/credentials` as key value pairs, with key
 name as `aws_access_key_id` and `aws_secret_access_key`
 
-Starts a BentoML GammaService docker image and set the credentials found in
+Starts a Kappa GammaService docker image and set the credentials found in
 `~/.aws/credentials` as environment variables to the running container.
 
 .. code-block:: bash

@@ -13,14 +13,14 @@
 import os
 import sys
 
-# Adding BentoML source directory for accessing BentoML version
+# Adding Kappa source directory for accessing Kappa version
 sys.path.insert(0, os.path.abspath('../..'))
 import bentoml
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'BentoML'
+project = 'Kappa'
 copyright = '2021, bentoml.org'
 author = 'bentoml.org'
 version = bentoml.__version__

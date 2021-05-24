@@ -196,7 +196,7 @@ class BentoAPIServer:
     @staticmethod
     def static_serve(static_path, file_path):
         """
-        The static files route for BentoML API server
+        The static files route for Kappa API server
         """
         try:
             return send_from_directory(static_path, file_path)
@@ -208,13 +208,13 @@ class BentoAPIServer:
     @staticmethod
     def index_view_func(static_path):
         """
-        The index route for BentoML API server
+        The index route for Kappa API server
         """
         return send_from_directory(static_path, 'index.html')
 
     def default_index_view_func(self):
         """
-        The default index view for BentoML API server. This includes the readme
+        The default index view for Kappa API server. This includes the readme
         generated from docstring and swagger UI
         """
         if not self.enable_swagger:
@@ -231,7 +231,7 @@ class BentoAPIServer:
 
     def swagger_ui_func(self):
         """
-        The swagger UI route for BentoML API server
+        The swagger UI route for Kappa API server
         """
         if not self.enable_swagger:
             return Response(
@@ -246,7 +246,7 @@ class BentoAPIServer:
     @staticmethod
     def swagger_static(static_path, filename):
         """
-        The swagger static files route for BentoML API server
+        The swagger static files route for Kappa API server
         """
         return send_from_directory(static_path, filename)
 
@@ -258,7 +258,7 @@ class BentoAPIServer:
     @staticmethod
     def healthz_view_func():
         """
-        Health check for BentoML API server.
+        Health check for Kappa API server.
         Make sure it works with Kubernetes liveness probe
         """
         return Response(response="\n", status=200, mimetype="text/plain")
@@ -408,7 +408,7 @@ class BentoAPIServer:
                 log_exception(sys.exc_info())
 
                 response = make_response(
-                    'An error has occurred in BentoML user code when handling this '
+                    'An error has occurred in Kappa user code when handling this '
                     'request, find the error details in server logs',
                     500,
                 )

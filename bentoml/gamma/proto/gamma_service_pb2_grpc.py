@@ -11,7 +11,7 @@ import bentoml.gamma.proto.repository_pb2 as repository__pb2
 class GammaStub(object):
     """Gamma RPC Server
 
-    A stateful service that provides a complete BentoML model management
+    A stateful service that provides a complete Kappa model management
     and model serving/deployment workflow
 
     It provides two sets of APIs:
@@ -98,7 +98,7 @@ class GammaStub(object):
 class GammaServicer(object):
     """Gamma RPC Server
 
-    A stateful service that provides a complete BentoML model management
+    A stateful service that provides a complete Kappa model management
     and model serving/deployment workflow
 
     It provides two sets of APIs:
@@ -285,7 +285,7 @@ def add_GammaServicer_to_server(servicer, server):
 class Gamma(object):
     """Gamma RPC Server
 
-    A stateful service that provides a complete BentoML model management
+    A stateful service that provides a complete Kappa model management
     and model serving/deployment workflow
 
     It provides two sets of APIs:

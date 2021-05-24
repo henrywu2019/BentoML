@@ -62,7 +62,7 @@ def api_func(event, context):  # pylint: disable=unused-argument
     """
     Event – AWS Lambda uses this parameter to pass in event data to the handler. This
     parameter is usually of the Python dict type. It can also be list, str, int,
-    float, or NoneType type. Currently BentoML only handles Lambda event coming from
+    float, or NoneType type. Currently Kappa only handles Lambda event coming from
     Application Load Balancer, in which case the parameter `event` must be type `dict`
     containing the HTTP request headers and body.
 
@@ -89,7 +89,7 @@ def api_func(event, context):  # pylint: disable=unused-argument
         return prediction
     else:
         error_msg = (
-            'Error: Unexpected Lambda event data received. Currently BentoML lambda '
+            'Error: Unexpected Lambda event data received. Currently Kappa lambda '
             'deployment can only handle event triggered by HTTP request from '
             'Application Load Balancer.'
         )

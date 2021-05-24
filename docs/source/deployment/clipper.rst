@@ -6,9 +6,9 @@ Clipper(http://clipper.ai/) is a low-latency prediction serving system for machi
 It provides a powerful way to orchestrate ML model containers and supports features such as `micro batching`_ which is
 critical for building low latency online model serving systems.
 
-BentoML makes it easier to build custom containers that can be deployed to Clipper, users can easily add Clipper
-specify API inputs to their prediction service created with BentoML, and deploy them into clipper cluster.
-In this guide, we will demonstrate how to deploy a scikit-learn model to clipper, using BentoML.
+Kappa makes it easier to build custom containers that can be deployed to Clipper, users can easily add Clipper
+specify API inputs to their prediction service created with Kappa, and deploy them into clipper cluster.
+In this guide, we will demonstrate how to deploy a scikit-learn model to clipper, using Kappa.
 
 .. _micro batching: https://www.usenix.org/system/files/conference/nsdi17/nsdi17-crankshaw.pdf
 
@@ -40,7 +40,7 @@ Train Iris classifier model
     >>> clf.fit(X, y)
 
 
-BentoML provides input types that are specific for use with Clipper, including `ClipperBytesInput`,
+Kappa provides input types that are specific for use with Clipper, including `ClipperBytesInput`,
 `ClipperIntsInput`, `ClipperFloatsInput`, `ClipperDoublesInput`, `ClipperStringsInput` each
 corresponding to one input type that clipper support.
 
@@ -82,12 +82,12 @@ Save the BentoService
 
     running sdist
     running egg_info
-    writing requirements to BentoML.egg-info/requires.txt
-    writing BentoML.egg-info/PKG-INFO
-    writing top-level names to BentoML.egg-info/top_level.txt
-    writing dependency_links to BentoML.egg-info/dependency_links.txt
-    writing entry points to BentoML.egg-info/entry_points.txt
-    reading manifest file 'BentoML.egg-info/SOURCES.txt'
+    writing requirements to Kappa.egg-info/requires.txt
+    writing Kappa.egg-info/PKG-INFO
+    writing top-level names to Kappa.egg-info/top_level.txt
+    writing dependency_links to Kappa.egg-info/dependency_links.txt
+    writing entry points to Kappa.egg-info/entry_points.txt
+    reading manifest file 'Kappa.egg-info/SOURCES.txt'
     ...
     ...
     ...
@@ -131,7 +131,7 @@ Register an application on the clipper cluster
     19-11-13:15:43:58 INFO     [clipper_admin.py:236] [default-cluster] Application bentoml-test was successfully registered
 
 
-Now you can deploy the saved BentoService using this Clipper connection and BentoML's `bentoml.clipper.deploy_bentoml` API,
+Now you can deploy the saved BentoService using this Clipper connection and Kappa's `bentoml.clipper.deploy_bentoml` API,
 which will first build a clipper model docker image that containing your BentoService and then deploy it to the cluster.
 
 .. code-block:: python
@@ -142,7 +142,7 @@ which will first build a clipper model docker image that containing your BentoSe
 
     >>> clipper_model_name, clipper_model_version = deploy_bentoml(cl, saved_path, 'predict_clipper')
 
-    [2019-11-13 15:45:49,422] WARNING - BentoML local changes detected - Local BentoML repository including all code changes will be bundled together with the BentoService archive. When used with docker, the base docker image will be default to same version as last PyPI release at version: 0.4.9. You can also force bentoml to use a specific version for deploying your BentoService archive, by setting the config 'core/bentoml_deploy_version' to a pinned version or your custom BentoML on github, e.g.:'bentoml_deploy_version = git+https://github.com/{username}/bentoml.git@{branch}'
+    [2019-11-13 15:45:49,422] WARNING - Kappa local changes detected - Local Kappa repository including all code changes will be bundled together with the BentoService archive. When used with docker, the base docker image will be default to same version as last PyPI release at version: 0.4.9. You can also force bentoml to use a specific version for deploying your BentoService archive, by setting the config 'core/bentoml_deploy_version' to a pinned version or your custom Kappa on github, e.g.:'bentoml_deploy_version = git+https://github.com/{username}/bentoml.git@{branch}'
     [2019-11-13 15:45:49,444] WARNING - BentoArchive version mismatch: loading archive bundled in version 0.4.9,  but loading from version 0.4.9+7.g429b9ec.dirty
     [2019-11-13 15:45:49,772] INFO - Step 1/10 : FROM clipper/python-closure-container:0.4.1
     [2019-11-13 15:45:49,775] INFO -

@@ -240,7 +240,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
 
             if bento_pb.bento.uri.type not in (BentoUri.LOCAL, BentoUri.S3):
                 raise BentoMLException(
-                    "BentoML currently not support {} repository".format(
+                    "Kappa currently not support {} repository".format(
                         BentoUri.StorageType.Name(bento_pb.bento.uri.type)
                     )
                 )
@@ -343,7 +343,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
 
             if bento_pb.bento.uri.type not in (BentoUri.LOCAL, BentoUri.S3):
                 raise BentoMLException(
-                    "BentoML currently not support {} repository".format(
+                    "Kappa currently not support {} repository".format(
                         BentoUri.StorageType.Name(bento_pb.bento.uri.type)
                     )
                 )

@@ -2,7 +2,7 @@
 set -e
 
 if [[ -z "$BENTOML_REPO" ]]; then
-  # Assuming running this script from anywhere within the BentoML git repository
+  # Assuming running this script from anywhere within the Kappa git repository
   BENTOML_REPO=$(git rev-parse --show-toplevel)
 fi
 

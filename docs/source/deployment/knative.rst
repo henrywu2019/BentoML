@@ -6,8 +6,8 @@ solution for deploying ML workload that requires more computing power that abstr
 infrastructure management and without worry about vendor lock.
 
 This guide demonstrates how to serve a scikit-learn based iris classifier model with
-BentoML on a KNative cluster. The same deployment steps are also applicable for models
-trained with other machine learning frameworks, see more BentoML examples :doc:`here <../examples>`.
+Kappa on a KNative cluster. The same deployment steps are also applicable for models
+trained with other machine learning frameworks, see more Kappa examples :doc:`here <../examples>`.
 
 Prerequisites
 -------------
@@ -31,16 +31,16 @@ Prerequisites
             pip install bentoml scikit-learn
 
 
-Knative deployment with BentoML
+Knative deployment with Kappa
 -------------------------------
 
 Run the example project from the :doc:`quick start guide <../quickstart>` to create the
-BentoML saved bundle for deployment:
+Kappa saved bundle for deployment:
 
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/BentoML.git
+    git clone git@github.com:bentoml/Kappa.git
     pip install -r ./bentoml/guides/quick-start/requirements.txt
     python ./bentoml/guides/quick-start/main.py
 
@@ -85,12 +85,12 @@ Verify the saved bundle created:
     }
 
 
-The BentoML saved bundle created can now be used to start a REST API Server hosting the
+The Kappa saved bundle created can now be used to start a REST API Server hosting the
 BentoService and available for sending test request:
 
 .. code-block:: bash
 
-    # Start BentoML API server:
+    # Start Kappa API server:
     bentoml serve IrisClassifier:latest
 
 
@@ -105,10 +105,10 @@ BentoService and available for sending test request:
 
 
 ======================================
-Deploy BentoML model server to KNative
+Deploy Kappa model server to KNative
 ======================================
 
-BentoML provides a convenient way to containerize the model API server with Docker:
+Kappa provides a convenient way to containerize the model API server with Docker:
 
     1. Find the SavedBundle directory with `bentoml get` command
 

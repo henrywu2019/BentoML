@@ -142,7 +142,7 @@ class S3Repository(BaseRepository):
                     return
                 else:
                     logger.warning(
-                        f"BentoML has deleted service '{bento_name}:{bento_version}' "
+                        f"Kappa has deleted service '{bento_name}:{bento_version}' "
                         f"from GammaService records, but it failed to delete the saved "
                         f"bundle files stored in s3://{self.bucket}/{object_name}, "
                         f"the files may have already been deleted by the user."
@@ -155,7 +155,7 @@ class S3Repository(BaseRepository):
                 try:
                     self.s3_client.head_object(Bucket=self.bucket, Key=object_name)
                     logger.warning(
-                        f"BentoML has deleted service '{bento_name}:{bento_version}' "
+                        f"Kappa has deleted service '{bento_name}:{bento_version}' "
                         f"from GammaService records, but it failed to delete the saved "
                         f"bundle files stored in s3://{self.bucket}/{object_name}, "
                         f"the files may have already been deleted by the user."

@@ -6,8 +6,8 @@ alternative to run BentoService that requires more computing power. Cloud Run is
 abstracts away infrastructure management, so you can focus on building service.
 
 This guide demonstrates how to deploy a scikit-learn based iris classifier model with
-BentoML to Google Cloud Run. The same deployment steps are also applicable for models
-trained with other machine learning frameworks, see more BentoML examples :doc:`here <../examples>`.
+Kappa to Google Cloud Run. The same deployment steps are also applicable for models
+trained with other machine learning frameworks, see more Kappa examples :doc:`here <../examples>`.
 
 
 Prerequisites
@@ -59,16 +59,16 @@ Create Google cloud project
 
 
 ============================================================
-Build and push BentoML model service image to GCP repository
+Build and push Kappa model service image to GCP repository
 ============================================================
 
 Run the example project from the :doc:`quick start guide <../quickstart>` to create the
-BentoML saved bundle for deployment:
+Kappa saved bundle for deployment:
 
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/BentoML.git
+    git clone git@github.com:bentoml/Kappa.git
     pip install -r ./bentoml/guides/quick-start/requirements.txt
     python ./bentoml/guides/quick-start/main.py
 
@@ -112,12 +112,12 @@ Verify the saved bundle created:
     }
 
 
-The BentoML saved bundle created can now be used to start a REST API Server hosting the
+The Kappa saved bundle created can now be used to start a REST API Server hosting the
 BentoService and available for sending test request:
 
 .. code-block:: bash
 
-    # Start BentoML API server:
+    # Start Kappa API server:
     bentoml serve IrisClassifier:latest
 
 

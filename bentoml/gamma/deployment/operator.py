@@ -45,7 +45,7 @@ def get_deployment_operator(gamma_service, deployment_pb):
         return AwsEc2DeploymentOperator(gamma_service)
     elif operator == DeploymentSpec.CUSTOM:
         raise NotImplementedError(
-            "Custom deployment operator is not supported in current version of BentoML"
+            "Custom deployment operator is not supported in current version of Kappa"
         )
     else:
         raise GammaDeploymentException("DeployOperator must be set")

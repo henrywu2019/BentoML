@@ -1,7 +1,7 @@
 Adaptive Micro Batching
 =======================
 
-1. The overall architecture of BentoML's micro-batching server
+1. The overall architecture of Kappa's micro-batching server
 --------------------------------------------------------------
 
 1.1 Why micro batching matters
@@ -14,7 +14,7 @@ Adaptive Micro Batching
 
    -- `tensorflow/serving <https://github.com/tensorflow/serving/blob/master/tensorflow_serving/batching/README.md>`__
 
-Plus, under BentoML's architecture, the HTTP handling and data
+Plus, under Kappa's architecture, the HTTP handling and data
 preprocessing procedure will also benefit from micro-batching.
 
 1.2 Architecture & Data Flow
@@ -76,7 +76,7 @@ reached ``mb_max_latency``.
 1.5 The main design decisions and trade-offs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Throughput and latency are most concerned for API servers. BentoML will
+Throughput and latency are most concerned for API servers. Kappa will
 fine-tune batches **automatically** to(in the order priority):
 
 -  Ensure the user defined constraint of ``mb_max_batch_size`` and
@@ -87,7 +87,7 @@ fine-tune batches **automatically** to(in the order priority):
 2. parameter tuning best practices & recommendations
 ----------------------------------------------------
 
-Different from TensorFlow Serving, BentoML will **automatically adjust**
+Different from TensorFlow Serving, Kappa will **automatically adjust**
 the batch size and wait timeout, balancing the maximum throughput and
 latency. It will respond to the fluctuations of server loading.
 
@@ -167,7 +167,7 @@ deployment. Once deployed, it won't change anymore.
 ~~~~~~~~~~~
 
 Clipper applied a combination of TCP Nagle and AIMD algorithm. This
-approach is more similar with BentoML, the difference is scheduling
+approach is more similar with Kappa, the difference is scheduling
 algorithm and the goal of optimization.
 
    To automatically find the optimal maximum batch size for each model
@@ -180,7 +180,7 @@ Clipper has parameter SLO(similar with mb\_max\_latency), the
 optimization goal of AIMD is to maximize the throughput under the bound
 of SLO.
 
-Therefore, for most cases, Clipper have higher latency than BentoML,
+Therefore, for most cases, Clipper have higher latency than Kappa,
 which also means it's able to serve less users at same time.
 
 .. spelling::

@@ -45,10 +45,10 @@ except Exception:
 setuptools.setup(
     name='{name}',
     version='{pypi_package_version}',
-    description="BentoML generated model module",
+    description="Kappa generated model module",
     long_description=\"\"\"{long_description}\"\"\",
     long_description_content_type="text/markdown",
-    url="https://github.com/bentoml/BentoML",
+    url="https://github.com/bentoml/Kappa",
     packages=setuptools.find_packages(),
     install_requires=install_reqs,
     include_package_data=True,

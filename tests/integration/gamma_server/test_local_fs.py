@@ -19,7 +19,7 @@ def test_sqlite_and_local_fs():
         svc = ExampleBentoService()
         svc.pack('model', [1, 2, 3])
         bento_tag = f'{svc.name}:{svc.version}'
-        logger.info(f'Saving BentoML saved bundle {bento_tag}')
+        logger.info(f'Saving Kappa saved bundle {bento_tag}')
         svc.save(gamma_url=gamma_server_url)
 
         bento_pb = yc.repository.get(bento_tag)
@@ -47,7 +47,7 @@ def test_gamma_server_with_postgres_and_local_storage():
         svc = ExampleBentoService()
         svc.pack('model', [1, 2, 3])
         bento_tag = f'{svc.name}:{svc.version}'
-        logger.info(f'Saving BentoML saved bundle {bento_tag}')
+        logger.info(f'Saving Kappa saved bundle {bento_tag}')
         svc.save(gamma_url=gamma_server_url)
 
         yc = get_gamma_client(gamma_server_url)

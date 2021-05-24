@@ -171,7 +171,7 @@ class BentoRepositoryAPIClient:
         if get_bento_response.status.status_code == status_pb2.Status.OK:
             raise BentoMLException(
                 "BentoService bundle {}:{} already registered in repository. Reset "
-                "BentoService version with BentoService#set_version or bypass BentoML's"
+                "BentoService version with BentoService#set_version or bypass Kappa's"
                 " model registry feature with BentoService#save_to_dir".format(
                     bento_service_metadata.name, bento_service_metadata.version
                 )
@@ -454,7 +454,7 @@ class BentoRepositoryAPIClient:
         else:
             # list of bentos
             if prune is True:
-                logger.info('Deleting all BentoML saved bundles.')
+                logger.info('Deleting all Kappa saved bundles.')
                 # ignore other fields
                 bento_name = None
                 labels = None

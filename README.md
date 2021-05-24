@@ -1,22 +1,22 @@
-[<img src="https://raw.githubusercontent.com/bentoml/BentoML/master/docs/source/_static/img/bentoml-readme-header.jpeg" width="600px" margin-left="-5px">](https://github.com/bentoml/BentoML)
+[<img src="https://raw.githubusercontent.com/bentoml/Kappa/master/docs/source/_static/img/bentoml-readme-header.jpeg" width="600px" margin-left="-5px">](https://github.com/bentoml/Kappa)
 
-## Model Serving Made Easy  [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=BentoML:%20Machine%20Learning%20Model%20Serving%20Made%20Easy%20&url=https://github.com/bentoml/BentoML&via=bentomlai&hashtags=mlops,modelserving,ML,AI,machinelearning,bentoml)
+## Model Serving Made Easy  [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Kappa:%20Machine%20Learning%20Model%20Serving%20Made%20Easy%20&url=https://github.com/bentoml/Kappa&via=bentomlai&hashtags=mlops,modelserving,ML,AI,machinelearning,bentoml)
 
-BentoML is a flexible, high-performance framework for serving, managing, and deploying machine learning models. 
+Kappa is a flexible, high-performance framework for serving, managing, and deploying machine learning models. 
 
 * Supports __multiple ML frameworks__, including Tensorflow, PyTorch, Keras, XGBoost
-  and [more](https://github.com/bentoml/BentoML#ml-frameworks)
+  and [more](https://github.com/bentoml/Kappa#ml-frameworks)
 * __Cloud native deployment__ with Docker, Kubernetes, AWS, Azure and
-  [many more](https://github.com/bentoml/BentoML#deployment-options)
+  [many more](https://github.com/bentoml/Kappa#deployment-options)
 * __High-Performance__ online API serving and offline batch serving
 * Web dashboards and APIs for model registry and deployment management
 
                                                            
-BentoML bridges the gap between Data Science and DevOps. By providing a
-standard interface for describing a prediction service, BentoML 
+Kappa bridges the gap between Data Science and DevOps. By providing a
+standard interface for describing a prediction service, Kappa 
 abstracts away how to run model inference efficiently and how model 
 serving workloads can integrate with cloud infrastructures.
-[See how it works!](https://github.com/bentoml/BentoML#introduction)
+[See how it works!](https://github.com/bentoml/Kappa#introduction)
 
 
 Join our community
@@ -24,26 +24,26 @@ Join our community
 
 ---
 
-[![pypi status](https://img.shields.io/pypi/v/bentoml.svg)](https://pypi.org/project/BentoML)
+[![pypi status](https://img.shields.io/pypi/v/bentoml.svg)](https://pypi.org/project/Kappa)
 [![Downloads](https://pepy.tech/badge/bentoml)](https://pepy.tech/project/bentoml)
-[![Actions Status](https://github.com/bentoml/bentoml/workflows/BentoML-CI/badge.svg)](https://github.com/bentoml/bentoml/actions)
+[![Actions Status](https://github.com/bentoml/bentoml/workflows/Kappa-CI/badge.svg)](https://github.com/bentoml/bentoml/actions)
 [![Documentation Status](https://readthedocs.org/projects/bentoml/badge/?version=latest)](https://docs.bentoml.org/)
-[![join BentoML Slack](https://badgen.net/badge/Join/BentoML%20Slack/cyan?icon=slack)](https://join.slack.com/t/bentoml/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg)
+[![join Kappa Slack](https://badgen.net/badge/Join/Kappa%20Slack/cyan?icon=slack)](https://join.slack.com/t/bentoml/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg)
 
 
-- [Documentation](https://github.com/bentoml/BentoML#documentation)
-- [Key Features](https://github.com/bentoml/BentoML#key-features)
-- [Introduction](https://github.com/bentoml/BentoML#Introduction)
-- [Why BentoML](https://github.com/bentoml/BentoML#why-bentoml)
-- [Contributing](https://github.com/bentoml/BentoML#contributing)
-- [License](https://github.com/bentoml/BentoML#license)
+- [Documentation](https://github.com/bentoml/Kappa#documentation)
+- [Key Features](https://github.com/bentoml/Kappa#key-features)
+- [Introduction](https://github.com/bentoml/Kappa#Introduction)
+- [Why Kappa](https://github.com/bentoml/Kappa#why-bentoml)
+- [Contributing](https://github.com/bentoml/Kappa#contributing)
+- [License](https://github.com/bentoml/Kappa#license)
 
 
 ## Documentation
 
-BentoML documentation: [https://docs.bentoml.org/](https://docs.bentoml.org/)
+Kappa documentation: [https://docs.bentoml.org/](https://docs.bentoml.org/)
 
-* [Quickstart Guide](https://docs.bentoml.org/en/latest/quickstart.html), try it out [on Google Colab](https://colab.research.google.com/github/bentoml/BentoML/blob/master/guides/quick-start/bentoml-quick-start-guide.ipynb) 
+* [Quickstart Guide](https://docs.bentoml.org/en/latest/quickstart.html), try it out [on Google Colab](https://colab.research.google.com/github/bentoml/Kappa/blob/master/guides/quick-start/bentoml-quick-start-guide.ipynb) 
 * [Core Concepts](https://docs.bentoml.org/en/latest/concepts.html)
 * [API References](https://docs.bentoml.org/en/latest/api/index.html)
 * [FAQ](https://docs.bentoml.org/en/latest/faq.html)
@@ -53,7 +53,7 @@ BentoML documentation: [https://docs.bentoml.org/](https://docs.bentoml.org/)
 ### Key Features
 
 Production-ready online serving:
-* Support **multiple ML frameworks** including PyTorch, TensorFlow, Scikit-Learn, XGBoost, and [many more](https://github.com/bentoml/BentoML#ml-frameworks)
+* Support **multiple ML frameworks** including PyTorch, TensorFlow, Scikit-Learn, XGBoost, and [many more](https://github.com/bentoml/Kappa#ml-frameworks)
 * **Containerized model server** for production deployment with Docker, Kubernetes, OpenShift, AWS ECS, Azure, GCP GKE, etc
 * **Adaptive micro-batching** for optimal online serving performance
 * Discover and package all dependencies automatically, including PyPI, conda packages and local python modules
@@ -105,7 +105,7 @@ Standarlize model serving and deployment workflow for teams:
 Be sure to check out [deployment overview doc](https://docs.bentoml.org/en/latest/deployment/index.html)
 to understand which deployment option is best suited for your use case.
 
-* One-click deployment with BentoML:
+* One-click deployment with Kappa:
   - [AWS Lambda](https://docs.bentoml.org/en/latest/deployment/aws_lambda.html)
   - [AWS SageMaker](https://docs.bentoml.org/en/latest/deployment/aws_sagemaker.html)
   - [AWS EC2](https://docs.bentoml.org/en/latest/deployment/aws_ec2.html)
@@ -129,10 +129,10 @@ to understand which deployment option is best suited for your use case.
 
 ## Introduction
 
-BentoML provides APIs for defining a prediction service, a servable model so to speak, 
+Kappa provides APIs for defining a prediction service, a servable model so to speak, 
 which includes the trained ML model itself, plus its pre-processing, post-processing
 code, input/output specifications and dependencies. Here's what a simple
-prediction service look like in BentoML: 
+prediction service look like in Kappa: 
 
 
 ```python
@@ -142,7 +142,7 @@ from bentoml import env, artifacts, api, BentoService
 from bentoml.adapters import DataframeInput, JsonOutput
 from bentoml.frameworks.sklearn import SklearnModelArtifact
 
-# BentoML packages local python modules automatically for deployment
+# Kappa packages local python modules automatically for deployment
 from my_ml_utils import my_encoder
 
 @env(infer_pip_packages=True)
@@ -169,7 +169,7 @@ class MyPredictionService(BentoService):
 
 This can be easily plugged into your model training process: import your bentoml 
 prediction service class, pack it with your trained model, and call `save` to persist
-the entire prediction service at the end, which creates a BentoML bundle:
+the entire prediction service at the end, which creates a Kappa bundle:
 
 ```python
 from my_prediction_service import MyPredictionService
@@ -178,13 +178,13 @@ svc.pack('my_model', my_sklearn_model)
 svc.save()  # saves to $HOME/bentoml/repository/MyPredictionService/{version}/
 ```
 
-The generated BentoML bundle is a file directory that contains all the code files, 
+The generated Kappa bundle is a file directory that contains all the code files, 
 serialized models, and configs required for reproducing this prediction service for
-inference. BentoML automatically captures all the python dependencies information and
+inference. Kappa automatically captures all the python dependencies information and
 have everything versioned and managed together in one place.
 
-BentoML automatically generates a version ID for this bundle, and keeps track of all
-bundles created under the `$HOME/bentoml` directory. With a BentoML bundle, user can 
+Kappa automatically generates a version ID for this bundle, and keeps track of all
+bundles created under the `$HOME/bentoml` directory. With a Kappa bundle, user can 
 start a local API server hosting it, either by its file path or its name and version:
 
 ```bash
@@ -203,26 +203,26 @@ docker run -p 5000:5000 my_prediction_service:v3 --workers 2
 ```
 
 The container image produced will have all the required dependencies installed. Besides
-the model inference API, the containerized BentoML model server also comes with
+the model inference API, the containerized Kappa model server also comes with
 Prometheus metrics, health check endpoint, prediction logging, and tracing support
 out-of-the-box. This makes it super easy for your DevOps team to incorporate your models
 into production systems.
 
-BentoML's model management component is called Gamma, it means food cart in Japanese, 
+Kappa's model management component is called Gamma, it means food cart in Japanese, 
 and you can think of it as where you'd store your bentos 🍱. Gamma provides CLI, Web UI,
-and Python API for accessing BentoML bundles you have created, and you can start a Gamma
+and Python API for accessing Kappa bundles you have created, and you can start a Gamma
 server for your team to manage all models on cloud storage(S3, GCS, MinIO etc) and build
 CI/CD workflow around it. 
 [Learn more about it here](https://docs.bentoml.org/en/latest/concepts.html#model-management).
 
-![Gamma UI](https://github.com/bentoml/BentoML/blob/master/docs/source/_static/img/gamma-service-web-ui-repository.png)
+![Gamma UI](https://github.com/bentoml/Kappa/blob/master/docs/source/_static/img/gamma-service-web-ui-repository.png)
 
 Read the [Quickstart Guide](https://docs.bentoml.org/en/latest/quickstart.html) 
-to learn more about the basic functionalities of BentoML. You can also try it out 
-[here on Google Colab](https://colab.research.google.com/github/bentoml/BentoML/blob/master/guides/quick-start/bentoml-quick-start-guide.ipynb).
+to learn more about the basic functionalities of Kappa. You can also try it out 
+[here on Google Colab](https://colab.research.google.com/github/bentoml/Kappa/blob/master/guides/quick-start/bentoml-quick-start-guide.ipynb).
 
 
-## Why BentoML
+## Why Kappa
 
 Moving trained Machine Learning models to serving applications in production is hard. It
 is a sequential process across data science, engineering and DevOps teams: after a
@@ -234,45 +234,45 @@ monitor the models deployed in production and ship new models quickly. It often 
 months for an engineering team to build a model serving & deployment solution that allow
 data science teams to ship new models in a repeatable and reliable way.
 
-BentoML is a framework designed to solve this problem. It provides high-level APIs for
+Kappa is a framework designed to solve this problem. It provides high-level APIs for
 Data Science team to create prediction services, abstract away DevOps'
 infrastructure needs and performance optimizations in the process. This allows DevOps
 team to seamlessly work with data science side-by-side, deploy and operate their models
-packaged in BentoML format in production.
+packaged in Kappa format in production.
 
 Check out [Frequently Asked Questions](https://docs.bentoml.org/en/latest/faq.html) page
-on how does BentoML compares to Tensorflow-serving, Clipper, AWS SageMaker, MLFlow, etc.
+on how does Kappa compares to Tensorflow-serving, Clipper, AWS SageMaker, MLFlow, etc.
 
-<img src="https://raw.githubusercontent.com/bentoml/BentoML/master/docs/source/_static/img/bentoml-overview.png" width="600">
+<img src="https://raw.githubusercontent.com/bentoml/Kappa/master/docs/source/_static/img/bentoml-overview.png" width="600">
 
 
 ## Contributing
 
-Have questions or feedback? Post a [new github issue](https://github.com/bentoml/BentoML/issues/new/choose)
-or discuss in our Slack channel: [![join BentoML Slack](https://badgen.net/badge/Join/BentoML%20Slack/cyan?icon=slack)](https://join.slack.com/t/bentoml/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg)
+Have questions or feedback? Post a [new github issue](https://github.com/bentoml/Kappa/issues/new/choose)
+or discuss in our Slack channel: [![join Kappa Slack](https://badgen.net/badge/Join/Kappa%20Slack/cyan?icon=slack)](https://join.slack.com/t/bentoml/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg)
 
-Want to help build BentoML? Check out our
-[contributing guide](https://github.com/bentoml/BentoML/blob/master/CONTRIBUTING.md) and the
-[development guide](https://github.com/bentoml/BentoML/blob/master/DEVELOPMENT.md).
+Want to help build Kappa? Check out our
+[contributing guide](https://github.com/bentoml/Kappa/blob/master/CONTRIBUTING.md) and the
+[development guide](https://github.com/bentoml/Kappa/blob/master/DEVELOPMENT.md).
 
 
 ## Releases
 
-BentoML is under active development and is evolving rapidly.
+Kappa is under active development and is evolving rapidly.
 It is currently a Beta release, __we may change APIs in future releases__ and there
 are still major features being worked on.
 
-Read more about the latest updates from the [releases page](https://github.com/bentoml/BentoML/releases).
+Read more about the latest updates from the [releases page](https://github.com/bentoml/Kappa/releases).
 
 
 ## Usage Tracking
 
-BentoML by default collects anonymous usage data using [Amplitude](https://amplitude.com).
-It only collects BentoML library's own actions and parameters, no user or model data will be collected.
-[Here is the code that does it](https://github.com/bentoml/BentoML/blob/master/bentoml/utils/usage_stats.py).
+Kappa by default collects anonymous usage data using [Amplitude](https://amplitude.com).
+It only collects Kappa library's own actions and parameters, no user or model data will be collected.
+[Here is the code that does it](https://github.com/bentoml/Kappa/blob/master/bentoml/utils/usage_stats.py).
 
-This helps BentoML team to understand how the community is using this tool and what to build next. You can
-easily opt-out of usage tracking by running the BentoML commands with the `--do-not-track` option.
+This helps Kappa team to understand how the community is using this tool and what to build next. You can
+easily opt-out of usage tracking by running the Kappa commands with the `--do-not-track` option.
 
 ```bash
 % bentoml [command] --do-not-track
@@ -287,6 +287,6 @@ or by setting the `BENTOML_DO_NOT_TRACK` environment variable to `True`.
 
 ## License
 
-[Apache License 2.0](https://github.com/bentoml/BentoML/blob/master/LICENSE)
+[Apache License 2.0](https://github.com/bentoml/Kappa/blob/master/LICENSE)
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbentoml%2FBentoML.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbentoml%2FBentoML?ref=badge_large)

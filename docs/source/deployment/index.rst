@@ -3,9 +3,9 @@
 Deployment Guides
 =================
 
-BentoML provides a set of APIs and CLI commands for automating cloud deployment workflow
+Kappa provides a set of APIs and CLI commands for automating cloud deployment workflow
 which gets your BentoService API server up and running in the cloud, and allows you to
-easily update and monitor the service. Currently BentoML have implemented this workflow
+easily update and monitor the service. Currently Kappa have implemented this workflow
 for AWS Lambda and AWS Sagemaker. More platforms such as AWS EC2, Kubernetes Cluster,
 Azure Virtual Machines are on our roadmap.
 
@@ -20,7 +20,7 @@ platforms, and we've created a few step by step tutorials for doing that.
     :ref:`Model Serving Guide <concepts-model-serving>`.
 
 
-If you are at a small team with limited DevOps support, BentoML provides a fully
+If you are at a small team with limited DevOps support, Kappa provides a fully
 automated deployment management for AWS EC2, AWS Lambda, AWS SageMaker, and Azure
 Functions. It provides the basic model deployment functionalities with minimum setup.
 Here are the detailed guides for each platform:
@@ -34,7 +34,7 @@ Here are the detailed guides for each platform:
   aws_ec2
   azure_functions
 
-BentoML also makes it very easy to deploy your models on any cloud platforms or your
+Kappa also makes it very easy to deploy your models on any cloud platforms or your
 in-house custom infrastructure. Here are deployment guides for popular cloud services
 and open source platforms:
 

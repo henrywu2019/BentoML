@@ -1,7 +1,7 @@
 EC2_CLOUDFORMATION_TEMPLATE = """\
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
-Description: BentoML load balanced template
+Description: Kappa load balanced template
 Parameters:
     AmazonLinux2LatestAmiId:
         Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>

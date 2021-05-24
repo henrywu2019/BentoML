@@ -116,7 +116,7 @@ def load_saved_bundle_config(bundle_path):
         return SavedBundleConfig.load(os.path.join(bundle_path, "bentoml.yml"))
     except FileNotFoundError:
         raise BentoMLException(
-            "BentoML can't locate config file 'bentoml.yml'"
+            "Kappa can't locate config file 'bentoml.yml'"
             " in saved bundle in path: {}".format(bundle_path)
         )
 
@@ -214,7 +214,7 @@ def load_bento_service_class(bundle_path):
         )
         # pylint:enable=deprecated-method
     else:
-        raise BentoMLException("BentoML requires Python 3.4 and above")
+        raise BentoMLException("Kappa requires Python 3.4 and above")
 
     # Remove bundle_path from sys.path to avoid import naming conflicts
     sys.path.remove(bundle_path)

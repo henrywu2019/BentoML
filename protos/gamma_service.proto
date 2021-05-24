@@ -10,7 +10,7 @@ import "repository.proto";
 
 // Gamma RPC Server
 //
-// A stateful service that provides a complete BentoML model management
+// A stateful service that provides a complete Kappa model management
 // and model serving/deployment workflow
 //
 // It provides two sets of APIs:

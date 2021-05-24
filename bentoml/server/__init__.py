@@ -70,7 +70,7 @@ def start_dev_server(
 def _start_dev_server(
     saved_bundle_path: str, api_server_port: int, enable_swagger: bool,
 ):
-    logger.info("Starting BentoML API server in development mode..")
+    logger.info("Starting Kappa API server in development mode..")
 
     from bentoml.server.api_server import BentoAPIServer
     from bentoml.saved_bundle import load_from_dir
@@ -88,7 +88,7 @@ def _start_dev_proxy(
     mb_max_batch_size: int,
     mb_max_latency: int,
 ):
-    logger.info("Starting BentoML API proxy in development mode..")
+    logger.info("Starting Kappa API proxy in development mode..")
 
     from bentoml.marshal.marshal import MarshalService
 
@@ -120,7 +120,7 @@ def start_prod_server(
 
     assert (
         psutil.POSIX
-    ), "BentoML API Server production mode only supports POSIX platforms"
+    ), "Kappa API Server production mode only supports POSIX platforms"
 
     prometheus_lock = multiprocessing.Lock()
     with reserve_free_port() as api_server_port:
@@ -166,7 +166,7 @@ def _start_prod_server(
     prometheus_lock: Optional[multiprocessing.Lock] = None,
 ):
 
-    logger.info("Starting BentoML API server in production mode..")
+    logger.info("Starting Kappa API server in production mode..")
 
     from bentoml.server.gunicorn_server import GunicornBentoServer
 
@@ -194,7 +194,7 @@ def _start_prod_proxy(
     prometheus_lock: Optional[multiprocessing.Lock] = None,
 ):
 
-    logger.info("Starting BentoML proxy in production mode..")
+    logger.info("Starting Kappa proxy in production mode..")
 
     from bentoml.server.marshal_server import GunicornMarshalServer
 

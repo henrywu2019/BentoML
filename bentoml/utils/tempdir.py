@@ -49,7 +49,7 @@ class TempDirectory(object):
     def __exit__(self, exc_type, exc_val, exc_tb):
         if get_debug_mode():
             logger.debug(
-                'BentoML in debug mode, keeping temp directory "%s"', self.path
+                'Kappa in debug mode, keeping temp directory "%s"', self.path
             )
             return
 

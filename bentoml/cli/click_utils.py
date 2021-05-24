@@ -63,7 +63,7 @@ def _echo(message, color="reset"):
 
 
 class BentoMLCommandGroup(click.Group):
-    """Click command class customized for BentoML cli, allow specifying a default
+    """Click command class customized for Kappa cli, allow specifying a default
     command for each group defined
     """
 

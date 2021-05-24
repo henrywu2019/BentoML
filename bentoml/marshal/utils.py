@@ -4,7 +4,7 @@ from typing import Sequence
 
 from bentoml.types import HTTPRequest, HTTPResponse
 
-MARSHAL_REQUEST_HEADER = "BentoML-Is-Merged-Request"
+MARSHAL_REQUEST_HEADER = "Kappa-Is-Merged-Request"
 
 
 class PlasmaDataLoader:

@@ -1,8 +1,8 @@
 Deploying to AWS SageMaker
 ==========================
 
-AWS Sagemaker is a fully managed services for quickly building ML models. BentoML provides great support
-for deploying BentoService to AWS Sagemaker without additional process and work from user. With BentoML,
+AWS Sagemaker is a fully managed services for quickly building ML models. Kappa provides great support
+for deploying BentoService to AWS Sagemaker without additional process and work from user. With Kappa,
 users can enjoy the great system performance from Sagemaker with any popular ML frameworks.
 
 
@@ -20,14 +20,14 @@ Prerequisites
 
 
 
-AWS Sagemaker deployment and management with BentoML
+AWS Sagemaker deployment and management with Kappa
 ----------------------------------------------------
 
 This guide uses the IrisClassifier BentoService from the :doc:`Quick start guide <../quickstart>`:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/BentoML.git
+    git clone git@github.com:bentoml/Kappa.git
     pip install -r ./bentoml/guides/quick-start/requirements.txt
     python ./bentoml/guides/quick-start/main.py
 
@@ -229,7 +229,7 @@ Use the sample data to verify the predict result from the Sagemaker deployment
     }
 
 
-Use `bentoml sagemaker list` to display all sagemaker deployments managed by BentoML
+Use `bentoml sagemaker list` to display all sagemaker deployments managed by Kappa
 
 .. code-block:: bash
 
@@ -239,7 +239,7 @@ Use `bentoml sagemaker list` to display all sagemaker deployments managed by Ben
     my-first-sagemaker-deployment  dev                    aws-sagemaker  running   15 minutes and 21.14 seconds
 
 
-Removing Sagemaker deployment is as easy as deploying one.  BentoML will remove any related resources from AWS as well.
+Removing Sagemaker deployment is as easy as deploying one.  Kappa will remove any related resources from AWS as well.
 
 .. code-block:: bash
 
@@ -252,7 +252,7 @@ Removing Sagemaker deployment is as easy as deploying one.  BentoML will remove 
 Deploy and manage AWS Sagemaker deployments with remote GammaService
 ====================================================================
 
-BentoML recommends to use remote GammaService for managing and deploying BentoService
+Kappa recommends to use remote GammaService for managing and deploying BentoService
 when you are working in a team. To deploy AWS Sagemaker deployments with remote
 GammaService, you need to provide the AWS credentials.
 
@@ -260,7 +260,7 @@ After signed in and configured your AWS CLI in your local machine, you can find 
 credentials in your aws directory, `~/.aws/credentials` as key value pairs, with key
 name as `aws_access_key_id` and `aws_secret_access_key`
 
-Starts a BentoML GammaService docker image and set the credentials found in
+Starts a Kappa GammaService docker image and set the credentials found in
 `~/.aws/credentials` as environment variables to the running container.
 
 .. code-block:: bash

@@ -7,8 +7,8 @@ frameworks like Tensorflow, XGBoost, scikit-learn and etc. BentoServices can eas
 deploy to KFServing and take advantage of what KFServing offers.
 
 This guide demonstrates how to serve a scikit-learn based iris classifier model with
-BentoML on a KFServing cluster. The same deployment steps are also applicable for models
-trained with other machine learning frameworks, see more BentoML examples :doc:`here <../examples>`.
+Kappa on a KFServing cluster. The same deployment steps are also applicable for models
+trained with other machine learning frameworks, see more Kappa examples :doc:`here <../examples>`.
 
 =============
 Prerequisites
@@ -29,16 +29,16 @@ Before starting this guide, make sure you have the following:
           pip install bentoml scikit-learn
 
 
-KFServing deployment with BentoML
+KFServing deployment with Kappa
 ---------------------------------
 
 Run the example project from the :doc:`quick start guide <../quickstart>` to create the
-BentoML saved bundle for deployment:
+Kappa saved bundle for deployment:
 
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/BentoML.git
+    git clone git@github.com:bentoml/Kappa.git
     pip install -r ./bentoml/guides/quick-start/requirements.txt
     python ./bentoml/guides/quick-start/main.py
 
@@ -82,12 +82,12 @@ Verify the saved bundle created:
       }
     }
 
-The BentoML saved bundle created can now be used to start a REST API Server hosting the
+The Kappa saved bundle created can now be used to start a REST API Server hosting the
 BentoService and available for sending test request:
 
 .. code-block:: bash
 
-    # Start BentoML API server:
+    # Start Kappa API server:
     bentoml serve IrisClassifier:latest
 
 
@@ -104,7 +104,7 @@ BentoService and available for sending test request:
 Deploy BentoService to KFServing
 ================================
 
-BentoML provides a convenient way to containerize the model API server with Docker:
+Kappa provides a convenient way to containerize the model API server with Docker:
 
     1. Find the SavedBundle directory with `bentoml get` command
 
@@ -122,11 +122,11 @@ BentoML provides a convenient way to containerize the model API server with Dock
     docker push {docker_username}/iris-classifier
 
 
-*Note: BentoML's REST interface is different than the Tensorflow V1 HTTP API that
+*Note: Kappa's REST interface is different than the Tensorflow V1 HTTP API that
 KFServing expects. Requests will send directly to the prediction service and bypass the
 top-level InferenceService.*
 
-*Support for KFServing V2 prediction protocol with BentoML is coming soon.*
+*Support for KFServing V2 prediction protocol with Kappa is coming soon.*
 
 The following is an example YAML file for specifying the resources required to run an
 InferenceService in KFServing. Replace `{docker_username}` with your Docker Hub username

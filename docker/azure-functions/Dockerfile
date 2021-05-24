@@ -27,7 +27,7 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/
 RUN chmod +x /usr/bin/tini
 # Finish install miniconda3
 
-# Install BentoML related
+# Install Kappa related
 RUN apt-get update --fix-missing && \
     apt-get install -y build-essential && \
     apt-get clean
@@ -35,5 +35,5 @@ RUN apt-get update --fix-missing && \
 ARG BENTOML_VERSION
 ENV BENTOML_VERSION=$BENTOML_VERSION
 
-# pre-install BentoML base dependencies
+# pre-install Kappa base dependencies
 RUN pip install bentoml==$BENTOML_VERSION --no-cache-dir

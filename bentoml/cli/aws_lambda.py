@@ -62,8 +62,8 @@ def get_aws_lambda_sub_command():
         '-n',
         '--namespace',
         type=click.STRING,
-        help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration gamma_service/default_namespace',
+        help='Deployment namespace managed by Kappa, default value is "dev" which '
+        'can be changed in Kappa configuration gamma_service/default_namespace',
     )
     @click.option(
         '-l',
@@ -151,8 +151,8 @@ def get_aws_lambda_sub_command():
         '-n',
         '--namespace',
         type=click.STRING,
-        help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration gamma_service/default_namespace',
+        help='Deployment namespace managed by Kappa, default value is "dev" which '
+        'can be changed in Kappa configuration gamma_service/default_namespace',
     )
     @click.option(
         '--memory-size',
@@ -208,8 +208,8 @@ def get_aws_lambda_sub_command():
         '-n',
         '--namespace',
         type=click.STRING,
-        help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration gamma_service/default_namespace',
+        help='Deployment namespace managed by Kappa, default value is "dev" which '
+        'can be changed in Kappa configuration gamma_service/default_namespace',
     )
     @click.option(
         '--force',
@@ -245,8 +245,8 @@ def get_aws_lambda_sub_command():
         '-n',
         '--namespace',
         type=click.STRING,
-        help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration gamma_service/default_namespace',
+        help='Deployment namespace managed by Kappa, default value is "dev" which '
+        'can be changed in Kappa configuration gamma_service/default_namespace',
     )
     @click.option(
         '-o', '--output', type=click.Choice(['json', 'yaml', 'table']), default='json'
@@ -273,8 +273,8 @@ def get_aws_lambda_sub_command():
         '-n',
         '--namespace',
         type=click.STRING,
-        help='Deployment namespace managed by BentoML, default value is "dev" which '
-        'can be changed in BentoML configuration gamma_service/default_namespace',
+        help='Deployment namespace managed by Kappa, default value is "dev" which '
+        'can be changed in Kappa configuration gamma_service/default_namespace',
         default=ALL_NAMESPACE_TAG,
     )
     @click.option(

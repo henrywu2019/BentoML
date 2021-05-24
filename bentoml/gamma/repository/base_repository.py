@@ -18,10 +18,10 @@ from abc import ABCMeta, abstractmethod
 
 class BaseRepository(object):
     """
-    BaseRepository is the interface for managing BentoML saved bundle files over either
+    BaseRepository is the interface for managing Kappa saved bundle files over either
      a file system or a cloud blob storage systems such as AWS S3 or MinIO
 
-    A BentoML saved bundle is a standard file format that contains trained model files
+    A Kappa saved bundle is a standard file format that contains trained model files
     as well as serving endpoint code, input/output spec, dependency specs and deployment
     configs.
     """

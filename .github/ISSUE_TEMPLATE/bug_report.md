@@ -31,7 +31,7 @@ To give us more information for diagnosing the issue, make sure to enable debug 
 
 Enable via environment variable, e.g.:
 ```
-$ git clone git@github.com:bentoml/BentoML.git && cd bentoml
+$ git clone git@github.com:bentoml/Kappa.git && cd bentoml
 $ BENTOML_DEBUG=TRUE python guides/quick-start/main.py
 ```
 
@@ -41,7 +41,7 @@ from bentoml.configuration import set_debug_mode
 set_debug_mode(True)
 ```
 
-For BentoML CLI commands, simply add the `--verbose` flag, e.g.:
+For Kappa CLI commands, simply add the `--verbose` flag, e.g.:
 ```bash
 bentoml get IrisClassifier --verbose
 ```
@@ -52,7 +52,7 @@ bentoml get IrisClassifier --verbose
 **Environment:**
  - OS: [e.g. MacOS 10.14.3]
  - Python Version [e.g. Python 3.7.1]
- - BentoML Version [e.g. BentoML-0.8.6]
+ - Kappa Version [e.g. Kappa-0.8.6]
 
 
 **Additional context**

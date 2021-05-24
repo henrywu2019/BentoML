@@ -175,7 +175,7 @@ def _deploy_lambda_function(
         for i in artifact_types
     ) and (py_major, py_minor) != ('3', '6'):
         raise BentoMLException(
-            'AWS Lambda Deployment only supports BentoML services'
+            'AWS Lambda Deployment only supports Kappa services'
             'built with Python 3.6.x. To fix this, repack your'
             'service with the right Python version'
             '(hint: pyenv/anaconda) and try again'
@@ -303,7 +303,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
             )
             if bento_pb.bento.uri.type not in (BentoUri.LOCAL, BentoUri.S3):
                 raise BentoMLException(
-                    'BentoML currently not support {} repository'.format(
+                    'Kappa currently not support {} repository'.format(
                         BentoUri.StorageType.Name(bento_pb.bento.uri.type)
                     )
                 )
@@ -362,7 +362,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
             )
             if bento_pb.bento.uri.type not in (BentoUri.LOCAL, BentoUri.S3):
                 raise BentoMLException(
-                    'BentoML currently not support {} repository'.format(
+                    'Kappa currently not support {} repository'.format(
                         BentoUri.StorageType.Name(bento_pb.bento.uri.type)
                     )
                 )

@@ -1,7 +1,7 @@
 Offline Batch Serving
 =====================
 
-BentoML CLI allows you to load and run packaged models straight from the CLI without needing to start up a server to serve requests (hence offline batch serving). There are three main classes of input adapters through which you can perform offline batch serving.
+Kappa CLI allows you to load and run packaged models straight from the CLI without needing to start up a server to serve requests (hence offline batch serving). There are three main classes of input adapters through which you can perform offline batch serving.
 
 :code:`StringInput`
 -------------------

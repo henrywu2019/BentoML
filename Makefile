@@ -6,11 +6,11 @@ help: ## Show all Makefile targets
 # General Development
 test: ## Run all unit tests with current Python version and env
 	@./ci/unit_tests.sh || (echo "Error running tests... You may need to run 'make install-test-deps'"; exit 1)
-format: ## Format code to adhere to BentoML style
+format: ## Format code to adhere to Kappa style
 	./dev/format.sh
 lint: ## Lint code
 	./dev/lint.sh
-install-local: ## Install BentoML from current directory in editable mode
+install-local: ## Install Kappa from current directory in editable mode
 	pip install --editable .
 	bentoml --version
 install-test-deps: ## Install all test dependencies
@@ -55,13 +55,13 @@ install-gamma-deps: ## Install dependencies to debug GammaService
 	go get github.com/fullstorydev/grpcui
 	go install github.com/fullstorydev/grpcui/cmd/grpcui@latest
 
-# BentoML Web UI
-watch-gamma-web-ui: ## Start BentoML Web UI server in dev mode
+# Kappa Web UI
+watch-gamma-web-ui: ## Start Kappa Web UI server in dev mode
 	bentoml gamma-service-start --no-ui & \
 	cd bentoml/gamma/web && yarn dev 0.0.0.0:50051 3000 . 0.0.0.0:50052
-build-gamma-web-ui: ## Build BentoML Web UI server and frontend
+build-gamma-web-ui: ## Build Kappa Web UI server and frontend
 	cd bentoml/gamma/web && yarn build
-run-gamma-web-ui: ## Run production BentoML Web UI server and frontend
+run-gamma-web-ui: ## Run production Kappa Web UI server and frontend
 	bentoml gamma-service-start --no-ui & \
 	cd bentoml/gamma/web && yarn start 0.0.0.0:50051 3000 . 0.0.0.0:50052
 install-web-deps: ## Install dependencies to run web server and frontend

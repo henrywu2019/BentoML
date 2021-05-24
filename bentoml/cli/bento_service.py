@@ -33,7 +33,7 @@ try:
     click_completion.init()
     shell_types = click_completion.DocumentedChoice(click_completion.core.shells)
 except ImportError:
-    # click_completion package is optional to use BentoML cli,
+    # click_completion package is optional to use Kappa cli,
     click_completion = None
     shell_types = click.Choice(['bash', 'zsh', 'fish', 'powershell'])
 
@@ -111,7 +111,7 @@ def create_bento_service_cli(
     @click.version_option(version=__version__)
     def bentoml_cli():
         """
-        BentoML CLI tool
+        Kappa CLI tool
         """
 
     # Example Usage: bentoml run {API_NAME} {BUNDLE_PATH} --input ...
@@ -352,7 +352,7 @@ def create_bento_service_cli(
             click.echo('%s completion installed in %s' % (shell, path))
         else:
             click.echo(
-                "'click_completion' is required for BentoML auto-completion, "
+                "'click_completion' is required for Kappa auto-completion, "
                 "install it with `pip install click_completion`"
             )
 

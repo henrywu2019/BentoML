@@ -37,7 +37,7 @@ class InferenceAPI(object):
     """
     InferenceAPI defines an inference call to the underlying model, including its input
     and output adapter, the user-defined API callback function, and configurations for
-    working with the BentoML adaptive micro-batching mechanism
+    working with the Kappa adaptive micro-batching mechanism
     """
 
     def __init__(

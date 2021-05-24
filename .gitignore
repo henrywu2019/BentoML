@@ -132,7 +132,7 @@ __bentoml_tmp_sdist_build
 # vscode config
 .vscode/
 
-# temp sdist build generated when bundling local dev branch of BentoML
+# temp sdist build generated when bundling local dev branch of Kappa
 __bentoml_tmp_sdist_build
 
 # Helm Dependencies

@@ -44,7 +44,7 @@ const DeploymentsList = (props) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Learn more about managing model serving deployments with BentoML
+              Learn more about managing model serving deployments with Kappa
             </a>
           );
         }

@@ -258,7 +258,7 @@ class TensorflowSavedModelArtifact(BentoServiceArtifact):
         logger.info(pretty_format_restored_model(loaded))
         if hasattr(loaded, "keras_api"):
             logger.warning(
-                f"BentoML detected that {self.__class__.__name__} is being used "
+                f"Kappa detected that {self.__class__.__name__} is being used "
                 "to pack a Keras API based model. "
                 "In order to get optimal serving performance, we recommend "
                 f"either replacing {self.__class__.__name__} with KerasModelArtifact, "
@@ -278,7 +278,7 @@ class TensorflowSavedModelArtifact(BentoServiceArtifact):
         return self.pack(saved_model_path)
 
     def save(self, dst):
-        # Copy exported SavedModel model directory to BentoML saved artifact directory
+        # Copy exported SavedModel model directory to Kappa saved artifact directory
         shutil.copytree(self._path, self._saved_model_path(dst))
 
     def __del__(self):

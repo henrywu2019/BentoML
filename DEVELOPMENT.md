@@ -1,6 +1,6 @@
-## Install BentoML from source
+## Install Kappa from source
 
-Ensure you have git, python and pip installed, BentoML supports python 3.6, 3.7, and 3.8
+Ensure you have git, python and pip installed, Kappa supports python 3.6, 3.7, and 3.8
 
 ```bash
 $ python --version
@@ -11,13 +11,13 @@ $ pip --version
 ```
 
 
-Download the source code from BentoML's Github repository:
+Download the source code from Kappa's Github repository:
 ```bash
-$ git clone https://github.com/bentoml/BentoML.git
-$ cd BentoML
+$ git clone https://github.com/bentoml/Kappa.git
+$ cd Kappa
 ```
 
-Install BentoML with pip in `editable` mode:
+Install Kappa with pip in `editable` mode:
 ```
 pip install --editable .
 ```
@@ -25,7 +25,7 @@ pip install --editable .
 This will make `bentoml` available on your system which links to the sources of
 your local clone and pick up changes you made locally.
 
-Test the BentoML installation:
+Test the Kappa installation:
 ```bash
 $ bentoml --version
 ```
@@ -34,24 +34,24 @@ import bentoml
 print(bentoml.__version__)
 ```
 
-#### Install BentoML from other forks or branches
+#### Install Kappa from other forks or branches
 
 The `pip` command support installing directly from remote git repository. This makes it
-easy to try out new BentoML feature that has not been released, test changes in a pull 
-request. For example, to install BentoML from its master branch:
+easy to try out new Kappa feature that has not been released, test changes in a pull 
+request. For example, to install Kappa from its master branch:
 
 ```
-pip install git+https://github.com/bentoml/BentoML.git
+pip install git+https://github.com/bentoml/Kappa.git
 ```
 
-Or to install from your own fork of BentoML:
+Or to install from your own fork of Kappa:
 ```
-pip install git+https://github.com/{your_github_username}/BentoML.git
+pip install git+https://github.com/{your_github_username}/Kappa.git
 ```
 
 You can also specify what branch to install from:
 ```
-pip install git+https://github.com/{your_github_username}/BentoML.git@{branch_name}
+pip install git+https://github.com/{your_github_username}/Kappa.git@{branch_name}
 ```
 
 
@@ -87,9 +87,9 @@ $ tox -e py37
 $ tox -e py36
 ```
 
-## Run BentoML with verbose/debug logging
+## Run Kappa with verbose/debug logging
 
-Add the following lines to the Python code that invokes BentoML:
+Add the following lines to the Python code that invokes Kappa:
 
 ```python
 from bentoml.configuration import set_debug_mode
@@ -213,18 +213,18 @@ gRPC Web UI available at http://0.0.0.0:60551/...
 Navigate to the URL from above
 
 
-## How to run and develop BentoML Web UI
+## How to run and develop Kappa Web UI
 
 Make sure you have `yarn` installed: https://classic.yarnpkg.com/en/docs/install 
 
-Install all npm packages required by BentoML Web UI:
+Install all npm packages required by Kappa Web UI:
 
 ```bash
-# install npm packages required by BentoML's Node.js Web Server
+# install npm packages required by Kappa's Node.js Web Server
 cd {PROJECT_ROOT}/bentoml/gamma/web/
 yarn
 
-# install npm packages required by BentoML web frontend
+# install npm packages required by Kappa web frontend
 cd {PROJECT_ROOT}/bentoml/gamma/web/client/
 yarn
 ```
@@ -239,11 +239,11 @@ npm run build
 ## Creating Pull Request on Github
 
 
-1. [Fork BentoML project](https://github.com/bentoml/BentoML/fork) on github and
-add upstream to local BentoML clone:
+1. [Fork Kappa project](https://github.com/bentoml/Kappa/fork) on github and
+add upstream to local Kappa clone:
 
 ```bash
-$ git remote add upstream git@github.com:YOUR_USER_NAME/BentoML.git
+$ git remote add upstream git@github.com:YOUR_USER_NAME/Kappa.git
 ```
 
 2. Make the changes either to fix a known issue or adding new feature
@@ -253,6 +253,6 @@ $ git remote add upstream git@github.com:YOUR_USER_NAME/BentoML.git
    on how to create a pull request on github
 
 4. Once your pull request created, an automated test run will be triggered on
-   your branch and the BentoML authors will be notified to review your code
+   your branch and the Kappa authors will be notified to review your code
    changes. Once tests are passed and reviewer has signed off, we will merge
    your pull request.

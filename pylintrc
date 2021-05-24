@@ -143,7 +143,7 @@ disable=print-statement,
         # Ignore "(R) Refactor"
         R,
 
-        # Additional rules disabled for BentoML project
+        # Additional rules disabled for Kappa project
         fixme, # Remove this after beta release
         protected-access,
 

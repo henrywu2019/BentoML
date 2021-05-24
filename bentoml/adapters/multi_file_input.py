@@ -163,7 +163,7 @@ class MultiFileInput(BaseInputAdapter):
             task = InferenceTask(data=None)
             task.discard(
                 http_status=400,
-                err_msg=f"BentoML#{self.__class__.__name__} only accepts requests "
+                err_msg=f"Kappa#{self.__class__.__name__} only accepts requests "
                 "with Content-Type: multipart/form-data",
             )
         else:
@@ -173,14 +173,14 @@ class MultiFileInput(BaseInputAdapter):
                 task = InferenceTask(data=None)
                 task.discard(
                     http_status=400,
-                    err_msg=f"BentoML#{self.__class__.__name__} requires inputs "
+                    err_msg=f"Kappa#{self.__class__.__name__} requires inputs "
                     f"fields {self.input_names}",
                 )
             elif not all(files) and not self.allow_none:
                 task = InferenceTask(data=None)
                 task.discard(
                     http_status=400,
-                    err_msg=f"BentoML#{self.__class__.__name__} requires inputs "
+                    err_msg=f"Kappa#{self.__class__.__name__} requires inputs "
                     f"fields {self.input_names}",
                 )
             else:

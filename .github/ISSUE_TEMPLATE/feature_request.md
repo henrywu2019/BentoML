@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest a new feature for BentoML
+about: Suggest a new feature for Kappa
 title: ''
 labels: 'new feature'
 assignees: ''

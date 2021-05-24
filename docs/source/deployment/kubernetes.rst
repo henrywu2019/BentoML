@@ -7,8 +7,8 @@ Machine learning services also can take advantage of Kubernetes' ability to quic
 and scale base on demand.
 
 This guide demonstrates how to serve a scikit-learn based iris classifier model with
-BentoML on a Kubernetes cluster. The same deployment steps are also applicable for models
-trained with other machine learning frameworks, see more BentoML examples :doc:`here <../examples>`.
+Kappa on a Kubernetes cluster. The same deployment steps are also applicable for models
+trained with other machine learning frameworks, see more Kappa examples :doc:`here <../examples>`.
 
 
 Prerequisites
@@ -38,15 +38,15 @@ Before starting this guide, make sure you have the following:
 
 
 
-Kubernetes deployment with BentoML
+Kubernetes deployment with Kappa
 ----------------------------------
 
 Run the example project from the :doc:`quick start guide <../quickstart>` to create the
-BentoML saved bundle for deployment:
+Kappa saved bundle for deployment:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/BentoML.git
+    git clone git@github.com:bentoml/Kappa.git
     pip install -r ./bentoml/guides/quick-start/requirements.txt
     python ./bentoml/guides/quick-start/main.py
 
@@ -91,12 +91,12 @@ Verify the saved bundle created:
     }
 
 
-The BentoML saved bundle created can now be used to start a REST API Server hosting the
+The Kappa saved bundle created can now be used to start a REST API Server hosting the
 BentoService and available for sending test request:
 
 .. code-block:: bash
 
-    # Start BentoML API server:
+    # Start Kappa API server:
     bentoml serve IrisClassifier:latest
 
 
@@ -114,7 +114,7 @@ BentoService and available for sending test request:
 Deploy BentoService to Kubernetes
 =================================
 
-BentoML provides a convenient way to containerize the model API server with Docker:
+Kappa provides a convenient way to containerize the model API server with Docker:
 
     1. Find the SavedBundle directory with `bentoml get` command
 
@@ -134,7 +134,7 @@ BentoML provides a convenient way to containerize the model API server with Dock
 
 
 The following is an example YAML file for specifying the resources required to run and
-expose a BentoML model server in a Kubernetes cluster. Replace {docker_username} with
+expose a Kappa model server in a Kubernetes cluster. Replace {docker_username} with
 your Docker Hub username and save it to iris-classifier.yaml
 
 .. code-block:: yaml
@@ -210,7 +210,7 @@ Before starting this section, make sure you have the following:
   * installation instruction: https://github.com/coreos/kube-prometheus
 
 
-BentoML API server provides Prometheus support out of the box. It comes with a “/metrics”
+Kappa API server provides Prometheus support out of the box. It comes with a “/metrics”
 endpoint which includes the essential metrics for model serving and the ability to create
 and customize new metrics base on needs.
 

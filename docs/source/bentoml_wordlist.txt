@@ -2,7 +2,7 @@ pypi
 Colab
 bento
 bentos
-BentoML
+Kappa
 bentoml
 Dataframe
 dataframe

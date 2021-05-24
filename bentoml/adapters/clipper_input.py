@@ -30,7 +30,7 @@ class ClipperInput(BaseInputAdapter):
      with Clipper(http://clipper.ai/)
 
     ClipperInput are not regular InputAdapter, they don't work with REST
-    API server nor BentoML CLI.
+    API server nor Kappa CLI.
     """
 
     @property
@@ -46,12 +46,12 @@ class ClipperInput(BaseInputAdapter):
 
     def from_cli(self, cli_args):
         raise NotImplementedError(
-            "ClipperInput is not supported to be used with BentoML CLI"
+            "ClipperInput is not supported to be used with Kappa CLI"
         )
 
     def from_inference_job(self, *args, **kwargs):
         raise NotImplementedError(
-            "" "ClipperInput is not supported to be used with BentoML function calling"
+            "" "ClipperInput is not supported to be used with Kappa function calling"
         )
 
     def from_aws_lambda_event(self, event):

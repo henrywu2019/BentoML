@@ -124,7 +124,7 @@ extras_require = {
 }
 
 setuptools.setup(
-    name="BentoML",
+    name="Kappa",
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     author="bentoml.org",
@@ -135,7 +135,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     install_requires=install_requires,
     extras_require=extras_require,
-    url="https://github.com/bentoml/BentoML",
+    url="https://github.com/bentoml/Kappa",
     packages=setuptools.find_packages(exclude=["tests*"]),
     classifiers=[
         "License :: OSI Approved :: Apache Software License",
@@ -149,9 +149,9 @@ setuptools.setup(
     python_requires=">=3.6.1",
     entry_points={"console_scripts": ["bentoml=bentoml:commandline_interface"]},
     project_urls={
-        "Bug Reports": "https://github.com/bentoml/BentoML/issues",
-        "BentoML User Slack Group": "https://bit.ly/2N5IpbB",
-        "Source Code": "https://github.com/bentoml/BentoML",
+        "Bug Reports": "https://github.com/bentoml/Kappa/issues",
+        "Kappa User Slack Group": "https://bit.ly/2N5IpbB",
+        "Source Code": "https://github.com/bentoml/Kappa",
     },
     include_package_data=True,  # Required for '.cfg' files under bentoml/config
 )

@@ -25,14 +25,14 @@ Prerequisites
   * Install instruction: https://docs.docker.com/install
 
 
-AWS Lambda deployment and management with BentoML
+AWS Lambda deployment and management with Kappa
 -------------------------------------------------
 
 This guide uses the IrisClassifier BentoService from the :doc:`Quick start guide <../quickstart>`:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/BentoML.git
+    git clone git@github.com:bentoml/Kappa.git
     pip install -r ./bentoml/guides/quick-start/requirements.txt
     python ./bentoml/guides/quick-start/main.py
 
@@ -47,7 +47,7 @@ Use `bentoml list` to get the BentoService name:version tag.
     IrisClassifier:20200121141808_FE78B5  2020-01-21 22:18:25.079723  predict(DataframeInput)  model(SklearnModelArtifact)
 
 
-BentoML has great support for AWS Lambda. You can deploy, update and delete Lambda
+Kappa has great support for AWS Lambda. You can deploy, update and delete Lambda
 deployment with single command, and customize deployment to fit your needs with parameters
 such as `memory_size` and `timeout`
 
@@ -91,7 +91,7 @@ Deployment name and bento service name:version tag is required.
     }
 
 
-BentoML helps you manage the entire process of deploying your BentoService bundle to Lambda.
+Kappa helps you manage the entire process of deploying your BentoService bundle to Lambda.
 Verify the deployed resources with AWS CLI tool:
 
 .. code-block:: bash
@@ -315,7 +315,7 @@ Removing a Lambda deployment is also very easy.  Calling `bentoml lambda delete`
 Deploy and manage AWS Lambda deployments with remote GammaService
 =================================================================
 
-BentoML recommends to use remote GammaService for managing and deploying BentoService
+Kappa recommends to use remote GammaService for managing and deploying BentoService
 when you are working in a team. To deploy AWS Lambda deployments with remote
 GammaService, you need to provide the AWS credentials.
 
@@ -323,7 +323,7 @@ After signed in and configured your AWS CLI in your local machine, you can find 
 credentials in your aws directory, `~/.aws/credentials` as key value pairs, with key
 name as `aws_access_key_id` and `aws_secret_access_key`
 
-Starts a BentoML GammaService docker image and set the credentials found in
+Starts a Kappa GammaService docker image and set the credentials found in
 `~/.aws/credentials` as environment variables to the running container.
 
 .. code-block:: bash

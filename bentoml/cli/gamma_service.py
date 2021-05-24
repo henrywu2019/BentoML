@@ -50,7 +50,7 @@ def add_gamma_service_sub_command(
 ):
     # pylint: disable=unused-variable
 
-    @cli.command(help='Start BentoML GammaService for model management and deployment')
+    @cli.command(help='Start Kappa GammaService for model management and deployment')
     @click.option(
         '--db-url',
         type=click.STRING,
@@ -63,7 +63,7 @@ def add_gamma_service_sub_command(
     @click.option(
         '--repo-base-url',
         type=click.STRING,
-        help='Deprecated option for base URL for storing BentoML saved bundle files, '
+        help='Deprecated option for base URL for storing Kappa saved bundle files, '
         'this can be a file system path(POSIX/Windows), or a S3 URL, '
         'usually starting with "s3://"',
         envvar='BENTOML_REPO_BASE_URL',

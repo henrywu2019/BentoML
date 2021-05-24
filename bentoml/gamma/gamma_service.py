@@ -188,7 +188,7 @@ def start_gamma_service_grpc_server(
         prom_ui_message = f"running on http://0.0.0.0:{ui_port}/metrics\n"
 
     click.echo(
-        f"* Starting BentoML GammaService gRPC Server\n"
+        f"* Starting Kappa GammaService gRPC Server\n"
         f'* Debug mode: { "on" if debug_mode else "off"}\n'
         f"* Web UI: {web_ui_message}\n"
         f"* Running on 0.0.0.0:{grpc_port} (Press CTRL+C to quit)\n"

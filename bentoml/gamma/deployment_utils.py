@@ -93,7 +93,7 @@ def deployment_dict_to_pb(deployment_dict):
     else:
         raise InvalidArgument(
             'Platform "{}" is not supported in the current version of '
-            'BentoML'.format(platform)
+            'Kappa'.format(platform)
         )
 
     return deployment_pb

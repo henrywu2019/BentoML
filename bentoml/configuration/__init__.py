@@ -42,10 +42,10 @@ def expand_env_var(env_var):
 
 
 # This is used as default for config('core', 'bentoml_deploy_version') - which is used
-# for getting the BentoML PyPI version string or the URL to a BentoML sdist, indicating
-# the BentoML module to be used when loading and using a saved BentoService bundle.
-# This is useful when using customized BentoML fork/branch or when working with
-# development branches of BentoML
+# for getting the Kappa PyPI version string or the URL to a Kappa sdist, indicating
+# the Kappa module to be used when loading and using a saved BentoService bundle.
+# This is useful when using customized Kappa fork/branch or when working with
+# development branches of Kappa
 BENTOML_VERSION = __version__
 # e.g. from '0.4.2+5.g6cac97f.dirty' to '0.4.2'
 LAST_PYPI_RELEASE_VERSION = __version__.split('+')[0]
@@ -68,28 +68,28 @@ def get_local_config_file():
 @lru_cache(maxsize=1)
 def get_bentoml_deploy_version(bentoml_deploy_version: str):
     """
-    BentoML version to use for generated docker image or serverless function bundle to
-    be deployed, this can be changed to an url to your fork of BentoML on github, or an
-    url to your custom BentoML build, for example:
+    Kappa version to use for generated docker image or serverless function bundle to
+    be deployed, this can be changed to an url to your fork of Kappa on github, or an
+    url to your custom Kappa build, for example:
 
     bentoml_deploy_version = git+https://github.com/{username}/bentoml.git@{branch}
     """
 
     if bentoml_deploy_version != LAST_PYPI_RELEASE_VERSION:
-        logger.info(f"Setting BentoML deploy version to '{bentoml_deploy_version}'")
+        logger.info(f"Setting Kappa deploy version to '{bentoml_deploy_version}'")
 
     if LAST_PYPI_RELEASE_VERSION != BENTOML_VERSION:
         if _is_pip_installed_bentoml():
             logger.warning(
-                "Using BentoML not from official PyPI release. In order to find the "
-                "same version of BentoML when deploying your BentoService, you must "
+                "Using Kappa not from official PyPI release. In order to find the "
+                "same version of Kappa when deploying your BentoService, you must "
                 "set the 'core/bentoml_deploy_version' config to a http/git location "
-                "of your BentoML fork, e.g.: 'bentoml_deploy_version = "
+                "of your Kappa fork, e.g.: 'bentoml_deploy_version = "
                 "git+https://github.com/{username}/bentoml.git@{branch}'"
             )
         else:
             logger.warning(
-                "Using BentoML installed in `editable` model, the local BentoML "
+                "Using Kappa installed in `editable` model, the local Kappa "
                 "repository including all code changes will be packaged together with "
                 "saved bundle created, under the './bundled_pip_dependencies' "
                 "directory of the saved bundle."
@@ -117,7 +117,7 @@ def get_debug_mode():
 
 
 def inject_dependencies():
-    """Inject dependencies and configuration to BentoML packages"""
+    """Inject dependencies and configuration to Kappa packages"""
 
     from timeit import default_timer as timer
 

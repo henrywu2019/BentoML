@@ -22,7 +22,7 @@ from bentoml.adapters.utils import (
 from bentoml.types import InferenceTask
 from bentoml.utils.lazy_loader import LazyLoader
 
-# BentoML optional dependencies, using lazy load to avoid ImportError
+# Kappa optional dependencies, using lazy load to avoid ImportError
 imageio = LazyLoader('imageio', globals(), 'imageio')
 numpy = LazyLoader('numpy', globals(), 'numpy')
 

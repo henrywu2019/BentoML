@@ -1,4 +1,4 @@
-.. BentoML documentation master file, created by
+.. Kappa documentation master file, created by
    sphinx-quickstart on Fri Jun 14 11:20:19 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -6,14 +6,14 @@
 ===================
 
 .. image:: _static/img/bentoml-readme-header.jpeg
-    :alt: BentoML
-    :target: https://github.com/bentoml/BentoML
+    :alt: Kappa
+    :target: https://github.com/bentoml/Kappa
 
 
 Model Serving Made Easy
 =======================
 
-BentoML is a flexible, high-performance framework for serving, managing, and deploying machine learning models.
+Kappa is a flexible, high-performance framework for serving, managing, and deploying machine learning models.
 
 * Supports **Multiple ML frameworks**, including Tensorflow, PyTorch, Keras, XGBoost
   and :ref:`more <frameworks-page>`
@@ -22,20 +22,20 @@ BentoML is a flexible, high-performance framework for serving, managing, and dep
 * **High-Performance** online API serving and offline batch serving
 * Web dashboards and APIs for model registry and deployment management
 
-BentoML bridges the gap between Data Science and DevOps. By providing a
-standard interface for describing a prediction service, BentoML
+Kappa bridges the gap between Data Science and DevOps. By providing a
+standard interface for describing a prediction service, Kappa
 abstracts away how to run model inference efficiently and how model
 serving workloads can integrate with cloud infrastructures.
-`See how it works! <https://github.com/bentoml/BentoML#introduction>`_
+`See how it works! <https://github.com/bentoml/Kappa#introduction>`_
 
 
-💻 Get started with BentoML: :ref:`Quickstart Guide <getting-started-page>` | `Quickstart on Google Colab <https://colab.research.google.com/github/bentoml/BentoML/blob/master/guides/quick-start/bentoml-quick-start-guide.ipynb>`_
+💻 Get started with Kappa: :ref:`Quickstart Guide <getting-started-page>` | `Quickstart on Google Colab <https://colab.research.google.com/github/bentoml/Kappa/blob/master/guides/quick-start/bentoml-quick-start-guide.ipynb>`_
 
-👩‍💻 Star/Watch/Fork the `BentoML Github Repository <https://github.com/bentoml/BentoML>`_.
+👩‍💻 Star/Watch/Fork the `Kappa Github Repository <https://github.com/bentoml/Kappa>`_.
 
 👉 Join the
 `community Slack <https://join.slack.com/t/bentoml/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg>`_
-and `discussions on Github <https://github.com/bentoml/BentoML/discussions>`_.
+and `discussions on Github <https://github.com/bentoml/Kappa/discussions>`_.
 
 
 ___________

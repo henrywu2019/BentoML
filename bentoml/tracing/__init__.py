@@ -34,8 +34,8 @@ def get_tracer(
     jaeger_server_port: str = Provide[BentoMLContainer.config.tracing.jaeger.port],
 ):
     # isinstance check here allow trace to be used where the top-level entry point has
-    # not yet implemented the wiring of BentoML config
-    # TODO: remove this check after PR1543 https://github.com/bentoml/BentoML/pull/1543
+    # not yet implemented the wiring of Kappa config
+    # TODO: remove this check after PR1543 https://github.com/bentoml/Kappa/pull/1543
     if isinstance(tracer_type, Provide):
         tracer_type = None
     if isinstance(zipkin_server_url, Provide):

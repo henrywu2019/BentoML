@@ -1,4 +1,4 @@
-name: BentoML-E2E
+name: Kappa-E2E
 
 on:
   repository_dispatch:

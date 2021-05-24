@@ -270,7 +270,7 @@ def env_decorator(
         conda_env_yml_file: use a pre-defined conda environment yml file
         setup_sh: user defined setup bash script, it is executed in docker build time
         docker_base_image: used for customizing the docker container image built with
-            BentoML saved bundle. Base image must either have both `bash` and `conda`
+            Kappa saved bundle. Base image must either have both `bash` and `conda`
             installed; or have `bash`, `pip`, `python` installed, in which case the user
             is required to ensure the python version matches the BentoService bundle
         zipimport_archives: list of zipimport archives paths relative to the module path
@@ -323,7 +323,7 @@ def ver_decorator(major, minor):
         major (int): Major version number for Bento Service
         minor (int): Minor version number for Bento Service
 
-    BentoML uses semantic versioning for BentoService distribution:
+    Kappa uses semantic versioning for BentoService distribution:
 
     * MAJOR is incremented when you make breaking API changes
 
@@ -384,10 +384,10 @@ def validate_version_str(version_str):
 
 def save(bento_service, base_path=None, version=None, labels=None):
     """
-    Save and register the given BentoService via BentoML's built-in model management
-    system. BentoML by default keeps track of all the SavedBundle's files and metadata
+    Save and register the given BentoService via Kappa's built-in model management
+    system. Kappa by default keeps track of all the SavedBundle's files and metadata
     in local file system under the $BENTOML_HOME(~/bentoml) directory. Users can also
-    configure BentoML to save their BentoService to a shared Database and cloud object
+    configure Kappa to save their BentoService to a shared Database and cloud object
     storage such as AWS S3.
 
     :param bento_service: target BentoService instance to be saved
@@ -417,7 +417,7 @@ def save(bento_service, base_path=None, version=None, labels=None):
 
 class BentoService:
     """
-    BentoService is the base component for building prediction services using BentoML.
+    BentoService is the base component for building prediction services using Kappa.
 
     BentoService provide an abstraction for describing model artifacts and environment
     dependencies required for a prediction service. And allows users to create inference
@@ -652,7 +652,7 @@ class BentoService:
             version_str = self.versioneer()
 
         if self._version_major is not None and self._version_minor is not None:
-            # BentoML uses semantic versioning for BentoService distribution
+            # Kappa uses semantic versioning for BentoService distribution
             # when user specified the MAJOR and MINOR version number along with
             # the BentoService class definition with '@ver' decorator.
             # The parameter version(or auto generated version) here will be used as
@@ -721,10 +721,10 @@ class BentoService:
 
     def save(self, gamma_url=None, version=None, labels=None):
         """
-        Save and register this BentoService via BentoML's built-in model management
-        system. BentoML by default keeps track of all the SavedBundle's files and
+        Save and register this BentoService via Kappa's built-in model management
+        system. Kappa by default keeps track of all the SavedBundle's files and
         metadata in local file system under the $BENTOML_HOME(~/bentoml) directory.
-        Users can also configure BentoML to save their BentoService to a shared Database
+        Users can also configure Kappa to save their BentoService to a shared Database
         and cloud object storage such as AWS S3.
 
         :param gamma_url: optional - URL path to Gamma server
@@ -882,7 +882,7 @@ class BentoService:
                     )
 
             # Reset bentoml to configured deploy version - this is for users using
-            # customized BentoML branch for development but use a different stable
+            # customized Kappa branch for development but use a different stable
             # version for deployment
             #
             # For example, a BentoService created with local dirty branch will fail

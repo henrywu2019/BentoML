@@ -10,8 +10,8 @@ The benefit to use this solution instead of Cloud Run are 2:
 AI Platform Unified Prediction has strict requirements for the accepted input and output of a request. You can find more `here <https://cloud.google.com/ai-platform-unified/docs/predictions/custom-container-requirements>`__
 
 This guide demonstrates how to deploy a scikit-learn based iris classifier model with
-BentoML to Google Cloud AI Platform Unified. The same deployment steps are also applicable for models
-trained with other machine learning frameworks, see more BentoML examples :doc:`here <../examples>`.
+Kappa to Google Cloud AI Platform Unified. The same deployment steps are also applicable for models
+trained with other machine learning frameworks, see more Kappa examples :doc:`here <../examples>`.
 
 
 Prerequisites
@@ -72,11 +72,11 @@ Alternatively you can create a dummy project following the next steps.
 
 
 ============================================================
-Build and push BentoML model service image to GCP repository
+Build and push Kappa model service image to GCP repository
 ============================================================
 
 Run the example project from the :doc:`quick start guide <../quickstart>` to create the
-BentoML saved bundle for deployment:
+Kappa saved bundle for deployment:
 
 Create a file with the following bash command which will train an iris sklearn model and package it in a Bento Service:
 
@@ -117,13 +117,13 @@ AI Platform Unified `expects <https://cloud.google.com/ai-platform-unified/docs/
        }
 
 
-The BentoML predict function `needs <https://cloud.google.com/ai-platform-unified/docs/predictions/custom-container-requirements#prediction>`__ to return a JSON Dict with the following structure:
+The Kappa predict function `needs <https://cloud.google.com/ai-platform-unified/docs/predictions/custom-container-requirements#prediction>`__ to return a JSON Dict with the following structure:
 .. code-block::
 
     {'predictions': PREDICTIONS}
 
 
-We define with the following bash command the BentoML Service:
+We define with the following bash command the Kappa Service:
 
 .. code-block:: bash
 
@@ -156,7 +156,7 @@ We define with the following bash command the BentoML Service:
             return {'predictions': self.artifacts.model.predict(input['instances'])}
     EOF
 
-Build BentoML bundle:
+Build Kappa bundle:
 
 .. code-block:: bash
 
@@ -222,12 +222,12 @@ Verify the saved bundle created:
 
 
 
-The BentoML saved bundle created can now be used to start a REST API Server hosting the
+The Kappa saved bundle created can now be used to start a REST API Server hosting the
 BentoService and available for sending test request:
 
 .. code-block:: bash
 
-    # Start BentoML API server:
+    # Start Kappa API server:
     bentoml serve IrisClassifier:latest
 
 
@@ -276,7 +276,7 @@ Deploy the image to Google Cloud AI Platform Unified
 3. Click on `IMPORT`
 4. In the Create Model service page, insert a name for the model and select a region. Click on Continue.
 5. Select `Import an existing container`. Select the image you previously pushed to GCR.
-6. You will need to setup routes and ports. The following configuration will allow you to do that for BentoML:
+6. You will need to setup routes and ports. The following configuration will allow you to do that for Kappa:
 
 .. image:: ../_static/img/gcloud-aiplatform-unified-routes.png
     :alt: GCP project creation

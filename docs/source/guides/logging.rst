@@ -1,11 +1,11 @@
 Logging
 =======
 
-BentoML produces `active.log`, `prediction.log`, and `feedback.log`. They are logged to both 
+Kappa produces `active.log`, `prediction.log`, and `feedback.log`. They are logged to both
 the console and file system under :code:`$BENTOML_HOME/logs` directory by default.
 
 +----------------+-------------------------------------------------+
-| active.log     | Logs generated from BentoML CLI and Python APIs |
+| active.log     | Logs generated from Kappa CLI and Python APIs |
 +----------------+-------------------------------------------------+
 | prediction.log | Inference requests and corresponding responses  |
 +----------------+-------------------------------------------------+
@@ -15,10 +15,10 @@ the console and file system under :code:`$BENTOML_HOME/logs` directory by defaul
 Basic Logging Configuration
 ---------------------------
 
-BentoML supports basic logging configuring undder the :code:`logging` section of the configuration.
+Kappa supports basic logging configuring undder the :code:`logging` section of the configuration.
 
 .. code-block:: yaml
-    :caption: BentoML Configuration
+    :caption: Kappa Configuration
 
     logging:
         level: INFO
@@ -33,7 +33,7 @@ Refer to the :ref:`configuration guide <configuration-page>` on how override con
 Advanced Logging Configuration
 ------------------------------
 
-BentoML uses the standard `Python logging <https://docs.python.org/3/howto/logging.html>`_
+Kappa uses the standard `Python logging <https://docs.python.org/3/howto/logging.html>`_
 module and provides logging customization through advanced :code:`logging` section in the configuration. 
 To use advanced logging, set :code:`logging/advanced/enabled` to :code:`True` and provide the standard 
 Python logging configuration in :code:`dict` format under the :code:`logging/advanced/config` section.

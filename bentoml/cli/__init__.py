@@ -28,7 +28,7 @@ def create_bentoml_cli():
     _cli = create_bento_service_cli()
 
     # Commands created here aren't mean to be used from generated BentoService CLI when
-    # installed as PyPI package. The are only used as part of BentoML cli command.
+    # installed as PyPI package. The are only used as part of Kappa cli command.
 
     aws_sagemaker_sub_command = get_aws_sagemaker_sub_command()
     aws_lambda_sub_command = get_aws_lambda_sub_command()

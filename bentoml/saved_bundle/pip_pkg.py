@@ -213,7 +213,7 @@ class DepSeekWork(object):
                     import_set.add(node.module.partition(".")[0])
         logger.debug("import set: %s", import_set)
         for module_name in import_set:
-            # Avoid parsing BentoML when BentoML is imported from local source code repo
+            # Avoid parsing Kappa when Kappa is imported from local source code repo
             if module_name == 'bentoml':
                 continue
             if module_name in self.parsed_module_set:

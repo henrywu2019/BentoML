@@ -49,8 +49,8 @@ from bentoml.saved_bundle.pip_pkg import get_zipmodules, ZIPIMPORT_DIR
 DEFAULT_SAVED_BUNDLE_README = """\
 # Generated BentoService bundle - {}:{}
 
-This is a ML Service bundle created with BentoML, it is not recommended to edit
-code or files contained in this directory. Instead, edit the code that uses BentoML
+This is a ML Service bundle created with Kappa, it is not recommended to edit
+code or files contained in this directory. Instead, edit the code that uses Kappa
 to create this bundle, and save a new BentoService bundle.
 """
 
@@ -213,7 +213,7 @@ def save_to_dir(bento_service, path, version=None, silent=False):
         # If user provided path is an remote location, the bundle will first save to
         # a temporary directory and then upload to the remote location
         logger.info(
-            'Saving bento to an remote path. BentoML will first save the bento '
+            'Saving bento to an remote path. Kappa will first save the bento '
             'to a local temporary directory and then upload to the remote path.'
         )
         with TempDirectory() as temp_dir:
@@ -272,12 +272,12 @@ def _bundle_local_bentoml_if_installed_from_source(target_path):
 
     bentoml_setup_py = os.path.abspath(os.path.join(module_location, '..', 'setup.py'))
 
-    # this is for BentoML developer to create BentoService containing custom develop
-    # branches of BentoML library, it is True only when BentoML module is installed in
+    # this is for Kappa developer to create BentoService containing custom develop
+    # branches of Kappa library, it is True only when Kappa module is installed in
     # development mode via "pip install --editable ."
     if not _is_pip_installed_bentoml() and os.path.isfile(bentoml_setup_py):
         logger.info(
-            "Detected non-PyPI-released BentoML installed, copying local BentoML module"
+            "Detected non-PyPI-released Kappa installed, copying local Kappa module"
             "files to target saved bundle path.."
         )
 

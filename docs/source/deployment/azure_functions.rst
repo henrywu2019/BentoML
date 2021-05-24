@@ -3,7 +3,7 @@ Deploying to Azure Functions
 
 Azure Functions is an event driven, compute-on-demand cloud service offered by
 Microsoft. Its serverless execution model along with the ability to bring your own
-container allow users deploy a BentoML API server with full functionality that scales
+container allow users deploy a Kappa API server with full functionality that scales
 base on usage.
 
 In this guide, it will deploy an IrisClassifier BentoService to Azure Functions, make a
@@ -30,7 +30,7 @@ Prerequisites:
             pip install bentoml scikit-learn
 
 
-Azure Functions deployment with BentoML
+Azure Functions deployment with Kappa
 ---------------------------------------
 
 Run the example project from the :doc:`Quickstart guide <../quickstart>` to create an
@@ -38,12 +38,12 @@ IrisClassifier BentoService saved bundle for the deployment:
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/BentoML.git
+    git clone git@github.com:bentoml/Kappa.git
     pip install -r ./bentoml/guides/quick-start/requirements.txt
     python ./bentoml/guides/quick-start/main.py
 
 
-Use BentoML CLI tool to get the information of the IrisClassifier BentoService created
+Use Kappa CLI tool to get the information of the IrisClassifier BentoService created
 above
 
 .. code-block:: bash
@@ -104,7 +104,7 @@ Deploy to Azure Functions requires a deployment name, BentoService in name:versi
 format, and a valid Azure location.  You can find list of Azure locations by calling
 command `az account list-locations`.
 
-BentoML will create necessary Azure resources, and then build and deploy your
+Kappa will create necessary Azure resources, and then build and deploy your
 BentoService as docker image to Azure Functions.
 
 .. code-block:: bash
@@ -217,7 +217,7 @@ Please wait few minutes before visiting your deployment.
 
 With the default authorization setting, your Azure Functions deployment is visible to
 all.  Open your browser and visit the URL in hostNames. You should see the web UI
-provided by BentoML API server.
+provided by Kappa API server.
 
 To test the prediction API in the Azure Functions deployment, you could use the web UI
 mentioned above or you could make a `curl` request to the endpoint.
@@ -279,12 +279,12 @@ Remove Azure Functions deployment
 Deploy and manage Azure Functions deployment with remote GammaService
 =====================================================================
 
-BentoML recommends to use remote GammaService for managing and deploying BentoService
+Kappa recommends to use remote GammaService for managing and deploying BentoService
 when you are working in a team. To deploy Azure Functions in remote GammaService, you
 need to provide the Azure credential for it.
 
 After Sign in with Azure CLI in your local machine, you should be able to find the
-`accessTokens.json` in your Azure directory. Now start the BentoML GammaService docker
+`accessTokens.json` in your Azure directory. Now start the Kappa GammaService docker
 image and mount that `accessTokens.json` file to the running container.
 
 .. code-block:: bash

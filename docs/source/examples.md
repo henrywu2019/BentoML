@@ -1,14 +1,14 @@
 Example Projects
 ================
 
-Here are the official BentoML example projects that you can find in the 
+Here are the official Kappa example projects that you can find in the 
 [bentoml/gallery](https://github.com/bentoml/gallery) repository, grouped by the main
 ML training framework used in the project.
 
 You can download the examples below and run them on your computer. Links to run them on
 Google Colab are also available, although some of the features demo'd in the notebooks
 does not work in the Colab environment due to its limitations, including running the 
-BentoML API model server, building docker image or creating cloud deployment.
+Kappa API model server, building docker image or creating cloud deployment.
 
 
 #### FastAI
@@ -69,7 +69,7 @@ BentoML API model server, building docker image or creating cloud deployment.
 * Credit Default Prediction (Scikit-Learn) [Project Link](https://github.com/jakubczakon/credit-default-prediction/)
 * Sun or Rain Inference (fastai, torchvision, Image Recognition) - [Project Link](https://github.com/BestWillInTheWorld/sun-or-rain-inference)
 * AiSpace - deep learning platform with pre-trained models - [Project Link](https://github.com/yingyuankai/AiSpace)
-* Serving ResNet model with BentoML [Project Link](https://github.com/jjmachan/resnet-bentoml)
+* Serving ResNet model with Kappa [Project Link](https://github.com/jjmachan/resnet-bentoml)
 
 
-If you have a project built with BentoML and would like to share with the community, feel free to create a Pull Request and add your project to the list above.
+If you have a project built with Kappa and would like to share with the community, feel free to create a Pull Request and add your project to the list above.

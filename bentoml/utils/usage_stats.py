@@ -65,7 +65,7 @@ def _send_amplitude_event(event_type, event_properties):
 
         return requests.post(AMPLITUDE_URL, data=event_data, timeout=1)
     except Exception as err:  # pylint:disable=broad-except
-        # silently fail since this error does not concern BentoML end users
+        # silently fail since this error does not concern Kappa end users
         logger.debug(str(err))
 
 

@@ -121,7 +121,7 @@ class SavedBundleConfig(object):
         if ver != BENTOML_VERSION:
             msg = (
                 "Saved BentoService bundle version mismatch: loading BentoService "
-                "bundle create with BentoML version {}, but loading from BentoML "
+                "bundle create with Kappa version {}, but loading from Kappa "
                 "version {}".format(conf["version"], BENTOML_VERSION)
             )
 
@@ -220,7 +220,7 @@ class SavedBundleConfig(object):
                     else:
                         # Use API name as the URL route when route config is missing,
                         # this is for backward compatibility for
-                        # BentoML version <= 0.10.1
+                        # Kappa version <= 0.10.1
                         api_metadata.route = api_config["name"]
 
                 if "input_config" in api_config:

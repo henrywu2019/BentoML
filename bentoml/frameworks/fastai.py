@@ -101,8 +101,8 @@ class Fastai1ModelArtifact(BentoServiceArtifact):
 
     def set_dependencies(self, env: BentoServiceEnv):
         logger.warning(
-            "BentoML by default does not include spacy and torchvision package when "
-            "using FastaiModelArtifact. To make sure BentoML bundle those packages if "
+            "Kappa by default does not include spacy and torchvision package when "
+            "using FastaiModelArtifact. To make sure Kappa bundle those packages if "
             "they are required for your model, either import those packages in "
             "BentoService definition file or manually add them via "
             "`@env(pip_packages=['torchvision'])` when defining a BentoService"
@@ -185,8 +185,8 @@ class FastaiModelArtifact(BentoServiceArtifact):
 
     def set_dependencies(self, env: BentoServiceEnv):
         logger.warning(
-            "BentoML by default does not include spacy and torchvision package when "
-            "using FastaiModelArtifact. To make sure BentoML bundle those packages if "
+            "Kappa by default does not include spacy and torchvision package when "
+            "using FastaiModelArtifact. To make sure Kappa bundle those packages if "
             "they are required for your model, either import those packages in "
             "BentoService definition file or manually add them via "
             "`@env(pip_packages=['torchvision'])` when defining a BentoService"

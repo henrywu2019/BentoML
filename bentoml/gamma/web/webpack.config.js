@@ -3,7 +3,7 @@ const path = require("path");
 const { CheckerPlugin } = require("awesome-typescript-loader");
 
 module.exports = {
-  // webpack is only used for production build in BentoML
+  // webpack is only used for production build in Kappa
   mode: "production", // "production" | "development" | "none"
   target: "node",
   bail: true, // Don't attempt to continue if there are any errors.

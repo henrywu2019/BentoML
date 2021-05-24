@@ -3,14 +3,14 @@
 Frameworks
 ==========
 
-Here are the all of the supported ML frameworks for BentoML. You can find the official
-BentoML example projects in the `bentoml/gallery <https://github.com/bentoml/gallery>`__
+Here are the all of the supported ML frameworks for Kappa. You can find the official
+Kappa example projects in the `bentoml/gallery <https://github.com/bentoml/gallery>`__
 repository, group by the ML training frameworks used in the project.
 
 You can download the examples below and run them on your computer. Links to run them on
 Google Colab are also available, although some of the features demoed in the notebooks
 does not work in the Colab environment due to its limitations, including running the
-BentoML API model server, building docker image or creating cloud deployment.
+Kappa API model server, building docker image or creating cloud deployment.
 
 
 ============

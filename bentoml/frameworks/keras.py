@@ -68,7 +68,7 @@ class KerasModelArtifact(BentoServiceArtifact):
             import tensorflow as tf
         except ImportError:
             raise MissingDependencyException(
-                "Tensorflow package is required to use KerasModelArtifact. BentoML "
+                "Tensorflow package is required to use KerasModelArtifact. Kappa "
                 "currently only support using Keras with Tensorflow backend."
             )
 
@@ -115,7 +115,7 @@ class KerasModelArtifact(BentoServiceArtifact):
             import tensorflow as tf
         except ImportError:
             raise MissingDependencyException(
-                "Tensorflow package is required to use KerasModelArtifact. BentoML "
+                "Tensorflow package is required to use KerasModelArtifact. Kappa "
                 "currently only support using Keras with Tensorflow backend."
             )
 
@@ -127,7 +127,7 @@ class KerasModelArtifact(BentoServiceArtifact):
             import tensorflow as tf
         except ImportError:
             raise MissingDependencyException(
-                "Tensorflow package is required to use KerasModelArtifact. BentoML "
+                "Tensorflow package is required to use KerasModelArtifact. Kappa "
                 "currently only support using Keras with Tensorflow backend."
             )
 
@@ -140,7 +140,7 @@ class KerasModelArtifact(BentoServiceArtifact):
             import tensorflow as tf
         except ImportError:
             raise MissingDependencyException(
-                "Tensorflow package is required to use KerasModelArtifact. BentoML "
+                "Tensorflow package is required to use KerasModelArtifact. Kappa "
                 "currently only support using Keras with Tensorflow backend."
             )
 

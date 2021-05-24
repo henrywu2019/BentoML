@@ -1,7 +1,7 @@
 Customizing InputAdapter
 ========================
 
-BentoML allows user to create customize InputAdapter to better suit for their system.
+Kappa allows user to create customize InputAdapter to better suit for their system.
 
 This guide demonstrate how to extending how to create a custom InputAdapter that check the
 incoming data and then uses the customized InputAdapter to create and test with BentoService

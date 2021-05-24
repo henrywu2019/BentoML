@@ -2,13 +2,13 @@ Deploying to SQL Server Machine Learning Services
 =================================================
 
 Microsoft's Machine Learning Services is a feature in SQL Server that gives the ability to run Python and R scripts with relational data.
-It allows to use BentoML and other open-source packages, along with the Microsoft Python packages, for predictive analytics and machine learning. 
+It allows to use Kappa and other open-source packages, along with the Microsoft Python packages, for predictive analytics and machine learning.
 The scripts are executed in-database without moving data outside SQL Server or over the network.
 
 
 This guide demonstrates how to serve a scikit-learn based iris classifier model with
 SQL Server Machine Learning Services. The same deployment steps are also applicable for models
-trained with other machine learning frameworks, see more BentoML examples :doc:`here <../examples>`.
+trained with other machine learning frameworks, see more Kappa examples :doc:`here <../examples>`.
 
 =============
 Prerequisites
@@ -37,16 +37,16 @@ As long as the server is not connected to remote compute, no server costs will b
 
 
 
-SQL Server deployment with BentoML
+SQL Server deployment with Kappa
 ----------------------------------
 
 Run the example project from the :doc:`quick start guide <../quickstart>` to create the
-BentoML saved bundle for deployment:
+Kappa saved bundle for deployment:
 
 
 .. code-block:: bash
 
-    git clone git@github.com:bentoml/BentoML.git
+    git clone git@github.com:bentoml/Kappa.git
     pip install -r ./bentoml/guides/quick-start/requirements.txt
     python ./bentoml/guides/quick-start/main.py
 
@@ -219,7 +219,7 @@ After executing the final query you can see the predictions in form of a table.
     SELECT * FROM predict_species;
 
 To disconnect from the server, click the disconnect icon on the left panel under Object Explorer in SSMS.
-The model is served with SQL server easily with the help of BentoML.
+The model is served with SQL server easily with the help of Kappa.
 
 .. spelling::
 

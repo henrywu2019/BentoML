@@ -22,7 +22,7 @@ if [ $# -eq 0 ] || [ $1 == "ensure_python" ] ; then
   if [ -f ./python_version ]; then
     PY_VERSION_SAVED=$(cat ./python_version)
     # remove PATCH version - since most patch version only contains backwards compatible
-    # bug fixes and the BentoML defautl docker base image will include the latest
+    # bug fixes and the Kappa defautl docker base image will include the latest
     # patch version of each Python minor release
     DESIRED_PY_VERSION=${PY_VERSION_SAVED:0:3} # returns 3.6, 3.7 or 3.8
     CURRENT_PY_VERSION=$(python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
@@ -48,7 +48,7 @@ if [ $# -eq 0 ] || [ $1 == "restore_conda_env" ] ; then
     # "|| true" ignores the error when the option is not found, for older conda version
     # This is commented out due to a bug with conda's implementation, we should revisit
     # after conda remove the experimental flag on pip_interop_enabled option
-    # See more details on https://github.com/bentoml/BentoML/pull/1012
+    # See more details on https://github.com/bentoml/Kappa/pull/1012
     # conda config --set pip_interop_enabled True || true
   
     echo "Updating conda base environment with environment.yml"

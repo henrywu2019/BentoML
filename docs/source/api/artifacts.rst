@@ -1,7 +1,7 @@
 Base Artifact
 =============
 
-All BentoML artifacts are inherited from the BentoServiceArtifact base class:
+All Kappa artifacts are inherited from the BentoServiceArtifact base class:
 
 .. autoclass:: bentoml.service.artifacts.BentoServiceArtifact
 

@@ -25,7 +25,7 @@ const HomePage = () => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              Learn about managing model serving deployments with BentoML
+              Learn about managing model serving deployments with Kappa
               <span role="img" aria-label="note">
                 🔗
               </span>
@@ -63,7 +63,7 @@ const HomePage = () => (
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn about packaging ML model for serving with BentoML
+                Learn about packaging ML model for serving with Kappa
                 <span role="img" aria-label="note">
                   🔗
                 </span>

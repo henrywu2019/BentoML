@@ -3,14 +3,14 @@
 Core Concepts
 =============
 
-The main idea of BentoML is that the Data Science team should be able to ship their
+The main idea of Kappa is that the Data Science team should be able to ship their
 models in a way that is easy to test, easy to deploy, and easy to integrate with.
 And to do so, Data Scientists need tools that help them build and ship prediction
 services, instead of uploading pickled model files or Protobuf files to a server and
 hoping things work out.
 
 :ref:`bentoml.BentoService <bentoml-bentoservice-label>` is the base class for building
-such prediction services using BentoML. And here's the minimal BentoService example from
+such prediction services using Kappa. And here's the minimal BentoService example from
 the :doc:`Getting Started Guide <quickstart>`:
 
 .. code-block:: python
@@ -32,9 +32,9 @@ Each BentoService class can contain multiple ML models through the
 :code:`@bentoml.artifact` decorator. And multiple inference APIs can be defined for
 client to access this service. Each inference API requires a input type specified via an
 :code:`InputAdapter` instance, which defines the expected input data type and data
-format of this API. BentoML provides API input adapters that covers most model serving
+format of this API. Kappa provides API input adapters that covers most model serving
 use cases including :code:`DataframeInput`, :code:`TfTensorInput`, :code:`ImageInput`
-and :code:`JsonInput`. BentoML by default will automatically detect the output type at
+and :code:`JsonInput`. Kappa by default will automatically detect the output type at
 runtime based on the return value of the API function, user can also specify an output
 type, e.g. :code:`@api(input=DataframeInput(), output=JsonOutput())`.
 
@@ -47,18 +47,18 @@ with the name ``"model"``, so the user code can get access to the model via
 :code:`self.artifacts.model`.
 
 The BentoService instance is now ready to be used for
-inference. But more importantly, BentoML solves the problem of saving the entire
+inference. But more importantly, Kappa solves the problem of saving the entire
 BentoService to disk, distribute the saved file, and reproduce the exact same prediction
 service in testing and production environment.
 
 To save the BentoService instance, simply call the
 :ref:`BentoService#save <bentoml-bentoservice-save-label>` method. In this process, 
-BentoML will:
+Kappa will:
 
 #. Saves the model based on the ML training framework and artifact type used
 #. Automatically extracts all the pip dependencies required by your BentoService class and put into a `requirements.txt` file
 #. Saves all the local python code dependencies
-#. Put all the generated files into one file directory, which, by default, is a location managed by BentoML
+#. Put all the generated files into one file directory, which, by default, is a location managed by Kappa
 
 
 .. code-block:: python
@@ -84,27 +84,27 @@ BentoML will:
   # Stop the dev model server
   iris_classifier_service.stop_dev_server()
 
-  # Save the entire prediction service to a BentoML bundle
+  # Save the entire prediction service to a Kappa bundle
   saved_path = iris_classifier_service.save()
 
 
-The BentoML bundle is a file directory that contains all the code, files and configs
+The Kappa bundle is a file directory that contains all the code, files and configs
 that are required to run this prediction service. A :code:`bentoml.yml` file can be
 found under the directory that contains all the metadata about this bundle and how it
 can be used for inference workload.
 
-BentoML bundle can be thought of as a docker container image or a software binary for
-machine learning model serving. The BentoML bundle can be generated at each of your
+Kappa bundle can be thought of as a docker container image or a software binary for
+machine learning model serving. The Kappa bundle can be generated at each of your
 training job, and then easily stored and distributed for CI testing and deployment in
 production.
 
-BentoML's model management component is called Gamma, it means food cart in Japanese,
+Kappa's model management component is called Gamma, it means food cart in Japanese,
 and you can think of it as where you'd store your bentos 🍱. Gamma provides CLI, Web UI,
-and Python API for accessing BentoML bundles you have created, and you can start a Gamma
+and Python API for accessing Kappa bundles you have created, and you can start a Gamma
 server for your team to manage all models on cloud storage(S3, GCS, MinIO etc) and build
 CI/CD workflow around it. :doc:`Learn more about it here <guides/gamma_service>`.
 
-Listing recent BentoML bundles created:
+Listing recent Kappa bundles created:
 
 .. code-block:: bash
 
@@ -115,13 +115,13 @@ Listing recent BentoML bundles created:
     ...
 
 
-BentoML model registry web UI:
+Kappa model registry web UI:
 
 .. image:: _static/img/gamma-service-web-ui-repository.png
-    :alt: BentoML GammaService Bento Repository Page
+    :alt: Kappa GammaService Bento Repository Page
 
 .. image:: _static/img/gamma-service-web-ui-repository-detail.png
-    :alt: BentoML GammaService Bento Details Page
+    :alt: Kappa GammaService Bento Details Page
 
 Creating BentoService
 ---------------------
@@ -129,9 +129,9 @@ Creating BentoService
 Users create a prediction service by subclassing
 :ref:`bentoml.BentoService <bentoml-bentoservice-label>`. It is recommended to always
 put the source code of your BentoService class into an individual Python file and check
-it into source control(e.g. git) along with your model training code. BentoML is
+it into source control(e.g. git) along with your model training code. Kappa is
 designed to be easily inserted to the end of your model training workflow, where you can
-import your BentoService class and create a BentoML bundle.
+import your BentoService class and create a Kappa bundle.
 
 .. note::
 
@@ -139,12 +139,12 @@ import your BentoService class and create a BentoML bundle.
     the class itself should not be defined in a Jupyter notebook cell or a python
     interactive shell. You can however use the :code:`%writefile` magic command in
     Jupyter notebook to write the BentoService class definition to a separate file, see
-    example in `BentoML quickstart notebook <https://github.com/bentoml/BentoML/blob/master/guides/quick-start/bentoml-quick-start-guide.ipynb>`_.
+    example in `Kappa quickstart notebook <https://github.com/bentoml/Kappa/blob/master/guides/quick-start/bentoml-quick-start-guide.ipynb>`_.
 
 
 BentoService can only be created using Python as the programming language. But it is
-possible to use models trained with other languages/frameworks with BentoML and benefit
-from BentoML's model management, API server, dockerization and performance 
+possible to use models trained with other languages/frameworks with Kappa and benefit
+from Kappa's model management, API server, dockerization and performance
 optimizations. To do so, you will need to :doc:`create custom artifact <guides/custom_artifact>`.
 Support for R and Spark MLlib models are on our roadmap.
 
@@ -154,12 +154,12 @@ Defining Service Environment
 
 The :ref:`bentoml.env <bentoml-env-label>` decorator is the API for defining the
 environment settings and dependencies of your prediction service. And here are the types
-of dependencies supported by BentoML:
+of dependencies supported by Kappa:
 
 PyPI Packages
 ^^^^^^^^^^^^^
 
-Python PyPI package is the most common type of dependency. BentoML provides a mechanism
+Python PyPI package is the most common type of dependency. Kappa provides a mechanism
 that automatically figures out the PyPI packages required by your BentoService
 python class, simply use the :code:`infer_pip_packages=True` option.
 
@@ -222,7 +222,7 @@ packages through the `requirements_txt_file` option:
 Conda Packages
 ^^^^^^^^^^^^^^
 
-Conda packages are also supported in BentoML, here's an example prediction service
+Conda packages are also supported in Kappa, here's an example prediction service
 hosting a H2O model that requires the h2o conda packages:
 
 .. code-block:: python
@@ -241,7 +241,7 @@ hosting a H2O model that requires the h2o conda packages:
 
 If you want to avoid install conda packages from the `defaults` conda channel, and want
 all your conda dependencies to be installed from the channels specified in the
-:code:`conda_channels` option, BentoML provides the optional flag
+:code:`conda_channels` option, Kappa provides the optional flag
 :code:`conda_override_channels` for this, which is similar to the
 :code:`--override-channels` in conda:
 
@@ -263,19 +263,19 @@ all your conda dependencies to be installed from the channels specified in the
 Custom Docker base image
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-BentoML's default Docker base image is released on
+Kappa's default Docker base image is released on
 `dockerhub r/bentoml <https://hub.docker.com/r/bentoml/model-server/tags>`_, its build
 process can be found under the
-`./docker directory in BentoML source code <https://github.com/bentoml/BentoML/tree/master/docker/model-server>`_.
+`./docker directory in Kappa source code <https://github.com/bentoml/Kappa/tree/master/docker/model-server>`_.
 
-The `bentoml containerize` is equivalent to running `docker build .` in the BentoML
+The `bentoml containerize` is equivalent to running `docker build .` in the Kappa
 bundle directory with a few additional options. The docker image build process copies
 all the bundle files to the docker image, makes sure it has the right python version,
 and installs all its PyPI and conda dependencies.
 
 However, there may be times when you need to use other Docker images (e.g. have some
 pre-build dependencies layers, company base image, using an Alpine-based image, etc.).
-BentoML makes it really easy to switch between base images by specifying a
+Kappa makes it really easy to switch between base images by specifying a
 :code:`docker_base_image`.
 
 .. code-block:: python
@@ -289,21 +289,21 @@ BentoML makes it really easy to switch between base images by specifying a
 
 .. note::
 
-    BentoML requires the user provided docker base image to have :code:`bash` and the
+    Kappa requires the user provided docker base image to have :code:`bash` and the
     right version of :code:`Python` pre-installed.
     If the conda packages are being used, an installation of conda on the base image
     will also be required.
-    This `bentoml-init.sh <https://github.com/bentoml/BentoML/blob/master/bentoml/saved_bundle/bentoml-init.sh>`_
-    script is how BentoML initializes a docker image with files under a BentoML bundle
+    This `bentoml-init.sh <https://github.com/bentoml/Kappa/blob/master/bentoml/saved_bundle/bentoml-init.sh>`_
+    script is how Kappa initializes a docker image with files under a Kappa bundle
 
 
-One such base image that many may find useful are the BentoML slim base images.
+One such base image that many may find useful are the Kappa slim base images.
 The original base image weighs in at roughly `~320MB` whereas the slim version weighs
 in at `~90MB`.
 
 .. code-block:: python
 
-  # e.g. using BentoML slim image
+  # e.g. using Kappa slim image
   @env(docker_base_image="bentoml/model-server:0.12.0-slim-py37")
   @artifacts([SklearnModelArtifact('model')])
   class ExamplePredictionService(BentoService):
@@ -311,12 +311,12 @@ in at `~90MB`.
 
 However, as with using any alternative Docker base image, there are a few things to keep
 in mind. Firstly, you should manually select the right slim image for your bundle. For
-example, if you used BentoML version 0.11.0 and Python 3.7 to create your BentoML
-bundle, you would use `bentoml/model-server:0.11.0-slim-py37`. Currently, BentoML support
+example, if you used Kappa version 0.11.0 and Python 3.7 to create your Kappa
+bundle, you would use `bentoml/model-server:0.11.0-slim-py37`. Currently, Kappa support
 Python 3.6, 3.7, and 3.8.
 
 Additionally, unlike the default docker base image, the slim image does not come with
-:code:`conda` pre-installed. This means that BentoML will ignore the conda dependencies
+:code:`conda` pre-installed. This means that Kappa will ignore the conda dependencies
 a user may have specified through the `conda_channels` and `conda_dependencies`
 option in the :code:`@env` decorator.
 
@@ -358,12 +358,12 @@ testing this feature.
 Packaging Model Artifacts
 -------------------------
 
-BentoML's model artifact API allow users to specify the trained models required by a
-BentoService. BentoML automatically handles model serialization and deserialization when
+Kappa's model artifact API allow users to specify the trained models required by a
+BentoService. Kappa automatically handles model serialization and deserialization when
 saving and loading a BentoService.
 
-Thus BentoML asks the user to choose the right Artifact class for the machine learning
-framework they are using. BentoML has built-in artifact class for most popular ML
+Thus Kappa asks the user to choose the right Artifact class for the machine learning
+framework they are using. Kappa has built-in artifact class for most popular ML
 frameworks and you can find the list of supported frameworks
 :doc:`here <api/artifacts>`. If the ML framework you're using is not in the list,
 `let us know <mailto:contact@bentoml.ai>`_  and we will consider adding its support.
@@ -411,7 +411,7 @@ models are depending on each other, such as the example above.
 Model Artifact Metadata
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-BentoML allows users to include additional metadata information for the packed model
+Kappa allows users to include additional metadata information for the packed model
 artifacts. The metadata are intended to be used to specify identifying attributes of
 the model artifact that are meaningful and relevant to users, such as accuracy, dataset
 used, and other static information.
@@ -498,7 +498,7 @@ e.g.:
           return postprocessing(model_output)
 
 
-When using DataframeInput, BentoML will convert the inference requests sent from the
+When using DataframeInput, Kappa will convert the inference requests sent from the
 client, either in the form of a JSON HTTP request or a CSV file, into a
 :code:`pandas.DataFrame` object and pass it down to the user-defined API function.
 
@@ -523,14 +523,14 @@ API function. For example:
 
 .. note::
 
-    Check out the :doc:`list of API InputAdapters <api/adapters>` that BentoML provides.
+    Check out the :doc:`list of API InputAdapters <api/adapters>` that Kappa provides.
 
 
-It is important to notice that in BentoML, the input variable passed into the
-user-defined API function **is always a list of inference inputs**. BentoML users
+It is important to notice that in Kappa, the input variable passed into the
+user-defined API function **is always a list of inference inputs**. Kappa users
 must make sure their API function code is processing a batch of input data.
 
-This design made it possible for BentoML to do Micro-Batching in online API serving, 
+This design made it possible for Kappa to do Micro-Batching in online API serving,
 which is one of the most effective optimization technique for model serving systems.
 
 
@@ -572,7 +572,7 @@ Defining a Batch API
 For APIs with ``batch=True``, the user-defined API function will be required to process
 a list of input item at a time, and return a list of results of the same length. On the
 contrary, @api by default uses batch=False, which processes one input item at a time.
-Implementing a batch API allow your workload to benefit from BentoML's adaptive
+Implementing a batch API allow your workload to benefit from Kappa's adaptive
 micro-batching mechanism when serving online traffic, and also will speed up offline
 batch inference job. We recommend using batch=True if performance & throughput is a
 concern. Non-batch APIs are usually easier to implement, good for quick POC, simple
@@ -618,7 +618,7 @@ or malformatted. Users can do this via the InferenceTask#discard API, here's an 
                 return results
 
 The number of tasks got discarded plus the length of the results array returned, should
-be equal to the length of the input list, this will allow BentoML to match the results
+be equal to the length of the input list, this will allow Kappa to match the results
 back to tasks that have not yet been discarded.
 
 *Allow fine-grained control of the HTTP response, CLI inference job output, etc. E.g.:*
@@ -691,7 +691,7 @@ service that supports different access patterns for different clients, e.g.:
           return self.artifacts.model.predict(df)
 
 
-Make sure to give each API a different name. BentoML uses the method name as the API's
+Make sure to give each API a different name. Kappa uses the method name as the API's
 name, which will become part the serving endpoint it generates.
 
 Operational API
@@ -707,7 +707,7 @@ Customize Web UI
 ----------------
 
 With ``@web_static_content`` decorator, you can add your web frontend project directory
-to your BentoService class and BentoML will automatically bundle all the web UI files
+to your BentoService class and Kappa will automatically bundle all the web UI files
 and host them when starting the API server.
 
 .. code-block:: python
@@ -794,7 +794,7 @@ There are 3 main types of model serving -
 * **Offline Batch Serving** - pre-compute predictions and save results in a storage system
 * **Edge Serving** - distribute model and run it on mobile or IoT devices
 
-BentoML has great support for online serving and offline batch serving. It has a 
+Kappa has great support for online serving and offline batch serving. It has a
 high-performance API server that can load a saved Bento and expose a REST API for client
 access. It also provide tools to load the Bento and feed it with a batch of inputs
 for offline inference. Edge serving is only supported when the client has the Python
@@ -815,7 +815,7 @@ server right away with:
 
 If you are using :ref:`save_to_dir <bentoml-bentoservice-save-label>` , or you have 
 directly copied the saved Bento file directory from other machine, the BentoService
-``IrisClassifier`` is not registered with your local BentoML repository. In that case,
+``IrisClassifier`` is not registered with your local Kappa repository. In that case,
 you can still start the server by providing the path to the saved BentoService:
 
 .. code-block:: bash
@@ -823,7 +823,7 @@ you can still start the server by providing the path to the saved BentoService:
     bentoml serve $saved_path
 
 The REST API request format is determined by each API's input type and input config.
-More details can be found in the :ref:`BentoML API InputAdapters References <bentoml-api-adapters-label>`.
+More details can be found in the :ref:`Kappa API InputAdapters References <bentoml-api-adapters-label>`.
 
 For running production API server, make sure to run ``bentoml serve-gunicorn`` 
 command instead, or use Docker container for deployment.
@@ -837,8 +837,8 @@ API Server Dockerization
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 When you are ready to deploy the service to production, a docker image containing your
-model API server can be easily created with BentoML. When saving a Bento, a
-``Dockerfile`` is also generated by BentoML in the same directory. ``Dockerfile`` is a 
+model API server can be easily created with Kappa. When saving a Bento, a
+``Dockerfile`` is also generated by Kappa in the same directory. ``Dockerfile`` is a
 text document that contains all the commands required for creating a docker image, and
 ``docker build`` command builds an image from a ``Dockerfile``.
 
@@ -895,13 +895,13 @@ Adaptive Micro-Batching
 
 Micro batching is a technique where incoming prediction requests are grouped into small
 batches to achieve the performance advantage of batch processing in model inference
-tasks. BentoML implemented such a micro batching layer that is inspired by the paper
+tasks. Kappa implemented such a micro batching layer that is inspired by the paper
 `Clipper: A Low-Latency Online Prediction Serving System 
 <https://www.usenix.org/system/files/conference/nsdi17/nsdi17-crankshaw.pdf>`_.
 
 
 Given the mass performance improvement a model serving system get from micro-batching, 
-BentoML APIs were designed to work with micro-batching without any code changes on the 
+Kappa APIs were designed to work with micro-batching without any code changes on the
 user side. It is why all the API InputAdapters are designed to accept a list of input data, 
 as described in the :ref:`concepts-api-func-and-adapters` section.
 
@@ -967,8 +967,8 @@ Python. There are two main ways this can be done:
 
 3. Command-Line Access
 
-  Similarly, a Bento can be loaded for inference using the BentoML CLI tool. The CLI
-  command `bentoml` is available once you've installed BentoML via ``pip``. And to load
+  Similarly, a Bento can be loaded for inference using the Kappa CLI tool. The CLI
+  command `bentoml` is available once you've installed Kappa via ``pip``. And to load
   a saved Bento file, simply use the :code:`bentoml run` command and give it either the
   name and version pair, or the Bento's path:
 
@@ -1004,7 +1004,7 @@ CLI command. This made it very easy to integrate with Job scheduling tools such 
 `Celery <http://www.celeryproject.org/>`_.
 
 
-For batch serving on large dataset running on a cluster, BentoML team is building a
+For batch serving on large dataset running on a cluster, Kappa team is building a
 Apache Spark UDF loader for BentoService. This feature is still in Beta testing phase. 
 `Contact us <mailto:contact@bentoml.ai>`_ if you are interested in helping to test or
 improve it.
@@ -1094,22 +1094,22 @@ BentoService directly. For example:
 Customizing Model Repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-BentoML has a standalone component :code:`GammaService` that handles model storage and
-deployment. BentoML uses a local :code:`GammaService` instance by default, which saves
+Kappa has a standalone component :code:`GammaService` that handles model storage and
+deployment. Kappa uses a local :code:`GammaService` instance by default, which saves
 BentoService files to :code:`~/bentoml/repository/` directory and other metadata to
 :code:`~/bentoml/storage.db`.
 
 Users can also customize this to make it work for team settings, making it possible
 for a team of data scientists to easily share, use and deploy models and prediction
 services created by each other. To do so, the user will need to setup a host server
-that runs :code:`GammaService`, from BentoML cli command `gamma-service-start`:
+that runs :code:`GammaService`, from Kappa cli command `gamma-service-start`:
 
 .. code-block:: bash
 
     > bentoml gamma-service-start --help
     Usage: bentoml gamma-service-start [OPTIONS]
 
-      Start BentoML GammaService for model management and deployment
+      Start Kappa GammaService for model management and deployment
 
     Options:
       --db-url TEXT         Database URL following RFC-1738, and usually can
@@ -1121,17 +1121,17 @@ that runs :code:`GammaService`, from BentoML cli command `gamma-service-start`:
                             URL, usually starts with "s3://"
       --grpc-port INTEGER   Port for Gamma server
       --ui-port INTEGER     Port for Gamma web UI
-      --ui / --no-ui        Start BentoML GammaService without Web UI
+      --ui / --no-ui        Start Kappa GammaService without Web UI
       -q, --quiet           Hide all warnings and info logs
       --verbose, --debug    Show debug logs when running the command
       --help                Show this message and exit.
 
 
-BentoML provides a pre-built docker image for running GammaService. For each BentoML
+Kappa provides a pre-built docker image for running GammaService. For each Kappa
 release, a new image will be pushed to [docker hub](https://hub.docker.com/r/bentoml/gamma-service/tags) under :code:`bentoml/gamma-service`
 with the same image tag as the PyPI package version. For example, use the following 
-command to start a GammaService of BentoML version 0.8.6, loading data from your local
-BentoML repository under the local ``~/bentoml`` directory:
+command to start a GammaService of Kappa version 0.8.6, loading data from your local
+Kappa repository under the local ``~/bentoml`` directory:
 
 .. code-block:: bash
 
@@ -1156,7 +1156,7 @@ as AWS credentials for managing deployments created on AWS:
         --db-url postgresql://scott:tiger@localhost:5432/bentomldb \
         --repo-base-url s3://my-bentoml-repo/
 
-    * Starting BentoML GammaService gRPC Server
+    * Starting Kappa GammaService gRPC Server
     * Debug mode: off
     * Web UI: running on http://0.0.0.0:3000
     * Running on 0.0.0.0:50051 (Press CTRL+C to quit)
@@ -1166,7 +1166,7 @@ as AWS credentials for managing deployments created on AWS:
 
 
 After deploying the GammaService server, get the server IP address and run the following
-command to configure BentoML client to use this remote GammaService for model management
+command to configure Kappa client to use this remote GammaService for model management
 and deployments. You will need to replace ``0.0.0.0`` with an IP address or URL
 that is accessible for your team:
 
@@ -1174,18 +1174,18 @@ that is accessible for your team:
 
     bentoml config set gamma_service.url=0.0.0.0:50051
 
-Once you've run the command above, all the BentoML model management operations will be
+Once you've run the command above, all the Kappa model management operations will be
 sent to the remote server, including saving BentoService, query saved BentoServices or
 creating model serving deployments.
 
 
 .. note::
 
-    BentoML's :code:`GammaService` does not provide any kind of authentication. To
+    Kappa's :code:`GammaService` does not provide any kind of authentication. To
     secure your deployment, we recommend only make the server accessible within your
     VPC for you data science team to have access.
 
-    BentoML team also provides hosted GammaService for enterprise teams, that has all
+    Kappa team also provides hosted GammaService for enterprise teams, that has all
     the security best practices built-in, to bootstrap the end-to-end model management 
     and model serving deployment workflow. `Contact us <mailto:contact@bentoml.ai>`_ to
     learn more about our offerings.
@@ -1222,7 +1222,7 @@ Currently, the only way to set labels for Bento is during save Bento as Bento bu
 
 **Set labels for deployments**
 
-Currently, CLI is the only way to set labels for deployments. In the upcoming release, BentoML
+Currently, CLI is the only way to set labels for deployments. In the upcoming release, Kappa
 provides alternative ways to set and update labels.
 
 .. code-block:: bash
@@ -1235,7 +1235,7 @@ provides alternative ways to set and update labels.
 Label selector
 ^^^^^^^^^^^^^^
 
-BentoML provides label selector for the user to identify BentoServices or deployments.
+Kappa provides label selector for the user to identify BentoServices or deployments.
 The label selector query supports two type of selector: `equality-based` and `set-based`.
 A label selector query can be made of multiple requirements which are comma-separated.
 In the case of multiple requirements, the comma separator acts as a logical AND operator.
@@ -1253,7 +1253,7 @@ Examples:
 
 **Set-based requirements**
 
-Set-based requirements allow you to filter keys according to a set of values. BentoML
+Set-based requirements allow you to filter keys according to a set of values. Kappa
 supports four type of operators, `In`, `NotIn`, `Exists`, `DoesNotExist`.
 
 Example:
@@ -1296,7 +1296,7 @@ Supported CLI commands:
 Retrieving BentoServices
 ------------------------
 
-After saving your Model services to BentoML, you can retrieve the artifact bundle using the CLI from any environment configured to use the GammaService. The :code:`--target_dir` flag specifies where the artifact bundle will be populated. If the directory exists, it will not be overwritten to avoid inconsistent bundles.
+After saving your Model services to Kappa, you can retrieve the artifact bundle using the CLI from any environment configured to use the GammaService. The :code:`--target_dir` flag specifies where the artifact bundle will be populated. If the directory exists, it will not be overwritten to avoid inconsistent bundles.
 
 .. code-block:: bash
 
@@ -1311,7 +1311,7 @@ After saving your Model services to BentoML, you can retrieve the artifact bundl
       --verbose, --debug  Show debug logs when running the command
       --help              Show this message and exit.
 
-This command extends BentoML to be useful in a CI workflow or to provide a rapid way to share Services with others.
+This command extends Kappa to be useful in a CI workflow or to provide a rapid way to share Services with others.
 
 .. code-block:: bash
 

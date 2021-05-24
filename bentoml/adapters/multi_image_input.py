@@ -22,7 +22,7 @@ from bentoml.adapters.utils import (
 from bentoml.types import InferenceTask
 from bentoml.utils.lazy_loader import LazyLoader
 
-# BentoML optional dependencies, using lazy load to avoid ImportError
+# Kappa optional dependencies, using lazy load to avoid ImportError
 imageio = LazyLoader('imageio', globals(), 'imageio')
 numpy = LazyLoader('numpy', globals(), 'numpy')
 
@@ -194,7 +194,7 @@ class MultiImageInput(MultiFileInput):
             if not all(f is not None for f in task.data):
                 task.discard(
                     http_status=400,
-                    err_msg=f"BentoML#{self.__class__.__name__} Empty request",
+                    err_msg=f"Kappa#{self.__class__.__name__} Empty request",
                 )
                 continue
             try:
@@ -210,14 +210,14 @@ class MultiImageInput(MultiFileInput):
             except ValueError:
                 task.discard(
                     http_status=400,
-                    err_msg=f"BentoML#{self.__class__.__name__} "
+                    err_msg=f"Kappa#{self.__class__.__name__} "
                     f"Input image decode failed, it must be in supported format list: "
                     f"{self.accept_image_formats}",
                 )
             except AssertionError:
                 task.discard(
                     http_status=400,
-                    err_msg=f"BentoML#{self.__class__.__name__} "
+                    err_msg=f"Kappa#{self.__class__.__name__} "
                     f"Input image file must be in supported format list: "
                     f"{self.accept_image_formats}",
                 )
@@ -225,7 +225,7 @@ class MultiImageInput(MultiFileInput):
                 err = traceback.format_exc()
                 task.discard(
                     http_status=500,
-                    err_msg=f"BentoML#{self.__class__.__name__} "
+                    err_msg=f"Kappa#{self.__class__.__name__} "
                     f"Internal Server Error: {err}",
                 )
 

@@ -10,7 +10,7 @@ RUN python -m venv /opt/venv
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
-# pre-install BentoML requirements
+# pre-install Kappa requirements
 RUN pip install bentoml[model_server]==$BENTOML_VERSION --no-cache-dir
 COPY entrypoint.sh .
 

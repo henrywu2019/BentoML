@@ -32,7 +32,7 @@ def _proto_status_code_to_http_status_code(proto_status_code, fallback):
 
 class BentoMLException(Exception):
     """
-    Base class for all BentoML's errors.
+    Base class for all Kappa's errors.
     Each custom exception should be derived from this class
     """
 
@@ -64,8 +64,8 @@ class RemoteException(BentoMLException):
 
 class Unauthenticated(BentoMLException):
     """
-    Raise when a BentoML operation is not authenticated properly, either against 3rd
-    party cloud service such as AWS s3, Docker Hub, or Atalaya hosted BentoML service
+    Raise when a Kappa operation is not authenticated properly, either against 3rd
+    party cloud service such as AWS s3, Docker Hub, or Atalaya hosted Kappa service
     """
 
     @property
@@ -75,7 +75,7 @@ class Unauthenticated(BentoMLException):
 
 class InvalidArgument(BentoMLException):
     """
-    Raise when BentoML received unexpected/invalid arguments from CLI arguments, HTTP
+    Raise when Kappa received unexpected/invalid arguments from CLI arguments, HTTP
     Request, or python API function parameters
     """
 
@@ -123,15 +123,15 @@ class ArtifactLoadingException(BentoMLException):
 
 
 class BentoMLConfigException(BentoMLException):
-    """Raise when BentoML is misconfigured or when required configuration is missing"""
+    """Raise when Kappa is misconfigured or when required configuration is missing"""
 
 
 class MissingDependencyException(BentoMLException):
     """
-    Raise when BentoML component failed to load required dependency - some BentoML
+    Raise when Kappa component failed to load required dependency - some Kappa
     components has dependency that is optional to the library itself. For example,
     when using SklearnModelArtifact, the scikit-learn module is required although
-    BentoML does not require scikit-learn to be a dependency when installed
+    Kappa does not require scikit-learn to be a dependency when installed
     """
 
 

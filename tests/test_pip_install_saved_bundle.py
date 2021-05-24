@@ -28,7 +28,7 @@ def test_pip_install_saved_bentoservice_bundle(bento_bundle_path, tmpdir):
         == 0
     ), 'saved bundle successfully installed'
 
-    # ensure BentoML is installed as dependency
+    # ensure Kappa is installed as dependency
     if psutil.WINDOWS:
         assert os.path.isfile(os.path.join(install_path, "bin", "bentoml.exe"))
     else:

@@ -240,7 +240,7 @@ def test_sagemaker_apply_fail_not_local_repo():
     deployment_operator = SageMakerDeploymentOperator(gamma_service)
     result_pb = deployment_operator.add(sagemaker_deployment_pb)
     assert result_pb.status.status_code == Status.INTERNAL
-    assert result_pb.status.error_message.startswith('BentoML currently not support')
+    assert result_pb.status.error_message.startswith('Kappa currently not support')
 
 
 @mock_sagemaker_deployment_wrapper

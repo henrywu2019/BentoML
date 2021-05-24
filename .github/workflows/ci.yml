@@ -1,4 +1,4 @@
-name: BentoML-CI
+name: Kappa-CI
 
 on:
   push:

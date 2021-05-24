@@ -51,7 +51,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && node --version \
   && npm --version
 
-# Build time argument - the BentoML version to be used in this image
+# Build time argument - the Kappa version to be used in this image
 ARG BENTOML_VERSION
 ENV BENTOML_VERSION=$BENTOML_VERSION
 RUN pip install "bentoml[gamma_service]==$BENTOML_VERSION" --no-cache-dir

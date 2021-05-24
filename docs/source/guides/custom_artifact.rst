@@ -1,8 +1,8 @@
 Adding Custom Model Artifact
 ============================
 
-BentoML integrates with the most popular machine learning frameworks. For the ML framework yet to integrate with BentoML,
-BentoML provides model artifact customizing...
+Kappa integrates with the most popular machine learning frameworks. For the ML framework yet to integrate with Kappa,
+Kappa provides model artifact customizing...
 
 The guide will demonstrate how to create a custom model artifact class, and then use it in BentoService for prediction
 

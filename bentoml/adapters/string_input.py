@@ -54,7 +54,7 @@ class StringInput(BaseInputAdapter):
             if len(files) != 1:
                 return InferenceTask().discard(
                     http_status=400,
-                    err_msg=f"BentoML#{self.__class__.__name__} accepts one text file "
+                    err_msg=f"Kappa#{self.__class__.__name__} accepts one text file "
                     "at a time",
                 )
             input_file = next(iter(files.values()))

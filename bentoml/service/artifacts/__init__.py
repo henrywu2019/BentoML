@@ -103,7 +103,7 @@ class BentoServiceArtifact:
 
     def _copy(self):
         """Create a new empty artifact instance with the same name, this is only used
-        internally for BentoML to create new artifact instances when create a new
+        internally for Kappa to create new artifact instances when create a new
         BentoService instance
         """
         return self.__class__(self.name)

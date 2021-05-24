@@ -150,7 +150,7 @@ class FileInput(BaseInputAdapter):
                 task = InferenceTask(data=None)
                 task.discard(
                     http_status=400,
-                    err_msg=f"BentoML#{self.__class__.__name__} requires one and at"
+                    err_msg=f"Kappa#{self.__class__.__name__} requires one and at"
                     " least one file at a time, if you just upgraded from"
                     " bentoml 0.7, you may need to use MultiFileAdapter instead",
                 )
@@ -165,7 +165,7 @@ class FileInput(BaseInputAdapter):
             task = InferenceTask(data=None)
             task.discard(
                 http_status=400,
-                err_msg=f'BentoML#{self.__class__.__name__} unexpected HTTP request'
+                err_msg=f'Kappa#{self.__class__.__name__} unexpected HTTP request'
                 ' format',
             )
         return task

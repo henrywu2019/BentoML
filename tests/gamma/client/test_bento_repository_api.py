@@ -97,7 +97,7 @@ def gamma_server_container():
         command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
     wait_until_container_ready(
-        container_name, b'* Starting BentoML GammaService gRPC Server', 120
+        container_name, b'* Starting Kappa GammaService gRPC Server', 120
     )
 
     yield f'localhost:{port}'

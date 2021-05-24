@@ -99,7 +99,7 @@ class CondaEnv(object):
         self._conda_env["name"] = name
 
     def add_conda_dependencies(self, conda_dependencies: List[str]):
-        # BentoML uses conda's channel_priority=strict option by default
+        # Kappa uses conda's channel_priority=strict option by default
         # Adding `dependencies` to beginning of the list to take priority over the
         # existing conda channels
         self._conda_env["dependencies"] = (
@@ -187,7 +187,7 @@ class BentoServiceEnv(object):
 
         self._pip_packages = {}
 
-        # add BentoML to pip packages list
+        # add Kappa to pip packages list
         bentoml_deploy_version = bentoml_deployment_version
         self.add_pip_package("bentoml=={}".format(bentoml_deploy_version))
 
@@ -208,7 +208,7 @@ class BentoServiceEnv(object):
         elif default_docker_base_image:
             logger.info(
                 f"Using default docker base image: `{docker_base_image}` specified in"
-                f"BentoML config file or env var. User must make sure that the docker "
+                f"Kappa config file or env var. User must make sure that the docker "
                 f"base image either has Python {PYTHON_MINOR_VERSION} or conda "
                 f"installed."
             )
@@ -221,7 +221,7 @@ class BentoServiceEnv(object):
 
                 logger.warning(
                     f"Python {PYTHON_VERSION} found in current environment is not "
-                    f"officially supported by BentoML. The docker base image used is"
+                    f"officially supported by Kappa. The docker base image used is"
                     f"'{self._docker_base_image}' which will use conda to install "
                     f"Python {PYTHON_VERSION} in the build process. Supported Python "
                     f"versions are: f{', '.join(PYTHON_SUPPORTED_VERSIONS)}"
@@ -235,7 +235,7 @@ class BentoServiceEnv(object):
                 )
 
                 logger.debug(
-                    f"Using BentoML default docker base image "
+                    f"Using Kappa default docker base image "
                     f"'{self._docker_base_image}'"
                 )
         self._zipimport_archives = zipimport_archives

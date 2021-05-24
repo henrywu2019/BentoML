@@ -291,7 +291,7 @@ BatchApiFuncReturnValue = TypeVar("BatchApiFuncReturnValue")
 @dataclass
 class InferenceResult(Generic[Output]):
     """
-    The data structure that returned by BentoML API server.
+    The data structure that returned by Kappa API server.
     Contains result data and context like HTTP headers.
     """
 
@@ -356,7 +356,7 @@ class InferenceError(InferenceResult):
 @dataclass
 class InferenceTask(Generic[Input]):
     """
-    The data structure passed to the BentoML API server for inferring.
+    The data structure passed to the Kappa API server for inferring.
     Contains payload data and context like HTTP headers or CLI args.
     """
 

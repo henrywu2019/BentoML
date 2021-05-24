@@ -24,7 +24,7 @@ from bentoml.adapters.utils import (
 from bentoml.types import InferenceTask, JsonSerializable, Optional
 from bentoml.utils.lazy_loader import LazyLoader
 
-# BentoML optional dependencies, using lazy load to avoid ImportError
+# Kappa optional dependencies, using lazy load to avoid ImportError
 imageio = LazyLoader('imageio', globals(), 'imageio')
 numpy = LazyLoader('numpy', globals(), 'numpy')
 
@@ -235,7 +235,7 @@ class AnnotatedImageInput(MultiFileInput):
             except AssertionError:
                 task.discard(
                     http_status=400,
-                    err_msg=f"BentoML#{self.__class__.__name__} "
+                    err_msg=f"Kappa#{self.__class__.__name__} "
                     f"Input image file must be in supported format list: "
                     f"{self.accept_image_formats}",
                 )
@@ -246,14 +246,14 @@ class AnnotatedImageInput(MultiFileInput):
             except json.JSONDecodeError:
                 task.discard(
                     http_status=400,
-                    err_msg=f"BentoML#{self.__class__.__name__} "
+                    err_msg=f"Kappa#{self.__class__.__name__} "
                     f"received invalid JSON file",
                 )
             except Exception:  # pylint: disable=broad-except
                 err = traceback.format_exc()
                 task.discard(
                     http_status=500,
-                    err_msg=f"BentoML#{self.__class__.__name__} "
+                    err_msg=f"Kappa#{self.__class__.__name__} "
                     f"Internal Server Error: {err}",
                 )
         return tuple(image_arrays), tuple(json_objs)

@@ -1,3 +1,3 @@
-# BentoML Guides
+# Kappa Guides
 
-BentoML guides and documentations have been migrated to http://docs.bentoml.org/
+Kappa guides and documentations have been migrated to http://docs.bentoml.org/

@@ -10,7 +10,7 @@ Install Gamma on K8s with Helm
 
 1. Configuration
 ================
-Helm charts rely on a values file to configure how to template and create Kubernetes resources. The default values for these resources can be found in `BentoML/helm/GammaService/values.yaml`. These basic values describe a basic local `GammaService` instance with ephemeral storage.
+Helm charts rely on a values file to configure how to template and create Kubernetes resources. The default values for these resources can be found in `Kappa/helm/GammaService/values.yaml`. These basic values describe a basic local `GammaService` instance with ephemeral storage.
 
 1.1 Persistent Storage
 ---------------------------
@@ -18,7 +18,7 @@ The recommended way to deploy `GammaService` is with a PostgreSQL DB instance wi
 
 .. code-block:: yaml
 
-    # in BentoML/helm/GammaService/values.yaml
+    # in Kappa/helm/GammaService/values.yaml
 
     # Local Postgres Service
     postgres:
@@ -40,7 +40,7 @@ An Ingress helps to manage incoming external traffic into the cluster. The confi
 
 .. code-block:: yaml
 
-    # in BentoML/helm/GammaService/values.yaml
+    # in Kappa/helm/GammaService/values.yaml
 
     ingress:
         enabled: false
@@ -198,7 +198,7 @@ Everything looks good!
 
 2.2 Cloud Providers
 -------------------
-This part of the BentoML documentation is a work in progress. If you have any questions
+This part of the Kappa documentation is a work in progress. If you have any questions
 related to this, please join
-`the BentoML Slack community <https://join.slack.com/t/bentoml/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg>`_
+`the Kappa Slack community <https://join.slack.com/t/bentoml/shared_invite/enQtNjcyMTY3MjE4NTgzLTU3ZDc1MWM5MzQxMWQxMzJiNTc1MTJmMzYzMTYwMjQ0OGEwNDFmZDkzYWQxNzgxYWNhNjAxZjk4MzI4OGY1Yjg>`_
 and ask in the bentoml-users channel.
