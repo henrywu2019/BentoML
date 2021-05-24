@@ -87,7 +87,7 @@ class OCIRepository(BaseRepository):
 
         try:
             par_request_url = self._get_presigned_url(object_name)
-            logger.info(f"URL for Read: {par_request_url}")
+            logger.debug(f"URL for Read: {par_request_url}")
             return par_request_url
         except Exception:  # pylint: disable=broad-except
             logger.error(

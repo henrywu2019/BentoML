@@ -13,9 +13,9 @@ from kappa.types import InferenceError, InferenceResult, InferenceTask
 # pylint: disable=arguments-differ
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([PickleArtifact("model"), SklearnModelArtifact('sk_model')])
-class NonBatchExampleService(kappa.BentoService):
+class NonBatchExampleService(kappa.MyModel):
     """
-    Example BentoService class made for testing purpose
+    Example MyModel class made for testing purpose
     """
 
     @kappa.api(

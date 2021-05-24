@@ -43,13 +43,13 @@ def get_deployment_sub_command():
     # pylint: disable=unused-variable
 
     @click.group(
-        help='Commands for managing and operating BentoService deployments',
+        help='Commands for managing and operating MyModel deployments',
         cls=BentoMLCommandGroup,
     )
     def deployment():
         pass
 
-    @deployment.command(help='Create BentoService deployment from yaml file')
+    @deployment.command(help='Create MyModel deployment from yaml file')
     @click.option(
         '-f',
         '--file',
@@ -80,7 +80,7 @@ def get_deployment_sub_command():
         )
         _print_deployment_info(result.deployment, output)
 
-    @deployment.command(help='Apply BentoService deployment from yaml file')
+    @deployment.command(help='Apply MyModel deployment from yaml file')
     @click.option(
         '-f',
         '--file',

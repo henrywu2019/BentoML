@@ -1,10 +1,10 @@
 import os
 from kappa.exceptions import MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 
-class GluonModelArtifact(BentoServiceArtifact):
+class GluonModelArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading gluon models
     Args:
@@ -14,14 +14,14 @@ class GluonModelArtifact(BentoServiceArtifact):
 
     Example usage:
 
-    >>> from kappa import env, artifacts, api, BentoService
+    >>> from kappa import env, artifacts, api, MyModel
     >>> from kappa.adapters import JsonInput
     >>> from kappa.frameworks.gluon import GluonModelArtifact
     >>> import mxnet as mx
     >>>
     >>> @env(infer_pip_packages=True)
     >>> @artifacts([GluonModelArtifact('model')])
-    >>> class GluonClassifier(BentoService):
+    >>> class GluonClassifier(MyModel):
     >>>     @api(input=JsonInput(), batch=False)
     >>>     def predict(self, request):
     >>>         nd_input = mx.nd.array(request['input'])
@@ -69,5 +69,5 @@ class GluonModelArtifact(BentoServiceArtifact):
     def get(self):
         return self._model
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(["mxnet"])

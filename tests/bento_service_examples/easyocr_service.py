@@ -7,7 +7,7 @@ import numpy as np
 
 @kappa.env(pip_packages=["easyocr>=1.3.0"])
 @kappa.artifacts([EasyOCRArtifact("chinese_small")])
-class EasyOCRService(kappa.BentoService):
+class EasyOCRService(kappa.MyModel):
     @kappa.api(input=ImageInput(), batch=False)
     def predict(self, image):
         reader = self.artifacts.chinese_small

@@ -173,7 +173,7 @@ def resolve_bundle_path(bento, pip_installed_bundle_path, gamma_url=None):
     if pip_installed_bundle_path:
         assert (
             bento is None
-        ), "pip installed BentoService commands should not have Bento argument"
+        ), "pip installed MyModel commands should not have Bento argument"
         return pip_installed_bundle_path
 
     if os.path.isdir(bento) or is_s3_url(bento) or is_gcs_url(bento):
@@ -181,14 +181,14 @@ def resolve_bundle_path(bento, pip_installed_bundle_path, gamma_url=None):
         return bento
 
     elif ":" in bento:
-        # assuming passing in BentoService in the form of Name:Version tag
+        # assuming passing in MyModel in the form of Name:Version tag
         gamma_client = get_gamma_client(gamma_url)
         bento_pb = gamma_client.repository.get(bento)
         return resolve_bento_bundle_uri(bento_pb)
     else:
         raise BentoMLException(
-            f'BentoService "{bento}" not found - either specify the file path of '
-            f"the BentoService saved bundle, or the BentoService id in the form of "
+            f'MyModel "{bento}" not found - either specify the file path of '
+            f"the MyModel saved bundle, or the MyModel id in the form of "
             f'"name:version"'
         )
 

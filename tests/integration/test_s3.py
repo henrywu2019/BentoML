@@ -6,7 +6,7 @@ from minio import Minio
 
 from kappa.utils.tempdir import TempDirectory
 from kappa.gamma.client import get_gamma_client
-from tests.bento_service_examples.example_bento_service import ExampleBentoService
+from tests.bento_service_examples.example_bento_service import ExampleMyModel
 
 bucket_name = 'test-repo'
 
@@ -40,7 +40,7 @@ def test_s3(minio_address):
         gamma_server_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
     gamma_server_url = "localhost:50051"
-    svc = ExampleBentoService()
+    svc = ExampleMyModel()
     svc.pack('model', {'model': 'abc'})
     bento_tag = f'{svc.name}:{svc.version}'
     saved_path = svc.save(gamma_url=gamma_server_url)

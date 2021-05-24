@@ -27,7 +27,7 @@ def create_kappa_cli():
 
     _cli = create_bento_service_cli()
 
-    # Commands created here aren't mean to be used from generated BentoService CLI when
+    # Commands created here aren't mean to be used from generated MyModel CLI when
     # installed as PyPI package. The are only used as part of Kappa cli command.
 
     aws_sagemaker_sub_command = get_aws_sagemaker_sub_command()

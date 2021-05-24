@@ -28,8 +28,8 @@ class TfNativeModel(tf.Module):
 
 @pytest.fixture()
 def onnxmlir_classifier_class():
-    # When the ExampleBentoService got saved and loaded again in the test, the two class
-    # attribute below got set to the loaded BentoService class. Resetting it here so it
+    # When the ExampleMyModel got saved and loaded again in the test, the two class
+    # attribute below got set to the loaded MyModel class. Resetting it here so it
     # does not effect other tests
     OnnxMlirClassifier._bento_service_bundle_path = None
     OnnxMlirClassifier._bento_service_bundle_version = None

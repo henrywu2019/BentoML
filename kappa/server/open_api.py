@@ -59,7 +59,7 @@ def get_open_api_spec_json(
     paths["/metadata"] = OrderedDict(
         get=OrderedDict(
             tags=["infra"],
-            description="BentoService metadata endpoint. Returns the service's"
+            description="MyModel metadata endpoint. Returns the service's"
             "`kappa.yml` in JSON format.",
             responses=default_response,
         )
@@ -77,10 +77,10 @@ def get_open_api_spec_json(
         paths["/feedback"] = OrderedDict(
             post=OrderedDict(
                 tags=["infra"],
-                description="Provide feedback to prediction results from BentoService. "
+                description="Provide feedback to prediction results from MyModel. "
                 "Expecting feedback request payload in JSON format "
                 "and requires `request_id` field, which can be obtained "
-                "from any BentoService prediction response's header. "
+                "from any MyModel prediction response's header. "
                 "Only last key will be considered if keys are repeated.",
                 requestBody=OrderedDict(
                     required=True,

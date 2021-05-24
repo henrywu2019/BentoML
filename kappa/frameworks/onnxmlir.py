@@ -2,11 +2,11 @@ import os
 import shutil
 
 from kappa.exceptions import MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 
-class OnnxMlirModelArtifact(BentoServiceArtifact):
+class OnnxMlirModelArtifact(MyModelArtifact):
     """Abstraction for saving/loading onnx-mlir compiled model and operationalized
     using pyruntime wrapper
 
@@ -25,7 +25,7 @@ class OnnxMlirModelArtifact(BentoServiceArtifact):
     Example usage:
 
     >>> import kappa
-    >>> from kappa import env, artifacts, api, BentoService
+    >>> from kappa import env, artifacts, api, MyModel
     >>> from kappa.adapters import ImageInput
     >>> from kappa.frameworks.onnxmlir import OnnxMlirModelArtifact
     >>> from kappa.types import JsonSerializable, InferenceTask, InferenceError
@@ -37,7 +37,7 @@ class OnnxMlirModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([OnnxMlirModelArtifact('model'), PickleArtifact('labels')])
-    >>> class ResNetPredict(BentoService):
+    >>> class ResNetPredict(MyModel):
     >>>
     >>> def preprocess(self, input_data):
     >>>     # convert the input data into the float32 input
@@ -105,7 +105,7 @@ class OnnxMlirModelArtifact(BentoServiceArtifact):
         print(path)
         return self.pack(self._saved_model_file_path(path))
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(["numpy"])
 
     def _get_onnxmlir_inference_session(self):

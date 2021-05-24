@@ -15,7 +15,7 @@ from kappa.frameworks.sklearn import SklearnModelArtifact
 
 @kappa.env(zipimport_archives=['nested_zipmodule.zip'])
 @kappa.artifacts([SklearnModelArtifact('model')])
-class IrisClassifier(kappa.BentoService):
+class IrisClassifier(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         df = identity(df)

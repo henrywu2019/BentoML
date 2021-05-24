@@ -77,14 +77,14 @@ class AnnotatedImageInput(MultiFileInput):
 
         from typing import Sequence
 
-        from kappa import BentoService, api, artifacts
+        from kappa import MyModel, api, artifacts
         from kappa.frameworks.tensorflow import TensorflowSavedModelArtifact
         from kappa.adapters import AnnotatedImageInput
 
         CLASS_NAMES = ['cat', 'dog']
 
         @artifacts([TensorflowSavedModelArtifact('classifier')])
-        class PetClassification(BentoService):
+        class PetClassification(MyModel):
            @api(input=AnnotatedImageInput(), batch=True)
            def predict(
                    self,

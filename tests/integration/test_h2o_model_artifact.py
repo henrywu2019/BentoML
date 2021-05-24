@@ -3,7 +3,7 @@ import json
 import pytest
 
 import kappa
-from tests.bento_service_examples.h2o_service import H2oExampleBentoService
+from tests.bento_service_examples.h2o_service import H2oExampleMyModel
 from tests.integration.utils import (
     build_api_server_docker_image,
     run_api_server_docker_container,
@@ -35,7 +35,7 @@ def h2o_svc():
     aml = H2OAutoML(max_runtime_secs=60, seed=1, project_name="powerplant_lb_frame")
     aml.train(y="HourlyEnergyOutputMW", training_frame=train, leaderboard_frame=test)
 
-    svc = H2oExampleBentoService()
+    svc = H2oExampleMyModel()
     svc.pack('model', aml.leader)
 
     return svc

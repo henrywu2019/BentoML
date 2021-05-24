@@ -23,9 +23,9 @@ result = (
 
 @pytest.fixture(scope="module")
 def transformers_svc():
-    """Return a Transformers BentoService."""
-    # When the ExampleBentoService got saved and loaded again in the test, the
-    # two class attribute below got set to the loaded BentoService class.
+    """Return a Transformers MyModel."""
+    # When the ExampleMyModel got saved and loaded again in the test, the
+    # two class attribute below got set to the loaded MyModel class.
     # Resetting it here so it does not effect other tests
     TransformersGPT2TextGenerator._bento_service_bundle_path = None
     TransformersGPT2TextGenerator._bento_service_bundle_version = None
@@ -43,7 +43,7 @@ def transformers_svc():
 
 @pytest.fixture(scope="module")
 def transformers_svc_saved_dir(tmp_path_factory, transformers_svc):
-    """Save a Transformers BentoService and return the saved directory."""
+    """Save a Transformers MyModel and return the saved directory."""
     # Must be called at least once before saving so that layers are built
     # See: https://github.com/tensorflow/tensorflow/issues/37439
     transformers_svc.predict(test_sentence)
@@ -55,7 +55,7 @@ def transformers_svc_saved_dir(tmp_path_factory, transformers_svc):
 
 @pytest.fixture()
 def transformers_svc_loaded(transformers_svc_saved_dir):
-    """Return a Transformers BentoService that has been saved and loaded."""
+    """Return a Transformers MyModel that has been saved and loaded."""
     return kappa.load(transformers_svc_saved_dir)
 
 

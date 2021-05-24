@@ -1,10 +1,10 @@
 import os
 
-from kappa.service import BentoServiceArtifact
+from kappa.service import MyModelArtifact
 from kappa.utils import cloudpickle
 
 
-class PickleArtifact(BentoServiceArtifact):
+class PickleArtifact(MyModelArtifact):
     """Abstraction for saving/loading python objects with pickle serialization
 
     Args:

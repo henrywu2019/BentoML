@@ -93,7 +93,7 @@ def _resolve_remote_bundle_path(bundle_path):
         response = requests.get(bundle_path)
         if response.status_code != 200:
             raise BentoMLException(
-                f"Error retrieving BentoService bundle. "
+                f"Error retrieving MyModel. "
                 f"{response.status_code}: {response.text}"
             )
         fileobj = io.BytesIO()
@@ -182,16 +182,16 @@ def _find_module_file(bundle_path, service_name, module_file):
 @resolve_remote_bundle
 def load_bento_service_class(bundle_path):
     """
-    Load a BentoService class from saved bundle in given path
+    Load a MyModel class from saved bundle in given path
 
-    :param bundle_path: A path to Bento files generated from BentoService#save,
-        #save_to_dir, or the path to pip installed BentoService directory
-    :return: BentoService class
+    :param bundle_path: A path to Bento files generated from MyModel#save,
+        #save_to_dir, or the path to pip installed MyModel directory
+    :return: MyModel class
     """
     config = load_saved_bundle_config(bundle_path)
     metadata = config["metadata"]
 
-    # Find and load target module containing BentoService class from given path
+    # Find and load target module containing MyModel class from given path
     module_file_path = _find_module_file(
         bundle_path, metadata["service_name"], metadata["module_file"]
     )
@@ -233,7 +233,7 @@ def load_bento_service_class(bundle_path):
     sys.path.remove(bundle_path)
 
     model_service_class = module.__getattribute__(metadata["service_name"])
-    # Set _bento_service_bundle_path, where BentoService will load its artifacts
+    # Set _bento_service_bundle_path, where MyModel will load its artifacts
     model_service_class._bento_service_bundle_path = bundle_path
     # Set cls._version, service instance can access it via svc.version
     model_service_class._bento_service_bundle_version = metadata["service_version"]
@@ -256,7 +256,7 @@ def safe_retrieve(bundle_path, target_dir):
     """Safely retrieve bento service to local path
 
     Args:
-        bundle_path (str): The path that contains saved BentoService bundle,
+        bundle_path (str): The path that contains saved MyModel,
             supporting both local file path and s3 path
         target_dir (str): Where the service contents should end up
 
@@ -271,11 +271,11 @@ def load_from_dir(bundle_path):
     """Load bento service from local file path or s3 path
 
     Args:
-        bundle_path (str): The path that contains saved BentoService bundle,
+        bundle_path (str): The path that contains saved MyModel,
             supporting both local file path and s3 path
 
     Returns:
-        kappa.service.BentoService: a loaded BentoService instance
+        kappa.service.MyModel: a loaded MyModel instance
     """
     track_load_start()
 

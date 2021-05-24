@@ -55,7 +55,7 @@ class MultiFileInput(BaseInputAdapter):
 
         @kappa.env(pip_packages=['torch', 'pillow', 'numpy'])
         @kappa.artifacts([PytorchModelArtifact('classifier')])
-        class PyTorchFashionClassifier(kappa.BentoService):
+        class PyTorchFashionClassifier(kappa.MyModel):
             @kappa.api(
                 input=MultiFileInput(input_names=['image', 'json']), batch=True)
             def predict(self, image_list: List[FileLike], json_list: List[FileLike]):

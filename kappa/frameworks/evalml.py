@@ -2,10 +2,10 @@ import importlib
 import os
 
 from kappa.exceptions import MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
+from kappa.service.artifacts import MyModelArtifact
 
 
-class EvalMLModelArtifact(BentoServiceArtifact):
+class EvalMLModelArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading EvalML models
 
@@ -31,7 +31,7 @@ class EvalMLModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([EvalMLModelArtifact('EvalML pipeline')])
-    >>> class EvalMLModelService(kappa.BentoService):
+    >>> class EvalMLModelService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=DataframeInput(), batch=True)
     >>>     def predict(self, df):

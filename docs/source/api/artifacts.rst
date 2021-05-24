@@ -1,12 +1,12 @@
 Base Artifact
 =============
 
-All Kappa artifacts are inherited from the BentoServiceArtifact base class:
+All Kappa artifacts are inherited from the MyModelArtifact base class:
 
-.. autoclass:: kappa.service.artifacts.BentoServiceArtifact
+.. autoclass:: kappa.service.artifacts.MyModelArtifact
 
 
-In a BentoService#artifacts returns an ArtifactCollection instance:
+In a MyModel#artifacts returns an ArtifactCollection instance:
 
 .. autoclass:: kappa.service.artifacts.ArtifactCollection
 

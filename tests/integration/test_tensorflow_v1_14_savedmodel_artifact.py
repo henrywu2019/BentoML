@@ -54,9 +54,9 @@ def tf1_model_path():
 
 @pytest.fixture(scope="session")
 def svc(tf1_model_path):
-    """Return a TensorFlow1 BentoService."""
-    # When the ExampleBentoService got saved and loaded again in the test, the
-    # two class attribute below got set to the loaded BentoService class.
+    """Return a TensorFlow1 MyModel."""
+    # When the ExampleMyModel got saved and loaded again in the test, the
+    # two class attribute below got set to the loaded MyModel class.
     # Resetting it here so it does not effect other tests
     from tests.bento_service_examples.tensorflow1_classifier import (
         Tensorflow1Classifier,

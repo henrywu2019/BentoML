@@ -3,7 +3,7 @@ Deploying to Azure Container Instance
 =====================================
 
 Microsoft Azure container instances is a service for running Docker container without
-managing servers. It is a great option for running BentoService that requires a lot of
+managing servers. It is a great option for running MyModel that requires a lot of
 computing resources.
 
 This guide demonstrates how to deploy a scikit-learn based iris classifier model with
@@ -29,7 +29,7 @@ Prerequisites
         pip install kappa scikit-learn
 
 
-Deploying BentoService to Azure Container Instance
+Deploying MyModel to Azure Container Instance
 --------------------------------------------------
 
 Run the example project from the :doc:`quick start guide <../quickstart>` to create the
@@ -56,7 +56,7 @@ Verify the saved bundle created:
         "type": "LOCAL",
         "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
-      "bentoServiceMetadata": {
+      "MyModelMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
@@ -75,7 +75,7 @@ Verify the saved bundle created:
           {
             "name": "predict",
             "InputType": "DataframeInput",
-            "docs": "BentoService API"
+            "docs": "MyModel API"
           }
         ]
       }
@@ -83,7 +83,7 @@ Verify the saved bundle created:
 
 
 The Kappa saved bundle created can now be used to start a REST API Server hosting the
-BentoService and available for sending test request:
+MyModel and available for sending test request:
 
 .. code-block:: bash
 

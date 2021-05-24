@@ -1,11 +1,11 @@
 import os
 
 from kappa.exceptions import InvalidArgument, MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 
-class LightGBMModelArtifact(BentoServiceArtifact):
+class LightGBMModelArtifact(MyModelArtifact):
     """
     Abstraction for save/load object with LightGBM.
 
@@ -33,7 +33,7 @@ class LightGBMModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.artifacts([LightGBMModelArtifact('model')])
     >>> @kappa.env(infer_pip_packages=True)
-    >>> class LgbModelService(kappa.BentoService):
+    >>> class LgbModelService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=DataframeInput(), batch=True)
     >>>     def predict(self, df):
@@ -78,7 +78,7 @@ class LightGBMModelArtifact(BentoServiceArtifact):
 
         return self.pack(bst)
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(['lightgbm'])
 
     def save(self, dst):

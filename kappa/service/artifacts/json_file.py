@@ -1,10 +1,10 @@
 import os
 import re
 
-from kappa.service import BentoServiceArtifact
+from kappa.service import MyModelArtifact
 
 
-class JSONArtifact(BentoServiceArtifact):
+class JSONArtifact(MyModelArtifact):
     """Abstraction for saving/loading objects to/from JSON files.
 
     Args:

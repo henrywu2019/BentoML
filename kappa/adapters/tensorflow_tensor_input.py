@@ -61,7 +61,7 @@ class TfTensorInput(StringInput):
 
         @kappa.env(infer_pip_packages=True)
         @kappa.artifacts([TensorflowSavedModelArtifact('model')])
-        class MyService(kappa.BentoService):
+        class MyService(kappa.MyModel):
 
             @kappa.api(input=TfTensorInput(), batch=True)
             def predict(self, input: tf.Tensor):

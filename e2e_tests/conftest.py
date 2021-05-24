@@ -19,7 +19,7 @@ from kappa.gamma.deployment.docker_utils import (  # noqa
 )
 from e2e_tests.cli_operations import delete_bento
 from e2e_tests.iris_classifier_example import IrisClassifier
-from e2e_tests.sample_bento_service import SampleBentoService, UpdatedSampleBentoService
+from e2e_tests.sample_bento_service import SampleMyModel, UpdatedSampleMyModel
 
 logger = logging.getLogger('kappa.test')
 
@@ -43,9 +43,9 @@ def iris_clf_service():
 
 
 @pytest.fixture()
-def basic_bentoservice_v1():
-    logger.debug('Creating basic_bentoservice_v1 saved bundle..')
-    my_model = SampleBentoService()
+def basic_MyModel_v1():
+    logger.debug('Creating basic_MyModel_v1 saved bundle..')
+    my_model = SampleMyModel()
     my_model.save()
 
     bento_name = f'{my_model.name}:{my_model.version}'
@@ -54,9 +54,9 @@ def basic_bentoservice_v1():
 
 
 @pytest.fixture()
-def basic_bentoservice_v2():
-    logger.debug('Creating basic_bentoservice_v2 saved bundle..')
-    my_model = UpdatedSampleBentoService()
+def basic_MyModel_v2():
+    logger.debug('Creating basic_MyModel_v2 saved bundle..')
+    my_model = UpdatedSampleMyModel()
     my_model.save()
 
     bento_name = f'{my_model.name}:{my_model.version}'

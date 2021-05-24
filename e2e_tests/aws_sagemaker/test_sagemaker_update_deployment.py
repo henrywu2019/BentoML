@@ -11,7 +11,7 @@ from e2e_tests.cli_operations import delete_deployment
 logger = logging.getLogger('kappa.test')
 
 
-def test_sagemaker_update_deployment(basic_bentoservice_v1, basic_bentoservice_v2):
+def test_sagemaker_update_deployment(basic_MyModel_v1, basic_MyModel_v2):
     random_hash = uuid.uuid4().hex[:6]
     deployment_name = f'tests-sagemaker-update-e2e-{random_hash}'
     region = 'us-west-2'
@@ -22,7 +22,7 @@ def test_sagemaker_update_deployment(basic_bentoservice_v1, basic_bentoservice_v
         'deploy',
         deployment_name,
         '-b',
-        basic_bentoservice_v1,
+        basic_MyModel_v1,
         '--api-name',
         'predict',
         '--region',
@@ -50,7 +50,7 @@ def test_sagemaker_update_deployment(basic_bentoservice_v1, basic_bentoservice_v
             'update',
             deployment_name,
             '-b',
-            basic_bentoservice_v2,
+            basic_MyModel_v2,
             '--wait',
             '--verbose',
         ]

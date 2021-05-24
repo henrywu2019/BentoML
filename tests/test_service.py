@@ -42,12 +42,12 @@ def test_invalid_artifact_type():
     with pytest.raises(InvalidArgument) as e:
 
         @kappa.artifacts(["Not A Artifact"])
-        class ExampleBentoService(  # pylint: disable=unused-variable
-            kappa.BentoService
+        class ExampleMyModel(  # pylint: disable=unused-variable
+            kappa.MyModel
         ):
             pass
 
-    assert "only accept list of BentoServiceArtifact" in str(e.value)
+    assert "only accept list of MyModelArtifact" in str(e.value)
 
 
 # noinspection PyUnusedLocal
@@ -55,8 +55,8 @@ def test_duplicated_artifact_name():
     with pytest.raises(InvalidArgument) as e:
 
         @kappa.artifacts([PickleArtifact("model"), PickleArtifact("model")])
-        class ExampleBentoService(  # pylint: disable=unused-variable
-            kappa.BentoService
+        class ExampleMyModel(  # pylint: disable=unused-variable
+            kappa.MyModel
         ):
             pass
 
@@ -67,8 +67,8 @@ def test_duplicated_artifact_name():
 def test_invalid_api_input():
     with pytest.raises(InvalidArgument) as e:
 
-        class ExampleBentoService(  # pylint: disable=unused-variable
-            kappa.BentoService
+        class ExampleMyModel(  # pylint: disable=unused-variable
+            kappa.MyModel
         ):
             @kappa.api("Not A InputAdapter")
             def test(self):
@@ -81,7 +81,7 @@ def test_invalid_api_input():
 
 
 def test_image_input_pip_dependencies():
-    class TestImageService(kappa.BentoService):
+    class TestImageService(kappa.MyModel):
         @kappa.api(input=ImageInput(), batch=True)
         def test(self, images):
             return images

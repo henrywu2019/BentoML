@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { getQueryObject } from "../utils";
 import HttpRequestContainer from "../utils/HttpRequestContainer";
-import BentoServiceTable from "../components/BentoServiceTable";
+import MyModelTable from "../components/MyModelTable";
 import { Section } from "../ui/Layout";
 
 const DEFAULT_BENTO_SERVICE_LIMIT_PER_PAGE = 30;
@@ -23,7 +23,7 @@ const Repository = (props) => {
         if (data && data.bentos) {
           hasBento = true;
 
-          bentoDisplay = <BentoServiceTable bentos={data.bentos} />;
+          bentoDisplay = <MyModelTable bentos={data.bentos} />;
         } else {
           bentoDisplay = <Section>No more models found</Section>;
         }

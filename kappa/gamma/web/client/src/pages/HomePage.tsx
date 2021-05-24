@@ -2,7 +2,7 @@ import * as React from "react";
 
 import HttpRequestContainer from "../utils/HttpRequestContainer";
 import DeploymentsTable from "../components/DeploymentsTable";
-import BentoServiceTable from "../components/BentoServiceTable";
+import MyModelTable from "../components/MyModelTable";
 import { Section } from "../ui/Layout";
 
 const HomePage = () => (
@@ -51,7 +51,7 @@ const HomePage = () => (
           return (
             <Section>
               <h2>Latest Models</h2>
-              <BentoServiceTable bentos={data.bentos} />
+              <MyModelTable bentos={data.bentos} />
             </Section>
           );
         } else {

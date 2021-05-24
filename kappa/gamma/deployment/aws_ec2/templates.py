@@ -10,7 +10,7 @@ Resources:
     SecurityGroupResource:
         Type: AWS::EC2::SecurityGroup
         Properties:
-            GroupDescription: "security group for bentoservice"
+            GroupDescription: "security group for MyModel"
             SecurityGroupIngress:
                 -
                     IpProtocol: tcp
@@ -238,7 +238,7 @@ runcmd:
 - ln -s /usr/bin/aws aws
 - aws ecr get-login-password --region {region}|docker login --username AWS --password-stdin {registry}
 - docker pull {tag}
-- docker run -p {bentoservice_port}:{bentoservice_port} {tag}
+- docker run -p {MyModel_port}:{MyModel_port} {tag}
 
 --==MYBOUNDARY==--
 """  # noqa: E501

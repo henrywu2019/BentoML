@@ -7,7 +7,7 @@ from kappa.frameworks.onnx import OnnxModelArtifact
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([OnnxModelArtifact('model', backend='onnxruntime')])
-class OnnxIrisClassifier(kappa.BentoService):
+class OnnxIrisClassifier(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         input_data = df.to_numpy().astype(numpy.float32)

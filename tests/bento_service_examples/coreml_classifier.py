@@ -9,7 +9,7 @@ from coremltools.models import MLModel  # pylint: disable=import-error
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([CoreMLModelArtifact('model')])
-class CoreMLClassifier(kappa.BentoService):
+class CoreMLClassifier(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df: pd.DataFrame) -> float:
         model: MLModel = self.artifacts.model

@@ -67,10 +67,10 @@ class MultiImageInput(MultiFileInput):
 
     .. code-block:: python
 
-        from kappa import BentoService
+        from kappa import MyModel
         import kappa
 
-        class MyService(BentoService):
+        class MyService(MyModel):
             @kappa.api(
                 input=MultiImageInput(input_names=('imageX', 'imageY')), batch=True)
             def predict(self, image_groups):

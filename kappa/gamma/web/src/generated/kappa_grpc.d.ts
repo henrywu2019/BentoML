@@ -3099,255 +3099,255 @@ export namespace kappa {
         }
     }
 
-    /** Properties of a BentoServiceMetadata. */
-    interface IBentoServiceMetadata {
+    /** Properties of a MyModelMetadata. */
+    interface IMyModelMetadata {
 
-        /** BentoServiceMetadata name */
+        /** MyModelMetadata name */
         name?: (string|null);
 
-        /** BentoServiceMetadata version */
+        /** MyModelMetadata version */
         version?: (string|null);
 
-        /** BentoServiceMetadata created_at */
+        /** MyModelMetadata created_at */
         created_at?: (google.protobuf.ITimestamp|null);
 
-        /** BentoServiceMetadata env */
-        env?: (kappa.BentoServiceMetadata.IBentoServiceEnv|null);
+        /** MyModelMetadata env */
+        env?: (kappa.MyModelMetadata.IMyModelEnv|null);
 
-        /** BentoServiceMetadata artifacts */
-        artifacts?: (kappa.BentoServiceMetadata.IBentoArtifact[]|null);
+        /** MyModelMetadata artifacts */
+        artifacts?: (kappa.MyModelMetadata.IBentoArtifact[]|null);
 
-        /** BentoServiceMetadata apis */
-        apis?: (kappa.BentoServiceMetadata.IBentoServiceApi[]|null);
+        /** MyModelMetadata apis */
+        apis?: (kappa.MyModelMetadata.IMyModelApi[]|null);
 
-        /** BentoServiceMetadata labels */
+        /** MyModelMetadata labels */
         labels?: ({ [k: string]: string }|null);
     }
 
-    /** Represents a BentoServiceMetadata. */
-    class BentoServiceMetadata implements IBentoServiceMetadata {
+    /** Represents a MyModelMetadata. */
+    class MyModelMetadata implements IMyModelMetadata {
 
         /**
-         * Constructs a new BentoServiceMetadata.
+         * Constructs a new MyModelMetadata.
          * @param [properties] Properties to set
          */
-        constructor(properties?: kappa.IBentoServiceMetadata);
+        constructor(properties?: kappa.IMyModelMetadata);
 
-        /** BentoServiceMetadata name. */
+        /** MyModelMetadata name. */
         public name: string;
 
-        /** BentoServiceMetadata version. */
+        /** MyModelMetadata version. */
         public version: string;
 
-        /** BentoServiceMetadata created_at. */
+        /** MyModelMetadata created_at. */
         public created_at?: (google.protobuf.ITimestamp|null);
 
-        /** BentoServiceMetadata env. */
-        public env?: (kappa.BentoServiceMetadata.IBentoServiceEnv|null);
+        /** MyModelMetadata env. */
+        public env?: (kappa.MyModelMetadata.IMyModelEnv|null);
 
-        /** BentoServiceMetadata artifacts. */
-        public artifacts: kappa.BentoServiceMetadata.IBentoArtifact[];
+        /** MyModelMetadata artifacts. */
+        public artifacts: kappa.MyModelMetadata.IBentoArtifact[];
 
-        /** BentoServiceMetadata apis. */
-        public apis: kappa.BentoServiceMetadata.IBentoServiceApi[];
+        /** MyModelMetadata apis. */
+        public apis: kappa.MyModelMetadata.IMyModelApi[];
 
-        /** BentoServiceMetadata labels. */
+        /** MyModelMetadata labels. */
         public labels: { [k: string]: string };
 
         /**
-         * Creates a new BentoServiceMetadata instance using the specified properties.
+         * Creates a new MyModelMetadata instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BentoServiceMetadata instance
+         * @returns MyModelMetadata instance
          */
-        public static create(properties?: kappa.IBentoServiceMetadata): kappa.BentoServiceMetadata;
+        public static create(properties?: kappa.IMyModelMetadata): kappa.MyModelMetadata;
 
         /**
-         * Encodes the specified BentoServiceMetadata message. Does not implicitly {@link kappa.BentoServiceMetadata.verify|verify} messages.
-         * @param message BentoServiceMetadata message or plain object to encode
+         * Encodes the specified MyModelMetadata message. Does not implicitly {@link kappa.MyModelMetadata.verify|verify} messages.
+         * @param message MyModelMetadata message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: kappa.IBentoServiceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: kappa.IMyModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BentoServiceMetadata message, length delimited. Does not implicitly {@link kappa.BentoServiceMetadata.verify|verify} messages.
-         * @param message BentoServiceMetadata message or plain object to encode
+         * Encodes the specified MyModelMetadata message, length delimited. Does not implicitly {@link kappa.MyModelMetadata.verify|verify} messages.
+         * @param message MyModelMetadata message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: kappa.IBentoServiceMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: kappa.IMyModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BentoServiceMetadata message from the specified reader or buffer.
+         * Decodes a MyModelMetadata message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BentoServiceMetadata
+         * @returns MyModelMetadata
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): kappa.BentoServiceMetadata;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): kappa.MyModelMetadata;
 
         /**
-         * Decodes a BentoServiceMetadata message from the specified reader or buffer, length delimited.
+         * Decodes a MyModelMetadata message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BentoServiceMetadata
+         * @returns MyModelMetadata
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): kappa.BentoServiceMetadata;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): kappa.MyModelMetadata;
 
         /**
-         * Verifies a BentoServiceMetadata message.
+         * Verifies a MyModelMetadata message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BentoServiceMetadata message from a plain object. Also converts values to their respective internal types.
+         * Creates a MyModelMetadata message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BentoServiceMetadata
+         * @returns MyModelMetadata
          */
-        public static fromObject(object: { [k: string]: any }): kappa.BentoServiceMetadata;
+        public static fromObject(object: { [k: string]: any }): kappa.MyModelMetadata;
 
         /**
-         * Creates a plain object from a BentoServiceMetadata message. Also converts values to other types if specified.
-         * @param message BentoServiceMetadata
+         * Creates a plain object from a MyModelMetadata message. Also converts values to other types if specified.
+         * @param message MyModelMetadata
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: kappa.BentoServiceMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: kappa.MyModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BentoServiceMetadata to JSON.
+         * Converts this MyModelMetadata to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    namespace BentoServiceMetadata {
+    namespace MyModelMetadata {
 
-        /** Properties of a BentoServiceEnv. */
-        interface IBentoServiceEnv {
+        /** Properties of a MyModelEnv. */
+        interface IMyModelEnv {
 
-            /** BentoServiceEnv setup_sh */
+            /** MyModelEnv setup_sh */
             setup_sh?: (string|null);
 
-            /** BentoServiceEnv conda_env */
+            /** MyModelEnv conda_env */
             conda_env?: (string|null);
 
-            /** BentoServiceEnv pip_dependencies */
+            /** MyModelEnv pip_dependencies */
             pip_dependencies?: (string|null);
 
-            /** BentoServiceEnv python_version */
+            /** MyModelEnv python_version */
             python_version?: (string|null);
 
-            /** BentoServiceEnv docker_base_image */
+            /** MyModelEnv docker_base_image */
             docker_base_image?: (string|null);
 
-            /** BentoServiceEnv pip_packages */
+            /** MyModelEnv pip_packages */
             pip_packages?: (string[]|null);
 
-            /** BentoServiceEnv requirements_txt */
+            /** MyModelEnv requirements_txt */
             requirements_txt?: (string|null);
         }
 
-        /** Represents a BentoServiceEnv. */
-        class BentoServiceEnv implements IBentoServiceEnv {
+        /** Represents a MyModelEnv. */
+        class MyModelEnv implements IMyModelEnv {
 
             /**
-             * Constructs a new BentoServiceEnv.
+             * Constructs a new MyModelEnv.
              * @param [properties] Properties to set
              */
-            constructor(properties?: kappa.BentoServiceMetadata.IBentoServiceEnv);
+            constructor(properties?: kappa.MyModelMetadata.IMyModelEnv);
 
-            /** BentoServiceEnv setup_sh. */
+            /** MyModelEnv setup_sh. */
             public setup_sh: string;
 
-            /** BentoServiceEnv conda_env. */
+            /** MyModelEnv conda_env. */
             public conda_env: string;
 
-            /** BentoServiceEnv pip_dependencies. */
+            /** MyModelEnv pip_dependencies. */
             public pip_dependencies: string;
 
-            /** BentoServiceEnv python_version. */
+            /** MyModelEnv python_version. */
             public python_version: string;
 
-            /** BentoServiceEnv docker_base_image. */
+            /** MyModelEnv docker_base_image. */
             public docker_base_image: string;
 
-            /** BentoServiceEnv pip_packages. */
+            /** MyModelEnv pip_packages. */
             public pip_packages: string[];
 
-            /** BentoServiceEnv requirements_txt. */
+            /** MyModelEnv requirements_txt. */
             public requirements_txt: string;
 
             /**
-             * Creates a new BentoServiceEnv instance using the specified properties.
+             * Creates a new MyModelEnv instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns BentoServiceEnv instance
+             * @returns MyModelEnv instance
              */
-            public static create(properties?: kappa.BentoServiceMetadata.IBentoServiceEnv): kappa.BentoServiceMetadata.BentoServiceEnv;
+            public static create(properties?: kappa.MyModelMetadata.IMyModelEnv): kappa.MyModelMetadata.MyModelEnv;
 
             /**
-             * Encodes the specified BentoServiceEnv message. Does not implicitly {@link kappa.BentoServiceMetadata.BentoServiceEnv.verify|verify} messages.
-             * @param message BentoServiceEnv message or plain object to encode
+             * Encodes the specified MyModelEnv message. Does not implicitly {@link kappa.MyModelMetadata.MyModelEnv.verify|verify} messages.
+             * @param message MyModelEnv message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: kappa.BentoServiceMetadata.IBentoServiceEnv, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: kappa.MyModelMetadata.IMyModelEnv, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified BentoServiceEnv message, length delimited. Does not implicitly {@link kappa.BentoServiceMetadata.BentoServiceEnv.verify|verify} messages.
-             * @param message BentoServiceEnv message or plain object to encode
+             * Encodes the specified MyModelEnv message, length delimited. Does not implicitly {@link kappa.MyModelMetadata.MyModelEnv.verify|verify} messages.
+             * @param message MyModelEnv message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: kappa.BentoServiceMetadata.IBentoServiceEnv, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: kappa.MyModelMetadata.IMyModelEnv, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a BentoServiceEnv message from the specified reader or buffer.
+             * Decodes a MyModelEnv message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns BentoServiceEnv
+             * @returns MyModelEnv
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): kappa.BentoServiceMetadata.BentoServiceEnv;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): kappa.MyModelMetadata.MyModelEnv;
 
             /**
-             * Decodes a BentoServiceEnv message from the specified reader or buffer, length delimited.
+             * Decodes a MyModelEnv message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns BentoServiceEnv
+             * @returns MyModelEnv
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): kappa.BentoServiceMetadata.BentoServiceEnv;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): kappa.MyModelMetadata.MyModelEnv;
 
             /**
-             * Verifies a BentoServiceEnv message.
+             * Verifies a MyModelEnv message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a BentoServiceEnv message from a plain object. Also converts values to their respective internal types.
+             * Creates a MyModelEnv message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns BentoServiceEnv
+             * @returns MyModelEnv
              */
-            public static fromObject(object: { [k: string]: any }): kappa.BentoServiceMetadata.BentoServiceEnv;
+            public static fromObject(object: { [k: string]: any }): kappa.MyModelMetadata.MyModelEnv;
 
             /**
-             * Creates a plain object from a BentoServiceEnv message. Also converts values to other types if specified.
-             * @param message BentoServiceEnv
+             * Creates a plain object from a MyModelEnv message. Also converts values to other types if specified.
+             * @param message MyModelEnv
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: kappa.BentoServiceMetadata.BentoServiceEnv, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: kappa.MyModelMetadata.MyModelEnv, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this BentoServiceEnv to JSON.
+             * Converts this MyModelEnv to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -3373,7 +3373,7 @@ export namespace kappa {
              * Constructs a new BentoArtifact.
              * @param [properties] Properties to set
              */
-            constructor(properties?: kappa.BentoServiceMetadata.IBentoArtifact);
+            constructor(properties?: kappa.MyModelMetadata.IBentoArtifact);
 
             /** BentoArtifact name. */
             public name: string;
@@ -3389,23 +3389,23 @@ export namespace kappa {
              * @param [properties] Properties to set
              * @returns BentoArtifact instance
              */
-            public static create(properties?: kappa.BentoServiceMetadata.IBentoArtifact): kappa.BentoServiceMetadata.BentoArtifact;
+            public static create(properties?: kappa.MyModelMetadata.IBentoArtifact): kappa.MyModelMetadata.BentoArtifact;
 
             /**
-             * Encodes the specified BentoArtifact message. Does not implicitly {@link kappa.BentoServiceMetadata.BentoArtifact.verify|verify} messages.
+             * Encodes the specified BentoArtifact message. Does not implicitly {@link kappa.MyModelMetadata.BentoArtifact.verify|verify} messages.
              * @param message BentoArtifact message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: kappa.BentoServiceMetadata.IBentoArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: kappa.MyModelMetadata.IBentoArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified BentoArtifact message, length delimited. Does not implicitly {@link kappa.BentoServiceMetadata.BentoArtifact.verify|verify} messages.
+             * Encodes the specified BentoArtifact message, length delimited. Does not implicitly {@link kappa.MyModelMetadata.BentoArtifact.verify|verify} messages.
              * @param message BentoArtifact message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: kappa.BentoServiceMetadata.IBentoArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: kappa.MyModelMetadata.IBentoArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
              * Decodes a BentoArtifact message from the specified reader or buffer.
@@ -3415,7 +3415,7 @@ export namespace kappa {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): kappa.BentoServiceMetadata.BentoArtifact;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): kappa.MyModelMetadata.BentoArtifact;
 
             /**
              * Decodes a BentoArtifact message from the specified reader or buffer, length delimited.
@@ -3424,7 +3424,7 @@ export namespace kappa {
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): kappa.BentoServiceMetadata.BentoArtifact;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): kappa.MyModelMetadata.BentoArtifact;
 
             /**
              * Verifies a BentoArtifact message.
@@ -3438,7 +3438,7 @@ export namespace kappa {
              * @param object Plain object
              * @returns BentoArtifact
              */
-            public static fromObject(object: { [k: string]: any }): kappa.BentoServiceMetadata.BentoArtifact;
+            public static fromObject(object: { [k: string]: any }): kappa.MyModelMetadata.BentoArtifact;
 
             /**
              * Creates a plain object from a BentoArtifact message. Also converts values to other types if specified.
@@ -3446,7 +3446,7 @@ export namespace kappa {
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: kappa.BentoServiceMetadata.BentoArtifact, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: kappa.MyModelMetadata.BentoArtifact, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
              * Converts this BentoArtifact to JSON.
@@ -3455,145 +3455,145 @@ export namespace kappa {
             public toJSON(): { [k: string]: any };
         }
 
-        /** Properties of a BentoServiceApi. */
-        interface IBentoServiceApi {
+        /** Properties of a MyModelApi. */
+        interface IMyModelApi {
 
-            /** BentoServiceApi name */
+            /** MyModelApi name */
             name?: (string|null);
 
-            /** BentoServiceApi input_type */
+            /** MyModelApi input_type */
             input_type?: (string|null);
 
-            /** BentoServiceApi docs */
+            /** MyModelApi docs */
             docs?: (string|null);
 
-            /** BentoServiceApi input_config */
+            /** MyModelApi input_config */
             input_config?: (google.protobuf.IStruct|null);
 
-            /** BentoServiceApi output_config */
+            /** MyModelApi output_config */
             output_config?: (google.protobuf.IStruct|null);
 
-            /** BentoServiceApi output_type */
+            /** MyModelApi output_type */
             output_type?: (string|null);
 
-            /** BentoServiceApi mb_max_latency */
+            /** MyModelApi mb_max_latency */
             mb_max_latency?: (number|null);
 
-            /** BentoServiceApi mb_max_batch_size */
+            /** MyModelApi mb_max_batch_size */
             mb_max_batch_size?: (number|null);
 
-            /** BentoServiceApi batch */
+            /** MyModelApi batch */
             batch?: (boolean|null);
 
-            /** BentoServiceApi route */
+            /** MyModelApi route */
             route?: (string|null);
         }
 
-        /** Represents a BentoServiceApi. */
-        class BentoServiceApi implements IBentoServiceApi {
+        /** Represents a MyModelApi. */
+        class MyModelApi implements IMyModelApi {
 
             /**
-             * Constructs a new BentoServiceApi.
+             * Constructs a new MyModelApi.
              * @param [properties] Properties to set
              */
-            constructor(properties?: kappa.BentoServiceMetadata.IBentoServiceApi);
+            constructor(properties?: kappa.MyModelMetadata.IMyModelApi);
 
-            /** BentoServiceApi name. */
+            /** MyModelApi name. */
             public name: string;
 
-            /** BentoServiceApi input_type. */
+            /** MyModelApi input_type. */
             public input_type: string;
 
-            /** BentoServiceApi docs. */
+            /** MyModelApi docs. */
             public docs: string;
 
-            /** BentoServiceApi input_config. */
+            /** MyModelApi input_config. */
             public input_config?: (google.protobuf.IStruct|null);
 
-            /** BentoServiceApi output_config. */
+            /** MyModelApi output_config. */
             public output_config?: (google.protobuf.IStruct|null);
 
-            /** BentoServiceApi output_type. */
+            /** MyModelApi output_type. */
             public output_type: string;
 
-            /** BentoServiceApi mb_max_latency. */
+            /** MyModelApi mb_max_latency. */
             public mb_max_latency: number;
 
-            /** BentoServiceApi mb_max_batch_size. */
+            /** MyModelApi mb_max_batch_size. */
             public mb_max_batch_size: number;
 
-            /** BentoServiceApi batch. */
+            /** MyModelApi batch. */
             public batch: boolean;
 
-            /** BentoServiceApi route. */
+            /** MyModelApi route. */
             public route: string;
 
             /**
-             * Creates a new BentoServiceApi instance using the specified properties.
+             * Creates a new MyModelApi instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns BentoServiceApi instance
+             * @returns MyModelApi instance
              */
-            public static create(properties?: kappa.BentoServiceMetadata.IBentoServiceApi): kappa.BentoServiceMetadata.BentoServiceApi;
+            public static create(properties?: kappa.MyModelMetadata.IMyModelApi): kappa.MyModelMetadata.MyModelApi;
 
             /**
-             * Encodes the specified BentoServiceApi message. Does not implicitly {@link kappa.BentoServiceMetadata.BentoServiceApi.verify|verify} messages.
-             * @param message BentoServiceApi message or plain object to encode
+             * Encodes the specified MyModelApi message. Does not implicitly {@link kappa.MyModelMetadata.MyModelApi.verify|verify} messages.
+             * @param message MyModelApi message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: kappa.BentoServiceMetadata.IBentoServiceApi, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: kappa.MyModelMetadata.IMyModelApi, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified BentoServiceApi message, length delimited. Does not implicitly {@link kappa.BentoServiceMetadata.BentoServiceApi.verify|verify} messages.
-             * @param message BentoServiceApi message or plain object to encode
+             * Encodes the specified MyModelApi message, length delimited. Does not implicitly {@link kappa.MyModelMetadata.MyModelApi.verify|verify} messages.
+             * @param message MyModelApi message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: kappa.BentoServiceMetadata.IBentoServiceApi, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: kappa.MyModelMetadata.IMyModelApi, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a BentoServiceApi message from the specified reader or buffer.
+             * Decodes a MyModelApi message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns BentoServiceApi
+             * @returns MyModelApi
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): kappa.BentoServiceMetadata.BentoServiceApi;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): kappa.MyModelMetadata.MyModelApi;
 
             /**
-             * Decodes a BentoServiceApi message from the specified reader or buffer, length delimited.
+             * Decodes a MyModelApi message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns BentoServiceApi
+             * @returns MyModelApi
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): kappa.BentoServiceMetadata.BentoServiceApi;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): kappa.MyModelMetadata.MyModelApi;
 
             /**
-             * Verifies a BentoServiceApi message.
+             * Verifies a MyModelApi message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a BentoServiceApi message from a plain object. Also converts values to their respective internal types.
+             * Creates a MyModelApi message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns BentoServiceApi
+             * @returns MyModelApi
              */
-            public static fromObject(object: { [k: string]: any }): kappa.BentoServiceMetadata.BentoServiceApi;
+            public static fromObject(object: { [k: string]: any }): kappa.MyModelMetadata.MyModelApi;
 
             /**
-             * Creates a plain object from a BentoServiceApi message. Also converts values to other types if specified.
-             * @param message BentoServiceApi
+             * Creates a plain object from a MyModelApi message. Also converts values to other types if specified.
+             * @param message MyModelApi
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: kappa.BentoServiceMetadata.BentoServiceApi, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: kappa.MyModelMetadata.MyModelApi, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this BentoServiceApi to JSON.
+             * Converts this MyModelApi to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -3613,7 +3613,7 @@ export namespace kappa {
         uri?: (kappa.IBentoUri|null);
 
         /** Bento bento_service_metadata */
-        bento_service_metadata?: (kappa.IBentoServiceMetadata|null);
+        bento_service_metadata?: (kappa.IMyModelMetadata|null);
 
         /** Bento status */
         status?: (kappa.IUploadStatus|null);
@@ -3638,7 +3638,7 @@ export namespace kappa {
         public uri?: (kappa.IBentoUri|null);
 
         /** Bento bento_service_metadata. */
-        public bento_service_metadata?: (kappa.IBentoServiceMetadata|null);
+        public bento_service_metadata?: (kappa.IMyModelMetadata|null);
 
         /** Bento status. */
         public status?: (kappa.IUploadStatus|null);
@@ -4039,7 +4039,7 @@ export namespace kappa {
         upload_status?: (kappa.IUploadStatus|null);
 
         /** UpdateBentoRequest service_metadata */
-        service_metadata?: (kappa.IBentoServiceMetadata|null);
+        service_metadata?: (kappa.IMyModelMetadata|null);
     }
 
     /** Represents an UpdateBentoRequest. */
@@ -4061,7 +4061,7 @@ export namespace kappa {
         public upload_status?: (kappa.IUploadStatus|null);
 
         /** UpdateBentoRequest service_metadata. */
-        public service_metadata?: (kappa.IBentoServiceMetadata|null);
+        public service_metadata?: (kappa.IMyModelMetadata|null);
 
         /**
          * Creates a new UpdateBentoRequest instance using the specified properties.

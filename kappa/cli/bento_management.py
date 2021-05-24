@@ -111,7 +111,7 @@ def _print_bentos_info(bentos, output_type):
 
 def add_bento_sub_command(cli):
     # pylint: disable=unused-variable
-    @cli.command(help='Get BentoService information')
+    @cli.command(help='Get MyModel information')
     @click.argument('bento', type=click.STRING)
     @click.option(
         '--limit', type=click.INT, help='Limit how many resources will be retrieved'
@@ -121,7 +121,7 @@ def add_bento_sub_command(cli):
     @click.option(
         '--labels',
         type=click.STRING,
-        help="Label query to filter BentoServices, supports '=', '!=', 'IN', 'NotIn', "
+        help="Label query to filter MyModels, supports '=', '!=', 'IN', 'NotIn', "
         "'Exists', and 'DoesNotExist'. (e.g. key1=value1, key2!=value2, key3 "
         "In (value3, value3a), key4 DoesNotExist)",
     )
@@ -152,17 +152,17 @@ def add_bento_sub_command(cli):
             )
             _print_bentos_info(result, output)
 
-    @cli.command(name='list', help='List BentoServices information')
+    @cli.command(name='list', help='List MyModels information')
     @click.option(
-        '--limit', type=click.INT, help='Limit how many BentoServices will be retrieved'
+        '--limit', type=click.INT, help='Limit how many MyModels will be retrieved'
     )
     @click.option(
-        '--offset', type=click.INT, help='How many BentoServices will be skipped'
+        '--offset', type=click.INT, help='How many MyModels will be skipped'
     )
     @click.option(
         '--labels',
         type=click.STRING,
-        help="Label query to filter BentoServices, supports '=', '!=', 'IN', 'NotIn', "
+        help="Label query to filter MyModels, supports '=', '!=', 'IN', 'NotIn', "
         "'Exists', and 'DoesNotExist'. (e.g. key1=value1, key2!=value2, key3 "
         "In (value3, value3a), key4 DoesNotExist)",
     )
@@ -253,7 +253,7 @@ Specify target service bundles to remove:
                         raise click.BadParameter(
                             "Bad formatting. Please present in BentoName:Version, "
                             "for example \"iris_classifier:v1.2.0\". For list of "
-                            "BentoService, separate tags by \",\", for example: "
+                            "MyModel, separate tags by \",\", for example: "
                             "\"my_service:v1,my_service:v2,classifier:v3\""
                         )
                     yc.repository.delete(
@@ -274,7 +274,7 @@ Specify target service bundles to remove:
                 prune=all, labels=labels, require_confirm=False if yes else True,
             )
 
-    @cli.command(help='Pull BentoService from remote gamma server',)
+    @cli.command(help='Pull MyModel from remote gamma server',)
     @click.argument("bento", type=click.STRING)
     @click.option(
         '--gamma-url',
@@ -283,13 +283,13 @@ Specify target service bundles to remove:
     )
     def pull(bento, gamma_url):
         if ':' not in bento:
-            _echo(f'BentoService {bento} invalid - specify name:version')
+            _echo(f'MyModel {bento} invalid - specify name:version')
             return
         yc = get_gamma_client(gamma_url)
         yc.repository.pull(bento=bento)
         _echo(f'Pulled {bento} from {gamma_url}')
 
-    @cli.command(help='Push BentoService to remote gamma server')
+    @cli.command(help='Push MyModel to remote gamma server')
     @click.argument("bento", type=click.STRING)
     @click.option(
         '--gamma-url',
@@ -305,7 +305,7 @@ Specify target service bundles to remove:
     )
     def push(bento, gamma_url, with_labels):
         if ':' not in bento:
-            _echo(f'BentoService {bento} invalid - specify name:version')
+            _echo(f'MyModel {bento} invalid - specify name:version')
             return
         yc = get_gamma_client(gamma_url)
         yc.repository.push(bento, with_labels)
@@ -319,7 +319,7 @@ Specify target service bundles to remove:
     )
     @click.option(
         '--target_dir',
-        help="Target directory to save BentoService. Defaults to the current directory",
+        help="Target directory to save MyModel. Defaults to the current directory",
         default=os.getcwd(),
     )
     def retrieve(bento, gamma_url, target_dir):

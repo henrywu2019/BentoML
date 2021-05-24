@@ -67,9 +67,9 @@ class TfNativeModelWithRagged(tf.Module):
 
 @pytest.fixture(scope="session")
 def svc():
-    """Return a TensorFlow2 BentoService."""
-    # When the ExampleBentoService got saved and loaded again in the test, the
-    # two class attribute below got set to the loaded BentoService class.
+    """Return a TensorFlow2 MyModel."""
+    # When the ExampleMyModel got saved and loaded again in the test, the
+    # two class attribute below got set to the loaded MyModel class.
     # Resetting it here so it does not effect other tests
     Tensorflow2Classifier._bento_service_bundle_path = None
     Tensorflow2Classifier._bento_service_bundle_version = None

@@ -37,8 +37,8 @@ from kappa.saved_bundle.config import (
     SavedBundleConfig,
 )
 from kappa.saved_bundle.pip_pkg import seek_pip_packages
-from kappa.service.artifacts import ArtifactCollection, BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import ArtifactCollection, MyModelArtifact
+from kappa.service.env import MyModelEnv
 from kappa.service.inference_api import InferenceAPI
 from kappa.utils.hybridmethod import hybridmethod
 
@@ -95,7 +95,7 @@ def api_decorator(
     **kwargs,
 ):  # pylint: disable=redefined-builtin
     """
-    A decorator exposed as `kappa.api` for defining Inference API in a BentoService
+    A decorator exposed as `kappa.api` for defining Inference API in a MyModel
     class.
 
     :param input: InputAdapter instance of the inference API
@@ -118,10 +118,10 @@ def api_decorator(
 
     Example usage:
 
-    >>> from kappa import BentoService, api
+    >>> from kappa import MyModel, api
     >>> from kappa.adapters import JsonInput, DataframeInput
     >>>
-    >>> class FraudDetectionAndIdentityService(BentoService):
+    >>> class FraudDetectionAndIdentityService(MyModel):
     >>>
     >>>     @api(input=JsonInput(), batch=True)
     >>>     def fraud_detect(self, json_list):
@@ -145,7 +145,7 @@ def api_decorator(
                 inspect.isclass(args[0]) and issubclass(args[0], BaseInputAdapter)
             ):
                 raise InvalidArgument(
-                    "BentoService @api decorator first parameter must "
+                    "MyModel @api decorator first parameter must "
                     "be an instance of a class derived from "
                     "kappa.adapters.BaseInputAdapter "
                 )
@@ -178,13 +178,13 @@ def api_decorator(
 
 
 def web_static_content_decorator(web_static_content):
-    """Define web UI static files required to be bundled with a BentoService
+    """Define web UI static files required to be bundled with a MyModel
 
     Args:
         web_static_content: path to directory containg index.html and static dir
 
     >>>  @web_static_content('./ui/')
-    >>>  class MyMLService(BentoService):
+    >>>  class MyMLService(MyModel):
     >>>     pass
     """
 
@@ -195,28 +195,28 @@ def web_static_content_decorator(web_static_content):
     return decorator
 
 
-def artifacts_decorator(artifacts: List[BentoServiceArtifact]):
-    """Define artifacts required to be bundled with a BentoService
+def artifacts_decorator(artifacts: List[MyModelArtifact]):
+    """Define artifacts required to be bundled with a MyModel
 
     Args:
-        artifacts (list(kappa.artifact.BentoServiceArtifact)): A list of desired
-            artifacts required by this BentoService
+        artifacts (list(kappa.artifact.MyModelArtifact)): A list of desired
+            artifacts required by this MyModel
     """
 
     def decorator(bento_service_cls):
         artifact_names = set()
         for artifact in artifacts:
-            if not isinstance(artifact, BentoServiceArtifact):
+            if not isinstance(artifact, MyModelArtifact):
                 raise InvalidArgument(
-                    "BentoService @artifacts decorator only accept list of "
-                    "BentoServiceArtifact instances, instead got type: '%s'"
+                    "MyModel @artifacts decorator only accept list of "
+                    "MyModelArtifact instances, instead got type: '%s'"
                     % type(artifact)
                 )
 
             if artifact.name in artifact_names:
                 raise InvalidArgument(
                     "Duplicated artifact name `%s` detected. Each artifact within one"
-                    "BentoService must have an unique name" % artifact.name
+                    "MyModel must have an unique name" % artifact.name
                 )
 
             artifact_names.add(artifact.name)
@@ -245,7 +245,7 @@ def env_decorator(
     docker_base_image: str = None,
     zipimport_archives: List[str] = None,
 ):
-    """Define environment and dependencies required for the BentoService being created
+    """Define environment and dependencies required for the MyModel being created
 
     Args:
         pip_packages:: list of pip_packages required, specified by package name
@@ -272,7 +272,7 @@ def env_decorator(
         docker_base_image: used for customizing the docker container image built with
             Kappa saved bundle. Base image must either have both `bash` and `conda`
             installed; or have `bash`, `pip`, `python` installed, in which case the user
-            is required to ensure the python version matches the BentoService bundle
+            is required to ensure the python version matches the MyModel
         zipimport_archives: list of zipimport archives paths relative to the module path
     """
 
@@ -295,7 +295,7 @@ def env_decorator(
         )
 
     def decorator(bento_service_cls):
-        bento_service_cls._env = BentoServiceEnv(
+        bento_service_cls._env = MyModelEnv(
             pip_packages=pip_packages or pip_dependencies,
             pip_index_url=pip_index_url,
             pip_trusted_host=pip_trusted_host,
@@ -317,13 +317,13 @@ def env_decorator(
 
 
 def ver_decorator(major, minor):
-    """Decorator for specifying the version of a custom BentoService.
+    """Decorator for specifying the version of a custom MyModel.
 
     Args:
         major (int): Major version number for Bento Service
         minor (int): Minor version number for Bento Service
 
-    Kappa uses semantic versioning for BentoService distribution:
+    Kappa uses semantic versioning for MyModel distribution:
 
     * MAJOR is incremented when you make breaking API changes
 
@@ -332,7 +332,7 @@ def ver_decorator(major, minor):
 
     * PATCH is incremented when you make backwards-compatible bug fixes
 
-    'Patch' is provided(or auto generated) when calling BentoService#save,
+    'Patch' is provided(or auto generated) when calling MyModel#save,
     while 'Major' and 'Minor' can be defined with '@ver' decorator
 
     >>>  from kappa import ver, artifacts
@@ -340,14 +340,14 @@ def ver_decorator(major, minor):
     >>>
     >>>  @ver(major=1, minor=4)
     >>>  @artifacts([PickleArtifact('model')])
-    >>>  class MyMLService(BentoService):
+    >>>  class MyMLService(MyModel):
     >>>     pass
     >>>
     >>>  svc = MyMLService()
     >>>  svc.pack("model", trained_classifier)
     >>>  svc.set_version("2019-08.iteration20")
     >>>  svc.save()
-    >>>  # The final produced BentoService bundle will have version:
+    >>>  # The final produced MyModel will have version:
     >>>  # "1.4.2019-08.iteration20"
     """
 
@@ -373,34 +373,34 @@ def validate_version_str(version_str):
         and re.match(semver_regex, version_str) is None
     ):
         raise InvalidArgument(
-            'Invalid BentoService version: "{}", it can only consist'
+            'Invalid MyModel version: "{}", it can only consist'
             ' ALPHA / DIGIT / "-" / "." / "_", and must be less than'
             "128 characters".format(version_str)
         )
 
     if version_str.lower() == "latest":
-        raise InvalidArgument('BentoService version can not be set to "latest"')
+        raise InvalidArgument('MyModel version can not be set to "latest"')
 
 
 def save(bento_service, base_path=None, version=None, labels=None):
     """
-    Save and register the given BentoService via Kappa's built-in model management
+    Save and register the given MyModel via Kappa's built-in model management
     system. Kappa by default keeps track of all the SavedBundle's files and metadata
     in local file system under the $BENTOML_HOME(~/kappa) directory. Users can also
-    configure Kappa to save their BentoService to a shared Database and cloud object
+    configure Kappa to save their MyModel to a shared Database and cloud object
     storage such as AWS S3.
 
-    :param bento_service: target BentoService instance to be saved
+    :param bento_service: target MyModel instance to be saved
     :param base_path: optional - override repository base path
     :param version: optional - save with version override
     :param labels: optional - user defined labels
 
-    :return: saved_path: file path to where the BentoService is saved
+    :return: saved_path: file path to where the MyModel is saved
     """
 
     logger.warning(
-        "`from kappa import save` is being deprecated soon, use BentoService#save "
-        "and BentoService#save_to_dir instead."
+        "`from kappa import save` is being deprecated soon, use MyModel#save "
+        "and MyModel#save_to_dir instead."
     )
 
     from kappa.gamma.client import GammaClient
@@ -415,24 +415,24 @@ def save(bento_service, base_path=None, version=None, labels=None):
     return gamma_client.repository.upload(bento_service, version, labels)
 
 
-class BentoService:
+class MyModel:
     """
-    BentoService is the base component for building prediction services using Kappa.
+    MyModel is the base component for building prediction services using Kappa.
 
-    BentoService provide an abstraction for describing model artifacts and environment
+    MyModel provide an abstraction for describing model artifacts and environment
     dependencies required for a prediction service. And allows users to create inference
     APIs that defines the inferencing logic and how the underlying model can be served.
-    Each BentoService can contain multiple models and serve multiple inference APIs.
+    Each MyModel can contain multiple models and serve multiple inference APIs.
 
     Usage example:
 
-    >>>  from kappa import BentoService, env, api, artifacts
+    >>>  from kappa import MyModel, env, api, artifacts
     >>>  from kappa.adapters import DataframeInput
     >>>  from kappa.frameworks.sklearn import SklearnModelArtifact
     >>>
     >>>  @artifacts([SklearnModelArtifact('clf')])
     >>>  @env(pip_packages=["scikit-learn"])
-    >>>  class MyMLService(BentoService):
+    >>>  class MyMLService(MyModel):
     >>>
     >>>     @api(input=DataframeInput(), batch=True)
     >>>     def predict(self, df):
@@ -444,31 +444,31 @@ class BentoService:
     >>>     bento_service.save_to_dir('/kappa_bundles')
     """
 
-    # List of inference APIs that this BentoService provides
+    # List of inference APIs that this MyModel provides
     _inference_apis: List[InferenceAPI] = []
 
-    # Name of this BentoService. It is default the class name of this BentoService class
+    # Name of this MyModel. It is default the class name of this MyModel class
     _bento_service_name: str = None
 
-    # For BentoService loaded from saved bundle, this will be set to the path of bundle.
-    # When user install BentoService bundle as a PyPI package, this will be set to the
+    # For MyModel loaded from saved bundle, this will be set to the path of bundle.
+    # When user install MyModel as a PyPI package, this will be set to the
     # installed site-package location of current python environment
     _bento_service_bundle_path: str = None
 
-    # List of artifacts required by this BentoService class, declared via the `@env`
+    # List of artifacts required by this MyModel class, declared via the `@env`
     # decorator. This list is used for initializing an empty ArtifactCollection when
-    # the BentoService class is instantiated
-    _declared_artifacts: List[BentoServiceArtifact] = []
+    # the MyModel class is instantiated
+    _declared_artifacts: List[MyModelArtifact] = []
 
     # An instance of ArtifactCollection, containing all required trained model artifacts
     _artifacts: ArtifactCollection = None
 
-    #  A `BentoServiceEnv` instance specifying the required dependencies and all system
+    #  A `MyModelEnv` instance specifying the required dependencies and all system
     #  environment setups
     _env = None
 
-    # When loading BentoService from saved bundle, this will be set to the version of
-    # the saved BentoService bundle
+    # When loading MyModel from saved bundle, this will be set to the version of
+    # the saved MyModel
     _bento_service_bundle_version = None
 
     # See `ver_decorator` function above for more information
@@ -479,7 +479,7 @@ class BentoService:
     _web_static_content = None
 
     def __init__(self):
-        # When creating BentoService instance from a saved bundle, set version to the
+        # When creating MyModel instance from a saved bundle, set version to the
         # version specified in the saved bundle
         self._bento_service_version = self.__class__._bento_service_bundle_version
         self._dev_server_bundle_path: tempfile.TemporaryDirectory = None
@@ -491,7 +491,7 @@ class BentoService:
         self._config_environments()
 
     def _config_environments(self):
-        self._env = self.__class__._env or BentoServiceEnv()
+        self._env = self.__class__._env or MyModelEnv()
 
         for api in self._inference_apis:
             self._env.add_pip_packages(api.input_adapter.pip_dependencies)
@@ -517,7 +517,7 @@ class BentoService:
                 mb_max_batch_size = getattr(function, "_mb_max_batch_size")
                 batch = getattr(function, "_batch")
 
-                # Bind api method call with self(BentoService instance)
+                # Bind api method call with self(MyModel instance)
                 user_func = function.__get__(self)
 
                 self._inference_apis.append(
@@ -541,7 +541,7 @@ class BentoService:
         )
 
         if self._bento_service_bundle_path:
-            # For pip installed BentoService, artifacts directory is located at
+            # For pip installed MyModel, artifacts directory is located at
             # 'package_path/artifacts/', but for loading from bundle directory, it is
             # in 'path/{service_name}/artifacts/'
             if os.path.isdir(
@@ -567,7 +567,7 @@ class BentoService:
         return self._inference_apis
 
     def get_inference_api(self, api_name):
-        """Find the inference API in this BentoService with a specific name.
+        """Find the inference API in this MyModel with a specific name.
 
         When the api_name is None, this returns the first Inference API found in the
         `self.inference_apis` list.
@@ -591,12 +591,12 @@ class BentoService:
 
     @property
     def artifacts(self):
-        """ Returns the ArtifactCollection instance specified with this BentoService
+        """ Returns the ArtifactCollection instance specified with this MyModel
         class
 
         Returns:
             artifacts(ArtifactCollection): A dictionary of packed artifacts from the
-            artifact name to the BentoServiceArtifact instance
+            artifact name to the MyModelArtifact instance
         """
         return self._artifacts
 
@@ -622,19 +622,19 @@ class BentoService:
     @property
     def name(self):
         """
-        :return: BentoService name
+        :return: MyModel name
         """
         return self.__class__.name()  # pylint: disable=no-value-for-parameter
 
     @name.classmethod
     def name(cls):  # pylint: disable=no-self-argument,invalid-overridden-method
         """
-        :return: BentoService name
+        :return: MyModel name
         """
         if cls._bento_service_name is not None:
             if not cls._bento_service_name.isidentifier():
                 raise InvalidArgument(
-                    'BentoService#_bento_service_name must be valid python identifier'
+                    'MyModel#_bento_service_name must be valid python identifier'
                     'matching regex `(letter|"_")(letter|digit|"_")*`'
                 )
 
@@ -644,17 +644,17 @@ class BentoService:
             return cls.__name__
 
     def set_version(self, version_str=None):
-        """Set the version of this BentoService instance. Once the version is set
+        """Set the version of this MyModel instance. Once the version is set
         explicitly via `set_version`, the `self.versioneer` method will no longer be
-        invoked when saving this BentoService.
+        invoked when saving this MyModel.
         """
         if version_str is None:
             version_str = self.versioneer()
 
         if self._version_major is not None and self._version_minor is not None:
-            # Kappa uses semantic versioning for BentoService distribution
+            # Kappa uses semantic versioning for MyModel distribution
             # when user specified the MAJOR and MINOR version number along with
-            # the BentoService class definition with '@ver' decorator.
+            # the MyModel class definition with '@ver' decorator.
             # The parameter version(or auto generated version) here will be used as
             # PATCH field in the final version:
             version_str = ".".join(
@@ -665,7 +665,7 @@ class BentoService:
 
         if self.__class__._bento_service_bundle_version is not None:
             logger.warning(
-                "Overriding loaded BentoService(%s) version:%s to %s",
+                "Overriding loaded MyModel(%s) version:%s to %s",
                 self.__class__._bento_service_bundle_path,
                 self.__class__._bento_service_bundle_version,
                 version_str,
@@ -677,7 +677,7 @@ class BentoService:
             and self._bento_service_version != version_str
         ):
             logger.warning(
-                "Resetting BentoService '%s' version from %s to %s",
+                "Resetting MyModel '%s' version from %s to %s",
                 self.name,
                 self._bento_service_version,
                 version_str,
@@ -688,7 +688,7 @@ class BentoService:
 
     def versioneer(self):
         """
-        Function used to generate a new version string when saving a new BentoService
+        Function used to generate a new version string when saving a new MyModel
         bundle. User can also override this function to get a customized version format
         """
         datetime_string = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -700,16 +700,16 @@ class BentoService:
     @property
     def version(self):
         """
-        Return the version of this BentoService. If the version of this BentoService has
+        Return the version of this MyModel. If the version of this MyModel has
         not been set explicitly via `self.set_version`, a new version will be generated
         with the `self.versioneer` method. User can customize this version str either by
         setting the version with `self.set_version` before a `save` call, or override
         the `self.versioneer` method to customize the version str generator logic.
 
-        For BentoService loaded from a saved bundle, this will simply return the version
+        For MyModel loaded from a saved bundle, this will simply return the version
         information found in the saved bundle.
 
-        :return: BentoService version str
+        :return: MyModel version str
         """
         if self.__class__._bento_service_bundle_version is not None:
             return self.__class__._bento_service_bundle_version
@@ -721,16 +721,16 @@ class BentoService:
 
     def save(self, gamma_url=None, version=None, labels=None):
         """
-        Save and register this BentoService via Kappa's built-in model management
+        Save and register this MyModel via Kappa's built-in model management
         system. Kappa by default keeps track of all the SavedBundle's files and
         metadata in local file system under the $BENTOML_HOME(~/kappa) directory.
-        Users can also configure Kappa to save their BentoService to a shared Database
+        Users can also configure Kappa to save their MyModel to a shared Database
         and cloud object storage such as AWS S3.
 
         :param gamma_url: optional - URL path to Gamma server
         :param version: optional - save with version override
         :param labels: optional - labels dictionary
-        :return: saved_path: file path to where the BentoService is saved
+        :return: saved_path: file path to where the MyModel is saved
         """
         from kappa.gamma.client import get_gamma_client
 
@@ -739,7 +739,7 @@ class BentoService:
         return yc.repository.upload(self, version, labels)
 
     def save_to_dir(self, path, version=None):
-        """Save this BentoService along with all its artifacts, source code and
+        """Save this MyModel along with all its artifacts, source code and
         dependencies to target file path, assuming path exist and empty. If target path
         is not empty, this call may override existing files in the given path.
 
@@ -751,15 +751,15 @@ class BentoService:
     @hybridmethod
     def pack(self, name, *args, **kwargs):
         """
-        BentoService#pack method is used for packing trained model instances with a
-        BentoService instance and make it ready for BentoService#save.
+        MyModel#pack method is used for packing trained model instances with a
+        MyModel instance and make it ready for MyModel#save.
 
         pack(name, *args, **kwargs):
 
         :param name: name of the declared model artifact
         :param args: args passing to the target model artifact to be packed
         :param kwargs: kwargs passing to the target model artifact to be packed
-        :return: this BentoService instance
+        :return: this MyModel instance
         """
         self.artifacts.get(name).pack(*args, **kwargs)
         return self
@@ -767,11 +767,11 @@ class BentoService:
     @pack.classmethod
     def pack(cls, *args, **kwargs):  # pylint: disable=no-self-argument
         """
-        **Deprecated**: Legacy `BentoService#pack` class method, no longer supported
+        **Deprecated**: Legacy `MyModel#pack` class method, no longer supported
         """
         raise BentoMLException(
-            "BentoService#pack class method is deprecated, use instance method `pack` "
-            "instead. e.g.: svc = MyBentoService(); svc.pack('model', model_object)"
+            "MyModel#pack class method is deprecated, use instance method `pack` "
+            "instead. e.g.: svc = MyMyModel(); svc.pack('model', model_object)"
         )
 
     def get_bento_service_metadata_pb(self):
@@ -885,7 +885,7 @@ class BentoService:
             # customized Kappa branch for development but use a different stable
             # version for deployment
             #
-            # For example, a BentoService created with local dirty branch will fail
+            # For example, a MyModel created with local dirty branch will fail
             # to deploy with docker due to the version can't be found on PyPI, but
             # get_kappa_deploy_version gives the user the latest released PyPI
             # version that's closest to the `dirty` branch

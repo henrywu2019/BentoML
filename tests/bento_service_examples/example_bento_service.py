@@ -6,9 +6,9 @@ from kappa.service.artifacts.pickle import PickleArtifact
 
 @kappa.artifacts([PickleArtifact("model")])
 @kappa.env(infer_pip_packages=True)
-class ExampleBentoService(kappa.BentoService):
+class ExampleMyModel(kappa.MyModel):
     """
-    Example BentoService class made for testing purpose
+    Example MyModel class made for testing purpose
     """
 
     @kappa.api(

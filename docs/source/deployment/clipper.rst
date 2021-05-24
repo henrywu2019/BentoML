@@ -22,7 +22,7 @@ Prerequisites
   * Install instruction: https://docs.docker.com/install
 
 
-Build BentoService for Clipper
+Build MyModel for Clipper
 ------------------------------
 
 ===========================
@@ -44,18 +44,18 @@ Kappa provides input types that are specific for use with Clipper, including `Cl
 `ClipperIntsInput`, `ClipperFloatsInput`, `ClipperDoublesInput`, `ClipperStringsInput` each
 corresponding to one input type that clipper support.
 
-Other than using Clipper specific input, the rest are the same as defining a regular BentoService class:
+Other than using Clipper specific input, the rest are the same as defining a regular MyModel class:
 
 .. code-block:: python
 
     >>> # save this to a separate iris_classifier.py file
-    >>> from kappa import BentoService, api, env, artifacts
+    >>> from kappa import MyModel, api, env, artifacts
     >>> from kappa.service.artifacts.common import PickleArtifact
     >>> from kappa.adapters import DataframeInput, ClipperFloatsInput
 
     >>> @artifacts([PickleArtifact('model')])
     >>> @env(infer_pip_packages=True)
-    >>> class IrisClassifier(BentoService):
+    >>> class IrisClassifier(MyModel):
 
     >>>     @api(input=DataframeInput(), batch=True)
     >>>     def predict(self, df):
@@ -66,18 +66,18 @@ Other than using Clipper specific input, the rest are the same as defining a reg
     >>>         return self.artifacts.model.predict(inputs)
 
 
-Save the BentoService
+Save the MyModel
 
 .. code-block:: python
 
-    >>> # 1) import the custom BentoService defined above
+    >>> # 1) import the custom MyModel defined above
     >>> from iris_classifier import IrisClassifier
 
     >>> # 2) `pack` it with required artifacts
     >>> svc = IrisClassifier()
     >>> svc.pack('model', clf)
 
-    >>> # 3) save packed BentoService as archive
+    >>> # 3) save packed MyModel as archive
     >>> saved_path = svc.save()
 
     running sdist
@@ -91,7 +91,7 @@ Save the BentoService
     ...
     ...
     ...
-    [2019-11-13 15:41:24,395] INFO - BentoService bundle 'IrisClassifier:20191113154121_E7D3CE' created at: /Users/chaoyuyang/kappa/repository/IrisClassifier/20191113154121_E7D3CE
+    [2019-11-13 15:41:24,395] INFO - MyModel 'IrisClassifier:20191113154121_E7D3CE' created at: /Users/chaoyuyang/kappa/repository/IrisClassifier/20191113154121_E7D3CE
 
 
 Test the clipper input directly with a list of floats as input
@@ -103,7 +103,7 @@ Test the clipper input directly with a list of floats as input
     array([0])
 
 
-Deploying BentoService to local Clipper cluster
+Deploying MyModel to local Clipper cluster
 -----------------------------------------------
 
 The sample code below assumes you have docker setup and starts a local Clipper cluster using Docker.
@@ -131,8 +131,8 @@ Register an application on the clipper cluster
     19-11-13:15:43:58 INFO     [clipper_admin.py:236] [default-cluster] Application kappa-test was successfully registered
 
 
-Now you can deploy the saved BentoService using this Clipper connection and Kappa's `kappa.clipper.deploy_bentoml` API,
-which will first build a clipper model docker image that containing your BentoService and then deploy it to the cluster.
+Now you can deploy the saved MyModel using this Clipper connection and Kappa's `kappa.clipper.deploy_bentoml` API,
+which will first build a clipper model docker image that containing your MyModel and then deploy it to the cluster.
 
 .. code-block:: python
 
@@ -142,7 +142,7 @@ which will first build a clipper model docker image that containing your BentoSe
 
     >>> clipper_model_name, clipper_model_version = deploy_bentoml(cl, saved_path, 'predict_clipper')
 
-    [2019-11-13 15:45:49,422] WARNING - Kappa local changes detected - Local Kappa repository including all code changes will be bundled together with the BentoService archive. When used with docker, the base docker image will be default to same version as last PyPI release at version: 0.4.9. You can also force kappa to use a specific version for deploying your BentoService archive, by setting the config 'core/bentoml_deploy_version' to a pinned version or your custom Kappa on github, e.g.:'bentoml_deploy_version = git+https://github.com/{username}/kappa.git@{branch}'
+    [2019-11-13 15:45:49,422] WARNING - Kappa local changes detected - Local Kappa repository including all code changes will be bundled together with the MyModel archive. When used with docker, the base docker image will be default to same version as last PyPI release at version: 0.4.9. You can also force kappa to use a specific version for deploying your MyModel archive, by setting the config 'core/bentoml_deploy_version' to a pinned version or your custom Kappa on github, e.g.:'bentoml_deploy_version = git+https://github.com/{username}/kappa.git@{branch}'
     [2019-11-13 15:45:49,444] WARNING - BentoArchive version mismatch: loading archive bundled in version 0.4.9,  but loading from version 0.4.9+7.g429b9ec.dirty
     [2019-11-13 15:45:49,772] INFO - Step 1/10 : FROM clipper/python-closure-container:0.4.1
     [2019-11-13 15:45:49,775] INFO -

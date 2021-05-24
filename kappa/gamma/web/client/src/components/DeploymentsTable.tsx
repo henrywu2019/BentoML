@@ -9,7 +9,7 @@ const DEPLOYMENTS_TABLE_HEADERS = [
   "Name",
   "Namespace",
   "Platform",
-  "BentoService",
+  "MyModel",
   "Status",
   "Age",
   "Last updated at",

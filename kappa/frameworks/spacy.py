@@ -2,13 +2,13 @@ import logging
 import os
 
 from kappa.exceptions import InvalidArgument, MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 logger = logging.getLogger(__name__)
 
 
-class SpacyModelArtifact(BentoServiceArtifact):
+class SpacyModelArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading spacy models
     with to_disk and spacy.util.load_model methods.
@@ -40,7 +40,7 @@ class SpacyModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([SpacyModelArtifact('nlp')])
-    >>> class SpacyModelService(kappa.BentoService):
+    >>> class SpacyModelService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=JsonInput(), batch=False)
     >>>     def predict(self, parsed_json):
@@ -96,7 +96,7 @@ class SpacyModelArtifact(BentoServiceArtifact):
 
         return self.pack(model)
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(['spacy'])
 
     def get(self):

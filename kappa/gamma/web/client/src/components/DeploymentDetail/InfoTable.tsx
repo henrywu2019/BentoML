@@ -33,7 +33,7 @@ const InfoTable = ({ deployment }) => {
     },
     {
       content: [
-        "BentoService",
+        "MyModel",
         <Link
           to={`/repository/${deployment.spec.bento_name}/${deployment.spec.bento_version}`}
         >

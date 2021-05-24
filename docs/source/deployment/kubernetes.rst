@@ -65,7 +65,7 @@ Verify the saved bundle created:
         "type": "LOCAL",
         "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
-      "bentoServiceMetadata": {
+      "MyModelMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
@@ -84,7 +84,7 @@ Verify the saved bundle created:
           {
             "name": "predict",
             "InputType": "DataframeInput",
-            "docs": "BentoService API"
+            "docs": "MyModel API"
           }
         ]
       }
@@ -92,7 +92,7 @@ Verify the saved bundle created:
 
 
 The Kappa saved bundle created can now be used to start a REST API Server hosting the
-BentoService and available for sending test request:
+MyModel and available for sending test request:
 
 .. code-block:: bash
 
@@ -111,7 +111,7 @@ BentoService and available for sending test request:
 
 
 =================================
-Deploy BentoService to Kubernetes
+Deploy MyModel to Kubernetes
 =================================
 
 Kappa provides a convenient way to containerize the model API server with Docker:

@@ -4,12 +4,12 @@ Deployment Guides
 =================
 
 Kappa provides a set of APIs and CLI commands for automating cloud deployment workflow
-which gets your BentoService API server up and running in the cloud, and allows you to
+which gets your MyModel API server up and running in the cloud, and allows you to
 easily update and monitor the service. Currently Kappa have implemented this workflow
 for AWS Lambda and AWS Sagemaker. More platforms such as AWS EC2, Kubernetes Cluster,
 Azure Virtual Machines are on our roadmap.
 
-You can also manually deploy the BentoService API Server or its docker image to cloud
+You can also manually deploy the MyModel API Server or its docker image to cloud
 platforms, and we've created a few step by step tutorials for doing that.
 
 .. note::

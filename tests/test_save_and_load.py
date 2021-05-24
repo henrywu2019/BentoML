@@ -55,9 +55,9 @@ def test_warning_when_save_without_declared_artifact(
     with mock.patch('kappa.saved_bundle.bundler.logger') as log_mock:
         svc.save_to_dir(str(tmpdir))
         log_mock.warning.assert_called_once_with(
-            "Missing declared artifact '%s' for BentoService '%s'",
+            "Missing declared artifact '%s' for MyModel '%s'",
             'model',
-            'ExampleBentoService',
+            'ExampleMyModel',
         )
 
 
@@ -130,7 +130,7 @@ def test_pack_metadata(tmpdir, example_bento_service_class):
     assert model_service.artifacts.get('model').metadata == model_metadata
 
 
-class TestBentoWithOutArtifact(kappa.BentoService):
+class TestBentoWithOutArtifact(kappa.MyModel):
     __test__ = False
 
     @kappa.api(input=DataframeInput(), batch=True)
@@ -155,7 +155,7 @@ def test_save_duplicated_bento_exception_raised(example_bento_service_class):
     assert svc.version == svc_metadata.version
 
     with pytest.raises(BentoMLException):
-        with patch.object(kappa.BentoService, 'save_to_dir') as save_to_dir_method:
+        with patch.object(kappa.MyModel, 'save_to_dir') as save_to_dir_method:
             # attempt to save again
             svc.save()
             save_to_dir_method.assert_not_called()

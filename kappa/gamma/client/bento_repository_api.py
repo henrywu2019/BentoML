@@ -66,17 +66,17 @@ class BentoRepositoryAPIClient:
 
     def push(self, bento, with_labels=True):
         """
-        Push a local BentoService to a remote gamma server.
+        Push a local MyModel to a remote gamma server.
 
         Args:
-            bento: a BentoService identifier in the format of NAME:VERSION
+            bento: a MyModel identifier in the format of NAME:VERSION
 
         Returns:
-            BentoService saved path
+            MyModel saved path
 
         Example:
 
-        >>> svc = MyBentoService()
+        >>> svc = MyMyModel()
         >>> svc.save()
         >>>
         >>> remote_gamma_client = get_gamma_client('http://remote.gamma.service:50050')
@@ -108,14 +108,14 @@ class BentoRepositoryAPIClient:
 
     def pull(self, bento):
         """
-        Pull a BentoService from a remote gamma service. The BentoService will be saved
+        Pull a MyModel from a remote gamma service. The MyModel will be saved
         and registered with local gamma service.
 
         Args:
-            bento: a BentoService identifier in the form of NAME:VERSION
+            bento: a MyModel identifier in the form of NAME:VERSION
 
         Returns:
-            BentoService saved path
+            MyModel saved path
 
         Example:
 
@@ -145,14 +145,14 @@ class BentoRepositoryAPIClient:
 
     def upload(self, bento_service, version=None, labels=None):
         """Save and upload given bento_service to gamma_service, which manages all your
-        saved BentoService bundles and model serving deployments.
+        saved MyModels and model serving deployments.
 
         Args:
-            bento_service (kappa.service.BentoService): a Bento Service instance
+            bento_service (kappa.service.MyModel): a Bento Service instance
             version (str): optional,
             labels (dict): optional
         Return:
-            URI to where the BentoService is being saved to
+            URI to where the MyModel is being saved to
         """
         with TempDirectory() as tmpdir:
             save_to_dir(bento_service, tmpdir, version, silent=True)
@@ -172,9 +172,9 @@ class BentoRepositoryAPIClient:
         )
         if get_bento_response.status.status_code == status_pb2.Status.OK:
             raise BentoMLException(
-                "BentoService bundle {}:{} already registered in repository. Reset "
-                "BentoService version with BentoService#set_version or bypass Kappa's"
-                " model registry feature with BentoService#save_to_dir".format(
+                "MyModel {}:{} already registered in repository. Reset "
+                "MyModel version with MyModel#set_version or bypass Kappa's"
+                " model registry feature with MyModel#save_to_dir".format(
                     bento_service_metadata.name, bento_service_metadata.version
                 )
             )
@@ -194,7 +194,7 @@ class BentoRepositoryAPIClient:
 
         if response.status.status_code != status_pb2.Status.OK:
             raise BentoMLException(
-                "Error adding BentoService bundle to repository: {}:{}".format(
+                "Error adding MyModel to repository: {}:{}".format(
                     Status.Name(response.status.status_code),
                     response.status.error_message,
                 )
@@ -209,7 +209,7 @@ class BentoRepositoryAPIClient:
             self._update_bento_upload_progress(bento_service_metadata)
 
             logger.info(
-                "BentoService bundle '%s:%s' saved to: %s",
+                "MyModel '%s:%s' saved to: %s",
                 bento_service_metadata.name,
                 bento_service_metadata.version,
                 response.uri.uri,
@@ -250,7 +250,7 @@ class BentoRepositoryAPIClient:
                     bento_service_metadata, UploadStatus.ERROR
                 )
                 raise BentoMLException(
-                    f"Error saving BentoService bundle to {uri_type}."
+                    f"Error saving MyModel to {uri_type}."
                     f"{http_response.status_code}: {http_response.text}"
                 )
 
@@ -294,10 +294,10 @@ class BentoRepositoryAPIClient:
 
     def get(self, bento):
         """
-        Get a BentoService info
+        Get a MyModel info
 
         Args:
-            bento: a BentoService identifier in the format of NAME:VERSION
+            bento: a MyModel identifier in the format of NAME:VERSION
 
         Returns:
             kappa.gamma.proto.repository_pb2.Bento
@@ -310,7 +310,7 @@ class BentoRepositoryAPIClient:
         track('py-api-get')
         if ':' not in bento:
             raise BentoMLException(
-                'BentoService name or version is missing. Please provide in the '
+                'MyModel name or version is missing. Please provide in the '
                 'format of name:version'
             )
         name, version = bento.split(':')
@@ -322,7 +322,7 @@ class BentoRepositoryAPIClient:
                 result.status
             )
             raise BentoMLException(
-                f'BentoService {name}:{version} not found - '
+                f'MyModel {name}:{version} not found - '
                 f'{error_code}:{error_message}'
             )
         return result.bento
@@ -337,10 +337,10 @@ class BentoRepositoryAPIClient:
         ascending_order=None,
     ):
         """
-        List BentoServices that satisfy the specified criteria.
+        List MyModels that satisfy the specified criteria.
 
         Args:
-            bento_name: optional. BentoService name
+            bento_name: optional. MyModel name
             limit: optional. maximum number of returned results
             labels: optional.
             offset: optional. offset of results
@@ -415,7 +415,7 @@ class BentoRepositoryAPIClient:
             labels: string
             bento_name: string
             bento_version: string
-            prune: boolean, Set True to delete all BentoService
+            prune: boolean, Set True to delete all MyModel
             require_confirm: boolean
         Example:
         >>>
@@ -486,7 +486,7 @@ class BentoRepositoryAPIClient:
 
     def containerize(self, bento, tag=None, build_args=None, push=False):
         """
-        Create a container image from a BentoService.
+        Create a container image from a MyModel.
 
         Args:
             bento: string
@@ -500,7 +500,7 @@ class BentoRepositoryAPIClient:
         track('py-api-containerize')
         if ':' not in bento:
             raise BentoMLException(
-                'BentoService name or version is missing. Please provide in the '
+                'MyModel name or version is missing. Please provide in the '
                 'format of name:version'
             )
         name, version = bento.split(':')
@@ -528,15 +528,15 @@ class BentoRepositoryAPIClient:
         Args:
             bento: string,
         Returns:
-            BentoService instance
+            MyModel instance
 
         Example:
         >>> gamma_client = get_gamma_client()
-        >>> # Load BentoService bases on bento tag.
+        >>> # Load MyModel bases on bento tag.
         >>> bento = gamma_client.repository.load('Service_name:version')
-        >>> # Load BentoService from bento bundle path
+        >>> # Load MyModel from bento bundle path
         >>> bento = gamma_client.repository.load('/path/to/bento/bundle')
-        >>> # Load BentoService from s3 storage
+        >>> # Load MyModel from s3 storage
         >>> bento = gamma_client.repository.load('s3://bucket/path/bundle.tar.gz')
         """
         track('py-api-load')

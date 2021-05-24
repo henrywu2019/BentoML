@@ -8,7 +8,7 @@ from kappa.frameworks.xgboost import XgboostModelArtifact
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([XgboostModelArtifact('model')])
-class XgboostModelClassifier(kappa.BentoService):
+class XgboostModelClassifier(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         dmatrix = xgb.DMatrix(df)

@@ -10,7 +10,7 @@ from kappa.gamma.proto.deployment_pb2 import (
 )
 from kappa.gamma.proto.repository_pb2 import (
     Bento,
-    BentoServiceMetadata,
+    MyModelMetadata,
     BentoUri,
     GetBentoResponse,
 )
@@ -42,7 +42,7 @@ def create_gamma_service_mock(repo_storage_type=BentoUri.LOCAL):
     if repo_storage_type == BentoUri.LOCAL:
         bento_pb.uri.uri = '/tmp/path/to/bundle'
     bento_pb.uri.type = repo_storage_type
-    api = BentoServiceMetadata.BentoServiceApi(name='predict')
+    api = MyModelMetadata.MyModelApi(name='predict')
     bento_pb.bento_service_metadata.apis.extend([api])
     bento_pb.bento_service_metadata.env.python_version = '3.7.0'
     get_bento_response = GetBentoResponse(bento=bento_pb)

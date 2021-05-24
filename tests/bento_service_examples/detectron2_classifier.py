@@ -19,7 +19,7 @@ def get_traceback_list():
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([DetectronModelArtifact('model')])
-class DetectronClassifier(kappa.BentoService):
+class DetectronClassifier(kappa.MyModel):
     @kappa.api(input=ImageInput(), batch=False)
     def predict(self, original_image: np.ndarray) -> Dict:
         _aug = T.ResizeShortestEdge([800, 800], 1333)

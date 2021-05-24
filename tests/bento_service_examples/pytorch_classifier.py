@@ -8,7 +8,7 @@ from kappa.frameworks.pytorch import PytorchModelArtifact
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([PytorchModelArtifact('model')])
-class PytorchClassifier(kappa.BentoService):
+class PytorchClassifier(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         input_data = df.to_numpy().astype(numpy.float32)

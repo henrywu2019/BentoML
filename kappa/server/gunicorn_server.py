@@ -58,7 +58,7 @@ if psutil.POSIX:
             >>>     bind="0.0.0.0:5000")
             >>> gunicorn_app.run()
 
-        :param bundle_path: path to the saved BentoService bundle
+        :param bundle_path: path to the saved MyModel
         :param bind: Specify a server socket to bind. Server sockets can be any of
             $(HOST), $(HOST):$(PORT), fd://$(FD), or unix:$(PATH).
         :param workers: number of worker processes

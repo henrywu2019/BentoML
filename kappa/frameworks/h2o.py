@@ -2,11 +2,11 @@ import os
 import shutil
 
 from kappa.exceptions import MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 
-class H2oModelArtifact(BentoServiceArtifact):
+class H2oModelArtifact(MyModelArtifact):
     """Abstraction for saving/loading objects with h2o.save_model and h2o.load_model
 
     Args:
@@ -32,7 +32,7 @@ class H2oModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.artifacts([H2oModelArtifact('model')])
     >>> @kappa.env(infer_pip_packages=True)
-    >>> class H2oModelService(kappa.BentoService):
+    >>> class H2oModelService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=DataframeInput(), batch=True)
     >>>     def predict(self, df):
@@ -50,7 +50,7 @@ class H2oModelArtifact(BentoServiceArtifact):
 
         self._model = None
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(['h2o'])
         env.add_conda_dependencies(['openjdk'])
 

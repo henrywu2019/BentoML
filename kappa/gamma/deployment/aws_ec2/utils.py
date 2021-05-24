@@ -1,7 +1,7 @@
 import boto3
 
 from kappa.gamma.deployment.aws_ec2.constants import (
-    BENTOSERVICE_PORT,
+    MyModel_PORT,
     AWS_EC2_IN_SERVICE_STATE,
     TARGET_HEALTHY_STATUS,
 )
@@ -68,7 +68,7 @@ def get_endpoints_from_instance_address(instances, api_names):
             for api in api_names:
                 all_endpoints.append(
                     "{ep}:{port}/{api}".format(
-                        ep=instance["endpoint"], port=BENTOSERVICE_PORT, api=api
+                        ep=instance["endpoint"], port=MyModel_PORT, api=api
                     )
                 )
 

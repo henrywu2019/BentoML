@@ -6,7 +6,7 @@ from kappa.frameworks.h2o import H2oModelArtifact
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([H2oModelArtifact('model')])
-class H2oExampleBentoService(kappa.BentoService):
+class H2oExampleMyModel(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         hf = h2o.H2OFrame(df)

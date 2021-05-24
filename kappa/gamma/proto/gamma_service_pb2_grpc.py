@@ -168,7 +168,7 @@ class GammaServicer(object):
 
     def UpdateBento(self, request, context):
         """RPC for updating a previously added Bento's information, including
-        the BentoService's Metadata(apis, env, artifacts etc) and the upload status.
+        the MyModel's Metadata(apis, env, artifacts etc) and the upload status.
         Gamma server expects the client to use this RPC for notifying that, for a
         previously requested AddBento call, what's the uploading progress and when the
         upload is completed

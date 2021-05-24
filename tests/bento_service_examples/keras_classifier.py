@@ -12,7 +12,7 @@ from kappa.frameworks.keras import KerasModelArtifact
         KerasModelArtifact('model2', store_as_json_and_weights=True),
     ]
 )
-class KerasClassifier(kappa.BentoService):
+class KerasClassifier(kappa.MyModel):
     @kappa.api(input=JsonInput(), batch=True)
     def predict(self, jsons):
         return self.artifacts.model.predict(np.array(jsons))

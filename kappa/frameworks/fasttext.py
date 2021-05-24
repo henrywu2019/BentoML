@@ -1,11 +1,11 @@
 import os
 
 from kappa.exceptions import MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 
-class FasttextModelArtifact(BentoServiceArtifact):
+class FasttextModelArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading fasttext models
 
@@ -28,7 +28,7 @@ class FasttextModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([FasttextModelArtifact('model')])
-    >>> class FasttextModelService(kappa.BentoService):
+    >>> class FasttextModelService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=JsonInput(), batch=False)
     >>>     def predict(self, parsed_json):
@@ -45,7 +45,7 @@ class FasttextModelArtifact(BentoServiceArtifact):
 
         self._model = None
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(["fasttext"])
 
     def _model_file_path(self, base_path):

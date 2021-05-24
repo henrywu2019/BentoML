@@ -1,10 +1,10 @@
 import os
 import re
 
-from kappa.service import BentoServiceArtifact
+from kappa.service import MyModelArtifact
 
 
-class TextFileArtifact(BentoServiceArtifact):
+class TextFileArtifact(MyModelArtifact):
     """Abstraction for saving/loading string to/from text files
 
     Args:

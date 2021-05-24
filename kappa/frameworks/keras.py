@@ -6,14 +6,14 @@ from kappa.exceptions import (
     InvalidArgument,
     MissingDependencyException,
 )
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 from kappa.utils import cloudpickle
 
 MODULE_NAME_FILE_ENCODING = "utf-8"
 
 
-class KerasModelArtifact(BentoServiceArtifact):
+class KerasModelArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading Keras model
 
@@ -45,7 +45,7 @@ class KerasModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([KerasModelArtifact('model')])
-    >>> class KerasModelService(kappa.BentoService):
+    >>> class KerasModelService(kappa.MyModel):
     >>>     @kappa.api(input=JsonInput(), batch=False)
     >>>     def predict(self, parsed_json):
     >>>         input_data = text.text_to_word_sequence(parsed_json['text'])
@@ -85,7 +85,7 @@ class KerasModelArtifact(BentoServiceArtifact):
         self._model = None
         self._custom_objects = None
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         # Note that keras module is not required, user can use tf.keras as an
         # replacement for the keras module. Although tensorflow module is required to
         #  be used as the default Keras backend

@@ -21,7 +21,7 @@ def test_auto_adapter_dependencies(bento_bundle_path):
     assert 'imageio' in dependencies
     assert 'kappa' in dependencies
 
-    # Test that dependencies also wrote to BentoServiceMetadata config file
+    # Test that dependencies also wrote to MyModelMetadata config file
 
 
 def _fit_clf():
@@ -58,14 +58,14 @@ def test_auto_artifact_dependencies():
     # Pack it with the newly trained model artifact
     iris_classifier_service.pack('model', clf)
 
-    # Save the prediction service to a BentoService bundle
+    # Save the prediction service to a MyModel
     saved_path = iris_classifier_service.save()
 
     # parse generated requirements.txt
     dependencies = _dependencies_to_requirements(_parse_dependencies(saved_path))
     _assert_in_dependencies(['scikit-learn', 'kappa'], dependencies)
 
-    # Test that dependencies also wrote to BentoServiceMetadata config file
+    # Test that dependencies also wrote to MyModelMetadata config file
     bs_metadata = load_bento_service_metadata(saved_path)
     dependencies = bs_metadata.env.pip_packages
     dependencies = _dependencies_to_requirements(dependencies)

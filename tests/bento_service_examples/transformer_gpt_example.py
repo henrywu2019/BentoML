@@ -5,7 +5,7 @@ from kappa.frameworks.transformers import TransformersModelArtifact
 
 @kappa.env(pip_packages=["torch==1.6.0", "transformers==3.1.0"])
 @kappa.artifacts([TransformersModelArtifact("gptModel")])
-class TransformersGPT2TextGenerator(kappa.BentoService):
+class TransformersGPT2TextGenerator(kappa.MyModel):
     @kappa.api(input=JsonInput(), batch=False)
     def predict(self, parsed_json):
         src_text = parsed_json.get("text")

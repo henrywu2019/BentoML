@@ -3,7 +3,7 @@ Deploying to Heroku
 
 Heroku is a popular platform as a service based on managed container system. It provides
 an easy solution to quickly build, run and scale applications. Kappa works great with
-Heroku. BentoServices could quickly deploy to Heroku as API model server for production.
+Heroku. MyModels could quickly deploy to Heroku as API model server for production.
 
 This guide demonstrates how to deploy a scikit-learn based iris classifier model with
 Kappa to Heroku. The same deployment steps are also applicable for models
@@ -56,7 +56,7 @@ Verify the saved bundle created:
         "type": "LOCAL",
         "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
-      "bentoServiceMetadata": {
+      "MyModelMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
@@ -75,7 +75,7 @@ Verify the saved bundle created:
           {
             "name": "predict",
             "InputType": "DataframeInput",
-            "docs": "BentoService API"
+            "docs": "MyModel API"
           }
         ]
       }
@@ -83,7 +83,7 @@ Verify the saved bundle created:
 
 
 The Kappa saved bundle created can now be used to start a REST API Server hosting the
-BentoService and available for sending test request:
+MyModel and available for sending test request:
 
 .. code-block:: bash
 

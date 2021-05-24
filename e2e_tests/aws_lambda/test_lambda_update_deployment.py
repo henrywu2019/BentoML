@@ -10,7 +10,7 @@ from e2e_tests.cli_operations import delete_deployment
 logger = logging.getLogger('kappa.test')
 
 
-def test_aws_lambda_update_deployment(basic_bentoservice_v1, basic_bentoservice_v2):
+def test_aws_lambda_update_deployment(basic_MyModel_v1, basic_MyModel_v2):
     random_hash = uuid.uuid4().hex[:6]
     deployment_name = f'tests-lambda-update-{random_hash}'
 
@@ -20,7 +20,7 @@ def test_aws_lambda_update_deployment(basic_bentoservice_v1, basic_bentoservice_
         'deploy',
         deployment_name,
         '-b',
-        basic_bentoservice_v1,
+        basic_MyModel_v1,
         '--region',
         'us-west-2',
         '--verbose',
@@ -41,7 +41,7 @@ def test_aws_lambda_update_deployment(basic_bentoservice_v1, basic_bentoservice_
             'update',
             deployment_name,
             '-b',
-            basic_bentoservice_v2,
+            basic_MyModel_v2,
             '--verbose',
         ]
 

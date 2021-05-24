@@ -7,7 +7,7 @@
 # (leave empty for SQLite)
 db_url: {}
 
-# Base URL for storing saved BentoService bundle files,
+# Base URL for storing saved MyModel files,
 # this can be a filesystem path(POSIX/Windows), or an S3
 # URL, usually starts with "s3://"
 repo_base_url: {}

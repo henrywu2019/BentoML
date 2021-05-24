@@ -48,7 +48,7 @@ def get_aws_ec2_sub_command():
     def aws_ec2():
         pass
 
-    @aws_ec2.command(help="Deploy BentoService to EC2")
+    @aws_ec2.command(help="Deploy MyModel to EC2")
     @click.argument("name", type=click.STRING)
     @click.option(
         "-b",
@@ -74,7 +74,7 @@ def get_aws_ec2_sub_command():
         "--desired-capacity",
         type=click.INT,
         default=DEFAULT_DESIRED_CAPACITY,
-        help="Desired number of instances size to run BentoService on."
+        help="Desired number of instances size to run MyModel on."
         "Should be between minimum and maximum capacities.Default is 1",
     )
     @click.option(
@@ -220,7 +220,7 @@ def get_aws_ec2_sub_command():
         "--bento-service-bundle",
         type=click.STRING,
         callback=parse_bento_tag_callback,
-        help="Target BentoService to be deployed, referenced by its name and version "
+        help="Target MyModel to be deployed, referenced by its name and version "
         'in format of name:version. For example: "iris_classifier:v1.2.0"',
     )
     @click.option(
@@ -241,7 +241,7 @@ def get_aws_ec2_sub_command():
         "--desired-capacity",
         type=click.INT,
         default=DEFAULT_DESIRED_CAPACITY,
-        help="Desired number of instances to run BentoService on."
+        help="Desired number of instances to run MyModel on."
         "Should be between minimum and maximum capacities.Default is 1",
     )
     @click.option(

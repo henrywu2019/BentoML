@@ -14,7 +14,7 @@ def format_path(path_str):
 
 
 @pytest.mark.skipif('not psutil.POSIX')
-def test_pip_install_saved_bentoservice_bundle(bento_bundle_path, tmpdir):
+def test_pip_install_saved_MyModel_bundle(bento_bundle_path, tmpdir):
     import subprocess
     from pip._internal.cli.main import main as pipmain
 
@@ -37,10 +37,10 @@ def test_pip_install_saved_bentoservice_bundle(bento_bundle_path, tmpdir):
     assert os.path.isdir(os.path.join(install_path, "kappa"))
 
     sys.path.insert(0, install_path)
-    ExampleBentoService = __import__("ExampleBentoService")
+    ExampleMyModel = __import__("ExampleMyModel")
     sys.path.remove(install_path)
 
-    svc = ExampleBentoService.load()
+    svc = ExampleMyModel.load()
     res = svc.predict_dataframe(pd.DataFrame(pd.DataFrame([1], columns=["col1"])))
     assert (res == 2).all()
 
@@ -49,9 +49,9 @@ def test_pip_install_saved_bentoservice_bundle(bento_bundle_path, tmpdir):
 
     # pip install should place cli entry script under target/bin directory
     if psutil.WINDOWS:
-        cli_bin_path = os.path.join(install_path, "bin", "ExampleBentoService.exe")
+        cli_bin_path = os.path.join(install_path, "bin", "ExampleMyModel.exe")
     else:
-        cli_bin_path = os.path.join(install_path, "bin", "ExampleBentoService")
+        cli_bin_path = os.path.join(install_path, "bin", "ExampleMyModel")
     assert os.path.isfile(cli_bin_path)
 
     # add install_path and local kappa module to PYTHONPATH to make them
@@ -63,7 +63,7 @@ def test_pip_install_saved_bentoservice_bundle(bento_bundle_path, tmpdir):
         [cli_bin_path, "info", "--quiet"], env=env
     ).decode()
     output = json.loads(output)
-    assert output["name"] == "ExampleBentoService"
+    assert output["name"] == "ExampleMyModel"
     assert output["version"] == svc.version
     assert "predict_dataframe" in map(lambda x: x["name"], output["apis"])
 

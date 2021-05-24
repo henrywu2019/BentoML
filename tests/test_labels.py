@@ -70,7 +70,7 @@ def test_deployment_labels():
             'deploy',
             'failed-name',
             '-b',
-            'ExampleBentoService:version',
+            'ExampleMyModel:version',
             '--labels',
             'test=abc',
         ],

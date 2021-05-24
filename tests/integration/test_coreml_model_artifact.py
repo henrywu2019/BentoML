@@ -13,8 +13,8 @@ from tests.integration.test_pytorch_model_artifact import test_df
 
 @pytest.fixture()
 def coreml_classifier_class():
-    # When the ExampleBentoService got saved and loaded again in the test, the two class
-    # attribute below got set to the loaded BentoService class. Resetting it here so it
+    # When the ExampleMyModel got saved and loaded again in the test, the two class
+    # attribute below got set to the loaded MyModel class. Resetting it here so it
     # does not effect other tests
     CoreMLClassifier._bento_service_bundle_path = None
     CoreMLClassifier._bento_service_bundle_version = None

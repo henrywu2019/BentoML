@@ -8,8 +8,8 @@ from kappa.exceptions import (
     InvalidArgument,
     MissingDependencyException,
 )
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ def _is_onnx_model_file(path):
     )
 
 
-class OnnxModelArtifact(BentoServiceArtifact):
+class OnnxModelArtifact(MyModelArtifact):
     """Abstraction for saving/loading onnx model
 
     Args:
@@ -69,7 +69,7 @@ class OnnxModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([OnnxModelArtifact('model', backend='onnxruntime')])
-    >>> class OnnxIrisClassifierService(kappa.BentoService):
+    >>> class OnnxIrisClassifierService(kappa.MyModel):
     >>>     @kappa.api(input=DataframeInput(), batch=True)
     >>>     def predict(self, df):
     >>>         input_data = df.to_numpy().astype(numpy.float32
@@ -87,7 +87,7 @@ class OnnxModelArtifact(BentoServiceArtifact):
     >>> # Option two: pack with ONNX model object
     >>> # svc.pack('model', onnx_model)
     >>>
-    >>> # Save BentoService
+    >>> # Save MyModel
     >>> svc.save()
     """
 
@@ -137,7 +137,7 @@ class OnnxModelArtifact(BentoServiceArtifact):
     def load(self, path):
         return self.pack(self._saved_model_file_path(path))
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         if self.backend == "onnxruntime":
             env.add_pip_packages(["onnxruntime"])
         elif self.backend == "onnxruntime-gpu":

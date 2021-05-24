@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bash Script that installs the dependencies specified in the BentoService archive
+# Bash Script that installs the dependencies specified in the MyModel archive
 #
 # Usage:
 #   * `kappa-init.sh` to run the full script

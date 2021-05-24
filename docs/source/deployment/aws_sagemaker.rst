@@ -2,7 +2,7 @@ Deploying to AWS SageMaker
 ==========================
 
 AWS Sagemaker is a fully managed services for quickly building ML models. Kappa provides great support
-for deploying BentoService to AWS Sagemaker without additional process and work from user. With Kappa,
+for deploying MyModel to AWS Sagemaker without additional process and work from user. With Kappa,
 users can enjoy the great system performance from Sagemaker with any popular ML frameworks.
 
 
@@ -23,7 +23,7 @@ Prerequisites
 AWS Sagemaker deployment and management with Kappa
 ----------------------------------------------------
 
-This guide uses the IrisClassifier BentoService from the :doc:`Quick start guide <../quickstart>`:
+This guide uses the IrisClassifier MyModel from the :doc:`Quick start guide <../quickstart>`:
 
 .. code-block:: bash
 
@@ -32,18 +32,18 @@ This guide uses the IrisClassifier BentoService from the :doc:`Quick start guide
     python ./kappa/guides/quick-start/main.py
 
 
-Use `bento list` to get the BentoService name:version tag.
+Use `bento list` to get the MyModel name:version tag.
 
 .. code-block:: bash
 
     > kappa list
 
-    BentoService                          CREATED_AT                  APIS                        ARTIFACTS
+    MyModel                          CREATED_AT                  APIS                        ARTIFACTS
     IrisClassifier:20200121141808_FE78B5  2020-01-21 22:18:25.079723  predict(DataframeInput)  model(SklearnModelArtifact)
 
 
-Deploy to Sagemaker requires a deployment name, BentoService name:version tag, and api name from the
-BentoService bundle. We apply those values to  `kappa sagemaker deploy`.
+Deploy to Sagemaker requires a deployment name, MyModel name:version tag, and api name from the
+MyModel. We apply those values to  `kappa sagemaker deploy`.
 
 
 .. code-block:: bash
@@ -181,7 +181,7 @@ and other information about the deployment
     }
 
 
-Use AWS CLI to verify that the BentoService is properly deployed to Sagemaker and is ready to inference
+Use AWS CLI to verify that the MyModel is properly deployed to Sagemaker and is ready to inference
 
 .. code-block:: bash
 
@@ -252,7 +252,7 @@ Removing Sagemaker deployment is as easy as deploying one.  Kappa will remove an
 Deploy and manage AWS Sagemaker deployments with remote GammaService
 ====================================================================
 
-Kappa recommends to use remote GammaService for managing and deploying BentoService
+Kappa recommends to use remote GammaService for managing and deploying MyModel
 when you are working in a team. To deploy AWS Sagemaker deployments with remote
 GammaService, you need to provide the AWS credentials.
 

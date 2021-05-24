@@ -10,7 +10,7 @@ from kappa.frameworks.paddle import PaddlePaddleModelArtifact
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([PaddlePaddleModelArtifact('model')])
-class PaddleService(kappa.BentoService):
+class PaddleService(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         input_data = df.to_numpy().astype(np.float32)

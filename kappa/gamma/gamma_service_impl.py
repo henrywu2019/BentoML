@@ -361,7 +361,7 @@ def get_gamma_service_impl(base=object):
                     )
                     if bento_pb:
                         error_message = (
-                            "BentoService bundle: "
+                            "MyModel: "
                             "{}:{} already exists".format(
                                 request.bento_name, request.bento_version
                             )
@@ -423,7 +423,7 @@ def get_gamma_service_impl(base=object):
                     )
                     if not bento_pb:
                         msg = (
-                            f"BentoService "
+                            f"MyModel "
                             f"{request.bento_name}:{request.bento_version} "
                             f"has already been deleted"
                         )
@@ -432,7 +432,7 @@ def get_gamma_service_impl(base=object):
                         )
 
                     logger.debug(
-                        'Deleting BentoService %s:%s',
+                        'Deleting MyModel %s:%s',
                         request.bento_name,
                         request.bento_version,
                     )
@@ -481,7 +481,7 @@ def get_gamma_service_impl(base=object):
                     else:
                         return GetBentoResponse(
                             status=Status.NOT_FOUND(
-                                "BentoService `{}:{}` is not found".format(
+                                "MyModel `{}:{}` is not found".format(
                                     request.bento_name, request.bento_version
                                 )
                             )
@@ -538,7 +538,7 @@ def get_gamma_service_impl(base=object):
                     )
                     if not bento_pb:
                         raise GammaRepositoryException(
-                            f'BentoService '
+                            f'MyModel '
                             f'{request.bento_name}:{request.bento_version} '
                             f'does not exist'
                         )

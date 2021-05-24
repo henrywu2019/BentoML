@@ -1,47 +1,47 @@
-BentoService API
+MyModel API
 ================
 
-.. _bentoml-bentoservice-label:
+.. _bentoml-MyModel-label:
 
-BentoService
+MyModel
 ++++++++++++
 
-.. autoclass:: kappa.BentoService
+.. autoclass:: kappa.MyModel
 
-  .. automethod:: kappa.BentoService.name
+  .. automethod:: kappa.MyModel.name
 
-  .. automethod:: kappa.BentoService.versioneer
+  .. automethod:: kappa.MyModel.versioneer
 
-  .. automethod:: kappa.BentoService.set_version
+  .. automethod:: kappa.MyModel.set_version
 
-  .. autoattribute:: kappa.BentoService.inference_apis
+  .. autoattribute:: kappa.MyModel.inference_apis
 
-  .. autoattribute:: kappa.BentoService.artifacts
+  .. autoattribute:: kappa.MyModel.artifacts
 
 
-  .. _bentoml-bentoservice-pack-label:
+  .. _bentoml-MyModel-pack-label:
 
   .. method:: pack(name, *args, *kwargs)
 
-        BentoService#pack method is used for packing trained model instances with a
-        BentoService instance and make it ready for BentoService#save.
+        MyModel#pack method is used for packing trained model instances with a
+        MyModel instance and make it ready for MyModel#save.
 
         :param name: name of the declared model artifact
         :param args: args passing to the target model artifact to be packed
         :param kwargs: kwargs passing to the target model artifact to be packed
-        :return: this BentoService instance
+        :return: this MyModel instance
 
-  .. automethod:: kappa.BentoService.pack
+  .. automethod:: kappa.MyModel.pack
     :noindex:
 
-  .. _bentoml-bentoservice-save-label:
+  .. _bentoml-MyModel-save-label:
 
-  .. automethod:: kappa.BentoService.save
+  .. automethod:: kappa.MyModel.save
 
 
-  .. _bentoml-bentoservice-save-to-dir-label:
+  .. _bentoml-MyModel-save-to-dir-label:
 
-  .. automethod:: kappa.BentoService.save_to_dir
+  .. automethod:: kappa.MyModel.save_to_dir
 
 
 api

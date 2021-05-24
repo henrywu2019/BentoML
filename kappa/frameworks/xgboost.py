@@ -1,11 +1,11 @@
 import os
 
 from kappa.exceptions import InvalidArgument, MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 
-class XgboostModelArtifact(BentoServiceArtifact):
+class XgboostModelArtifact(MyModelArtifact):
     """Abstraction for save/load object with Xgboost.
 
     Args:
@@ -34,7 +34,7 @@ class XgboostModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts(XgboostModelArtifact('model'))
-    >>> class XGBoostModelService(kappa.BentoService):
+    >>> class XGBoostModelService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=DataframeInput(), batch=True)
     >>>     def predict(self, df):
@@ -51,7 +51,7 @@ class XgboostModelArtifact(BentoServiceArtifact):
         self._model_extension = model_extension
         self._model = None
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(['xgboost'])
 
     def _model_file_path(self, base_path):

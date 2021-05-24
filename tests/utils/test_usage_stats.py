@@ -70,10 +70,10 @@ def test_get_bento_service_event_properties(bento_service):
 
 
 def test_get_bento_service_event_properties_with_no_artifact():
-    class ExampleBentoService(kappa.BentoService):
+    class ExampleMyModel(kappa.MyModel):
         pass
 
-    properties = _get_bento_service_event_properties(ExampleBentoService())
+    properties = _get_bento_service_event_properties(ExampleMyModel())
 
     assert "input_types" not in properties
     assert properties["artifact_types"]

@@ -63,7 +63,7 @@ cpu
 dev
 config
 configs
-BentoService
+MyModel
 url
 args
 kwargs

@@ -25,7 +25,7 @@
 <!--- [ ] Others: describe the type of change if it does not fit to categories listed -->
 
 ## Component(s) if applicable
-- [ ] BentoService (service definition, dependency management, API input/output adapters)
+- [ ] MyModel (service definition, dependency management, API input/output adapters)
 - [ ] Model Artifact (model serialization, multi-framework support)
 - [ ] Model Server (mico-batching, dockerisation, logging, OpenAPI, instruments)
 - [ ] GammaService gRPC server (model registry, cloud deployment automation)

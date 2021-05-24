@@ -14,7 +14,7 @@ from tests.bento_service_examples.local_dependencies.nested_dependency import (
 
 @kappa.env(pip_packages=["scikit-learn"])
 @kappa.artifacts([SklearnModelArtifact('model')])
-class IrisClassifier(kappa.BentoService):
+class IrisClassifier(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         df = dummy_util_func(df)

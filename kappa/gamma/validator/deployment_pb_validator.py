@@ -172,7 +172,7 @@ class GammaDeploymentValidator(Validator):
                 )
 
     def _validate_bento_service_version(self, bento_service_version, field, value):
-        """ Test the given BentoService version is not "latest"
+        """ Test the given MyModel version is not "latest"
 
         The rule's arguments are validated against this schema:
         {'type': 'boolean'}

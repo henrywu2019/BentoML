@@ -4,13 +4,13 @@ Adding Custom Model Artifact
 Kappa integrates with the most popular machine learning frameworks. For the ML framework yet to integrate with Kappa,
 Kappa provides model artifact customizing...
 
-The guide will demonstrate how to create a custom model artifact class, and then use it in BentoService for prediction
+The guide will demonstrate how to create a custom model artifact class, and then use it in MyModel for prediction
 
 ----------------------
 Create custom Artifact
 ----------------------
 
-The following code creates a subclass from the `BentoServiceArtifact`. It implements how to
+The following code creates a subclass from the `MyModelArtifact`. It implements how to
 save and load the model.  In the `pack` method, the model class does validation to make sure
 the model is valid.  It uses `cloudpickle` to `save` and `load`.
 
@@ -23,9 +23,9 @@ the model is valid.  It uses `cloudpickle` to `save` and `load`.
     import json
     from kappa.utils import cloudpickle
     from kappa.exceptions import InvalidArgument
-    from kappa.service.artifacts import BentoServiceArtifact
+    from kappa.service.artifacts import MyModelArtifact
 
-    class MyModelArtifact(BentoServiceArtifact):
+    class MyModelArtifact(MyModelArtifact):
         def __init__(self, name):
             super(MyModelArtifact, self).__init__(name)
             self._model = None
@@ -55,7 +55,7 @@ the model is valid.  It uses `cloudpickle` to `save` and `load`.
 
 
 -----------------------------------------------------
-Define and save BentoService with the custom Artifact
+Define and save MyModel with the custom Artifact
 -----------------------------------------------------
 
 .. code-block:: python
@@ -63,13 +63,13 @@ Define and save BentoService with the custom Artifact
     # my_bento_service.py
 
     from my_model_artifact import MyModelArtifact
-    from kappa import BentoService, env, api, artifacts
+    from kappa import MyModel, env, api, artifacts
     from kappa.adapters import JsonInputAdapter
     import kappa
 
     @env(infer_pip_packages=True)
     @artifacts([MyModelArtifact('test_model')])
-    class MyService(kappa.BentoService):
+    class MyService(kappa.MyModel):
 
         @api(input=JsonInput, batch=False)
         def predict(self, input_data):

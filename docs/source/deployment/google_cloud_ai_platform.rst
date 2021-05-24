@@ -128,13 +128,13 @@ We define with the following bash command the Kappa Service:
 .. code-block:: bash
 
     cat > main.py <<EOF
-    from kappa import env, artifacts, api, BentoService
+    from kappa import env, artifacts, api, MyModel
     from kappa.adapters import JsonInput
     from kappa.frameworks.sklearn import SklearnModelArtifact
 
     @env(infer_pip_packages=True)
     @artifacts([SklearnModelArtifact('model')])
-    class IrisClassifier(BentoService):
+    class IrisClassifier(MyModel):
         """
         A minimum prediction service exposing a Scikit-learn model
         """
@@ -177,7 +177,7 @@ Verify the saved bundle created:
         "type": "LOCAL",
         "uri": "/Users/eliasecchi/kappa/repository/IrisClassifier/20210325170627_3F9592"
       },
-      "bentoServiceMetadata": {
+      "MyModelMetadata": {
         "name": "IrisClassifier",
         "version": "20210325170627_3F9592",
         "createdAt": "2021-03-25T17:06:28.274128Z",
@@ -223,7 +223,7 @@ Verify the saved bundle created:
 
 
 The Kappa saved bundle created can now be used to start a REST API Server hosting the
-BentoService and available for sending test request:
+MyModel and available for sending test request:
 
 .. code-block:: bash
 

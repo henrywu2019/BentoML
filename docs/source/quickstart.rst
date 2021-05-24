@@ -86,13 +86,13 @@ serving the iris classifier model trained above:
     # iris_classifier.py
     import pandas as pd
 
-    from kappa import env, artifacts, api, BentoService
+    from kappa import env, artifacts, api, MyModel
     from kappa.adapters import DataframeInput
     from kappa.frameworks.sklearn import SklearnModelArtifact
 
     @env(infer_pip_packages=True)
     @artifacts([SklearnModelArtifact('model')])
-    class IrisClassifier(BentoService):
+    class IrisClassifier(MyModel):
         """
         A minimum prediction service exposing a Scikit-learn model
         """
@@ -198,9 +198,9 @@ packaged models:
 
     The :code:`{saved_path}` in the following commands are referring to the returned
     value of :code:`iris_classifier_service.save()`.
-    It is the file path where the BentoService saved bundle is stored.
-    Kappa locally keeps track of all the BentoService SavedBundle you've created,
-    you can also find the saved_path of your BentoService from the output of
+    It is the file path where the MyModel saved bundle is stored.
+    Kappa locally keeps track of all the MyModel SavedBundle you've created,
+    you can also find the saved_path of your MyModel from the output of
     :code:`kappa list -o wide`, :code:`kappa get IrisClassifier -o wide` and
     :code:`kappa get IrisClassifier:latest` command.
 

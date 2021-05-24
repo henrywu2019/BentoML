@@ -119,7 +119,7 @@ class LockUnavailable(BentoMLException):
 
 
 class ArtifactLoadingException(BentoMLException):
-    """Raise when BentoService failed to load model artifacts from saved bundle"""
+    """Raise when MyModel failed to load model artifacts from saved bundle"""
 
 
 class BentoMLConfigException(BentoMLException):
@@ -152,7 +152,7 @@ class GammaDeploymentException(GammaServiceException):
 
 
 class GammaRepositoryException(GammaServiceException):
-    """Raise when GammaService encounters an issue managing BentoService repository"""
+    """Raise when GammaService encounters an issue managing MyModel repository"""
 
 
 class AWSServiceError(GammaDeploymentException):
@@ -168,4 +168,4 @@ class CLIException(BentoMLException):
 
 
 class GammaLabelException(GammaServiceException):
-    """Raise when GammaService encounters an issue managing BentoService label"""
+    """Raise when GammaService encounters an issue managing MyModel label"""

@@ -28,7 +28,7 @@ Prerequisites
 AWS Lambda deployment and management with Kappa
 -------------------------------------------------
 
-This guide uses the IrisClassifier BentoService from the :doc:`Quick start guide <../quickstart>`:
+This guide uses the IrisClassifier MyModel from the :doc:`Quick start guide <../quickstart>`:
 
 .. code-block:: bash
 
@@ -36,14 +36,14 @@ This guide uses the IrisClassifier BentoService from the :doc:`Quick start guide
     pip install -r ./kappa/guides/quick-start/requirements.txt
     python ./kappa/guides/quick-start/main.py
 
-Use `kappa list` to get the BentoService name:version tag.
+Use `kappa list` to get the MyModel name:version tag.
 
 
 .. code-block:: bash
 
     > kappa list
 
-    BentoService                          CREATED_AT                  APIS                        ARTIFACTS
+    MyModel                          CREATED_AT                  APIS                        ARTIFACTS
     IrisClassifier:20200121141808_FE78B5  2020-01-21 22:18:25.079723  predict(DataframeInput)  model(SklearnModelArtifact)
 
 
@@ -51,7 +51,7 @@ Kappa has great support for AWS Lambda. You can deploy, update and delete Lambda
 deployment with single command, and customize deployment to fit your needs with parameters
 such as `memory_size` and `timeout`
 
-To deploy BentoService to AWS Lambda, use `kappa lambda deploy` command.
+To deploy MyModel to AWS Lambda, use `kappa lambda deploy` command.
 Deployment name and bento service name:version tag is required.
 
 .. code-block:: bash
@@ -91,7 +91,7 @@ Deployment name and bento service name:version tag is required.
     }
 
 
-Kappa helps you manage the entire process of deploying your BentoService bundle to Lambda.
+Kappa helps you manage the entire process of deploying your MyModel to Lambda.
 Verify the deployed resources with AWS CLI tool:
 
 .. code-block:: bash
@@ -315,7 +315,7 @@ Removing a Lambda deployment is also very easy.  Calling `kappa lambda delete` c
 Deploy and manage AWS Lambda deployments with remote GammaService
 =================================================================
 
-Kappa recommends to use remote GammaService for managing and deploying BentoService
+Kappa recommends to use remote GammaService for managing and deploying MyModel
 when you are working in a team. To deploy AWS Lambda deployments with remote
 GammaService, you need to provide the AWS credentials.
 

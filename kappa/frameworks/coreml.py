@@ -2,13 +2,13 @@ import logging
 import os
 
 from kappa.exceptions import InvalidArgument, MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 logger = logging.getLogger(__name__)
 
 
-class CoreMLModelArtifact(BentoServiceArtifact):
+class CoreMLModelArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading coreml.models.MLModel objects
     with coremltools.models.MLModel.save and coremltools.models.MLModel(path).
@@ -45,7 +45,7 @@ class CoreMLModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([CoreMLModelArtifact('model')])
-    >>> class CoreMLModelService(kappa.BentoService):
+    >>> class CoreMLModelService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=ImageInput(), batch=True)
     >>>     def predict(self, imgs):
@@ -102,7 +102,7 @@ class CoreMLModelArtifact(BentoServiceArtifact):
 
         return self.pack(model)
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(['coremltools>=4.0b2'])
 
     def get(self):

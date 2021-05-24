@@ -8,7 +8,7 @@ import numpy as np
 import pytest
 
 from kappa.gamma.client import GammaClient
-from tests.bento_service_examples.example_bento_service import ExampleBentoService
+from tests.bento_service_examples.example_bento_service import ExampleMyModel
 
 
 def pytest_configure():
@@ -192,17 +192,17 @@ class TestModel(object):
 
 @pytest.fixture()
 def example_bento_service_class():
-    # When the ExampleBentoService got saved and loaded again in the test, the two class
-    # attribute below got set to the loaded BentoService class. Resetting it here so it
+    # When the ExampleMyModel got saved and loaded again in the test, the two class
+    # attribute below got set to the loaded MyModel class. Resetting it here so it
     # does not effect other tests
-    ExampleBentoService._bento_service_bundle_path = None
-    ExampleBentoService._bento_service_bundle_version = None
-    return ExampleBentoService
+    ExampleMyModel._bento_service_bundle_path = None
+    ExampleMyModel._bento_service_bundle_version = None
+    return ExampleMyModel
 
 
 @pytest.fixture()
 def bento_service(example_bento_service_class):  # pylint:disable=redefined-outer-name
-    """Create a new ExampleBentoService
+    """Create a new ExampleMyModel
     """
     test_model = TestModel()
     test_svc = example_bento_service_class()
@@ -212,7 +212,7 @@ def bento_service(example_bento_service_class):  # pylint:disable=redefined-oute
 
 @pytest.fixture()
 def bento_bundle_path(bento_service):  # pylint:disable=redefined-outer-name
-    """Create a new ExampleBentoService, saved it to tmpdir, and return full saved_path
+    """Create a new ExampleMyModel, saved it to tmpdir, and return full saved_path
     """
     saved_path = bento_service.save()
     yield saved_path

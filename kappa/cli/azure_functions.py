@@ -45,13 +45,13 @@ def get_azure_functions_sub_command():
 
     @click.group(
         name='azure-functions',
-        help='Commands for Azure Functions BentoService deployment',
+        help='Commands for Azure Functions MyModel deployment',
         cls=BentoMLCommandGroup,
     )
     def azure_functions():
         pass
 
-    @azure_functions.command(help='Deploy BentoService to Azure Functions')
+    @azure_functions.command(help='Deploy MyModel to Azure Functions')
     @click.option(
         '-n',
         '--namespace',
@@ -67,7 +67,7 @@ def get_azure_functions_sub_command():
         type=click.STRING,
         required=True,
         callback=parse_bento_tag_callback,
-        help='Target BentoService to be deployed, referenced by its name and version '
+        help='Target MyModel to be deployed, referenced by its name and version '
         'in the format of name:version. For example: "iris_classifier:v1.2.0"',
     )
     @click.option(
@@ -169,7 +169,7 @@ def get_azure_functions_sub_command():
         '--bento-service-bundle',
         type=click.STRING,
         callback=parse_bento_tag_callback,
-        help='Target BentoService to be deployed, referenced by its name and version '
+        help='Target MyModel to be deployed, referenced by its name and version '
         'in the format of name:version. For example: "iris_classifier:v1.2.0"',
     )
     @click.option(

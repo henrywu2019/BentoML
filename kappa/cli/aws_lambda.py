@@ -40,13 +40,13 @@ def get_aws_lambda_sub_command():
 
     @click.group(
         name='lambda',
-        help='Commands for AWS Lambda BentoService deployments',
+        help='Commands for AWS Lambda MyModel deployments',
         cls=BentoMLCommandGroup,
     )
     def aws_lambda():
         pass
 
-    @aws_lambda.command(help='Deploy BentoService to AWS Lambda')
+    @aws_lambda.command(help='Deploy MyModel to AWS Lambda')
     @click.argument('name', type=click.STRING)
     @click.option(
         '-b',
@@ -55,7 +55,7 @@ def get_aws_lambda_sub_command():
         type=click.STRING,
         required=True,
         callback=parse_bento_tag_callback,
-        help='Target BentoService to be deployed, referenced by its name and version '
+        help='Target MyModel to be deployed, referenced by its name and version '
         'in format of name:version. For example: "iris_classifier:v1.2.0"',
     )
     @click.option(
@@ -144,7 +144,7 @@ def get_aws_lambda_sub_command():
         '--bento-service-bundle',
         type=click.STRING,
         callback=parse_bento_tag_callback,
-        help='Target BentoService to be deployed, referenced by its name and version '
+        help='Target MyModel to be deployed, referenced by its name and version '
         'in format of name:version. For example: "iris_classifier:v1.2.0"',
     )
     @click.option(

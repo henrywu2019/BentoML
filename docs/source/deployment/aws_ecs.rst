@@ -64,7 +64,7 @@ Verify the saved bundle created:
         "type": "LOCAL",
         "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
-      "bentoServiceMetadata": {
+      "MyModelMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
@@ -83,7 +83,7 @@ Verify the saved bundle created:
           {
             "name": "predict",
             "inputType": "DataframeInput",
-            "docs": "BentoService API"
+            "docs": "MyModel API"
           }
         ]
       }
@@ -91,7 +91,7 @@ Verify the saved bundle created:
 
 
 The Kappa saved bundle created can now be used to start a REST API Server hosting the
-BentoService and available for sending test request:
+MyModel and available for sending test request:
 
 .. code-block:: bash
 
@@ -363,7 +363,7 @@ Use security group ID from previous command
 
 
 =====================================
-Deploying BentoService to ECR cluster
+Deploying MyModel to ECR cluster
 =====================================
 
 Create `docker-compose.yaml` file, use the image tag from previous steps
@@ -406,7 +406,7 @@ Compose `ecs-params.yaml` with subnets information from starting up ECS cluster,
           assign_public_ip: ENABLED
 
 
-After create `ecs-params.yaml`, we can deploy our BentoService to the ECS cluster
+After create `ecs-params.yaml`, we can deploy our MyModel to the ECS cluster
 
 .. code-block:: bash
 

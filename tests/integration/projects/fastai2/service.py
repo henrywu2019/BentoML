@@ -10,7 +10,7 @@ from kappa.frameworks.fastai import FastaiModelArtifact
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([FastaiModelArtifact('model')])
-class FastaiClassifier(kappa.BentoService):
+class FastaiClassifier(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         input_data = df.to_numpy().astype(np.float32)

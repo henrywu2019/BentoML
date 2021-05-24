@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x10repository.proto\x12\x05kappa\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0cstatus.proto\x1a\x15label_selectors.proto\"\xf3\x01\n\x08\x42\x65ntoUri\x12)\n\x04type\x18\x01 \x01(\x0e\x32\x1b.kappa.BentoUri.StorageType\x12\x0b\n\x03uri\x18\x02 \x01(\t\x12\x18\n\x10s3_presigned_url\x18\x03 \x01(\t\x12\x19\n\x11gcs_presigned_url\x18\x04 \x01(\t\x12\x19\n\x11oci_presigned_url\x18\x05 \x01(\t\"_\n\x0bStorageType\x12\t\n\x05UNSET\x10\x00\x12\t\n\x05LOCAL\x10\x01\x12\x06\n\x02S3\x10\x02\x12\x07\n\x03GCS\x10\x03\x12\x16\n\x12\x41ZURE_BLOB_STORAGE\x10\x04\x12\x08\n\x04HDFS\x10\x05\x12\x07\n\x03OCI\x10\x06\"\xa0\x07\n\x14\x42\x65ntoServiceMetadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x38\n\x03\x65nv\x18\x04 \x01(\x0b\x32+.kappa.BentoServiceMetadata.BentoServiceEnv\x12<\n\tartifacts\x18\x05 \x03(\x0b\x32).kappa.BentoServiceMetadata.BentoArtifact\x12\x39\n\x04\x61pis\x18\x06 \x03(\x0b\x32+.kappa.BentoServiceMetadata.BentoServiceApi\x12\x37\n\x06labels\x18\x07 \x03(\x0b\x32\'.kappa.BentoServiceMetadata.LabelsEntry\x1a\xb3\x01\n\x0f\x42\x65ntoServiceEnv\x12\x10\n\x08setup_sh\x18\x01 \x01(\t\x12\x11\n\tconda_env\x18\x02 \x01(\t\x12\x18\n\x10pip_dependencies\x18\x03 \x01(\t\x12\x16\n\x0epython_version\x18\x04 \x01(\t\x12\x19\n\x11\x64ocker_base_image\x18\x05 \x01(\t\x12\x14\n\x0cpip_packages\x18\x06 \x03(\t\x12\x18\n\x10requirements_txt\x18\x07 \x01(\t\x1a_\n\rBentoArtifact\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x15\n\rartifact_type\x18\x02 \x01(\t\x12)\n\x08metadata\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\x1a\x86\x02\n\x0f\x42\x65ntoServiceApi\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\ninput_type\x18\x02 \x01(\t\x12\x0c\n\x04\x64ocs\x18\x03 \x01(\t\x12-\n\x0cinput_config\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\x12.\n\routput_config\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x13\n\x0boutput_type\x18\x06 \x01(\t\x12\x16\n\x0emb_max_latency\x18\x07 \x01(\x05\x12\x19\n\x11mb_max_batch_size\x18\x08 \x01(\x05\x12\r\n\x05\x62\x61tch\x18\t \x01(\x08\x12\r\n\x05route\x18\n \x01(\t\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xa6\x01\n\x05\x42\x65nto\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\x12\x1c\n\x03uri\x18\x03 \x01(\x0b\x32\x0f.kappa.BentoUri\x12;\n\x16\x62\x65nto_service_metadata\x18\x04 \x01(\x0b\x32\x1b.kappa.BentoServiceMetadata\x12#\n\x06status\x18\x05 \x01(\x0b\x32\x13.kappa.UploadStatus\"<\n\x0f\x41\x64\x64\x42\x65ntoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x15\n\rbento_version\x18\x02 \x01(\t\"O\n\x10\x41\x64\x64\x42\x65ntoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\x12\x1c\n\x03uri\x18\x02 \x01(\x0b\x32\x0f.kappa.BentoUri\"\xe3\x01\n\x0cUploadStatus\x12*\n\x06status\x18\x01 \x01(\x0e\x32\x1a.kappa.UploadStatus.Status\x12.\n\nupdated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\npercentage\x18\x03 \x01(\x05\x12\x15\n\rerror_message\x18\x04 \x01(\t\"L\n\x06Status\x12\x11\n\rUNINITIALIZED\x10\x00\x12\r\n\tUPLOADING\x10\x01\x12\x08\n\x04\x44ONE\x10\x02\x12\t\n\x05\x45RROR\x10\x03\x12\x0b\n\x07TIMEOUT\x10\x04\"\xa2\x01\n\x12UpdateBentoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x15\n\rbento_version\x18\x02 \x01(\t\x12*\n\rupload_status\x18\x03 \x01(\x0b\x32\x13.kappa.UploadStatus\x12\x35\n\x10service_metadata\x18\x04 \x01(\x0b\x32\x1b.kappa.BentoServiceMetadata\"4\n\x13UpdateBentoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\"J\n\x1d\x44\x61ngerouslyDeleteBentoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x15\n\rbento_version\x18\x02 \x01(\t\"?\n\x1e\x44\x61ngerouslyDeleteBentoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\"<\n\x0fGetBentoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x15\n\rbento_version\x18\x02 \x01(\t\"N\n\x10GetBentoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\x12\x1b\n\x05\x62\x65nto\x18\x02 \x01(\x0b\x32\x0c.kappa.Bento\"\xf6\x01\n\x10ListBentoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\x05\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x39\n\x08order_by\x18\x04 \x01(\x0e\x32\'.kappa.ListBentoRequest.SORTABLE_COLUMN\x12\x17\n\x0f\x61scending_order\x18\x05 \x01(\x08\x12.\n\x0flabel_selectors\x18\x06 \x01(\x0b\x32\x15.kappa.LabelSelectors\"+\n\x0fSORTABLE_COLUMN\x12\x0e\n\ncreated_at\x10\x00\x12\x08\n\x04name\x10\x01\"P\n\x11ListBentoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\x12\x1c\n\x06\x62\x65ntos\x18\x02 \x03(\x0b\x32\x0c.kappa.Bento\"\xd6\x01\n\x18\x43ontainerizeBentoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x15\n\rbento_version\x18\x02 \x01(\t\x12\x0b\n\x03tag\x18\x03 \x01(\t\x12\x42\n\nbuild_args\x18\x04 \x03(\x0b\x32..kappa.ContainerizeBentoRequest.BuildArgsEntry\x12\x0c\n\x04push\x18\x05 \x01(\x08\x1a\x30\n\x0e\x42uildArgsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"G\n\x19\x43ontainerizeBentoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\x12\x0b\n\x03tag\x18\x02 \x01(\tb\x06proto3'
+  serialized_pb=b'\n\x10repository.proto\x12\x05kappa\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x0cstatus.proto\x1a\x15label_selectors.proto\"\xf3\x01\n\x08\x42\x65ntoUri\x12)\n\x04type\x18\x01 \x01(\x0e\x32\x1b.kappa.BentoUri.StorageType\x12\x0b\n\x03uri\x18\x02 \x01(\t\x12\x18\n\x10s3_presigned_url\x18\x03 \x01(\t\x12\x19\n\x11gcs_presigned_url\x18\x04 \x01(\t\x12\x19\n\x11oci_presigned_url\x18\x05 \x01(\t\"_\n\x0bStorageType\x12\t\n\x05UNSET\x10\x00\x12\t\n\x05LOCAL\x10\x01\x12\x06\n\x02S3\x10\x02\x12\x07\n\x03GCS\x10\x03\x12\x16\n\x12\x41ZURE_BLOB_STORAGE\x10\x04\x12\x08\n\x04HDFS\x10\x05\x12\x07\n\x03OCI\x10\x06\"\xf3\x06\n\x0fMyModelMetadata\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\x03\x65nv\x18\x04 \x01(\x0b\x32!.kappa.MyModelMetadata.MyModelEnv\x12\x37\n\tartifacts\x18\x05 \x03(\x0b\x32$.kappa.MyModelMetadata.BentoArtifact\x12/\n\x04\x61pis\x18\x06 \x03(\x0b\x32!.kappa.MyModelMetadata.MyModelApi\x12\x32\n\x06labels\x18\x07 \x03(\x0b\x32\".kappa.MyModelMetadata.LabelsEntry\x1a\xae\x01\n\nMyModelEnv\x12\x10\n\x08setup_sh\x18\x01 \x01(\t\x12\x11\n\tconda_env\x18\x02 \x01(\t\x12\x18\n\x10pip_dependencies\x18\x03 \x01(\t\x12\x16\n\x0epython_version\x18\x04 \x01(\t\x12\x19\n\x11\x64ocker_base_image\x18\x05 \x01(\t\x12\x14\n\x0cpip_packages\x18\x06 \x03(\t\x12\x18\n\x10requirements_txt\x18\x07 \x01(\t\x1a_\n\rBentoArtifact\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x15\n\rartifact_type\x18\x02 \x01(\t\x12)\n\x08metadata\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\x1a\x81\x02\n\nMyModelApi\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\ninput_type\x18\x02 \x01(\t\x12\x0c\n\x04\x64ocs\x18\x03 \x01(\t\x12-\n\x0cinput_config\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\x12.\n\routput_config\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x13\n\x0boutput_type\x18\x06 \x01(\t\x12\x16\n\x0emb_max_latency\x18\x07 \x01(\x05\x12\x19\n\x11mb_max_batch_size\x18\x08 \x01(\x05\x12\r\n\x05\x62\x61tch\x18\t \x01(\x08\x12\r\n\x05route\x18\n \x01(\t\x1a-\n\x0bLabelsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xa1\x01\n\x05\x42\x65nto\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\x12\x1c\n\x03uri\x18\x03 \x01(\x0b\x32\x0f.kappa.BentoUri\x12\x36\n\x16\x62\x65nto_service_metadata\x18\x04 \x01(\x0b\x32\x16.kappa.MyModelMetadata\x12#\n\x06status\x18\x05 \x01(\x0b\x32\x13.kappa.UploadStatus\"<\n\x0f\x41\x64\x64\x42\x65ntoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x15\n\rbento_version\x18\x02 \x01(\t\"O\n\x10\x41\x64\x64\x42\x65ntoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\x12\x1c\n\x03uri\x18\x02 \x01(\x0b\x32\x0f.kappa.BentoUri\"\xe3\x01\n\x0cUploadStatus\x12*\n\x06status\x18\x01 \x01(\x0e\x32\x1a.kappa.UploadStatus.Status\x12.\n\nupdated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\npercentage\x18\x03 \x01(\x05\x12\x15\n\rerror_message\x18\x04 \x01(\t\"L\n\x06Status\x12\x11\n\rUNINITIALIZED\x10\x00\x12\r\n\tUPLOADING\x10\x01\x12\x08\n\x04\x44ONE\x10\x02\x12\t\n\x05\x45RROR\x10\x03\x12\x0b\n\x07TIMEOUT\x10\x04\"\x9d\x01\n\x12UpdateBentoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x15\n\rbento_version\x18\x02 \x01(\t\x12*\n\rupload_status\x18\x03 \x01(\x0b\x32\x13.kappa.UploadStatus\x12\x30\n\x10service_metadata\x18\x04 \x01(\x0b\x32\x16.kappa.MyModelMetadata\"4\n\x13UpdateBentoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\"J\n\x1d\x44\x61ngerouslyDeleteBentoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x15\n\rbento_version\x18\x02 \x01(\t\"?\n\x1e\x44\x61ngerouslyDeleteBentoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\"<\n\x0fGetBentoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x15\n\rbento_version\x18\x02 \x01(\t\"N\n\x10GetBentoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\x12\x1b\n\x05\x62\x65nto\x18\x02 \x01(\x0b\x32\x0c.kappa.Bento\"\xf6\x01\n\x10ListBentoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\x05\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x39\n\x08order_by\x18\x04 \x01(\x0e\x32\'.kappa.ListBentoRequest.SORTABLE_COLUMN\x12\x17\n\x0f\x61scending_order\x18\x05 \x01(\x08\x12.\n\x0flabel_selectors\x18\x06 \x01(\x0b\x32\x15.kappa.LabelSelectors\"+\n\x0fSORTABLE_COLUMN\x12\x0e\n\ncreated_at\x10\x00\x12\x08\n\x04name\x10\x01\"P\n\x11ListBentoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\x12\x1c\n\x06\x62\x65ntos\x18\x02 \x03(\x0b\x32\x0c.kappa.Bento\"\xd6\x01\n\x18\x43ontainerizeBentoRequest\x12\x12\n\nbento_name\x18\x01 \x01(\t\x12\x15\n\rbento_version\x18\x02 \x01(\t\x12\x0b\n\x03tag\x18\x03 \x01(\t\x12\x42\n\nbuild_args\x18\x04 \x03(\x0b\x32..kappa.ContainerizeBentoRequest.BuildArgsEntry\x12\x0c\n\x04push\x18\x05 \x01(\x08\x1a\x30\n\x0e\x42uildArgsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"G\n\x19\x43ontainerizeBentoResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\x12\x0b\n\x03tag\x18\x02 \x01(\tb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_struct__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,status__pb2.DESCRIPTOR,label__selectors__pb2.DESCRIPTOR,])
 
@@ -114,8 +114,8 @@ _UPLOADSTATUS_STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1768,
-  serialized_end=1844,
+  serialized_start=1718,
+  serialized_end=1794,
 )
 _sym_db.RegisterEnumDescriptor(_UPLOADSTATUS_STATUS)
 
@@ -139,8 +139,8 @@ _LISTBENTOREQUEST_SORTABLE_COLUMN = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2552,
-  serialized_end=2595,
+  serialized_start=2497,
+  serialized_end=2540,
 )
 _sym_db.RegisterEnumDescriptor(_LISTBENTOREQUEST_SORTABLE_COLUMN)
 
@@ -206,58 +206,58 @@ _BENTOURI = _descriptor.Descriptor(
 )
 
 
-_BENTOSERVICEMETADATA_BENTOSERVICEENV = _descriptor.Descriptor(
-  name='BentoServiceEnv',
-  full_name='kappa.BentoServiceMetadata.BentoServiceEnv',
+_MYMODELMETADATA_MYMODELENV = _descriptor.Descriptor(
+  name='MyModelEnv',
+  full_name='kappa.MyModelMetadata.MyModelEnv',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='setup_sh', full_name='kappa.BentoServiceMetadata.BentoServiceEnv.setup_sh', index=0,
+      name='setup_sh', full_name='kappa.MyModelMetadata.MyModelEnv.setup_sh', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='conda_env', full_name='kappa.BentoServiceMetadata.BentoServiceEnv.conda_env', index=1,
+      name='conda_env', full_name='kappa.MyModelMetadata.MyModelEnv.conda_env', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='pip_dependencies', full_name='kappa.BentoServiceMetadata.BentoServiceEnv.pip_dependencies', index=2,
+      name='pip_dependencies', full_name='kappa.MyModelMetadata.MyModelEnv.pip_dependencies', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='python_version', full_name='kappa.BentoServiceMetadata.BentoServiceEnv.python_version', index=3,
+      name='python_version', full_name='kappa.MyModelMetadata.MyModelEnv.python_version', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='docker_base_image', full_name='kappa.BentoServiceMetadata.BentoServiceEnv.docker_base_image', index=4,
+      name='docker_base_image', full_name='kappa.MyModelMetadata.MyModelEnv.docker_base_image', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='pip_packages', full_name='kappa.BentoServiceMetadata.BentoServiceEnv.pip_packages', index=5,
+      name='pip_packages', full_name='kappa.MyModelMetadata.MyModelEnv.pip_packages', index=5,
       number=6, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='requirements_txt', full_name='kappa.BentoServiceMetadata.BentoServiceEnv.requirements_txt', index=6,
+      name='requirements_txt', full_name='kappa.MyModelMetadata.MyModelEnv.requirements_txt', index=6,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -275,34 +275,34 @@ _BENTOSERVICEMETADATA_BENTOSERVICEENV = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=714,
-  serialized_end=893,
+  serialized_start=679,
+  serialized_end=853,
 )
 
-_BENTOSERVICEMETADATA_BENTOARTIFACT = _descriptor.Descriptor(
+_MYMODELMETADATA_BENTOARTIFACT = _descriptor.Descriptor(
   name='BentoArtifact',
-  full_name='kappa.BentoServiceMetadata.BentoArtifact',
+  full_name='kappa.MyModelMetadata.BentoArtifact',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='kappa.BentoServiceMetadata.BentoArtifact.name', index=0,
+      name='name', full_name='kappa.MyModelMetadata.BentoArtifact.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='artifact_type', full_name='kappa.BentoServiceMetadata.BentoArtifact.artifact_type', index=1,
+      name='artifact_type', full_name='kappa.MyModelMetadata.BentoArtifact.artifact_type', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='metadata', full_name='kappa.BentoServiceMetadata.BentoArtifact.metadata', index=2,
+      name='metadata', full_name='kappa.MyModelMetadata.BentoArtifact.metadata', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -320,83 +320,83 @@ _BENTOSERVICEMETADATA_BENTOARTIFACT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=895,
-  serialized_end=990,
+  serialized_start=855,
+  serialized_end=950,
 )
 
-_BENTOSERVICEMETADATA_BENTOSERVICEAPI = _descriptor.Descriptor(
-  name='BentoServiceApi',
-  full_name='kappa.BentoServiceMetadata.BentoServiceApi',
+_MYMODELMETADATA_MYMODELAPI = _descriptor.Descriptor(
+  name='MyModelApi',
+  full_name='kappa.MyModelMetadata.MyModelApi',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='kappa.BentoServiceMetadata.BentoServiceApi.name', index=0,
+      name='name', full_name='kappa.MyModelMetadata.MyModelApi.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='input_type', full_name='kappa.BentoServiceMetadata.BentoServiceApi.input_type', index=1,
+      name='input_type', full_name='kappa.MyModelMetadata.MyModelApi.input_type', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='docs', full_name='kappa.BentoServiceMetadata.BentoServiceApi.docs', index=2,
+      name='docs', full_name='kappa.MyModelMetadata.MyModelApi.docs', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='input_config', full_name='kappa.BentoServiceMetadata.BentoServiceApi.input_config', index=3,
+      name='input_config', full_name='kappa.MyModelMetadata.MyModelApi.input_config', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='output_config', full_name='kappa.BentoServiceMetadata.BentoServiceApi.output_config', index=4,
+      name='output_config', full_name='kappa.MyModelMetadata.MyModelApi.output_config', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='output_type', full_name='kappa.BentoServiceMetadata.BentoServiceApi.output_type', index=5,
+      name='output_type', full_name='kappa.MyModelMetadata.MyModelApi.output_type', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='mb_max_latency', full_name='kappa.BentoServiceMetadata.BentoServiceApi.mb_max_latency', index=6,
+      name='mb_max_latency', full_name='kappa.MyModelMetadata.MyModelApi.mb_max_latency', index=6,
       number=7, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='mb_max_batch_size', full_name='kappa.BentoServiceMetadata.BentoServiceApi.mb_max_batch_size', index=7,
+      name='mb_max_batch_size', full_name='kappa.MyModelMetadata.MyModelApi.mb_max_batch_size', index=7,
       number=8, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='batch', full_name='kappa.BentoServiceMetadata.BentoServiceApi.batch', index=8,
+      name='batch', full_name='kappa.MyModelMetadata.MyModelApi.batch', index=8,
       number=9, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='route', full_name='kappa.BentoServiceMetadata.BentoServiceApi.route', index=9,
+      name='route', full_name='kappa.MyModelMetadata.MyModelApi.route', index=9,
       number=10, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -414,27 +414,27 @@ _BENTOSERVICEMETADATA_BENTOSERVICEAPI = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=993,
-  serialized_end=1255,
+  serialized_start=953,
+  serialized_end=1210,
 )
 
-_BENTOSERVICEMETADATA_LABELSENTRY = _descriptor.Descriptor(
+_MYMODELMETADATA_LABELSENTRY = _descriptor.Descriptor(
   name='LabelsEntry',
-  full_name='kappa.BentoServiceMetadata.LabelsEntry',
+  full_name='kappa.MyModelMetadata.LabelsEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='kappa.BentoServiceMetadata.LabelsEntry.key', index=0,
+      name='key', full_name='kappa.MyModelMetadata.LabelsEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='value', full_name='kappa.BentoServiceMetadata.LabelsEntry.value', index=1,
+      name='value', full_name='kappa.MyModelMetadata.LabelsEntry.value', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -452,62 +452,62 @@ _BENTOSERVICEMETADATA_LABELSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1257,
-  serialized_end=1302,
+  serialized_start=1212,
+  serialized_end=1257,
 )
 
-_BENTOSERVICEMETADATA = _descriptor.Descriptor(
-  name='BentoServiceMetadata',
-  full_name='kappa.BentoServiceMetadata',
+_MYMODELMETADATA = _descriptor.Descriptor(
+  name='MyModelMetadata',
+  full_name='kappa.MyModelMetadata',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='kappa.BentoServiceMetadata.name', index=0,
+      name='name', full_name='kappa.MyModelMetadata.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='version', full_name='kappa.BentoServiceMetadata.version', index=1,
+      name='version', full_name='kappa.MyModelMetadata.version', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='created_at', full_name='kappa.BentoServiceMetadata.created_at', index=2,
+      name='created_at', full_name='kappa.MyModelMetadata.created_at', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='env', full_name='kappa.BentoServiceMetadata.env', index=3,
+      name='env', full_name='kappa.MyModelMetadata.env', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='artifacts', full_name='kappa.BentoServiceMetadata.artifacts', index=4,
+      name='artifacts', full_name='kappa.MyModelMetadata.artifacts', index=4,
       number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='apis', full_name='kappa.BentoServiceMetadata.apis', index=5,
+      name='apis', full_name='kappa.MyModelMetadata.apis', index=5,
       number=6, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='labels', full_name='kappa.BentoServiceMetadata.labels', index=6,
+      name='labels', full_name='kappa.MyModelMetadata.labels', index=6,
       number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -516,7 +516,7 @@ _BENTOSERVICEMETADATA = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_BENTOSERVICEMETADATA_BENTOSERVICEENV, _BENTOSERVICEMETADATA_BENTOARTIFACT, _BENTOSERVICEMETADATA_BENTOSERVICEAPI, _BENTOSERVICEMETADATA_LABELSENTRY, ],
+  nested_types=[_MYMODELMETADATA_MYMODELENV, _MYMODELMETADATA_BENTOARTIFACT, _MYMODELMETADATA_MYMODELAPI, _MYMODELMETADATA_LABELSENTRY, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -526,7 +526,7 @@ _BENTOSERVICEMETADATA = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=374,
-  serialized_end=1302,
+  serialized_end=1257,
 )
 
 
@@ -585,8 +585,8 @@ _BENTO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1305,
-  serialized_end=1471,
+  serialized_start=1260,
+  serialized_end=1421,
 )
 
 
@@ -624,8 +624,8 @@ _ADDBENTOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1473,
-  serialized_end=1533,
+  serialized_start=1423,
+  serialized_end=1483,
 )
 
 
@@ -663,8 +663,8 @@ _ADDBENTORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1535,
-  serialized_end=1614,
+  serialized_start=1485,
+  serialized_end=1564,
 )
 
 
@@ -717,8 +717,8 @@ _UPLOADSTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1617,
-  serialized_end=1844,
+  serialized_start=1567,
+  serialized_end=1794,
 )
 
 
@@ -770,8 +770,8 @@ _UPDATEBENTOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1847,
-  serialized_end=2009,
+  serialized_start=1797,
+  serialized_end=1954,
 )
 
 
@@ -802,8 +802,8 @@ _UPDATEBENTORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2011,
-  serialized_end=2063,
+  serialized_start=1956,
+  serialized_end=2008,
 )
 
 
@@ -841,8 +841,8 @@ _DANGEROUSLYDELETEBENTOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2065,
-  serialized_end=2139,
+  serialized_start=2010,
+  serialized_end=2084,
 )
 
 
@@ -873,8 +873,8 @@ _DANGEROUSLYDELETEBENTORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2141,
-  serialized_end=2204,
+  serialized_start=2086,
+  serialized_end=2149,
 )
 
 
@@ -912,8 +912,8 @@ _GETBENTOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2206,
-  serialized_end=2266,
+  serialized_start=2151,
+  serialized_end=2211,
 )
 
 
@@ -951,8 +951,8 @@ _GETBENTORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2268,
-  serialized_end=2346,
+  serialized_start=2213,
+  serialized_end=2291,
 )
 
 
@@ -1019,8 +1019,8 @@ _LISTBENTOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2349,
-  serialized_end=2595,
+  serialized_start=2294,
+  serialized_end=2540,
 )
 
 
@@ -1058,8 +1058,8 @@ _LISTBENTORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2597,
-  serialized_end=2677,
+  serialized_start=2542,
+  serialized_end=2622,
 )
 
 
@@ -1097,8 +1097,8 @@ _CONTAINERIZEBENTOREQUEST_BUILDARGSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2846,
-  serialized_end=2894,
+  serialized_start=2791,
+  serialized_end=2839,
 )
 
 _CONTAINERIZEBENTOREQUEST = _descriptor.Descriptor(
@@ -1156,8 +1156,8 @@ _CONTAINERIZEBENTOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2680,
-  serialized_end=2894,
+  serialized_start=2625,
+  serialized_end=2839,
 )
 
 
@@ -1195,26 +1195,26 @@ _CONTAINERIZEBENTORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2896,
-  serialized_end=2967,
+  serialized_start=2841,
+  serialized_end=2912,
 )
 
 _BENTOURI.fields_by_name['type'].enum_type = _BENTOURI_STORAGETYPE
 _BENTOURI_STORAGETYPE.containing_type = _BENTOURI
-_BENTOSERVICEMETADATA_BENTOSERVICEENV.containing_type = _BENTOSERVICEMETADATA
-_BENTOSERVICEMETADATA_BENTOARTIFACT.fields_by_name['metadata'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
-_BENTOSERVICEMETADATA_BENTOARTIFACT.containing_type = _BENTOSERVICEMETADATA
-_BENTOSERVICEMETADATA_BENTOSERVICEAPI.fields_by_name['input_config'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
-_BENTOSERVICEMETADATA_BENTOSERVICEAPI.fields_by_name['output_config'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
-_BENTOSERVICEMETADATA_BENTOSERVICEAPI.containing_type = _BENTOSERVICEMETADATA
-_BENTOSERVICEMETADATA_LABELSENTRY.containing_type = _BENTOSERVICEMETADATA
-_BENTOSERVICEMETADATA.fields_by_name['created_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_BENTOSERVICEMETADATA.fields_by_name['env'].message_type = _BENTOSERVICEMETADATA_BENTOSERVICEENV
-_BENTOSERVICEMETADATA.fields_by_name['artifacts'].message_type = _BENTOSERVICEMETADATA_BENTOARTIFACT
-_BENTOSERVICEMETADATA.fields_by_name['apis'].message_type = _BENTOSERVICEMETADATA_BENTOSERVICEAPI
-_BENTOSERVICEMETADATA.fields_by_name['labels'].message_type = _BENTOSERVICEMETADATA_LABELSENTRY
+_MYMODELMETADATA_MYMODELENV.containing_type = _MYMODELMETADATA
+_MYMODELMETADATA_BENTOARTIFACT.fields_by_name['metadata'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
+_MYMODELMETADATA_BENTOARTIFACT.containing_type = _MYMODELMETADATA
+_MYMODELMETADATA_MYMODELAPI.fields_by_name['input_config'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
+_MYMODELMETADATA_MYMODELAPI.fields_by_name['output_config'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
+_MYMODELMETADATA_MYMODELAPI.containing_type = _MYMODELMETADATA
+_MYMODELMETADATA_LABELSENTRY.containing_type = _MYMODELMETADATA
+_MYMODELMETADATA.fields_by_name['created_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_MYMODELMETADATA.fields_by_name['env'].message_type = _MYMODELMETADATA_MYMODELENV
+_MYMODELMETADATA.fields_by_name['artifacts'].message_type = _MYMODELMETADATA_BENTOARTIFACT
+_MYMODELMETADATA.fields_by_name['apis'].message_type = _MYMODELMETADATA_MYMODELAPI
+_MYMODELMETADATA.fields_by_name['labels'].message_type = _MYMODELMETADATA_LABELSENTRY
 _BENTO.fields_by_name['uri'].message_type = _BENTOURI
-_BENTO.fields_by_name['bento_service_metadata'].message_type = _BENTOSERVICEMETADATA
+_BENTO.fields_by_name['bento_service_metadata'].message_type = _MYMODELMETADATA
 _BENTO.fields_by_name['status'].message_type = _UPLOADSTATUS
 _ADDBENTORESPONSE.fields_by_name['status'].message_type = status__pb2._STATUS
 _ADDBENTORESPONSE.fields_by_name['uri'].message_type = _BENTOURI
@@ -1222,7 +1222,7 @@ _UPLOADSTATUS.fields_by_name['status'].enum_type = _UPLOADSTATUS_STATUS
 _UPLOADSTATUS.fields_by_name['updated_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _UPLOADSTATUS_STATUS.containing_type = _UPLOADSTATUS
 _UPDATEBENTOREQUEST.fields_by_name['upload_status'].message_type = _UPLOADSTATUS
-_UPDATEBENTOREQUEST.fields_by_name['service_metadata'].message_type = _BENTOSERVICEMETADATA
+_UPDATEBENTOREQUEST.fields_by_name['service_metadata'].message_type = _MYMODELMETADATA
 _UPDATEBENTORESPONSE.fields_by_name['status'].message_type = status__pb2._STATUS
 _DANGEROUSLYDELETEBENTORESPONSE.fields_by_name['status'].message_type = status__pb2._STATUS
 _GETBENTORESPONSE.fields_by_name['status'].message_type = status__pb2._STATUS
@@ -1236,7 +1236,7 @@ _CONTAINERIZEBENTOREQUEST_BUILDARGSENTRY.containing_type = _CONTAINERIZEBENTOREQ
 _CONTAINERIZEBENTOREQUEST.fields_by_name['build_args'].message_type = _CONTAINERIZEBENTOREQUEST_BUILDARGSENTRY
 _CONTAINERIZEBENTORESPONSE.fields_by_name['status'].message_type = status__pb2._STATUS
 DESCRIPTOR.message_types_by_name['BentoUri'] = _BENTOURI
-DESCRIPTOR.message_types_by_name['BentoServiceMetadata'] = _BENTOSERVICEMETADATA
+DESCRIPTOR.message_types_by_name['MyModelMetadata'] = _MYMODELMETADATA
 DESCRIPTOR.message_types_by_name['Bento'] = _BENTO
 DESCRIPTOR.message_types_by_name['AddBentoRequest'] = _ADDBENTOREQUEST
 DESCRIPTOR.message_types_by_name['AddBentoResponse'] = _ADDBENTORESPONSE
@@ -1260,44 +1260,44 @@ BentoUri = _reflection.GeneratedProtocolMessageType('BentoUri', (_message.Messag
   })
 _sym_db.RegisterMessage(BentoUri)
 
-BentoServiceMetadata = _reflection.GeneratedProtocolMessageType('BentoServiceMetadata', (_message.Message,), {
+MyModelMetadata = _reflection.GeneratedProtocolMessageType('MyModelMetadata', (_message.Message,), {
 
-  'BentoServiceEnv' : _reflection.GeneratedProtocolMessageType('BentoServiceEnv', (_message.Message,), {
-    'DESCRIPTOR' : _BENTOSERVICEMETADATA_BENTOSERVICEENV,
+  'MyModelEnv' : _reflection.GeneratedProtocolMessageType('MyModelEnv', (_message.Message,), {
+    'DESCRIPTOR' : _MYMODELMETADATA_MYMODELENV,
     '__module__' : 'repository_pb2'
-    # @@protoc_insertion_point(class_scope:kappa.BentoServiceMetadata.BentoServiceEnv)
+    # @@protoc_insertion_point(class_scope:kappa.MyModelMetadata.MyModelEnv)
     })
   ,
 
   'BentoArtifact' : _reflection.GeneratedProtocolMessageType('BentoArtifact', (_message.Message,), {
-    'DESCRIPTOR' : _BENTOSERVICEMETADATA_BENTOARTIFACT,
+    'DESCRIPTOR' : _MYMODELMETADATA_BENTOARTIFACT,
     '__module__' : 'repository_pb2'
-    # @@protoc_insertion_point(class_scope:kappa.BentoServiceMetadata.BentoArtifact)
+    # @@protoc_insertion_point(class_scope:kappa.MyModelMetadata.BentoArtifact)
     })
   ,
 
-  'BentoServiceApi' : _reflection.GeneratedProtocolMessageType('BentoServiceApi', (_message.Message,), {
-    'DESCRIPTOR' : _BENTOSERVICEMETADATA_BENTOSERVICEAPI,
+  'MyModelApi' : _reflection.GeneratedProtocolMessageType('MyModelApi', (_message.Message,), {
+    'DESCRIPTOR' : _MYMODELMETADATA_MYMODELAPI,
     '__module__' : 'repository_pb2'
-    # @@protoc_insertion_point(class_scope:kappa.BentoServiceMetadata.BentoServiceApi)
+    # @@protoc_insertion_point(class_scope:kappa.MyModelMetadata.MyModelApi)
     })
   ,
 
   'LabelsEntry' : _reflection.GeneratedProtocolMessageType('LabelsEntry', (_message.Message,), {
-    'DESCRIPTOR' : _BENTOSERVICEMETADATA_LABELSENTRY,
+    'DESCRIPTOR' : _MYMODELMETADATA_LABELSENTRY,
     '__module__' : 'repository_pb2'
-    # @@protoc_insertion_point(class_scope:kappa.BentoServiceMetadata.LabelsEntry)
+    # @@protoc_insertion_point(class_scope:kappa.MyModelMetadata.LabelsEntry)
     })
   ,
-  'DESCRIPTOR' : _BENTOSERVICEMETADATA,
+  'DESCRIPTOR' : _MYMODELMETADATA,
   '__module__' : 'repository_pb2'
-  # @@protoc_insertion_point(class_scope:kappa.BentoServiceMetadata)
+  # @@protoc_insertion_point(class_scope:kappa.MyModelMetadata)
   })
-_sym_db.RegisterMessage(BentoServiceMetadata)
-_sym_db.RegisterMessage(BentoServiceMetadata.BentoServiceEnv)
-_sym_db.RegisterMessage(BentoServiceMetadata.BentoArtifact)
-_sym_db.RegisterMessage(BentoServiceMetadata.BentoServiceApi)
-_sym_db.RegisterMessage(BentoServiceMetadata.LabelsEntry)
+_sym_db.RegisterMessage(MyModelMetadata)
+_sym_db.RegisterMessage(MyModelMetadata.MyModelEnv)
+_sym_db.RegisterMessage(MyModelMetadata.BentoArtifact)
+_sym_db.RegisterMessage(MyModelMetadata.MyModelApi)
+_sym_db.RegisterMessage(MyModelMetadata.LabelsEntry)
 
 Bento = _reflection.GeneratedProtocolMessageType('Bento', (_message.Message,), {
   'DESCRIPTOR' : _BENTO,
@@ -1406,6 +1406,6 @@ ContainerizeBentoResponse = _reflection.GeneratedProtocolMessageType('Containeri
 _sym_db.RegisterMessage(ContainerizeBentoResponse)
 
 
-_BENTOSERVICEMETADATA_LABELSENTRY._options = None
+_MYMODELMETADATA_LABELSENTRY._options = None
 _CONTAINERIZEBENTOREQUEST_BUILDARGSENTRY._options = None
 # @@protoc_insertion_point(module_scope)

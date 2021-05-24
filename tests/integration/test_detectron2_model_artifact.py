@@ -10,8 +10,8 @@ from detectron2.modeling import build_model
 
 @pytest.fixture()
 def detectron2_classifier_class():
-    # When the ExampleBentoService got saved and loaded again in the test, the two class
-    # attribute below got set to the loaded BentoService class. Resetting it here so it
+    # When the ExampleMyModel got saved and loaded again in the test, the two class
+    # attribute below got set to the loaded MyModel class. Resetting it here so it
     # does not effect other tests
     DetectronClassifier._bento_service_bundle_path = None
     DetectronClassifier._bento_service_bundle_version = None

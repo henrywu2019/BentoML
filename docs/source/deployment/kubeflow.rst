@@ -58,7 +58,7 @@ Use Kappa CLI tool to get the information of IrisClassifier created above
         "type": "LOCAL",
         "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
-      "bentoServiceMetadata": {
+      "MyModelMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
@@ -77,7 +77,7 @@ Use Kappa CLI tool to get the information of IrisClassifier created above
           {
             "name": "predict",
             "InputType": "DataframeInput",
-            "docs": "BentoService API"
+            "docs": "MyModel API"
           }
         ]
       }
@@ -85,7 +85,7 @@ Use Kappa CLI tool to get the information of IrisClassifier created above
 
 
 ===============================
-Deploy BentoService to Kubeflow
+Deploy MyModel to Kubeflow
 ===============================
 
 Kappa provides a convenient way to containerize the model API server with Docker:

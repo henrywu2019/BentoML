@@ -7438,30 +7438,30 @@ export const kappa = $root.kappa = (() => {
         return BentoUri;
     })();
 
-    kappa.BentoServiceMetadata = (function() {
+    kappa.MyModelMetadata = (function() {
 
         /**
-         * Properties of a BentoServiceMetadata.
+         * Properties of a MyModelMetadata.
          * @memberof kappa
-         * @interface IBentoServiceMetadata
-         * @property {string|null} [name] BentoServiceMetadata name
-         * @property {string|null} [version] BentoServiceMetadata version
-         * @property {google.protobuf.ITimestamp|null} [created_at] BentoServiceMetadata created_at
-         * @property {kappa.BentoServiceMetadata.IBentoServiceEnv|null} [env] BentoServiceMetadata env
-         * @property {Array.<kappa.BentoServiceMetadata.IBentoArtifact>|null} [artifacts] BentoServiceMetadata artifacts
-         * @property {Array.<kappa.BentoServiceMetadata.IBentoServiceApi>|null} [apis] BentoServiceMetadata apis
-         * @property {Object.<string,string>|null} [labels] BentoServiceMetadata labels
+         * @interface IMyModelMetadata
+         * @property {string|null} [name] MyModelMetadata name
+         * @property {string|null} [version] MyModelMetadata version
+         * @property {google.protobuf.ITimestamp|null} [created_at] MyModelMetadata created_at
+         * @property {kappa.MyModelMetadata.IMyModelEnv|null} [env] MyModelMetadata env
+         * @property {Array.<kappa.MyModelMetadata.IBentoArtifact>|null} [artifacts] MyModelMetadata artifacts
+         * @property {Array.<kappa.MyModelMetadata.IMyModelApi>|null} [apis] MyModelMetadata apis
+         * @property {Object.<string,string>|null} [labels] MyModelMetadata labels
          */
 
         /**
-         * Constructs a new BentoServiceMetadata.
+         * Constructs a new MyModelMetadata.
          * @memberof kappa
-         * @classdesc Represents a BentoServiceMetadata.
-         * @implements IBentoServiceMetadata
+         * @classdesc Represents a MyModelMetadata.
+         * @implements IMyModelMetadata
          * @constructor
-         * @param {kappa.IBentoServiceMetadata=} [properties] Properties to set
+         * @param {kappa.IMyModelMetadata=} [properties] Properties to set
          */
-        function BentoServiceMetadata(properties) {
+        function MyModelMetadata(properties) {
             this.artifacts = [];
             this.apis = [];
             this.labels = {};
@@ -7472,83 +7472,83 @@ export const kappa = $root.kappa = (() => {
         }
 
         /**
-         * BentoServiceMetadata name.
+         * MyModelMetadata name.
          * @member {string} name
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @instance
          */
-        BentoServiceMetadata.prototype.name = "";
+        MyModelMetadata.prototype.name = "";
 
         /**
-         * BentoServiceMetadata version.
+         * MyModelMetadata version.
          * @member {string} version
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @instance
          */
-        BentoServiceMetadata.prototype.version = "";
+        MyModelMetadata.prototype.version = "";
 
         /**
-         * BentoServiceMetadata created_at.
+         * MyModelMetadata created_at.
          * @member {google.protobuf.ITimestamp|null|undefined} created_at
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @instance
          */
-        BentoServiceMetadata.prototype.created_at = null;
+        MyModelMetadata.prototype.created_at = null;
 
         /**
-         * BentoServiceMetadata env.
-         * @member {kappa.BentoServiceMetadata.IBentoServiceEnv|null|undefined} env
-         * @memberof kappa.BentoServiceMetadata
+         * MyModelMetadata env.
+         * @member {kappa.MyModelMetadata.IMyModelEnv|null|undefined} env
+         * @memberof kappa.MyModelMetadata
          * @instance
          */
-        BentoServiceMetadata.prototype.env = null;
+        MyModelMetadata.prototype.env = null;
 
         /**
-         * BentoServiceMetadata artifacts.
-         * @member {Array.<kappa.BentoServiceMetadata.IBentoArtifact>} artifacts
-         * @memberof kappa.BentoServiceMetadata
+         * MyModelMetadata artifacts.
+         * @member {Array.<kappa.MyModelMetadata.IBentoArtifact>} artifacts
+         * @memberof kappa.MyModelMetadata
          * @instance
          */
-        BentoServiceMetadata.prototype.artifacts = $util.emptyArray;
+        MyModelMetadata.prototype.artifacts = $util.emptyArray;
 
         /**
-         * BentoServiceMetadata apis.
-         * @member {Array.<kappa.BentoServiceMetadata.IBentoServiceApi>} apis
-         * @memberof kappa.BentoServiceMetadata
+         * MyModelMetadata apis.
+         * @member {Array.<kappa.MyModelMetadata.IMyModelApi>} apis
+         * @memberof kappa.MyModelMetadata
          * @instance
          */
-        BentoServiceMetadata.prototype.apis = $util.emptyArray;
+        MyModelMetadata.prototype.apis = $util.emptyArray;
 
         /**
-         * BentoServiceMetadata labels.
+         * MyModelMetadata labels.
          * @member {Object.<string,string>} labels
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @instance
          */
-        BentoServiceMetadata.prototype.labels = $util.emptyObject;
+        MyModelMetadata.prototype.labels = $util.emptyObject;
 
         /**
-         * Creates a new BentoServiceMetadata instance using the specified properties.
+         * Creates a new MyModelMetadata instance using the specified properties.
          * @function create
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @static
-         * @param {kappa.IBentoServiceMetadata=} [properties] Properties to set
-         * @returns {kappa.BentoServiceMetadata} BentoServiceMetadata instance
+         * @param {kappa.IMyModelMetadata=} [properties] Properties to set
+         * @returns {kappa.MyModelMetadata} MyModelMetadata instance
          */
-        BentoServiceMetadata.create = function create(properties) {
-            return new BentoServiceMetadata(properties);
+        MyModelMetadata.create = function create(properties) {
+            return new MyModelMetadata(properties);
         };
 
         /**
-         * Encodes the specified BentoServiceMetadata message. Does not implicitly {@link kappa.BentoServiceMetadata.verify|verify} messages.
+         * Encodes the specified MyModelMetadata message. Does not implicitly {@link kappa.MyModelMetadata.verify|verify} messages.
          * @function encode
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @static
-         * @param {kappa.IBentoServiceMetadata} message BentoServiceMetadata message or plain object to encode
+         * @param {kappa.IMyModelMetadata} message MyModelMetadata message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        BentoServiceMetadata.encode = function encode(message, writer) {
+        MyModelMetadata.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
@@ -7558,13 +7558,13 @@ export const kappa = $root.kappa = (() => {
             if (message.created_at != null && Object.hasOwnProperty.call(message, "created_at"))
                 $root.google.protobuf.Timestamp.encode(message.created_at, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.env != null && Object.hasOwnProperty.call(message, "env"))
-                $root.kappa.BentoServiceMetadata.BentoServiceEnv.encode(message.env, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                $root.kappa.MyModelMetadata.MyModelEnv.encode(message.env, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             if (message.artifacts != null && message.artifacts.length)
                 for (let i = 0; i < message.artifacts.length; ++i)
-                    $root.kappa.BentoServiceMetadata.BentoArtifact.encode(message.artifacts[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                    $root.kappa.MyModelMetadata.BentoArtifact.encode(message.artifacts[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             if (message.apis != null && message.apis.length)
                 for (let i = 0; i < message.apis.length; ++i)
-                    $root.kappa.BentoServiceMetadata.BentoServiceApi.encode(message.apis[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    $root.kappa.MyModelMetadata.MyModelApi.encode(message.apis[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                 for (let keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                     writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
@@ -7572,33 +7572,33 @@ export const kappa = $root.kappa = (() => {
         };
 
         /**
-         * Encodes the specified BentoServiceMetadata message, length delimited. Does not implicitly {@link kappa.BentoServiceMetadata.verify|verify} messages.
+         * Encodes the specified MyModelMetadata message, length delimited. Does not implicitly {@link kappa.MyModelMetadata.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @static
-         * @param {kappa.IBentoServiceMetadata} message BentoServiceMetadata message or plain object to encode
+         * @param {kappa.IMyModelMetadata} message MyModelMetadata message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        BentoServiceMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+        MyModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a BentoServiceMetadata message from the specified reader or buffer.
+         * Decodes a MyModelMetadata message from the specified reader or buffer.
          * @function decode
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {kappa.BentoServiceMetadata} BentoServiceMetadata
+         * @returns {kappa.MyModelMetadata} MyModelMetadata
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        BentoServiceMetadata.decode = function decode(reader, length) {
+        MyModelMetadata.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.kappa.BentoServiceMetadata(), key;
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.kappa.MyModelMetadata(), key;
             while (reader.pos < end) {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -7612,17 +7612,17 @@ export const kappa = $root.kappa = (() => {
                     message.created_at = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 case 4:
-                    message.env = $root.kappa.BentoServiceMetadata.BentoServiceEnv.decode(reader, reader.uint32());
+                    message.env = $root.kappa.MyModelMetadata.MyModelEnv.decode(reader, reader.uint32());
                     break;
                 case 5:
                     if (!(message.artifacts && message.artifacts.length))
                         message.artifacts = [];
-                    message.artifacts.push($root.kappa.BentoServiceMetadata.BentoArtifact.decode(reader, reader.uint32()));
+                    message.artifacts.push($root.kappa.MyModelMetadata.BentoArtifact.decode(reader, reader.uint32()));
                     break;
                 case 6:
                     if (!(message.apis && message.apis.length))
                         message.apis = [];
-                    message.apis.push($root.kappa.BentoServiceMetadata.BentoServiceApi.decode(reader, reader.uint32()));
+                    message.apis.push($root.kappa.MyModelMetadata.MyModelApi.decode(reader, reader.uint32()));
                     break;
                 case 7:
                     reader.skip().pos++;
@@ -7641,30 +7641,30 @@ export const kappa = $root.kappa = (() => {
         };
 
         /**
-         * Decodes a BentoServiceMetadata message from the specified reader or buffer, length delimited.
+         * Decodes a MyModelMetadata message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {kappa.BentoServiceMetadata} BentoServiceMetadata
+         * @returns {kappa.MyModelMetadata} MyModelMetadata
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        BentoServiceMetadata.decodeDelimited = function decodeDelimited(reader) {
+        MyModelMetadata.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a BentoServiceMetadata message.
+         * Verifies a MyModelMetadata message.
          * @function verify
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        BentoServiceMetadata.verify = function verify(message) {
+        MyModelMetadata.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.name != null && message.hasOwnProperty("name"))
@@ -7679,7 +7679,7 @@ export const kappa = $root.kappa = (() => {
                     return "created_at." + error;
             }
             if (message.env != null && message.hasOwnProperty("env")) {
-                let error = $root.kappa.BentoServiceMetadata.BentoServiceEnv.verify(message.env);
+                let error = $root.kappa.MyModelMetadata.MyModelEnv.verify(message.env);
                 if (error)
                     return "env." + error;
             }
@@ -7687,7 +7687,7 @@ export const kappa = $root.kappa = (() => {
                 if (!Array.isArray(message.artifacts))
                     return "artifacts: array expected";
                 for (let i = 0; i < message.artifacts.length; ++i) {
-                    let error = $root.kappa.BentoServiceMetadata.BentoArtifact.verify(message.artifacts[i]);
+                    let error = $root.kappa.MyModelMetadata.BentoArtifact.verify(message.artifacts[i]);
                     if (error)
                         return "artifacts." + error;
                 }
@@ -7696,7 +7696,7 @@ export const kappa = $root.kappa = (() => {
                 if (!Array.isArray(message.apis))
                     return "apis: array expected";
                 for (let i = 0; i < message.apis.length; ++i) {
-                    let error = $root.kappa.BentoServiceMetadata.BentoServiceApi.verify(message.apis[i]);
+                    let error = $root.kappa.MyModelMetadata.MyModelApi.verify(message.apis[i]);
                     if (error)
                         return "apis." + error;
                 }
@@ -7713,54 +7713,54 @@ export const kappa = $root.kappa = (() => {
         };
 
         /**
-         * Creates a BentoServiceMetadata message from a plain object. Also converts values to their respective internal types.
+         * Creates a MyModelMetadata message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {kappa.BentoServiceMetadata} BentoServiceMetadata
+         * @returns {kappa.MyModelMetadata} MyModelMetadata
          */
-        BentoServiceMetadata.fromObject = function fromObject(object) {
-            if (object instanceof $root.kappa.BentoServiceMetadata)
+        MyModelMetadata.fromObject = function fromObject(object) {
+            if (object instanceof $root.kappa.MyModelMetadata)
                 return object;
-            let message = new $root.kappa.BentoServiceMetadata();
+            let message = new $root.kappa.MyModelMetadata();
             if (object.name != null)
                 message.name = String(object.name);
             if (object.version != null)
                 message.version = String(object.version);
             if (object.created_at != null) {
                 if (typeof object.created_at !== "object")
-                    throw TypeError(".kappa.BentoServiceMetadata.created_at: object expected");
+                    throw TypeError(".kappa.MyModelMetadata.created_at: object expected");
                 message.created_at = $root.google.protobuf.Timestamp.fromObject(object.created_at);
             }
             if (object.env != null) {
                 if (typeof object.env !== "object")
-                    throw TypeError(".kappa.BentoServiceMetadata.env: object expected");
-                message.env = $root.kappa.BentoServiceMetadata.BentoServiceEnv.fromObject(object.env);
+                    throw TypeError(".kappa.MyModelMetadata.env: object expected");
+                message.env = $root.kappa.MyModelMetadata.MyModelEnv.fromObject(object.env);
             }
             if (object.artifacts) {
                 if (!Array.isArray(object.artifacts))
-                    throw TypeError(".kappa.BentoServiceMetadata.artifacts: array expected");
+                    throw TypeError(".kappa.MyModelMetadata.artifacts: array expected");
                 message.artifacts = [];
                 for (let i = 0; i < object.artifacts.length; ++i) {
                     if (typeof object.artifacts[i] !== "object")
-                        throw TypeError(".kappa.BentoServiceMetadata.artifacts: object expected");
-                    message.artifacts[i] = $root.kappa.BentoServiceMetadata.BentoArtifact.fromObject(object.artifacts[i]);
+                        throw TypeError(".kappa.MyModelMetadata.artifacts: object expected");
+                    message.artifacts[i] = $root.kappa.MyModelMetadata.BentoArtifact.fromObject(object.artifacts[i]);
                 }
             }
             if (object.apis) {
                 if (!Array.isArray(object.apis))
-                    throw TypeError(".kappa.BentoServiceMetadata.apis: array expected");
+                    throw TypeError(".kappa.MyModelMetadata.apis: array expected");
                 message.apis = [];
                 for (let i = 0; i < object.apis.length; ++i) {
                     if (typeof object.apis[i] !== "object")
-                        throw TypeError(".kappa.BentoServiceMetadata.apis: object expected");
-                    message.apis[i] = $root.kappa.BentoServiceMetadata.BentoServiceApi.fromObject(object.apis[i]);
+                        throw TypeError(".kappa.MyModelMetadata.apis: object expected");
+                    message.apis[i] = $root.kappa.MyModelMetadata.MyModelApi.fromObject(object.apis[i]);
                 }
             }
             if (object.labels) {
                 if (typeof object.labels !== "object")
-                    throw TypeError(".kappa.BentoServiceMetadata.labels: object expected");
+                    throw TypeError(".kappa.MyModelMetadata.labels: object expected");
                 message.labels = {};
                 for (let keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                     message.labels[keys[i]] = String(object.labels[keys[i]]);
@@ -7769,15 +7769,15 @@ export const kappa = $root.kappa = (() => {
         };
 
         /**
-         * Creates a plain object from a BentoServiceMetadata message. Also converts values to other types if specified.
+         * Creates a plain object from a MyModelMetadata message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @static
-         * @param {kappa.BentoServiceMetadata} message BentoServiceMetadata
+         * @param {kappa.MyModelMetadata} message MyModelMetadata
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        BentoServiceMetadata.toObject = function toObject(message, options) {
+        MyModelMetadata.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             let object = {};
@@ -7800,16 +7800,16 @@ export const kappa = $root.kappa = (() => {
             if (message.created_at != null && message.hasOwnProperty("created_at"))
                 object.created_at = $root.google.protobuf.Timestamp.toObject(message.created_at, options);
             if (message.env != null && message.hasOwnProperty("env"))
-                object.env = $root.kappa.BentoServiceMetadata.BentoServiceEnv.toObject(message.env, options);
+                object.env = $root.kappa.MyModelMetadata.MyModelEnv.toObject(message.env, options);
             if (message.artifacts && message.artifacts.length) {
                 object.artifacts = [];
                 for (let j = 0; j < message.artifacts.length; ++j)
-                    object.artifacts[j] = $root.kappa.BentoServiceMetadata.BentoArtifact.toObject(message.artifacts[j], options);
+                    object.artifacts[j] = $root.kappa.MyModelMetadata.BentoArtifact.toObject(message.artifacts[j], options);
             }
             if (message.apis && message.apis.length) {
                 object.apis = [];
                 for (let j = 0; j < message.apis.length; ++j)
-                    object.apis[j] = $root.kappa.BentoServiceMetadata.BentoServiceApi.toObject(message.apis[j], options);
+                    object.apis[j] = $root.kappa.MyModelMetadata.MyModelApi.toObject(message.apis[j], options);
             }
             let keys2;
             if (message.labels && (keys2 = Object.keys(message.labels)).length) {
@@ -7821,40 +7821,40 @@ export const kappa = $root.kappa = (() => {
         };
 
         /**
-         * Converts this BentoServiceMetadata to JSON.
+         * Converts this MyModelMetadata to JSON.
          * @function toJSON
-         * @memberof kappa.BentoServiceMetadata
+         * @memberof kappa.MyModelMetadata
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        BentoServiceMetadata.prototype.toJSON = function toJSON() {
+        MyModelMetadata.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        BentoServiceMetadata.BentoServiceEnv = (function() {
+        MyModelMetadata.MyModelEnv = (function() {
 
             /**
-             * Properties of a BentoServiceEnv.
-             * @memberof kappa.BentoServiceMetadata
-             * @interface IBentoServiceEnv
-             * @property {string|null} [setup_sh] BentoServiceEnv setup_sh
-             * @property {string|null} [conda_env] BentoServiceEnv conda_env
-             * @property {string|null} [pip_dependencies] BentoServiceEnv pip_dependencies
-             * @property {string|null} [python_version] BentoServiceEnv python_version
-             * @property {string|null} [docker_base_image] BentoServiceEnv docker_base_image
-             * @property {Array.<string>|null} [pip_packages] BentoServiceEnv pip_packages
-             * @property {string|null} [requirements_txt] BentoServiceEnv requirements_txt
+             * Properties of a MyModelEnv.
+             * @memberof kappa.MyModelMetadata
+             * @interface IMyModelEnv
+             * @property {string|null} [setup_sh] MyModelEnv setup_sh
+             * @property {string|null} [conda_env] MyModelEnv conda_env
+             * @property {string|null} [pip_dependencies] MyModelEnv pip_dependencies
+             * @property {string|null} [python_version] MyModelEnv python_version
+             * @property {string|null} [docker_base_image] MyModelEnv docker_base_image
+             * @property {Array.<string>|null} [pip_packages] MyModelEnv pip_packages
+             * @property {string|null} [requirements_txt] MyModelEnv requirements_txt
              */
 
             /**
-             * Constructs a new BentoServiceEnv.
-             * @memberof kappa.BentoServiceMetadata
-             * @classdesc Represents a BentoServiceEnv.
-             * @implements IBentoServiceEnv
+             * Constructs a new MyModelEnv.
+             * @memberof kappa.MyModelMetadata
+             * @classdesc Represents a MyModelEnv.
+             * @implements IMyModelEnv
              * @constructor
-             * @param {kappa.BentoServiceMetadata.IBentoServiceEnv=} [properties] Properties to set
+             * @param {kappa.MyModelMetadata.IMyModelEnv=} [properties] Properties to set
              */
-            function BentoServiceEnv(properties) {
+            function MyModelEnv(properties) {
                 this.pip_packages = [];
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -7863,83 +7863,83 @@ export const kappa = $root.kappa = (() => {
             }
 
             /**
-             * BentoServiceEnv setup_sh.
+             * MyModelEnv setup_sh.
              * @member {string} setup_sh
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @instance
              */
-            BentoServiceEnv.prototype.setup_sh = "";
+            MyModelEnv.prototype.setup_sh = "";
 
             /**
-             * BentoServiceEnv conda_env.
+             * MyModelEnv conda_env.
              * @member {string} conda_env
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @instance
              */
-            BentoServiceEnv.prototype.conda_env = "";
+            MyModelEnv.prototype.conda_env = "";
 
             /**
-             * BentoServiceEnv pip_dependencies.
+             * MyModelEnv pip_dependencies.
              * @member {string} pip_dependencies
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @instance
              */
-            BentoServiceEnv.prototype.pip_dependencies = "";
+            MyModelEnv.prototype.pip_dependencies = "";
 
             /**
-             * BentoServiceEnv python_version.
+             * MyModelEnv python_version.
              * @member {string} python_version
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @instance
              */
-            BentoServiceEnv.prototype.python_version = "";
+            MyModelEnv.prototype.python_version = "";
 
             /**
-             * BentoServiceEnv docker_base_image.
+             * MyModelEnv docker_base_image.
              * @member {string} docker_base_image
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @instance
              */
-            BentoServiceEnv.prototype.docker_base_image = "";
+            MyModelEnv.prototype.docker_base_image = "";
 
             /**
-             * BentoServiceEnv pip_packages.
+             * MyModelEnv pip_packages.
              * @member {Array.<string>} pip_packages
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @instance
              */
-            BentoServiceEnv.prototype.pip_packages = $util.emptyArray;
+            MyModelEnv.prototype.pip_packages = $util.emptyArray;
 
             /**
-             * BentoServiceEnv requirements_txt.
+             * MyModelEnv requirements_txt.
              * @member {string} requirements_txt
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @instance
              */
-            BentoServiceEnv.prototype.requirements_txt = "";
+            MyModelEnv.prototype.requirements_txt = "";
 
             /**
-             * Creates a new BentoServiceEnv instance using the specified properties.
+             * Creates a new MyModelEnv instance using the specified properties.
              * @function create
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @static
-             * @param {kappa.BentoServiceMetadata.IBentoServiceEnv=} [properties] Properties to set
-             * @returns {kappa.BentoServiceMetadata.BentoServiceEnv} BentoServiceEnv instance
+             * @param {kappa.MyModelMetadata.IMyModelEnv=} [properties] Properties to set
+             * @returns {kappa.MyModelMetadata.MyModelEnv} MyModelEnv instance
              */
-            BentoServiceEnv.create = function create(properties) {
-                return new BentoServiceEnv(properties);
+            MyModelEnv.create = function create(properties) {
+                return new MyModelEnv(properties);
             };
 
             /**
-             * Encodes the specified BentoServiceEnv message. Does not implicitly {@link kappa.BentoServiceMetadata.BentoServiceEnv.verify|verify} messages.
+             * Encodes the specified MyModelEnv message. Does not implicitly {@link kappa.MyModelMetadata.MyModelEnv.verify|verify} messages.
              * @function encode
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @static
-             * @param {kappa.BentoServiceMetadata.IBentoServiceEnv} message BentoServiceEnv message or plain object to encode
+             * @param {kappa.MyModelMetadata.IMyModelEnv} message MyModelEnv message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            BentoServiceEnv.encode = function encode(message, writer) {
+            MyModelEnv.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
                 if (message.setup_sh != null && Object.hasOwnProperty.call(message, "setup_sh"))
@@ -7961,33 +7961,33 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Encodes the specified BentoServiceEnv message, length delimited. Does not implicitly {@link kappa.BentoServiceMetadata.BentoServiceEnv.verify|verify} messages.
+             * Encodes the specified MyModelEnv message, length delimited. Does not implicitly {@link kappa.MyModelMetadata.MyModelEnv.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @static
-             * @param {kappa.BentoServiceMetadata.IBentoServiceEnv} message BentoServiceEnv message or plain object to encode
+             * @param {kappa.MyModelMetadata.IMyModelEnv} message MyModelEnv message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            BentoServiceEnv.encodeDelimited = function encodeDelimited(message, writer) {
+            MyModelEnv.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
 
             /**
-             * Decodes a BentoServiceEnv message from the specified reader or buffer.
+             * Decodes a MyModelEnv message from the specified reader or buffer.
              * @function decode
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {kappa.BentoServiceMetadata.BentoServiceEnv} BentoServiceEnv
+             * @returns {kappa.MyModelMetadata.MyModelEnv} MyModelEnv
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            BentoServiceEnv.decode = function decode(reader, length) {
+            MyModelEnv.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.kappa.BentoServiceMetadata.BentoServiceEnv();
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.kappa.MyModelMetadata.MyModelEnv();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
@@ -8023,30 +8023,30 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Decodes a BentoServiceEnv message from the specified reader or buffer, length delimited.
+             * Decodes a MyModelEnv message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {kappa.BentoServiceMetadata.BentoServiceEnv} BentoServiceEnv
+             * @returns {kappa.MyModelMetadata.MyModelEnv} MyModelEnv
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            BentoServiceEnv.decodeDelimited = function decodeDelimited(reader) {
+            MyModelEnv.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
             /**
-             * Verifies a BentoServiceEnv message.
+             * Verifies a MyModelEnv message.
              * @function verify
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            BentoServiceEnv.verify = function verify(message) {
+            MyModelEnv.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.setup_sh != null && message.hasOwnProperty("setup_sh"))
@@ -8078,17 +8078,17 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Creates a BentoServiceEnv message from a plain object. Also converts values to their respective internal types.
+             * Creates a MyModelEnv message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {kappa.BentoServiceMetadata.BentoServiceEnv} BentoServiceEnv
+             * @returns {kappa.MyModelMetadata.MyModelEnv} MyModelEnv
              */
-            BentoServiceEnv.fromObject = function fromObject(object) {
-                if (object instanceof $root.kappa.BentoServiceMetadata.BentoServiceEnv)
+            MyModelEnv.fromObject = function fromObject(object) {
+                if (object instanceof $root.kappa.MyModelMetadata.MyModelEnv)
                     return object;
-                let message = new $root.kappa.BentoServiceMetadata.BentoServiceEnv();
+                let message = new $root.kappa.MyModelMetadata.MyModelEnv();
                 if (object.setup_sh != null)
                     message.setup_sh = String(object.setup_sh);
                 if (object.conda_env != null)
@@ -8101,7 +8101,7 @@ export const kappa = $root.kappa = (() => {
                     message.docker_base_image = String(object.docker_base_image);
                 if (object.pip_packages) {
                     if (!Array.isArray(object.pip_packages))
-                        throw TypeError(".kappa.BentoServiceMetadata.BentoServiceEnv.pip_packages: array expected");
+                        throw TypeError(".kappa.MyModelMetadata.MyModelEnv.pip_packages: array expected");
                     message.pip_packages = [];
                     for (let i = 0; i < object.pip_packages.length; ++i)
                         message.pip_packages[i] = String(object.pip_packages[i]);
@@ -8112,15 +8112,15 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Creates a plain object from a BentoServiceEnv message. Also converts values to other types if specified.
+             * Creates a plain object from a MyModelEnv message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @static
-             * @param {kappa.BentoServiceMetadata.BentoServiceEnv} message BentoServiceEnv
+             * @param {kappa.MyModelMetadata.MyModelEnv} message MyModelEnv
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            BentoServiceEnv.toObject = function toObject(message, options) {
+            MyModelEnv.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 let object = {};
@@ -8155,24 +8155,24 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Converts this BentoServiceEnv to JSON.
+             * Converts this MyModelEnv to JSON.
              * @function toJSON
-             * @memberof kappa.BentoServiceMetadata.BentoServiceEnv
+             * @memberof kappa.MyModelMetadata.MyModelEnv
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            BentoServiceEnv.prototype.toJSON = function toJSON() {
+            MyModelEnv.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            return BentoServiceEnv;
+            return MyModelEnv;
         })();
 
-        BentoServiceMetadata.BentoArtifact = (function() {
+        MyModelMetadata.BentoArtifact = (function() {
 
             /**
              * Properties of a BentoArtifact.
-             * @memberof kappa.BentoServiceMetadata
+             * @memberof kappa.MyModelMetadata
              * @interface IBentoArtifact
              * @property {string|null} [name] BentoArtifact name
              * @property {string|null} [artifact_type] BentoArtifact artifact_type
@@ -8181,11 +8181,11 @@ export const kappa = $root.kappa = (() => {
 
             /**
              * Constructs a new BentoArtifact.
-             * @memberof kappa.BentoServiceMetadata
+             * @memberof kappa.MyModelMetadata
              * @classdesc Represents a BentoArtifact.
              * @implements IBentoArtifact
              * @constructor
-             * @param {kappa.BentoServiceMetadata.IBentoArtifact=} [properties] Properties to set
+             * @param {kappa.MyModelMetadata.IBentoArtifact=} [properties] Properties to set
              */
             function BentoArtifact(properties) {
                 if (properties)
@@ -8197,7 +8197,7 @@ export const kappa = $root.kappa = (() => {
             /**
              * BentoArtifact name.
              * @member {string} name
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @instance
              */
             BentoArtifact.prototype.name = "";
@@ -8205,7 +8205,7 @@ export const kappa = $root.kappa = (() => {
             /**
              * BentoArtifact artifact_type.
              * @member {string} artifact_type
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @instance
              */
             BentoArtifact.prototype.artifact_type = "";
@@ -8213,7 +8213,7 @@ export const kappa = $root.kappa = (() => {
             /**
              * BentoArtifact metadata.
              * @member {google.protobuf.IStruct|null|undefined} metadata
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @instance
              */
             BentoArtifact.prototype.metadata = null;
@@ -8221,21 +8221,21 @@ export const kappa = $root.kappa = (() => {
             /**
              * Creates a new BentoArtifact instance using the specified properties.
              * @function create
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @static
-             * @param {kappa.BentoServiceMetadata.IBentoArtifact=} [properties] Properties to set
-             * @returns {kappa.BentoServiceMetadata.BentoArtifact} BentoArtifact instance
+             * @param {kappa.MyModelMetadata.IBentoArtifact=} [properties] Properties to set
+             * @returns {kappa.MyModelMetadata.BentoArtifact} BentoArtifact instance
              */
             BentoArtifact.create = function create(properties) {
                 return new BentoArtifact(properties);
             };
 
             /**
-             * Encodes the specified BentoArtifact message. Does not implicitly {@link kappa.BentoServiceMetadata.BentoArtifact.verify|verify} messages.
+             * Encodes the specified BentoArtifact message. Does not implicitly {@link kappa.MyModelMetadata.BentoArtifact.verify|verify} messages.
              * @function encode
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @static
-             * @param {kappa.BentoServiceMetadata.IBentoArtifact} message BentoArtifact message or plain object to encode
+             * @param {kappa.MyModelMetadata.IBentoArtifact} message BentoArtifact message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
@@ -8252,11 +8252,11 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Encodes the specified BentoArtifact message, length delimited. Does not implicitly {@link kappa.BentoServiceMetadata.BentoArtifact.verify|verify} messages.
+             * Encodes the specified BentoArtifact message, length delimited. Does not implicitly {@link kappa.MyModelMetadata.BentoArtifact.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @static
-             * @param {kappa.BentoServiceMetadata.IBentoArtifact} message BentoArtifact message or plain object to encode
+             * @param {kappa.MyModelMetadata.IBentoArtifact} message BentoArtifact message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
@@ -8267,18 +8267,18 @@ export const kappa = $root.kappa = (() => {
             /**
              * Decodes a BentoArtifact message from the specified reader or buffer.
              * @function decode
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {kappa.BentoServiceMetadata.BentoArtifact} BentoArtifact
+             * @returns {kappa.MyModelMetadata.BentoArtifact} BentoArtifact
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
             BentoArtifact.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.kappa.BentoServiceMetadata.BentoArtifact();
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.kappa.MyModelMetadata.BentoArtifact();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
@@ -8302,10 +8302,10 @@ export const kappa = $root.kappa = (() => {
             /**
              * Decodes a BentoArtifact message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {kappa.BentoServiceMetadata.BentoArtifact} BentoArtifact
+             * @returns {kappa.MyModelMetadata.BentoArtifact} BentoArtifact
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
@@ -8318,7 +8318,7 @@ export const kappa = $root.kappa = (() => {
             /**
              * Verifies a BentoArtifact message.
              * @function verify
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -8343,22 +8343,22 @@ export const kappa = $root.kappa = (() => {
             /**
              * Creates a BentoArtifact message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {kappa.BentoServiceMetadata.BentoArtifact} BentoArtifact
+             * @returns {kappa.MyModelMetadata.BentoArtifact} BentoArtifact
              */
             BentoArtifact.fromObject = function fromObject(object) {
-                if (object instanceof $root.kappa.BentoServiceMetadata.BentoArtifact)
+                if (object instanceof $root.kappa.MyModelMetadata.BentoArtifact)
                     return object;
-                let message = new $root.kappa.BentoServiceMetadata.BentoArtifact();
+                let message = new $root.kappa.MyModelMetadata.BentoArtifact();
                 if (object.name != null)
                     message.name = String(object.name);
                 if (object.artifact_type != null)
                     message.artifact_type = String(object.artifact_type);
                 if (object.metadata != null) {
                     if (typeof object.metadata !== "object")
-                        throw TypeError(".kappa.BentoServiceMetadata.BentoArtifact.metadata: object expected");
+                        throw TypeError(".kappa.MyModelMetadata.BentoArtifact.metadata: object expected");
                     message.metadata = $root.google.protobuf.Struct.fromObject(object.metadata);
                 }
                 return message;
@@ -8367,9 +8367,9 @@ export const kappa = $root.kappa = (() => {
             /**
              * Creates a plain object from a BentoArtifact message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @static
-             * @param {kappa.BentoServiceMetadata.BentoArtifact} message BentoArtifact
+             * @param {kappa.MyModelMetadata.BentoArtifact} message BentoArtifact
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
@@ -8394,7 +8394,7 @@ export const kappa = $root.kappa = (() => {
             /**
              * Converts this BentoArtifact to JSON.
              * @function toJSON
-             * @memberof kappa.BentoServiceMetadata.BentoArtifact
+             * @memberof kappa.MyModelMetadata.BentoArtifact
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
@@ -8405,33 +8405,33 @@ export const kappa = $root.kappa = (() => {
             return BentoArtifact;
         })();
 
-        BentoServiceMetadata.BentoServiceApi = (function() {
+        MyModelMetadata.MyModelApi = (function() {
 
             /**
-             * Properties of a BentoServiceApi.
-             * @memberof kappa.BentoServiceMetadata
-             * @interface IBentoServiceApi
-             * @property {string|null} [name] BentoServiceApi name
-             * @property {string|null} [input_type] BentoServiceApi input_type
-             * @property {string|null} [docs] BentoServiceApi docs
-             * @property {google.protobuf.IStruct|null} [input_config] BentoServiceApi input_config
-             * @property {google.protobuf.IStruct|null} [output_config] BentoServiceApi output_config
-             * @property {string|null} [output_type] BentoServiceApi output_type
-             * @property {number|null} [mb_max_latency] BentoServiceApi mb_max_latency
-             * @property {number|null} [mb_max_batch_size] BentoServiceApi mb_max_batch_size
-             * @property {boolean|null} [batch] BentoServiceApi batch
-             * @property {string|null} [route] BentoServiceApi route
+             * Properties of a MyModelApi.
+             * @memberof kappa.MyModelMetadata
+             * @interface IMyModelApi
+             * @property {string|null} [name] MyModelApi name
+             * @property {string|null} [input_type] MyModelApi input_type
+             * @property {string|null} [docs] MyModelApi docs
+             * @property {google.protobuf.IStruct|null} [input_config] MyModelApi input_config
+             * @property {google.protobuf.IStruct|null} [output_config] MyModelApi output_config
+             * @property {string|null} [output_type] MyModelApi output_type
+             * @property {number|null} [mb_max_latency] MyModelApi mb_max_latency
+             * @property {number|null} [mb_max_batch_size] MyModelApi mb_max_batch_size
+             * @property {boolean|null} [batch] MyModelApi batch
+             * @property {string|null} [route] MyModelApi route
              */
 
             /**
-             * Constructs a new BentoServiceApi.
-             * @memberof kappa.BentoServiceMetadata
-             * @classdesc Represents a BentoServiceApi.
-             * @implements IBentoServiceApi
+             * Constructs a new MyModelApi.
+             * @memberof kappa.MyModelMetadata
+             * @classdesc Represents a MyModelApi.
+             * @implements IMyModelApi
              * @constructor
-             * @param {kappa.BentoServiceMetadata.IBentoServiceApi=} [properties] Properties to set
+             * @param {kappa.MyModelMetadata.IMyModelApi=} [properties] Properties to set
              */
-            function BentoServiceApi(properties) {
+            function MyModelApi(properties) {
                 if (properties)
                     for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -8439,107 +8439,107 @@ export const kappa = $root.kappa = (() => {
             }
 
             /**
-             * BentoServiceApi name.
+             * MyModelApi name.
              * @member {string} name
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              */
-            BentoServiceApi.prototype.name = "";
+            MyModelApi.prototype.name = "";
 
             /**
-             * BentoServiceApi input_type.
+             * MyModelApi input_type.
              * @member {string} input_type
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              */
-            BentoServiceApi.prototype.input_type = "";
+            MyModelApi.prototype.input_type = "";
 
             /**
-             * BentoServiceApi docs.
+             * MyModelApi docs.
              * @member {string} docs
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              */
-            BentoServiceApi.prototype.docs = "";
+            MyModelApi.prototype.docs = "";
 
             /**
-             * BentoServiceApi input_config.
+             * MyModelApi input_config.
              * @member {google.protobuf.IStruct|null|undefined} input_config
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              */
-            BentoServiceApi.prototype.input_config = null;
+            MyModelApi.prototype.input_config = null;
 
             /**
-             * BentoServiceApi output_config.
+             * MyModelApi output_config.
              * @member {google.protobuf.IStruct|null|undefined} output_config
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              */
-            BentoServiceApi.prototype.output_config = null;
+            MyModelApi.prototype.output_config = null;
 
             /**
-             * BentoServiceApi output_type.
+             * MyModelApi output_type.
              * @member {string} output_type
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              */
-            BentoServiceApi.prototype.output_type = "";
+            MyModelApi.prototype.output_type = "";
 
             /**
-             * BentoServiceApi mb_max_latency.
+             * MyModelApi mb_max_latency.
              * @member {number} mb_max_latency
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              */
-            BentoServiceApi.prototype.mb_max_latency = 0;
+            MyModelApi.prototype.mb_max_latency = 0;
 
             /**
-             * BentoServiceApi mb_max_batch_size.
+             * MyModelApi mb_max_batch_size.
              * @member {number} mb_max_batch_size
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              */
-            BentoServiceApi.prototype.mb_max_batch_size = 0;
+            MyModelApi.prototype.mb_max_batch_size = 0;
 
             /**
-             * BentoServiceApi batch.
+             * MyModelApi batch.
              * @member {boolean} batch
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              */
-            BentoServiceApi.prototype.batch = false;
+            MyModelApi.prototype.batch = false;
 
             /**
-             * BentoServiceApi route.
+             * MyModelApi route.
              * @member {string} route
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              */
-            BentoServiceApi.prototype.route = "";
+            MyModelApi.prototype.route = "";
 
             /**
-             * Creates a new BentoServiceApi instance using the specified properties.
+             * Creates a new MyModelApi instance using the specified properties.
              * @function create
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @static
-             * @param {kappa.BentoServiceMetadata.IBentoServiceApi=} [properties] Properties to set
-             * @returns {kappa.BentoServiceMetadata.BentoServiceApi} BentoServiceApi instance
+             * @param {kappa.MyModelMetadata.IMyModelApi=} [properties] Properties to set
+             * @returns {kappa.MyModelMetadata.MyModelApi} MyModelApi instance
              */
-            BentoServiceApi.create = function create(properties) {
-                return new BentoServiceApi(properties);
+            MyModelApi.create = function create(properties) {
+                return new MyModelApi(properties);
             };
 
             /**
-             * Encodes the specified BentoServiceApi message. Does not implicitly {@link kappa.BentoServiceMetadata.BentoServiceApi.verify|verify} messages.
+             * Encodes the specified MyModelApi message. Does not implicitly {@link kappa.MyModelMetadata.MyModelApi.verify|verify} messages.
              * @function encode
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @static
-             * @param {kappa.BentoServiceMetadata.IBentoServiceApi} message BentoServiceApi message or plain object to encode
+             * @param {kappa.MyModelMetadata.IMyModelApi} message MyModelApi message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            BentoServiceApi.encode = function encode(message, writer) {
+            MyModelApi.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
@@ -8566,33 +8566,33 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Encodes the specified BentoServiceApi message, length delimited. Does not implicitly {@link kappa.BentoServiceMetadata.BentoServiceApi.verify|verify} messages.
+             * Encodes the specified MyModelApi message, length delimited. Does not implicitly {@link kappa.MyModelMetadata.MyModelApi.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @static
-             * @param {kappa.BentoServiceMetadata.IBentoServiceApi} message BentoServiceApi message or plain object to encode
+             * @param {kappa.MyModelMetadata.IMyModelApi} message MyModelApi message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            BentoServiceApi.encodeDelimited = function encodeDelimited(message, writer) {
+            MyModelApi.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
 
             /**
-             * Decodes a BentoServiceApi message from the specified reader or buffer.
+             * Decodes a MyModelApi message from the specified reader or buffer.
              * @function decode
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {kappa.BentoServiceMetadata.BentoServiceApi} BentoServiceApi
+             * @returns {kappa.MyModelMetadata.MyModelApi} MyModelApi
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            BentoServiceApi.decode = function decode(reader, length) {
+            MyModelApi.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.kappa.BentoServiceMetadata.BentoServiceApi();
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.kappa.MyModelMetadata.MyModelApi();
                 while (reader.pos < end) {
                     let tag = reader.uint32();
                     switch (tag >>> 3) {
@@ -8635,30 +8635,30 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Decodes a BentoServiceApi message from the specified reader or buffer, length delimited.
+             * Decodes a MyModelApi message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {kappa.BentoServiceMetadata.BentoServiceApi} BentoServiceApi
+             * @returns {kappa.MyModelMetadata.MyModelApi} MyModelApi
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            BentoServiceApi.decodeDelimited = function decodeDelimited(reader) {
+            MyModelApi.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
 
             /**
-             * Verifies a BentoServiceApi message.
+             * Verifies a MyModelApi message.
              * @function verify
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            BentoServiceApi.verify = function verify(message) {
+            MyModelApi.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.name != null && message.hasOwnProperty("name"))
@@ -8699,17 +8699,17 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Creates a BentoServiceApi message from a plain object. Also converts values to their respective internal types.
+             * Creates a MyModelApi message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {kappa.BentoServiceMetadata.BentoServiceApi} BentoServiceApi
+             * @returns {kappa.MyModelMetadata.MyModelApi} MyModelApi
              */
-            BentoServiceApi.fromObject = function fromObject(object) {
-                if (object instanceof $root.kappa.BentoServiceMetadata.BentoServiceApi)
+            MyModelApi.fromObject = function fromObject(object) {
+                if (object instanceof $root.kappa.MyModelMetadata.MyModelApi)
                     return object;
-                let message = new $root.kappa.BentoServiceMetadata.BentoServiceApi();
+                let message = new $root.kappa.MyModelMetadata.MyModelApi();
                 if (object.name != null)
                     message.name = String(object.name);
                 if (object.input_type != null)
@@ -8718,12 +8718,12 @@ export const kappa = $root.kappa = (() => {
                     message.docs = String(object.docs);
                 if (object.input_config != null) {
                     if (typeof object.input_config !== "object")
-                        throw TypeError(".kappa.BentoServiceMetadata.BentoServiceApi.input_config: object expected");
+                        throw TypeError(".kappa.MyModelMetadata.MyModelApi.input_config: object expected");
                     message.input_config = $root.google.protobuf.Struct.fromObject(object.input_config);
                 }
                 if (object.output_config != null) {
                     if (typeof object.output_config !== "object")
-                        throw TypeError(".kappa.BentoServiceMetadata.BentoServiceApi.output_config: object expected");
+                        throw TypeError(".kappa.MyModelMetadata.MyModelApi.output_config: object expected");
                     message.output_config = $root.google.protobuf.Struct.fromObject(object.output_config);
                 }
                 if (object.output_type != null)
@@ -8740,15 +8740,15 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Creates a plain object from a BentoServiceApi message. Also converts values to other types if specified.
+             * Creates a plain object from a MyModelApi message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @static
-             * @param {kappa.BentoServiceMetadata.BentoServiceApi} message BentoServiceApi
+             * @param {kappa.MyModelMetadata.MyModelApi} message MyModelApi
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            BentoServiceApi.toObject = function toObject(message, options) {
+            MyModelApi.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 let object = {};
@@ -8788,20 +8788,20 @@ export const kappa = $root.kappa = (() => {
             };
 
             /**
-             * Converts this BentoServiceApi to JSON.
+             * Converts this MyModelApi to JSON.
              * @function toJSON
-             * @memberof kappa.BentoServiceMetadata.BentoServiceApi
+             * @memberof kappa.MyModelMetadata.MyModelApi
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            BentoServiceApi.prototype.toJSON = function toJSON() {
+            MyModelApi.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
 
-            return BentoServiceApi;
+            return MyModelApi;
         })();
 
-        return BentoServiceMetadata;
+        return MyModelMetadata;
     })();
 
     kappa.Bento = (function() {
@@ -8813,7 +8813,7 @@ export const kappa = $root.kappa = (() => {
          * @property {string|null} [name] Bento name
          * @property {string|null} [version] Bento version
          * @property {kappa.IBentoUri|null} [uri] Bento uri
-         * @property {kappa.IBentoServiceMetadata|null} [bento_service_metadata] Bento bento_service_metadata
+         * @property {kappa.IMyModelMetadata|null} [bento_service_metadata] Bento bento_service_metadata
          * @property {kappa.IUploadStatus|null} [status] Bento status
          */
 
@@ -8858,7 +8858,7 @@ export const kappa = $root.kappa = (() => {
 
         /**
          * Bento bento_service_metadata.
-         * @member {kappa.IBentoServiceMetadata|null|undefined} bento_service_metadata
+         * @member {kappa.IMyModelMetadata|null|undefined} bento_service_metadata
          * @memberof kappa.Bento
          * @instance
          */
@@ -8903,7 +8903,7 @@ export const kappa = $root.kappa = (() => {
             if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
                 $root.kappa.BentoUri.encode(message.uri, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.bento_service_metadata != null && Object.hasOwnProperty.call(message, "bento_service_metadata"))
-                $root.kappa.BentoServiceMetadata.encode(message.bento_service_metadata, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                $root.kappa.MyModelMetadata.encode(message.bento_service_metadata, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             if (message.status != null && Object.hasOwnProperty.call(message, "status"))
                 $root.kappa.UploadStatus.encode(message.status, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             return writer;
@@ -8950,7 +8950,7 @@ export const kappa = $root.kappa = (() => {
                     message.uri = $root.kappa.BentoUri.decode(reader, reader.uint32());
                     break;
                 case 4:
-                    message.bento_service_metadata = $root.kappa.BentoServiceMetadata.decode(reader, reader.uint32());
+                    message.bento_service_metadata = $root.kappa.MyModelMetadata.decode(reader, reader.uint32());
                     break;
                 case 5:
                     message.status = $root.kappa.UploadStatus.decode(reader, reader.uint32());
@@ -9002,7 +9002,7 @@ export const kappa = $root.kappa = (() => {
                     return "uri." + error;
             }
             if (message.bento_service_metadata != null && message.hasOwnProperty("bento_service_metadata")) {
-                let error = $root.kappa.BentoServiceMetadata.verify(message.bento_service_metadata);
+                let error = $root.kappa.MyModelMetadata.verify(message.bento_service_metadata);
                 if (error)
                     return "bento_service_metadata." + error;
             }
@@ -9038,7 +9038,7 @@ export const kappa = $root.kappa = (() => {
             if (object.bento_service_metadata != null) {
                 if (typeof object.bento_service_metadata !== "object")
                     throw TypeError(".kappa.Bento.bento_service_metadata: object expected");
-                message.bento_service_metadata = $root.kappa.BentoServiceMetadata.fromObject(object.bento_service_metadata);
+                message.bento_service_metadata = $root.kappa.MyModelMetadata.fromObject(object.bento_service_metadata);
             }
             if (object.status != null) {
                 if (typeof object.status !== "object")
@@ -9075,7 +9075,7 @@ export const kappa = $root.kappa = (() => {
             if (message.uri != null && message.hasOwnProperty("uri"))
                 object.uri = $root.kappa.BentoUri.toObject(message.uri, options);
             if (message.bento_service_metadata != null && message.hasOwnProperty("bento_service_metadata"))
-                object.bento_service_metadata = $root.kappa.BentoServiceMetadata.toObject(message.bento_service_metadata, options);
+                object.bento_service_metadata = $root.kappa.MyModelMetadata.toObject(message.bento_service_metadata, options);
             if (message.status != null && message.hasOwnProperty("status"))
                 object.status = $root.kappa.UploadStatus.toObject(message.status, options);
             return object;
@@ -9841,7 +9841,7 @@ export const kappa = $root.kappa = (() => {
          * @property {string|null} [bento_name] UpdateBentoRequest bento_name
          * @property {string|null} [bento_version] UpdateBentoRequest bento_version
          * @property {kappa.IUploadStatus|null} [upload_status] UpdateBentoRequest upload_status
-         * @property {kappa.IBentoServiceMetadata|null} [service_metadata] UpdateBentoRequest service_metadata
+         * @property {kappa.IMyModelMetadata|null} [service_metadata] UpdateBentoRequest service_metadata
          */
 
         /**
@@ -9885,7 +9885,7 @@ export const kappa = $root.kappa = (() => {
 
         /**
          * UpdateBentoRequest service_metadata.
-         * @member {kappa.IBentoServiceMetadata|null|undefined} service_metadata
+         * @member {kappa.IMyModelMetadata|null|undefined} service_metadata
          * @memberof kappa.UpdateBentoRequest
          * @instance
          */
@@ -9922,7 +9922,7 @@ export const kappa = $root.kappa = (() => {
             if (message.upload_status != null && Object.hasOwnProperty.call(message, "upload_status"))
                 $root.kappa.UploadStatus.encode(message.upload_status, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.service_metadata != null && Object.hasOwnProperty.call(message, "service_metadata"))
-                $root.kappa.BentoServiceMetadata.encode(message.service_metadata, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                $root.kappa.MyModelMetadata.encode(message.service_metadata, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
 
@@ -9967,7 +9967,7 @@ export const kappa = $root.kappa = (() => {
                     message.upload_status = $root.kappa.UploadStatus.decode(reader, reader.uint32());
                     break;
                 case 4:
-                    message.service_metadata = $root.kappa.BentoServiceMetadata.decode(reader, reader.uint32());
+                    message.service_metadata = $root.kappa.MyModelMetadata.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -10016,7 +10016,7 @@ export const kappa = $root.kappa = (() => {
                     return "upload_status." + error;
             }
             if (message.service_metadata != null && message.hasOwnProperty("service_metadata")) {
-                let error = $root.kappa.BentoServiceMetadata.verify(message.service_metadata);
+                let error = $root.kappa.MyModelMetadata.verify(message.service_metadata);
                 if (error)
                     return "service_metadata." + error;
             }
@@ -10047,7 +10047,7 @@ export const kappa = $root.kappa = (() => {
             if (object.service_metadata != null) {
                 if (typeof object.service_metadata !== "object")
                     throw TypeError(".kappa.UpdateBentoRequest.service_metadata: object expected");
-                message.service_metadata = $root.kappa.BentoServiceMetadata.fromObject(object.service_metadata);
+                message.service_metadata = $root.kappa.MyModelMetadata.fromObject(object.service_metadata);
             }
             return message;
         };
@@ -10078,7 +10078,7 @@ export const kappa = $root.kappa = (() => {
             if (message.upload_status != null && message.hasOwnProperty("upload_status"))
                 object.upload_status = $root.kappa.UploadStatus.toObject(message.upload_status, options);
             if (message.service_metadata != null && message.hasOwnProperty("service_metadata"))
-                object.service_metadata = $root.kappa.BentoServiceMetadata.toObject(message.service_metadata, options);
+                object.service_metadata = $root.kappa.MyModelMetadata.toObject(message.service_metadata, options);
             return object;
         };
 

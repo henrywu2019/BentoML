@@ -8,8 +8,8 @@ from kappa.exceptions import (
     InvalidArgument,
     MissingDependencyException,
 )
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 from kappa.utils import cloudpickle
 
 logger = logging.getLogger(__name__)
@@ -27,7 +27,7 @@ def _is_pytorch_lightning_model_file_like(path):
     )
 
 
-class PytorchModelArtifact(BentoServiceArtifact):
+class PytorchModelArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading objects with torch.save and torch.load
 
@@ -61,7 +61,7 @@ class PytorchModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([PytorchModelArtifact('net')])
-    >>> class PytorchModelService(kappa.BentoService):
+    >>> class PytorchModelService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=ImageInput(), batch=True)
     >>>     def predict(self, imgs):
@@ -133,13 +133,13 @@ class PytorchModelArtifact(BentoServiceArtifact):
 
         return self.pack(model)
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         logger.warning(
             "Kappa by default does not include spacy and torchvision package when "
             "using PytorchModelArtifact. To make sure Kappa bundle those packages if "
             "they are required for your model, either import those packages in "
-            "BentoService definition file or manually add them via "
-            "`@env(pip_packages=['torchvision'])` when defining a BentoService"
+            "MyModel definition file or manually add them via "
+            "`@env(pip_packages=['torchvision'])` when defining a MyModel"
         )
         env.add_pip_packages(['torch'])
 
@@ -161,7 +161,7 @@ class PytorchModelArtifact(BentoServiceArtifact):
         return cloudpickle.dump(self._model, open(self._file_path(dst), "wb"))
 
 
-class PytorchLightningModelArtifact(BentoServiceArtifact):
+class PytorchLightningModelArtifact(MyModelArtifact):
     """Abstraction for saving and loading pytorch lightning model
 
     Args:
@@ -188,7 +188,7 @@ class PytorchLightningModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([PytorchLightningModelArtifact('model')])
-    >>> class PytorchLightingService(kappa.BentoService):
+    >>> class PytorchLightingService(kappa.MyModel):
     >>>     @kappa.api(input=DataframeInput(), batch=True)
     >>>     def predict(self, df):
     >>>         input_tensor = torch.from_numpy(df.to_numpy())
@@ -247,7 +247,7 @@ class PytorchLightningModelArtifact(BentoServiceArtifact):
     def load(self, path):
         self._model = self._get_torch_script_model(self._saved_model_file_path(path))
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(['pytorch-lightning'])
 
     def get(self):

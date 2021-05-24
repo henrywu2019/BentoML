@@ -2,7 +2,7 @@ import logging
 import pytest
 import subprocess
 
-from tests.bento_service_examples.example_bento_service import ExampleBentoService
+from tests.bento_service_examples.example_bento_service import ExampleMyModel
 from tests.threading_util import ThreadWithResult, run_delayed_thread
 
 logger = logging.getLogger('kappa.test')
@@ -20,7 +20,7 @@ def cli(svc, cmd, *args):
 
 @pytest.fixture()
 def packed_svc():
-    svc = ExampleBentoService()
+    svc = ExampleMyModel()
     svc.pack('model', [1, 2, 3])
     svc.save()
     return svc

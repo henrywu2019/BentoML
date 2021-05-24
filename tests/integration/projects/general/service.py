@@ -24,9 +24,9 @@ from kappa.types import InferenceResult, InferenceTask
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([PickleArtifact("model"), SklearnModelArtifact('sk_model')])
-class ExampleService(kappa.BentoService):
+class ExampleService(kappa.MyModel):
     """
-    Example BentoService class made for testing purpose
+    Example MyModel class made for testing purpose
     """
 
     @kappa.api(

@@ -104,7 +104,7 @@ def get_arn_role_from_current_aws_user():
 def create_and_push_docker_image_to_ecr(
     region, bento_name, bento_version, snapshot_path
 ):
-    """Create BentoService sagemaker image and push to AWS ECR
+    """Create MyModel sagemaker image and push to AWS ECR
 
     Example: https://github.com/awslabs/amazon-sagemaker-examples/blob/\
         master/advanced_functionality/scikit_bring_your_own/container/build_and_push.sh
@@ -580,7 +580,7 @@ class SageMakerDeploymentOperator(DeploymentOperatorBase):
                 != current_deployment_spec.bento_version
             ):
                 logger.debug(
-                    "BentoService tag is different from current deployment, "
+                    "MyModel tag is different from current deployment, "
                     "creating new docker image and push to ECR"
                 )
                 with TempDirectory() as temp_dir:

@@ -116,7 +116,7 @@ def create_bento_service_cli(
 
     # Example Usage: kappa run {API_NAME} {BUNDLE_PATH} --input ...
     @kappa_cli.command(
-        help="Run a API defined in saved BentoService bundle from command line",
+        help="Run a API defined in saved MyModel from command line",
         short_help="Run API function",
         context_settings=dict(ignore_unknown_options=True, allow_extra_args=True),
     )
@@ -138,7 +138,7 @@ def create_bento_service_cli(
 
     # Example Usage: kappa info {BUNDLE_PATH}
     @kappa_cli.command(
-        help="List all APIs defined in the BentoService loaded from saved bundle",
+        help="List all APIs defined in the MyModel loaded from saved bundle",
         short_help="List APIs",
     )
     @conditional_argument(pip_installed_bundle_path is None, "bento", type=click.STRING)
@@ -151,7 +151,7 @@ def create_bento_service_cli(
     )
     def info(bento=None, gamma_url=None):
         """
-        List all APIs defined in the BentoService loaded from saved bundle
+        List all APIs defined in the MyModel loaded from saved bundle
         """
         saved_bundle_path = resolve_bundle_path(
             bento, pip_installed_bundle_path, gamma_url
@@ -186,7 +186,7 @@ def create_bento_service_cli(
 
     # Example Usage: kappa serve {BUNDLE_PATH} --port={PORT}
     @kappa_cli.command(
-        help="Start a dev API server serving specified BentoService",
+        help="Start a dev API server serving specified MyModel",
         short_help="Start local dev API server",
     )
     @conditional_argument(pip_installed_bundle_path is None, "bento", type=click.STRING)
@@ -247,7 +247,7 @@ def create_bento_service_cli(
     # Example Usage:
     # kappa serve-gunicorn {BUNDLE_PATH} --port={PORT} --workers={WORKERS}
     @kappa_cli.command(
-        help="Start a production API server serving specified BentoService",
+        help="Start a production API server serving specified MyModel",
         short_help="Start production API server",
     )
     @conditional_argument(pip_installed_bundle_path is None, "bento", type=click.STRING)
@@ -382,9 +382,9 @@ def create_bento_service_cli(
         '"--gamma-url http://localhost:50050"',
     )
     def containerize(bento, push, tag, build_arg, gamma_url):
-        """Containerize specified BentoService.
+        """Containerize specified MyModel.
 
-        BENTO is the target BentoService to be containerized, referenced by its name
+        BENTO is the target MyModel to be containerized, referenced by its name
         and version in format of name:version. For example: "iris_classifier:v1.2.0"
 
         `kappa containerize` command also supports the use of the `latest` tag

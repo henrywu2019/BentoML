@@ -44,13 +44,13 @@ def get_aws_sagemaker_sub_command():
 
     @click.group(
         name='sagemaker',
-        help='Commands for AWS Sagemaker BentoService deployments',
+        help='Commands for AWS Sagemaker MyModel deployments',
         cls=BentoMLCommandGroup,
     )
     def aws_sagemaker():
         pass
 
-    @aws_sagemaker.command(help='Deploy BentoService to AWS Sagemaker')
+    @aws_sagemaker.command(help='Deploy MyModel to AWS Sagemaker')
     @click.argument('name', type=click.STRING)
     @click.option(
         '-b',
@@ -59,7 +59,7 @@ def get_aws_sagemaker_sub_command():
         type=click.STRING,
         required=True,
         callback=parse_bento_tag_callback,
-        help='Target BentoService to be deployed, referenced by its name and version '
+        help='Target MyModel to be deployed, referenced by its name and version '
         'in format of name:version. For example: "iris_classifier:v1.2.0"',
     )
     @click.option(
@@ -186,7 +186,7 @@ def get_aws_sagemaker_sub_command():
         '--bento-service-bundle',
         type=click.STRING,
         callback=parse_bento_tag_callback,
-        help='Target BentoService to be deployed, referenced by its name and version '
+        help='Target MyModel to be deployed, referenced by its name and version '
         'in format of name:version. For example: "iris_classifier:v1.2.0"',
     )
     @click.option(

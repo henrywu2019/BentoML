@@ -12,7 +12,7 @@ if "tensorflow" not in sys.modules:
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([TensorflowSavedModelArtifact('model')])
-class Tensorflow1Classifier(kappa.BentoService):
+class Tensorflow1Classifier(kappa.MyModel):
     @kappa.api(input=TfTensorInput(), batch=True)
     def predict(self, tensor):
         import tensorflow as tf

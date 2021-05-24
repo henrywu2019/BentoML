@@ -589,7 +589,7 @@ class AzureFunctionsDeploymentOperator(DeploymentOperatorBase):
             or deployment_pb.spec.bento_version != current_deployment.spec.bento_version
         ):
             logger.debug(
-                'BentoService tag is different from current Azure Functions '
+                'MyModel tag is different from current Azure Functions '
                 'deployment, creating new Azure Functions project and push to ACR'
             )
             _update_azure_functions(

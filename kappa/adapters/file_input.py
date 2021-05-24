@@ -51,7 +51,7 @@ class FileInput(BaseInputAdapter):
 
         @kappa.env(pip_packages=['torch', 'pillow', 'numpy'])
         @kappa.artifacts([PytorchModelArtifact('classifier')])
-        class PyTorchFashionClassifier(kappa.BentoService):
+        class PyTorchFashionClassifier(kappa.MyModel):
 
             @kappa.api(input=FileInput(), batch=True)
             def predict(self, file_streams):

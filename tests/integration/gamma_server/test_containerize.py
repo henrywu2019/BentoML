@@ -2,13 +2,13 @@ import logging
 import subprocess
 
 from kappa.gamma.client import get_gamma_client
-from tests.bento_service_examples.example_bento_service import ExampleBentoService
+from tests.bento_service_examples.example_bento_service import ExampleMyModel
 
 logger = logging.getLogger('kappa.test')
 
 
 def test_gamma_server_containerize_without_push():
-    svc = ExampleBentoService()
+    svc = ExampleMyModel()
     svc.pack('model', [1, 2, 3])
     logger.info('Saving bento service to local gamma server')
     svc.save()
@@ -20,7 +20,7 @@ def test_gamma_server_containerize_without_push():
 
 
 def test_gamma_server_containerize_from_cli():
-    svc = ExampleBentoService()
+    svc = ExampleMyModel()
     svc.pack('model', [1, 2, 3])
     logger.info('Saving bento service to local gamma server')
     svc.save()

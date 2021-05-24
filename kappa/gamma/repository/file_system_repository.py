@@ -39,7 +39,7 @@ class FileSystemRepository(BaseRepository):
         self.uri_type = BentoUri.LOCAL
 
     def add(self, bento_name, bento_version):
-        # Full path containing saved BentoService bundle, it the base path with service
+        # Full path containing saved MyModel, it the base path with service
         # name and service version as prefix. e.g.:
         # with base_path = '/tmp/my_bento_repo/', the saved bento will resolve in
         # the directory: '/tmp/my_bento_repo/service_name/version/'
@@ -53,7 +53,7 @@ class FileSystemRepository(BaseRepository):
         # Raise if target bento version already exist in storage
         if os.path.exists(target_dir):
             raise GammaRepositoryException(
-                "Existing BentoService bundle {name}:{version} found in repository: "
+                "Existing MyModel {name}:{version} found in repository: "
                 "{target_dir}".format(
                     name=bento_name, version=bento_version, target_dir=target_dir
                 )
@@ -80,7 +80,7 @@ class FileSystemRepository(BaseRepository):
             return shutil.rmtree(saved_path)
         except FileNotFoundError:
             logger.warning(
-                "BentoService %s:%s has already been deleted from local storage",
+                "MyModel %s:%s has already been deleted from local storage",
                 bento_name,
                 bento_version,
             )

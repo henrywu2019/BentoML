@@ -1,10 +1,10 @@
 import os
 from kappa.exceptions import MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 
-class DetectronModelArtifact(BentoServiceArtifact):
+class DetectronModelArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading objects with
     detectron2.checkpoint.DetectionCheckpointer save and load
@@ -30,7 +30,7 @@ class DetectronModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([DetectronModelArtifact('model')])
-    >>> class CocoDetectronService(kappa.BentoService):
+    >>> class CocoDetectronService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=ImageInput(), batch=False)
     >>>     def predict(self, img: np.ndarray) -> Dict:
@@ -76,7 +76,7 @@ class DetectronModelArtifact(BentoServiceArtifact):
         self._aug = None
         self._input_model_yaml = None
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(['torch', "detectron2"])
 
     def _model_file_path(self, base_path):

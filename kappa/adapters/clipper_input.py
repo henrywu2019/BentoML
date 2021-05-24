@@ -26,7 +26,7 @@ ADAPTER_TYPE_TO_INPUT_TYPE = {
 
 class ClipperInput(BaseInputAdapter):
     """
-    A special input adapter that should only be used when deploying BentoService
+    A special input adapter that should only be used when deploying MyModel
      with Clipper(http://clipper.ai/)
 
     ClipperInput are not regular InputAdapter, they don't work with REST
@@ -35,7 +35,7 @@ class ClipperInput(BaseInputAdapter):
 
     @property
     def pip_dependencies(self):
-        # 'clipper_admin' package is only required on the machine deploying BentoService
+        # 'clipper_admin' package is only required on the machine deploying MyModel
         # to a clipper cluster, not required by the API Server itself
         return []
 

@@ -3,7 +3,7 @@ Deploying to KFServing
 
 
 KFServing enables serverless inference on Kubernetes cluster for common machine learning
-frameworks like Tensorflow, XGBoost, scikit-learn and etc. BentoServices can easily
+frameworks like Tensorflow, XGBoost, scikit-learn and etc. MyModels can easily
 deploy to KFServing and take advantage of what KFServing offers.
 
 This guide demonstrates how to serve a scikit-learn based iris classifier model with
@@ -57,7 +57,7 @@ Verify the saved bundle created:
         "type": "LOCAL",
         "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
-      "bentoServiceMetadata": {
+      "MyModelMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
@@ -76,14 +76,14 @@ Verify the saved bundle created:
           {
             "name": "predict",
             "InputType": "DataframeInput",
-            "docs": "BentoService API"
+            "docs": "MyModel API"
           }
         ]
       }
     }
 
 The Kappa saved bundle created can now be used to start a REST API Server hosting the
-BentoService and available for sending test request:
+MyModel and available for sending test request:
 
 .. code-block:: bash
 
@@ -101,7 +101,7 @@ BentoService and available for sending test request:
       http://localhost:5000/predict
 
 ================================
-Deploy BentoService to KFServing
+Deploy MyModel to KFServing
 ================================
 
 Kappa provides a convenient way to containerize the model API server with Docker:

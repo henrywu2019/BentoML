@@ -28,7 +28,7 @@ from kappa.exceptions import BentoMLException
 from kappa.marshal.utils import DataLoader, MARSHAL_REQUEST_HEADER
 from kappa.server.instruments import InstrumentMiddleware
 from kappa.server.open_api import get_open_api_spec_json
-from kappa.service import BentoService, InferenceAPI
+from kappa.service import MyModel, InferenceAPI
 from kappa.tracing import get_tracer
 
 CONTENT_TYPE_LATEST = str("text/plain; version=0.0.4; charset=utf-8")
@@ -139,8 +139,8 @@ def log_exception(exc_info):
 
 class BentoAPIServer:
     """
-    BentoAPIServer creates a REST API server based on APIs defined with a BentoService
-    via BentoService#get_service_apis call. Each InferenceAPI will become one
+    BentoAPIServer creates a REST API server based on APIs defined with a MyModel
+    via MyModel#get_service_apis call. Each InferenceAPI will become one
     endpoint exposed on the REST server, and the RequestHandler defined on each
     InferenceAPI object will be used to handle Request object before feeding the
     request data into a Service API function
@@ -149,7 +149,7 @@ class BentoAPIServer:
     @inject
     def __init__(
         self,
-        bento_service: BentoService,
+        bento_service: MyModel,
         app_name: str = None,
         enable_swagger: bool = Provide[
             BentoMLContainer.config.bento_server.swagger.enabled
@@ -302,7 +302,7 @@ class BentoAPIServer:
         /healthz        Health check ping
         /feedback       Submitting feedback
         /metrics        Prometheus metrics endpoint
-        /metadata       BentoService Artifact Metadata
+        /metadata       MyModel Artifact Metadata
 
         And user defined InferenceAPI list into flask routes, e.g.:
         /classify
@@ -395,7 +395,7 @@ class BentoAPIServer:
                 if 400 <= e.status_code < 500 and e.status_code not in (401, 403):
                     response = make_response(
                         jsonify(
-                            message="BentoService error handling API request: %s"
+                            message="MyModel error handling API request: %s"
                             % str(e)
                         ),
                         e.status_code,
@@ -417,7 +417,7 @@ class BentoAPIServer:
 
         def api_func_with_tracing():
             with get_tracer().span(
-                service_name=f"BentoService.{self.bento_service.name}",
+                service_name=f"MyModel.{self.bento_service.name}",
                 span_name=f"InferenceAPI {api.name} HTTP route",
                 request_headers=request.headers,
             ):

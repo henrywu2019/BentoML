@@ -49,11 +49,11 @@ bento_bundle_path = os.path.join('./', bento_name)
 if not os.path.exists(bento_bundle_path):
     bento_bundle_path = os.path.join('/tmp/requirements', bento_name)
 
-logger.debug('Loading BentoService bundle from path: "%s"', bento_bundle_path)
+logger.debug('Loading MyModel from path: "%s"', bento_bundle_path)
 bento_service = load_from_dir(bento_bundle_path)
-logger.debug('BentoService "%s" loaded successfully', bento_service.name)
+logger.debug('MyModel "%s" loaded successfully', bento_service.name)
 bento_service_api = bento_service.get_inference_api(api_name)
-logger.debug('BentoService API "%s" loaded successfully', {bento_service_api.name})
+logger.debug('MyModel API "%s" loaded successfully', {bento_service_api.name})
 
 this_module = sys.modules[__name__]
 

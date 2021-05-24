@@ -1,13 +1,13 @@
 import os
 
 from kappa.gamma.client import get_gamma_client
-from .example_bento_service_class import ExampleBentoService
+from .example_bento_service_class import ExampleMyModel
 from tests.gamma.local_gamma_service import local_gamma_service_container
 
 
 def test_push_and_pull():
     with local_gamma_service_container() as gamma_server_url:
-        svc = ExampleBentoService()
+        svc = ExampleMyModel()
         bento_tag = f'{svc.name}:{svc.version}'
         saved_path = svc.save()
         yc = get_gamma_client(gamma_server_url)

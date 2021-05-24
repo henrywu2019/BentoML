@@ -27,7 +27,7 @@ def _validate_labels(labels):
         InvalidArgument
     """
     if not isinstance(labels, dict):
-        raise InvalidArgument('BentoService labels must be a dictionary')
+        raise InvalidArgument('MyModel labels must be a dictionary')
 
     pattern = re.compile("^(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])?$")
     for key in labels:

@@ -2,11 +2,11 @@ import os
 import json
 
 from kappa.exceptions import InvalidArgument, MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 
-class EasyOCRArtifact(BentoServiceArtifact):
+class EasyOCRArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading EasyOCR models
 
@@ -26,7 +26,7 @@ class EasyOCRArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(pip_packages=["easyocr>=1.3.0"])
     >>> @kappa.artifacts([EasyOCRArtifact("chinese_small")])
-    >>> class EasyOCRService(kappa.BentoService):
+    >>> class EasyOCRService(kappa.MyModel):
     >>>     @kappa.api(input=ImageInput(), batch=False)
     >>>     def predict(self, image):
     >>>         reader = self.artifacts.chinese_small
@@ -58,7 +58,7 @@ class EasyOCRArtifact(BentoServiceArtifact):
         self._model_params = None
         self._gpu = None
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(["easyocr>=1.3.0"])
 
     def _model_file_path(self, base_path):

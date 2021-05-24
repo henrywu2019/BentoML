@@ -34,7 +34,7 @@ def test_bento_service_class(bento_service_class):
     # Pack it with the newly trained model artifact
     bento_service.pack('model', clf)
 
-    # Save the prediction service to a BentoService bundle
+    # Save the prediction service to a MyModel
     bento_service.save()
 
     bento_name = f"{bento_service.name}:{bento_service.version}"

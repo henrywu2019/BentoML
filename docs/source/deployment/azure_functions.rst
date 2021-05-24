@@ -6,7 +6,7 @@ Microsoft. Its serverless execution model along with the ability to bring your o
 container allow users deploy a Kappa API server with full functionality that scales
 base on usage.
 
-In this guide, it will deploy an IrisClassifier BentoService to Azure Functions, make a
+In this guide, it will deploy an IrisClassifier MyModel to Azure Functions, make a
 prediction request to the deployment endpoint, and then delete the deployment. It will
 also show how to start an remote GammaService with Azure credential for deploying to
 the Azure Functions.
@@ -34,7 +34,7 @@ Azure Functions deployment with Kappa
 ---------------------------------------
 
 Run the example project from the :doc:`Quickstart guide <../quickstart>` to create an
-IrisClassifier BentoService saved bundle for the deployment:
+IrisClassifier MyModel saved bundle for the deployment:
 
 .. code-block:: bash
 
@@ -43,7 +43,7 @@ IrisClassifier BentoService saved bundle for the deployment:
     python ./kappa/guides/quick-start/main.py
 
 
-Use Kappa CLI tool to get the information of the IrisClassifier BentoService created
+Use Kappa CLI tool to get the information of the IrisClassifier MyModel created
 above
 
 .. code-block:: bash
@@ -58,7 +58,7 @@ above
         "type": "LOCAL",
         "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200618124555_310CE0"
       },
-      "bentoServiceMetadata": {
+      "MyModelMetadata": {
         "name": "IrisClassifier",
         "version": "20200618124555_310CE0",
         "createdAt": "2020-06-18T19:46:18.675900Z",
@@ -78,7 +78,7 @@ above
           {
             "name": "predict",
             "inputType": "DataframeInput",
-            "docs": "BentoService API",
+            "docs": "MyModel API",
             "inputConfig": {
               "orient": "records",
               "typ": "frame",
@@ -97,15 +97,15 @@ above
 
 
 ======================================
-Deploy BentoService to Azure Functions
+Deploy MyModel to Azure Functions
 ======================================
 
-Deploy to Azure Functions requires a deployment name, BentoService in name:version
+Deploy to Azure Functions requires a deployment name, MyModel in name:version
 format, and a valid Azure location.  You can find list of Azure locations by calling
 command `az account list-locations`.
 
 Kappa will create necessary Azure resources, and then build and deploy your
-BentoService as docker image to Azure Functions.
+MyModel as docker image to Azure Functions.
 
 .. code-block:: bash
 
@@ -279,7 +279,7 @@ Remove Azure Functions deployment
 Deploy and manage Azure Functions deployment with remote GammaService
 =====================================================================
 
-Kappa recommends to use remote GammaService for managing and deploying BentoService
+Kappa recommends to use remote GammaService for managing and deploying MyModel
 when you are working in a team. To deploy Azure Functions in remote GammaService, you
 need to provide the Azure credential for it.
 

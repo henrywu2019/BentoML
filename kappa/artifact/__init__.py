@@ -6,13 +6,13 @@ logger.warning(
 Importing from "kappa.artifact.*" has been deprecated. Instead, use\
 `kappa.frameworks.*` and `kappa.service.*`. e.g.:, \
 `from kappa.frameworks.sklearn import SklearnModelArtifact`, \
-`from kappa.service.artifacts import BentoServiceArtifact`, \
+`from kappa.service.artifacts import MyModelArtifact`, \
 `from kappa.service.artifacts.common import PickleArtifact`"""
 )
 
 from kappa.service.artifacts import (
-    BentoServiceArtifact,
-    BentoServiceArtifactWrapper,
+    MyModelArtifact,
+    MyModelArtifactWrapper,
     ArtifactCollection,
 )
 
@@ -48,8 +48,8 @@ from kappa.frameworks.easyocr import EasyOCRArtifact  # noqa: E402
 
 __all__ = [
     "ArtifactCollection",
-    "BentoServiceArtifact",
-    "BentoServiceArtifactWrapper",
+    "MyModelArtifact",
+    "MyModelArtifactWrapper",
     "CoreMLModelArtifact",
     "DetectronModelArtifact",
     "EvalMLModelArtifact",

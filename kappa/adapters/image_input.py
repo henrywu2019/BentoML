@@ -67,14 +67,14 @@ class ImageInput(FileInput):
         from typing import List
 
         import numpy as np
-        from kappa import BentoService, api, artifacts
+        from kappa import MyModel, api, artifacts
         from kappa.frameworks.tensorflow import TensorflowSavedModelArtifact
         from kappa.adapters import ImageInput
 
         CLASS_NAMES = ['cat', 'dog']
 
         @artifacts([TensorflowSavedModelArtifact('classifier')])
-        class PetClassification(BentoService):
+        class PetClassification(MyModel):
             @api(input=ImageInput(), batch=True)
             def predict(
                 self, image_arrays: List[imageio.core.utils.Array]

@@ -11,7 +11,7 @@ sys.path.append('/workdir/onnx-mlir/build/Debug/lib/')
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([OnnxMlirModelArtifact('model')])
-class OnnxMlirClassifier(kappa.BentoService):
+class OnnxMlirClassifier(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         input_data = df.to_numpy().astype(numpy.float64)

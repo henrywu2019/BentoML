@@ -31,7 +31,7 @@ class BaseRepository(object):
     @abstractmethod
     def add(self, bento_name, bento_version):
         """
-        Proposing to add a saved BentoService to target repository by providing the
+        Proposing to add a saved MyModel to target repository by providing the
         bento name and version.
         Return value is an URL(file path or s3 path for example), that is ready for
         the client to upload saved Bento files.

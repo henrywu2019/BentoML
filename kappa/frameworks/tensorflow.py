@@ -5,8 +5,8 @@ import shutil
 import tempfile
 
 from kappa.exceptions import MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 from kappa.utils.tensorflow import (
     cast_tensor_by_spec,
     get_arg_names,
@@ -125,7 +125,7 @@ def _load_tf_saved_model(path):
         return loaded
 
 
-class TensorflowSavedModelArtifact(BentoServiceArtifact):
+class TensorflowSavedModelArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading Tensorflow model in tf.saved_model format
 
@@ -162,7 +162,7 @@ class TensorflowSavedModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(pip_packages=["tensorflow"])
     >>> @kappa.artifacts([TensorflowSavedModelArtifact('model')])
-    >>> class TfModelService(kappa.BentoService):
+    >>> class TfModelService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=JsonInput(), batch=False)
     >>>     def predict(self, json):
@@ -188,7 +188,7 @@ class TensorflowSavedModelArtifact(BentoServiceArtifact):
         self._tmpdir = None
         self._path = None
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(['tensorflow'])
 
     def _saved_model_path(self, base_path):

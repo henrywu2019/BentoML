@@ -6,7 +6,7 @@ from kappa.exceptions import (
     MissingDependencyException,
     NotFound,
 )
-from kappa.service import BentoServiceArtifact
+from kappa.service import MyModelArtifact
 
 try:
     import transformers
@@ -14,7 +14,7 @@ except ImportError:
     transformers = None
 
 
-class TransformersModelArtifact(BentoServiceArtifact):
+class TransformersModelArtifact(MyModelArtifact):
     """Abstraction for saving/loading Transformers models
 
     Args:
@@ -40,7 +40,7 @@ class TransformersModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(pip_packages=["transformers==3.1.0", "torch==1.6.0"])
     >>> @kappa.artifacts([TransformersModelArtifact("gptModel")])
-    >>> class TransformerService(kappa.BentoService):
+    >>> class TransformerService(kappa.MyModel):
     >>>     @kappa.api(input=JsonInput(), batch=False)
     >>>     def predict(self, parsed_json):
     >>>         src_text = parsed_json.get("text")

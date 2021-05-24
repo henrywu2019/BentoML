@@ -3,7 +3,7 @@ from kappa.service.artifacts.json_file import JSONArtifact
 
 
 @kappa.artifacts([JSONArtifact("hparams")])
-class ExampleServiceWithJSONArtifact(kappa.BentoService):
+class ExampleServiceWithJSONArtifact(kappa.MyModel):
     pass
 
 

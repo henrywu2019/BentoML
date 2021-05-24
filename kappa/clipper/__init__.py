@@ -41,7 +41,7 @@ from kappa.saved_bundle import load_bento_service_api
 IMPORT_ERROR_RETURN_CODE = 3
 
 
-class BentoServiceContainer(rpc.ModelContainerBase):
+class MyModelContainer(rpc.ModelContainerBase):
 
     def __init__(self, kappa_bundle_path, api_name):
         bento_service_api = load_bento_service_api(kappa_bundle_path, api_name)
@@ -69,11 +69,11 @@ class BentoServiceContainer(rpc.ModelContainerBase):
 
 
 if __name__ == "__main__":
-    print("Starting BentoService Clipper Container")
+    print("Starting MyModel Clipper Container")
     rpc_service = rpc.RPCService()
 
     try:
-        model = BentoServiceContainer('/container', '{api_name}')
+        model = MyModelContainer('/container', '{api_name}')
         sys.stdout.flush()
         sys.stderr.flush()
     except ImportError:
@@ -160,14 +160,14 @@ def deploy_kappa(
         )
     except StopIteration:
         raise BentoMLException(
-            "Can't find API '{}' in BentoService bundle {}".format(
+            "Can't find API '{}' in MyModel {}".format(
                 api_name, bento_service_metadata.name
             )
         )
 
     if api_metadata.input_type not in ADAPTER_TYPE_TO_INPUT_TYPE:
         raise BentoMLException(
-            "Only BentoService APIs using ClipperInput can be deployed to Clipper"
+            "Only MyModel APIs using ClipperInput can be deployed to Clipper"
         )
 
     input_type = ADAPTER_TYPE_TO_INPUT_TYPE[api_metadata.input_type]

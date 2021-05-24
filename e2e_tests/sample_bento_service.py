@@ -1,20 +1,20 @@
 import logging
 
-from kappa import BentoService, api
+from kappa import MyModel, api
 from kappa.adapters import JsonInput
 
 logger = logging.getLogger('kappa.test')
 
 
-class SampleBentoService(BentoService):
+class SampleMyModel(MyModel):
     @api(input=JsonInput(), batch=False)
     def predict(self, data):
-        logger.info(f"SampleBentoService predict API received data {data}")
+        logger.info(f"SampleMyModel predict API received data {data}")
         return 'cat'
 
 
-class UpdatedSampleBentoService(BentoService):
+class UpdatedSampleMyModel(MyModel):
     @api(input=JsonInput(), batch=False)
     def predict(self, data):
-        logger.info(f"UpdatedSampleBentoService predict API received data {data}")
+        logger.info(f"UpdatedSampleMyModel predict API received data {data}")
         return 'dog'

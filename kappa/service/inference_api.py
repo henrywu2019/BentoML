@@ -102,7 +102,7 @@ class InferenceAPI(object):
         if doc is None:
             # generate a default doc string for this inference API
             doc = (
-                f"BentoService inference API '{self.name}', input: "
+                f"MyModel inference API '{self.name}', input: "
                 f"'{type(input_adapter).__name__}', output: "
                 f"'{type(output_adapter).__name__}'"
             )
@@ -111,7 +111,7 @@ class InferenceAPI(object):
     @property
     def service(self):
         """
-        :return: a reference to the BentoService serving this inference API
+        :return: a reference to the MyModel serving this inference API
         """
         return self._service
 
@@ -164,7 +164,7 @@ class InferenceAPI(object):
         @functools.wraps(self._user_func)
         def wrapped_func(*args, **kwargs):
             with get_tracer().span(
-                service_name=f"BentoService.{self.service.name}",
+                service_name=f"MyModel.{self.service.name}",
                 span_name=f"InferenceAPI {self.name} user defined callback function",
             ):
                 if append_arg and append_arg in kwargs:
@@ -302,7 +302,7 @@ class InferenceAPI(object):
 
     def handle_batch_request(self, requests: Sequence[HTTPRequest]):
         with get_tracer().span(
-            service_name=f"BentoService.{self.service.name}",
+            service_name=f"MyModel.{self.service.name}",
             span_name=f"InferenceAPI {self.name} handle batch requests",
         ):
             inf_tasks = map(self.input_adapter.from_http_request, requests)

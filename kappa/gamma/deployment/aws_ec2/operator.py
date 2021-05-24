@@ -57,7 +57,7 @@ from kappa.gamma.deployment.aws_ec2.utils import (
     get_healthy_target,
 )
 from kappa.gamma.deployment.aws_ec2.constants import (
-    BENTOSERVICE_PORT,
+    MyModel_PORT,
     TARGET_HEALTH_CHECK_INTERVAL,
     TARGET_HEALTH_CHECK_PATH,
     TARGET_HEALTH_CHECK_PORT,
@@ -82,7 +82,7 @@ def _make_user_data(registry, tag, region):
     """
 
     base_format = EC2_USER_INIT_SCRIPT.format(
-        registry=registry, tag=tag, region=region, bentoservice_port=BENTOSERVICE_PORT
+        registry=registry, tag=tag, region=region, MyModel_port=MyModel_PORT
     )
     encoded = base64.b64encode(base_format.encode("ascii")).decode("ascii")
     return encoded

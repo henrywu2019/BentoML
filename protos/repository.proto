@@ -26,8 +26,8 @@ message BentoUri {
   string oci_presigned_url = 5;
 }
 
-message BentoServiceMetadata {
-  message BentoServiceEnv {
+message MyModelMetadata {
+  message MyModelEnv {
     string setup_sh = 1;
     string conda_env = 2;
     string pip_dependencies = 3; // deprecated, in favor of pip_packages below
@@ -43,7 +43,7 @@ message BentoServiceMetadata {
     google.protobuf.Struct metadata = 3;
   }
 
-  message BentoServiceApi {
+  message MyModelApi {
     string name = 1;
     string input_type = 2;
     string docs = 3;
@@ -59,10 +59,10 @@ message BentoServiceMetadata {
   string name = 1;
   string version = 2;
   google.protobuf.Timestamp created_at = 3;
-  BentoServiceEnv env = 4;
+  MyModelEnv env = 4;
   repeated BentoArtifact artifacts = 5;
-  repeated BentoServiceApi apis = 6;
-  // Optional, used for managing BentoService
+  repeated MyModelApi apis = 6;
+  // Optional, used for managing MyModel
   map<string, string> labels = 7;
 }
 
@@ -70,7 +70,7 @@ message Bento {
   string name = 1;
   string version = 2;
   BentoUri uri = 3;
-  BentoServiceMetadata bento_service_metadata = 4;
+  MyModelMetadata bento_service_metadata = 4;
   UploadStatus status = 5;
 }
 
@@ -102,7 +102,7 @@ message UpdateBentoRequest {
   string bento_name = 1;
   string bento_version = 2;
   UploadStatus upload_status = 3;
-  BentoServiceMetadata service_metadata = 4;
+  MyModelMetadata service_metadata = 4;
 }
 
 message UpdateBentoResponse {

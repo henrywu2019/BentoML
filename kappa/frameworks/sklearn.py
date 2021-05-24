@@ -1,7 +1,7 @@
 import os
 
 from kappa.exceptions import MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
+from kappa.service.artifacts import MyModelArtifact
 
 
 def _import_joblib_module():
@@ -24,7 +24,7 @@ def _import_joblib_module():
     return joblib
 
 
-class SklearnModelArtifact(BentoServiceArtifact):
+class SklearnModelArtifact(MyModelArtifact):
     """
     Abstraction for saving/loading scikit learn models using sklearn.externals.joblib
 
@@ -48,7 +48,7 @@ class SklearnModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.env(infer_pip_packages=True)
     >>> @kappa.artifacts([SklearnModelArtifact('model')])
-    >>> class SklearnModelService(kappa.BentoService):
+    >>> class SklearnModelService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=DataframeInput(), batch=True)
     >>>     def predict(self, df):

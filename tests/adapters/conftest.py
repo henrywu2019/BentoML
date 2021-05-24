@@ -16,7 +16,7 @@ def batch_mode(request):
 @pytest.fixture()
 def make_api(batch_mode):
     service_mock = Mock()
-    service_mock.name = "TestBentoService"
+    service_mock.name = "TestMyModel"
 
     def _make_api(input_adapter, user_func):
         if not input_adapter.BATCH_MODE_SUPPORTED and batch_mode:

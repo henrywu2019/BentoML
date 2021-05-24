@@ -7,7 +7,7 @@ from kappa.adapters import DataframeInput
 
 @kappa.env(infer_pip_packages=True)
 @kappa.artifacts([PytorchLightningModelArtifact('model')])
-class PytorchLightningService(kappa.BentoService):
+class PytorchLightningService(kappa.MyModel):
     @kappa.api(input=DataframeInput(), batch=True)
     def predict(self, df):
         input_tensor = torch.from_numpy(df.to_numpy())

@@ -116,9 +116,9 @@ class CondaEnv(object):
             self._yaml.dump(self._conda_env, output_yaml)
 
 
-class BentoServiceEnv(object):
+class MyModelEnv(object):
     """Defines all aspect of the system environment requirements for a custom
-    BentoService to be used. This includes:
+    MyModel to be used. This includes:
 
 
     Args:

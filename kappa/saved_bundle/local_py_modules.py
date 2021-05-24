@@ -159,7 +159,7 @@ def copy_local_py_modules(target_module, destination):
 
     # Look for dependencies that are not distributed python package, but users'
     # local python code, all other dependencies must be defined with @env
-    # decorator when creating a new BentoService class
+    # decorator when creating a new MyModel class
     user_packages_and_modules = {}
     for name, module in finder.modules.items():
         if hasattr(module, "__file__") and module.__file__ is not None:

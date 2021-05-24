@@ -4,7 +4,7 @@ Customizing InputAdapter
 Kappa allows user to create customize InputAdapter to better suit for their system.
 
 This guide demonstrate how to extending how to create a custom InputAdapter that check the
-incoming data and then uses the customized InputAdapter to create and test with BentoService
+incoming data and then uses the customized InputAdapter to create and test with MyModel
 
 --------------------------
 Create custom InputAdapter
@@ -43,7 +43,7 @@ will discard the task with appropriate status code and message.
 
 
 -------------------------------------------------------------
-Define and save BentoService with the customized InputAdapter
+Define and save MyModel with the customized InputAdapter
 -------------------------------------------------------------
 
 .. code-block:: python
@@ -55,7 +55,7 @@ Define and save BentoService with the customized InputAdapter
     from my_custom_input import MyCustomJsonInput
 
     @kappa.env(infer_pip=True)
-    class MyService(kappa.BentoService):
+    class MyService(kappa.MyModel):
         @kappa.api(input=MyCustomJsonInput(), batch=True)
         def predict(self, input_data):
             result = []

@@ -14,7 +14,7 @@ from kappa.gamma.deployment.sagemaker.operator import SageMakerDeploymentOperato
 from kappa.gamma.proto.deployment_pb2 import Deployment, DeploymentSpec
 from kappa.gamma.proto.repository_pb2 import (
     Bento,
-    BentoServiceMetadata,
+    MyModelMetadata,
     GetBentoResponse,
     BentoUri,
 )
@@ -200,7 +200,7 @@ def create_gamma_service_mock(repo_storage_type=BentoUri.LOCAL):
     if repo_storage_type == BentoUri.LOCAL:
         bento_pb.uri.uri = TEST_DEPLOYMENT_BENTO_LOCAL_URI
     bento_pb.uri.type = repo_storage_type
-    api = BentoServiceMetadata.BentoServiceApi(name=TEST_BENTO_API_NAME)
+    api = MyModelMetadata.MyModelApi(name=TEST_BENTO_API_NAME)
     bento_pb.bento_service_metadata.apis.extend([api])
     get_bento_response = GetBentoResponse(bento=bento_pb)
 

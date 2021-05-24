@@ -11,7 +11,7 @@ from kappa.frameworks.tensorflow import TensorflowSavedModelArtifact
         TensorflowSavedModelArtifact('model3'),
     ]
 )
-class Tensorflow2Classifier(kappa.BentoService):
+class Tensorflow2Classifier(kappa.MyModel):
     @kappa.api(input=TfTensorInput(), batch=True)
     def predict1(self, tensor):
         return self.artifacts.model1(tensor)

@@ -59,7 +59,7 @@ Verify the saved bundle created:
         "type": "LOCAL",
         "uri": "/Users/bozhaoyu/kappa/repository/IrisClassifier/20200121141808_FE78B5"
       },
-      "bentoServiceMetadata": {
+      "MyModelMetadata": {
         "name": "IrisClassifier",
         "version": "20200121141808_FE78B5",
         "createdAt": "2020-01-21T22:18:25.079723Z",
@@ -78,7 +78,7 @@ Verify the saved bundle created:
           {
             "name": "predict",
             "InputType": "DataframeInput",
-            "docs": "BentoService API"
+            "docs": "MyModel API"
           }
         ]
       }
@@ -86,7 +86,7 @@ Verify the saved bundle created:
 
 
 The Kappa saved bundle created can now be used to start a REST API Server hosting the
-BentoService and available for sending test request:
+MyModel and available for sending test request:
 
 .. code-block:: bash
 
@@ -144,7 +144,7 @@ Make sure Knative serving components are running.
 
 Copy the following service definition into `service.yaml` and replace `{docker_username}`
 with your docker hub username. The Knative service is directing livenessProbe and
-readyinessProbe to the /healthz endpoint on BentoService.
+readyinessProbe to the /healthz endpoint on MyModel.
 
 
 .. code-block:: yaml
@@ -176,7 +176,7 @@ readyinessProbe to the /healthz endpoint on BentoService.
 
 
 
-Create kappa namespace and then deploy BentoService to Knative with kubectl apply command.
+Create kappa namespace and then deploy MyModel to Knative with kubectl apply command.
 
 .. code-block:: bash
 

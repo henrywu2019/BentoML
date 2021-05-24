@@ -43,7 +43,7 @@ def expand_env_var(env_var):
 
 # This is used as default for config('core', 'kappa_deploy_version') - which is used
 # for getting the Kappa PyPI version string or the URL to a Kappa sdist, indicating
-# the Kappa module to be used when loading and using a saved BentoService bundle.
+# the Kappa module to be used when loading and using a saved MyModel.
 # This is useful when using customized Kappa fork/branch or when working with
 # development branches of Kappa
 BENTOML_VERSION = __version__
@@ -82,7 +82,7 @@ def get_kappa_deploy_version(kappa_deploy_version: str):
         if _is_pip_installed_kappa():
             logger.warning(
                 "Using Kappa not from official PyPI release. In order to find the "
-                "same version of Kappa when deploying your BentoService, you must "
+                "same version of Kappa when deploying your MyModel, you must "
                 "set the 'core/kappa_deploy_version' config to a http/git location "
                 "of your Kappa fork, e.g.: 'kappa_deploy_version = "
                 "git+https://github.com/{username}/kappa.git@{branch}'"

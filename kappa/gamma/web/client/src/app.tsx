@@ -5,8 +5,8 @@ import HomePage from "./pages/HomePage";
 import DeploymentsList from "./pages/DeploymentsList";
 import DeploymentDetails from "./pages/DeploymentDetails";
 import Repository from "./pages/Repository";
-import BentoServicesList from "./pages/BentoServiceList";
-import BentoServiceDetail from "./pages/BentoServiceDetail";
+import MyModelsList from "./pages/MyModelList";
+import MyModelDetail from "./pages/MyModelDetail";
 import Layout from "./ui/Layout";
 import Breadcrumbs from "./components/Breadcrumbs";
 import NavigationBar from "./components/NavigationBar";
@@ -36,9 +36,9 @@ export const App = () => {
 
             <Route
               path="/repository/:name/:version"
-              component={BentoServiceDetail}
+              component={MyModelDetail}
             />
-            <Route path="/repository/:name" component={BentoServicesList} />
+            <Route path="/repository/:name" component={MyModelsList} />
             <Route path="/repository" component={Repository} />
 
             <Route path="/about" component={HomePage} />

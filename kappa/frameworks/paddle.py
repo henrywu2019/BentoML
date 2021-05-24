@@ -1,8 +1,8 @@
 import os
 
 from kappa.exceptions import MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 import tempfile
 
 
@@ -13,7 +13,7 @@ except ImportError:
     paddle = None
 
 
-class PaddlePaddleModelArtifact(BentoServiceArtifact):
+class PaddlePaddleModelArtifact(MyModelArtifact):
     """Abstraction for saving/loading PaddlePaddle models
 
     Args:
@@ -27,13 +27,13 @@ class PaddlePaddleModelArtifact(BentoServiceArtifact):
 
     >>> import pandas as pd
     >>>
-    >>> from kappa import env, artifacts, api, BentoService
+    >>> from kappa import env, artifacts, api, MyModel
     >>> from kappa.adapters import DataframeInput
     >>> from kappa.frameworks.paddle import PaddlePaddleModelArtifact
     >>>
     >>> @env(infer_pip_packages=True)
     >>> @artifacts([PaddlePaddleModelArtifact('model')])
-    >>> class PaddleService(BentoService):
+    >>> class PaddleService(MyModel):
     >>>    @api(input=DataframeInput(), batch=True)
     >>>    def predict(self, df: pd.DataFrame):
     >>>        input_data = df.to_numpy().astype(np.float32)
@@ -104,5 +104,5 @@ class PaddlePaddleModelArtifact(BentoServiceArtifact):
             self._predictor = predictor
         return self._predictor
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         env.add_pip_packages(['paddlepaddle'])

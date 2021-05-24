@@ -28,7 +28,7 @@ configure_logging()
 
 from kappa.saved_bundle import load_from_dir, save_to_dir  # noqa: E402
 from kappa.service import (  # noqa: E402
-    BentoService,
+    MyModel,
     api_decorator as api,
     env_decorator as env,
     web_static_content_decorator as web_static_content,
@@ -50,7 +50,7 @@ __all__ = [
     "env",
     "web_static_content",
     "ver",
-    "BentoService",
+    "MyModel",
     # backward compatible
     "load",
     "load_from_dir",

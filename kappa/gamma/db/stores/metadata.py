@@ -39,7 +39,7 @@ from kappa.gamma.db.stores.label import (
 from kappa.gamma.proto.repository_pb2 import (
     UploadStatus,
     BentoUri,
-    BentoServiceMetadata,
+    MyModelMetadata,
     Bento as BentoPB,
     ListBentoRequest,
 )
@@ -68,7 +68,7 @@ class Bento(Base):
         Enum(*BentoUri.StorageType.keys(), name='uri_type'), default=BentoUri.UNSET
     )
 
-    # JSON filed mapping directly to BentoServiceMetadata proto message
+    # JSON filed mapping directly to MyModelMetadata proto message
     bento_service_metadata = Column(JSON, nullable=False, default={})
 
     # Time of AddBento call, the time of Bento creation can be found in metadata field
@@ -100,7 +100,7 @@ def _bento_orm_obj_to_pb(bento_obj, labels=None):
                 api['output_type'] = 'DefaultOutput'
 
     bento_service_metadata_pb = ParseDict(
-        bento_obj.bento_service_metadata, BentoServiceMetadata()
+        bento_obj.bento_service_metadata, MyModelMetadata()
     )
     bento_uri = BentoUri(
         uri=bento_obj.uri, type=BentoUri.StorageType.Value(bento_obj.uri_type)

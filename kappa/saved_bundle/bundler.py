@@ -47,11 +47,11 @@ from kappa.saved_bundle.pip_pkg import get_zipmodules, ZIPIMPORT_DIR
 
 
 DEFAULT_SAVED_BUNDLE_README = """\
-# Generated BentoService bundle - {}:{}
+# Generated MyModel - {}:{}
 
 This is a ML Service bundle created with Kappa, it is not recommended to edit
 code or files contained in this directory. Instead, edit the code that uses Kappa
-to create this bundle, and save a new BentoService bundle.
+to create this bundle, and save a new MyModel.
 """
 
 logger = logging.getLogger(__name__)
@@ -64,7 +64,7 @@ def _write_bento_content_to_dir(bento_service, path):
     for artifact in bento_service.artifacts.get_artifact_list():
         if not artifact.packed:
             logger.warning(
-                "Missing declared artifact '%s' for BentoService '%s'",
+                "Missing declared artifact '%s' for MyModel '%s'",
                 artifact.name,
                 bento_service.name,
             )
@@ -73,10 +73,10 @@ def _write_bento_content_to_dir(bento_service, path):
         os.mkdir(module_base_path)
     except FileExistsError:
         raise BentoMLException(
-            f"Existing module file found for BentoService {bento_service.name}"
+            f"Existing module file found for MyModel {bento_service.name}"
         )
 
-    # write README.md with custom BentoService's docstring if presented
+    # write README.md with custom MyModel's docstring if presented
     saved_bundle_readme = DEFAULT_SAVED_BUNDLE_README.format(
         bento_service.name, bento_service.version
     )
@@ -110,7 +110,7 @@ def _write_bento_content_to_dir(bento_service, path):
             )
         )
 
-    # write setup.py, this make saved BentoService bundle pip installable
+    # write setup.py, this make saved MyModel pip installable
     setup_py_content = BENTO_SERVICE_BUNDLE_SETUP_PY_TEMPLATE.format(
         name=bento_service.name,
         pypi_package_version=bento_service.version,
@@ -184,11 +184,11 @@ def _write_bento_content_to_dir(bento_service, path):
 
 
 def save_to_dir(bento_service, path, version=None, silent=False):
-    """Save given BentoService along with all its artifacts, source code and
+    """Save given MyModel along with all its artifacts, source code and
     dependencies to target file path, assuming path exist and empty. If target path
     is not empty, this call may override existing files in the given path.
 
-    :param bento_service (kappa.service.BentoService): a Bento Service instance
+    :param bento_service (kappa.service.MyModel): a Bento Service instance
     :param path (str): Destination of where the bento service will be saved. The
         destination can be local path or remote path. The remote path supports both
         AWS S3('s3://bucket/path') and Google Cloud Storage('gs://bucket/path').
@@ -197,11 +197,11 @@ def save_to_dir(bento_service, path, version=None, silent=False):
     """
     track_save(bento_service)
 
-    from kappa.service import BentoService
+    from kappa.service import MyModel
 
-    if not isinstance(bento_service, BentoService):
+    if not isinstance(bento_service, MyModel):
         raise BentoMLException(
-            "save_to_dir only works with instances of custom BentoService class"
+            "save_to_dir only works with instances of custom MyModel class"
         )
 
     if version is not None:
@@ -236,7 +236,7 @@ def save_to_dir(bento_service, path, version=None, silent=False):
 
     if not silent:
         logger.info(
-            "BentoService bundle '%s:%s' created at: %s",
+            "MyModel '%s:%s' created at: %s",
             bento_service.name,
             bento_service.version,
             path,
@@ -263,7 +263,7 @@ def normalize_gztarball(file_path):
 def _bundle_local_kappa_if_installed_from_source(target_path):
     """
     if kappa is installed in editor mode(pip install -e), this will build a source
-    distribution with the local kappa fork and add it to saved BentoService bundle
+    distribution with the local kappa fork and add it to saved MyModel
     path under bundled_pip_dependencies directory
     """
 
@@ -272,7 +272,7 @@ def _bundle_local_kappa_if_installed_from_source(target_path):
 
     kappa_setup_py = os.path.abspath(os.path.join(module_location, '..', 'setup.py'))
 
-    # this is for Kappa developer to create BentoService containing custom develop
+    # this is for Kappa developer to create MyModel containing custom develop
     # branches of Kappa library, it is True only when Kappa module is installed in
     # development mode via "pip install --editable ."
     if not _is_pip_installed_kappa() and os.path.isfile(kappa_setup_py):
@@ -340,6 +340,6 @@ def _upload_file_to_remote_path(remote_path, file_path, file_name):
         http_response = requests.put(remote_path)
         if http_response.status_code != 200:
             raise BentoMLException(
-                f'Error uploading BentoService to {remote_path} '
+                f'Error uploading MyModel to {remote_path} '
                 f'{http_response.status_code}'
             )

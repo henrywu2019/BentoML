@@ -127,7 +127,7 @@ import logging
 from kappa import saved_bundle, configure_logging
 from kappa.cli.bento_service import create_bento_service_cli
 
-# By default, ignore warnings when loading BentoService installed as PyPI distribution
+# By default, ignore warnings when loading MyModel installed as PyPI distribution
 # CLI will change back to default log level in config(info), and by adding --quiet or
 # --verbose CLI option, user can change the CLI output behavior
 configure_logging(logging_level=logging.ERROR)

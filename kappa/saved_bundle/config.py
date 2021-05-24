@@ -79,7 +79,7 @@ class SavedBundleConfig(object):
     def __init__(
         self,
         bento_service=None,
-        kind="BentoService",
+        kind="MyModel",
         kappa_deployment_version: str = Provide[
             BentoMLContainer.bento_bundle_deployment_version
         ],
@@ -120,7 +120,7 @@ class SavedBundleConfig(object):
 
         if ver != BENTOML_VERSION:
             msg = (
-                "Saved BentoService bundle version mismatch: loading BentoService "
+                "Saved MyModel version mismatch: loading MyModel "
                 "bundle create with Kappa version {}, but loading from Kappa "
                 "version {}".format(conf["version"], BENTOML_VERSION)
             )
@@ -137,17 +137,17 @@ class SavedBundleConfig(object):
 
         if py_ver != PYTHON_VERSION:
             logger.warning(
-                f"Saved BentoService Python version mismatch: loading "
-                f"BentoService bundle created with Python version {py_ver}, "
+                f"Saved MyModel Python version mismatch: loading "
+                f"MyModel created with Python version {py_ver}, "
                 f"but current environment version is {PYTHON_VERSION}."
             )
 
         return conf
 
     def get_bento_service_metadata_pb(self):
-        from kappa.gamma.proto.repository_pb2 import BentoServiceMetadata
+        from kappa.gamma.proto.repository_pb2 import MyModelMetadata
 
-        bento_service_metadata = BentoServiceMetadata()
+        bento_service_metadata = MyModelMetadata()
         bento_service_metadata.name = self.config["metadata"]["service_name"]
         bento_service_metadata.version = self.config["metadata"]["service_version"]
         bento_service_metadata.created_at.FromDatetime(
@@ -190,7 +190,7 @@ class SavedBundleConfig(object):
                 else:
                     output_type = "DefaultOutput"
 
-                api_metadata = BentoServiceMetadata.BentoServiceApi(
+                api_metadata = MyModelMetadata.MyModelApi(
                     name=api_config["name"],
                     docs=api_config["docs"],
                     input_type=input_type,
@@ -235,7 +235,7 @@ class SavedBundleConfig(object):
 
         if "artifacts" in self.config:
             for artifact_config in self.config["artifacts"]:
-                artifact_metadata = BentoServiceMetadata.BentoArtifact()
+                artifact_metadata = MyModelMetadata.BentoArtifact()
                 if "name" in artifact_config:
                     artifact_metadata.name = artifact_config["name"]
                 if "artifact_type" in artifact_config:

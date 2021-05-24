@@ -93,13 +93,13 @@ class DataframeInput(StringInput):
 
     .. code-block:: python
 
-        from kappa import env, artifacts, api, BentoService
+        from kappa import env, artifacts, api, MyModel
         from kappa.adapters import DataframeInput
         from kappa.frameworks.sklearn import SklearnModelArtifact
 
         @env(infer_pip_packages=True)
         @artifacts([SklearnModelArtifact('model')])
-        class IrisClassifier(BentoService):
+        class IrisClassifier(MyModel):
 
             @api(
                 input=DataframeInput(

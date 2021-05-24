@@ -5,7 +5,7 @@ from typing import List
 from pathlib import Path
 
 from kappa.exceptions import InvalidArgument, FailedPrecondition
-from kappa.service.env import BentoServiceEnv
+from kappa.service.env import MyModelEnv
 from kappa.utils.ruamel_yaml import YAML
 
 logger = logging.getLogger(__name__)
@@ -13,9 +13,9 @@ logger = logging.getLogger(__name__)
 ARTIFACTS_DIR_NAME = "artifacts"
 
 
-class BentoServiceArtifact:
+class MyModelArtifact:
     """
-    BentoServiceArtifact is the base abstraction for describing the trained model
+    MyModelArtifact is the base abstraction for describing the trained model
     serialization and deserialization process.
     """
 
@@ -52,13 +52,13 @@ class BentoServiceArtifact:
     def name(self):
         """
         The name of an artifact. It can be used to reference this artifact in a
-        BentoService inference API callback function, via `self.artifacts[NAME]`
+        MyModel inference API callback function, via `self.artifacts[NAME]`
         """
         return self._name
 
     def pack(self, model, metadata: dict = None):  # pylint: disable=unused-argument
         """
-        Pack the in-memory trained model object to this BentoServiceArtifact
+        Pack the in-memory trained model object to this MyModelArtifact
 
         Note: add "# pylint:disable=arguments-differ" to child class's pack method
         """
@@ -77,12 +77,12 @@ class BentoServiceArtifact:
         """
         Save artifact to given dst path
 
-        In a BentoService saved bundle, all artifacts are being saved to the
+        In a MyModel saved bundle, all artifacts are being saved to the
         `{service.name}/artifact/` directory. Thus, `save` must use the artifact name
         as a way to differentiate its files from other artifacts.
 
-        For example, a BentoServiceArtifact class' save implementation should not create
-        a file named `config.json` in the `dst` directory. Because when a BentoService
+        For example, a MyModelArtifact class' save implementation should not create
+        a file named `config.json` in the `dst` directory. Because when a MyModel
         has multiple artifacts of this same artifact type, they will all try to create
         this `config.json` file and overwrite each other. The right way to do it here,
         is use the name as the prefix(or part of the file name), e.g.
@@ -94,17 +94,17 @@ class BentoServiceArtifact:
         Get returns a reference to the artifact being packed or loaded from path
         """
 
-    def set_dependencies(self, env: BentoServiceEnv):
-        """modify target BentoServiceEnv instance to ensure the required dependencies
-        are listed in the BentoService environment spec
+    def set_dependencies(self, env: MyModelEnv):
+        """modify target MyModelEnv instance to ensure the required dependencies
+        are listed in the MyModel environment spec
 
-        :param env: target BentoServiceEnv instance to modify
+        :param env: target MyModelEnv instance to modify
         """
 
     def _copy(self):
         """Create a new empty artifact instance with the same name, this is only used
         internally for Kappa to create new artifact instances when create a new
-        BentoService instance
+        MyModel instance
         """
         return self.__class__(self.name)
 
@@ -199,14 +199,14 @@ class BentoServiceArtifact:
         return object.__getattribute__(self, item)
 
 
-class BentoServiceArtifactWrapper:
+class MyModelArtifactWrapper:
     """
-    Deprecated: use only the BentoServiceArtifact to define artifact operations
+    Deprecated: use only the MyModelArtifact to define artifact operations
     """
 
     def __init__(self):
         logger.warning(
-            "BentoServiceArtifactWrapper is deprecated now, use BentoServiceArtifact "
+            "MyModelArtifactWrapper is deprecated now, use MyModelArtifact "
             "to define artifact operations"
         )
 
@@ -216,7 +216,7 @@ class ArtifactCollection(dict):
     A dict of artifact instances (artifact.name -> artifact_instance)
     """
 
-    def __setitem__(self, key: str, artifact: BentoServiceArtifact):
+    def __setitem__(self, key: str, artifact: MyModelArtifact):
         if key != artifact.name:
             raise InvalidArgument(
                 "Must use Artifact name as key, {} not equal to {}".format(
@@ -226,29 +226,29 @@ class ArtifactCollection(dict):
         self.add(artifact)
 
     def __getattr__(self, item: str):
-        """Proxy to `BentoServiceArtifact#get()` to allow easy access to the model
-        artifact in its native form. E.g. for a BentoService class with an artifact
+        """Proxy to `MyModelArtifact#get()` to allow easy access to the model
+        artifact in its native form. E.g. for a MyModel class with an artifact
         `SklearnModelArtifact('model')`, when user code accesses `self.artifacts.model`
-        in the BentoService API callback function, instead of returning an instance of
-        BentoServiceArtifact, it returns a Sklearn model object
+        in the MyModel API callback function, instead of returning an instance of
+        MyModelArtifact, it returns a Sklearn model object
         """
         return self[item].get()
 
-    def get(self, item: str) -> BentoServiceArtifact:
-        """Access the BentoServiceArtifact instance by artifact name
+    def get(self, item: str) -> MyModelArtifact:
+        """Access the MyModelArtifact instance by artifact name
         """
         return self[item]
 
-    def get_artifact_list(self) -> List[BentoServiceArtifact]:
-        """Access the list of BentoServiceArtifact instances
+    def get_artifact_list(self) -> List[MyModelArtifact]:
+        """Access the list of MyModelArtifact instances
         """
         return super(ArtifactCollection, self).values()
 
-    def add(self, artifact: BentoServiceArtifact):
+    def add(self, artifact: MyModelArtifact):
         super(ArtifactCollection, self).__setitem__(artifact.name, artifact)
 
     def save(self, dst):
-        """Save all BentoServiceArtifact instances in self.values() to `dst` path
+        """Save all MyModelArtifact instances in self.values() to `dst` path
         if they are `packed` or `loaded`
         """
         save_path = os.path.join(dst, ARTIFACTS_DIR_NAME)
@@ -264,7 +264,7 @@ class ArtifactCollection(dict):
                 )
 
     @classmethod
-    def from_artifact_list(cls, artifacts_list: List[BentoServiceArtifact]):
+    def from_artifact_list(cls, artifacts_list: List[MyModelArtifact]):
         artifact_collection = cls()
         for artifact in artifacts_list:
             artifact_collection.add(artifact._copy())

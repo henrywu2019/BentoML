@@ -26,7 +26,7 @@ classes = (
 
 @kappa.env(pip_packages=['torch', 'numpy', 'torchvision', 'scikit-learn'])
 @kappa.artifacts([PytorchModelArtifact('net')])
-class PytorchImageClassifier(kappa.BentoService):
+class PytorchImageClassifier(kappa.MyModel):
     @kappa.utils.cached_property
     def transform(self):
         return transforms.Compose(

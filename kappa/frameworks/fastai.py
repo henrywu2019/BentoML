@@ -3,8 +3,8 @@ import os
 import shutil
 
 from kappa.exceptions import InvalidArgument, MissingDependencyException
-from kappa.service.artifacts import BentoServiceArtifact
-from kappa.service.env import BentoServiceEnv
+from kappa.service.artifacts import MyModelArtifact
+from kappa.service.env import MyModelEnv
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +32,7 @@ def _import_fastai2_module():
     return fastai
 
 
-class Fastai1ModelArtifact(BentoServiceArtifact):
+class Fastai1ModelArtifact(MyModelArtifact):
     """Saving and Loading FastAI Model
 
     Args:
@@ -58,7 +58,7 @@ class Fastai1ModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.artifacts([Fastai1ModelArtifact('model')])
     >>> @kappa.env(infer_pip_packages=True)
-    >>> class FastaiModelService(kappa.BentoService):
+    >>> class FastaiModelService(kappa.MyModel):
     >>>
     >>>     @api(input=DataframeInput(), batch=True)
     >>>     def predict(self, df):
@@ -99,13 +99,13 @@ class Fastai1ModelArtifact(BentoServiceArtifact):
         model = fastai_module.basic_train.load_learner(path, self._file_name)
         return self.pack(model)
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         logger.warning(
             "Kappa by default does not include spacy and torchvision package when "
             "using FastaiModelArtifact. To make sure Kappa bundle those packages if "
             "they are required for your model, either import those packages in "
-            "BentoService definition file or manually add them via "
-            "`@env(pip_packages=['torchvision'])` when defining a BentoService"
+            "MyModel definition file or manually add them via "
+            "`@env(pip_packages=['torchvision'])` when defining a MyModel"
         )
         env.add_pip_packages(['torch', "fastai<2.0.0"])
 
@@ -120,7 +120,7 @@ class Fastai1ModelArtifact(BentoServiceArtifact):
         return self._model
 
 
-class FastaiModelArtifact(BentoServiceArtifact):
+class FastaiModelArtifact(MyModelArtifact):
     """Saving and Loading FastAI v2 Model
 
     Args:
@@ -146,7 +146,7 @@ class FastaiModelArtifact(BentoServiceArtifact):
     >>>
     >>> @kappa.artifact([FastaiModelArtifact('learner')])
     >>> @kappa.env(infer_pip_packages=True)
-    >>> class FastaiImageService(kappa.BentoService):
+    >>> class FastaiImageService(kappa.MyModel):
     >>>
     >>>     @kappa.api(input=FileAdapter(), batch=True)
     >>>     def predict(self, files):
@@ -183,13 +183,13 @@ class FastaiModelArtifact(BentoServiceArtifact):
         model = fastai2_module.basics.load_learner(path + '/' + self._file_name)
         return self.pack(model)
 
-    def set_dependencies(self, env: BentoServiceEnv):
+    def set_dependencies(self, env: MyModelEnv):
         logger.warning(
             "Kappa by default does not include spacy and torchvision package when "
             "using FastaiModelArtifact. To make sure Kappa bundle those packages if "
             "they are required for your model, either import those packages in "
-            "BentoService definition file or manually add them via "
-            "`@env(pip_packages=['torchvision'])` when defining a BentoService"
+            "MyModel definition file or manually add them via "
+            "`@env(pip_packages=['torchvision'])` when defining a MyModel"
         )
         env.add_pip_packages(['torch', "fastcore", "fastai>=2.0.0"])
 
