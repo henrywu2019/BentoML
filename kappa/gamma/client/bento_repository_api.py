@@ -94,6 +94,8 @@ class BentoRepositoryAPIClient:
             bento_bundle_path = local_bento_pb.uri.s3_presigned_url
         elif local_bento_pb.uri.gcs_presigned_url:
             bento_bundle_path = local_bento_pb.uri.gcs_presigned_url
+        elif local_bento_pb.uri.oci_presigned_url:
+            bento_bundle_path = local_bento_pb.uri.oci_presigned_url
         else:
             bento_bundle_path = local_bento_pb.uri.uri
         labels = (
@@ -283,6 +285,8 @@ class BentoRepositoryAPIClient:
             bento_service_bundle_path = bento_pb.uri.s3_presigned_url
         elif bento_pb.uri.gcs_presigned_url:
             bento_service_bundle_path = bento_pb.uri.gcs_presigned_url
+        elif bento_pb.uri.oci_presigned_url:
+            bento_service_bundle_path = bento_pb.uri.oci_presigned_url
         else:
             bento_service_bundle_path = bento_pb.uri.uri
 

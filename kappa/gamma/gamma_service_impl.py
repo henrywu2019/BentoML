@@ -473,6 +473,10 @@ def get_gamma_service_impl(base=object):
                             bento_pb.uri.gcs_presigned_url = self.repo.get(
                                 bento_pb.name, bento_pb.version
                             )
+                        elif bento_pb.uri.type == BentoUri.OCI:
+                            bento_pb.uri.oci_presigned_url = self.repo.get(
+                                bento_pb.name, bento_pb.version
+                            )
                         return GetBentoResponse(status=Status.OK(), bento=bento_pb)
                     else:
                         return GetBentoResponse(

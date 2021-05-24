@@ -205,5 +205,7 @@ def resolve_bento_bundle_uri(bento_pb):
         return bento_pb.uri.s3_presigned_url
     if bento_pb.uri.gcs_presigned_url:
         return bento_pb.uri.gcs_presigned_url
+    if bento_pb.uri.oci_presigned_url:
+        return bento_pb.uri.oci_presigned_url
     else:
         return bento_pb.uri.uri

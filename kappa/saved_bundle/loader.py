@@ -74,6 +74,19 @@ def _resolve_remote_bundle_path(bundle_path):
         fileobj = io.BytesIO()
         gcs.download_blob_to_file(bundle_path, fileobj)
         fileobj.seek(0, 0)
+    elif is_oci_url(bundle_path):
+        try:
+            from google.cloud import storage
+        except ImportError:
+            raise BentoMLException(
+                '"google-cloud-storage" package is required. You can install it with '
+                'pip: "pip install google-cloud-storage"'
+            )
+
+        gcs = storage.Client()
+        fileobj = io.BytesIO()
+        gcs.download_blob_to_file(bundle_path, fileobj)
+        fileobj.seek(0, 0)
     elif _is_http_url(bundle_path):
         import requests
 
