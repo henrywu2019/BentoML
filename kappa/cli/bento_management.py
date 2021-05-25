@@ -232,17 +232,12 @@ def add_bento_sub_command(cli):
     ):
         """Delete bento bundles in target GammaService. When the --gamma-url option is not specified, it will use local Gamma by default.
 
-Specify target service bundles to remove:
-
-* Delete single bento bundle by "name:version", e.g: `kappa delete IrisClassifier:v1`
-
-* Bulk delete all bento bundles with a specific name, e.g.: `kappa delete IrisClassifier`
-
-* Bulk delete multiple bento bundles by name and version, separated by ",", e.g.: `benotml delete Irisclassifier:v1,MyPredictService:v2`
-
-* Bulk delete by tag, e.g.: `kappa delete --tag env=dev`
-
-* Bulk delete all, e.g.: `kappa delete --all`
+        Specify target service bundles to remove:
+        * Delete single bento bundle by "name:version", e.g: `kappa delete IrisClassifier:v1`
+        * Bulk delete all bento bundles with a specific name, e.g.: `kappa delete IrisClassifier`
+        * Bulk delete multiple bento bundles by name and version, separated by ",", e.g.: `benotml delete Irisclassifier:v1,MyPredictService:v2`
+        * Bulk delete by tag, e.g.: `kappa delete --tag env=dev`
+        * Bulk delete all, e.g.: `kappa delete --all`
         """  # noqa
         yc = get_gamma_client(gamma_url)
         # Backward compatible with the previous CLI, allows deletion with tag/s

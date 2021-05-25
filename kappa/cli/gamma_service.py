@@ -159,11 +159,11 @@ def add_gamma_service_sub_command(
         from kappa.utils.gcs import is_gcs_url
 
         if repo_base_url:
-            logger.warning(
+            """logger.warning(
                 "Option --repo-base-url has been deprecated but is still supported "
                 "in the current release. Consider using --repository-type and its "
                 "corresponding options in the upcoming releases. "
-            )
+            )"""
             if is_s3_url(repo_base_url):
                 repository_type = GAMMA_REPOSITORY_S3
                 s3_url = repo_base_url

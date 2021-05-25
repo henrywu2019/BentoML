@@ -127,8 +127,8 @@ setuptools.setup(
     name="Kappa",
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
-    author="kappa.org",
-    author_email="contact@kappa.ai",
+    author="fuheng.wu, BentoML",
+    author_email="fuheng.wu@oracle.com",
     description="A framework for machine learning model serving",
     long_description=long_description,
     license="Apache License 2.0",
@@ -150,7 +150,6 @@ setuptools.setup(
     entry_points={"console_scripts": ["kappa=kappa:commandline_interface"]},
     project_urls={
         "Bug Reports": "https://github.com/kappa/Kappa/issues",
-        "Kappa User Slack Group": "https://bit.ly/2N5IpbB",
         "Source Code": "https://github.com/kappa/Kappa",
     },
     include_package_data=True,  # Required for '.cfg' files under kappa/config

@@ -31,13 +31,13 @@ logger = logging.getLogger(__name__)
 class OCIRepository(BaseRepository):
     @inject
     def __init__(
-        self,
-        base_url,
+            self,
+            base_url,
     ):
         self.uri_type = BentoUri.OCI
 
         parse_result = urlparse(base_url)
-        self.bucket = parse_result.netloc
+        self.bucket_name = parse_result.netloc
         self.base_path = parse_result.path.lstrip('/')
 
         self.config = oci.config.from_file()
@@ -64,8 +64,8 @@ class OCIRepository(BaseRepository):
         create_par_details.time_expires = par_ttl.isoformat()
 
         par = self.object_storage.create_preauthenticated_request(namespace_name=self.namespace,
-                                                             bucket_name=self.bucket,
-                                                             create_preauthenticated_request_details=create_par_details)
+                                                                  bucket_name=self.bucket_name,
+                                                                  create_preauthenticated_request_details=create_par_details)
 
         # Get Object using the Pre-Authenticated Request
         par_request_url = self.object_storage.base_client.get_endpoint() + par.data.access_uri
@@ -77,7 +77,7 @@ class OCIRepository(BaseRepository):
                                                   CreatePreauthenticatedRequestDetails.ACCESS_TYPE_OBJECT_WRITE)
         return BentoUri(
             type=self.uri_type,
-            uri='oci://{}/{}'.format(self.bucket, object_name),
+            uri='oci://{}/{}'.format(self.bucket_name, object_name),
             oci_presigned_url=par_request_url,
         )
 
@@ -95,11 +95,17 @@ class OCIRepository(BaseRepository):
                 "falling back to using OCI path and client side credential for"
                 "downloading with oci sdk"
             )
-            return 'oci://{}/{}'.format(self.bucket, object_name)
+            return 'oci://{}/{}'.format(self.bucket_name, object_name)
 
-    def dangerously_delete(self, bento_name, bento_version):
-        # Remove s3 path containing related Bento files
-
+    def dangerously_delete(self, bento_name, bento_version) -> bool:
         object_name = self._get_object_name(bento_name, bento_version)
-
-        pass
+        try:
+            delete_object_response = self.object_storage.delete_object(self.namespace,
+                                                                       self.bucket_name,
+                                                                       object_name)
+        except Exception as e:
+            logger.error(f"Got error when trying to delete {object_name} in OCI object storage: {str(e)}")
+        if hasattr(delete_object_response, "data"):
+            return delete_object_response.data is None
+        else:
+            raise GammaRepositoryException('Unrecognized response format from OCI delete_object')
