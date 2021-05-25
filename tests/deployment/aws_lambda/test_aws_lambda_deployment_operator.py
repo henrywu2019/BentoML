@@ -102,7 +102,7 @@ def test_aws_lambda_app_py(monkeypatch):
     }
 
     # Clean up environ set by lambda_app.py
-    del os.environ["BENTOML_HOME"]
+    del os.environ["KAPPA_HOME"]
     del os.environ["BENTOML_BENTO_SERVICE_NAME"]
     del os.environ["BENTOML_API_NAME"]
 

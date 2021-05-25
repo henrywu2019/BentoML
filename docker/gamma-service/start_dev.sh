@@ -19,5 +19,5 @@ docker run \
   -v ~/kappa:/kappa \
   -p 3000:3000 \
   -p 50051:50051 \
-  -e BENTOML_HOME=/kappa \
+  -e KAPPA_HOME=/kappa \
   kappa/gamma-service:dev "$@"

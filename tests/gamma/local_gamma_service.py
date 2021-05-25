@@ -65,7 +65,7 @@ RUN pip install -U /kappa-local-repo
             gamma_server_command.extend(['--repo-base-url', repo_base_url])
         container = docker_client.containers.run(
             image=gamma_docker_image_tag,
-            environment=['BENTOML_HOME=/tmp'],
+            environment=['KAPPA_HOME=/tmp'],
             ports={'50051/tcp': 50051},
             command=gamma_server_command,
             name=container_name,

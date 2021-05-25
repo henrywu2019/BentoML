@@ -20,5 +20,5 @@ docker run \
   -p 3000:3000 \
   -p 50051:50051 \
   -p 8080:8080 \
-  -e BENTOML_HOME=/kappa \
+  -e KAPPA_HOME=/kappa \
   kappa/gamma-service:dev make watch-gamma-web-ui

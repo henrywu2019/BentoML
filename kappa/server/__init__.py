@@ -168,6 +168,12 @@ def _start_prod_server(
 
     logger.info("Starting Kappa API server in production mode..")
 
+    def info(title):
+        import os
+        logger.info(title)
+        logger.info(f'module name:{__name__}, parent process:{os.getppid()}, process id:{os.getpid()}')
+    info("_start_prod_server")
+
     from kappa.server.gunicorn_server import GunicornBentoServer
 
     gunicorn_app = GunicornBentoServer(

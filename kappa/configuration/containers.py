@@ -203,7 +203,7 @@ class BentoMLContainer(containers.DeclarativeContainer):
 
     kappa_home = providers.Callable(
         lambda: expand_env_var(
-            os.environ.get("BENTOML_HOME", os.path.join("~", "kappa"))
+            os.environ.get("KAPPA_HOME", os.path.join("~", "kappa"))
         )
     )
 

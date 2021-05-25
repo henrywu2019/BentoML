@@ -82,7 +82,7 @@ def gamma_server_container():
         '--name',
         container_name,
         '-e',
-        'BENTOML_HOME=/tmp',
+        'KAPPA_HOME=/tmp',
         '-p',
         f'{port}:{port}',
         '-p',

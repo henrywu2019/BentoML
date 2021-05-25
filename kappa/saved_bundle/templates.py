@@ -81,7 +81,7 @@ RUN groupadd -g $GID -o kappa && useradd -m -u $UID -g $GID -o -r kappa
 
 ARG BUNDLE_PATH=/home/kappa/bundle
 ENV BUNDLE_PATH=$BUNDLE_PATH
-ENV BENTOML_HOME=/home/kappa/
+ENV KAPPA_HOME=/home/kappa/
 
 RUN mkdir $BUNDLE_PATH && chown kappa:kappa $BUNDLE_PATH -R
 WORKDIR $BUNDLE_PATH

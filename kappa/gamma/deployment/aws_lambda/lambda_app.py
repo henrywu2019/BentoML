@@ -36,8 +36,8 @@ except ImportError:
 if '/tmp/requirements' not in sys.path:
     sys.path.append('/tmp/requirements')
 
-# Set BENTOML_HOME to /tmp directory due to AWS lambda disk access restrictions
-os.environ['BENTOML_HOME'] = '/tmp/kappa/'
+# Set KAPPA_HOME to /tmp directory due to AWS lambda disk access restrictions
+os.environ['KAPPA_HOME'] = '/tmp/kappa/'
 from kappa.saved_bundle import load_from_dir  # noqa
 
 logger = logging.getLogger('kappa.lambda_app')

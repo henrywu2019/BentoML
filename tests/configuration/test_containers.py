@@ -161,10 +161,10 @@ def test_kappa_home():
     container = BentoMLContainer()
     assert container.kappa_home() == mock_kappa_home()
 
-    os.environ["BENTOML_HOME"] = "/tmp/kappa"
+    os.environ["KAPPA_HOME"] = "/tmp/kappa"
     assert container.kappa_home() == "/tmp/kappa"
 
-    del os.environ["BENTOML_HOME"]
+    del os.environ["KAPPA_HOME"]
 
 
 def test_prometheus_multiproc_dir():
