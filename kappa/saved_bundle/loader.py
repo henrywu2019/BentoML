@@ -26,7 +26,7 @@ from pathlib import PureWindowsPath, PurePosixPath
 
 from kappa.utils.s3 import is_s3_url
 from kappa.utils.gcs import is_gcs_url
-from kappa.utils.oci_object_storage import is_oci_url
+from kappa.utils.oci_object_storage import is_oci_url, download_oos_to_file
 from kappa.exceptions import BentoMLException
 from kappa.saved_bundle.config import SavedBundleConfig
 from kappa.saved_bundle.pip_pkg import ZIPIMPORT_DIR
@@ -75,17 +75,8 @@ def _resolve_remote_bundle_path(bundle_path):
         gcs.download_blob_to_file(bundle_path, fileobj)
         fileobj.seek(0, 0)
     elif is_oci_url(bundle_path):
-        try:
-            from google.cloud import storage
-        except ImportError:
-            raise BentoMLException(
-                '"google-cloud-storage" package is required. You can install it with '
-                'pip: "pip install google-cloud-storage"'
-            )
-
-        gcs = storage.Client()
         fileobj = io.BytesIO()
-        gcs.download_blob_to_file(bundle_path, fileobj)
+        download_oos_to_file(bundle_path, fileobj)
         fileobj.seek(0, 0)
     elif _is_http_url(bundle_path):
         import requests

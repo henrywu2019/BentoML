@@ -21,7 +21,7 @@ const HomePage = () => (
         } else {
           deploymentDisplay = (
             <a
-              href="https://docs.kappa.org/en/latest"
+              href="https://www.google.com"
               target="_blank"
               rel="noopener noreferrer"
             >

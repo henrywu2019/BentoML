@@ -554,6 +554,10 @@ def get_gamma_service_impl(base=object):
                             bento_service_bundle_path = self.repo.get(
                                 bento_pb.name, bento_pb.version
                             )
+                        elif bento_pb.uri.type == BentoUri.OCI:
+                            bento_service_bundle_path = self.repo.get(
+                                bento_pb.name, bento_pb.version
+                            )
                         safe_retrieve(bento_service_bundle_path, temp_bundle_path)
                         try:
                             docker_client.images.build(

@@ -21,4 +21,5 @@ if __name__ == "__main__":
     # Save the prediction service to disk for model serving
     saved_path = iris_classifier_service.save(gamma_url="0.0.0.0:50052")
     #saved_path = iris_classifier_service.save()
+    print(saved_path)
 

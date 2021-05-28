@@ -123,7 +123,7 @@ def inject_dependencies():
 
     start = timer()
 
-    logger.debug("Start dependency injection")
+    logger.warning("Start dependency injection")
 
     from kappa.configuration.containers import BentoMLContainer, BentoMLConfiguration
 
@@ -147,10 +147,10 @@ def inject_dependencies():
     )
     from kappa.gamma import gamma_service
     from kappa.gamma import gamma_service_impl
-    from kappa.gamma.repository import s3_repository, gcs_repository
+    from kappa.gamma.repository import s3_repository, gcs_repository, oci_repository
 
     container.wire(
-        modules=[gamma_service, s3_repository, gcs_repository, gamma_service_impl],
+        modules=[gamma_service, s3_repository, gcs_repository, oci_repository, gamma_service_impl],
         packages=[marshal, server, tracing, cli, adapters, saved_bundle, service],
     )
 

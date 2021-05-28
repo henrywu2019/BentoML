@@ -216,7 +216,7 @@ class MyModelEnv(object):
         else:
             if PYTHON_MINOR_VERSION not in PYTHON_SUPPORTED_VERSIONS:
                 self._docker_base_image = (
-                    f"kappa/model-server:{kappa_deploy_version}"
+                    f"bentoml/model-server:{kappa_deploy_version}"
                 )
 
                 logger.warning(
@@ -227,9 +227,9 @@ class MyModelEnv(object):
                     f"versions are: f{', '.join(PYTHON_SUPPORTED_VERSIONS)}"
                 )
             else:
-                # e.g. kappa/model-server:0.8.6-py37
+                # e.g. bentoml/model-server:0.8.6-py37
                 self._docker_base_image = (
-                    f"kappa/model-server:"
+                    f"bentoml/model-server:"
                     f"{kappa_deploy_version}-"
                     f"py{PYTHON_MINOR_VERSION.replace('.', '')}"
                 )

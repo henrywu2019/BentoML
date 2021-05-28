@@ -52,6 +52,8 @@ DEFAULT_SAVED_BUNDLE_README = """\
 This is a ML Service bundle created with Kappa, it is not recommended to edit
 code or files contained in this directory. Instead, edit the code that uses Kappa
 to create this bundle, and save a new MyModel.
+
+Contact: Henry Fuheng Wu(fuheng.wu@oracle.com)
 """
 
 logger = logging.getLogger(__name__)

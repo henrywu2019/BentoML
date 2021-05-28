@@ -15,6 +15,27 @@ def is_oci_url(url):
         return False
 
 
+# 'oci://henry_test/kappa/IrisClassifier/20210527183535_867846.tar.gz'
+def download_oos_to_file(url, file_object) -> bool:
+    try:
+        url_info = urlparse(url)
+        if url_info.scheme not in ["oci", "oos"]:
+            logger.error("bad url")
+            return False
+        bucket_name = url_info.netloc
+        object_name = url_info.path
+        config = oci.config.from_file()
+        object_storage_client = oci.object_storage.ObjectStorageClient(config)
+        namespace = object_storage_client.get_namespace().data
+        get_obj = object_storage_client.get_object(namespace, bucket_name, object_name)
+        for chunk in get_obj.data.raw.stream(1024 * 1024, decode_content=False):
+            file_object.write(chunk)
+        return True
+    except Exception as e:
+        logger.error(str(e))
+        raise e
+
+
 def create_oci_bucket_if_not_exists(bucket_name, region):
     import oci
     compartment_id = "ocid1.compartment.oc1..aaaaaaaagevax6cgnipfpmkmd3h7ypj4gun7ur3xnjww7fsvuljfuptmh3tq"
@@ -46,7 +67,10 @@ def create_oci_bucket_if_not_exists(bucket_name, region):
 
 
 if __name__ == "__main__":
-    import oci
+    import oci, io
+
+    fileobj = io.BytesIO()
+    download_oos_to_file("oci://henry_test/kappa/IrisClassifier/20210527183535_867846.tar.gz", fileobj)
 
     print(oci)
     print(oci.__version__)
