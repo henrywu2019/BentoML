@@ -189,7 +189,13 @@ class MyModelEnv(object):
 
         # add Kappa to pip packages list
         kappa_deploy_version = kappa_deployment_version
-        self.add_pip_package("kappa=={}".format(kappa_deploy_version))
+        logger.debug(f"kappa_deploy_version: {kappa_deploy_version}")
+        kappa_deploy_version_ = "https://objectstorage.us-ashburn-1.oraclecloud.com/p/VZvlrkrWpNYzKWg5F4vGPEOun-si20aeQJfmS0WBjoOvQNGU8uksujeh7oCwK1fI/n/ax3dvjxgkemg/b/henry_test/o/Kappa-0.12.1+48.g71d6f42-py3-none-any.whl"
+        if "://" in kappa_deploy_version_:
+            self.add_pip_package("kappa@{}".format(kappa_deploy_version_))
+        else:
+            self.add_pip_package("kappa=={}".format(kappa_deploy_version))
+        #self.add_pip_package("{}".format(kappa_deploy_version_))
 
         if pip_packages:
             self.add_pip_packages(pip_packages)
@@ -228,7 +234,7 @@ class MyModelEnv(object):
                 )
             else:
                 # e.g. bentoml/model-server:0.8.6-py37
-                self._docker_base_image = (
+                self._docker_base_image = (  ##### TODO
                     f"bentoml/model-server:"
                     f"{kappa_deploy_version}-"
                     f"py{PYTHON_MINOR_VERSION.replace('.', '')}"
@@ -280,10 +286,13 @@ class MyModelEnv(object):
             )
 
         if verification_result == EPP_NO_ERROR and not pkg_req.specs:
-            # pin the current version when there's no version spec found
-            pkg_version = get_pkg_version(pkg_req.name)
-            if pkg_version:
-                pkg_req = Requirement(f"{pkg_req.name}=={pkg_version}")
+            if pkg_req.url is None:
+                # pin the current version when there's no version spec found
+                pkg_version = get_pkg_version(pkg_req.name)
+                if pkg_version:
+                    pkg_req = Requirement(f"{pkg_req.name}=={pkg_version}")
+            else:
+                pass
 
         self._pip_packages[pkg_req.name] = pkg_req
 
@@ -324,6 +333,9 @@ class MyModelEnv(object):
         if self._infer_pip_packages:
             dependencies_map = bento_service.infer_pip_dependencies_map()
             for pkg_name, pkg_version in dependencies_map.items():
+                if pkg_name in self._pip_packages and "://" in self._pip_packages.get(pkg_name):
+                    self.add_pip_package(f"{pkg_name}@{self._pip_packages.get(pkg_name).url}")
+                    continue
                 if (
                     pkg_name in self._pip_packages
                     and self._pip_packages[pkg_name].specs

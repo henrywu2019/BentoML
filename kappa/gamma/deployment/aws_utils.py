@@ -95,7 +95,7 @@ def ensure_sam_available_or_raise():
     except ImportError:
         raise MissingDependencyException(
             "aws-sam-cli package is required. Install "
-            "with `pip install --user aws-sam-cli`"
+            "with `pip install -U aws-sam-cli==0.33.1`"
         )
 
 

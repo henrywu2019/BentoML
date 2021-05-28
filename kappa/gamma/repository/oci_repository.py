@@ -14,16 +14,13 @@
 
 import logging
 from urllib.parse import urlparse
-from dependency_injector.wiring import Provide, inject
+from dependency_injector.wiring import inject
 
-from kappa.configuration.containers import BentoMLContainer
 from kappa.exceptions import GammaRepositoryException
 from kappa.gamma.proto.repository_pb2 import BentoUri
 from kappa.gamma.repository.base_repository import BaseRepository
 from datetime import datetime, timedelta
 import pytz
-import oci
-from oci.object_storage.models import CreatePreauthenticatedRequestDetails
 
 logger = logging.getLogger(__name__)
 
@@ -34,6 +31,15 @@ class OCIRepository(BaseRepository):
             self,
             base_url,
     ):
+        try:
+            import oci
+            from oci.object_storage.models import CreatePreauthenticatedRequestDetails
+        except ImportError:
+            raise GammaRepositoryException(
+                '"oci" package is required for Oracle Cloud Object '
+                'Storage Repository. You can install it with pip: '
+                '"pip install oci"'
+            )
         self.uri_type = BentoUri.OCI
 
         parse_result = urlparse(base_url)
@@ -43,6 +49,7 @@ class OCIRepository(BaseRepository):
         self.config = oci.config.from_file()
         self.object_storage = oci.object_storage.ObjectStorageClient(self.config)
         self.namespace = self.object_storage.get_namespace().data
+        self.CreatePreauthenticatedRequestDetails = CreatePreauthenticatedRequestDetails
 
     def _get_object_name(self, bento_name, bento_version):
         if self.base_path:
@@ -52,15 +59,17 @@ class OCIRepository(BaseRepository):
 
     def _get_presigned_url(self,
                            object_name,
-                           access_type=CreatePreauthenticatedRequestDetails.ACCESS_TYPE_OBJECT_READ):
+                           access_type=0):
         # Creating a Pre-Authenticated Request
         par_ttl = (datetime.utcnow() + timedelta(hours=24)).replace(tzinfo=pytz.UTC)
 
-        create_par_details = CreatePreauthenticatedRequestDetails()
+        create_par_details = self.CreatePreauthenticatedRequestDetails()
         par_name = f"par-{object_name.replace('/', '-')}"
         create_par_details.name = par_name
         create_par_details.object_name = object_name
-        create_par_details.access_type = access_type
+        create_par_details.access_type = self.CreatePreauthenticatedRequestDetails.ACCESS_TYPE_OBJECT_READ
+        if access_type != 0:
+            create_par_details.access_type = self.CreatePreauthenticatedRequestDetails.ACCESS_TYPE_OBJECT_WRITE
         create_par_details.time_expires = par_ttl.isoformat()
 
         par = self.object_storage.create_preauthenticated_request(namespace_name=self.namespace,
@@ -73,8 +82,7 @@ class OCIRepository(BaseRepository):
 
     def add(self, bento_name, bento_version) -> BentoUri:
         object_name = self._get_object_name(bento_name, bento_version)
-        par_request_url = self._get_presigned_url(object_name,
-                                                  CreatePreauthenticatedRequestDetails.ACCESS_TYPE_OBJECT_WRITE)
+        par_request_url = self._get_presigned_url(object_name, 1)
         return BentoUri(
             type=self.uri_type,
             uri='oci://{}/{}'.format(self.bucket_name, object_name),

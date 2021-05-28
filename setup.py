@@ -58,6 +58,7 @@ install_requires = [
 gamma_service_requires = [
     "grpcio~=1.34.0",  # match the grpcio-tools version used in gamma docker image
     "google-cloud-storage",
+    "oci==2.38.4",
     "azure-cli",
     "aws-sam-cli==0.33.1",
     "psycopg2",

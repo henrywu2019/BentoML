@@ -48,7 +48,7 @@ setuptools.setup(
     description="Kappa generated model module",
     long_description=\"\"\"{long_description}\"\"\",
     long_description_content_type="text/markdown",
-    url="https://github.com/kappa/Kappa",
+    url="http://www.oracle.com",
     packages=setuptools.find_packages(),
     install_requires=install_reqs,
     include_package_data=True,
@@ -70,6 +70,57 @@ graft {service_name}/artifacts
 
 MODEL_SERVER_DOCKERFILE_CPU = """\
 FROM {docker_base_image}
+
+# Configure PIP install arguments, e.g. --index-url, --trusted-url, --extra-index-url
+ARG EXTRA_PIP_INSTALL_ARGS=
+ENV EXTRA_PIP_INSTALL_ARGS $EXTRA_PIP_INSTALL_ARGS
+
+ARG UID=1034
+ARG GID=1034
+RUN groupadd -g $GID -o kappa && useradd -m -u $UID -g $GID -o -r kappa
+
+ARG BUNDLE_PATH=/home/kappa/bundle
+ENV BUNDLE_PATH=$BUNDLE_PATH
+ENV KAPPA_HOME=/home/kappa/
+
+RUN mkdir $BUNDLE_PATH && chown kappa:kappa $BUNDLE_PATH -R
+WORKDIR $BUNDLE_PATH
+
+# copy over the init script; copy over entrypoint scripts
+COPY --chown=kappa:kappa kappa-init.sh docker-entrypoint.sh ./
+RUN chmod +x ./kappa-init.sh
+
+# Copy docker-entrypoint.sh again, because setup.sh might not exist. This prevent COPY command from failing.
+COPY --chown=kappa:kappa docker-entrypoint.sh setup.s[h] ./
+RUN ./kappa-init.sh custom_setup
+
+COPY --chown=kappa:kappa docker-entrypoint.sh python_versio[n] ./
+RUN ./kappa-init.sh ensure_python
+
+COPY --chown=kappa:kappa environment.yml ./
+RUN ./kappa-init.sh restore_conda_env
+
+COPY --chown=kappa:kappa requirements.txt ./
+RUN ./kappa-init.sh install_pip_packages
+
+COPY --chown=kappa:kappa docker-entrypoint.sh bundled_pip_dependencie[s]  ./bundled_pip_dependencies/
+RUN rm ./bundled_pip_dependencies/docker-entrypoint.sh && ./kappa-init.sh install_bundled_pip_packages
+
+# copy over model files
+COPY --chown=kappa:kappa . ./
+
+# the env var $PORT is required by heroku container runtime
+ENV PORT 5000
+EXPOSE $PORT
+
+USER kappa
+RUN chmod +x ./docker-entrypoint.sh
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
+CMD ["kappa", "serve-gunicorn", "./"]
+"""  # noqa: E501
+
+MODEL_SERVER_DOCKERFILE_TRITON = """\
+FROM nvcr.io/nvidia/tritonserver:21.05-py3
 
 # Configure PIP install arguments, e.g. --index-url, --trusted-url, --extra-index-url
 ARG EXTRA_PIP_INSTALL_ARGS=
