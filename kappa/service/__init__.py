@@ -209,8 +209,7 @@ def artifacts_decorator(artifacts: List[MyModelArtifact]):
             if not isinstance(artifact, MyModelArtifact):
                 raise InvalidArgument(
                     "MyModel @artifacts decorator only accept list of "
-                    "MyModelArtifact instances, instead got type: '%s'"
-                    % type(artifact)
+                    "MyModelArtifact instances, instead got type: '%s'" % type(artifact)
                 )
 
             if artifact.name in artifact_names:
@@ -865,9 +864,7 @@ class MyModel:
     @inject
     def infer_pip_dependencies_map(
         self,
-        kappa_version: str = Provide[
-            BentoMLContainer.bento_bundle_deployment_version
-        ],
+        kappa_version: str = Provide[BentoMLContainer.bento_bundle_deployment_version],
     ):
         if not self.pip_dependencies_map:
             self.pip_dependencies_map = {}

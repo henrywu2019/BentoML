@@ -130,7 +130,7 @@ def _write_bento_content_to_dir(bento_service, path):
     with open(os.path.join(path, "Dockerfile"), "w") as f:
         f.write(
             MODEL_SERVER_DOCKERFILE_CPU.format(
-            #MODEL_SERVER_DOCKERFILE_TRITON.format(
+                # MODEL_SERVER_DOCKERFILE_TRITON.format(
                 docker_base_image=bento_service._env._docker_base_image
             )
         )
@@ -160,9 +160,7 @@ def _write_bento_content_to_dir(bento_service, path):
     os.chmod(docker_entrypoint_sh_file_dst, st.st_mode | stat.S_IEXEC)
 
     # copy kappa-init.sh for install targz bundles
-    kappa_init_sh_file_src = os.path.join(
-        os.path.dirname(__file__), "kappa-init.sh"
-    )
+    kappa_init_sh_file_src = os.path.join(os.path.dirname(__file__), "kappa-init.sh")
     kappa_init_sh_file_dst = os.path.join(path, "kappa-init.sh")
     shutil.copyfile(kappa_init_sh_file_src, kappa_init_sh_file_dst)
     # chmod +x kappa_init_script file

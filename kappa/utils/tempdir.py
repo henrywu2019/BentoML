@@ -48,9 +48,7 @@ class TempDirectory(object):
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if get_debug_mode():
-            logger.debug(
-                'Kappa in debug mode, keeping temp directory "%s"', self.path
-            )
+            logger.debug('Kappa in debug mode, keeping temp directory "%s"', self.path)
             return
 
         if self._cleanup:

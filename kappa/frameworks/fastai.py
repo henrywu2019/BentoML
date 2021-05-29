@@ -25,8 +25,7 @@ def _import_fastai2_module():
         import fastai.basics  # noqa
     except ImportError:
         raise MissingDependencyException(
-            "fastai2 package is required to use "
-            "kappa.artifacts.FastaiModelArtifact"
+            "fastai2 package is required to use " "kappa.artifacts.FastaiModelArtifact"
         )
 
     return fastai

@@ -7,9 +7,7 @@ from botocore.exceptions import ClientError
 from mock import patch, MagicMock
 from moto import mock_ecr, mock_iam, mock_sts
 
-from kappa.gamma.deployment.sagemaker.operator import (
-    get_arn_role_from_current_aws_user,
-)
+from kappa.gamma.deployment.sagemaker.operator import get_arn_role_from_current_aws_user
 from kappa.gamma.deployment.sagemaker.operator import SageMakerDeploymentOperator
 from kappa.gamma.proto.deployment_pb2 import Deployment, DeploymentSpec
 from kappa.gamma.proto.repository_pb2 import (
@@ -172,9 +170,7 @@ def mock_aws_services_for_sagemaker(func):
 
 def mock_sagemaker_deployment_wrapper(func):
     @mock_aws_services_for_sagemaker
-    @patch(
-        'kappa.gamma.deployment.sagemaker.operator.build_docker_image', MagicMock()
-    )
+    @patch('kappa.gamma.deployment.sagemaker.operator.build_docker_image', MagicMock())
     @patch(
         'kappa.gamma.deployment.sagemaker.operator.push_docker_image_to_repository',
         MagicMock(),

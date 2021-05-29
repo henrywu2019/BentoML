@@ -18,9 +18,7 @@ class NonBatchExampleService(kappa.MyModel):
     Example MyModel class made for testing purpose
     """
 
-    @kappa.api(
-        input=MultiImageInput(input_names=('original', 'compared')), batch=False
-    )
+    @kappa.api(input=MultiImageInput(input_names=('original', 'compared')), batch=False)
     def predict_multi_images(self, original, compared):
         return self.artifacts.model.predict_multi_images([original], [compared])[0]
 

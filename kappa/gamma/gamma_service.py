@@ -118,7 +118,12 @@ def start_gamma_service_grpc_server(
     GammaServicerImpl = get_gamma_service_impl(GammaServicer)
     gamma_service = GammaServicerImpl(
         repository=create_repository(
-            repository_type, file_system_directory, s3_url, s3_endpoint_url, gcs_url, oci_url,
+            repository_type,
+            file_system_directory,
+            s3_url,
+            s3_endpoint_url,
+            gcs_url,
+            oci_url,
         ),
         database=DB(db_url),
     )

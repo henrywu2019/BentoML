@@ -170,8 +170,12 @@ def _start_prod_server(
 
     def info(title):
         import os
+
         logger.info(title)
-        logger.info(f'module name:{__name__}, parent process:{os.getppid()}, process id:{os.getpid()}')
+        logger.info(
+            f'module name:{__name__}, parent process:{os.getppid()}, process id:{os.getpid()}'
+        )
+
     info("_start_prod_server")
 
     from kappa.server.gunicorn_server import GunicornBentoServer

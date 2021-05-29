@@ -202,9 +202,7 @@ class BentoMLContainer(containers.DeclarativeContainer):
     )
 
     kappa_home = providers.Callable(
-        lambda: expand_env_var(
-            os.environ.get("KAPPA_HOME", os.path.join("~", "kappa"))
-        )
+        lambda: expand_env_var(os.environ.get("KAPPA_HOME", os.path.join("~", "kappa")))
     )
 
     prometheus_multiproc_dir = providers.Callable(

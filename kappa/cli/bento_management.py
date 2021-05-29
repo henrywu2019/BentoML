@@ -156,9 +156,7 @@ def add_bento_sub_command(cli):
     @click.option(
         '--limit', type=click.INT, help='Limit how many MyModels will be retrieved'
     )
-    @click.option(
-        '--offset', type=click.INT, help='How many MyModels will be skipped'
-    )
+    @click.option('--offset', type=click.INT, help='How many MyModels will be skipped')
     @click.option(
         '--labels',
         type=click.STRING,

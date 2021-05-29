@@ -195,7 +195,7 @@ class MyModelEnv(object):
             self.add_pip_package("kappa@{}".format(kappa_deploy_version_))
         else:
             self.add_pip_package("kappa=={}".format(kappa_deploy_version))
-        #self.add_pip_package("{}".format(kappa_deploy_version_))
+        # self.add_pip_package("{}".format(kappa_deploy_version_))
 
         if pip_packages:
             self.add_pip_packages(pip_packages)
@@ -221,9 +221,7 @@ class MyModelEnv(object):
             self._docker_base_image = default_docker_base_image
         else:
             if PYTHON_MINOR_VERSION not in PYTHON_SUPPORTED_VERSIONS:
-                self._docker_base_image = (
-                    f"bentoml/model-server:{kappa_deploy_version}"
-                )
+                self._docker_base_image = f"bentoml/model-server:{kappa_deploy_version}"
 
                 logger.warning(
                     f"Python {PYTHON_VERSION} found in current environment is not "
@@ -333,8 +331,12 @@ class MyModelEnv(object):
         if self._infer_pip_packages:
             dependencies_map = bento_service.infer_pip_dependencies_map()
             for pkg_name, pkg_version in dependencies_map.items():
-                if pkg_name in self._pip_packages and "://" in self._pip_packages.get(pkg_name):
-                    self.add_pip_package(f"{pkg_name}@{self._pip_packages.get(pkg_name).url}")
+                if pkg_name in self._pip_packages and "://" in self._pip_packages.get(
+                    pkg_name
+                ):
+                    self.add_pip_package(
+                        f"{pkg_name}@{self._pip_packages.get(pkg_name).url}"
+                    )
                     continue
                 if (
                     pkg_name in self._pip_packages

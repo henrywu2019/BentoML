@@ -395,8 +395,7 @@ class BentoAPIServer:
                 if 400 <= e.status_code < 500 and e.status_code not in (401, 403):
                     response = make_response(
                         jsonify(
-                            message="MyModel error handling API request: %s"
-                            % str(e)
+                            message="MyModel error handling API request: %s" % str(e)
                         ),
                         e.status_code,
                     )

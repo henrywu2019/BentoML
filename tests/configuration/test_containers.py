@@ -307,9 +307,7 @@ def test_logging_file_directory():
     config = BentoMLConfiguration().as_dict()
     container.config.from_dict(config)
 
-    assert container.logging_file_directory() == os.path.join(
-        mock_kappa_home(), "logs"
-    )
+    assert container.logging_file_directory() == os.path.join(mock_kappa_home(), "logs")
 
     override_config = tempfile.NamedTemporaryFile(delete=False)
     override_config.write(

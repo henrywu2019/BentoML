@@ -44,7 +44,10 @@ def _is_http_url(bundle_path):
 
 def _is_remote_path(bundle_path):
     return isinstance(bundle_path, str) and (
-        is_s3_url(bundle_path) or is_gcs_url(bundle_path) or is_oci_url(bundle_path) or _is_http_url(bundle_path)
+        is_s3_url(bundle_path)
+        or is_gcs_url(bundle_path)
+        or is_oci_url(bundle_path)
+        or _is_http_url(bundle_path)
     )
 
 
@@ -84,8 +87,7 @@ def _resolve_remote_bundle_path(bundle_path):
         response = requests.get(bundle_path)
         if response.status_code != 200:
             raise BentoMLException(
-                f"Error retrieving MyModel. "
-                f"{response.status_code}: {response.text}"
+                f"Error retrieving MyModel. " f"{response.status_code}: {response.text}"
             )
         fileobj = io.BytesIO()
         fileobj.write(response.content)

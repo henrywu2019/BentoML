@@ -360,11 +360,8 @@ def get_gamma_service_impl(base=object):
                         sess, request.bento_name, request.bento_version
                     )
                     if bento_pb:
-                        error_message = (
-                            "MyModel: "
-                            "{}:{} already exists".format(
-                                request.bento_name, request.bento_version
-                            )
+                        error_message = "MyModel: " "{}:{} already exists".format(
+                            request.bento_name, request.bento_version
                         )
                         logger.error(error_message)
                         return AddBentoResponse(status=Status.ABORTED(error_message))

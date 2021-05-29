@@ -150,7 +150,13 @@ def inject_dependencies():
     from kappa.gamma.repository import s3_repository, gcs_repository, oci_repository
 
     container.wire(
-        modules=[gamma_service, s3_repository, gcs_repository, oci_repository, gamma_service_impl],
+        modules=[
+            gamma_service,
+            s3_repository,
+            gcs_repository,
+            oci_repository,
+            gamma_service_impl,
+        ],
         packages=[marshal, server, tracing, cli, adapters, saved_bundle, service],
     )
 

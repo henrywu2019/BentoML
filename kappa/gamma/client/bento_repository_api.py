@@ -322,8 +322,7 @@ class BentoRepositoryAPIClient:
                 result.status
             )
             raise BentoMLException(
-                f'MyModel {name}:{version} not found - '
-                f'{error_code}:{error_message}'
+                f'MyModel {name}:{version} not found - ' f'{error_code}:{error_message}'
             )
         return result.bento
 

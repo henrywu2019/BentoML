@@ -35,9 +35,7 @@ class ExampleMyModel(kappa.MyModel):
     def predict_image(self, images):
         return self.artifacts.model.predict_image(images)
 
-    @kappa.api(
-        input=MultiImageInput(input_names=('original', 'compared')), batch=False
-    )
+    @kappa.api(input=MultiImageInput(input_names=('original', 'compared')), batch=False)
     def predict_multi_images(self, original, compared):
         return self.artifacts.model.predict_multi_images(original, compared)
 

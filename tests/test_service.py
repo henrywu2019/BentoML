@@ -9,9 +9,7 @@ from kappa.service.artifacts.pickle import PickleArtifact
 
 def test_custom_api_name():
     # these names should work:
-    kappa.api(input=DataframeInput(), api_name="a_valid_name", batch=True)(
-        lambda x: x
-    )
+    kappa.api(input=DataframeInput(), api_name="a_valid_name", batch=True)(lambda x: x)
     kappa.api(input=DataframeInput(), api_name="AValidName", batch=True)(lambda x: x)
     kappa.api(input=DataframeInput(), api_name="_AValidName", batch=True)(lambda x: x)
     kappa.api(input=DataframeInput(), api_name="a_valid_name_123", batch=True)(
@@ -42,9 +40,7 @@ def test_invalid_artifact_type():
     with pytest.raises(InvalidArgument) as e:
 
         @kappa.artifacts(["Not A Artifact"])
-        class ExampleMyModel(  # pylint: disable=unused-variable
-            kappa.MyModel
-        ):
+        class ExampleMyModel(kappa.MyModel):  # pylint: disable=unused-variable
             pass
 
     assert "only accept list of MyModelArtifact" in str(e.value)
@@ -55,9 +51,7 @@ def test_duplicated_artifact_name():
     with pytest.raises(InvalidArgument) as e:
 
         @kappa.artifacts([PickleArtifact("model"), PickleArtifact("model")])
-        class ExampleMyModel(  # pylint: disable=unused-variable
-            kappa.MyModel
-        ):
+        class ExampleMyModel(kappa.MyModel):  # pylint: disable=unused-variable
             pass
 
     assert "Duplicated artifact name `model` detected" in str(e.value)
@@ -67,9 +61,7 @@ def test_duplicated_artifact_name():
 def test_invalid_api_input():
     with pytest.raises(InvalidArgument) as e:
 
-        class ExampleMyModel(  # pylint: disable=unused-variable
-            kappa.MyModel
-        ):
+        class ExampleMyModel(kappa.MyModel):  # pylint: disable=unused-variable
             @kappa.api("Not A InputAdapter")
             def test(self):
                 pass
