@@ -129,8 +129,8 @@ def _write_bento_content_to_dir(bento_service, path):
     logger.debug("Using Docker Base Image %s", bento_service._env._docker_base_image)
     with open(os.path.join(path, "Dockerfile"), "w") as f:
         f.write(
-            #MODEL_SERVER_DOCKERFILE_CPU.format(
-            MODEL_SERVER_DOCKERFILE_TRITON.format(
+            MODEL_SERVER_DOCKERFILE_CPU.format(
+            #MODEL_SERVER_DOCKERFILE_TRITON.format(
                 docker_base_image=bento_service._env._docker_base_image
             )
         )
