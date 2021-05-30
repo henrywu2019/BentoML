@@ -15,11 +15,11 @@ and applied to the entire team.
 
 Kappa configuration is defined by a YAML file placed in a directory specified by the `KAPPA_CONFIG`
 environment variable. By default, configurations defined in `$KAPPA_HOME/kappa.yml` is applied if present.
-The example below starts the bento server with configuration defined in `~/bentoml_configuration.yml`
+The example below starts the bento server with configuration defined in `~/kappa_configuration.yml`
 
 .. code-block:: shell
 
-    $ KAPPA_CONFIG=~/bentoml_configuration.yml kappa serve-gunicorn IrisClassifier:latest
+    $ KAPPA_CONFIG=~/kappa_configuration.yml kappa serve-gunicorn IrisClassifier:latest
 
 Users only need to specify a partial configuration with only the properties they wish to customize instead 
 of a full configuration schema. In the example below, the microbatching workers count is overridden to 4. 
@@ -35,7 +35,7 @@ Remaining properties will take their defaults values.
 Throughout the Kappa documentation, features that are customizable through configuration are demonstrated
 like the example above. For a full configuration schema including all customizable properties, refer to 
 the Kappa configuration template defined in
-`default_bentoml.yml <https://github.com/kappa/Kappa/blob/master/kappa/configuration/default_bentoml.yml>`_.
+`default_kappa.yml <https://github.com/kappa/Kappa/blob/master/kappa/configuration/default_kappa.yml>`_.
 
 Docker Deployment
 -----------------
@@ -65,7 +65,7 @@ YAML based configuration.
 +---------------+--------------------------------------------+-----------------------------------------+
 | Section       | Key                                        | Key                                     |
 +---------------+--------------------------------------------+-----------------------------------------+
-| core          | bentoml_deploy_version                     | bento_bundle.deployment_version         |
+| core          | kappa_deploy_version                     | bento_bundle.deployment_version         |
 +---------------+--------------------------------------------+-----------------------------------------+
 | core          | default_docker_base_image                  | bento_bundle.default_docker_base_image  |
 +---------------+--------------------------------------------+-----------------------------------------+

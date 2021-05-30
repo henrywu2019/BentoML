@@ -131,18 +131,18 @@ Register an application on the clipper cluster
     19-11-13:15:43:58 INFO     [clipper_admin.py:236] [default-cluster] Application kappa-test was successfully registered
 
 
-Now you can deploy the saved MyModel using this Clipper connection and Kappa's `kappa.clipper.deploy_bentoml` API,
+Now you can deploy the saved MyModel using this Clipper connection and Kappa's `kappa.clipper.deploy_kappa` API,
 which will first build a clipper model docker image that containing your MyModel and then deploy it to the cluster.
 
 .. code-block:: python
 
-    >>> from kappa.clipper import deploy_bentoml
+    >>> from kappa.clipper import deploy_kappa
 
     >>> saved_path = "/Users/chaoyuyang/kappa/repository/IrisClassifier/20191113154121_E7D3CE"
 
-    >>> clipper_model_name, clipper_model_version = deploy_bentoml(cl, saved_path, 'predict_clipper')
+    >>> clipper_model_name, clipper_model_version = deploy_kappa(cl, saved_path, 'predict_clipper')
 
-    [2019-11-13 15:45:49,422] WARNING - Kappa local changes detected - Local Kappa repository including all code changes will be bundled together with the MyModel archive. When used with docker, the base docker image will be default to same version as last PyPI release at version: 0.4.9. You can also force kappa to use a specific version for deploying your MyModel archive, by setting the config 'core/bentoml_deploy_version' to a pinned version or your custom Kappa on github, e.g.:'bentoml_deploy_version = git+https://github.com/{username}/kappa.git@{branch}'
+    [2019-11-13 15:45:49,422] WARNING - Kappa local changes detected - Local Kappa repository including all code changes will be bundled together with the MyModel archive. When used with docker, the base docker image will be default to same version as last PyPI release at version: 0.4.9. You can also force kappa to use a specific version for deploying your MyModel archive, by setting the config 'core/kappa_deploy_version' to a pinned version or your custom Kappa on github, e.g.:'kappa_deploy_version = git+https://github.com/{username}/kappa.git@{branch}'
     [2019-11-13 15:45:49,444] WARNING - BentoArchive version mismatch: loading archive bundled in version 0.4.9,  but loading from version 0.4.9+7.g429b9ec.dirty
     [2019-11-13 15:45:49,772] INFO - Step 1/10 : FROM clipper/python-closure-container:0.4.1
     [2019-11-13 15:45:49,775] INFO -

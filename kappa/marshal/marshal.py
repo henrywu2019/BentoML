@@ -24,7 +24,7 @@ import aiohttp.web
 import psutil
 from dependency_injector.wiring import Provide, inject
 
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 from kappa.exceptions import RemoteException
 from kappa.marshal.dispatcher import CorkDispatcher, NonBlockSema
 from kappa.marshal.utils import DataLoader, MARSHAL_REQUEST_HEADER
@@ -43,7 +43,7 @@ def metrics_patch(cls):
             self,
             *args,
             namespace: str = Provide[
-                BentoMLContainer.config.bento_server.metrics.namespace
+                KappaContainer.config.bento_server.metrics.namespace
             ],
             **kwargs,
         ):
@@ -143,19 +143,19 @@ class MarshalService:
         bento_bundle_path,
         outbound_host="localhost",
         outbound_port=None,
-        outbound_workers: int = Provide[BentoMLContainer.api_server_workers],
+        outbound_workers: int = Provide[KappaContainer.api_server_workers],
         mb_max_batch_size: int = Provide[
-            BentoMLContainer.config.bento_server.microbatch.max_batch_size
+            KappaContainer.config.bento_server.microbatch.max_batch_size
         ],
         mb_max_latency: int = Provide[
-            BentoMLContainer.config.bento_server.microbatch.max_latency
+            KappaContainer.config.bento_server.microbatch.max_latency
         ],
         max_request_size: int = Provide[
-            BentoMLContainer.config.bento_server.max_request_size
+            KappaContainer.config.bento_server.max_request_size
         ],
         outbound_unix_socket: str = None,
         enable_microbatch: bool = Provide[
-            BentoMLContainer.config.bento_server.microbatch.enabled
+            KappaContainer.config.bento_server.microbatch.enabled
         ],
     ):
         self._client = None
@@ -363,7 +363,7 @@ class MarshalService:
 
     @inject
     def fork_start_app(
-        self, port=Provide[BentoMLContainer.config.bento_server.port],
+        self, port=Provide[KappaContainer.config.bento_server.port],
     ):
         # Use new eventloop in the fork process to avoid problems on MacOS
         # ref: https://groups.google.com/forum/#!topic/python-tornado/DkXjSNPCzsI

@@ -19,7 +19,7 @@ from dependency_injector.wiring import Provide, inject
 import boto3
 from botocore.exceptions import ClientError
 
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 from kappa.exceptions import GammaRepositoryException
 from kappa.gamma.proto.repository_pb2 import BentoUri
 from kappa.gamma.repository.base_repository import BaseRepository
@@ -33,13 +33,13 @@ class S3Repository(BaseRepository):
         self,
         base_url,
         endpoint_url: str = Provide[
-            BentoMLContainer.config.gamma.repository.s3.endpoint_url
+            KappaContainer.config.gamma.repository.s3.endpoint_url
         ],
         signature_version: str = Provide[
-            BentoMLContainer.config.gamma.repository.s3.signature_version
+            KappaContainer.config.gamma.repository.s3.signature_version
         ],
         expiration: int = Provide[
-            BentoMLContainer.config.gamma.repository.s3.expiration
+            KappaContainer.config.gamma.repository.s3.expiration
         ],
     ):
         self.uri_type = BentoUri.S3

@@ -6,7 +6,7 @@ from dependency_injector.wiring import Provide, inject
 from flask import Request
 from timeit import default_timer
 
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 
 
 logger = logging.getLogger(__name__)
@@ -19,7 +19,7 @@ class InstrumentMiddleware:
         app,
         bento_service,
         namespace: str = Provide[
-            BentoMLContainer.config.bento_server.metrics.namespace
+            KappaContainer.config.bento_server.metrics.namespace
         ],
     ):
         self.app = app
@@ -89,7 +89,7 @@ class InstrumentMiddleware:
 @inject
 def setup_prometheus_multiproc_dir(
     lock: multiprocessing.Lock = None,
-    prometheus_multiproc_dir: str = Provide[BentoMLContainer.prometheus_multiproc_dir],
+    prometheus_multiproc_dir: str = Provide[KappaContainer.prometheus_multiproc_dir],
 ):
     """
     Set up prometheus_multiproc_dir for prometheus to work in multiprocess mode,

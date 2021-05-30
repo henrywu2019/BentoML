@@ -10,7 +10,7 @@ from kappa.exceptions import (
     GammaDeploymentException,
     AWSServiceError,
     InvalidArgument,
-    BentoMLException,
+    KappaException,
 )
 from kappa.saved_bundle import loader
 from kappa.utils.tempdir import TempDirectory
@@ -449,14 +449,14 @@ class SageMakerDeploymentOperator(DeploymentOperatorBase):
                 )
             )
             if bento_pb.bento.uri.type not in (BentoUri.LOCAL, BentoUri.S3):
-                raise BentoMLException(
+                raise KappaException(
                     "Kappa currently not support {} repository".format(
                         BentoUri.StorageType.Name(bento_pb.bento.uri.type)
                     )
                 )
             return self._add(deployment_pb, bento_pb, bento_pb.bento.uri.uri)
 
-        except BentoMLException as error:
+        except KappaException as error:
             deployment_pb.state.state = DeploymentState.ERROR
             deployment_pb.state.error_message = (
                 f"Error creating SageMaker deployment: {str(error)}"
@@ -530,7 +530,7 @@ class SageMakerDeploymentOperator(DeploymentOperatorBase):
                 )
             )
             if bento_pb.bento.uri.type not in (BentoUri.LOCAL, BentoUri.S3):
-                raise BentoMLException(
+                raise KappaException(
                     "Kappa currently not support {} repository".format(
                         BentoUri.StorageType.Name(bento_pb.bento.uri.type)
                     )
@@ -538,7 +538,7 @@ class SageMakerDeploymentOperator(DeploymentOperatorBase):
             return self._update(
                 deployment_pb, previous_deployment, bento_pb, bento_pb.bento.uri.uri
             )
-        except BentoMLException as error:
+        except KappaException as error:
             deployment_pb.state.state = DeploymentState.ERROR
             deployment_pb.state.error_message = (
                 f"Error updating SageMaker deployment: {str(error)}"
@@ -697,7 +697,7 @@ class SageMakerDeploymentOperator(DeploymentOperatorBase):
             delete_sagemaker_deployment_resources_if_exist(deployment_pb)
 
             return DeleteDeploymentResponse(status=Status.OK())
-        except BentoMLException as error:
+        except KappaException as error:
             return DeleteDeploymentResponse(status=error.status_proto)
 
     def describe(self, deployment_pb):
@@ -737,5 +737,5 @@ class SageMakerDeploymentOperator(DeploymentOperatorBase):
             return DescribeDeploymentResponse(
                 state=deployment_state, status=Status.OK()
             )
-        except BentoMLException as error:
+        except KappaException as error:
             return DescribeDeploymentResponse(status=error.status_proto)

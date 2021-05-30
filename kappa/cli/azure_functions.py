@@ -16,7 +16,7 @@ import click
 
 from kappa.utils.lazy_loader import LazyLoader
 from kappa.cli.click_utils import (
-    BentoMLCommandGroup,
+    KappaCommandGroup,
     parse_bento_tag_callback,
     CLI_COLOR_SUCCESS,
     _echo,
@@ -46,7 +46,7 @@ def get_azure_functions_sub_command():
     @click.group(
         name='azure-functions',
         help='Commands for Azure Functions MyModel deployment',
-        cls=BentoMLCommandGroup,
+        cls=KappaCommandGroup,
     )
     def azure_functions():
         pass

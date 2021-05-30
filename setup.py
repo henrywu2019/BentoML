@@ -128,7 +128,7 @@ setuptools.setup(
     name="Kappa",
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
-    author="fuheng.wu, BentoML",
+    author="fuheng.wu, Kappa",
     author_email="fuheng.wu@oracle.com",
     description="A framework for machine learning model serving",
     long_description=long_description,

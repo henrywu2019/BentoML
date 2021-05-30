@@ -27,7 +27,7 @@ from urllib.parse import urlparse
 import requests
 
 from kappa.configuration import _is_pip_installed_kappa
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 from kappa.saved_bundle.local_py_modules import (
     copy_local_py_modules,
     copy_zip_import_archives,
@@ -62,7 +62,7 @@ logger = logging.getLogger(__name__)
 
 def _write_bento_content_to_dir(bento_service, path):
     if not os.path.exists(path):
-        raise BentoMLException("Directory '{}' not found".format(path))
+        raise KappaException("Directory '{}' not found".format(path))
 
     for artifact in bento_service.artifacts.get_artifact_list():
         if not artifact.packed:
@@ -75,7 +75,7 @@ def _write_bento_content_to_dir(bento_service, path):
     try:
         os.mkdir(module_base_path)
     except FileExistsError:
-        raise BentoMLException(
+        raise KappaException(
             f"Existing module file found for MyModel {bento_service.name}"
         )
 
@@ -141,7 +141,7 @@ def _write_bento_content_to_dir(bento_service, path):
             os.getcwd(), bento_service.web_static_content
         )
         if not os.path.isdir(src_web_static_content_dir):
-            raise BentoMLException(
+            raise KappaException(
                 f'web_static_content directory {src_web_static_content_dir} not found'
             )
         dest_web_static_content_dir = os.path.join(
@@ -202,7 +202,7 @@ def save_to_dir(bento_service, path, version=None, silent=False):
     from kappa.service import MyModel
 
     if not isinstance(bento_service, MyModel):
-        raise BentoMLException(
+        raise KappaException(
             "save_to_dir only works with instances of custom MyModel class"
         )
 
@@ -320,7 +320,7 @@ def _upload_file_to_remote_path(remote_path, file_path, file_name):
         try:
             import boto3
         except ImportError:
-            raise BentoMLException(
+            raise KappaException(
                 '"boto3" package is required for saving bento to AWS S3 bucket'
             )
         s3_client = boto3.client('s3')
@@ -330,7 +330,7 @@ def _upload_file_to_remote_path(remote_path, file_path, file_name):
         try:
             from google.cloud import storage
         except ImportError:
-            raise BentoMLException(
+            raise KappaException(
                 '"google.cloud" package is required for saving bento to Google '
                 'Cloud Storage'
             )
@@ -341,7 +341,7 @@ def _upload_file_to_remote_path(remote_path, file_path, file_name):
     else:
         http_response = requests.put(remote_path)
         if http_response.status_code != 200:
-            raise BentoMLException(
+            raise KappaException(
                 f'Error uploading MyModel to {remote_path} '
                 f'{http_response.status_code}'
             )

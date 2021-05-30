@@ -31,7 +31,7 @@ from kappa.gamma.proto.deployment_pb2 import (
     Deployment,
     DeploymentState,
 )
-from kappa.exceptions import BentoMLException, GammaDeploymentException
+from kappa.exceptions import KappaException, GammaDeploymentException
 from kappa.gamma.proto import status_pb2
 from kappa.gamma.validator import validate_deployment_pb
 from kappa.gamma.deployment_utils import (
@@ -77,7 +77,7 @@ class DeploymentAPIClient:
             elif operator == "ec2":
                 operator = DeploymentSpec.AWS_EC2
             else:
-                raise BentoMLException(f'Unrecognized operator {operator}')
+                raise KappaException(f'Unrecognized operator {operator}')
 
         list_deployment_request = ListDeploymentsRequest(
             limit=limit,
@@ -140,7 +140,7 @@ class DeploymentAPIClient:
             )
         )
         if get_deployment_pb.status.status_code != status_pb2.Status.NOT_FOUND:
-            raise BentoMLException(
+            raise KappaException(
                 f'Deployment "{deployment_pb.name}" already existed, use Update or '
                 f'Apply for updating existing deployment, delete the deployment, '
                 f'or use a different deployment name'
@@ -250,7 +250,7 @@ class DeploymentAPIClient:
             ApplyDeploymentResponse
 
         Raises:
-            BentoMLException
+            KappaException
         """
         deployment_pb = Deployment(
             name=name, namespace=namespace, labels=labels, annotations=annotations
@@ -316,13 +316,13 @@ class DeploymentAPIClient:
             Protobuf message
 
         Raises:
-             BentoMLException
+             KappaException
         """
 
         get_deployment_result = self.get(namespace, deployment_name)
         if get_deployment_result.status.status_code != status_pb2.Status.OK:
             get_deployment_status = get_deployment_result.status
-            raise BentoMLException(
+            raise KappaException(
                 f'Failed to retrieve current deployment {deployment_name} in '
                 f'{namespace}. '
                 f'{status_pb2.Status.Code.Name(get_deployment_status.status_code)}'
@@ -442,7 +442,7 @@ class DeploymentAPIClient:
                 get_deployment_result.status.status_code
             )
             error_message = get_deployment_result.status.error_message
-            raise BentoMLException(
+            raise KappaException(
                 f"Failed to retrieve current deployment {deployment_name} "
                 f"in {namespace}.  {error_code}:{error_message}"
             )
@@ -520,7 +520,7 @@ class DeploymentAPIClient:
             ApplyDeploymentResponse: status, deployment
 
         Raises:
-            BentoMLException
+            KappaException
 
         """
         deployment_pb = Deployment(
@@ -553,7 +553,7 @@ class DeploymentAPIClient:
                 get_deployment_result.status.status_code
             )
             error_message = status_pb2.status.error_message
-            raise BentoMLException(
+            raise KappaException(
                 f'Failed to retrieve current deployment {deployment_name} '
                 f'in {namespace}.  {error_code}:{error_message}'
             )
@@ -642,7 +642,7 @@ class DeploymentAPIClient:
                 get_deployment_result.status.status_code
             )
             error_message = status_pb2.status.error_message
-            raise BentoMLException(
+            raise KappaException(
                 f'Failed to retrieve current deployment {deployment_name} in '
                 f'{namespace}. {error_code}:{error_message}'
             )

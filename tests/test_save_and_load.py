@@ -7,7 +7,7 @@ from mock import patch
 
 import kappa
 from kappa.adapters import DataframeInput
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 from kappa.saved_bundle import load_bento_service_metadata
 from tests.conftest import delete_saved_bento_service
 
@@ -154,7 +154,7 @@ def test_save_duplicated_bento_exception_raised(example_bento_service_class):
     svc_metadata = load_bento_service_metadata(saved_path)
     assert svc.version == svc_metadata.version
 
-    with pytest.raises(BentoMLException):
+    with pytest.raises(KappaException):
         with patch.object(kappa.MyModel, 'save_to_dir') as save_to_dir_method:
             # attempt to save again
             svc.save()

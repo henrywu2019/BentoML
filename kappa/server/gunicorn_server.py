@@ -21,7 +21,7 @@ from dependency_injector.wiring import Provide as P
 from dependency_injector.wiring import inject
 from flask import Response
 
-from kappa.configuration.containers import BentoMLContainer as C
+from kappa.configuration.containers import KappaContainer as C
 from kappa.saved_bundle import load_from_dir
 from kappa.server.api_server import BentoAPIServer
 from kappa.server.instruments import setup_prometheus_multiproc_dir

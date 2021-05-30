@@ -23,7 +23,7 @@ import boto3
 
 from kappa.utils.ruamel_yaml import YAML
 from kappa.exceptions import (
-    BentoMLException,
+    KappaException,
     InvalidArgument,
     GammaDeploymentException,
 )
@@ -166,7 +166,7 @@ def _deploy_lambda_function(
 
     py_major, py_minor, _ = bento_service_metadata.env.python_version.split('.')
     if py_major != '3':
-        raise BentoMLException('Python 2 is not supported for Lambda Deployment')
+        raise KappaException('Python 2 is not supported for Lambda Deployment')
     python_runtime = 'python{}.{}'.format(py_major, py_minor)
 
     artifact_types = [item.artifact_type for item in bento_service_metadata.artifacts]
@@ -174,7 +174,7 @@ def _deploy_lambda_function(
         i in ['TensorflowSavedModelArtifact', 'KerasModelArtifact']
         for i in artifact_types
     ) and (py_major, py_minor) != ('3', '6'):
-        raise BentoMLException(
+        raise KappaException(
             'AWS Lambda Deployment only supports Kappa services'
             'built with Python 3.6.x. To fix this, repack your'
             'service with the right Python version'
@@ -240,7 +240,7 @@ def _deploy_lambda_function(
                 shutil.rmtree(os.path.join(build_directory, name))
             total_build_dir_size = total_file_or_directory_size(build_directory)
             if total_build_dir_size > LAMBDA_FUNCTION_MAX_LIMIT:
-                raise BentoMLException(
+                raise KappaException(
                     'Build function size is over 700MB, max size '
                     'capable for AWS Lambda function'
                 )
@@ -302,14 +302,14 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
                 )
             )
             if bento_pb.bento.uri.type not in (BentoUri.LOCAL, BentoUri.S3):
-                raise BentoMLException(
+                raise KappaException(
                     'Kappa currently not support {} repository'.format(
                         BentoUri.StorageType.Name(bento_pb.bento.uri.type)
                     )
                 )
 
             return self._add(deployment_pb, bento_pb, bento_pb.bento.uri.uri)
-        except BentoMLException as error:
+        except KappaException as error:
             deployment_pb.state.state = DeploymentState.ERROR
             deployment_pb.state.error_message = f'Error: {str(error)}'
             return ApplyDeploymentResponse(
@@ -344,7 +344,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
                 bento_path=bento_path,
             )
             return ApplyDeploymentResponse(status=Status.OK(), deployment=deployment_pb)
-        except BentoMLException as error:
+        except KappaException as error:
             if lambda_s3_bucket and lambda_deployment_config:
                 cleanup_s3_bucket_if_exist(
                     lambda_s3_bucket, lambda_deployment_config.region
@@ -361,7 +361,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
                 )
             )
             if bento_pb.bento.uri.type not in (BentoUri.LOCAL, BentoUri.S3):
-                raise BentoMLException(
+                raise KappaException(
                     'Kappa currently not support {} repository'.format(
                         BentoUri.StorageType.Name(bento_pb.bento.uri.type)
                     )
@@ -370,7 +370,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
             return self._update(
                 deployment_pb, previous_deployment, bento_pb, bento_pb.bento.uri.uri
             )
-        except BentoMLException as error:
+        except KappaException as error:
             deployment_pb.state.state = DeploymentState.ERROR
             deployment_pb.state.error_message = f'Error: {str(error)}'
             return ApplyDeploymentResponse(
@@ -401,7 +401,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
         if 's3_bucket' in latest_deployment_state:
             lambda_s3_bucket = latest_deployment_state['s3_bucket']
         else:
-            raise BentoMLException(
+            raise KappaException(
                 'S3 Bucket is missing in the AWS Lambda deployment, please make sure '
                 'it exists and try again'
             )
@@ -449,7 +449,7 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
             cf_client.delete_stack(StackName=stack_name)
             return DeleteDeploymentResponse(status=Status.OK())
 
-        except BentoMLException as error:
+        except KappaException as error:
             return DeleteDeploymentResponse(status=error.status_proto)
 
     def describe(self, deployment_pb):
@@ -533,5 +533,5 @@ class AwsLambdaDeploymentOperator(DeploymentOperatorBase):
             )
             state.timestamp.GetCurrentTime()
             return DescribeDeploymentResponse(status=Status.OK(), state=state)
-        except BentoMLException as error:
+        except KappaException as error:
             return DescribeDeploymentResponse(status=error.status_proto)

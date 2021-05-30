@@ -19,7 +19,7 @@ from kappa.utils.lazy_loader import LazyLoader
 from kappa.utils import get_default_gamma_client
 from kappa.cli.utils import Spinner
 from kappa.cli.click_utils import (
-    BentoMLCommandGroup,
+    KappaCommandGroup,
     parse_bento_tag_callback,
     _echo,
     CLI_COLOR_SUCCESS,
@@ -41,7 +41,7 @@ def get_aws_lambda_sub_command():
     @click.group(
         name='lambda',
         help='Commands for AWS Lambda MyModel deployments',
-        cls=BentoMLCommandGroup,
+        cls=KappaCommandGroup,
     )
     def aws_lambda():
         pass

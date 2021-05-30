@@ -8,7 +8,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 from kappa.exceptions import (
-    BentoMLException,
+    KappaException,
     MissingDependencyException,
     AWSServiceError,
 )
@@ -62,7 +62,7 @@ def generate_aws_compatible_string(*items, max_length=63):
 
     name = "-".join(items)
     if len(name) > max_length:
-        raise BentoMLException(
+        raise KappaException(
             "AWS resource name {} exceeds maximum length of {}".format(name, max_length)
         )
     invalid_chars = re.compile("[^a-zA-Z0-9-]|_")
@@ -88,7 +88,7 @@ def ensure_sam_available_or_raise():
         import samcli
 
         if samcli.__version__ != "0.33.1":
-            raise BentoMLException(
+            raise KappaException(
                 "aws-sam-cli package requires version 0.33.1 "
                 "Install the package with `pip install -U aws-sam-cli==0.33.1`"
             )
@@ -131,7 +131,7 @@ def validate_sam_template(template_file, aws_region, sam_project_path):
         error_message = stderr
         if not error_message:
             error_message = stdout
-        raise BentoMLException(
+        raise KappaException(
             "Failed to validate lambda template. {}".format(error_message)
         )
 
@@ -266,13 +266,13 @@ def describe_cloudformation_stack(region, stack_name):
         cloudformation_stack_result = cf_client.describe_stacks(StackName=stack_name)
         stack_info = cloudformation_stack_result.get('Stacks')
         if len(stack_info) < 1:
-            raise BentoMLException(f'Cloudformation {stack_name} not found')
+            raise KappaException(f'Cloudformation {stack_name} not found')
         if len(stack_info) > 1:
-            raise BentoMLException(
+            raise KappaException(
                 f'Found more than one cloudformation stack for {stack_name}'
             )
         return stack_info[0]
     except ClientError as error:
-        raise BentoMLException(
+        raise KappaException(
             f'Failed to describe CloudFormation {stack_name} {error}'
         )

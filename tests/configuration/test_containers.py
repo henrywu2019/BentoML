@@ -2,12 +2,12 @@ import pytest
 import tempfile
 import os
 
-from kappa.configuration.containers import BentoMLConfiguration, BentoMLContainer
-from kappa.exceptions import BentoMLConfigException
+from kappa.configuration.containers import KappaConfiguration, KappaContainer
+from kappa.exceptions import KappaConfigException
 
 
 def test_override():
-    config = BentoMLConfiguration()
+    config = KappaConfiguration()
     config.override(["bento_server", "port"], 6000)
     config_dict = config.as_dict()
     assert config_dict is not None
@@ -15,21 +15,21 @@ def test_override():
 
 
 def test_override_schema_violation():
-    config = BentoMLConfiguration()
-    with pytest.raises(BentoMLConfigException) as e:
+    config = KappaConfiguration()
+    with pytest.raises(KappaConfigException) as e:
         config.override(["api_server", "port"], "non-integer")
     assert e is not None
 
 
 def test_override_nonexist_key():
-    config = BentoMLConfiguration()
-    with pytest.raises(BentoMLConfigException) as e:
+    config = KappaConfiguration()
+    with pytest.raises(KappaConfigException) as e:
         config.override(["non-existent", "non-existent"], 6000)
     assert e is not None
 
 
 def test_override_none_value():
-    config = BentoMLConfiguration()
+    config = KappaConfiguration()
     config.override(["bento_server", "port"], None)
     config_dict = config.as_dict()
     assert config_dict is not None
@@ -37,15 +37,15 @@ def test_override_none_value():
 
 
 def test_override_none_key():
-    config = BentoMLConfiguration()
-    with pytest.raises(BentoMLConfigException) as e:
+    config = KappaConfiguration()
+    with pytest.raises(KappaConfigException) as e:
         config.override(None, 6000)
     assert e is not None
 
 
 def test_override_empty_key():
-    config = BentoMLConfiguration()
-    with pytest.raises(BentoMLConfigException) as e:
+    config = KappaConfiguration()
+    with pytest.raises(KappaConfigException) as e:
         config.override([], 6000)
     assert e is not None
 
@@ -60,8 +60,8 @@ invalid_key1:
     )
     config.close()
 
-    with pytest.raises(BentoMLConfigException) as e:
-        BentoMLConfiguration(
+    with pytest.raises(KappaConfigException) as e:
+        KappaConfiguration(
             default_config_file=config.name, validate_schema=True,
         )
 
@@ -70,7 +70,7 @@ invalid_key1:
 
 
 def test_api_server_workers():
-    container = BentoMLContainer()
+    container = KappaContainer()
 
     config_auto_workers = tempfile.NamedTemporaryFile(delete=False)
     config_auto_workers.write(
@@ -82,7 +82,7 @@ bento_server:
     config_auto_workers.close()
 
     container.config.from_dict(
-        BentoMLConfiguration(
+        KappaConfiguration(
             default_config_file=config_auto_workers.name, validate_schema=False,
         ).as_dict(),
     )
@@ -101,7 +101,7 @@ bento_server:
     config_manual_workers.close()
 
     container.config.from_dict(
-        BentoMLConfiguration(
+        KappaConfiguration(
             default_config_file=config_manual_workers.name, validate_schema=False,
         ).as_dict(),
     )
@@ -135,7 +135,7 @@ key1:
     )
     override_config_file.close()
 
-    config = BentoMLConfiguration(
+    config = KappaConfiguration(
         default_config_file=default_config_file.name,
         override_config_file=override_config_file.name,
         validate_schema=False,
@@ -158,7 +158,7 @@ def mock_kappa_home():
 
 
 def test_kappa_home():
-    container = BentoMLContainer()
+    container = KappaContainer()
     assert container.kappa_home() == mock_kappa_home()
 
     os.environ["KAPPA_HOME"] = "/tmp/kappa"
@@ -168,8 +168,8 @@ def test_kappa_home():
 
 
 def test_prometheus_multiproc_dir():
-    container = BentoMLContainer()
-    config = BentoMLConfiguration().as_dict()
+    container = KappaContainer()
+    config = KappaConfiguration().as_dict()
     container.config.from_dict(config)
 
     assert container.prometheus_multiproc_dir() == os.path.join(
@@ -178,8 +178,8 @@ def test_prometheus_multiproc_dir():
 
 
 def test_default_bento_bundle_deployment_version():
-    container = BentoMLContainer()
-    config = BentoMLConfiguration().as_dict()
+    container = KappaContainer()
+    config = KappaConfiguration().as_dict()
     container.config.from_dict(config)
 
     assert container.bento_bundle_deployment_version() is not None
@@ -195,8 +195,8 @@ bento_bundle:
     )
     override_config.close()
 
-    container = BentoMLContainer()
-    config = BentoMLConfiguration(override_config_file=override_config.name).as_dict()
+    container = KappaContainer()
+    config = KappaConfiguration(override_config_file=override_config.name).as_dict()
     container.config.from_dict(config)
 
     assert container.bento_bundle_deployment_version() == "0.0.1"
@@ -204,8 +204,8 @@ bento_bundle:
 
 
 def test_gamma_database_url():
-    container = BentoMLContainer()
-    config = BentoMLConfiguration().as_dict()
+    container = KappaContainer()
+    config = KappaConfiguration().as_dict()
     container.config.from_dict(config)
 
     assert container.gamma_database_url() == "{}:///{}".format(
@@ -222,7 +222,7 @@ gamma:
     )
     override_config.close()
 
-    config = BentoMLConfiguration(override_config_file=override_config.name).as_dict()
+    config = KappaConfiguration(override_config_file=override_config.name).as_dict()
     container.config.from_dict(config)
 
     assert container.gamma_database_url() == "customized_url"
@@ -231,8 +231,8 @@ gamma:
 
 
 def test_gamma_tls_root_ca_cert():
-    container = BentoMLContainer()
-    config = BentoMLConfiguration().as_dict()
+    container = KappaContainer()
+    config = KappaConfiguration().as_dict()
     container.config.from_dict(config)
 
     assert container.gamma_tls_root_ca_cert() is None
@@ -248,7 +248,7 @@ gamma:
     )
     override_config.close()
 
-    config = BentoMLConfiguration(override_config_file=override_config.name).as_dict()
+    config = KappaConfiguration(override_config_file=override_config.name).as_dict()
     container.config.from_dict(config)
 
     assert container.gamma_tls_root_ca_cert() == "value1"
@@ -267,7 +267,7 @@ gamma:
     )
     override_config.close()
 
-    config = BentoMLConfiguration(override_config_file=override_config.name).as_dict()
+    config = KappaConfiguration(override_config_file=override_config.name).as_dict()
     container.config.from_dict(config)
 
     assert container.gamma_tls_root_ca_cert() == "value1"
@@ -276,8 +276,8 @@ gamma:
 
 
 def test_gamma_logging_path():
-    container = BentoMLContainer()
-    config = BentoMLConfiguration().as_dict()
+    container = KappaContainer()
+    config = KappaConfiguration().as_dict()
     container.config.from_dict(config)
 
     assert container.gamma_logging_path() == os.path.join(
@@ -294,7 +294,7 @@ gamma:
     )
     override_config.close()
 
-    config = BentoMLConfiguration(override_config_file=override_config.name).as_dict()
+    config = KappaConfiguration(override_config_file=override_config.name).as_dict()
     container.config.from_dict(config)
 
     assert container.gamma_logging_path() == "/tmp/customized.log"
@@ -303,8 +303,8 @@ gamma:
 
 
 def test_logging_file_directory():
-    container = BentoMLContainer()
-    config = BentoMLConfiguration().as_dict()
+    container = KappaContainer()
+    config = KappaConfiguration().as_dict()
     container.config.from_dict(config)
 
     assert container.logging_file_directory() == os.path.join(mock_kappa_home(), "logs")
@@ -319,7 +319,7 @@ logging:
     )
     override_config.close()
 
-    config = BentoMLConfiguration(override_config_file=override_config.name).as_dict()
+    config = KappaConfiguration(override_config_file=override_config.name).as_dict()
     container.config.from_dict(config)
 
     assert container.logging_file_directory() == "/tmp/logs"

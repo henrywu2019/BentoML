@@ -15,7 +15,7 @@ aws-sam-cli==0.33.1
 aws-sam-translator==1.15.1
 Babel==2.9.1
 bce-python-sdk==0.8.60
-BentoML==0.12.1+39.g8f3d7da.dirty
+Kappa==0.12.1+39.g8f3d7da.dirty
 binaryornot==0.4.4
 black==21.4b2
 boto3==1.17.77

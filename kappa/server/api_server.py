@@ -22,9 +22,9 @@ from flask import Flask, Response, jsonify, make_response, request, send_from_di
 from google.protobuf.json_format import MessageToJson
 from werkzeug.exceptions import BadRequest, NotFound
 
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 from kappa.configuration import get_debug_mode
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 from kappa.marshal.utils import DataLoader, MARSHAL_REQUEST_HEADER
 from kappa.server.instruments import InstrumentMiddleware
 from kappa.server.open_api import get_open_api_spec_json
@@ -152,13 +152,13 @@ class BentoAPIServer:
         bento_service: MyModel,
         app_name: str = None,
         enable_swagger: bool = Provide[
-            BentoMLContainer.config.bento_server.swagger.enabled
+            KappaContainer.config.bento_server.swagger.enabled
         ],
         enable_metrics: bool = Provide[
-            BentoMLContainer.config.bento_server.metrics.enabled
+            KappaContainer.config.bento_server.metrics.enabled
         ],
         enable_feedback: bool = Provide[
-            BentoMLContainer.config.bento_server.feedback.enabled
+            KappaContainer.config.bento_server.feedback.enabled
         ],
     ):
         app_name = bento_service.name if app_name is None else app_name
@@ -389,7 +389,7 @@ class BentoAPIServer:
                     response = make_response(response_body)
                 else:
                     response = api.handle_request(request)
-            except BentoMLException as e:
+            except KappaException as e:
                 log_exception(sys.exc_info())
 
                 if 400 <= e.status_code < 500 and e.status_code not in (401, 403):

@@ -66,7 +66,7 @@ above
           "condaEnv": "name: kappa-IrisClassifier\nchannels:\n- defaults\ndependencies:\n- python=3.7.3\n- pip\n",
           "pipDependencies": "scikit-learn\npandas\nkappa==0.8.1",
           "pythonVersion": "3.7.3",
-          "dockerBaseImage": "bentoml/model-server:0.8.1"
+          "dockerBaseImage": "kappa/model-server:0.8.1"
         },
         "artifacts": [
           {

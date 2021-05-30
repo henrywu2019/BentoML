@@ -27,7 +27,7 @@ from pathlib import PureWindowsPath, PurePosixPath
 from kappa.utils.s3 import is_s3_url
 from kappa.utils.gcs import is_gcs_url
 from kappa.utils.oci_object_storage import is_oci_url, download_oos_to_file
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 from kappa.saved_bundle.config import SavedBundleConfig
 from kappa.saved_bundle.pip_pkg import ZIPIMPORT_DIR
 from kappa.utils.usage_stats import track_load_start, track_load_finish
@@ -68,7 +68,7 @@ def _resolve_remote_bundle_path(bundle_path):
         try:
             from google.cloud import storage
         except ImportError:
-            raise BentoMLException(
+            raise KappaException(
                 '"google-cloud-storage" package is required. You can install it with '
                 'pip: "pip install google-cloud-storage"'
             )
@@ -86,14 +86,14 @@ def _resolve_remote_bundle_path(bundle_path):
 
         response = requests.get(bundle_path)
         if response.status_code != 200:
-            raise BentoMLException(
+            raise KappaException(
                 f"Error retrieving MyModel. " f"{response.status_code}: {response.text}"
             )
         fileobj = io.BytesIO()
         fileobj.write(response.content)
         fileobj.seek(0, 0)
     else:
-        raise BentoMLException(f"Saved bundle path: '{bundle_path}' is not supported")
+        raise KappaException(f"Saved bundle path: '{bundle_path}' is not supported")
 
     with tarfile.open(mode="r:gz", fileobj=fileobj) as tar:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -121,7 +121,7 @@ def load_saved_bundle_config(bundle_path):
     try:
         return SavedBundleConfig.load(os.path.join(bundle_path, "kappa.yml"))
     except FileNotFoundError:
-        raise BentoMLException(
+        raise KappaException(
             "Kappa can't locate config file 'kappa.yml'"
             " in saved bundle in path: {}".format(bundle_path)
         )
@@ -163,7 +163,7 @@ def _find_module_file(bundle_path, service_name, module_file):
                 )
 
     if not os.path.isfile(module_file_path):
-        raise BentoMLException(
+        raise KappaException(
             "Can not locate module_file {} in saved bundle {}".format(
                 module_file, bundle_path
             )
@@ -220,7 +220,7 @@ def load_bento_service_class(bundle_path):
         )
         # pylint:enable=deprecated-method
     else:
-        raise BentoMLException("Kappa requires Python 3.4 and above")
+        raise KappaException("Kappa requires Python 3.4 and above")
 
     # Remove bundle_path from sys.path to avoid import naming conflicts
     sys.path.remove(bundle_path)

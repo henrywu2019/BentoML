@@ -4,7 +4,7 @@ import pathlib
 import shutil
 
 from kappa.exceptions import (
-    BentoMLException,
+    KappaException,
     InvalidArgument,
     MissingDependencyException,
 )
@@ -94,7 +94,7 @@ class OnnxModelArtifact(MyModelArtifact):
     def __init__(self, name, backend="onnxruntime"):
         super(OnnxModelArtifact, self).__init__(name)
         if backend not in SUPPORTED_ONNX_BACKEND:
-            raise BentoMLException(
+            raise KappaException(
                 f'"{backend}" runtime is currently not supported for OnnxModelArtifact'
             )
         self.backend = backend
@@ -168,9 +168,9 @@ class OnnxModelArtifact(MyModelArtifact):
                 )
                 return onnxruntime.InferenceSession(self._onnx_model_path)
             else:
-                raise BentoMLException("OnnxModelArtifact in bad state")
+                raise KappaException("OnnxModelArtifact in bad state")
         else:
-            raise BentoMLException(
+            raise KappaException(
                 f'"{self.backend}" runtime is currently not supported for '
                 f"OnnxModelArtifact"
             )

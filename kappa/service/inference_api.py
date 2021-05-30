@@ -24,7 +24,7 @@ from typing import Iterable, Iterator, Sequence
 import flask
 
 from kappa.adapters import BaseInputAdapter, BaseOutputAdapter
-from kappa.exceptions import BentoMLConfigException
+from kappa.exceptions import KappaConfigException
 from kappa.tracing import get_tracer
 from kappa.types import HTTPRequest, InferenceResult, InferenceTask
 from kappa.utils import cached_property
@@ -89,12 +89,12 @@ class InferenceAPI(object):
         self.route = name if route is None else route
 
         if not self.input_adapter.BATCH_MODE_SUPPORTED and batch:
-            raise BentoMLConfigException(
+            raise KappaConfigException(
                 f"{input_adapter.__class__.__name__} does not support `batch=True`"
             )
 
         if not self.input_adapter.SINGLE_MODE_SUPPORTED and not batch:
-            raise BentoMLConfigException(
+            raise KappaConfigException(
                 f"{input_adapter.__class__.__name__} does not support `batch=False`, "
                 "its output passed to API functions could only be a batch of data."
             )

@@ -127,13 +127,13 @@ benchmark/*/*.csv
 mlflow_tmp/
 
 # bundle local kappa source when installed in editor mode
-__bentoml_tmp_sdist_build
+__kappa_tmp_sdist_build
 
 # vscode config
 .vscode/
 
 # temp sdist build generated when bundling local dev branch of Kappa
-__bentoml_tmp_sdist_build
+__kappa_tmp_sdist_build
 
 # Helm Dependencies
 helm/GammaService/charts

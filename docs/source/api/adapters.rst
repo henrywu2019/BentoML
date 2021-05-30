@@ -1,4 +1,4 @@
-.. _bentoml-api-adapters-label:
+.. _kappa-api-adapters-label:
 
 API InputAdapters
 =================

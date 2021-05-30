@@ -43,7 +43,7 @@ from kappa.gamma.deployment.aws_utils import (
     describe_cloudformation_stack,
 )
 from kappa.exceptions import (
-    BentoMLException,
+    KappaException,
     InvalidArgument,
     GammaDeploymentException,
 )
@@ -239,7 +239,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
             )
 
             if bento_pb.bento.uri.type not in (BentoUri.LOCAL, BentoUri.S3):
-                raise BentoMLException(
+                raise KappaException(
                     "Kappa currently not support {} repository".format(
                         BentoUri.StorageType.Name(bento_pb.bento.uri.type)
                     )
@@ -247,7 +247,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
             bento_path = bento_pb.bento.uri.uri
 
             return self._add(deployment_pb, bento_pb, bento_path)
-        except BentoMLException as error:
+        except KappaException as error:
             deployment_pb.state.state = DeploymentState.ERROR
             deployment_pb.state.error_message = f"Error: {str(error)}"
             return ApplyDeploymentResponse(
@@ -280,7 +280,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
                 artifact_s3_bucket_name,
                 aws_ec2_deployment_config.region,
             )
-        except BentoMLException as error:
+        except KappaException as error:
             if artifact_s3_bucket_name and aws_ec2_deployment_config.region:
                 cleanup_s3_bucket_if_exist(
                     artifact_s3_bucket_name, aws_ec2_deployment_config.region
@@ -319,7 +319,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
                     )
 
             return DeleteDeploymentResponse(status=Status.OK())
-        except BentoMLException as error:
+        except KappaException as error:
             return DeleteDeploymentResponse(status=error.status_proto)
 
     def update(self, deployment_pb, previous_deployment):
@@ -342,7 +342,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
             )
 
             if bento_pb.bento.uri.type not in (BentoUri.LOCAL, BentoUri.S3):
-                raise BentoMLException(
+                raise KappaException(
                     "Kappa currently not support {} repository".format(
                         BentoUri.StorageType.Name(bento_pb.bento.uri.type)
                     )
@@ -354,7 +354,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
                 bento_pb.bento.uri.uri,
                 ec2_deployment_config.region,
             )
-        except BentoMLException as error:
+        except KappaException as error:
             deployment_pb.state.state = DeploymentState.ERROR
             deployment_pb.state.error_message = f"Error: {str(error)}"
             return ApplyDeploymentResponse(
@@ -385,7 +385,7 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
         if "S3Bucket" in previous_deployment_state:
             s3_bucket_name = previous_deployment_state.get("S3Bucket")
         else:
-            raise BentoMLException(
+            raise KappaException(
                 "S3 Bucket is missing in the AWS EC2 deployment, please make sure "
                 "it exists and try again"
             )
@@ -478,5 +478,5 @@ class AwsEc2DeploymentOperator(DeploymentOperatorBase):
             )
             return DescribeDeploymentResponse(status=Status.OK(), state=state)
 
-        except BentoMLException as error:
+        except KappaException as error:
             return DescribeDeploymentResponse(status=error.status_proto)

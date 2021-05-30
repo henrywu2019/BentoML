@@ -125,15 +125,15 @@ def inject_dependencies():
 
     logger.warning("Start dependency injection")
 
-    from kappa.configuration.containers import BentoMLContainer, BentoMLConfiguration
+    from kappa.configuration.containers import KappaContainer, KappaConfiguration
 
     config_file = get_local_config_file()
     if config_file and config_file.endswith(".yml"):
-        configuration = BentoMLConfiguration(override_config_file=config_file)
+        configuration = KappaConfiguration(override_config_file=config_file)
     else:
-        configuration = BentoMLConfiguration()
+        configuration = KappaConfiguration()
 
-    container = BentoMLContainer()
+    container = KappaContainer()
     container.config.from_dict(configuration.as_dict())
 
     from kappa import (

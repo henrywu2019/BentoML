@@ -37,7 +37,7 @@ from kappa.gamma.deployment.azure_functions.templates import AZURE_API_FUNCTION_
 from kappa.gamma.deployment.operator import DeploymentOperatorBase
 from kappa.gamma.deployment.docker_utils import ensure_docker_available_or_raise
 from kappa.exceptions import (
-    BentoMLException,
+    KappaException,
     MissingDependencyException,
     AzureServiceError,
     GammaDeploymentException,
@@ -109,7 +109,7 @@ def _init_azure_functions_project(
                 )
             )
     except Exception as e:
-        raise BentoMLException(f'Failed to initialize azure function project. {str(e)}')
+        raise KappaException(f'Failed to initialize azure function project. {str(e)}')
 
 
 def _generate_azure_resource_names(namespace, deployment_name):
@@ -513,7 +513,7 @@ class AzureFunctionsDeploymentOperator(DeploymentOperatorBase):
             return self._add(
                 deployment_pb, bento_repo_pb.bento, bento_repo_pb.bento.uri.uri
             )
-        except BentoMLException as error:
+        except KappaException as error:
             deployment_pb.state.state = DeploymentState.ERROR
             deployment_pb.state.error_message = f'Error: {str(error)}'
             return ApplyDeploymentResponse(
@@ -568,7 +568,7 @@ class AzureFunctionsDeploymentOperator(DeploymentOperatorBase):
             return self._update(
                 deployment_pb, previous_deployment, bento_pb, bento_pb.uri.uri
             )
-        except BentoMLException as error:
+        except KappaException as error:
             deployment_pb.state.state = DeploymentState.ERROR
             deployment_pb.state.error_message = (
                 f'Encounter error when updating Azure Functions deployment: '
@@ -640,7 +640,7 @@ class AzureFunctionsDeploymentOperator(DeploymentOperatorBase):
                 parse_json=False,
             )
             return DeleteDeploymentResponse(status=Status.OK())
-        except BentoMLException as error:
+        except KappaException as error:
             return DeleteDeploymentResponse(status=error.status_proto)
 
     def describe(self, deployment_pb):
@@ -696,5 +696,5 @@ class AzureFunctionsDeploymentOperator(DeploymentOperatorBase):
             return DescribeDeploymentResponse(
                 state=deployment_state, status=Status.OK()
             )
-        except BentoMLException as error:
+        except KappaException as error:
             return DescribeDeploymentResponse(status=error.status_proto)

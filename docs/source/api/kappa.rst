@@ -1,7 +1,7 @@
 MyModel API
 ================
 
-.. _bentoml-MyModel-label:
+.. _kappa-MyModel-label:
 
 MyModel
 ++++++++++++
@@ -19,7 +19,7 @@ MyModel
   .. autoattribute:: kappa.MyModel.artifacts
 
 
-  .. _bentoml-MyModel-pack-label:
+  .. _kappa-MyModel-pack-label:
 
   .. method:: pack(name, *args, *kwargs)
 
@@ -34,12 +34,12 @@ MyModel
   .. automethod:: kappa.MyModel.pack
     :noindex:
 
-  .. _bentoml-MyModel-save-label:
+  .. _kappa-MyModel-save-label:
 
   .. automethod:: kappa.MyModel.save
 
 
-  .. _bentoml-MyModel-save-to-dir-label:
+  .. _kappa-MyModel-save-to-dir-label:
 
   .. automethod:: kappa.MyModel.save_to_dir
 
@@ -48,7 +48,7 @@ api
 +++
 .. autofunction:: kappa.api
 
-.. _bentoml-env-label:
+.. _kappa-env-label:
 
 env
 +++
@@ -78,7 +78,7 @@ load_from_dir
 +++++++++++++
 .. autofunction:: kappa.load_from_dir
 
-.. _bentoml-load-label:
+.. _kappa-load-label:
 
 .. spelling::
 

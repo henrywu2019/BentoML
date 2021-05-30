@@ -20,7 +20,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from urllib.parse import urlparse
 
-from kappa.exceptions import BentoMLException, LockUnavailable
+from kappa.exceptions import KappaException, LockUnavailable
 from kappa.gamma.db.base import Base
 from kappa.gamma.db.stores.deployment import DeploymentStore
 from kappa.gamma.db.stores.label import LabelStore
@@ -60,7 +60,7 @@ class DB(object):
         self.engine = create_engine(db_url, **extra_db_args)
 
         if not database_exists(self.engine.url) and not is_sqlite_db(db_url):
-            raise BentoMLException(
+            raise KappaException(
                 f'Database does not exist or Database name is missing in config '
                 f'db.url: {db_url}'
             )
@@ -86,7 +86,7 @@ class DB(object):
             raise LockUnavailable(e)
         except Exception as e:
             session.rollback()
-            raise BentoMLException(e)
+            raise KappaException(e)
         finally:
             session.close()
 

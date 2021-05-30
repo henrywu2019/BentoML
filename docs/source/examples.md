@@ -58,14 +58,14 @@ Kappa API model server, building docker image or creating cloud deployment.
  * Iris Classifier deployed with SQL Server - [nbviewer](https://nbviewer.jupyter.org/github/kappa/gallery/blob/master/end-to-end/sql-server-deployment/sql-server-deployment.ipynb) | [source](https://github.com/kappa/gallery/blob/master/end-to-end/sql-server-deployment/sql-server-deployment.ipynb)
  
 ### Statsmodels
-* Shampoo Sales Prediction -  [Google Colab](https://colab.research.google.com/github/kappa/gallery/blob/master/statsmodels_holt/bentoml_statsmodels.ipynb) | [nbviewer](https://nbviewer.jupyter.org/github/kappa/gallery/blob/master/statsmodels_holt/bentoml_statsmodels.ipynb) | [source](https://github.com/kappa/gallery/blob/master/statsmodels_holt/bentoml_statsmodels.ipynb)
+* Shampoo Sales Prediction -  [Google Colab](https://colab.research.google.com/github/kappa/gallery/blob/master/statsmodels_holt/kappa_statsmodels.ipynb) | [nbviewer](https://nbviewer.jupyter.org/github/kappa/gallery/blob/master/statsmodels_holt/kappa_statsmodels.ipynb) | [source](https://github.com/kappa/gallery/blob/master/statsmodels_holt/kappa_statsmodels.ipynb)
 
 #### Community Projects
 
 * Stress Analysis in Social Media (Tensorflow, BERT) - [Project Link](https://github.com/gillian850413/Insight_Stress_Analysis)
 * Unsupervised OpenIE (NLP, PyTorch, flair)  - [Project Link](https://github.com/tchewik/unsupervised_openie)
 * Find Duplicated Jobs Prediction (FastAI, PyTorch) - [Project Link](https://github.com/NY-aasaanjobs/Find-Duplicate-Jobs-API)
-* Rossmann Sales Forecast (FastAI) - [Project Link](https://github.com/rubanzasilva/RossmanSales/blob/master/rossman_sales_bentoml.ipynb)
+* Rossmann Sales Forecast (FastAI) - [Project Link](https://github.com/rubanzasilva/RossmanSales/blob/master/rossman_sales_kappa.ipynb)
 * Credit Default Prediction (Scikit-Learn) [Project Link](https://github.com/jakubczakon/credit-default-prediction/)
 * Sun or Rain Inference (fastai, torchvision, Image Recognition) - [Project Link](https://github.com/BestWillInTheWorld/sun-or-rain-inference)
 * AiSpace - deep learning platform with pre-trained models - [Project Link](https://github.com/yingyuankai/AiSpace)

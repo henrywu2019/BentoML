@@ -6,7 +6,7 @@ from kappa.gamma.deployment.aws_ec2.constants import (
     TARGET_HEALTHY_STATUS,
 )
 from kappa.gamma.deployment.aws_utils import call_sam_command
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 
 
 def build_template(template_file_path, project_directory, region):
@@ -16,7 +16,7 @@ def build_template(template_file_path, project_directory, region):
 
     if status_code != 0:
         error_message = stderr if stderr else stdout
-        raise BentoMLException("Failed to build ec2 service {}".format(error_message))
+        raise KappaException("Failed to build ec2 service {}".format(error_message))
 
     return status_code, stdout, stderr
 
@@ -35,7 +35,7 @@ def package_template(s3_bucket_name, project_directory, region):
     )
     if status_code != 0:
         error_message = stderr if stderr else stdout
-        raise BentoMLException("Failed to package ec2 service {}".format(error_message))
+        raise KappaException("Failed to package ec2 service {}".format(error_message))
     return status_code, stdout, stderr
 
 
@@ -57,7 +57,7 @@ def deploy_template(stack_name, s3_bucket_name, project_directory, region):
     )
     if status_code != 0:
         error_message = stderr if stderr else stdout
-        raise BentoMLException("Failed to deploy ec2 service {}".format(error_message))
+        raise KappaException("Failed to deploy ec2 service {}".format(error_message))
     return status_code, stdout, stderr
 
 

@@ -15,17 +15,17 @@
 from collections import OrderedDict
 from dependency_injector.wiring import Provide, inject
 
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 
 
 @inject
 def get_open_api_spec_json(
     bento_service,
     enable_metrics: bool = Provide[
-        BentoMLContainer.config.bento_server.metrics.enabled
+        KappaContainer.config.bento_server.metrics.enabled
     ],
     enable_feedback: bool = Provide[
-        BentoMLContainer.config.bento_server.feedback.enabled
+        KappaContainer.config.bento_server.feedback.enabled
     ],
 ):
     """

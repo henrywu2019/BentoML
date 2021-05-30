@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 
 import docker
 
-from kappa.exceptions import MissingDependencyException, BentoMLException
+from kappa.exceptions import MissingDependencyException, KappaException
 
 
 logger = logging.getLogger(__name__)
@@ -54,7 +54,7 @@ def build_docker_image(
         )
     except (docker.errors.APIError, docker.errors.BuildError) as error:
         logger.error(f'Failed to build docker image {image_tag}: {error}')
-        raise BentoMLException(f'Failed to build docker image {image_tag}: {error}')
+        raise KappaException(f'Failed to build docker image {image_tag}: {error}')
 
 
 def push_docker_image_to_repository(
@@ -67,4 +67,4 @@ def push_docker_image_to_repository(
     try:
         docker_client.images.push(**docker_push_kwags)
     except docker.errors.APIError as error:
-        raise BentoMLException(f'Failed to push docker image {image_tag}: {error}')
+        raise KappaException(f'Failed to push docker image {image_tag}: {error}')

@@ -9,12 +9,12 @@ from dependency_injector.wiring import Provide, inject
 from kappa import __version__
 from kappa.cli.click_utils import (
     CLI_COLOR_SUCCESS,
-    BentoMLCommandGroup,
+    KappaCommandGroup,
     _echo,
     conditional_argument,
 )
 from kappa.cli.utils import Spinner
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 from kappa.saved_bundle import (
     load_bento_service_api,
     load_bento_service_metadata,
@@ -60,27 +60,27 @@ def escape_shell_params(param):
 def create_bento_service_cli(
     pip_installed_bundle_path: str = None,
     default_gamma_url: str = None,
-    default_port: int = Provide[BentoMLContainer.config.bento_server.port],
+    default_port: int = Provide[KappaContainer.config.bento_server.port],
     default_enable_microbatch: bool = Provide[
-        BentoMLContainer.config.bento_server.microbatch.enabled
+        KappaContainer.config.bento_server.microbatch.enabled
     ],
     default_mb_max_batch_size: int = Provide[
-        BentoMLContainer.config.bento_server.microbatch.max_batch_size
+        KappaContainer.config.bento_server.microbatch.max_batch_size
     ],
     default_mb_max_latency: int = Provide[
-        BentoMLContainer.config.bento_server.microbatch.max_latency
+        KappaContainer.config.bento_server.microbatch.max_latency
     ],
     default_run_with_ngrok: bool = Provide[
-        BentoMLContainer.config.bento_server.ngrok.enabled
+        KappaContainer.config.bento_server.ngrok.enabled
     ],
     default_enable_swagger: bool = Provide[
-        BentoMLContainer.config.bento_server.swagger.enabled
+        KappaContainer.config.bento_server.swagger.enabled
     ],
-    default_workers: int = Provide[BentoMLContainer.config.bento_server.workers],
+    default_workers: int = Provide[KappaContainer.config.bento_server.workers],
     default_microbatch_workers: int = Provide[
-        BentoMLContainer.config.bento_server.microbatch.workers
+        KappaContainer.config.bento_server.microbatch.workers
     ],
-    default_timeout: int = Provide[BentoMLContainer.config.bento_server.timeout],
+    default_timeout: int = Provide[KappaContainer.config.bento_server.timeout],
 ):
     # pylint: disable=unused-variable
 
@@ -107,7 +107,7 @@ def create_bento_service_cli(
         ),
     ]
 
-    @click.group(cls=BentoMLCommandGroup)
+    @click.group(cls=KappaCommandGroup)
     @click.version_option(version=__version__)
     def kappa_cli():
         """

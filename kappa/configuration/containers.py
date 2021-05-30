@@ -22,7 +22,7 @@ from schema import And, Or, Schema, SchemaError, Optional, Use
 
 from kappa import __version__
 from kappa.configuration import expand_env_var, get_kappa_deploy_version
-from kappa.exceptions import BentoMLConfigException
+from kappa.exceptions import KappaConfigException
 from kappa.utils.ruamel_yaml import YAML
 
 
@@ -117,7 +117,7 @@ SCHEMA = Schema(
 )
 
 
-class BentoMLConfiguration:
+class KappaConfiguration:
     def __init__(
         self,
         default_config_file: str = None,
@@ -137,7 +137,7 @@ class BentoMLConfiguration:
             try:
                 SCHEMA.validate(self.config)
             except SchemaError as e:
-                raise BentoMLConfigException(
+                raise KappaConfigException(
                     "Default configuration 'default_kappa.yml' does not"
                     " conform to the required schema."
                 ) from e
@@ -146,7 +146,7 @@ class BentoMLConfiguration:
         if override_config_file is not None:
             LOGGER.info("Applying user config override from %s" % override_config_file)
             if not os.path.exists(override_config_file):
-                raise BentoMLConfigException(
+                raise KappaConfigException(
                     f"Config file {override_config_file} not found"
                 )
 
@@ -158,23 +158,23 @@ class BentoMLConfiguration:
                 try:
                     SCHEMA.validate(self.config)
                 except SchemaError as e:
-                    raise BentoMLConfigException(
+                    raise KappaConfigException(
                         "Configuration after user override does not conform to"
                         " the required schema."
                     ) from e
 
     def override(self, keys: list, value):
         if keys is None:
-            raise BentoMLConfigException("Configuration override key is None.")
+            raise KappaConfigException("Configuration override key is None.")
         if len(keys) == 0:
-            raise BentoMLConfigException("Configuration override key is empty.")
+            raise KappaConfigException("Configuration override key is empty.")
         if value is None:
             return
 
         c = self.config
         for key in keys[:-1]:
             if key not in c:
-                raise BentoMLConfigException(
+                raise KappaConfigException(
                     "Configuration override key is invalid, %s" % keys
                 )
             c = c[key]
@@ -183,7 +183,7 @@ class BentoMLConfiguration:
         try:
             SCHEMA.validate(self.config)
         except SchemaError as e:
-            raise BentoMLConfigException(
+            raise KappaConfigException(
                 "Configuration after applying override does not conform"
                 " to the required schema, key=%s, value=%s." % (keys, value)
             ) from e
@@ -192,7 +192,7 @@ class BentoMLConfiguration:
         return self.config
 
 
-class BentoMLContainer(containers.DeclarativeContainer):
+class KappaContainer(containers.DeclarativeContainer):
 
     config = providers.Configuration(strict=True)
 

@@ -15,9 +15,9 @@
 import os
 
 from kappa.saved_bundle import load_from_dir
-from kappa.gamma.deployment.sagemaker.model_server import BentomlSagemakerServer
+from kappa.gamma.deployment.sagemaker.model_server import KappaSagemakerServer
 
 api_name = os.environ.get('API_NAME', None)
 model_service = load_from_dir('/bento')
-server = BentomlSagemakerServer(model_service, api_name)
+server = KappaSagemakerServer(model_service, api_name)
 app = server.app

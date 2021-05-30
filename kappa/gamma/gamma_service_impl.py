@@ -15,7 +15,7 @@ import logging
 from datetime import datetime
 from dependency_injector.wiring import Provide, inject
 
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 from kappa.saved_bundle import safe_retrieve
 from kappa.utils.docker_utils import (
     to_valid_docker_image_name,
@@ -48,7 +48,7 @@ from kappa.gamma.proto.gamma_service_pb2 import (
 )
 from kappa.gamma.deployment.operator import get_deployment_operator
 from kappa.exceptions import (
-    BentoMLException,
+    KappaException,
     InvalidArgument,
     GammaRepositoryException,
 )
@@ -85,7 +85,7 @@ def get_gamma_service_impl(base=object):
             self,
             database: DB,
             repository: BaseRepository,
-            default_namespace: str = Provide[BentoMLContainer.config.gamma.namespace],
+            default_namespace: str = Provide[KappaContainer.config.gamma.namespace],
         ):
             self.default_namespace = default_namespace
             self.repo = repository
@@ -150,7 +150,7 @@ def get_gamma_service_impl(base=object):
                                 sess, response.deployment
                             )
                         else:
-                            raise BentoMLException(
+                            raise KappaException(
                                 "DeploymentOperator Internal Error: failed to add or "
                                 "update deployment metadata to database"
                             )
@@ -177,7 +177,7 @@ def get_gamma_service_impl(base=object):
 
                     return response
 
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error("RPC ERROR ApplyDeployment: %s", e)
                     return ApplyDeploymentResponse(status=e.status_proto)
                 except Exception as e:
@@ -250,7 +250,7 @@ def get_gamma_service_impl(base=object):
                             )
                         )
 
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error("RPC ERROR DeleteDeployment: %s", e)
                     return DeleteDeploymentResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except
@@ -280,7 +280,7 @@ def get_gamma_service_impl(base=object):
                                 )
                             )
                         )
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error("RPC ERROR GetDeployment: %s", e)
                     return GetDeploymentResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except
@@ -319,7 +319,7 @@ def get_gamma_service_impl(base=object):
                                 )
                             )
                         )
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error("RPC ERROR DescribeDeployment: %s", e)
                     return DeleteDeploymentResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except
@@ -344,7 +344,7 @@ def get_gamma_service_impl(base=object):
                     return ListDeploymentsResponse(
                         status=Status.OK(), deployments=deployment_pb_list
                     )
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error("RPC ERROR ListDeployments: %s", e)
                     return ListDeploymentsResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except
@@ -376,7 +376,7 @@ def get_gamma_service_impl(base=object):
                         uri_type=new_bento_uri.type,
                     )
                     return AddBentoResponse(status=Status.OK(), uri=new_bento_uri)
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error("RPC ERROR AddBento: %s", e)
                     return DeleteDeploymentResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except
@@ -403,7 +403,7 @@ def get_gamma_service_impl(base=object):
                             request.service_metadata,
                         )
                     return UpdateBentoResponse(status=Status.OK())
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error("RPC ERROR UpdateBento: %s", e)
                     return UpdateBentoResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except
@@ -440,7 +440,7 @@ def get_gamma_service_impl(base=object):
                         request.bento_name, request.bento_version
                     )
                     return DangerouslyDeleteBentoResponse(status=Status.OK())
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error("RPC ERROR DangerouslyDeleteBento: %s", e)
                     return DangerouslyDeleteBentoResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except
@@ -483,7 +483,7 @@ def get_gamma_service_impl(base=object):
                                 )
                             )
                         )
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error("RPC ERROR GetBento: %s", e)
                     return GetBentoResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except
@@ -507,7 +507,7 @@ def get_gamma_service_impl(base=object):
                     return ListBentoResponse(
                         status=Status.OK(), bentos=bento_metadata_pb_list
                     )
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error("RPC ERROR ListBento: %s", e)
                     return ListBentoResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except
@@ -576,7 +576,7 @@ def get_gamma_service_impl(base=object):
                             except docker.errors.APIError as error:
                                 raise GammaRepositoryException(error)
                         return ContainerizeBentoResponse(status=Status.OK(), tag=tag)
-                except BentoMLException as e:
+                except KappaException as e:
                     logger.error(f"RPC ERROR ContainerizeBento: {e}")
                     return ContainerizeBentoResponse(status=e.status_proto)
                 except Exception as e:  # pylint: disable=broad-except

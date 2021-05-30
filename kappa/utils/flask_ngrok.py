@@ -10,7 +10,7 @@ import zipfile
 from pathlib import Path
 import logging
 import requests
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +27,7 @@ def _get_command():
     elif system == "Linux":
         command = "ngrok"
     else:
-        raise BentoMLException("{system} is not supported".format(system=system))
+        raise KappaException("{system} is not supported".format(system=system))
     return command
 
 

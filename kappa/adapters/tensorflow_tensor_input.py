@@ -46,7 +46,7 @@ class TfTensorInput(StringInput):
         * method: equivalence of serving API methods: (predict, classify, regress)
 
     Raises:
-        BentoMLException: Kappa currently doesn't support Content-Type
+        KappaException: Kappa currently doesn't support Content-Type
 
     Examples
     --------

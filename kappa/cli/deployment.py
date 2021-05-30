@@ -17,7 +17,7 @@ import logging
 
 from kappa.utils.lazy_loader import LazyLoader
 from kappa.cli.click_utils import (
-    BentoMLCommandGroup,
+    KappaCommandGroup,
     _echo,
     CLI_COLOR_SUCCESS,
     parse_yaml_file_callback,
@@ -44,7 +44,7 @@ def get_deployment_sub_command():
 
     @click.group(
         help='Commands for managing and operating MyModel deployments',
-        cls=BentoMLCommandGroup,
+        cls=KappaCommandGroup,
     )
     def deployment():
         pass

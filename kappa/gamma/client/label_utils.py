@@ -13,7 +13,7 @@
 # limitations under the License.
 import re
 
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 from kappa.gamma.proto.label_selectors_pb2 import LabelSelectors
 
 
@@ -33,12 +33,12 @@ def _extract_expressions(query):
 
 def value_string_to_list(value_string):
     if not value_string.startswith('(') or not value_string.endswith(')'):
-        raise BentoMLException(
+        raise KappaException(
             f"Query values {value_string} need to be inside (). "
             f"e.g. (value1, value2, ..)"
         )
     if len(value_string) == 2:
-        raise BentoMLException("Query values can't be empty")
+        raise KappaException("Query values can't be empty")
     return [value.strip() for value in value_string[1:-1].split(',')]
 
 
@@ -63,15 +63,15 @@ def generate_gprc_labels_selector(label_selectors, label_query):
             # Possible queries: key=value, key!=value, key
             query = elements[0].strip()
             if query.lower() in [i.lower() for i in label_expression_operators.keys()]:
-                raise BentoMLException(
+                raise KappaException(
                     f"Label query operator {query} can't be the only element"
                 )
             if '!=' in query:
                 if query.count('!=') > 1:
-                    raise BentoMLException(f"Too many '!=' operator in query {query}")
+                    raise KappaException(f"Too many '!=' operator in query {query}")
                 key, value = query.split('!=')
                 if not value:
-                    raise BentoMLException(f"Label {query} can't have empty value")
+                    raise KappaException(f"Label {query} can't have empty value")
                 label_selectors.match_expressions.append(
                     LabelSelectors.LabelSelectorExpression(
                         key=key,
@@ -81,10 +81,10 @@ def generate_gprc_labels_selector(label_selectors, label_query):
                 )
             elif '=' in query:
                 if query.count('=') > 1:
-                    raise BentoMLException(f"Too many '=' operator in query {query}")
+                    raise KappaException(f"Too many '=' operator in query {query}")
                 key, value = query.split('=')
                 if not value:
-                    raise BentoMLException(f"Label {query} can't have empty value")
+                    raise KappaException(f"Label {query} can't have empty value")
                 label_selectors.match_labels[key] = value
             else:
                 label_selectors.match_expressions.append(
@@ -122,5 +122,5 @@ def generate_gprc_labels_selector(label_selectors, label_query):
                 )
             )
         else:
-            raise BentoMLException(f'Too many elements in the label query {expression}')
+            raise KappaException(f'Too many elements in the label query {expression}')
     return

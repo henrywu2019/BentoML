@@ -19,7 +19,7 @@ from kappa.utils.lazy_loader import LazyLoader
 from kappa.cli.utils import Spinner
 from kappa.utils import get_default_gamma_client
 from kappa.cli.click_utils import (
-    BentoMLCommandGroup,
+    KappaCommandGroup,
     parse_bento_tag_callback,
     _echo,
     CLI_COLOR_SUCCESS,
@@ -44,7 +44,7 @@ gamma_proto = LazyLoader("gamma_proto", globals(), "kappa.gamma.proto")
 def get_aws_ec2_sub_command():
     # pylint: disable=unused-variable
 
-    @click.group(name="ec2", cls=BentoMLCommandGroup, help="commands for EC2")
+    @click.group(name="ec2", cls=KappaCommandGroup, help="commands for EC2")
     def aws_ec2():
         pass
 

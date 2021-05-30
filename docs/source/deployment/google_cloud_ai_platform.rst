@@ -184,7 +184,7 @@ Verify the saved bundle created:
         "env": {
           "condaEnv": "name: kappa-default-conda-env\nchannels:\n- conda-forge\n- defaults\ndependencies:\n- pip\n",
           "pythonVersion": "3.7.9",
-          "dockerBaseImage": "bentoml/model-server:0.10.1-py37",
+          "dockerBaseImage": "kappa/model-server:0.10.1-py37",
           "pipPackages": [
             "kappa==0.10.1",
             "pandas==1.2.0",

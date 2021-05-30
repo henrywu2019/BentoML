@@ -16,7 +16,7 @@ import subprocess
 import urllib3
 
 from typing import NamedTuple, Tuple
-from kappa.exceptions import BentoMLException, MissingDependencyException
+from kappa.exceptions import KappaException, MissingDependencyException
 
 UNARY = 'UNARY'
 SERVER_STREAMING = 'SERVER_STREAMING'
@@ -29,7 +29,7 @@ def ensure_node_available_or_raise():
     try:
         subprocess.check_output(['node', '--version'])
     except subprocess.CalledProcessError as error:
-        raise BentoMLException(
+        raise KappaException(
             'Error executing node command: {}'.format(error.output.decode())
         )
     except FileNotFoundError:

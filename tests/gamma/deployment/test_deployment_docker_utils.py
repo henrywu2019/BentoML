@@ -8,7 +8,7 @@ from kappa.gamma.deployment.docker_utils import (
     build_docker_image,
     push_docker_image_to_repository,
 )
-from kappa.exceptions import MissingDependencyException, BentoMLException
+from kappa.exceptions import MissingDependencyException, KappaException
 
 mock_image_tag = 'mytag:v1'
 mock_repository = f'repository.com/{mock_image_tag}'
@@ -39,7 +39,7 @@ def test_build_docker_image():
             side_effect=docker.errors.APIError('API error')
         )
         from_env_mock.return_value = mock_docker_client
-        with pytest.raises(BentoMLException) as build_api_error:
+        with pytest.raises(KappaException) as build_api_error:
             build_docker_image(context_path='', dockerfile='', image_tag=mock_image_tag)
         assert str(build_api_error.value).startswith(
             f'Failed to build docker image {mock_image_tag}'
@@ -48,7 +48,7 @@ def test_build_docker_image():
         mock_docker_client.images.build = Mock(
             side_effect=docker.errors.BuildError(build_log='', reason='')
         )
-        with pytest.raises(BentoMLException) as build_api_error:
+        with pytest.raises(KappaException) as build_api_error:
             build_docker_image(context_path='', dockerfile='', image_tag=mock_image_tag)
         assert str(build_api_error.value).startswith(
             f'Failed to build docker image {mock_image_tag}'
@@ -62,7 +62,7 @@ def test_push_docker_image_to_repository():
             side_effect=docker.errors.APIError('API error')
         )
         from_env_mock.return_value = mock_docker_client
-        with pytest.raises(BentoMLException) as push_api_error:
+        with pytest.raises(KappaException) as push_api_error:
             push_docker_image_to_repository(mock_repository, image_tag=mock_image_tag)
         assert str(push_api_error.value).startswith(
             f'Failed to push docker image {mock_image_tag}'

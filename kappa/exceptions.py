@@ -30,7 +30,7 @@ def _proto_status_code_to_http_status_code(proto_status_code, fallback):
     return _PROTO_STATUS_CODE_TO_HTTP_STATUS_CODE.get(proto_status_code, fallback)
 
 
-class BentoMLException(Exception):
+class KappaException(Exception):
     """
     Base class for all Kappa's errors.
     Each custom exception should be derived from this class
@@ -52,7 +52,7 @@ class BentoMLException(Exception):
         return _proto_status_code_to_http_status_code(self.proto_status_code, 500)
 
 
-class RemoteException(BentoMLException):
+class RemoteException(KappaException):
     """
     Raise when known exceptions happened in remote server(a model server normally)
     """
@@ -62,7 +62,7 @@ class RemoteException(BentoMLException):
         self.payload = payload
 
 
-class Unauthenticated(BentoMLException):
+class Unauthenticated(KappaException):
     """
     Raise when a Kappa operation is not authenticated properly, either against 3rd
     party cloud service such as AWS s3, Docker Hub, or Atalaya hosted Kappa service
@@ -73,7 +73,7 @@ class Unauthenticated(BentoMLException):
         return gamma_proto.status_pb2.Status.UNAUTHENTICATED
 
 
-class InvalidArgument(BentoMLException):
+class InvalidArgument(KappaException):
     """
     Raise when Kappa received unexpected/invalid arguments from CLI arguments, HTTP
     Request, or python API function parameters
@@ -88,7 +88,7 @@ class BadInput(InvalidArgument):
     """Raise when InputAdapter receiving bad input request"""
 
 
-class NotFound(BentoMLException):
+class NotFound(KappaException):
     """
     Raise when specified resource or name not found
     """
@@ -98,7 +98,7 @@ class NotFound(BentoMLException):
         return gamma_proto.status_pb2.Status.NOT_FOUND
 
 
-class FailedPrecondition(BentoMLException):
+class FailedPrecondition(KappaException):
     """
     Raise when required precondition check failed
     """
@@ -108,7 +108,7 @@ class FailedPrecondition(BentoMLException):
         return gamma_proto.status_pb2.Status.FAILED_PRECONDITION
 
 
-class LockUnavailable(BentoMLException):
+class LockUnavailable(KappaException):
     """
     Raise when a bundle/deployment resource is unable to be locked
     """
@@ -118,15 +118,15 @@ class LockUnavailable(BentoMLException):
         return gamma_proto.status_pb2.Status.FAILED_PRECONDITION
 
 
-class ArtifactLoadingException(BentoMLException):
+class ArtifactLoadingException(KappaException):
     """Raise when MyModel failed to load model artifacts from saved bundle"""
 
 
-class BentoMLConfigException(BentoMLException):
+class KappaConfigException(KappaException):
     """Raise when Kappa is misconfigured or when required configuration is missing"""
 
 
-class MissingDependencyException(BentoMLException):
+class MissingDependencyException(KappaException):
     """
     Raise when Kappa component failed to load required dependency - some Kappa
     components has dependency that is optional to the library itself. For example,
@@ -135,7 +135,7 @@ class MissingDependencyException(BentoMLException):
     """
 
 
-class GammaServiceException(BentoMLException):
+class GammaServiceException(KappaException):
     """Raise when GammaService encounters an error"""
 
 
@@ -163,7 +163,7 @@ class AzureServiceError(GammaDeploymentException):
     """Raise when GammaService encounters an issue with Azure service"""
 
 
-class CLIException(BentoMLException):
+class CLIException(KappaException):
     """Raise when CLI encounters an issue"""
 
 

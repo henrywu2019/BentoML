@@ -167,7 +167,7 @@ class catch_exceptions(object):
 
 
 def resolve_bundle_path(bento, pip_installed_bundle_path, gamma_url=None):
-    from kappa.exceptions import BentoMLException
+    from kappa.exceptions import KappaException
     from kappa.gamma.client import get_gamma_client
 
     if pip_installed_bundle_path:
@@ -186,7 +186,7 @@ def resolve_bundle_path(bento, pip_installed_bundle_path, gamma_url=None):
         bento_pb = gamma_client.repository.get(bento)
         return resolve_bento_bundle_uri(bento_pb)
     else:
-        raise BentoMLException(
+        raise KappaException(
             f'MyModel "{bento}" not found - either specify the file path of '
             f"the MyModel saved bundle, or the MyModel id in the form of "
             f'"name:version"'

@@ -22,8 +22,8 @@ from typing import List
 
 from pkg_resources import Requirement
 
-from kappa.configuration.containers import BentoMLContainer
-from kappa.exceptions import BentoMLException
+from kappa.configuration.containers import KappaContainer
+from kappa.exceptions import KappaException
 from kappa.saved_bundle.pip_pkg import (
     EPP_NO_ERROR,
     EPP_PKG_NOT_EXIST,
@@ -73,7 +73,7 @@ class CondaEnv(object):
         if default_env_yaml_file:
             env_yml_file = Path(default_env_yaml_file)
             if not env_yml_file.is_file():
-                raise BentoMLException(
+                raise KappaException(
                     f"Can not find conda environment config yaml file at: "
                     f"`{default_env_yaml_file}`"
                 )
@@ -85,7 +85,7 @@ class CondaEnv(object):
             self.set_name(name)
 
         if override_channels and channels is None:
-            raise BentoMLException(
+            raise KappaException(
                 "No `conda_channels` provided while override_channels=True"
             )
 
@@ -164,11 +164,11 @@ class MyModelEnv(object):
         setup_sh: str = None,
         docker_base_image: str = None,
         default_docker_base_image: str = Provide[
-            BentoMLContainer.config.bento_bundle.default_docker_base_image
+            KappaContainer.config.bento_bundle.default_docker_base_image
         ],
         zipimport_archives: List[str] = None,
         kappa_deployment_version: str = Provide[
-            BentoMLContainer.bento_bundle_deployment_version
+            KappaContainer.bento_bundle_deployment_version
         ],
     ):
         self._python_version = PYTHON_VERSION
@@ -221,7 +221,7 @@ class MyModelEnv(object):
             self._docker_base_image = default_docker_base_image
         else:
             if PYTHON_MINOR_VERSION not in PYTHON_SUPPORTED_VERSIONS:
-                self._docker_base_image = f"bentoml/model-server:{kappa_deploy_version}"
+                self._docker_base_image = f"kappa/model-server:{kappa_deploy_version}"
 
                 logger.warning(
                     f"Python {PYTHON_VERSION} found in current environment is not "
@@ -231,9 +231,9 @@ class MyModelEnv(object):
                     f"versions are: f{', '.join(PYTHON_SUPPORTED_VERSIONS)}"
                 )
             else:
-                # e.g. bentoml/model-server:0.8.6-py37
+                # e.g. kappa/model-server:0.8.6-py37
                 self._docker_base_image = (  ##### TODO
-                    f"bentoml/model-server:"
+                    f"kappa/model-server:"
                     f"{kappa_deploy_version}-"
                     f"py{PYTHON_MINOR_VERSION.replace('.', '')}"
                 )
@@ -315,12 +315,12 @@ class MyModelEnv(object):
             return self._requirements_txt_content
 
         if not self._requirements_txt_file:
-            raise BentoMLException("requirement txt file not specified")
+            raise KappaException("requirement txt file not specified")
 
         if not self._requirements_txt_content:
             req_txt_file = Path(self._requirements_txt_file)
             if not req_txt_file.is_file():
-                raise BentoMLException(
+                raise KappaException(
                     f"requirement txt file not found at '{self._requirements_txt_file}'"
                 )
             self._requirements_txt_content = req_txt_file.read_text()

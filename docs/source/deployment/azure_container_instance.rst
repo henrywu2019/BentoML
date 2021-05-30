@@ -151,7 +151,7 @@ Create and configure Azure ACR (Azure Container Registry)
 
 .. code-block:: bash
 
-    $ az acr create --resource-group iris-classifier --name bentomlirisclassifier --sku Basic --admin-enabled true
+    $ az acr create --resource-group iris-classifier --name kappairisclassifier --sku Basic --admin-enabled true
 
     # Sample output
 
@@ -164,11 +164,11 @@ Create and configure Azure ACR (Azure Container Registry)
         "keyVaultProperties": null,
         "status": "disabled"
       },
-      "id": "/subscriptions/f01c41a2-72ba-480c-99a6-b3241fada0ac/resourceGroups/iris-classifier/providers/Microsoft.ContainerRegistry/registries/bentomlirisclassifier",
+      "id": "/subscriptions/f01c41a2-72ba-480c-99a6-b3241fada0ac/resourceGroups/iris-classifier/providers/Microsoft.ContainerRegistry/registries/kappairisclassifier",
       "identity": null,
       "location": "eastus",
-      "loginServer": "bentomlirisclassifier.azurecr.io",
-      "name": "bentomlirisclassifier",
+      "loginServer": "kappairisclassifier.azurecr.io",
+      "name": "kappairisclassifier",
       "networkRuleSet": null,
       "policies": {
         "quarantinePolicy": {
@@ -200,20 +200,20 @@ Create and configure Azure ACR (Azure Container Registry)
 
 .. code-block:: bash
 
-    $ az acr login --name bentomlirisclassifier
+    $ az acr login --name kappairisclassifier
 
     Login Succeeded
 
 
 .. code-block:: bash
 
-    $ az acr show --name BentoMLIrisClassifier --query loginServer --output table
+    $ az acr show --name KappaIrisClassifier --query loginServer --output table
 
     # Sample output
 
     Result
     --------------------------------
-    bentomlirisclassifier.azurecr.io
+    kappairisclassifier.azurecr.io
 
 
 ==================================
@@ -225,7 +225,7 @@ Build and push docker image to ACR
     # Find the local path of the latest version IrisClassifier saved bundle
     $ saved_path=$(kappa get IrisClassifier:latest --print-location --quiet)
 
-    $ docker build -t bentomlirisclassifier.azurecr.io/iris-classifier $saved_path
+    $ docker build -t kappairisclassifier.azurecr.io/iris-classifier $saved_path
 
     # Sample output
 
@@ -252,16 +252,16 @@ Build and push docker image to ACR
     Removing intermediate container 5ebd6bb79077
     ---> 0cb0ac545be1
     Successfully built 0cb0ac545be1
-    Successfully tagged bentomlirisclassifier.azurecr.io/iris-classifier:latest
+    Successfully tagged kappairisclassifier.azurecr.io/iris-classifier:latest
 
 
 .. code-block:: bash
 
-    $ docker push bentomlirisclassifier.azurecr.io/iris-classifier
+    $ docker push kappairisclassifier.azurecr.io/iris-classifier
 
     # Sample output
 
-    The push refers to repository [bentomlirisclassifier.azurecr.io/iris-classifier]
+    The push refers to repository [kappairisclassifier.azurecr.io/iris-classifier]
     ...
     latest: digest: sha256:4b747c7d4db55278feb20caac6a5cf0ca74fae998b808d5cf2e5a20b3cde4303 size: 2227
 
@@ -273,7 +273,7 @@ Retrieve registry username and password for container deployment
 
 .. code-block:: bash
 
-    $ az acr repository list --name bentomlirisclassifier --output table
+    $ az acr repository list --name kappairisclassifier --output table
 
     # Sample output
 
@@ -284,7 +284,7 @@ Retrieve registry username and password for container deployment
 
 .. code-block:: bash
 
-    $ az acr credential show -n bentomlirisclassifier
+    $ az acr credential show -n kappairisclassifier
 
     # Sample output
 
@@ -299,7 +299,7 @@ Retrieve registry username and password for container deployment
           "value": "NIoodtFcfhI3YtReyUnCiT=ChOL8ef+X"
         }
       ],
-      "username": "bentomlirisclassifier"
+      "username": "kappairisclassifier"
     }
 
 Deploying image as Azure container. `registry-username` and `registry-password` are from previous command's output
@@ -307,14 +307,14 @@ Deploying image as Azure container. `registry-username` and `registry-password` 
 .. code-block:: bash
 
     $ az container create --resource-group iris-classifier \
-        --name bentomlirisclassifier \
-        --image bentomlirisclassifier.azurecr.io/iris-classifier \
+        --name kappairisclassifier \
+        --image kappairisclassifier.azurecr.io/iris-classifier \
         --cpu 1 \
         --memory 1 \
-        --registry-login-server bentomlirisclassifier.azurecr.io \
-        --registry-username bentomlirisclassifier \
+        --registry-login-server kappairisclassifier.azurecr.io \
+        --registry-username kappairisclassifier \
         --registry-password i/qE2Eu/Ngv344HjfOEPjNKkN9hHre+k \
-        --dns-name-label bentomlirisclassifier777 \
+        --dns-name-label kappairisclassifier777 \
         --ports 5000
 
     # Sample output
@@ -324,7 +324,7 @@ Deploying image as Azure container. `registry-username` and `registry-password` 
         {
           "command": null,
           "environmentVariables": [],
-          "image": "bentomlirisclassifier.azurecr.io/iris-classifier",
+          "image": "kappairisclassifier.azurecr.io/iris-classifier",
           "instanceView": {
             "currentState": {
               "detailStatus": "",
@@ -338,7 +338,7 @@ Deploying image as Azure container. `registry-username` and `registry-password` 
                 "count": 1,
                 "firstTimestamp": "2020-04-21T05:12:55+00:00",
                 "lastTimestamp": "2020-04-21T05:12:55+00:00",
-                "message": "pulling image \"bentomlirisclassifier.azurecr.io/iris-classifier\"",
+                "message": "pulling image \"kappairisclassifier.azurecr.io/iris-classifier\"",
                 "name": "Pulling",
                 "type": "Normal"
               },
@@ -346,7 +346,7 @@ Deploying image as Azure container. `registry-username` and `registry-password` 
                 "count": 1,
                 "firstTimestamp": "2020-04-21T05:15:54+00:00",
                 "lastTimestamp": "2020-04-21T05:15:54+00:00",
-                "message": "Successfully pulled image \"bentomlirisclassifier.azurecr.io/iris-classifier\"",
+                "message": "Successfully pulled image \"kappairisclassifier.azurecr.io/iris-classifier\"",
                 "name": "Pulled",
                 "type": "Normal"
               },
@@ -371,7 +371,7 @@ Deploying image as Azure container. `registry-username` and `registry-password` 
             "restartCount": 0
           },
           "livenessProbe": null,
-          "name": "bentomlirisclassifier",
+          "name": "kappairisclassifier",
           "ports": [
             {
               "port": 5000,
@@ -392,13 +392,13 @@ Deploying image as Azure container. `registry-username` and `registry-password` 
       ],
       "diagnostics": null,
       "dnsConfig": null,
-      "id": "/subscriptions/f01c41a2-72ba-480c-99a6-b3241fada0ac/resourceGroups/iris-classifier/providers/Microsoft.ContainerInstance/containerGroups/bentomlirisclassifier",
+      "id": "/subscriptions/f01c41a2-72ba-480c-99a6-b3241fada0ac/resourceGroups/iris-classifier/providers/Microsoft.ContainerInstance/containerGroups/kappairisclassifier",
       "identity": null,
       "imageRegistryCredentials": [
         {
           "password": null,
-          "server": "bentomlirisclassifier.azurecr.io",
-          "username": "bentomlirisclassifier"
+          "server": "kappairisclassifier.azurecr.io",
+          "username": "kappairisclassifier"
         }
       ],
       "instanceView": {
@@ -406,8 +406,8 @@ Deploying image as Azure container. `registry-username` and `registry-password` 
         "state": "Running"
       },
       "ipAddress": {
-        "dnsNameLabel": "bentomlirisclassifier777",
-        "fqdn": "bentomlirisclassifier777.eastus.azurecontainer.io",
+        "dnsNameLabel": "kappairisclassifier777",
+        "fqdn": "kappairisclassifier777.eastus.azurecontainer.io",
         "ip": "20.185.15.187",
         "ports": [
           {
@@ -418,7 +418,7 @@ Deploying image as Azure container. `registry-username` and `registry-password` 
         "type": "Public"
       },
       "location": "eastus",
-      "name": "bentomlirisclassifier",
+      "name": "kappairisclassifier",
       "networkProfile": null,
       "osType": "Linux",
       "provisioningState": "Succeeded",
@@ -433,7 +433,7 @@ Use `az container show` command to fetch container instance state
 
 .. code-block:: bash
 
-    $ az container show --resource-group iris-classifier --name bentomlirisclassifier --query instanceView.state
+    $ az container show --resource-group iris-classifier --name kappairisclassifier --query instanceView.state
 
     "Running"
 
@@ -442,9 +442,9 @@ We can use the same `az container show` command to retrieve endpoint address
 
 .. code-block:: bash
 
-    $ az container show --resource-group iris-classifier --name bentomlirisclassifier --query ipAddress.fqdn
+    $ az container show --resource-group iris-classifier --name kappairisclassifier --query ipAddress.fqdn
 
-    "bentomlirisclassifier777.eastus.azurecontainer.io"
+    "kappairisclassifier777.eastus.azurecontainer.io"
 
 
 ===============================================================
@@ -454,7 +454,7 @@ Validate Azure container instance with sample data POST request
 .. code-block:: bash
 
     $ curl -X \
-        POST "http://bentomlirisclassifier777.eastus.azurecontainer.io:5000/predict" \
+        POST "http://kappairisclassifier777.eastus.azurecontainer.io:5000/predict" \
         --header "Content-Type: application/json" \
         -d '[[5.1, 3.5, 1.4, 0.2]]'
 

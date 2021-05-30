@@ -22,8 +22,8 @@ from sys import version_info
 from google.protobuf.struct_pb2 import Struct
 
 from kappa import __version__ as KAPPA_VERSION
-from kappa.configuration.containers import BentoMLContainer
-from kappa.exceptions import BentoMLConfigException
+from kappa.configuration.containers import KappaContainer
+from kappa.exceptions import KappaConfigException
 from kappa.utils import dump_to_yaml_str
 from kappa.utils.ruamel_yaml import YAML
 
@@ -81,7 +81,7 @@ class SavedBundleConfig(object):
         bento_service=None,
         kind="MyModel",
         kappa_deployment_version: str = Provide[
-            BentoMLContainer.bento_bundle_deployment_version
+            KappaContainer.bento_bundle_deployment_version
         ],
     ):
         self.kind = kind
@@ -129,7 +129,7 @@ class SavedBundleConfig(object):
             # changes. Raise error in this case.
             if ver.split(".")[0] != KAPPA_VERSION.split(".")[0]:
                 if not KAPPA_VERSION.startswith('0+untagged'):
-                    raise BentoMLConfigException(msg)
+                    raise KappaConfigException(msg)
                 else:
                     logger.warning(msg)
             else:  # Otherwise just show a warning.

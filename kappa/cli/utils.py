@@ -25,7 +25,7 @@ from tabulate import tabulate
 
 from kappa.cli.click_utils import _echo
 from kappa.utils import pb_to_yaml
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 
 logger = logging.getLogger(__name__)
 
@@ -109,7 +109,7 @@ def echo_docker_api_result(docker_generator):
             yield f"Pushed {cur} / {total}"
         if "errorDetail" in line:
             error = line["errorDetail"]
-            raise BentoMLException(error["message"])
+            raise KappaException(error["message"])
 
 
 def _print_deployment_info(deployment, output_type):

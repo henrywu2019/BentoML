@@ -1,6 +1,6 @@
 import pytest
 
-from kappa.exceptions import GammaDeploymentException, BentoMLException
+from kappa.exceptions import GammaDeploymentException, KappaException
 from kappa.gamma.proto.deployment_pb2 import Deployment
 from kappa.gamma.deployment_utils import deployment_dict_to_pb
 
@@ -12,7 +12,7 @@ def test_deployment_dict_to_pb():
     assert str(error.value).startswith('"spec" is required field for deployment')
 
     failed_dict_custom_operator = {'name': 'fake', 'spec': {'operator': 'custom'}}
-    with pytest.raises(BentoMLException) as error:
+    with pytest.raises(KappaException) as error:
         deployment_dict_to_pb(failed_dict_custom_operator)
     assert str(error.value).startswith('Platform "custom" is not supported')
 

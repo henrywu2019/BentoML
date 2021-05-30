@@ -24,7 +24,7 @@ from click import ClickException
 
 from kappa import configure_logging
 from kappa.configuration import set_debug_mode
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 from kappa.utils.ruamel_yaml import YAML
 from kappa.utils.usage_stats import track
 
@@ -62,7 +62,7 @@ def _echo(message, color="reset"):
     click.secho(message, fg=color)
 
 
-class BentoMLCommandGroup(click.Group):
+class KappaCommandGroup(click.Group):
     """Click command class customized for Kappa cli, allow specifying a default
     command for each group defined
     """
@@ -151,7 +151,7 @@ class BentoMLCommandGroup(click.Group):
         def wrapper(*args, **kwargs):
             try:
                 return func(*args, **kwargs)
-            except BentoMLException as e:
+            except KappaException as e:
                 msg = f'{cmd_group.name} {command_name} failed: {str(e)}'
                 raise ClickException(click.style(msg, fg='red'))
 
@@ -160,18 +160,18 @@ class BentoMLCommandGroup(click.Group):
     def command(self, *args, **kwargs):
         def wrapper(func):
             # add common parameters to command
-            func = BentoMLCommandGroup.kappa_common_params(func)
+            func = KappaCommandGroup.kappa_common_params(func)
             # Send tracking events before command finish.
-            func = BentoMLCommandGroup.kappa_track_usage(func, self, **kwargs)
-            # If BentoMLException raise ClickException instead before exit
-            func = BentoMLCommandGroup.raise_click_exception(func, self, **kwargs)
+            func = KappaCommandGroup.kappa_track_usage(func, self, **kwargs)
+            # If KappaException raise ClickException instead before exit
+            func = KappaCommandGroup.raise_click_exception(func, self, **kwargs)
 
             # move common parameters to end of the parameters list
             func.__click_params__ = (
                 func.__click_params__[-self.NUMBER_OF_COMMON_PARAMS :]
                 + func.__click_params__[: -self.NUMBER_OF_COMMON_PARAMS]
             )
-            return super(BentoMLCommandGroup, self).command(*args, **kwargs)(func)
+            return super(KappaCommandGroup, self).command(*args, **kwargs)(func)
 
         return wrapper
 

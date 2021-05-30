@@ -25,7 +25,7 @@ from kappa.gamma.deployment.docker_utils import (
     build_docker_image,
 )
 from kappa.adapters.clipper_input import ADAPTER_TYPE_TO_INPUT_TYPE
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 from kappa.utils.usage_stats import track
 
 logger = logging.getLogger(__name__)
@@ -129,7 +129,7 @@ def deploy_kappa(
 
     Args:
         clipper_conn(clipper_admin.ClipperConnection): Clipper connection instance
-        bundle_path(str): Path to the saved BentomlService bundle.
+        bundle_path(str): Path to the saved KappaService bundle.
         api_name(str): name of the api that will be used as prediction function for
             clipper cluster
         model_name(str): Model's name for clipper cluster
@@ -146,7 +146,7 @@ def deploy_kappa(
     ensure_docker_available_or_raise()
 
     if not clipper_conn.connected:
-        raise BentoMLException(
+        raise KappaException(
             "No connection to Clipper cluster. CallClipperConnection.connect to "
             "connect to an existing cluster or ClipperConnection.start_clipper to "
             "create a new one"
@@ -159,14 +159,14 @@ def deploy_kappa(
             (api for api in bento_service_metadata.apis if api.name == api_name)
         )
     except StopIteration:
-        raise BentoMLException(
+        raise KappaException(
             "Can't find API '{}' in MyModel {}".format(
                 api_name, bento_service_metadata.name
             )
         )
 
     if api_metadata.input_type not in ADAPTER_TYPE_TO_INPUT_TYPE:
-        raise BentoMLException(
+        raise KappaException(
             "Only MyModel APIs using ClipperInput can be deployed to Clipper"
         )
 
@@ -189,7 +189,7 @@ def deploy_kappa(
         elif bento_service_metadata.env.python_version.startswith("2.7"):
             base_image = "clipper/python-closure-container:0.4.1"
         else:
-            raise BentoMLException(
+            raise KappaException(
                 "Python version {} is not supported in Clipper".format(
                     bento_service_metadata.env.python_version
                 )

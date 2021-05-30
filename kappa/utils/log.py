@@ -19,7 +19,7 @@ from dependency_injector.wiring import Provide, inject
 from pathlib import Path
 
 from kappa.configuration import get_debug_mode
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 
 
 def get_logging_config_dict(
@@ -116,14 +116,14 @@ def get_logging_config_dict(
 
 @inject
 def configure_logging(
-    logging_level: str = Provide[BentoMLContainer.config.logging.level],
-    base_log_dir: str = Provide[BentoMLContainer.logging_file_directory],
+    logging_level: str = Provide[KappaContainer.config.logging.level],
+    base_log_dir: str = Provide[KappaContainer.logging_file_directory],
     console_logging_enabled: bool = Provide[
-        BentoMLContainer.config.logging.console.enabled
+        KappaContainer.config.logging.console.enabled
     ],
-    file_logging_enabled: bool = Provide[BentoMLContainer.config.logging.file.enabled],
-    advanced_enabled: bool = Provide[BentoMLContainer.config.logging.advanced.enabled],
-    advanced_config: dict = Provide[BentoMLContainer.config.logging.advanced.config],
+    file_logging_enabled: bool = Provide[KappaContainer.config.logging.file.enabled],
+    advanced_enabled: bool = Provide[KappaContainer.config.logging.advanced.enabled],
+    advanced_config: dict = Provide[KappaContainer.config.logging.advanced.config],
 ):
     Path(base_log_dir).mkdir(parents=True, exist_ok=True)
     if advanced_enabled:

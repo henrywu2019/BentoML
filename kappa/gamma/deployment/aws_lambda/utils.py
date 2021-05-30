@@ -22,7 +22,7 @@ from pathlib import Path
 import boto3
 from botocore.exceptions import ClientError
 
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 from kappa.gamma.deployment.aws_utils import call_sam_command
 
 logger = logging.getLogger(__name__)
@@ -105,7 +105,7 @@ def init_sam_project(
         error_message = stderr
         if not error_message:
             error_message = stdout
-        raise BentoMLException(
+        raise KappaException(
             "Failed to build lambda function. {}".format(error_message)
         )
     logger.debug("Removing unnecessary files to free up space")
@@ -173,7 +173,7 @@ def lambda_package(project_dir, aws_region, s3_bucket_name, deployment_prefix):
         error_message = stderr
         if not error_message:
             error_message = stdout
-        raise BentoMLException(
+        raise KappaException(
             "Failed to package lambda function. {}".format(error_message)
         )
     else:
@@ -208,7 +208,7 @@ def lambda_deploy(project_dir, aws_region, stack_name):
         error_message = stderr
         if not error_message:
             error_message = stdout
-        raise BentoMLException(
+        raise KappaException(
             "Failed to deploy lambda function. {}".format(error_message)
         )
     else:
@@ -289,7 +289,7 @@ def reduce_bundle_size_and_upload_extra_resources_to_s3(
             os.path.join(deployment_prefix, "requirements.tar"),
         )
     except ClientError as e:
-        raise BentoMLException(str(e))
+        raise KappaException(str(e))
 
 
 def ensure_is_ready_to_deploy_to_cloud_formation(stack_name, region):
@@ -323,4 +323,4 @@ def ensure_is_ready_to_deploy_to_cloud_formation(stack_name, region):
         if error_code == "ValidationError" and "does not exist" in error_message:
             pass
         else:
-            raise BentoMLException(str(e))
+            raise KappaException(str(e))

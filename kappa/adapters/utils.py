@@ -3,7 +3,7 @@ import json
 import os
 from dependency_injector.wiring import Provide, inject
 
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 from kappa.types import HTTPRequest, InferenceTask
 
 TF_B64_KEY = "b64"
@@ -103,7 +103,7 @@ def check_file_extension(file_name, accept_ext_list):
 @inject
 def get_default_accept_image_formats(
     default_extensions: list = Provide[
-        BentoMLContainer.config.adapters.image_input.default_extensions
+        KappaContainer.config.adapters.image_input.default_extensions
     ],
 ):
     """With default kappa config, this returns:

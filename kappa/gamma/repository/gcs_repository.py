@@ -16,7 +16,7 @@ import logging
 from urllib.parse import urlparse
 from dependency_injector.wiring import Provide, inject
 
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 from kappa.exceptions import GammaRepositoryException
 from kappa.gamma.proto.repository_pb2 import BentoUri
 from kappa.gamma.repository.base_repository import BaseRepository
@@ -30,7 +30,7 @@ class GCSRepository(BaseRepository):
         self,
         base_url,
         expiration: int = Provide[
-            BentoMLContainer.config.gamma.repository.gcs.expiration
+            KappaContainer.config.gamma.repository.gcs.expiration
         ],
     ):
         try:

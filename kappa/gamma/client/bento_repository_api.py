@@ -23,7 +23,7 @@ import click
 import requests
 import shutil
 
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 from kappa.utils import (
     status_pb_to_error_code_and_message,
     resolve_bento_bundle_uri,
@@ -171,7 +171,7 @@ class BentoRepositoryAPIClient:
             )
         )
         if get_bento_response.status.status_code == status_pb2.Status.OK:
-            raise BentoMLException(
+            raise KappaException(
                 "MyModel {}:{} already registered in repository. Reset "
                 "MyModel version with MyModel#set_version or bypass Kappa's"
                 " model registry feature with MyModel#save_to_dir".format(
@@ -179,7 +179,7 @@ class BentoRepositoryAPIClient:
                 )
             )
         elif get_bento_response.status.status_code != status_pb2.Status.NOT_FOUND:
-            raise BentoMLException(
+            raise KappaException(
                 'Failed accessing GammaService. {error_code}:'
                 '{error_message}'.format(
                     error_code=Status.Name(get_bento_response.status.status_code),
@@ -193,7 +193,7 @@ class BentoRepositoryAPIClient:
         response = self.gamma_service.AddBento(request)
 
         if response.status.status_code != status_pb2.Status.OK:
-            raise BentoMLException(
+            raise KappaException(
                 "Error adding MyModel to repository: {}:{}".format(
                     Status.Name(response.status.status_code),
                     response.status.error_message,
@@ -249,7 +249,7 @@ class BentoRepositoryAPIClient:
                 self._update_bento_upload_progress(
                     bento_service_metadata, UploadStatus.ERROR
                 )
-                raise BentoMLException(
+                raise KappaException(
                     f"Error saving MyModel to {uri_type}."
                     f"{http_response.status_code}: {http_response.text}"
                 )
@@ -262,7 +262,7 @@ class BentoRepositoryAPIClient:
 
             return response.uri.uri
         else:
-            raise BentoMLException(
+            raise KappaException(
                 f"Error saving Bento to target repository, URI type {response.uri.type}"
                 f" at {response.uri.uri} not supported"
             )
@@ -309,7 +309,7 @@ class BentoRepositoryAPIClient:
         """
         track('py-api-get')
         if ':' not in bento:
-            raise BentoMLException(
+            raise KappaException(
                 'MyModel name or version is missing. Please provide in the '
                 'format of name:version'
             )
@@ -321,7 +321,7 @@ class BentoRepositoryAPIClient:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
-            raise BentoMLException(
+            raise KappaException(
                 f'MyModel {name}:{version} not found - ' f'{error_code}:{error_message}'
             )
         return result.bento
@@ -372,7 +372,7 @@ class BentoRepositoryAPIClient:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
-            raise BentoMLException(f'{error_code}:{error_message}')
+            raise KappaException(f'{error_code}:{error_message}')
         return result.bentos
 
     def _delete_bento_bundle(self, bento_tag, require_confirm):
@@ -441,7 +441,7 @@ class BentoRepositoryAPIClient:
             and bento_name is not None
             and bento_version is not None
         ):
-            raise BentoMLException('Too much arguments')
+            raise KappaException('Too much arguments')
 
         if bento_tag is not None:
             logger.info(f'Deleting saved Bento bundle {bento_tag}')
@@ -498,7 +498,7 @@ class BentoRepositoryAPIClient:
         """
         track('py-api-containerize')
         if ':' not in bento:
-            raise BentoMLException(
+            raise KappaException(
                 'MyModel name or version is missing. Please provide in the '
                 'format of name:version'
             )
@@ -516,7 +516,7 @@ class BentoRepositoryAPIClient:
             error_code, error_message = status_pb_to_error_code_and_message(
                 result.status
             )
-            raise BentoMLException(
+            raise KappaException(
                 f'Failed to containerize {bento} - {error_code}:{error_message}'
             )
         return result.tag

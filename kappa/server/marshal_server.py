@@ -20,7 +20,7 @@ import psutil
 from dependency_injector.wiring import Provide as P
 from dependency_injector.wiring import inject
 
-from kappa.configuration.containers import BentoMLContainer as C
+from kappa.configuration.containers import KappaContainer as C
 from kappa.marshal.marshal import MarshalService
 from kappa.server.instruments import setup_prometheus_multiproc_dir
 

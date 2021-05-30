@@ -12,7 +12,7 @@ import signal
 import sys
 from dependency_injector.wiring import Provide, inject
 
-from kappa.configuration.containers import BentoMLConfiguration, BentoMLContainer
+from kappa.configuration.containers import KappaConfiguration, KappaContainer
 
 
 def sigterm_handler(nginx_pid, gunicorn_pid):
@@ -30,8 +30,8 @@ def sigterm_handler(nginx_pid, gunicorn_pid):
 
 @inject
 def _serve(
-    bento_server_timeout: int = Provide[BentoMLContainer.config.bento_server.timeout],
-    bento_server_workers: int = Provide[BentoMLContainer.api_server_workers],
+    bento_server_timeout: int = Provide[KappaContainer.config.bento_server.timeout],
+    bento_server_workers: int = Provide[KappaContainer.api_server_workers],
 ):
     # link the log streams to stdout/err so they will be logged to the container logs
     subprocess.check_call(['ln', '-sf', '/dev/stdout', '/var/log/nginx/access.log'])
@@ -66,8 +66,8 @@ def _serve(
 
 
 if __name__ == '__main__':
-    container = BentoMLContainer()
-    config = BentoMLConfiguration()
+    container = KappaContainer()
+    config = KappaConfiguration()
     if "KAPPA_GUNICORN_TIMEOUT" in os.environ:
         config.override(["api_server", "timeout"], int(os.environ.get("KAPPA_GUNICORN_TIMEOUT")))
     if "KAPPA_GUNICORN_NUM_OF_WORKERS" in os.environ:

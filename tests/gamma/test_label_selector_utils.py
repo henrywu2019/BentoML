@@ -1,6 +1,6 @@
 import pytest
 
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 from kappa.gamma.client.label_utils import (
     _extract_expressions,
     _extract_expression_elements,
@@ -84,15 +84,15 @@ def test_generate_grpc_labels_selector():
     assert success_mixed_selector.match_expressions[3].values == ['admin'], ''
     assert not success_mixed_selector.match_expressions[1].values, ''
 
-    with pytest.raises(BentoMLException) as e:
+    with pytest.raises(KappaException) as e:
         generate_gprc_labels_selector(LabelSelectors(), 'key=value1=value2')
     assert str(e.value).startswith("Too many '=' operator in")
 
-    with pytest.raises(BentoMLException) as e:
+    with pytest.raises(KappaException) as e:
         generate_gprc_labels_selector(LabelSelectors(), 'In')
     assert str(e.value).startswith("Label query operator In can't be the only element")
 
-    with pytest.raises(BentoMLException) as e:
+    with pytest.raises(KappaException) as e:
         generate_gprc_labels_selector(LabelSelectors(), 'key in value1 value2')
     assert str(e.value).startswith('Too many elements in the label query')
 
@@ -104,6 +104,6 @@ def test_generate_grpc_labels_selector():
         generate_gprc_labels_selector(LabelSelectors(), 'Key ins (value)')
     assert str(e.value).startswith('Operator "ins" is invalid')
 
-    with pytest.raises(BentoMLException) as e:
+    with pytest.raises(KappaException) as e:
         generate_gprc_labels_selector(LabelSelectors(), 'key In ()')
     assert str(e.value).startswith("Query values can't be empty")

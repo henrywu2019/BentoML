@@ -54,7 +54,7 @@ Kappa packaged model can be easily deployed to SageMaker serving: https://docs.k
 How does Kappa compare to MLFlow?
 -----------------------------------
 
-MLFlow provides components that work great for experimentation management, ML project management. Kappa only focuses on serving and deploying trained models. You can, in fact, serve models logged in MLFlow experimentation with Kappa (see the gallery for an `example <https://github.com/kappa/gallery/blob/master/bentomlflow/mlflow-to-kappa-example.ipynb>`_).
+MLFlow provides components that work great for experimentation management, ML project management. Kappa only focuses on serving and deploying trained models. You can, in fact, serve models logged in MLFlow experimentation with Kappa (see the gallery for an `example <https://github.com/kappa/gallery/blob/master/kappaflow/mlflow-to-kappa-example.ipynb>`_).
 
 Both Kappa and MLFlow can expose a trained model as a REST API server, but there are a few main differences:
 

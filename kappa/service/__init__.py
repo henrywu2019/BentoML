@@ -28,8 +28,8 @@ from dependency_injector.wiring import Provide, inject
 from typing import List
 
 from kappa.adapters import BaseInputAdapter, BaseOutputAdapter, DefaultOutput
-from kappa.configuration.containers import BentoMLContainer
-from kappa.exceptions import BentoMLException, InvalidArgument, NotFound
+from kappa.configuration.containers import KappaContainer
+from kappa.exceptions import KappaException, InvalidArgument, NotFound
 from kappa.saved_bundle import save_to_dir
 from kappa.saved_bundle.config import (
     DEFAULT_MAX_BATCH_SIZE,
@@ -768,7 +768,7 @@ class MyModel:
         """
         **Deprecated**: Legacy `MyModel#pack` class method, no longer supported
         """
-        raise BentoMLException(
+        raise KappaException(
             "MyModel#pack class method is deprecated, use instance method `pack` "
             "instead. e.g.: svc = MyMyModel(); svc.pack('model', model_object)"
         )
@@ -864,7 +864,7 @@ class MyModel:
     @inject
     def infer_pip_dependencies_map(
         self,
-        kappa_version: str = Provide[BentoMLContainer.bento_bundle_deployment_version],
+        kappa_version: str = Provide[KappaContainer.bento_bundle_deployment_version],
     ):
         if not self.pip_dependencies_map:
             self.pip_dependencies_map = {}

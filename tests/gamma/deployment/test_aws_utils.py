@@ -3,7 +3,7 @@ import pytest
 from botocore.exceptions import ClientError
 from mock import patch
 
-from kappa.exceptions import AWSServiceError, BentoMLException
+from kappa.exceptions import AWSServiceError, KappaException
 from kappa.gamma.deployment.aws_utils import (
     create_ecr_repository_if_not_exists,
     get_ecr_login_info,
@@ -114,7 +114,7 @@ def test_describe_cloudformation_stack():
     with patch(
         "botocore.client.BaseClient._make_api_call", new=mock_cf_client_too_many
     ):
-        with pytest.raises(BentoMLException) as error:
+        with pytest.raises(KappaException) as error:
             describe_cloudformation_stack(mock_region, mock_stack_name)
         assert f'Found more than one cloudformation stack for {mock_stack_name}' in str(
             error.value
@@ -124,7 +124,7 @@ def test_describe_cloudformation_stack():
         mock_client_call.side_effect = ClientError(
             operation_name='DescribeStacks', error_response={}
         )
-        with pytest.raises(BentoMLException) as error:
+        with pytest.raises(KappaException) as error:
             describe_cloudformation_stack(mock_region, mock_stack_name)
         assert f'Failed to describe CloudFormation {mock_stack_name}' in str(
             error.value

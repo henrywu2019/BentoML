@@ -187,7 +187,7 @@ For statsmodels, we recommend using PickleArtifact:
 
 Example Projects:
 
-* Shampoo Sales Prediction -  `Google Colab <https://colab.research.google.com/github/kappa/gallery/blob/master/statsmodels_holt/bentoml_statsmodels.ipynb>`__ / `Notebook Source <https://github.com/kappa/gallery/blob/master/statsmodels_holt/bentoml_statsmodels.ipynb>`__
+* Shampoo Sales Prediction -  `Google Colab <https://colab.research.google.com/github/kappa/gallery/blob/master/statsmodels_holt/kappa_statsmodels.ipynb>`__ / `Notebook Source <https://github.com/kappa/gallery/blob/master/statsmodels_holt/kappa_statsmodels.ipynb>`__
 
 
 =====

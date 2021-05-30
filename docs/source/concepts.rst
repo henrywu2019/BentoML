@@ -264,7 +264,7 @@ Custom Docker base image
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Kappa's default Docker base image is released on
-`dockerhub r/kappa <https://hub.docker.com/r/bentoml/model-server/tags>`_, its build
+`dockerhub r/kappa <https://hub.docker.com/r/kappa/model-server/tags>`_, its build
 process can be found under the
 `./docker directory in Kappa source code <https://github.com/kappa/Kappa/tree/master/docker/model-server>`_.
 
@@ -304,7 +304,7 @@ in at `~90MB`.
 .. code-block:: python
 
   # e.g. using Kappa slim image
-  @env(docker_base_image="bentoml/model-server:0.12.0-slim-py37")
+  @env(docker_base_image="kappa/model-server:0.12.0-slim-py37")
   @artifacts([SklearnModelArtifact('model')])
   class ExamplePredictionService(MyModel):
     ...
@@ -312,7 +312,7 @@ in at `~90MB`.
 However, as with using any alternative Docker base image, there are a few things to keep
 in mind. Firstly, you should manually select the right slim image for your bundle. For
 example, if you used Kappa version 0.11.0 and Python 3.7 to create your Kappa
-bundle, you would use `bentoml/model-server:0.11.0-slim-py37`. Currently, Kappa support
+bundle, you would use `kappa/model-server:0.11.0-slim-py37`. Currently, Kappa support
 Python 3.6, 3.7, and 3.8.
 
 Additionally, unlike the default docker base image, the slim image does not come with
@@ -1153,7 +1153,7 @@ as AWS credentials for managing deployments created on AWS:
     > docker run -p 3000:3000 -p 50051:50051 \
         -e AWS_SECRET_ACCESS_KEY=... -e AWS_ACCESS_KEY_ID=...  \
         kappa/gamma-service \
-        --db-url postgresql://scott:tiger@localhost:5432/bentomldb \
+        --db-url postgresql://scott:tiger@localhost:5432/kappadb \
         --repo-base-url s3://my-kappa-repo/
 
     * Starting Kappa GammaService gRPC Server
@@ -1315,7 +1315,7 @@ This command extends Kappa to be useful in a CI workflow or to provide a rapid w
 
 .. code-block:: bash
 
-    kappa retrieve ModelServe --target_dir=~/bentoml_bundle/
+    kappa retrieve ModelServe --target_dir=~/kappa_bundle/
 
 
 .. spelling::

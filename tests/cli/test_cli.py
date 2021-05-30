@@ -14,7 +14,7 @@ from kappa.utils.docker_utils import (
     to_valid_docker_image_version,
 )
 from kappa.cli.utils import echo_docker_api_result
-from kappa.exceptions import BentoMLException, GammaDeploymentException
+from kappa.exceptions import KappaException, GammaDeploymentException
 
 
 def generate_test_input_file():
@@ -118,7 +118,7 @@ def test_run_command_with_input_file(bento_bundle_path):
 
 def test_echo_docker_api_result_build():
     build_stream = [
-        {'stream': 'Step 1/2 : FROM bentoml/model-server:0.8.1'},
+        {'stream': 'Step 1/2 : FROM kappa/model-server:0.8.1'},
         {'stream': '\n'},
         {'stream': ' ---> f034fa23264c\n'},
         {'stream': 'Step 2/2 : COPY . /bento'},
@@ -130,7 +130,7 @@ def test_echo_docker_api_result_build():
     ]
 
     expected = [
-        "Step 1/2 : FROM bentoml/model-server:0.8.1",
+        "Step 1/2 : FROM kappa/model-server:0.8.1",
         " ---> f034fa23264c",
         "Step 2/2 : COPY . /bento",
         " ---> Using cache",
@@ -159,7 +159,7 @@ def test_echo_docker_api_result_push_no_access():
         },
     ]
 
-    with pytest.raises(BentoMLException) as e:
+    with pytest.raises(KappaException) as e:
         _ = [line for line in echo_docker_api_result(push_stream)]
     assert str(e.value) == 'denied: requested access to the resource is denied'
 

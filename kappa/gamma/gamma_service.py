@@ -8,8 +8,8 @@ from concurrent import futures
 import certifi
 import click
 from kappa.configuration import get_debug_mode
-from kappa.configuration.containers import BentoMLContainer
-from kappa.exceptions import BentoMLException
+from kappa.configuration.containers import KappaContainer
+from kappa.exceptions import KappaException
 from kappa.utils import reserve_free_port
 from kappa.gamma.grpc_interceptor import (
     PromServerInterceptor,
@@ -22,23 +22,23 @@ from prometheus_client import start_http_server
 
 @inject
 def get_gamma_service(
-    channel_address: str = Provide[BentoMLContainer.config.gamma.remote.url],
-    access_token: str = Provide[BentoMLContainer.config.gamma.remote.access_token],
+    channel_address: str = Provide[KappaContainer.config.gamma.remote.url],
+    access_token: str = Provide[KappaContainer.config.gamma.remote.access_token],
     access_token_header: str = Provide[
-        BentoMLContainer.config.gamma.remote.access_token_header
+        KappaContainer.config.gamma.remote.access_token_header
     ],
-    tls_root_ca_cert: str = Provide[BentoMLContainer.gamma_tls_root_ca_cert],
-    tls_client_key: str = Provide[BentoMLContainer.config.gamma.remote.tls.client_key],
+    tls_root_ca_cert: str = Provide[KappaContainer.gamma_tls_root_ca_cert],
+    tls_client_key: str = Provide[KappaContainer.config.gamma.remote.tls.client_key],
     tls_client_cert: str = Provide[
-        BentoMLContainer.config.gamma.remote.tls.client_cert
+        KappaContainer.config.gamma.remote.tls.client_cert
     ],
-    db_url: str = Provide[BentoMLContainer.gamma_database_url],
-    default_namespace: str = Provide[BentoMLContainer.config.gamma.namespace],
-    repository_type: str = Provide[BentoMLContainer.config.gamma.repository.type],
-    file_system_directory: str = Provide[BentoMLContainer.gamma_file_system_directory],
-    s3_url: str = Provide[BentoMLContainer.config.gamma.repository.s3.url],
-    gcs_url: str = Provide[BentoMLContainer.config.gamma.repository.gcs.url],
-    oci_url: str = Provide[BentoMLContainer.config.gamma.repository.oci.url],
+    db_url: str = Provide[KappaContainer.gamma_database_url],
+    default_namespace: str = Provide[KappaContainer.config.gamma.namespace],
+    repository_type: str = Provide[KappaContainer.config.gamma.repository.type],
+    file_system_directory: str = Provide[KappaContainer.gamma_file_system_directory],
+    s3_url: str = Provide[KappaContainer.config.gamma.repository.s3.url],
+    gcs_url: str = Provide[KappaContainer.config.gamma.repository.gcs.url],
+    oci_url: str = Provide[KappaContainer.config.gamma.repository.oci.url],
 ):
     if channel_address:
         # Lazily import grpcio for GammaSerivce gRPC related actions
@@ -105,7 +105,7 @@ def start_gamma_service_grpc_server(
     s3_endpoint_url,
     gcs_url,
     oci_url,
-    web_ui_log_path: str = Provide[BentoMLContainer.gamma_logging_path],
+    web_ui_log_path: str = Provide[KappaContainer.gamma_logging_path],
 ):
     # Lazily import grpcio for GammaSerivce gRPC related actions
     import grpc
@@ -277,7 +277,7 @@ def async_start_gamma_service_web_ui(
             ]
     else:
         if not os.path.exists(os.path.join(web_ui_dir, "dist", "bundle.js")):
-            raise BentoMLException(
+            raise KappaException(
                 "Gamma web client built is missing. "
                 "Please run `npm run build` in the kappa/gamma/web directory "
                 "and then try again"
@@ -300,7 +300,7 @@ def async_start_gamma_service_web_ui(
     if not is_web_proc_running:
         web_proc_output = web_proc.stdout.read().decode("utf-8")
         logger.error(f"return code: {web_proc.returncode} {web_proc_output}")
-        raise BentoMLException("Gamma web ui did not start properly")
+        raise KappaException("Gamma web ui did not start properly")
 
     atexit.register(web_proc.terminate)
 

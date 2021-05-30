@@ -25,7 +25,7 @@ import modulefinder
 from unittest.mock import patch
 
 from kappa.saved_bundle.pip_pkg import get_all_pip_installed_modules
-from kappa.exceptions import BentoMLException
+from kappa.exceptions import KappaException
 
 
 logger = logging.getLogger(__name__)
@@ -87,7 +87,7 @@ def copy_local_py_modules(target_module, destination):
     # When target module is defined in interactive session, we can not easily
     # get the class definition into a python module file and distribute it
     if target_module.__name__ == "__main__" and not hasattr(target_module, "__file__"):
-        raise BentoMLException(
+        raise KappaException(
             "Custom BentoModel class can not be defined in Python interactive REPL, try"
             " writing the class definition to a file and import it."
         )

@@ -18,7 +18,7 @@ import logging
 from dependency_injector.wiring import Provide, inject
 
 from kappa.configuration.containers import (
-    BentoMLContainer,
+    KappaContainer,
     GAMMA_REPOSITORY_TYPES,
     GAMMA_REPOSITORY_FILE_SYSTEM,
     GAMMA_REPOSITORY_S3,
@@ -34,19 +34,19 @@ logger = logging.getLogger(__name__)
 @inject
 def add_gamma_service_sub_command(
     cli,
-    default_db_url: str = Provide[BentoMLContainer.gamma_database_url],
+    default_db_url: str = Provide[KappaContainer.gamma_database_url],
     default_repository_type: str = Provide[
-        BentoMLContainer.config.gamma.repository.type
+        KappaContainer.config.gamma.repository.type
     ],
     default_file_system_directory: str = Provide[
-        BentoMLContainer.gamma_file_system_directory
+        KappaContainer.gamma_file_system_directory
     ],
-    default_s3_url: str = Provide[BentoMLContainer.config.gamma.repository.s3.url],
+    default_s3_url: str = Provide[KappaContainer.config.gamma.repository.s3.url],
     default_s3_endpoint_url: str = Provide[
-        BentoMLContainer.config.gamma.repository.s3.endpoint_url
+        KappaContainer.config.gamma.repository.s3.endpoint_url
     ],
-    default_gcs_url: str = Provide[BentoMLContainer.config.gamma.repository.gcs.url],
-    default_oci_url: str = Provide[BentoMLContainer.config.gamma.repository.oci.url],
+    default_gcs_url: str = Provide[KappaContainer.config.gamma.repository.gcs.url],
+    default_oci_url: str = Provide[KappaContainer.config.gamma.repository.oci.url],
 ):
     # pylint: disable=unused-variable
 

@@ -17,7 +17,7 @@ from functools import lru_cache
 
 from dependency_injector.wiring import Provide, inject
 
-from kappa.configuration.containers import BentoMLContainer
+from kappa.configuration.containers import KappaContainer
 
 
 logger = logging.getLogger(__name__)
@@ -26,12 +26,12 @@ logger = logging.getLogger(__name__)
 @inject
 @lru_cache(maxsize=1)
 def get_tracer(
-    tracer_type=Provide[BentoMLContainer.config.tracing.type],
-    zipkin_server_url: str = Provide[BentoMLContainer.config.tracing.zipkin.url],
+    tracer_type=Provide[KappaContainer.config.tracing.type],
+    zipkin_server_url: str = Provide[KappaContainer.config.tracing.zipkin.url],
     jaeger_server_address: str = Provide[
-        BentoMLContainer.config.tracing.jaeger.address
+        KappaContainer.config.tracing.jaeger.address
     ],
-    jaeger_server_port: str = Provide[BentoMLContainer.config.tracing.jaeger.port],
+    jaeger_server_port: str = Provide[KappaContainer.config.tracing.jaeger.port],
 ):
     # isinstance check here allow trace to be used where the top-level entry point has
     # not yet implemented the wiring of Kappa config
