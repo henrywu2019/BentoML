@@ -1,10 +1,10 @@
 FROM python:3.7-buster
 
 # GammaService GRPC port
-EXPOSE 50051
+EXPOSE 5555
 
 # GammaService Web UI port
-EXPOSE 3000
+EXPOSE 5000
 
 COPY entrypoint.sh /usr/local/bin/
 
