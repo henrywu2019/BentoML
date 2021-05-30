@@ -1,9 +1,9 @@
 # Using specific version of docker image, due to issues at upstream. Once
 # https://github.com/Azure/azure-functions-docker/issues/281 is resolved, we can update
 # this.
-#ARG PYTHON_VERSION
-#FROM mcr.microsoft.com/azure-functions/python:3.0.13901-python$PYTHON_VERSION
-FROM docker.io/fnproject/python
+ARG PYTHON_VERSION
+## TODO
+FROM mcr.microsoft.com/azure-functions/python:3.0.13901-python$PYTHON_VERSION
 
 # Install miniconda3
 # https://hub.docker.com/r/continuumio/miniconda3/dockerfile
@@ -35,11 +35,9 @@ RUN apt-get update --fix-missing && \
 
 #ARG KAPPA_VERSION
 #ENV KAPPA_VERSION=$KAPPA_VERSION
-
-# pre-install Kappa base dependencies
-#RUN pip install kappa==$KAPPA_VERSION --no-cache-dir
 RUN pip install pytz oci
 
 # pre-install Kappa base dependencies
 #RUN pip install kappa==$KAPPA_VERSION --no-cache-dir
 RUN pip install http://129.159.115.226:9999/Kappa-0.0.1-py3-none-any.whl --no-cache-dir
+
