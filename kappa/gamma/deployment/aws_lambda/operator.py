@@ -129,10 +129,10 @@ def _create_aws_lambda_cloudformation_template_file(
                 'Policies': [{'S3ReadPolicy': {'BucketName': s3_bucket_name}}],
                 'Environment': {
                     'Variables': {
-                        'BENTOML_BENTO_SERVICE_NAME': bento_service_name,
-                        'BENTOML_API_NAME': api_name,
-                        'BENTOML_S3_BUCKET': s3_bucket_name,
-                        'BENTOML_DEPLOYMENT_PATH_PREFIX': deployment_path_prefix,
+                        'KAPPA_BENTO_SERVICE_NAME': bento_service_name,
+                        'KAPPA_API_NAME': api_name,
+                        'KAPPA_S3_BUCKET': s3_bucket_name,
+                        'KAPPA_DEPLOYMENT_PATH_PREFIX': deployment_path_prefix,
                     }
                 },
             },

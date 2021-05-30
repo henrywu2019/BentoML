@@ -13,34 +13,34 @@ def test_get_local_config_file():
 
     assert config_file is None
 
-    os.environ["BENTOML_CONFIG"] = "/tmp/kappa.cfg"
+    os.environ["KAPPA_CONFIG"] = "/tmp/kappa.cfg"
     config_file = get_local_config_file()
 
     assert config_file == "/tmp/kappa.cfg"
 
-    del os.environ["BENTOML_CONFIG"]
+    del os.environ["KAPPA_CONFIG"]
 
 
 def test_get_debug_mode():
-    os.environ["BENTOML_DEBUG"] = "TRUE"
+    os.environ["KAPPA_DEBUG"] = "TRUE"
     assert get_debug_mode()
 
-    os.environ["BENTOML_DEBUG"] = "true"
+    os.environ["KAPPA_DEBUG"] = "true"
     assert get_debug_mode()
 
-    os.environ["BENTOML_DEBUG"] = "True"
+    os.environ["KAPPA_DEBUG"] = "True"
     assert get_debug_mode()
 
-    os.environ["BENTOML_DEBUG"] = "FALSE"
+    os.environ["KAPPA_DEBUG"] = "FALSE"
     assert not get_debug_mode()
 
-    os.environ["BENTOML_DEBUG"] = "false"
+    os.environ["KAPPA_DEBUG"] = "false"
     assert not get_debug_mode()
 
-    os.environ["BENTOML_DEBUG"] = "False"
+    os.environ["KAPPA_DEBUG"] = "False"
     assert not get_debug_mode()
 
-    del os.environ["BENTOML_DEBUG"]
+    del os.environ["KAPPA_DEBUG"]
     assert not get_debug_mode()
 
 
@@ -51,7 +51,7 @@ def test_set_debug_mode():
     set_debug_mode(False)
     assert not get_debug_mode()
 
-    del os.environ["BENTOML_DEBUG"]
+    del os.environ["KAPPA_DEBUG"]
 
 
 def assert_debug_mode(enabled: bool):
@@ -86,4 +86,4 @@ def test_multiprocess_debug_mode():
 
     assert process.exitcode == 0
 
-    del os.environ["BENTOML_DEBUG"]
+    del os.environ["KAPPA_DEBUG"]

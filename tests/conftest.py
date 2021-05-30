@@ -75,7 +75,7 @@ def pytest_configure():
                 def _wrapped(*args, **kwargs):
                     from packaging import version
 
-                    bundle_ver = os.environ.get("BUNDLE_BENTOML_VERSION")
+                    bundle_ver = os.environ.get("BUNDLE_KAPPA_VERSION")
                     if bundle_ver and version.parse(bundle_ver) < version.parse(ver):
                         pytest.skip()
                     return func(*args, **kwargs)
@@ -86,7 +86,7 @@ def pytest_configure():
                 async def _wrapped(*args, **kwargs):
                     from packaging import version
 
-                    bundle_ver = os.environ.get("BUNDLE_BENTOML_VERSION")
+                    bundle_ver = os.environ.get("BUNDLE_KAPPA_VERSION")
                     if bundle_ver and version.parse(bundle_ver) < version.parse(ver):
                         pytest.skip()
                     return await func(*args, **kwargs)

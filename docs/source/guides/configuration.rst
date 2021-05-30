@@ -13,13 +13,13 @@ and applied to the entire team.
     `kappa config` CLI command is no longer compatible with the configuration releases in 0.13.0 and above.
     Please see legacy configuration property mapping table below to upgrade configuration to the new format.
 
-Kappa configuration is defined by a YAML file placed in a directory specified by the `BENTOML_CONFIG`
-environment variable. By default, configurations defined in `$BENTOML_HOME/kappa.yml` is applied if present.
+Kappa configuration is defined by a YAML file placed in a directory specified by the `KAPPA_CONFIG`
+environment variable. By default, configurations defined in `$KAPPA_HOME/kappa.yml` is applied if present.
 The example below starts the bento server with configuration defined in `~/bentoml_configuration.yml`
 
 .. code-block:: shell
 
-    $ BENTOML_CONFIG=~/bentoml_configuration.yml kappa serve-gunicorn IrisClassifier:latest
+    $ KAPPA_CONFIG=~/bentoml_configuration.yml kappa serve-gunicorn IrisClassifier:latest
 
 Users only need to specify a partial configuration with only the properties they wish to customize instead 
 of a full configuration schema. In the example below, the microbatching workers count is overridden to 4. 

@@ -32,7 +32,7 @@ To give us more information for diagnosing the issue, make sure to enable debug 
 Enable via environment variable, e.g.:
 ```
 $ git clone git@github.com:kappa/Kappa.git && cd kappa
-$ BENTOML_DEBUG=TRUE python guides/quick-start/main.py
+$ KAPPA_DEBUG=TRUE python guides/quick-start/main.py
 ```
 
 Or set debug logging in your Python code:

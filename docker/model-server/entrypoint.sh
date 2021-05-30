@@ -17,9 +17,9 @@ _main() {
 
   if [ -n "${PORT:-}" ]; then
     # Set Kappa API server port via env var
-    export BENTOML_PORT=$PORT \
+    export KAPPA_PORT=$PORT \
     # Backward compatibility for Kappa prior to 0.7.5
-    export BENTOML__APISERVER__DEFAULT_PORT=$PORT
+    export KAPPA__APISERVER__DEFAULT_PORT=$PORT
   fi
 
   exec "$@"

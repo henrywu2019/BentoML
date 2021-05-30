@@ -24,7 +24,7 @@ from kappa import __version__, _version as version_mod
 logger = logging.getLogger(__name__)
 
 
-DEBUG_ENV_VAR = "BENTOML_DEBUG"
+DEBUG_ENV_VAR = "KAPPA_DEBUG"
 
 
 def expand_env_var(env_var):
@@ -46,7 +46,7 @@ def expand_env_var(env_var):
 # the Kappa module to be used when loading and using a saved MyModel.
 # This is useful when using customized Kappa fork/branch or when working with
 # development branches of Kappa
-BENTOML_VERSION = __version__
+KAPPA_VERSION = __version__
 # e.g. from '0.4.2+5.g6cac97f.dirty' to '0.4.2'
 LAST_PYPI_RELEASE_VERSION = __version__.split('+')[0]
 
@@ -59,9 +59,9 @@ def _is_pip_installed_kappa():
 
 
 def get_local_config_file():
-    if "BENTOML_CONFIG" in os.environ:
+    if "KAPPA_CONFIG" in os.environ:
         # User local config file for customizing kappa
-        return expand_env_var(os.environ.get("BENTOML_CONFIG"))
+        return expand_env_var(os.environ.get("KAPPA_CONFIG"))
     return None
 
 
@@ -78,7 +78,7 @@ def get_kappa_deploy_version(kappa_deploy_version: str):
     if kappa_deploy_version != LAST_PYPI_RELEASE_VERSION:
         logger.info(f"Setting Kappa deploy version to '{kappa_deploy_version}'")
 
-    if LAST_PYPI_RELEASE_VERSION != BENTOML_VERSION:
+    if LAST_PYPI_RELEASE_VERSION != KAPPA_VERSION:
         if _is_pip_installed_kappa():
             logger.warning(
                 "Using Kappa not from official PyPI release. In order to find the "

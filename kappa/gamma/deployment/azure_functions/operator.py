@@ -224,7 +224,7 @@ def _build_and_push_docker_image_to_azure_container_registry(
             dockerfile=os.path.join(azure_functions_project_dir, 'Dockerfile-azure'),
             tag=tag,
             buildargs={
-                'BENTOML_VERSION': LAST_PYPI_RELEASE_VERSION,
+                'KAPPA_VERSION': LAST_PYPI_RELEASE_VERSION,
                 'PYTHON_VERSION': major + minor,
             },
         )

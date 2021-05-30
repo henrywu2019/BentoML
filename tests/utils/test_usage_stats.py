@@ -13,7 +13,7 @@ MOCK_DEPLOYMENT_NAME = 'mock_name'
 MOCK_FAILED_DEPLOYMENT_NAME = 'mock-failed'
 MOCK_DEPLOYMENT_NAMESPACE = 'mock_namespace'
 
-DO_NOT_TRACK_ENV = "BENTOML_DO_NOT_TRACK"
+DO_NOT_TRACK_ENV = "KAPPA_DO_NOT_TRACK"
 
 
 def mock_track_func(event, properties):
@@ -174,9 +174,9 @@ def test_track_server_force_delete(mock_deployment_store):
 def test_do_not_track():
     """Test _do_not_track behavior with different environment variable values.
 
-    If BENTOML_DO_NOT_TRACK is not set, False should be returned. Else if
-    BENTOML_DO_NOT_TRACK is True, True should be returned. Else if
-    BENTOML_DO_NOT_TRACK is False, False should be returned. Calling _do_not_track()
+    If KAPPA_DO_NOT_TRACK is not set, False should be returned. Else if
+    KAPPA_DO_NOT_TRACK is True, True should be returned. Else if
+    KAPPA_DO_NOT_TRACK is False, False should be returned. Calling _do_not_track()
     multiple times will return the same value.
     """
     _do_not_track.cache_clear()

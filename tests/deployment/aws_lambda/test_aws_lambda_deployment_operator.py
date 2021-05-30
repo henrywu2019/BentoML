@@ -79,11 +79,11 @@ def test_aws_lambda_app_py(monkeypatch):
 
     mock_bento_service = Mock_bento_service_class()
 
-    monkeypatch.setenv('BENTOML_BENTO_SERVICE_NAME', 'Mock_bento_service')
-    monkeypatch.setenv('BENTOML_S3_BUCKET', 'Mock_s3_bucket')
-    monkeypatch.setenv('BENTOML_DEPLOYMENT_PATH_PREFIX', 'deployment/prefix')
-    monkeypatch.setenv('BENTOML_ARTIFACTS_PREFIX', 'mock_artifacts_prefix')
-    monkeypatch.setenv('BENTOML_API_NAME', 'predict')
+    monkeypatch.setenv('KAPPA_BENTO_SERVICE_NAME', 'Mock_bento_service')
+    monkeypatch.setenv('KAPPA_S3_BUCKET', 'Mock_s3_bucket')
+    monkeypatch.setenv('KAPPA_DEPLOYMENT_PATH_PREFIX', 'deployment/prefix')
+    monkeypatch.setenv('KAPPA_ARTIFACTS_PREFIX', 'mock_artifacts_prefix')
+    monkeypatch.setenv('KAPPA_API_NAME', 'predict')
 
     @patch('kappa.saved_bundle.load_from_dir', return_value=mock_bento_service)
     def return_predict_func(_):
@@ -103,8 +103,8 @@ def test_aws_lambda_app_py(monkeypatch):
 
     # Clean up environ set by lambda_app.py
     del os.environ["KAPPA_HOME"]
-    del os.environ["BENTOML_BENTO_SERVICE_NAME"]
-    del os.environ["BENTOML_API_NAME"]
+    del os.environ["KAPPA_BENTO_SERVICE_NAME"]
+    del os.environ["KAPPA_API_NAME"]
 
 
 @patch('shutil.rmtree', MagicMock())

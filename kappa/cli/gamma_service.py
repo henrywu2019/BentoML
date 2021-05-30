@@ -57,7 +57,7 @@ def add_gamma_service_sub_command(
         help='Database URL following RFC-1738, and usually can include username, '
         'password, hostname, database name as well as optional keyword arguments '
         'for additional configuration',
-        envvar='BENTOML_DB_URL',
+        envvar='KAPPA_DB_URL',
         default=default_db_url,
     )
     @click.option(
@@ -66,28 +66,28 @@ def add_gamma_service_sub_command(
         help='Deprecated option for base URL for storing Kappa saved bundle files, '
         'this can be a file system path(POSIX/Windows), or a S3 URL, '
         'usually starting with "s3://"',
-        envvar='BENTOML_REPO_BASE_URL',
+        envvar='KAPPA_REPO_BASE_URL',
     )
     @click.option(
         '--grpc-port',
         type=click.INT,
         default=50051,
         help='Port to run GammaService gRPC server',
-        envvar='BENTOML_GRPC_PORT',
+        envvar='KAPPA_GRPC_PORT',
     )
     @click.option(
         '--ui-port',
         type=click.INT,
         default=3000,
         help='Port to run GammaService Web UI server',
-        envvar='BENTOML_WEB_UI_PORT',
+        envvar='KAPPA_WEB_UI_PORT',
     )
     @click.option(
         '--ui/--no-ui',
         default=True,
         help='Run GammaService with or without Web UI, when running with --no-ui, it '
         'will only run the gRPC server',
-        envvar='BENTOML_ENABLE_WEB_UI',
+        envvar='KAPPA_ENABLE_WEB_UI',
     )
     @click.option(
         '--web-prefix-path',
@@ -95,28 +95,28 @@ def add_gamma_service_sub_command(
         default='.',
         help='Add a location prefix to the URL when running GammaService'
         'behind a reverse proxy server',
-        envvar='BENTOML_GAMMA_WEB_PREFIX_PATH',
+        envvar='KAPPA_GAMMA_WEB_PREFIX_PATH',
     )
     @click.option(
         '--repository-type',
         type=click.Choice(GAMMA_REPOSITORY_TYPES, case_sensitive=False),
         default=default_repository_type,
         help='Type of the repository implementation',
-        envvar='BENTOML_GAMMA_REPOSITORY_TYPE',
+        envvar='KAPPA_GAMMA_REPOSITORY_TYPE',
     )
     @click.option(
         '--file-system-directory',
         type=click.STRING,
         default=default_file_system_directory,
         help='Specifies the directory path for the file system repository type',
-        envvar='BENTOML_GAMMA_FILE_SYSTEM_DIRECTORY',
+        envvar='KAPPA_GAMMA_FILE_SYSTEM_DIRECTORY',
     )
     @click.option(
         '--s3-url',
         type=click.STRING,
         default=default_s3_url,
         help='Specifies the S3 URL for the S3 repository type',
-        envvar='BENTOML_GAMMA_S3_URL',
+        envvar='KAPPA_GAMMA_S3_URL',
     )
     @click.option(
         '--s3-endpoint-url',
@@ -124,21 +124,21 @@ def add_gamma_service_sub_command(
         default=default_s3_endpoint_url,
         help='S3 Endpoint URL is used for deploying with storage services that are '
         'compatible with Amazon S3, such as MinIO',
-        envvar='BENTOML_S3_ENDPOINT_URL',
+        envvar='KAPPA_S3_ENDPOINT_URL',
     )
     @click.option(
         '--gcs-url',
         type=click.STRING,
         default=default_gcs_url,
         help='Specifies the GCS URL for the GCS repository type',
-        envvar='BENTOML_GAMMA_GCS_URL',
+        envvar='KAPPA_GAMMA_GCS_URL',
     )
     @click.option(
         '--oci-url',
         type=click.STRING,
         default=default_oci_url,
         help='Specifies the OCI URL for the OCI repository type',
-        envvar='BENTOML_GAMMA_OCI_URL',
+        envvar='KAPPA_GAMMA_OCI_URL',
     )
     def gamma_service_start(
         db_url,

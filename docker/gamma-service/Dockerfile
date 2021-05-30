@@ -52,9 +52,9 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && npm --version
 
 # Build time argument - the Kappa version to be used in this image
-ARG BENTOML_VERSION
-ENV BENTOML_VERSION=$BENTOML_VERSION
-RUN pip install "kappa[gamma_service]==$BENTOML_VERSION" --no-cache-dir
+ARG KAPPA_VERSION
+ENV KAPPA_VERSION=$KAPPA_VERSION
+RUN pip install "kappa[gamma_service]==$KAPPA_VERSION" --no-cache-dir
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["kappa", "gamma-service-start"]

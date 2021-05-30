@@ -19,7 +19,7 @@ EOF
 
 echo "Starting Kappa proto generator docker container.."
 docker run --rm -v $GIT_ROOT:/home/kappa kappa-proto-generator \
-    bash -c "BENTOML_REPO=/home/kappa /home/kappa/protos/generate.sh"
+    bash -c "KAPPA_REPO=/home/kappa /home/kappa/protos/generate.sh"
 
 #docker run --rm -v $GIT_ROOT:/home/kappa kappa-proto-generator -it \
 #    bash -c "bash"

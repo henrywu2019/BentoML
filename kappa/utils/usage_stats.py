@@ -24,7 +24,7 @@ from functools import lru_cache
 from kappa.utils.ruamel_yaml import YAML
 from kappa.utils import ProtoMessageToDict
 from kappa.configuration import _is_pip_installed_kappa
-from kappa import __version__ as BENTOML_VERSION
+from kappa import __version__ as KAPPA_VERSION
 
 
 logger = logging.getLogger(__name__)
@@ -127,7 +127,7 @@ def _do_not_track() -> bool:
     Returns True if and only if the environment variable is defined and has value True.
     The function is cached for better performance.
     """
-    return os.environ.get("BENTOML_DO_NOT_TRACK", str(False)).lower() == "true"
+    return os.environ.get("KAPPA_DO_NOT_TRACK", str(False)).lower() == "true"
 
 
 def track(event_type, event_properties=None):
@@ -144,7 +144,7 @@ def track(event_type, event_properties=None):
         del event_properties['bento_service_bundle_path']
 
     event_properties['py_version'] = PY_VERSION
-    event_properties["bento_version"] = BENTOML_VERSION
+    event_properties["bento_version"] = KAPPA_VERSION
     event_properties["platform_info"] = PLATFORM
 
     return _send_amplitude_event(event_type, event_properties)

@@ -24,8 +24,8 @@ logger = logging.getLogger(__name__)
 
 
 def download_extra_resources():
-    s3_bucket = os.environ.get('BENTOML_S3_BUCKET')
-    s3_prefix = os.environ.get('BENTOML_DEPLOYMENT_PATH_PREFIX')
+    s3_bucket = os.environ.get('KAPPA_S3_BUCKET')
+    s3_prefix = os.environ.get('KAPPA_DEPLOYMENT_PATH_PREFIX')
     additional_pkg_dir = '/tmp/requirements'
 
     if not os.path.exists(additional_pkg_dir) or not os.listdir(additional_pkg_dir):

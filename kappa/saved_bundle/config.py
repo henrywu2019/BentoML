@@ -21,13 +21,13 @@ from sys import version_info
 
 from google.protobuf.struct_pb2 import Struct
 
-from kappa import __version__ as BENTOML_VERSION
+from kappa import __version__ as KAPPA_VERSION
 from kappa.configuration.containers import BentoMLContainer
 from kappa.exceptions import BentoMLConfigException
 from kappa.utils import dump_to_yaml_str
 from kappa.utils.ruamel_yaml import YAML
 
-BENTOML_CONFIG_YAML_TEMPLATE = """\
+KAPPA_CONFIG_YAML_TEMPLATE = """\
 version: {kappa_version}
 kind: {kind}
 metadata:
@@ -88,7 +88,7 @@ class SavedBundleConfig(object):
         self._yaml = YAML()
         self._yaml.default_flow_style = False
         self.config = self._yaml.load(
-            BENTOML_CONFIG_YAML_TEMPLATE.format(
+            KAPPA_CONFIG_YAML_TEMPLATE.format(
                 kind=self.kind,
                 kappa_version=kappa_deployment_version,
                 created_at=str(datetime.utcnow()),
@@ -118,17 +118,17 @@ class SavedBundleConfig(object):
         ver = str(conf["version"])
         py_ver = conf.config["env"]["python_version"]
 
-        if ver != BENTOML_VERSION:
+        if ver != KAPPA_VERSION:
             msg = (
                 "Saved MyModel version mismatch: loading MyModel "
                 "bundle create with Kappa version {}, but loading from Kappa "
-                "version {}".format(conf["version"], BENTOML_VERSION)
+                "version {}".format(conf["version"], KAPPA_VERSION)
             )
 
             # If major version is different, then there could be incompatible API
             # changes. Raise error in this case.
-            if ver.split(".")[0] != BENTOML_VERSION.split(".")[0]:
-                if not BENTOML_VERSION.startswith('0+untagged'):
+            if ver.split(".")[0] != KAPPA_VERSION.split(".")[0]:
+                if not KAPPA_VERSION.startswith('0+untagged'):
                     raise BentoMLConfigException(msg)
                 else:
                     logger.warning(msg)

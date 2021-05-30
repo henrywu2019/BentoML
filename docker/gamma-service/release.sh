@@ -2,7 +2,7 @@
 set -e
 
 if [ "$#" -eq 1 ]; then
-  BENTOML_VERSION=$1
+  KAPPA_VERSION=$1
 else
   echo "Must provide target Kappa version, e.g. ./release.sh 0.7.0"
   exit 1
@@ -13,10 +13,10 @@ GIT_ROOT=$(git rev-parse --show-toplevel)
 cd "$GIT_ROOT"/docker/gamma-service
 
 docker build --pull \
-    --build-arg BENTOML_VERSION="$BENTOML_VERSION" \
-    -t kappa/gamma-service:"$BENTOML_VERSION" \
+    --build-arg KAPPA_VERSION="$KAPPA_VERSION" \
+    -t kappa/gamma-service:"$KAPPA_VERSION" \
     -t kappa/gamma-service:latest \
     .
 
-docker push kappa/gamma-service:"$BENTOML_VERSION"
+docker push kappa/gamma-service:"$KAPPA_VERSION"
 docker push kappa/gamma-service:latest

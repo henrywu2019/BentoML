@@ -89,7 +89,7 @@ class BentoMLCommandGroup(click.Group):
             '--do-not-track',
             is_flag=True,
             default=False,
-            envvar="BENTOML_DO_NOT_TRACK",
+            envvar="KAPPA_DO_NOT_TRACK",
             help="Specify the option to not track usage.",
         )
         @functools.wraps(func)
@@ -115,7 +115,7 @@ class BentoMLCommandGroup(click.Group):
         @functools.wraps(func)
         def wrapper(do_not_track: bool, *args, **kwargs):
             if do_not_track:
-                os.environ["BENTOML_DO_NOT_TRACK"] = str(True)
+                os.environ["KAPPA_DO_NOT_TRACK"] = str(True)
                 logger.info(
                     "Executing '%s' command without usage tracking.", command_name
                 )

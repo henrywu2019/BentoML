@@ -89,20 +89,20 @@ def create_bento_service_cli(
             '--enable-microbatch/--disable-microbatch',
             default=default_enable_microbatch,
             help="Run API server with micro-batch enabled.",
-            envvar='BENTOML_ENABLE_MICROBATCH',
+            envvar='KAPPA_ENABLE_MICROBATCH',
         ),
         click.option(
             '--mb-max-batch-size',
             type=click.INT,
             help="Specify micro batching maximal batch size.",
-            envvar='BENTOML_MB_MAX_BATCH_SIZE',
+            envvar='KAPPA_MB_MAX_BATCH_SIZE',
             default=default_mb_max_batch_size,
         ),
         click.option(
             '--mb-max-latency',
             type=click.INT,
             help="Specify micro batching maximal latency in milliseconds.",
-            envvar='BENTOML_MB_MAX_LATENCY',
+            envvar='KAPPA_MB_MAX_LATENCY',
             default=default_mb_max_latency,
         ),
     ]
@@ -195,7 +195,7 @@ def create_bento_service_cli(
         type=click.INT,
         default=default_port,
         help="The port to listen on for the REST api server, default is 5000",
-        envvar='BENTOML_PORT',
+        envvar='KAPPA_PORT',
     )
     @add_options(batch_options)
     @click.option(
@@ -204,7 +204,7 @@ def create_bento_service_cli(
         default=default_run_with_ngrok,
         help="Use ngrok to relay traffic on a public endpoint to this "
         "API server on localhost",
-        envvar='BENTOML_ENABLE_NGROK',
+        envvar='KAPPA_ENABLE_NGROK',
     )
     @click.option(
         '--gamma-url',
@@ -218,7 +218,7 @@ def create_bento_service_cli(
         is_flag=True,
         default=default_enable_swagger,
         help="Run API server with Swagger UI enabled",
-        envvar='BENTOML_ENABLE_SWAGGER',
+        envvar='KAPPA_ENABLE_SWAGGER',
     )
     def serve(
         port,
@@ -257,7 +257,7 @@ def create_bento_service_cli(
         type=click.INT,
         default=default_port,
         help="The port to listen on for the REST api server, default is 5000",
-        envvar='BENTOML_PORT',
+        envvar='KAPPA_PORT',
     )
     @click.option(
         "-w",
@@ -265,7 +265,7 @@ def create_bento_service_cli(
         type=click.INT,
         default=default_workers,
         help="Number of workers will start for the gunicorn server",
-        envvar='BENTOML_GUNICORN_WORKERS',
+        envvar='KAPPA_GUNICORN_WORKERS',
     )
     @click.option(
         "--timeout",
@@ -279,7 +279,7 @@ def create_bento_service_cli(
         type=click.INT,
         default=default_microbatch_workers,
         help="Number of micro-batch request dispatcher workers",
-        envvar='BENTOML_MICROBATCH_WORKERS',
+        envvar='KAPPA_MICROBATCH_WORKERS',
     )
     @click.option(
         '--gamma-url',
@@ -293,7 +293,7 @@ def create_bento_service_cli(
         is_flag=True,
         default=default_enable_swagger,
         help="Run API server with Swagger UI enabled",
-        envvar='BENTOML_ENABLE_SWAGGER',
+        envvar='KAPPA_ENABLE_SWAGGER',
     )
     def serve_gunicorn(
         port,

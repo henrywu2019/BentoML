@@ -32,8 +32,8 @@ RUN apt-get update --fix-missing && \
     apt-get install -y build-essential && \
     apt-get clean
 
-ARG BENTOML_VERSION
-ENV BENTOML_VERSION=$BENTOML_VERSION
+ARG KAPPA_VERSION
+ENV KAPPA_VERSION=$KAPPA_VERSION
 
 # pre-install Kappa base dependencies
-RUN pip install kappa==$BENTOML_VERSION --no-cache-dir
+RUN pip install kappa==$KAPPA_VERSION --no-cache-dir

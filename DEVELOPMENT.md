@@ -96,9 +96,9 @@ from kappa.configuration import set_debug_mode
 set_debug_mode(True)
 ```
 
-And/or set the `BENTOML_DEBUG` environment variable to `TRUE`:
+And/or set the `KAPPA_DEBUG` environment variable to `TRUE`:
 ```bash
-export BENTOML_DEBUG=TRUE
+export KAPPA_DEBUG=TRUE
 ```
 
 And/or use the `--verbose` option when running `kappa` CLI command, e.g.:

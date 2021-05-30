@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
-if [[ -z "$BENTOML_REPO" ]]; then
+if [[ -z "$KAPPA_REPO" ]]; then
   # Assuming running this script from anywhere within the Kappa git repository
-  BENTOML_REPO=$(git rev-parse --show-toplevel)
+  KAPPA_REPO=$(git rev-parse --show-toplevel)
 fi
 
-PROTO_PATH=$BENTOML_REPO/protos
-PY_OUT_PATH=$BENTOML_REPO/kappa/gamma/proto
+PROTO_PATH=$KAPPA_REPO/protos
+PY_OUT_PATH=$KAPPA_REPO/kappa/gamma/proto
 # test GammaService Interceptor calls
 PROTO_TEST_PATH=$PROTO_PATH/tests
-PY_TEST_OUT_PATH=$BENTOML_REPO/tests/gamma/proto
+PY_TEST_OUT_PATH=$KAPPA_REPO/tests/gamma/proto
 
 echo "Cleaning up existing proto generated py code.."
 rm -rf "$PY_OUT_PATH" "$PY_TEST_OUT_PATH"
@@ -97,7 +97,7 @@ echo "Generate grpc code for javascript/typescript"
 echo "Please make sure protobufjs is installed on your system"
 echo "You can install with npm i -g protobufjs"
 
-JS_OUT_PATH=$BENTOML_REPO/kappa/gamma/web/src/generated
+JS_OUT_PATH=$KAPPA_REPO/kappa/gamma/web/src/generated
 echo "Cleaning up existing proto generated js code.."
 rm -rf "$JS_OUT_PATH"
 mkdir -p "$JS_OUT_PATH"

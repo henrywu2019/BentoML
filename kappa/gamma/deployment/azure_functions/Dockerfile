@@ -1,6 +1,6 @@
-ARG BENTOML_VERSION=latest
+ARG KAPPA_VERSION=latest
 ARG PYTHON_VERSION=3.7
-FROM kappa/azure-functions:$BENTOML_VERSION-py$PYTHON_VERSION
+FROM kappa/azure-functions:$KAPPA_VERSION-py$PYTHON_VERSION
 
 # https://github.com/MicrosoftDocs/azure-docs/issues/26761
 # Copying MyModel to Azure function specific directory

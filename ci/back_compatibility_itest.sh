@@ -12,7 +12,7 @@ python -m pip uninstall kappa -y
 python -m pip install kappa
 mkdir tempdir
 cd tempdir
-export BUNDLE_BENTOML_VERSION=$(python -c "import kappa;print(kappa.__version__)")
+export BUNDLE_KAPPA_VERSION=$(python -c "import kappa;print(kappa.__version__)")
 
 # Run test
 PROJECT_PATH="$GIT_ROOT/tests/integration/projects/general"

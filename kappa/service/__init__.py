@@ -43,7 +43,7 @@ from kappa.service.inference_api import InferenceAPI
 from kappa.utils.hybridmethod import hybridmethod
 
 ARTIFACTS_DIR_NAME = "artifacts"
-BENTOML_RESERVED_API_NAMES = [
+KAPPA_RESERVED_API_NAMES = [
     "index",
     "swagger",
     "docs",
@@ -62,7 +62,7 @@ def validate_inference_api_name(api_name: str):
             " numbers, underscores and not starting with a number.".format(api_name)
         )
 
-    if api_name in BENTOML_RESERVED_API_NAMES:
+    if api_name in KAPPA_RESERVED_API_NAMES:
         raise InvalidArgument(
             "Reserved API name: '{}' is reserved for infra endpoints".format(api_name)
         )
@@ -76,7 +76,7 @@ def validate_inference_api_route(route: str):
         raise InvalidArgument(
             "The path {} contains illegal url characters".format(route)
         )
-    if route in BENTOML_RESERVED_API_NAMES:
+    if route in KAPPA_RESERVED_API_NAMES:
         raise InvalidArgument(
             "Reserved API route: '{}' is reserved for infra endpoints".format(route)
         )
@@ -385,7 +385,7 @@ def save(bento_service, base_path=None, version=None, labels=None):
     """
     Save and register the given MyModel via Kappa's built-in model management
     system. Kappa by default keeps track of all the SavedBundle's files and metadata
-    in local file system under the $BENTOML_HOME(~/kappa) directory. Users can also
+    in local file system under the $KAPPA_HOME(~/kappa) directory. Users can also
     configure Kappa to save their MyModel to a shared Database and cloud object
     storage such as AWS S3.
 
@@ -722,7 +722,7 @@ class MyModel:
         """
         Save and register this MyModel via Kappa's built-in model management
         system. Kappa by default keeps track of all the SavedBundle's files and
-        metadata in local file system under the $BENTOML_HOME(~/kappa) directory.
+        metadata in local file system under the $KAPPA_HOME(~/kappa) directory.
         Users can also configure Kappa to save their MyModel to a shared Database
         and cloud object storage such as AWS S3.
 

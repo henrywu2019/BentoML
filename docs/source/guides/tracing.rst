@@ -47,11 +47,11 @@ CLI argument `--config`:
     kappa serve $BENTO_BUNDLE_PATH --config my_config_file.yml
 
 After Kappa v0.13.0, user will need to provide the config file path via environment
-variable :code:`BENTOML_CONFIG`:
+variable :code:`KAPPA_CONFIG`:
 
 .. code-block:: bash
 
-    BENTOML_CONFIG=my_config_file.yml kappa serve $BENTO_BUNDLE_PATH
+    KAPPA_CONFIG=my_config_file.yml kappa serve $BENTO_BUNDLE_PATH
 
 
 Similarly when serving with Kappa API server docker image, assuming you have a
@@ -62,7 +62,7 @@ Similarly when serving with Kappa API server docker image, assuming you have a
     docker run -v $(PWD):/tmp my-bento-api-server --config /tmp/my_config_file.yml
 
     # after version 0.13.0
-    docker run -v $(PWD):/tmp -e BENTOML_CONFIG=/tmp/my_config_file.yml my-bento-api-server
+    docker run -v $(PWD):/tmp -e KAPPA_CONFIG=/tmp/my_config_file.yml my-bento-api-server
 
 Kappa has already implemented basic tracing information for its micro-batching server
 and model server. If there's additional tracing that you'd like to add to your Kappa

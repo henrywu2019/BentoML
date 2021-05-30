@@ -7,7 +7,7 @@ from typing import Sequence
 from packaging import version
 
 import kappa
-from kappa import __version__ as BENTOML_VERSION
+from kappa import __version__ as KAPPA_VERSION
 from kappa.adapters import (
     DataframeInput,
     FileInput,
@@ -122,7 +122,7 @@ class ExampleService(kappa.MyModel):
     def echo_json(self, input_data):
         return input_data
 
-    if version.parse(BENTOML_VERSION) > version.parse("0.12.1+0"):
+    if version.parse(KAPPA_VERSION) > version.parse("0.12.1+0"):
 
         @kappa.api(input=JsonInput(), output=JsonOutput(ensure_ascii=True))
         def echo_json_ensure_ascii(self, input_data):

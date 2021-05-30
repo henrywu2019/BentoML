@@ -42,8 +42,8 @@ from kappa.saved_bundle import load_from_dir  # noqa
 
 logger = logging.getLogger('kappa.lambda_app')
 
-bento_name = os.environ['BENTOML_BENTO_SERVICE_NAME']
-api_name = os.environ["BENTOML_API_NAME"]
+bento_name = os.environ['KAPPA_BENTO_SERVICE_NAME']
+api_name = os.environ["KAPPA_API_NAME"]
 
 bento_bundle_path = os.path.join('./', bento_name)
 if not os.path.exists(bento_bundle_path):

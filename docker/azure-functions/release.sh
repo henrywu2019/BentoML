@@ -2,7 +2,7 @@
 set -e
 
 if [ "$#" -eq 1 ]; then
-  BENTOML_VERSION=$1
+  KAPPA_VERSION=$1
 else
   echo "Must provide target Kappa version, e.g. ./release.sh 0.7.0"
   exit 1
@@ -19,11 +19,11 @@ do
     echo "Releasing Kappa docker image for Azure Functions with Python $version.."
 
     docker build --pull \
-        --build-arg BENTOML_VERSION="$BENTOML_VERSION" \
+        --build-arg KAPPA_VERSION="$KAPPA_VERSION" \
         --build-arg PYTHON_VERSION=$version \
-        -t kappa/azure-functions:$BENTOML_VERSION-py${version//.} \
+        -t kappa/azure-functions:$KAPPA_VERSION-py${version//.} \
         .
-    docker push kappa/azure-functions:$BENTOML_VERSION-py${version//.}
+    docker push kappa/azure-functions:$KAPPA_VERSION-py${version//.}
 done
 
 echo "Done"

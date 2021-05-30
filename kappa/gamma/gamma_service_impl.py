@@ -58,7 +58,7 @@ from kappa.gamma.status import Status
 from kappa.gamma.proto import status_pb2
 from kappa.utils import ProtoMessageToDict
 from kappa.gamma.validator import validate_deployment_pb
-from kappa import __version__ as BENTOML_VERSION
+from kappa import __version__ as KAPPA_VERSION
 
 logger = logging.getLogger(__name__)
 
@@ -96,7 +96,7 @@ def get_gamma_service_impl(base=object):
 
         def GetGammaServiceVersion(self, request, context=None):
             return GetGammaServiceVersionResponse(
-                status=Status.OK, version=BENTOML_VERSION
+                status=Status.OK, version=KAPPA_VERSION
             )
 
         def ApplyDeployment(self, request, context=None):

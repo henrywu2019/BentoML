@@ -2,7 +2,7 @@ Logging
 =======
 
 Kappa produces `active.log`, `prediction.log`, and `feedback.log`. They are logged to both
-the console and file system under :code:`$BENTOML_HOME/logs` directory by default.
+the console and file system under :code:`$KAPPA_HOME/logs` directory by default.
 
 +----------------+-------------------------------------------------+
 | active.log     | Logs generated from Kappa CLI and Python APIs |

@@ -3,15 +3,15 @@ FROM python:${PYTHON_VERSION}-slim AS compile-image
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends build-essential gcc
 
-ARG BENTOML_VERSION
-ENV BENTOML_VERSION=$BENTOML_VERSION
+ARG KAPPA_VERSION
+ENV KAPPA_VERSION=$KAPPA_VERSION
 
 RUN python -m venv /opt/venv
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
 # pre-install Kappa requirements
-RUN pip install kappa[model_server]==$BENTOML_VERSION --no-cache-dir
+RUN pip install kappa[model_server]==$KAPPA_VERSION --no-cache-dir
 COPY entrypoint.sh .
 
 # multi-stage build to shave dependency cost
