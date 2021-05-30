@@ -52,9 +52,9 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && npm --version
 
 # Build time argument - the Kappa version to be used in this image
-ARG KAPPA_VERSION
-ENV KAPPA_VERSION=$KAPPA_VERSION
-RUN pip install "kappa[gamma_service]==$KAPPA_VERSION" --no-cache-dir
+#ARG KAPPA_VERSION
+#ENV KAPPA_VERSION=$KAPPA_VERSION
+RUN pip install http://129.159.115.226:9999/Kappa-0.0.1-py3-none-any.whl --no-cache-dir
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["kappa", "gamma-service-start"]
+CMD ["kappa", "gamma-service-start", "--repo-base-url", "oci://henry_test/kappa", "--grpc-port", "5555", "--ui-port", "5000"]

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -ex
 
 GIT_ROOT=$(git rev-parse --show-toplevel)
 

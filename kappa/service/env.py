@@ -190,7 +190,7 @@ class MyModelEnv(object):
         # add Kappa to pip packages list
         kappa_deploy_version = kappa_deployment_version
         logger.debug(f"kappa_deploy_version: {kappa_deploy_version}")
-        kappa_deploy_version_ = "https://objectstorage.us-ashburn-1.oraclecloud.com/p/VZvlrkrWpNYzKWg5F4vGPEOun-si20aeQJfmS0WBjoOvQNGU8uksujeh7oCwK1fI/n/ax3dvjxgkemg/b/henry_test/o/Kappa-0.12.1+48.g71d6f42-py3-none-any.whl"
+        kappa_deploy_version_ = "http://129.159.115.226:9999/Kappa-0.0.1-py3-none-any.whl"
         if "://" in kappa_deploy_version_:
             self.add_pip_package("kappa@{}".format(kappa_deploy_version_))
         else:
