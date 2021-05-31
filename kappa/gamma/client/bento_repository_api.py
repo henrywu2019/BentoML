@@ -245,6 +245,7 @@ class BentoRepositoryAPIClient:
             fileobj.seek(0, 0)
 
             file_size = fileobj.getbuffer().nbytes
+            logger.info("Uploading model...")
             with tqdm(total=file_size, unit="B", unit_scale=True, unit_divisor=1024) as t:
                 wrapped_file = CallbackIOWrapper(t.update, fileobj, "read")
                 http_response = requests.put(remote_uri, data=wrapped_file)
