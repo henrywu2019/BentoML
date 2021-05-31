@@ -20,7 +20,7 @@ RUN conda install pip python=3.8 -y
 #RUN pip install kappa[model_server]==$KAPPA_VERSION --no-cache-dir
 RUN pip install http://129.159.115.226:9999/Kappa-0.0.1-py3-none-any.whl --no-cache-dir
 
-RUN pip install pytz oci
+RUN pip install pytz oci tqdm
 
 COPY entrypoint.sh /usr/local/bin/
 

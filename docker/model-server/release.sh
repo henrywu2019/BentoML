@@ -11,9 +11,10 @@ fi
 GIT_ROOT=$(git rev-parse --show-toplevel)
 cd "$GIT_ROOT"/docker/model-server
 
-PYTHON_MAJOR_VERSIONS=(3.6 3.7 3.8 3.9)
+#PYTHON_MAJOR_VERSIONS=(3.6 3.7 3.8 3.9)
+PYTHON_MAJOR_VERSIONS=(3.8)
 #which version to tag with latest tag
-PYTHON_LATEST_VERSION=3.9
+PYTHON_LATEST_VERSION=3.8
 
 
 docker login -u 'bmc_operator_access/fuhwu' iad.ocir.io -p $OCASTESTTOKEN
