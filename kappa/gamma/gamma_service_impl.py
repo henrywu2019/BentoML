@@ -563,9 +563,9 @@ def get_gamma_service_impl(base=object):
                             login_result = docker_client.login(username="bmc_operator_access/fuhwu",
                                                                registry="iad.ocir.io",
                                                                password=os.environ['OCASTESTTOKEN'])
-                            if not (login_result and "Status" in login_result and login_result[
-                                'Status'] == "Login Succeeded"):
-                                raise GammaRepositoryException("OCIR register failed!")
+                            #if not (login_result and "Status" in login_result and login_result[
+                            #    'Status'] == "Login Succeeded"):
+                            #    raise GammaRepositoryException("OCIR register failed!")
                             build_log = docker_client.images.build(
                                 path=temp_bundle_path,
                                 tag=tag,
