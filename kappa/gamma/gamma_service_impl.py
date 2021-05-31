@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import json
 import logging
 from datetime import datetime
 from dependency_injector.wiring import Provide, inject
@@ -557,6 +558,14 @@ def get_gamma_service_impl(base=object):
                             )
                         safe_retrieve(bento_service_bundle_path, temp_bundle_path)
                         try:
+                            # Oracle Registry
+                            import os
+                            login_result = docker_client.login(username="bmc_operator_access/fuhwu",
+                                                               registry="iad.ocir.io",
+                                                               password=os.environ['OCASTESTTOKEN'])
+                            if not (login_result and "Status" in login_result and login_result[
+                                'Status'] == "Login Succeeded"):
+                                raise GammaRepositoryException("OCIR register failed!")
                             docker_client.images.build(
                                 path=temp_bundle_path,
                                 tag=tag,

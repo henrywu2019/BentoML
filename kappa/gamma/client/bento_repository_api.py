@@ -18,6 +18,8 @@ import io
 import os
 import logging
 import tarfile
+from tqdm import tqdm
+from tqdm.utils import CallbackIOWrapper
 
 import click
 import requests
@@ -227,32 +229,33 @@ class BentoRepositoryAPIClient:
                 bento_service_metadata, UploadStatus.UPLOADING, 0
             )
 
+            if response.uri.type == BentoUri.S3:
+                remote_uri = response.uri.s3_presigned_url
+            elif response.uri.type == BentoUri.GCS:
+                remote_uri = response.uri.gcs_presigned_url
+            elif response.uri.type == BentoUri.OCI:
+                remote_uri = response.uri.oci_presigned_url
+            else:
+                raise KappaException(
+                    f"Wrong URI type {response.uri.type} at {response.uri.uri} is not supported"
+                )
             fileobj = io.BytesIO()
             with tarfile.open(mode="w:gz", fileobj=fileobj) as tar:
                 tar.add(saved_bento_path, arcname=bento_service_metadata.name)
             fileobj.seek(0, 0)
 
-            if response.uri.type == BentoUri.S3:
-                http_response = requests.put(
-                    response.uri.s3_presigned_url, data=fileobj
-                )
-            elif response.uri.type == BentoUri.GCS:
-                http_response = requests.put(
-                    response.uri.gcs_presigned_url, data=fileobj
-                )
-            elif response.uri.type == BentoUri.OCI:
-                http_response = requests.put(
-                    response.uri.oci_presigned_url, data=fileobj
-                )
-
-            if http_response.status_code != 200:
-                self._update_bento_upload_progress(
-                    bento_service_metadata, UploadStatus.ERROR
-                )
-                raise KappaException(
-                    f"Error saving MyModel to {uri_type}."
-                    f"{http_response.status_code}: {http_response.text}"
-                )
+            file_size = fileobj.getbuffer().nbytes
+            with tqdm(total=file_size, unit="B", unit_scale=True, unit_divisor=1024) as t:
+                wrapped_file = CallbackIOWrapper(t.update, fileobj, "read")
+                http_response = requests.put(remote_uri, data=wrapped_file)
+                if http_response.status_code != 200:
+                    self._update_bento_upload_progress(
+                        bento_service_metadata, UploadStatus.ERROR
+                    )
+                    raise KappaException(
+                        f"Error saving MyModel to {uri_type}."
+                        f"{http_response.status_code}: {http_response.text}"
+                    )
 
             self._update_bento_upload_progress(bento_service_metadata)
 
