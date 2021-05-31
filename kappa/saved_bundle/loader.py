@@ -84,13 +84,26 @@ def _resolve_remote_bundle_path(bundle_path):
     elif _is_http_url(bundle_path):
         import requests
 
-        response = requests.get(bundle_path)
+        response = requests.get(bundle_path, stream=True)
+        total_size_in_bytes = int(response.headers.get('content-length', 0))
+        if total_size_in_bytes>0:
+            from tqdm import tqdm
+            block_size = 1024*500  # 500 Kibibyte
+            with tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True) as progress_bar:
+                fileobj = io.BytesIO()
+                for data in response.iter_content(block_size):
+                    progress_bar.update(len(data))
+                    fileobj.write(data)
+            if total_size_in_bytes != 0 and progress_bar.n != total_size_in_bytes:
+                logger.error(f"error happens when downloading {bundle_path}")
         if response.status_code != 200:
             raise KappaException(
                 f"Error retrieving MyModel. " f"{response.status_code}: {response.text}"
             )
-        fileobj = io.BytesIO()
-        fileobj.write(response.content)
+        if total_size_in_bytes <= 0:
+            response = requests.get(bundle_path)
+            fileobj = io.BytesIO()
+            fileobj.write(response.content)
         fileobj.seek(0, 0)
     else:
         raise KappaException(f"Saved bundle path: '{bundle_path}' is not supported")
@@ -256,7 +269,12 @@ def safe_retrieve(bundle_path, target_dir):
     Returns:
         string: location of safe local path
     """
-    shutil.copytree(bundle_path, target_dir)
+    logger.info(f"copying from {bundle_path} to {target_dir} ...")
+
+    def _logpath(path, names):
+        logger.info(f"Working in {path}. names: {names}")
+        return []  # nothing will be ignored
+    shutil.copytree(bundle_path, target_dir, ignore=_logpath)
 
 
 @resolve_remote_bundle

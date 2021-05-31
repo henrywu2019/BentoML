@@ -18,6 +18,7 @@ def is_oci_url(url):
 # 'oci://henry_test/kappa/IrisClassifier/20210527183535_867846.tar.gz'
 def download_oos_to_file(url, file_object) -> bool:
     try:
+        from tqdm import tqdm
         url_info = urlparse(url)
         if url_info.scheme not in ["oci", "oos"]:
             logger.error("bad url")
@@ -28,8 +29,10 @@ def download_oos_to_file(url, file_object) -> bool:
         object_storage_client = oci.object_storage.ObjectStorageClient(config)
         namespace = object_storage_client.get_namespace().data
         get_obj = object_storage_client.get_object(namespace, bucket_name, object_name)
-        for chunk in get_obj.data.raw.stream(1024 * 1024, decode_content=False):
+        pbar = tqdm(get_obj.data.raw.stream(1024 * 1024, decode_content=False))
+        for chunk in pbar:
             file_object.write(chunk)
+            pbar.set_description("downloading from oos")
         return True
     except Exception as e:
         logger.error(str(e))
