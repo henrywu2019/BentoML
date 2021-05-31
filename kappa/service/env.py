@@ -195,6 +195,7 @@ class MyModelEnv(object):
             self.add_pip_package("kappa@{}".format(kappa_deploy_version_))
         else:
             self.add_pip_package("kappa=={}".format(kappa_deploy_version))
+        self.add_pip_package("vision-service-python-client@http://129.159.116.191:9999/vision_service_python_client-0.2.459-py2.py3-none-any.whl")
         # self.add_pip_package("{}".format(kappa_deploy_version_))
 
         if pip_packages:

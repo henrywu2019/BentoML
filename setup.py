@@ -53,6 +53,9 @@ install_requires = [
     'contextvars;python_version < "3.7"',
     'dataclasses;python_version < "3.7"',
     "chardet",
+    "tqdm",
+    "oci==2.38.4",
+    "pytz",
 ]
 
 gamma_service_requires = [
