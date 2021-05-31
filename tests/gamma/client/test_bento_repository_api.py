@@ -72,7 +72,7 @@ def wait_until_container_ready(container_name, check_message, timeout_seconds=12
 def gamma_server_container():
     ensure_docker_available_or_raise()
 
-    gamma_docker_image_tag = f'kappa/gamma-service:{LAST_PYPI_RELEASE_VERSION}'
+    gamma_docker_image_tag = f'iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:{LAST_PYPI_RELEASE_VERSION}'
     container_name = f'e2e-test-gamma-service-container-{uuid.uuid4().hex[:6]}'
     port = '50055'
     command = [

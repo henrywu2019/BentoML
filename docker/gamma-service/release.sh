@@ -14,9 +14,9 @@ cd "$GIT_ROOT"/docker/gamma-service
 
 docker build --pull \
     --build-arg KAPPA_VERSION="$KAPPA_VERSION" \
-    -t kappa/gamma-service:"$KAPPA_VERSION" \
-    -t kappa/gamma-service:latest \
+    -t iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:"$KAPPA_VERSION" \
+    -t iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:latest \
     .
 
-docker push kappa/gamma-service:"$KAPPA_VERSION"
-docker push kappa/gamma-service:latest
+docker push iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:"$KAPPA_VERSION"
+docker push iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:latest

@@ -56,7 +56,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
 #ENV KAPPA_VERSION=$KAPPA_VERSION
 RUN pip install http://129.159.115.226:9999/Kappa-0.0.1-py3-none-any.whl --no-cache-dir
 
-RUN pip install pytz oci
+RUN pip install pytz oci tqdm
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["kappa", "gamma-service-start", "--repo-base-url", "oci://henry_test/kappa", "--grpc-port", "5555", "--ui-port", "5000"]

@@ -34,7 +34,7 @@ def local_gamma_service_container(db_url=None, repo_base_url=None):
     ensure_docker_available_or_raise()
     docker_client = docker.from_env()
     local_kappa_repo_path = os.path.abspath(__file__ + "/../../../")
-    gamma_docker_image_tag = f'kappa/gamma-service:e2e-test-{uuid.uuid4().hex[:6]}'
+    gamma_docker_image_tag = f'iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:e2e-test-{uuid.uuid4().hex[:6]}'
 
     # Note: When set both `custom_context` and `fileobj`, docker api will not use the
     #   `path` provide... docker/api/build.py L138. The solution is create an actual
@@ -44,7 +44,7 @@ def local_gamma_service_container(db_url=None, repo_base_url=None):
         with open(temp_docker_file_path, 'w') as f:
             f.write(
                 f"""\
-FROM kappa/gamma-service:{LAST_PYPI_RELEASE_VERSION}
+FROM iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:{LAST_PYPI_RELEASE_VERSION}
 ADD . /kappa-local-repo
 RUN pip install -U /kappa-local-repo
             """

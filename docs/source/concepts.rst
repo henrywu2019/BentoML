@@ -1128,7 +1128,7 @@ that runs :code:`GammaService`, from Kappa cli command `gamma-service-start`:
 
 
 Kappa provides a pre-built docker image for running GammaService. For each Kappa
-release, a new image will be pushed to [docker hub](https://hub.docker.com/r/kappa/gamma-service/tags) under :code:`kappa/gamma-service`
+release, a new image will be pushed to [docker hub](https://hub.docker.com/r/iad.ocir.io/axhheqi2ofpb/kappa/gamma-service/tags) under :code:`iad.ocir.io/axhheqi2ofpb/kappa/gamma-service`
 with the same image tag as the PyPI package version. For example, use the following 
 command to start a GammaService of Kappa version 0.8.6, loading data from your local
 Kappa repository under the local ``~/kappa`` directory:
@@ -1138,7 +1138,7 @@ Kappa repository under the local ``~/kappa`` directory:
     > docker run -v ~/kappa:/kappa \
         -p 3000:3000 \
         -p 50051:50051 \
-        kappa/gamma-service:0.8.6 \
+        iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:0.8.6 \
         --db-url=sqlite:///kappa/storage.db \
         --repo-base-url=/kappa/repository
 
@@ -1152,7 +1152,7 @@ as AWS credentials for managing deployments created on AWS:
 
     > docker run -p 3000:3000 -p 50051:50051 \
         -e AWS_SECRET_ACCESS_KEY=... -e AWS_ACCESS_KEY_ID=...  \
-        kappa/gamma-service \
+        iad.ocir.io/axhheqi2ofpb/kappa/gamma-service \
         --db-url postgresql://scott:tiger@localhost:5432/kappadb \
         --repo-base-url s3://my-kappa-repo/
 

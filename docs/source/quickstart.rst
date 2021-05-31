@@ -192,7 +192,7 @@ packaged models:
       -v ~/kappa:/kappa \
       -p 3000:3000 \
       -p 50051:50051 \
-      kappa/gamma-service:latest
+      iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:latest
 
 .. note::
 

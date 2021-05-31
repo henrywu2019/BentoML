@@ -289,7 +289,7 @@ image and mount that `accessTokens.json` file to the running container.
 
 .. code-block:: bash
 
-    $ docker run -v ~/.azure/accessTokens.json:/home/.azure/accessTokens.json -p 50051:50051 -p 3000:3000 kappa/gamma-service:latest
+    $ docker run -v ~/.azure/accessTokens.json:/home/.azure/accessTokens.json -p 50051:50051 -p 3000:3000 iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:latest
 
 
 After the GammaService docker container is running, in another terminal window, set
@@ -357,7 +357,7 @@ Copy and paste the code below into a file named `gamma-service.yaml`
             app: gamma-service
         spec:
           containers:
-          - image: kappa/gamma-service
+          - image: iad.ocir.io/axhheqi2ofpb/kappa/gamma-service
             imagePullPolicy: IfNotPresent
             name: gamma-service
             ports:

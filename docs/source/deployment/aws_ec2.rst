@@ -257,7 +257,7 @@ Starts a Kappa GammaService docker image and set the credentials found in
     $ docker run -e AWS_ACCESS_KEY_ID=MY-ACCESS-KEY-ID \
         -e AWS_SECRET_ACCESS_KEY=MY_SECRET-ACCESS-KEY \
         -e AWS_DEFAULT_REGION=MY-DEFAULT-REGION \
-        -p 50051:50051 -p 3000:3000 kappa/gamma-service:latest
+        -p 50051:50051 -p 3000:3000 iad.ocir.io/axhheqi2ofpb/kappa/gamma-service:latest
 
 
 After the GammaService docker container is running, in another terminal window, set
@@ -351,7 +351,7 @@ Copy and paste the code below into a file named `gamma-service.yaml`
             app: gamma-service
         spec:
           containers:
-          - image: kappa/gamma-service
+          - image: iad.ocir.io/axhheqi2ofpb/kappa/gamma-service
             imagePullPolicy: IfNotPresent
             name: gamma-service
             ports:

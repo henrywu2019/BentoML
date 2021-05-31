@@ -566,11 +566,14 @@ def get_gamma_service_impl(base=object):
                             if not (login_result and "Status" in login_result and login_result[
                                 'Status'] == "Login Succeeded"):
                                 raise GammaRepositoryException("OCIR register failed!")
-                            docker_client.images.build(
+                            build_log = docker_client.images.build(
                                 path=temp_bundle_path,
                                 tag=tag,
                                 buildargs=dict(request.build_args),
+                                quiet=False,
+                                squash=False,
                             )
+                            logger.info(str(build_log))
                         except (
                             docker.errors.APIError,
                             docker.errors.BuildError,
