@@ -221,7 +221,7 @@ class MyModelEnv(object):
             self._docker_base_image = default_docker_base_image
         else:
             if PYTHON_MINOR_VERSION not in PYTHON_SUPPORTED_VERSIONS:
-                self._docker_base_image = f"kappa/model-server:{kappa_deploy_version}"
+                self._docker_base_image = f"iad.ocir.io/axhheqi2ofpb/kappa/model-server:{kappa_deploy_version}"
 
                 logger.warning(
                     f"Python {PYTHON_VERSION} found in current environment is not "
@@ -231,9 +231,9 @@ class MyModelEnv(object):
                     f"versions are: f{', '.join(PYTHON_SUPPORTED_VERSIONS)}"
                 )
             else:
-                # e.g. kappa/model-server:0.8.6-py37
+                # e.g. iad.ocir.io/axhheqi2ofpb/kappa/model-server:0.8.6-py37
                 self._docker_base_image = (  ##### TODO
-                    f"kappa/model-server:"
+                    f"iad.ocir.io/axhheqi2ofpb/kappa/model-server:"
                     f"{kappa_deploy_version}-"
                     f"py{PYTHON_MINOR_VERSION.replace('.', '')}"
                 )
