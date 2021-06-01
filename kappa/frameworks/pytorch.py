@@ -158,6 +158,7 @@ class PytorchModelArtifact(MyModelArtifact):
         if isinstance(self._model, torch.jit.ScriptModule):
             return torch.jit.save(self._model, self._file_path(dst))
 
+        #return torch.save(self._model, self._file_path(dst))
         return cloudpickle.dump(self._model, open(self._file_path(dst), "wb"))
 
 

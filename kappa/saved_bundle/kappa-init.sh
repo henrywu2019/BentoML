@@ -53,7 +53,7 @@ if [ $# -eq 0 ] || [ $1 == "restore_conda_env" ] ; then
   
     echo "Updating conda base environment with environment.yml"
     conda env update -n base -f ./environment.yml
-    conda clean --all
+    conda clean --all --yes
   else
     echo "WARNING: conda command not found, skipping conda dependencies in environment.yml"
   fi
