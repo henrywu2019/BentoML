@@ -4844,6 +4844,9 @@ export namespace kappa {
 
         /** ContainerizeBentoRequest push */
         push?: (boolean|null);
+
+        /** ContainerizeBentoRequest repository */
+        repository?: (string|null);
     }
 
     /** Represents a ContainerizeBentoRequest. */
@@ -4869,6 +4872,9 @@ export namespace kappa {
 
         /** ContainerizeBentoRequest push. */
         public push: boolean;
+
+        /** ContainerizeBentoRequest repository. */
+        public repository: string;
 
         /**
          * Creates a new ContainerizeBentoRequest instance using the specified properties.

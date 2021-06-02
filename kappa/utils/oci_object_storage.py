@@ -19,6 +19,7 @@ def is_oci_url(url):
 def download_oos_to_file(url, file_object) -> bool:
     try:
         from tqdm import tqdm
+        import oci
         url_info = urlparse(url)
         if url_info.scheme not in ["oci", "oos"]:
             logger.error("bad url")

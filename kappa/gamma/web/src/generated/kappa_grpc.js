@@ -11697,6 +11697,7 @@ export const kappa = $root.kappa = (() => {
          * @property {string|null} [tag] ContainerizeBentoRequest tag
          * @property {Object.<string,string>|null} [build_args] ContainerizeBentoRequest build_args
          * @property {boolean|null} [push] ContainerizeBentoRequest push
+         * @property {string|null} [repository] ContainerizeBentoRequest repository
          */
 
         /**
@@ -11756,6 +11757,14 @@ export const kappa = $root.kappa = (() => {
         ContainerizeBentoRequest.prototype.push = false;
 
         /**
+         * ContainerizeBentoRequest repository.
+         * @member {string} repository
+         * @memberof kappa.ContainerizeBentoRequest
+         * @instance
+         */
+        ContainerizeBentoRequest.prototype.repository = "";
+
+        /**
          * Creates a new ContainerizeBentoRequest instance using the specified properties.
          * @function create
          * @memberof kappa.ContainerizeBentoRequest
@@ -11790,6 +11799,8 @@ export const kappa = $root.kappa = (() => {
                     writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.build_args[keys[i]]).ldelim();
             if (message.push != null && Object.hasOwnProperty.call(message, "push"))
                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.push);
+            if (message.repository != null && Object.hasOwnProperty.call(message, "repository"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.repository);
             return writer;
         };
 
@@ -11843,6 +11854,9 @@ export const kappa = $root.kappa = (() => {
                     break;
                 case 5:
                     message.push = reader.bool();
+                    break;
+                case 6:
+                    message.repository = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -11899,6 +11913,9 @@ export const kappa = $root.kappa = (() => {
             if (message.push != null && message.hasOwnProperty("push"))
                 if (typeof message.push !== "boolean")
                     return "push: boolean expected";
+            if (message.repository != null && message.hasOwnProperty("repository"))
+                if (!$util.isString(message.repository))
+                    return "repository: string expected";
             return null;
         };
 
@@ -11929,6 +11946,8 @@ export const kappa = $root.kappa = (() => {
             }
             if (object.push != null)
                 message.push = Boolean(object.push);
+            if (object.repository != null)
+                message.repository = String(object.repository);
             return message;
         };
 
@@ -11952,6 +11971,7 @@ export const kappa = $root.kappa = (() => {
                 object.bento_version = "";
                 object.tag = "";
                 object.push = false;
+                object.repository = "";
             }
             if (message.bento_name != null && message.hasOwnProperty("bento_name"))
                 object.bento_name = message.bento_name;
@@ -11967,6 +11987,8 @@ export const kappa = $root.kappa = (() => {
             }
             if (message.push != null && message.hasOwnProperty("push"))
                 object.push = message.push;
+            if (message.repository != null && message.hasOwnProperty("repository"))
+                object.repository = message.repository;
             return object;
         };
 

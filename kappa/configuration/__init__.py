@@ -123,7 +123,7 @@ def inject_dependencies():
 
     start = timer()
 
-    logger.warning("Start dependency injection")
+    #logger.warning("Start dependency injection")
 
     from kappa.configuration.containers import KappaContainer, KappaConfiguration
 

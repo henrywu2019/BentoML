@@ -19,7 +19,7 @@ if __name__ == "__main__":
     iris_classifier_service.pack('model', clf)
 
     # Save the prediction service to disk for model serving
-    saved_path = iris_classifier_service.save(gamma_url="129.159.115.226:50052")
+    saved_path = iris_classifier_service.save(gamma_url="0.0.0.0:5555")
     #saved_path = iris_classifier_service.save()
     print(saved_path)
 

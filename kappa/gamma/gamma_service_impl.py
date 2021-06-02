@@ -528,6 +528,9 @@ def get_gamma_service_impl(base=object):
                     if ":" not in tag:
                         version = to_valid_docker_image_version(request.bento_version)
                         tag = f"{tag}:{version}"
+                    TAG_PREFIX = "iad.ocir.io/axhheqi2ofpb/kappa/"
+                    tag = TAG_PREFIX + tag
+                    logger.info(f"building docker container {tag}...")
                     import docker
 
                     docker_client = docker.from_env()
@@ -582,6 +585,8 @@ def get_gamma_service_impl(base=object):
                             raise GammaRepositoryException(error)
                         if request.push is True:
                             try:
+                                logger.info(f"✋pushing docker {tag} to {request.repository}...")
+
                                 docker_client.images.push(
                                     repository=request.repository, tag=tag
                                 )

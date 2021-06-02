@@ -429,7 +429,7 @@ def create_bento_service_cli(
             tag = gamma_client.repository.containerize(
                 bento=bento_tag, tag=tag, build_args=docker_build_args, push=push,
             )
-            _echo(f'Build container image: {tag}', CLI_COLOR_SUCCESS)
+            _echo(f'\n👍Build container image: {tag}', CLI_COLOR_SUCCESS)
 
     # pylint: enable=unused-variable
     return kappa_cli

@@ -152,6 +152,7 @@ message ContainerizeBentoRequest {
   string tag = 3;
   map<string, string> build_args = 4;
   bool push = 5;
+  string repository = 6;
 }
 
 message ContainerizeBentoResponse {
