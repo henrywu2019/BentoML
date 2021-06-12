@@ -23,8 +23,7 @@ from kappa.types import InferenceTask
 from kappa.utils.lazy_loader import LazyLoader
 
 # Kappa optional dependencies, using lazy load to avoid ImportError
-imageio = LazyLoader('imageio', globals(), 'imageio')
-imageio = LazyLoader('cv2', globals(), 'cv2')
+cv2 = LazyLoader('cv2', globals(), 'cv2')
 numpy = LazyLoader('numpy', globals(), 'numpy')
 
 
@@ -33,10 +32,9 @@ ApiFuncArgs = Tuple[
 ]
 
 
-class ImageInput(FileInput):
-    """Convert incoming image data from http request, cli or lambda event into imageio
-    array (a subclass of numpy.ndarray that has a meta attribute) and pass down to
-    user defined API functions.
+class ImageInputCV2(FileInput):
+    """Convert incoming image data from http request, cli or lambda event into numpy.ndarray
+    and pass down to user defined API functions.
 
     ** To operate raw files or PIL.Image obj, use the low-level :class:`.FileInput`. **
 
@@ -47,21 +45,15 @@ class ImageInput(FileInput):
         Default value is loaded from kappa config
         'apiserver/default_image_input_accept_file_extensions', which is
         set to ['.jpg', '.png', '.jpeg', '.tiff', '.webp', '.bmp'] by default.
-        List of all supported format can be found here:
-        https://imageio.readthedocs.io/en/stable/formats.html
-    pilmode : str
-        The pilmode to be used for reading image file into numpy
-        array. Default value is 'RGB'.  Find more information at:
-        https://imageio.readthedocs.io/en/stable/format_png-pil.html
 
     Raises
     ----------
-    ImportError: imageio package is required to use ImageInput
+    ImportError: cv2 package is required to use ImageInputCV2
 
     Examples
     ----------
 
-    Service using ImageInput:
+    Service using ImageInputCV2:
 
     .. code-block:: python
 
@@ -70,25 +62,25 @@ class ImageInput(FileInput):
         import numpy as np
         from kappa import MyModel, api, artifacts
         from kappa.frameworks.tensorflow import TensorflowSavedModelArtifact
-        from kappa.adapters import ImageInput
+        from kappa.adapters import ImageInputCV2
 
         CLASS_NAMES = ['cat', 'dog']
 
         @artifacts([TensorflowSavedModelArtifact('classifier')])
         class PetClassification(MyModel):
-            @api(input=ImageInput(), batch=True)
+            @api(input=ImageInputCV2(), batch=True)
             def predict(
-                self, image_arrays: List[imageio.core.utils.Array]
+                self, image_arrays: List[nump]
             ) -> List[str]:
                 results = self.artifacts.classifer.predict(image_arrays)
                 return [CLASS_NAMES[r] for r in results]
 
-    OR use ImageInput with ``batch=False`` (the default):
+    OR use ImageInputCV2 with ``batch=False`` (the default):
 
     .. code-block:: python
 
-        @api(input=ImageInput(), batch=False)
-        def predict(self, image_array: imageio.core.utils.Array) -> str:
+        @api(input=ImageInputCV2(), batch=False)
+        def predict(self, image_array: cv2.core.utils.Array) -> str:
             results = self.artifacts.classifer.predict([image_array])
             return CLASS_NAMES[results[0]]
 
@@ -155,19 +147,18 @@ class ImageInput(FileInput):
     """
 
     def __init__(
-        self, accept_image_formats=None, pilmode="RGB", **base_kwargs,
+        self, accept_image_formats=None, **base_kwargs,
     ):
-        assert imageio, "`imageio` dependency can be imported"
+        assert cv2, "`cv2` dependency can be imported"
 
         super().__init__(**base_kwargs)
         if 'input_names' in base_kwargs:
             raise TypeError(
-                "ImageInput doesn't take input_names as parameters since kappa 0.8."
+                "ImageInputCV2 doesn't take input_names as parameters since kappa 0.8."
                 "Update your Service definition "
                 "or use MultiImageInput instead."
             )
 
-        self.pilmode = pilmode
         self.accept_image_formats = set(
             accept_image_formats or get_default_accept_image_formats()
         )
@@ -177,7 +168,6 @@ class ImageInput(FileInput):
         return {
             # Converting to list, google.protobuf.Struct does not work with tuple type
             "accept_image_formats": list(self.accept_image_formats),
-            "pilmode": self.pilmode,
         }
 
     @property
@@ -196,7 +186,7 @@ class ImageInput(FileInput):
 
     @property
     def pip_dependencies(self):
-        return ["imageio", "cv2"]
+        return ["cv2"]
 
     def extract_user_func_args(
         self, tasks: Iterable[InferenceTask[BinaryIO]]
@@ -213,8 +203,8 @@ class ImageInput(FileInput):
                 )
                 continue
             try:
-                img_array = imageio.imread(task.data, pilmode=self.pilmode)
-                img_list.append(img_array)
+                data = numpy.asarray(bytearray(task.data.read()), dtype=numpy.uint8)
+                img_list.append(data)
             except ValueError as e:
                 task.discard(http_status=400, err_msg=str(e))
 

@@ -45,6 +45,27 @@ const NavigationBar = (props) => {
           href={baseURL + "/deployments"}
           style={getHighlightStyle(highlight, "deployments")}
         />
+        <AnchorButton
+          className={Classes.MINIMAL}
+          large
+          text="Repo"
+          href={baseURL + "/repo"}
+          style={getHighlightStyle(highlight, "repo")}
+        />
+        <AnchorButton
+          className={Classes.MINIMAL}
+          large
+          text="Project"
+          href={baseURL + "/project"}
+          style={getHighlightStyle(highlight, "project")}
+        />
+        <AnchorButton
+          className={Classes.MINIMAL}
+          large
+          text="Optimization"
+          href={baseURL + "/optimization"}
+          style={getHighlightStyle(highlight, "project")}
+        />
       </NavbarGroup>
     </Navbar>
   );

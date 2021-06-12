@@ -23,19 +23,17 @@ from kappa.types import InferenceTask
 from kappa.utils.lazy_loader import LazyLoader
 
 # Kappa optional dependencies, using lazy load to avoid ImportError
-imageio = LazyLoader('imageio', globals(), 'imageio')
-imageio = LazyLoader('cv2', globals(), 'cv2')
 numpy = LazyLoader('numpy', globals(), 'numpy')
 
 
 ApiFuncArgs = Tuple[
-    Sequence['numpy.ndarray'],
+    Sequence['bytes'],
 ]
 
 
-class ImageInput(FileInput):
-    """Convert incoming image data from http request, cli or lambda event into imageio
-    array (a subclass of numpy.ndarray that has a meta attribute) and pass down to
+class BinaryFileInput(FileInput):
+    """Convert incoming image data from http request, cli or lambda event into numpy
+    array (a subclass of bytes that has a meta attribute) and pass down to
     user defined API functions.
 
     ** To operate raw files or PIL.Image obj, use the low-level :class:`.FileInput`. **
@@ -56,12 +54,12 @@ class ImageInput(FileInput):
 
     Raises
     ----------
-    ImportError: imageio package is required to use ImageInput
+    ImportError: imageio package is required to use BinaryFileInput
 
     Examples
     ----------
 
-    Service using ImageInput:
+    Service using BinaryFileInput:
 
     .. code-block:: python
 
@@ -70,25 +68,25 @@ class ImageInput(FileInput):
         import numpy as np
         from kappa import MyModel, api, artifacts
         from kappa.frameworks.tensorflow import TensorflowSavedModelArtifact
-        from kappa.adapters import ImageInput
+        from kappa.adapters import BinaryFileInput
 
         CLASS_NAMES = ['cat', 'dog']
 
         @artifacts([TensorflowSavedModelArtifact('classifier')])
         class PetClassification(MyModel):
-            @api(input=ImageInput(), batch=True)
+            @api(input=BinaryFileInput(), batch=True)
             def predict(
-                self, image_arrays: List[imageio.core.utils.Array]
+                self, image_arrays: List[bytes]
             ) -> List[str]:
                 results = self.artifacts.classifer.predict(image_arrays)
                 return [CLASS_NAMES[r] for r in results]
 
-    OR use ImageInput with ``batch=False`` (the default):
+    OR use BinaryFileInput with ``batch=False`` (the default):
 
     .. code-block:: python
 
-        @api(input=ImageInput(), batch=False)
-        def predict(self, image_array: imageio.core.utils.Array) -> str:
+        @api(input=BinaryFileInput(), batch=False)
+        def predict(self, image_array: bytes) -> str:
             results = self.artifacts.classifer.predict([image_array])
             return CLASS_NAMES[results[0]]
 
@@ -155,19 +153,16 @@ class ImageInput(FileInput):
     """
 
     def __init__(
-        self, accept_image_formats=None, pilmode="RGB", **base_kwargs,
+        self, accept_image_formats=None, **base_kwargs,
     ):
-        assert imageio, "`imageio` dependency can be imported"
-
         super().__init__(**base_kwargs)
         if 'input_names' in base_kwargs:
             raise TypeError(
-                "ImageInput doesn't take input_names as parameters since kappa 0.8."
+                "BinaryFileInput doesn't take input_names as parameters since kappa 0.8."
                 "Update your Service definition "
-                "or use MultiImageInput instead."
+                "or use MultiBinaryFileInput instead."
             )
 
-        self.pilmode = pilmode
         self.accept_image_formats = set(
             accept_image_formats or get_default_accept_image_formats()
         )
@@ -177,7 +172,6 @@ class ImageInput(FileInput):
         return {
             # Converting to list, google.protobuf.Struct does not work with tuple type
             "accept_image_formats": list(self.accept_image_formats),
-            "pilmode": self.pilmode,
         }
 
     @property
@@ -196,7 +190,7 @@ class ImageInput(FileInput):
 
     @property
     def pip_dependencies(self):
-        return ["imageio", "cv2"]
+        return ["numpy"]
 
     def extract_user_func_args(
         self, tasks: Iterable[InferenceTask[BinaryIO]]
@@ -213,7 +207,7 @@ class ImageInput(FileInput):
                 )
                 continue
             try:
-                img_array = imageio.imread(task.data, pilmode=self.pilmode)
+                img_array = task.data.read()
                 img_list.append(img_array)
             except ValueError as e:
                 task.discard(http_status=400, err_msg=str(e))

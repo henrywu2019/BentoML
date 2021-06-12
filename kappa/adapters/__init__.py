@@ -26,7 +26,9 @@ from kappa.adapters.dataframe_input import DataframeInput
 from kappa.adapters.dataframe_output import DataframeOutput
 from kappa.adapters.default_output import DefaultOutput
 from kappa.adapters.file_input import FileInput
+from kappa.adapters.image_input_cv2 import ImageInputCV2
 from kappa.adapters.image_input import ImageInput
+from kappa.adapters.binary_file_input import BinaryFileInput
 from kappa.adapters.json_input import JsonInput
 from kappa.adapters.json_output import JsonOutput
 from kappa.adapters.multi_file_input import MultiFileInput
@@ -45,7 +47,9 @@ __all__ = [
     "JsonInput",
     "StringInput",
     'JsonOutput',
-    "ImageInput",
+    "ImageInput",  # PIL
+    "ImageInputCV2",  # CV2
+    "BinaryFileInput",
     "MultiImageInput",
     "FileInput",
     "MultiFileInput",

@@ -157,8 +157,10 @@ class PytorchModelArtifact(MyModelArtifact):
         # If model is a TorchScriptModule, we cannot apply standard pickling
         if isinstance(self._model, torch.jit.ScriptModule):
             return torch.jit.save(self._model, self._file_path(dst))
+        import dill as pickle
 
-        return torch.jit.save(self._model, self._file_path(dst))
+        #return torch.jit.save(self._model, self._file_path(dst))
+        return pickle.dump(self._model, open(self._file_path(dst), "wb"))
         return cloudpickle.dump(self._model, open(self._file_path(dst), "wb"))
 
 
