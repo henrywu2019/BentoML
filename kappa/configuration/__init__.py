@@ -134,7 +134,8 @@ def inject_dependencies():
         configuration = KappaConfiguration()
 
     container = KappaContainer()
-    container.config.from_dict(configuration.as_dict())
+    configuration_dict = configuration.as_dict()
+    container.config.from_dict(configuration_dict)
 
     from kappa import (
         marshal,

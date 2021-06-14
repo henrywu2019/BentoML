@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x13gamma_service.proto\x12\x05kappa\x1a\x1bgoogle/protobuf/empty.proto\x1a\x0cstatus.proto\x1a\x10\x64\x65ployment.proto\x1a\x10repository.proto\"4\n\x13HealthCheckResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\"P\n\x1eGetGammaServiceVersionResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\x12\x0f\n\x07version\x18\x02 \x01(\t\"\x18\n\x05\x43hunk\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x32\x82\x08\n\x05Gamma\x12\x41\n\x0bHealthCheck\x12\x16.google.protobuf.Empty\x1a\x1a.kappa.HealthCheckResponse\x12W\n\x16GetGammaServiceVersion\x12\x16.google.protobuf.Empty\x1a%.kappa.GetGammaServiceVersionResponse\x12P\n\x0f\x41pplyDeployment\x12\x1d.kappa.ApplyDeploymentRequest\x1a\x1e.kappa.ApplyDeploymentResponse\x12S\n\x10\x44\x65leteDeployment\x12\x1e.kappa.DeleteDeploymentRequest\x1a\x1f.kappa.DeleteDeploymentResponse\x12J\n\rGetDeployment\x12\x1b.kappa.GetDeploymentRequest\x1a\x1c.kappa.GetDeploymentResponse\x12Y\n\x12\x44\x65scribeDeployment\x12 .kappa.DescribeDeploymentRequest\x1a!.kappa.DescribeDeploymentResponse\x12P\n\x0fListDeployments\x12\x1d.kappa.ListDeploymentsRequest\x1a\x1e.kappa.ListDeploymentsResponse\x12;\n\x08\x41\x64\x64\x42\x65nto\x12\x16.kappa.AddBentoRequest\x1a\x17.kappa.AddBentoResponse\x12\x44\n\x0bUpdateBento\x12\x19.kappa.UpdateBentoRequest\x1a\x1a.kappa.UpdateBentoResponse\x12;\n\x08GetBento\x12\x16.kappa.GetBentoRequest\x1a\x17.kappa.GetBentoResponse\x12\x65\n\x16\x44\x61ngerouslyDeleteBento\x12$.kappa.DangerouslyDeleteBentoRequest\x1a%.kappa.DangerouslyDeleteBentoResponse\x12>\n\tListBento\x12\x17.kappa.ListBentoRequest\x1a\x18.kappa.ListBentoResponse\x12V\n\x11\x43ontainerizeBento\x12\x1f.kappa.ContainerizeBentoRequest\x1a .kappa.ContainerizeBentoResponseb\x06proto3'
+  serialized_pb=b'\n\x13gamma_service.proto\x12\x05kappa\x1a\x1bgoogle/protobuf/empty.proto\x1a\x0cstatus.proto\x1a\x10\x64\x65ployment.proto\x1a\x10repository.proto\"4\n\x13HealthCheckResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\"P\n\x1eGetGammaServiceVersionResponse\x12\x1d\n\x06status\x18\x01 \x01(\x0b\x32\r.kappa.Status\x12\x0f\n\x07version\x18\x02 \x01(\t\"\x18\n\x05\x43hunk\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x32\xc5\x08\n\x05Gamma\x12\x41\n\x0bHealthCheck\x12\x16.google.protobuf.Empty\x1a\x1a.kappa.HealthCheckResponse\x12W\n\x16GetGammaServiceVersion\x12\x16.google.protobuf.Empty\x1a%.kappa.GetGammaServiceVersionResponse\x12P\n\x0f\x41pplyDeployment\x12\x1d.kappa.ApplyDeploymentRequest\x1a\x1e.kappa.ApplyDeploymentResponse\x12S\n\x10\x44\x65leteDeployment\x12\x1e.kappa.DeleteDeploymentRequest\x1a\x1f.kappa.DeleteDeploymentResponse\x12J\n\rGetDeployment\x12\x1b.kappa.GetDeploymentRequest\x1a\x1c.kappa.GetDeploymentResponse\x12Y\n\x12\x44\x65scribeDeployment\x12 .kappa.DescribeDeploymentRequest\x1a!.kappa.DescribeDeploymentResponse\x12P\n\x0fListDeployments\x12\x1d.kappa.ListDeploymentsRequest\x1a\x1e.kappa.ListDeploymentsResponse\x12;\n\x08\x41\x64\x64\x42\x65nto\x12\x16.kappa.AddBentoRequest\x1a\x17.kappa.AddBentoResponse\x12\x44\n\x0bUpdateBento\x12\x19.kappa.UpdateBentoRequest\x1a\x1a.kappa.UpdateBentoResponse\x12;\n\x08GetBento\x12\x16.kappa.GetBentoRequest\x1a\x17.kappa.GetBentoResponse\x12\x65\n\x16\x44\x61ngerouslyDeleteBento\x12$.kappa.DangerouslyDeleteBentoRequest\x1a%.kappa.DangerouslyDeleteBentoResponse\x12>\n\tListBento\x12\x17.kappa.ListBentoRequest\x1a\x18.kappa.ListBentoResponse\x12\x41\n\x0bListProject\x12\x16.google.protobuf.Empty\x1a\x1a.kappa.ListProjectResponse\x12V\n\x11\x43ontainerizeBento\x12\x1f.kappa.ContainerizeBentoRequest\x1a .kappa.ContainerizeBentoResponseb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,status__pb2.DESCRIPTOR,deployment__pb2.DESCRIPTOR,repository__pb2.DESCRIPTOR,])
 
@@ -170,7 +170,7 @@ _GAMMA = _descriptor.ServiceDescriptor(
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
   serialized_start=272,
-  serialized_end=1298,
+  serialized_end=1365,
   methods=[
   _descriptor.MethodDescriptor(
     name='HealthCheck',
@@ -293,9 +293,19 @@ _GAMMA = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='ListProject',
+    full_name='kappa.Gamma.ListProject',
+    index=12,
+    containing_service=None,
+    input_type=google_dot_protobuf_dot_empty__pb2._EMPTY,
+    output_type=repository__pb2._LISTPROJECTRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='ContainerizeBento',
     full_name='kappa.Gamma.ContainerizeBento',
-    index=12,
+    index=13,
     containing_service=None,
     input_type=repository__pb2._CONTAINERIZEBENTOREQUEST,
     output_type=repository__pb2._CONTAINERIZEBENTORESPONSE,

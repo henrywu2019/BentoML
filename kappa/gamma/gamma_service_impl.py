@@ -40,6 +40,7 @@ from kappa.gamma.proto.repository_pb2 import (
     GetBentoResponse,
     UpdateBentoResponse,
     ListBentoResponse,
+    ListProjectResponse,
     BentoUri,
     ContainerizeBentoResponse,
 )
@@ -87,10 +88,12 @@ def get_gamma_service_impl(base=object):
             database: DB,
             repository: BaseRepository,
             default_namespace: str = Provide[KappaContainer.config.gamma.namespace],
+            projects: dict =  Provide[KappaContainer.config.projects],
         ):
             self.default_namespace = default_namespace
             self.repo = repository
             self.db = database
+            self.projects = projects
 
         def HealthCheck(self, request, context=None):
             return HealthCheckResponse(status=Status.OK())
@@ -514,6 +517,19 @@ def get_gamma_service_impl(base=object):
                 except Exception as e:  # pylint: disable=broad-except
                     logger.error("🔥 RPC ERROR ListBento: %s", e)
                     return ListBentoResponse(status=Status.INTERNAL())
+
+        def ListProject(self, request, context=None):
+            with self.db.create_session() as sess:
+                try:
+                    return ListProjectResponse(
+                        status=Status.OK(), projects=[]
+                    )
+                except KappaException as e:
+                    logger.error("🔥 RPC ERROR ListProject: %s", e)
+                    return ListProjectResponse(status=e.status_proto)
+                except Exception as e:  # pylint: disable=broad-except
+                    logger.error("🔥 RPC ERROR ListProject: %s", e)
+                    return ListProjectResponse(status=Status.INTERNAL())
 
         def ContainerizeBento(self, request, context=None):
             bento_id = f"{request.bento_name}_{request.bento_version}"

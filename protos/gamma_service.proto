@@ -75,6 +75,10 @@ service Gamma {
   rpc ListBento(ListBentoRequest)
     returns (ListBentoResponse);
 
+    // Get a list of Projects that are stored in current repository
+  rpc ListProject(google.protobuf.Empty)
+    returns (ListProjectResponse);
+
   // Create a container image from a Bento
   rpc ContainerizeBento(ContainerizeBentoRequest)
     returns (ContainerizeBentoResponse);

@@ -27,14 +27,49 @@ const NavigationBar = (props) => {
       <NavbarGroup align={Alignment.LEFT}>
         <NavbarHeading>
           <Link to="/">
-            <img src={baseURL + `/${logo}`} width={150} height={40} alt={""} />{" "}
+            <img src={baseURL + `/${logo}`} width={150} height={40} alt={"Kappa - The Goalkeeper of ML Services"} />{" "}
           </Link>
         </NavbarHeading>
         <NavbarDivider />
         <AnchorButton
           className={Classes.MINIMAL}
           large
-          text="Repository"
+          text="Project"
+          href={baseURL + "/project"}
+          style={getHighlightStyle(highlight, "project")}
+        />
+        <AnchorButton
+          className={Classes.MINIMAL}
+          large
+          text="Model"
+          href={baseURL + "/model"}
+          style={getHighlightStyle(highlight, "model")}
+        />
+        <AnchorButton
+          className={Classes.MINIMAL}
+          large
+          text="Productionization"
+          href={baseURL + "/productionization"}
+          style={getHighlightStyle(highlight, "productionization")}
+        />
+        <AnchorButton
+          className={Classes.MINIMAL}
+          large
+          text="Experiment"
+          href={baseURL + "/experiment"}
+          style={getHighlightStyle(highlight, "experiment")}
+        />
+        <AnchorButton
+          className={Classes.MINIMAL}
+          large
+          text="Data"
+          href={baseURL + "/data"}
+          style={getHighlightStyle(highlight, "data")}
+        />
+        <AnchorButton
+          className={Classes.MINIMAL}
+          large
+          text="Versioning"
           href={baseURL + "/repository"}
           style={getHighlightStyle(highlight, "repository")}
         />
@@ -48,23 +83,16 @@ const NavigationBar = (props) => {
         <AnchorButton
           className={Classes.MINIMAL}
           large
-          text="Repo"
-          href={baseURL + "/repo"}
-          style={getHighlightStyle(highlight, "repo")}
+          text="Metrics"
+          href={baseURL + "/metrics"}
+          style={getHighlightStyle(highlight, "metrics")}
         />
         <AnchorButton
           className={Classes.MINIMAL}
           large
-          text="Project"
-          href={baseURL + "/project"}
-          style={getHighlightStyle(highlight, "project")}
-        />
-        <AnchorButton
-          className={Classes.MINIMAL}
-          large
-          text="Optimization"
-          href={baseURL + "/optimization"}
-          style={getHighlightStyle(highlight, "project")}
+          text="Help"
+          href={baseURL + "/help"}
+          style={getHighlightStyle(highlight, "help")}
         />
       </NavbarGroup>
     </Navbar>

@@ -88,6 +88,11 @@ class GammaStub(object):
                 request_serializer=repository__pb2.ListBentoRequest.SerializeToString,
                 response_deserializer=repository__pb2.ListBentoResponse.FromString,
                 )
+        self.ListProject = channel.unary_unary(
+                '/kappa.Gamma/ListProject',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=repository__pb2.ListProjectResponse.FromString,
+                )
         self.ContainerizeBento = channel.unary_unary(
                 '/kappa.Gamma/ContainerizeBento',
                 request_serializer=repository__pb2.ContainerizeBentoRequest.SerializeToString,
@@ -200,6 +205,13 @@ class GammaServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListProject(self, request, context):
+        """Get a list of Projects that are stored in current repository
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ContainerizeBento(self, request, context):
         """Create a container image from a Bento
         """
@@ -269,6 +281,11 @@ def add_GammaServicer_to_server(servicer, server):
                     servicer.ListBento,
                     request_deserializer=repository__pb2.ListBentoRequest.FromString,
                     response_serializer=repository__pb2.ListBentoResponse.SerializeToString,
+            ),
+            'ListProject': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListProject,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=repository__pb2.ListProjectResponse.SerializeToString,
             ),
             'ContainerizeBento': grpc.unary_unary_rpc_method_handler(
                     servicer.ContainerizeBento,
@@ -497,6 +514,23 @@ class Gamma(object):
         return grpc.experimental.unary_unary(request, target, '/kappa.Gamma/ListBento',
             repository__pb2.ListBentoRequest.SerializeToString,
             repository__pb2.ListBentoResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListProject(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/kappa.Gamma/ListProject',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            repository__pb2.ListProjectResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import DeploymentsList from "./pages/DeploymentsList";
 import DeploymentDetails from "./pages/DeploymentDetails";
 import Repository from "./pages/Repository";
+import Project from "./pages/Project";
 import MyModelsList from "./pages/MyModelList";
 import MyModelDetail from "./pages/MyModelDetail";
 import Layout from "./ui/Layout";
@@ -40,6 +41,7 @@ export const App = () => {
             />
             <Route path="/repository/:name" component={MyModelsList} />
             <Route path="/repository" component={Repository} />
+            <Route path="/project" component={Project} />
 
             <Route path="/about" component={HomePage} />
             <Route path="/config" component={HomePage} />

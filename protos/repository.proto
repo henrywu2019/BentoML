@@ -74,6 +74,12 @@ message Bento {
   UploadStatus status = 5;
 }
 
+message Project {
+  string name = 1;
+  string training_repo = 2;
+  string inference_repo = 3;
+}
+
 message AddBentoRequest {
   string bento_name = 1;
   string bento_version = 2;
@@ -144,6 +150,11 @@ message ListBentoRequest {
 message ListBentoResponse {
   Status status = 1;
   repeated Bento bentos = 2;
+}
+
+message ListProjectResponse {
+  Status status = 1;
+  repeated Project projects = 2;
 }
 
 message ContainerizeBentoRequest {

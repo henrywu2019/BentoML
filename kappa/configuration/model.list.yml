@@ -3,66 +3,68 @@
 #   - model_name
 #   - model_name
 #
-vision_service_table_detection:
-  type: pipeline
-  framework: torch
-  models:
-    - yolov5
+projects:
 
-vision_service_key_value:
-  type: pipeline
-  framework: torch
-  models:
-    - yolov5_kv_detection
-    - yolov5_kv_separation
+  vision_service_table_detection:
+    type: pipeline
+    framework: torch
+    models:
+      - yolov5
 
-vision_service_ocr:
-  type: pipeline
-  framework: paddle
-  models:
-    - cls
-    - det
-    - rec
-    - rec_ara
-    - rec_chi_sim
-    - rec_deu
-    - rec_fra
-    - rec_hin
-    - rec_ita
-    - rec_jpn
-    - rec_kor
-    - scene_doc_clf
+  vision_service_key_value:
+    type: pipeline
+    framework: torch
+    models:
+      - yolov5_kv_detection
+      - yolov5_kv_separation
 
-vision_service_image_classification:
-  type: pipeline
-  framework: torch
-  models:
-    - efficientnet_v2_s
-    - image_classification_efficientnet_b0_onnx
-    - image_classification_efficientnet_industry_hannover_onnx
+  vision_service_ocr:
+    type: pipeline
+    framework: paddle
+    models:
+      - cls
+      - det
+      - rec
+      - rec_ara
+      - rec_chi_sim
+      - rec_deu
+      - rec_fra
+      - rec_hin
+      - rec_ita
+      - rec_jpn
+      - rec_kor
+      - scene_doc_clf
 
-vision_service_object_detection:
-  type: model
-  framework: torch
-  models:
-    - object_detection_yolov5_openimage
-    - object_detection_efficientnet_coco_onnx
+  vision_service_image_classification:
+    type: pipeline
+    framework: torch
+    models:
+      - efficientnet_v2_s
+      - image_classification_efficientnet_b0_onnx
+      - image_classification_efficientnet_industry_hannover_onnx
 
-vision_service_mrz:
-  type: pipeline
-  framework: paddle
-  models:
-    - detection
-    - recognition
+  vision_service_object_detection:
+    type: model
+    framework: torch
+    models:
+      - object_detection_yolov5_openimage
+      - object_detection_efficientnet_coco_onnx
 
-vision_service_document_classification:
-  type: model
-  framework: torch
-  models:
-    - document_classification_dic_onnx
+  vision_service_mrz:
+    type: pipeline
+    framework: paddle
+    models:
+      - detection
+      - recognition
 
-vision_service_language_detection:
-  type: model
-  framework: paddle
-  models:
-    - language_detection
+  vision_service_document_classification:
+    type: model
+    framework: torch
+    models:
+      - document_classification_dic_onnx
+
+  vision_service_language_detection:
+    type: model
+    framework: paddle
+    models:
+      - language_detection

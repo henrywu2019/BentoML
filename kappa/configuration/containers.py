@@ -144,7 +144,7 @@ class KappaConfiguration:
 
         # User override configuration
         if override_config_file is not None:
-            LOGGER.info("Applying user config override from %s" % override_config_file)
+            LOGGER.warning("Applying user config override from %s" % override_config_file)
             if not os.path.exists(override_config_file):
                 raise KappaConfigException(
                     f"Config file {override_config_file} not found"
@@ -154,14 +154,14 @@ class KappaConfiguration:
                 override_config = YAML().load(f.read())
             always_merger.merge(self.config, override_config)
 
-            if validate_schema:
+            """if validate_schema:
                 try:
                     SCHEMA.validate(self.config)
                 except SchemaError as e:
                     raise KappaConfigException(
                         "Configuration after user override does not conform to"
                         " the required schema."
-                    ) from e
+                    ) from e"""
 
     def override(self, keys: list, value):
         if keys is None:

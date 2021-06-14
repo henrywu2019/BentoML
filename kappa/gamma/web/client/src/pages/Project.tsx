@@ -13,20 +13,12 @@ const Repository = (props) => {
   const offset = Number(query.offset) || 0;
   return (
     <HttpRequestContainer
-      url="/api/ListBento"
+      url="/api/ListProject"
       method="get"
       params={{ limit: DEFAULT_BENTO_SERVICE_LIMIT_PER_PAGE, offset }}
     >
       {({ data }) => {
-        let hasBento = false;
-        let bentoDisplay;
-        if (data && data.bentos) {
-          hasBento = true;
-
-          bentoDisplay = <MyModelTable bentos={data.bentos} />;
-        } else {
-          bentoDisplay = <Section>No more models found</Section>;
-        }
+        let bentoDisplay = <Section>Hello</Section>;
         return (
           <Section>
             {bentoDisplay}
@@ -39,12 +31,12 @@ const Repository = (props) => {
             >
               <div>
                 {offset > 0 && (
-                  <Link to={`/repository?offset=${offset - 10}`}>Previous</Link>
+                  <Link to={`/project?offset=${offset - 10}`}>Previous</Link>
                 )}
               </div>
               <div>
-                {hasBento && (
-                  <Link to={`/repository?offset=${offset + 10}`}>Next</Link>
+                {(
+                  <Link to={`/project?offset=${offset + 10}`}>Next</Link>
                 )}
               </div>
             </div>

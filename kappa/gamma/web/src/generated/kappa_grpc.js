@@ -6462,6 +6462,39 @@ export const kappa = $root.kappa = (() => {
          */
 
         /**
+         * Callback as used by {@link kappa.Gamma#listProject}.
+         * @memberof kappa.Gamma
+         * @typedef ListProjectCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {kappa.ListProjectResponse} [response] ListProjectResponse
+         */
+
+        /**
+         * Calls ListProject.
+         * @function listProject
+         * @memberof kappa.Gamma
+         * @instance
+         * @param {google.protobuf.IEmpty} request Empty message or plain object
+         * @param {kappa.Gamma.ListProjectCallback} callback Node-style callback called with the error, if any, and ListProjectResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(Gamma.prototype.listProject = function listProject(request, callback) {
+            return this.rpcCall(listProject, $root.google.protobuf.Empty, $root.kappa.ListProjectResponse, request, callback);
+        }, "name", { value: "ListProject" });
+
+        /**
+         * Calls ListProject.
+         * @function listProject
+         * @memberof kappa.Gamma
+         * @instance
+         * @param {google.protobuf.IEmpty} request Empty message or plain object
+         * @returns {Promise<kappa.ListProjectResponse>} Promise
+         * @variation 2
+         */
+
+        /**
          * Callback as used by {@link kappa.Gamma#containerizeBento}.
          * @memberof kappa.Gamma
          * @typedef ContainerizeBentoCallback
@@ -9095,6 +9128,238 @@ export const kappa = $root.kappa = (() => {
         return Bento;
     })();
 
+    kappa.Project = (function() {
+
+        /**
+         * Properties of a Project.
+         * @memberof kappa
+         * @interface IProject
+         * @property {string|null} [name] Project name
+         * @property {string|null} [training_repo] Project training_repo
+         * @property {string|null} [inference_repo] Project inference_repo
+         */
+
+        /**
+         * Constructs a new Project.
+         * @memberof kappa
+         * @classdesc Represents a Project.
+         * @implements IProject
+         * @constructor
+         * @param {kappa.IProject=} [properties] Properties to set
+         */
+        function Project(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Project name.
+         * @member {string} name
+         * @memberof kappa.Project
+         * @instance
+         */
+        Project.prototype.name = "";
+
+        /**
+         * Project training_repo.
+         * @member {string} training_repo
+         * @memberof kappa.Project
+         * @instance
+         */
+        Project.prototype.training_repo = "";
+
+        /**
+         * Project inference_repo.
+         * @member {string} inference_repo
+         * @memberof kappa.Project
+         * @instance
+         */
+        Project.prototype.inference_repo = "";
+
+        /**
+         * Creates a new Project instance using the specified properties.
+         * @function create
+         * @memberof kappa.Project
+         * @static
+         * @param {kappa.IProject=} [properties] Properties to set
+         * @returns {kappa.Project} Project instance
+         */
+        Project.create = function create(properties) {
+            return new Project(properties);
+        };
+
+        /**
+         * Encodes the specified Project message. Does not implicitly {@link kappa.Project.verify|verify} messages.
+         * @function encode
+         * @memberof kappa.Project
+         * @static
+         * @param {kappa.IProject} message Project message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Project.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+            if (message.training_repo != null && Object.hasOwnProperty.call(message, "training_repo"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.training_repo);
+            if (message.inference_repo != null && Object.hasOwnProperty.call(message, "inference_repo"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.inference_repo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Project message, length delimited. Does not implicitly {@link kappa.Project.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof kappa.Project
+         * @static
+         * @param {kappa.IProject} message Project message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Project.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Project message from the specified reader or buffer.
+         * @function decode
+         * @memberof kappa.Project
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {kappa.Project} Project
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Project.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.kappa.Project();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.name = reader.string();
+                    break;
+                case 2:
+                    message.training_repo = reader.string();
+                    break;
+                case 3:
+                    message.inference_repo = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Project message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof kappa.Project
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {kappa.Project} Project
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Project.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Project message.
+         * @function verify
+         * @memberof kappa.Project
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Project.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.training_repo != null && message.hasOwnProperty("training_repo"))
+                if (!$util.isString(message.training_repo))
+                    return "training_repo: string expected";
+            if (message.inference_repo != null && message.hasOwnProperty("inference_repo"))
+                if (!$util.isString(message.inference_repo))
+                    return "inference_repo: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a Project message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof kappa.Project
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {kappa.Project} Project
+         */
+        Project.fromObject = function fromObject(object) {
+            if (object instanceof $root.kappa.Project)
+                return object;
+            let message = new $root.kappa.Project();
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.training_repo != null)
+                message.training_repo = String(object.training_repo);
+            if (object.inference_repo != null)
+                message.inference_repo = String(object.inference_repo);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Project message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof kappa.Project
+         * @static
+         * @param {kappa.Project} message Project
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Project.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults) {
+                object.name = "";
+                object.training_repo = "";
+                object.inference_repo = "";
+            }
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.training_repo != null && message.hasOwnProperty("training_repo"))
+                object.training_repo = message.training_repo;
+            if (message.inference_repo != null && message.hasOwnProperty("inference_repo"))
+                object.inference_repo = message.inference_repo;
+            return object;
+        };
+
+        /**
+         * Converts this Project to JSON.
+         * @function toJSON
+         * @memberof kappa.Project
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Project.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Project;
+    })();
+
     kappa.AddBentoRequest = (function() {
 
         /**
@@ -11684,6 +11949,242 @@ export const kappa = $root.kappa = (() => {
         };
 
         return ListBentoResponse;
+    })();
+
+    kappa.ListProjectResponse = (function() {
+
+        /**
+         * Properties of a ListProjectResponse.
+         * @memberof kappa
+         * @interface IListProjectResponse
+         * @property {kappa.IStatus|null} [status] ListProjectResponse status
+         * @property {Array.<kappa.IProject>|null} [projects] ListProjectResponse projects
+         */
+
+        /**
+         * Constructs a new ListProjectResponse.
+         * @memberof kappa
+         * @classdesc Represents a ListProjectResponse.
+         * @implements IListProjectResponse
+         * @constructor
+         * @param {kappa.IListProjectResponse=} [properties] Properties to set
+         */
+        function ListProjectResponse(properties) {
+            this.projects = [];
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ListProjectResponse status.
+         * @member {kappa.IStatus|null|undefined} status
+         * @memberof kappa.ListProjectResponse
+         * @instance
+         */
+        ListProjectResponse.prototype.status = null;
+
+        /**
+         * ListProjectResponse projects.
+         * @member {Array.<kappa.IProject>} projects
+         * @memberof kappa.ListProjectResponse
+         * @instance
+         */
+        ListProjectResponse.prototype.projects = $util.emptyArray;
+
+        /**
+         * Creates a new ListProjectResponse instance using the specified properties.
+         * @function create
+         * @memberof kappa.ListProjectResponse
+         * @static
+         * @param {kappa.IListProjectResponse=} [properties] Properties to set
+         * @returns {kappa.ListProjectResponse} ListProjectResponse instance
+         */
+        ListProjectResponse.create = function create(properties) {
+            return new ListProjectResponse(properties);
+        };
+
+        /**
+         * Encodes the specified ListProjectResponse message. Does not implicitly {@link kappa.ListProjectResponse.verify|verify} messages.
+         * @function encode
+         * @memberof kappa.ListProjectResponse
+         * @static
+         * @param {kappa.IListProjectResponse} message ListProjectResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ListProjectResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                $root.kappa.Status.encode(message.status, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.projects != null && message.projects.length)
+                for (let i = 0; i < message.projects.length; ++i)
+                    $root.kappa.Project.encode(message.projects[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ListProjectResponse message, length delimited. Does not implicitly {@link kappa.ListProjectResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof kappa.ListProjectResponse
+         * @static
+         * @param {kappa.IListProjectResponse} message ListProjectResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ListProjectResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a ListProjectResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof kappa.ListProjectResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {kappa.ListProjectResponse} ListProjectResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ListProjectResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.kappa.ListProjectResponse();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = $root.kappa.Status.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    if (!(message.projects && message.projects.length))
+                        message.projects = [];
+                    message.projects.push($root.kappa.Project.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a ListProjectResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof kappa.ListProjectResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {kappa.ListProjectResponse} ListProjectResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ListProjectResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a ListProjectResponse message.
+         * @function verify
+         * @memberof kappa.ListProjectResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ListProjectResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.status != null && message.hasOwnProperty("status")) {
+                let error = $root.kappa.Status.verify(message.status);
+                if (error)
+                    return "status." + error;
+            }
+            if (message.projects != null && message.hasOwnProperty("projects")) {
+                if (!Array.isArray(message.projects))
+                    return "projects: array expected";
+                for (let i = 0; i < message.projects.length; ++i) {
+                    let error = $root.kappa.Project.verify(message.projects[i]);
+                    if (error)
+                        return "projects." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a ListProjectResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof kappa.ListProjectResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {kappa.ListProjectResponse} ListProjectResponse
+         */
+        ListProjectResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.kappa.ListProjectResponse)
+                return object;
+            let message = new $root.kappa.ListProjectResponse();
+            if (object.status != null) {
+                if (typeof object.status !== "object")
+                    throw TypeError(".kappa.ListProjectResponse.status: object expected");
+                message.status = $root.kappa.Status.fromObject(object.status);
+            }
+            if (object.projects) {
+                if (!Array.isArray(object.projects))
+                    throw TypeError(".kappa.ListProjectResponse.projects: array expected");
+                message.projects = [];
+                for (let i = 0; i < object.projects.length; ++i) {
+                    if (typeof object.projects[i] !== "object")
+                        throw TypeError(".kappa.ListProjectResponse.projects: object expected");
+                    message.projects[i] = $root.kappa.Project.fromObject(object.projects[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a ListProjectResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof kappa.ListProjectResponse
+         * @static
+         * @param {kappa.ListProjectResponse} message ListProjectResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ListProjectResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.arrays || options.defaults)
+                object.projects = [];
+            if (options.defaults)
+                object.status = null;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = $root.kappa.Status.toObject(message.status, options);
+            if (message.projects && message.projects.length) {
+                object.projects = [];
+                for (let j = 0; j < message.projects.length; ++j)
+                    object.projects[j] = $root.kappa.Project.toObject(message.projects[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this ListProjectResponse to JSON.
+         * @function toJSON
+         * @memberof kappa.ListProjectResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ListProjectResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ListProjectResponse;
     })();
 
     kappa.ContainerizeBentoRequest = (function() {

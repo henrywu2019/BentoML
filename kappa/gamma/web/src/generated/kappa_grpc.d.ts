@@ -2587,6 +2587,20 @@ export namespace kappa {
         public listBento(request: kappa.IListBentoRequest): Promise<kappa.ListBentoResponse>;
 
         /**
+         * Calls ListProject.
+         * @param request Empty message or plain object
+         * @param callback Node-style callback called with the error, if any, and ListProjectResponse
+         */
+        public listProject(request: google.protobuf.IEmpty, callback: kappa.Gamma.ListProjectCallback): void;
+
+        /**
+         * Calls ListProject.
+         * @param request Empty message or plain object
+         * @returns Promise
+         */
+        public listProject(request: google.protobuf.IEmpty): Promise<kappa.ListProjectResponse>;
+
+        /**
          * Calls ContainerizeBento.
          * @param request ContainerizeBentoRequest message or plain object
          * @param callback Node-style callback called with the error, if any, and ContainerizeBentoResponse
@@ -2686,6 +2700,13 @@ export namespace kappa {
          * @param [response] ListBentoResponse
          */
         type ListBentoCallback = (error: (Error|null), response?: kappa.ListBentoResponse) => void;
+
+        /**
+         * Callback as used by {@link kappa.Gamma#listProject}.
+         * @param error Error, if any
+         * @param [response] ListProjectResponse
+         */
+        type ListProjectCallback = (error: (Error|null), response?: kappa.ListProjectResponse) => void;
 
         /**
          * Callback as used by {@link kappa.Gamma#containerizeBento}.
@@ -3709,6 +3730,108 @@ export namespace kappa {
 
         /**
          * Converts this Bento to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a Project. */
+    interface IProject {
+
+        /** Project name */
+        name?: (string|null);
+
+        /** Project training_repo */
+        training_repo?: (string|null);
+
+        /** Project inference_repo */
+        inference_repo?: (string|null);
+    }
+
+    /** Represents a Project. */
+    class Project implements IProject {
+
+        /**
+         * Constructs a new Project.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: kappa.IProject);
+
+        /** Project name. */
+        public name: string;
+
+        /** Project training_repo. */
+        public training_repo: string;
+
+        /** Project inference_repo. */
+        public inference_repo: string;
+
+        /**
+         * Creates a new Project instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Project instance
+         */
+        public static create(properties?: kappa.IProject): kappa.Project;
+
+        /**
+         * Encodes the specified Project message. Does not implicitly {@link kappa.Project.verify|verify} messages.
+         * @param message Project message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: kappa.IProject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Project message, length delimited. Does not implicitly {@link kappa.Project.verify|verify} messages.
+         * @param message Project message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: kappa.IProject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Project message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Project
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): kappa.Project;
+
+        /**
+         * Decodes a Project message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Project
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): kappa.Project;
+
+        /**
+         * Verifies a Project message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Project message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Project
+         */
+        public static fromObject(object: { [k: string]: any }): kappa.Project;
+
+        /**
+         * Creates a plain object from a Project message. Also converts values to other types if specified.
+         * @param message Project
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: kappa.Project, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Project to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -4822,6 +4945,102 @@ export namespace kappa {
 
         /**
          * Converts this ListBentoResponse to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ListProjectResponse. */
+    interface IListProjectResponse {
+
+        /** ListProjectResponse status */
+        status?: (kappa.IStatus|null);
+
+        /** ListProjectResponse projects */
+        projects?: (kappa.IProject[]|null);
+    }
+
+    /** Represents a ListProjectResponse. */
+    class ListProjectResponse implements IListProjectResponse {
+
+        /**
+         * Constructs a new ListProjectResponse.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: kappa.IListProjectResponse);
+
+        /** ListProjectResponse status. */
+        public status?: (kappa.IStatus|null);
+
+        /** ListProjectResponse projects. */
+        public projects: kappa.IProject[];
+
+        /**
+         * Creates a new ListProjectResponse instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ListProjectResponse instance
+         */
+        public static create(properties?: kappa.IListProjectResponse): kappa.ListProjectResponse;
+
+        /**
+         * Encodes the specified ListProjectResponse message. Does not implicitly {@link kappa.ListProjectResponse.verify|verify} messages.
+         * @param message ListProjectResponse message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: kappa.IListProjectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ListProjectResponse message, length delimited. Does not implicitly {@link kappa.ListProjectResponse.verify|verify} messages.
+         * @param message ListProjectResponse message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: kappa.IListProjectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ListProjectResponse message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ListProjectResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): kappa.ListProjectResponse;
+
+        /**
+         * Decodes a ListProjectResponse message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ListProjectResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): kappa.ListProjectResponse;
+
+        /**
+         * Verifies a ListProjectResponse message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ListProjectResponse message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ListProjectResponse
+         */
+        public static fromObject(object: { [k: string]: any }): kappa.ListProjectResponse;
+
+        /**
+         * Creates a plain object from a ListProjectResponse message. Also converts values to other types if specified.
+         * @param message ListProjectResponse
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: kappa.ListProjectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ListProjectResponse to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
